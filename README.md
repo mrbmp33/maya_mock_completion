@@ -1,4 +1,4 @@
-# better_maya_completion
+# maya_mock_completion
 
 This project is a custom modification over the command/api completion sent by Autodesk through _Maya's Developer Kit_ for Maya 2022.
 
