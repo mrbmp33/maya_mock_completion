@@ -1,18 +1,17 @@
 from setuptools import setup, find_packages
 
-with open("readme.md") as f:
+with open("./README.md") as f:
     long_description = f.read()
     
 setup(
     name="maya_mock_completion",
     version="0.0.1",
-    description="A mock version of the Autodesk maya library to run maya code without using mayapy.",
+    description="A mock version of the Autodesk maya libraries to run code intended for maya using a regular Python "
+                "from a virtual environment.",
     package_dir={
-        "": "maya_mock_completion",
-        "maya": "maya",
-        "pymel": "pymel",
+        "": ".",
     },
-    packages=find_packages(where="maya_mock_completion") + ["maya", "pymel"],
+    packages=find_packages(),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/mrbmp33/maya_mock_completion",

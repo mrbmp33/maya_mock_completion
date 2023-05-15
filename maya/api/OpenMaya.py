@@ -6320,7 +6320,7 @@ class MGlobal(object):
         is True, and tracking is enabled, will return the selected items
         in the order that they were selected.
         """
-        pass
+        return MSelectionList
 
     @staticmethod
     def getAssociatedSets(*args, **kwargs):
