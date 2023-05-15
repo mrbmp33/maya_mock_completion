@@ -1,6 +1,6 @@
 # MAYA MOCK COMPLETION
 
-This project is a custom modification of Maya's *commands/api* libraries that allows you to execute python code that uses these libraries from a regular python interpreter, ideally the one from your venv.
+This project is a custom modification of Maya's *commands/api* stub libraries that allows you to execute python code that uses these libraries from a regular python interpreter, ideally the one from your venv.
 
 Developing code for Maya can be a bit sluggish since it normally takes the following steps:
 
