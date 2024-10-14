@@ -1,5 +1,5 @@
-from __builtin__ import object as _object
-from __builtin__ import property as _swig_property
+
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
@@ -163,7 +163,7 @@ class MFnIkJoint(OpenMaya.MFnTransform):
     kZAxis = 2
 
 
-class shortPtr(_object):
+class shortPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -194,7 +194,7 @@ class shortPtr(_object):
     __weakref__ = None
 
 
-class MIkHandleGroup(_object):
+class MIkHandleGroup(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -239,7 +239,7 @@ class MIkHandleGroup(_object):
     __weakref__ = None
 
 
-class uCharPtr(_object):
+class uCharPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -270,7 +270,7 @@ class uCharPtr(_object):
     __weakref__ = None
 
 
-class MAnimCurveChange(_object):
+class MAnimCurveChange(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -430,7 +430,7 @@ class MFnLatticeDeformer(OpenMaya.MFnDependencyNode):
     __swig_setmethods__ = {}
 
 
-class MAnimControl(_object):
+class MAnimControl(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -632,7 +632,7 @@ class MFnBlendShapeDeformer(OpenMaya.MFnDependencyNode):
     kWorldOrigin = 1
 
 
-class charPtr(_object):
+class charPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -663,7 +663,7 @@ class charPtr(_object):
     __weakref__ = None
 
 
-class MItKeyframe(_object):
+class MItKeyframe(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -742,7 +742,7 @@ class MItKeyframe(_object):
     kTangentStepNext = 10
 
 
-class uIntPtr(_object):
+class uIntPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -960,7 +960,7 @@ class MFnAnimCurve(OpenMaya.MFnDependencyNode):
     kTangentTypeCount = 32768
 
 
-class boolPtr(_object):
+class boolPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -991,7 +991,7 @@ class boolPtr(_object):
     __weakref__ = None
 
 
-class MIkSystem(_object):
+class MIkSystem(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1034,7 +1034,7 @@ class MIkSystem(_object):
     __weakref__ = None
 
 
-class MAnimUtil(_object):
+class MAnimUtil(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -1266,7 +1266,7 @@ class MFnClip(OpenMaya.MFnDependencyNode):
     __swig_setmethods__ = {}
 
 
-class MAnimCurveClipboardItem(_object):
+class MAnimCurveClipboardItem(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -1313,7 +1313,7 @@ class MAnimCurveClipboardItem(_object):
     __weakref__ = None
 
 
-class MAnimCurveClipboard(_object):
+class MAnimCurveClipboard(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1458,7 +1458,7 @@ class MFnWireDeformer(OpenMaya.MFnDependencyNode):
     __swig_setmethods__ = {}
 
 
-class doublePtr(_object):
+class doublePtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1676,7 +1676,7 @@ class MFnCharacter(OpenMaya.MFnSet):
     __swig_setmethods__ = {}
 
 
-class intPtr(_object):
+class intPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1707,7 +1707,7 @@ class intPtr(_object):
     __weakref__ = None
 
 
-class MAnimCurveClipboardItemArray(_object):
+class MAnimCurveClipboardItemArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1758,7 +1758,7 @@ class MAnimCurveClipboardItemArray(_object):
     __weakref__ = None
 
 
-class floatPtr(_object):
+class floatPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass

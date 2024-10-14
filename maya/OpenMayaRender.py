@@ -1,11 +1,11 @@
-from __builtin__ import object as _object
-from __builtin__ import property as _swig_property
+
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class RV_PIXEL(_object):
+class RV_PIXEL(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -39,7 +39,7 @@ class RV_PIXEL(_object):
     __weakref__ = None
 
 
-class RV_AOV(_object):
+class RV_AOV(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -70,7 +70,7 @@ class RV_AOV(_object):
     __weakref__ = None
 
 
-class MLightLinks(_object):
+class MLightLinks(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -110,7 +110,7 @@ class MLightLinks(_object):
     __weakref__ = None
 
 
-class MRenderingInfo(_object):
+class MRenderingInfo(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -148,7 +148,7 @@ class MRenderingInfo(_object):
     __weakref__ = None
 
 
-class MVaryingParameter(_object):
+class MVaryingParameter(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -242,7 +242,7 @@ class MVaryingParameter(_object):
     kWeight = 5
 
 
-class MRenderView(_object):
+class MRenderView(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -294,7 +294,7 @@ class MRenderView(_object):
     __weakref__ = None
 
 
-class MGeometryList(_object):
+class MGeometryList(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -359,7 +359,7 @@ class MGeometryList(_object):
     kNone = 0
 
 
-class MSwatchRenderRegister(_object):
+class MSwatchRenderRegister(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -387,7 +387,7 @@ class MSwatchRenderRegister(_object):
     __weakref__ = None
 
 
-class MHwrCallback(_object):
+class MHwrCallback(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -423,7 +423,7 @@ class MHwrCallback(_object):
     __weakref__ = None
 
 
-class floatPtr(_object):
+class floatPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -454,7 +454,7 @@ class floatPtr(_object):
     __weakref__ = None
 
 
-class MGeometryPrimitive(_object):
+class MGeometryPrimitive(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -510,7 +510,7 @@ class MGeometryPrimitive(_object):
     kTriangles = 5
 
 
-class shortPtr(_object):
+class shortPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -541,7 +541,7 @@ class shortPtr(_object):
     __weakref__ = None
 
 
-class doublePtr(_object):
+class doublePtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -572,7 +572,7 @@ class doublePtr(_object):
     __weakref__ = None
 
 
-class MGeometryData(_object):
+class MGeometryData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -674,7 +674,7 @@ class MGeometryData(_object):
     kWeight = 5
 
 
-class MUniformParameter(_object):
+class MUniformParameter(object):
     def UIHidden(self, *args): pass
 
     def __del__(self): pass
@@ -904,7 +904,7 @@ class MUniformParameter(_object):
     kTypeUnknown = 0
 
 
-class MSwatchRenderBase(_object):
+class MSwatchRenderBase(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -950,7 +950,7 @@ class MSwatchRenderBase(_object):
     __weakref__ = None
 
 
-class MHardwareRenderer(_object):
+class MHardwareRenderer(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -1081,7 +1081,7 @@ class MFnImageSource(OpenMaya.MFnDependencyNode):
     __swig_setmethods__ = {}
 
 
-class MRenderData(_object):
+class MRenderData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1161,7 +1161,7 @@ class MRenderData(_object):
     __weakref__ = None
 
 
-class MRenderSetupPrivate(_object):
+class MRenderSetupPrivate(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -1182,7 +1182,7 @@ class MRenderSetupPrivate(_object):
     __weakref__ = None
 
 
-class MGeometryManager(_object):
+class MGeometryManager(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -1271,7 +1271,7 @@ class MFnRenderLayer(OpenMaya.MFnDependencyNode):
     __swig_setmethods__ = {}
 
 
-class MGLFunctionTable(_object):
+class MGLFunctionTable(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -2787,7 +2787,7 @@ class MGLFunctionTable(_object):
     kMGL_Version20 = 6
 
 
-class uIntPtr(_object):
+class uIntPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2818,7 +2818,7 @@ class uIntPtr(_object):
     __weakref__ = None
 
 
-class MRenderTargetLegacy(_object):
+class MRenderTargetLegacy(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -2844,7 +2844,7 @@ class MRenderTargetLegacy(_object):
     __weakref__ = None
 
 
-class MRenderShadowData(_object):
+class MRenderShadowData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2911,7 +2911,7 @@ class MRenderShadowData(_object):
     kSpot = 3
 
 
-class MRenderUtil(_object):
+class MRenderUtil(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -3038,7 +3038,7 @@ class MRenderUtil(_object):
     kSpecularOnly = 5
 
 
-class uCharPtr(_object):
+class uCharPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3069,7 +3069,7 @@ class uCharPtr(_object):
     __weakref__ = None
 
 
-class MGeometryRequirementsLegacy(_object):
+class MGeometryRequirementsLegacy(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3107,7 +3107,7 @@ class MGeometryRequirementsLegacy(_object):
     __weakref__ = None
 
 
-class MUniformParameterList(_object):
+class MUniformParameterList(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3141,7 +3141,7 @@ class MUniformParameterList(_object):
     __weakref__ = None
 
 
-class intPtr(_object):
+class intPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3172,7 +3172,7 @@ class intPtr(_object):
     __weakref__ = None
 
 
-class MRenderCallback(_object):
+class MRenderCallback(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -3214,7 +3214,7 @@ class MRenderCallback(_object):
     __weakref__ = None
 
 
-class MGeometryLegacy(_object):
+class MGeometryLegacy(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3258,7 +3258,7 @@ class MGeometryLegacy(_object):
     __weakref__ = None
 
 
-class boolPtr(_object):
+class boolPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3289,7 +3289,7 @@ class boolPtr(_object):
     __weakref__ = None
 
 
-class charPtr(_object):
+class charPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3320,7 +3320,7 @@ class charPtr(_object):
     __weakref__ = None
 
 
-class MViewportRenderer(_object):
+class MViewportRenderer(object):
     def UIname(self, *args): pass
 
     def __del__(self): pass
@@ -3450,7 +3450,7 @@ class MViewportRenderer(_object):
     kSoftware = 2
 
 
-class MVaryingParameterList(_object):
+class MVaryingParameterList(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3521,7 +3521,7 @@ class MFnRenderPass(OpenMaya.MFnDependencyNode):
     __swig_setmethods__ = {}
 
 
-class MCommonRenderSettingsData(_object):
+class MCommonRenderSettingsData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3656,7 +3656,7 @@ class MCommonRenderSettingsData(_object):
     kRelativePath = 0
 
 
-class MRenderSetup(_object):
+class MRenderSetup(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -3680,7 +3680,7 @@ class MRenderSetup(_object):
     __weakref__ = None
 
 
-class MDrawProcedureBase(_object):
+class MDrawProcedureBase(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3712,7 +3712,7 @@ class MDrawProcedureBase(_object):
     __weakref__ = None
 
 
-class MD3D9Renderer(_object):
+class MD3D9Renderer(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3745,7 +3745,7 @@ class MD3D9Renderer(_object):
     __weakref__ = None
 
 
-class MHwTextureManager(_object):
+class MHwTextureManager(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -3778,7 +3778,7 @@ class MHwTextureManager(_object):
     __weakref__ = None
 
 
-class MRenderProfile(_object):
+class MRenderProfile(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass

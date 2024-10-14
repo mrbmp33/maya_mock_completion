@@ -1,11 +1,11 @@
-from __builtin__ import object as _object
-from __builtin__ import property as _swig_property
+
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class MEvaluationNode(_object):
+class MEvaluationNode(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -50,7 +50,7 @@ class MEvaluationNode(_object):
     __weakref__ = None
 
 
-class MRampAttribute(_object):
+class MRampAttribute(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -130,7 +130,7 @@ class MRampAttribute(_object):
     kSpline = 3
 
 
-class MDagPathArray(_object):
+class MDagPathArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -179,7 +179,7 @@ class MDagPathArray(_object):
     __weakref__ = None
 
 
-class MMeshIntersector(_object):
+class MMeshIntersector(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -210,7 +210,7 @@ class MMeshIntersector(_object):
     __weakref__ = None
 
 
-class MObject(_object):
+class MObject(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -249,7 +249,7 @@ class MObject(_object):
     __weakref__ = None
 
 
-class intPtr(_object):
+class intPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -280,7 +280,7 @@ class intPtr(_object):
     __weakref__ = None
 
 
-class MTimeArray(_object):
+class MTimeArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -329,7 +329,7 @@ class MTimeArray(_object):
     __weakref__ = None
 
 
-class MItMeshEdge(_object):
+class MItMeshEdge(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -402,7 +402,7 @@ class MItMeshEdge(_object):
     __weakref__ = None
 
 
-class array2dDouble(_object):
+class array2dDouble(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -430,7 +430,7 @@ class array2dDouble(_object):
     __weakref__ = None
 
 
-class MTimer(_object):
+class MTimer(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -466,7 +466,7 @@ class MTimer(_object):
     __weakref__ = None
 
 
-class MItDependencyNodes(_object):
+class MItDependencyNodes(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -501,7 +501,7 @@ class MItDependencyNodes(_object):
     __weakref__ = None
 
 
-class MDagPath(_object):
+class MDagPath(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -594,7 +594,7 @@ class MDagPath(_object):
     __weakref__ = None
 
 
-class MIntArray(_object):
+class MIntArray(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -661,7 +661,7 @@ class MIntArray(_object):
     __weakref__ = None
 
 
-class array4dFloat(_object):
+class array4dFloat(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -689,7 +689,7 @@ class array4dFloat(_object):
     __weakref__ = None
 
 
-class array3dFloat(_object):
+class array3dFloat(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -717,7 +717,7 @@ class array3dFloat(_object):
     __weakref__ = None
 
 
-class MAttributePattern(_object):
+class MAttributePattern(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -765,7 +765,7 @@ class MAttributePattern(_object):
     __weakref__ = None
 
 
-class MRichSelection(_object):
+class MRichSelection(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -802,7 +802,7 @@ class MRichSelection(_object):
     __weakref__ = None
 
 
-class MAttributePatternArray(_object):
+class MAttributePatternArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -851,7 +851,7 @@ class MAttributePatternArray(_object):
     __weakref__ = None
 
 
-class MItSubdEdge(_object):
+class MItSubdEdge(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -896,7 +896,7 @@ class MItSubdEdge(_object):
     __weakref__ = None
 
 
-class MRenderPassRegistry(_object):
+class MRenderPassRegistry(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -923,7 +923,7 @@ class MRenderPassRegistry(_object):
     __weakref__ = None
 
 
-class MItMeshPolygon(_object):
+class MItMeshPolygon(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1072,7 +1072,7 @@ class MItMeshPolygon(_object):
     __weakref__ = None
 
 
-class MVector(_object):
+class MVector(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -1193,7 +1193,7 @@ class MVector(_object):
     zero = None
 
 
-class MFloatVectorArray(_object):
+class MFloatVectorArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1244,7 +1244,7 @@ class MFloatVectorArray(_object):
     __weakref__ = None
 
 
-class MTrimBoundaryArray(_object):
+class MTrimBoundaryArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1291,7 +1291,7 @@ class MTrimBoundaryArray(_object):
     __weakref__ = None
 
 
-class MPlugArray(_object):
+class MPlugArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1340,7 +1340,7 @@ class MPlugArray(_object):
     __weakref__ = None
 
 
-class MIteratorType(_object):
+class MIteratorType(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1382,7 +1382,7 @@ class MIteratorType(_object):
     kMPlugObject = 2
 
 
-class MCommandResult(_object):
+class MCommandResult(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1439,7 +1439,7 @@ class MCommandResult(_object):
     kVectorArray = 10
 
 
-class MIffTag(_object):
+class MIffTag(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -1487,7 +1487,7 @@ class MIffTag(_object):
     kPROP = None
 
 
-class uIntPtr(_object):
+class uIntPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1518,7 +1518,7 @@ class uIntPtr(_object):
     __weakref__ = None
 
 
-class MArgList(_object):
+class MArgList(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1576,10 +1576,10 @@ class MArgList(_object):
 
     __weakref__ = None
 
-    kInvalidArgIndex = 4294967295L
+    kInvalidArgIndex = 4294967295
 
 
-class MEdit(_object):
+class MEdit(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1634,7 +1634,7 @@ class MEdit(_object):
     kSetAttrEdit = 1
 
 
-class MBoundingBox(_object):
+class MBoundingBox(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1680,7 +1680,7 @@ class MBoundingBox(_object):
     __weakref__ = None
 
 
-class MNurbsIntersector(_object):
+class MNurbsIntersector(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1715,7 +1715,7 @@ class MNurbsIntersector(_object):
     __weakref__ = None
 
 
-class array4dDouble(_object):
+class array4dDouble(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1743,7 +1743,7 @@ class array4dDouble(_object):
     __weakref__ = None
 
 
-class MFloatMatrix(_object):
+class MFloatMatrix(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -1826,7 +1826,7 @@ class MFloatMatrix(_object):
     __weakref__ = None
 
 
-class MTime(_object):
+class MTime(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -2024,7 +2024,7 @@ class MTime(_object):
     kUserDef = 51
 
 
-class MInt64Array(_object):
+class MInt64Array(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -2091,7 +2091,7 @@ class MInt64Array(_object):
     __weakref__ = None
 
 
-class MMessage(_object):
+class MMessage(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2149,7 +2149,7 @@ class MMessage(_object):
     kDoNotDoAction = 1
 
 
-class array4dInt(_object):
+class array4dInt(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2177,7 +2177,7 @@ class array4dInt(_object):
     __weakref__ = None
 
 
-class MSelectionMask(_object):
+class MSelectionMask(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2386,7 +2386,7 @@ class MSelectionMask(_object):
     kSelectXYZLocators = 22
 
 
-class MProfiler(_object):
+class MProfiler(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -2541,7 +2541,7 @@ class MProfiler(_object):
     kColorG_L3 = 17
 
 
-class MUuid(_object):
+class MUuid(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -2582,7 +2582,7 @@ class MUuid(_object):
     __weakref__ = None
 
 
-class MItDependencyGraph(_object):
+class MItDependencyGraph(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2685,7 +2685,7 @@ class MItDependencyGraph(_object):
     kUpstream = 1
 
 
-class MMeshIsectAccelParams(_object):
+class MMeshIsectAccelParams(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2707,7 +2707,7 @@ class MMeshIsectAccelParams(_object):
     __weakref__ = None
 
 
-class MUint64Array(_object):
+class MUint64Array(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -2774,7 +2774,7 @@ class MUint64Array(_object):
     __weakref__ = None
 
 
-class MMatrix(_object):
+class MMatrix(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -2861,7 +2861,7 @@ class MMatrix(_object):
     identity = None
 
 
-class MArrayDataBuilder(_object):
+class MArrayDataBuilder(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2904,7 +2904,7 @@ class MArrayDataBuilder(_object):
     __weakref__ = None
 
 
-class MDGContextGuard(_object):
+class MDGContextGuard(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2926,7 +2926,7 @@ class MDGContextGuard(_object):
     __weakref__ = None
 
 
-class MPoint(_object):
+class MPoint(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -3015,7 +3015,7 @@ class MPoint(_object):
     origin = None
 
 
-class MItSubdVertex(_object):
+class MItSubdVertex(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3054,7 +3054,7 @@ class MItSubdVertex(_object):
     __weakref__ = None
 
 
-class MWeight(_object):
+class MWeight(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3089,7 +3089,7 @@ class MWeight(_object):
     __weakref__ = None
 
 
-class MUserData(_object):
+class MUserData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3118,7 +3118,7 @@ class MUserData(_object):
     __weakref__ = None
 
 
-class MFloatPointArray(_object):
+class MFloatPointArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3169,7 +3169,7 @@ class MFloatPointArray(_object):
     __weakref__ = None
 
 
-class MVectorArray(_object):
+class MVectorArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3220,7 +3220,7 @@ class MVectorArray(_object):
     __weakref__ = None
 
 
-class shortPtr(_object):
+class shortPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3251,7 +3251,7 @@ class shortPtr(_object):
     __weakref__ = None
 
 
-class array3dDouble(_object):
+class array3dDouble(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3279,7 +3279,7 @@ class array3dDouble(_object):
     __weakref__ = None
 
 
-class MPointArray(_object):
+class MPointArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3330,7 +3330,7 @@ class MPointArray(_object):
     __weakref__ = None
 
 
-class MObjectHandle(_object):
+class MObjectHandle(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -3371,7 +3371,7 @@ class MObjectHandle(_object):
     __weakref__ = None
 
 
-class MItSelectionList(_object):
+class MItSelectionList(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3426,7 +3426,7 @@ class MItSelectionList(_object):
     kUnknownItem = -1
 
 
-class MDataBlock(_object):
+class MDataBlock(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3467,7 +3467,7 @@ class MDataBlock(_object):
     __weakref__ = None
 
 
-class MAttributeIndex(_object):
+class MAttributeIndex(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -3528,7 +3528,7 @@ class MAttributeIndex(_object):
     kInteger = 0
 
 
-class MPlane(_object):
+class MPlane(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3561,7 +3561,7 @@ class MPlane(_object):
     __weakref__ = None
 
 
-class MItCurveCV(_object):
+class MItCurveCV(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3608,7 +3608,7 @@ class MItCurveCV(_object):
     __weakref__ = None
 
 
-class MDAGDrawOverrideInfo(_object):
+class MDAGDrawOverrideInfo(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -3661,7 +3661,7 @@ class MDAGDrawOverrideInfo(_object):
     kLODFull = 0
 
 
-class MEvaluationManager(_object):
+class MEvaluationManager(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -3691,7 +3691,7 @@ class MEvaluationManager(_object):
     __weakref__ = None
 
 
-class MColor(_object):
+class MColor(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -3781,7 +3781,7 @@ class MColor(_object):
     kRGB = 0
 
 
-class MFileIO(_object):
+class MFileIO(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4065,7 +4065,7 @@ class MFileIO(_object):
     kVersion8_5 = 139
 
 
-class MTypeId(_object):
+class MTypeId(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -4098,7 +4098,7 @@ class MTypeId(_object):
     __weakref__ = None
 
 
-class MMessageNode(_object):
+class MMessageNode(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4141,7 +4141,7 @@ class MMessageNode(_object):
     __weakref__ = None
 
 
-class MURI(_object):
+class MURI(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -4249,7 +4249,7 @@ class MURI(_object):
     __weakref__ = None
 
 
-class charPtr(_object):
+class charPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4280,7 +4280,7 @@ class charPtr(_object):
     __weakref__ = None
 
 
-class MScriptUtil(_object):
+class MScriptUtil(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4572,7 +4572,7 @@ class MScriptUtil(_object):
     __weakref__ = None
 
 
-class MSelectionList(_object):
+class MSelectionList(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4635,7 +4635,7 @@ class MSelectionList(_object):
     kXORWithList = 1
 
 
-class MItInstancer(_object):
+class MItInstancer(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4684,7 +4684,7 @@ class MItInstancer(_object):
     __weakref__ = None
 
 
-class MComputation(_object):
+class MComputation(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4727,7 +4727,7 @@ class MComputation(_object):
     __weakref__ = None
 
 
-class MCurveAttribute(_object):
+class MCurveAttribute(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4786,7 +4786,7 @@ class MCurveAttribute(_object):
     __weakref__ = None
 
 
-class MFnBase(_object):
+class MFnBase(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4819,7 +4819,7 @@ class MFnBase(_object):
     __weakref__ = None
 
 
-class MIffFile(_object):
+class MIffFile(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4868,7 +4868,7 @@ class MIffFile(_object):
     __weakref__ = None
 
 
-class MArrayDataHandle(_object):
+class MArrayDataHandle(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4921,7 +4921,7 @@ class MArrayDataHandle(_object):
     __weakref__ = None
 
 
-class MCallbackIdArray(_object):
+class MCallbackIdArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -4970,7 +4970,7 @@ class MCallbackIdArray(_object):
     __weakref__ = None
 
 
-class MQuaternion(_object):
+class MQuaternion(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -5074,7 +5074,7 @@ class MQuaternion(_object):
     identity = None
 
 
-class MItGeometry(_object):
+class MItGeometry(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -5127,7 +5127,7 @@ class MItGeometry(_object):
     __weakref__ = None
 
 
-class MFloatArray(_object):
+class MFloatArray(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -5194,7 +5194,7 @@ class MFloatArray(_object):
     __weakref__ = None
 
 
-class MDistance(_object):
+class MDistance(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -5285,7 +5285,7 @@ class MDistance(_object):
     kYards = 3
 
 
-class MCacheFormatDescription(_object):
+class MCacheFormatDescription(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -5362,7 +5362,7 @@ class MCacheFormatDescription(_object):
     kUnknownData = 0
 
 
-class MDoubleArray(_object):
+class MDoubleArray(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -5429,7 +5429,7 @@ class MDoubleArray(_object):
     __weakref__ = None
 
 
-class MMeshSmoothOptions(_object):
+class MMeshSmoothOptions(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -5542,7 +5542,7 @@ class MMeshSmoothOptions(_object):
     kSharpEdgesAndCorners = 1
 
 
-class MDataHandle(_object):
+class MDataHandle(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -5751,7 +5751,7 @@ class MDataHandle(_object):
     __weakref__ = None
 
 
-class MObjectArray(_object):
+class MObjectArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -5800,7 +5800,7 @@ class MObjectArray(_object):
     __weakref__ = None
 
 
-class MEulerRotation(_object):
+class MEulerRotation(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -5923,7 +5923,7 @@ class MEulerRotation(_object):
     kZYX = 5
 
 
-class array3dInt(_object):
+class array3dInt(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -5951,7 +5951,7 @@ class array3dInt(_object):
     __weakref__ = None
 
 
-class MFileObject(_object):
+class MFileObject(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6051,7 +6051,7 @@ class MFileObject(_object):
     kStrict = 6
 
 
-class MSpace(_object):
+class MSpace(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6087,7 +6087,7 @@ class MSpace(_object):
     kWorld = 4
 
 
-class MStreamUtils(_object):
+class MStreamUtils(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6145,7 +6145,7 @@ class MStreamUtils(_object):
     __weakref__ = None
 
 
-class MItDag(_object):
+class MItDag(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6210,7 +6210,7 @@ class MItDag(_object):
     kInvalidType = 0
 
 
-class MFnSubdNames(_object):
+class MFnSubdNames(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6301,7 +6301,7 @@ class MFnSubdNames(_object):
     __weakref__ = None
 
 
-class doublePtr(_object):
+class doublePtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6332,7 +6332,7 @@ class doublePtr(_object):
     __weakref__ = None
 
 
-class MSyntax(_object):
+class MSyntax(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6421,7 +6421,7 @@ class MSyntax(_object):
     kUnsigned = 6
 
 
-class MPointOnNurbs(_object):
+class MPointOnNurbs(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6449,7 +6449,7 @@ class MPointOnNurbs(_object):
     __weakref__ = None
 
 
-class MUintArray(_object):
+class MUintArray(object):
     def __add__(self, *args): pass
 
     def __del__(self): pass
@@ -6516,7 +6516,7 @@ class MUintArray(_object):
     __weakref__ = None
 
 
-class MItEdits(_object):
+class MItEdits(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -6575,7 +6575,7 @@ class MItEdits(_object):
     kReverse = 1
 
 
-class MFn(_object):
+class MFn(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -8870,7 +8870,7 @@ class MFn(_object):
     kXsectionSubdivEdit = 814
 
 
-class MGlobal(_object):
+class MGlobal(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args): pass
@@ -9151,7 +9151,7 @@ class MGlobal(_object):
     kXORWithList = 1
 
 
-class MAttributeSpec(_object):
+class MAttributeSpec(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -9190,7 +9190,7 @@ class MAttributeSpec(_object):
     __weakref__ = None
 
 
-class MDGModifier(_object):
+class MDGModifier(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -9281,7 +9281,7 @@ class MDGModifier(_object):
     __weakref__ = None
 
 
-class MAngle(_object):
+class MAngle(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -9356,7 +9356,7 @@ class MAngle(_object):
     kRadians = 1
 
 
-class MProfilingScope(_object):
+class MProfilingScope(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -9381,7 +9381,7 @@ class MProfilingScope(_object):
     __weakref__ = None
 
 
-class MItMeshFaceVertex(_object):
+class MItMeshFaceVertex(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -9452,7 +9452,7 @@ class MItMeshFaceVertex(_object):
     __weakref__ = None
 
 
-class MPlug(_object):
+class MPlug(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -9657,7 +9657,7 @@ class MPlug(_object):
     kNotFreeToChange = 1
 
 
-class MColorArray(_object):
+class MColorArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -9708,7 +9708,7 @@ class MColorArray(_object):
     __weakref__ = None
 
 
-class MCacheConfigRuleRegistry(_object):
+class MCacheConfigRuleRegistry(object):
     def __getattr__(self, name): pass
 
     def __init__(self, *args, **kwargs): pass
@@ -9741,7 +9741,7 @@ class MCacheConfigRuleRegistry(_object):
     __weakref__ = None
 
 
-class MFloatPoint(_object):
+class MFloatPoint(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -9832,7 +9832,7 @@ class MFloatPoint(_object):
     origin = None
 
 
-class MTesselationParams(_object):
+class MTesselationParams(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -9956,7 +9956,7 @@ class MTesselationParams(_object):
     kUseTriangleEdgeSwapping = 8
 
 
-class MItMeshVertex(_object):
+class MItMeshVertex(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10051,7 +10051,7 @@ class MItMeshVertex(_object):
     __weakref__ = None
 
 
-class MDGContext(_object):
+class MDGContext(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10092,7 +10092,7 @@ class MDGContext(_object):
     __weakref__ = None
 
 
-class MEvaluationNodeIterator(_object):
+class MEvaluationNodeIterator(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10127,7 +10127,7 @@ class MEvaluationNodeIterator(_object):
     __weakref__ = None
 
 
-class MTransformationMatrix(_object):
+class MTransformationMatrix(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -10265,7 +10265,7 @@ class MTransformationMatrix(_object):
     kZYX = 6
 
 
-class MMatrixArray(_object):
+class MMatrixArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10314,7 +10314,7 @@ class MMatrixArray(_object):
     __weakref__ = None
 
 
-class MAttributeSpecArray(_object):
+class MAttributeSpecArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10363,7 +10363,7 @@ class MAttributeSpecArray(_object):
     __weakref__ = None
 
 
-class MItSubdFace(_object):
+class MItSubdFace(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10402,7 +10402,7 @@ class MItSubdFace(_object):
     __weakref__ = None
 
 
-class MFloatVector(_object):
+class MFloatVector(object):
     def __add__(self, *args): pass
 
     def __call__(self, *args): pass
@@ -10509,7 +10509,7 @@ class MFloatVector(_object):
     zero = None
 
 
-class MNodeClass(_object):
+class MNodeClass(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10560,7 +10560,7 @@ class MNodeClass(_object):
     __weakref__ = None
 
 
-class floatPtr(_object):
+class floatPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10591,7 +10591,7 @@ class floatPtr(_object):
     __weakref__ = None
 
 
-class MArgParser(_object):
+class MArgParser(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10660,7 +10660,7 @@ class MArgParser(_object):
     __weakref__ = None
 
 
-class MRenderPassDef(_object):
+class MRenderPassDef(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10703,7 +10703,7 @@ class MRenderPassDef(_object):
     __weakref__ = None
 
 
-class MNamespace(_object):
+class MNamespace(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10779,7 +10779,7 @@ class MNamespace(_object):
     __weakref__ = None
 
 
-class uCharPtr(_object):
+class uCharPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10810,7 +10810,7 @@ class uCharPtr(_object):
     __weakref__ = None
 
 
-class MPointOnMesh(_object):
+class MPointOnMesh(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10842,7 +10842,7 @@ class MPointOnMesh(_object):
     __weakref__ = None
 
 
-class MImageFileInfo(_object):
+class MImageFileInfo(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10902,7 +10902,7 @@ class MImageFileInfo(_object):
     kImageTypeUnknown = 0
 
 
-class MImage(_object):
+class MImage(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -10994,7 +10994,7 @@ class MImage(_object):
     kUnknownFormat = 3
 
 
-class MItSurfaceCV(_object):
+class MItSurfaceCV(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -11047,7 +11047,7 @@ class MItSurfaceCV(_object):
     __weakref__ = None
 
 
-class array2dFloat(_object):
+class array2dFloat(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -11075,7 +11075,7 @@ class array2dFloat(_object):
     __weakref__ = None
 
 
-class boolPtr(_object):
+class boolPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass

@@ -1,11 +1,10 @@
-from __builtin__ import object as _object
-from __builtin__ import property as _swig_property
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class MPxAttributePatternFactory(_object):
+class MPxAttributePatternFactory(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -38,7 +37,7 @@ class MPxAttributePatternFactory(_object):
     __weakref__ = None
 
 
-class uIntPtr(_object):
+class uIntPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -69,7 +68,7 @@ class uIntPtr(_object):
     __weakref__ = None
 
 
-class MPxMaterialInformation(_object):
+class MPxMaterialInformation(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -112,7 +111,7 @@ class MPxMaterialInformation(_object):
     kTexture = 1
 
 
-class MPxCacheFormat(_object):
+class MPxCacheFormat(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -213,7 +212,7 @@ class MPxCacheFormat(_object):
     kWrite = 1
 
 
-class MPxRenderPassImpl(_object):
+class MPxRenderPassImpl(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -291,7 +290,7 @@ class MPxRenderPassImpl(_object):
     kVectorSemantic = 2
 
 
-class charPtr(_object):
+class charPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -322,7 +321,7 @@ class charPtr(_object):
     __weakref__ = None
 
 
-class MPxModelEditorCommand(_object):
+class MPxModelEditorCommand(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -367,7 +366,7 @@ class MPxModelEditorCommand(_object):
     __weakref__ = None
 
 
-class MPxGlBuffer(_object):
+class MPxGlBuffer(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -406,7 +405,7 @@ class MPxGlBuffer(_object):
     __weakref__ = None
 
 
-class MPxCommand(_object):
+class MPxCommand(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -499,7 +498,7 @@ class MPxCommand(_object):
     kString = 2
 
 
-class boolPtr(_object):
+class boolPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -530,7 +529,7 @@ class boolPtr(_object):
     __weakref__ = None
 
 
-class MPxTransformationMatrix(_object):
+class MPxTransformationMatrix(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -658,7 +657,7 @@ class MPxTransformationMatrix(_object):
     identity = None
 
 
-class MPxGeometryIterator(_object):
+class MPxGeometryIterator(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -721,7 +720,7 @@ class MPxGeometryIterator(_object):
     __weakref__ = None
 
 
-class MPxUIControl(_object):
+class MPxUIControl(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -748,7 +747,7 @@ class MPxUIControl(_object):
     __weakref__ = None
 
 
-class MPxMayaAsciiFilterOutput(_object):
+class MPxMayaAsciiFilterOutput(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -772,7 +771,7 @@ class MPxMayaAsciiFilterOutput(_object):
     __weakref__ = None
 
 
-class MPxFileResolver(_object):
+class MPxFileResolver(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -828,7 +827,7 @@ class MPxFileResolver(_object):
     kNone = 1
 
 
-class MPxContextCommand(_object):
+class MPxContextCommand(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -865,7 +864,7 @@ class MPxContextCommand(_object):
     __weakref__ = None
 
 
-class uCharPtr(_object):
+class uCharPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -896,7 +895,7 @@ class uCharPtr(_object):
     __weakref__ = None
 
 
-class MaterialInputData(_object):
+class MaterialInputData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -936,7 +935,7 @@ class MaterialInputData(_object):
     __weakref__ = None
 
 
-class MPxDragAndDropBehavior(_object):
+class MPxDragAndDropBehavior(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -973,7 +972,7 @@ class MPxDragAndDropBehavior(_object):
     __weakref__ = None
 
 
-class doublePtr(_object):
+class doublePtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1164,7 +1163,7 @@ class MFnPlugin(OpenMaya.MFnBase):
     kDefaultDataLocation = None
 
 
-class MPxCacheConfigRuleFilter(_object):
+class MPxCacheConfigRuleFilter(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1194,7 +1193,7 @@ class MPxCacheConfigRuleFilter(_object):
     __weakref__ = None
 
 
-class MPxAnimCurveInterpolator(_object):
+class MPxAnimCurveInterpolator(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1230,7 +1229,7 @@ class MPxAnimCurveInterpolator(_object):
     kLockType = 2
 
 
-class MPxRepresentation(_object):
+class MPxRepresentation(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1268,7 +1267,7 @@ class MPxRepresentation(_object):
     __weakref__ = None
 
 
-class MPxControlCommand(_object):
+class MPxControlCommand(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1309,7 +1308,7 @@ class MPxControlCommand(_object):
     __weakref__ = None
 
 
-class MPxEditData(_object):
+class MPxEditData(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1344,7 +1343,7 @@ class MPxEditData(_object):
     __weakref__ = None
 
 
-class MPxNode(_object):
+class MPxNode(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1547,7 +1546,7 @@ class MPxNode(_object):
     kUntrusted = 3
 
 
-class MPxImageFile(_object):
+class MPxImageFile(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1579,7 +1578,7 @@ class MPxImageFile(_object):
     __weakref__ = None
 
 
-class floatPtr(_object):
+class floatPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1610,7 +1609,7 @@ class floatPtr(_object):
     __weakref__ = None
 
 
-class MPxSurfaceShapeUI(_object):
+class MPxSurfaceShapeUI(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1670,7 +1669,7 @@ class MPxSurfaceShapeUI(_object):
     kSelectMeshVerts = 1
 
 
-class MPxData(_object):
+class MPxData(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1714,7 +1713,7 @@ class MPxData(_object):
     kLast = 2
 
 
-class MPxMidiInputDevice(_object):
+class MPxMidiInputDevice(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1759,7 +1758,7 @@ class MPxMidiInputDevice(_object):
     __weakref__ = None
 
 
-class MPxFileTranslator(_object):
+class MPxFileTranslator(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -1828,7 +1827,7 @@ class MPxFileTranslator(_object):
     kUnknownAccessMode = 0
 
 
-class MPx3dModelView(_object):
+class MPx3dModelView(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -2120,7 +2119,7 @@ class MPx3dModelView(_object):
     kLightSelected = 1
 
 
-class intPtr(_object):
+class intPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2151,7 +2150,7 @@ class intPtr(_object):
     __weakref__ = None
 
 
-class MExternalContentLocationTable(_object):
+class MExternalContentLocationTable(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2181,7 +2180,7 @@ class MExternalContentLocationTable(_object):
     __weakref__ = None
 
 
-class MExternalContentInfoTable(_object):
+class MExternalContentInfoTable(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2213,7 +2212,7 @@ class MExternalContentInfoTable(_object):
     __weakref__ = None
 
 
-class MPxContext(_object):
+class MPxContext(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -2288,7 +2287,7 @@ class MPxContext(_object):
     kImage3 = 2
 
 
-class shortPtr(_object):
+class shortPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -2319,7 +2318,7 @@ class shortPtr(_object):
     __weakref__ = None
 
 
-class MPxBakeEngine(_object):
+class MPxBakeEngine(object):
     def __del__(self): pass
 
     def __disown__(self): pass

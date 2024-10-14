@@ -1,11 +1,11 @@
-from __builtin__ import object as _object
-from __builtin__ import property as _swig_property
+
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class MDynSweptTriangle(_object):
+class MDynSweptTriangle(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -180,7 +180,7 @@ class MFnFluid(OpenMaya.MFnDagNode):
     kZero = 0
 
 
-class floatPtr(_object):
+class floatPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -211,7 +211,7 @@ class floatPtr(_object):
     __weakref__ = None
 
 
-class MnObject(_object):
+class MnObject(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -370,7 +370,7 @@ class MFnParticleSystem(OpenMaya.MFnDagNode):
     kTube = 1
 
 
-class doublePtr(_object):
+class doublePtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -434,7 +434,7 @@ class MFnDynSweptGeometryData(OpenMaya.MFnData):
     __swig_setmethods__ = {}
 
 
-class uIntPtr(_object):
+class uIntPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -465,7 +465,7 @@ class uIntPtr(_object):
     __weakref__ = None
 
 
-class MDynamicsUtil(_object):
+class MDynamicsUtil(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -505,7 +505,7 @@ class MDynamicsUtil(_object):
     __weakref__ = None
 
 
-class boolPtr(_object):
+class boolPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -612,7 +612,7 @@ class MFnField(OpenMaya.MFnDagNode):
     __swig_setmethods__ = {}
 
 
-class MDynSweptLine(_object):
+class MDynSweptLine(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -645,7 +645,7 @@ class MDynSweptLine(_object):
     __weakref__ = None
 
 
-class intPtr(_object):
+class intPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -676,7 +676,7 @@ class intPtr(_object):
     __weakref__ = None
 
 
-class shortPtr(_object):
+class shortPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -707,7 +707,7 @@ class shortPtr(_object):
     __weakref__ = None
 
 
-class MRenderLine(_object):
+class MRenderLine(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -816,7 +816,7 @@ class MFnNObjectData(OpenMaya.MFnData):
     __swig_setmethods__ = {}
 
 
-class uCharPtr(_object):
+class uCharPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -847,7 +847,7 @@ class uCharPtr(_object):
     __weakref__ = None
 
 
-class MnSolver(_object):
+class MnSolver(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -930,7 +930,7 @@ class MFnInstancer(OpenMaya.MFnDagNode):
     __swig_setmethods__ = {}
 
 
-class MRenderLineArray(_object):
+class MRenderLineArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -963,7 +963,7 @@ class MRenderLineArray(_object):
     __weakref__ = None
 
 
-class charPtr(_object):
+class charPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -994,7 +994,7 @@ class charPtr(_object):
     __weakref__ = None
 
 
-class MHairSystem(_object):
+class MHairSystem(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass

@@ -1,11 +1,11 @@
-from __builtin__ import object as _object
-from __builtin__ import property as _swig_property
+
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class MMaterial(_object):
+class MMaterial(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -103,7 +103,7 @@ class MMaterial(_object):
     kWhiteness = 9
 
 
-class uIntPtr(_object):
+class uIntPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -134,7 +134,7 @@ class uIntPtr(_object):
     __weakref__ = None
 
 
-class uCharPtr(_object):
+class uCharPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -197,7 +197,7 @@ class MHWShaderSwatchGenerator(OpenMayaRender.MSwatchRenderBase):
     __swig_setmethods__ = {}
 
 
-class doublePtr(_object):
+class doublePtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -228,7 +228,7 @@ class doublePtr(_object):
     __weakref__ = None
 
 
-class MDrawRequestQueue(_object):
+class MDrawRequestQueue(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -261,7 +261,7 @@ class MDrawRequestQueue(_object):
     __weakref__ = None
 
 
-class MToolsInfo(_object):
+class MToolsInfo(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -295,7 +295,7 @@ class MToolsInfo(_object):
     __weakref__ = None
 
 
-class MTextureEditorDrawInfo(_object):
+class MTextureEditorDrawInfo(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -340,7 +340,7 @@ class MTextureEditorDrawInfo(_object):
     kDrawWireframe = 1
 
 
-class charPtr(_object):
+class charPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -371,7 +371,7 @@ class charPtr(_object):
     __weakref__ = None
 
 
-class shortPtr(_object):
+class shortPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -429,7 +429,7 @@ class MPaintMessage(OpenMaya.MMessage):
     __swig_setmethods__ = {}
 
 
-class MGraphEditorInfo(_object):
+class MGraphEditorInfo(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -476,7 +476,7 @@ class MGraphEditorInfo(_object):
     kAnimCurveSelected = 2
 
 
-class MExternalDropData(_object):
+class MExternalDropData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -544,7 +544,7 @@ class MExternalDropData(_object):
     kShiftModifier = 33554432
 
 
-class MExternalDropCallback(_object):
+class MExternalDropCallback(object):
     def __del__(self): pass
 
     def __disown__(self): pass
@@ -582,7 +582,7 @@ class MExternalDropCallback(_object):
     kNoMayaDefaultAndNoAccept = 2
 
 
-class MDrawRequest(_object):
+class MDrawRequest(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -713,7 +713,7 @@ class MUiMessage(OpenMaya.MMessage):
     __swig_setmethods__ = {}
 
 
-class MQtUtil(_object):
+class MQtUtil(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -798,7 +798,7 @@ class MQtUtil(_object):
     __weakref__ = None
 
 
-class MDeviceChannel(_object):
+class MDeviceChannel(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -834,7 +834,7 @@ class MDeviceChannel(_object):
     __weakref__ = None
 
 
-class MProgressWindow(_object):
+class MProgressWindow(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -913,7 +913,7 @@ class MProgressWindow(_object):
     __weakref__ = None
 
 
-class MCursor(_object):
+class MCursor(object):
     def __del__(self): pass
 
     def __eq__(self, *args): pass
@@ -953,7 +953,7 @@ class MCursor(_object):
     pencilCursor = None
 
 
-class MManipData(_object):
+class MManipData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -996,7 +996,7 @@ class MManipData(_object):
     __weakref__ = None
 
 
-class boolPtr(_object):
+class boolPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1027,7 +1027,7 @@ class boolPtr(_object):
     __weakref__ = None
 
 
-class MEvent(_object):
+class MEvent(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1084,7 +1084,7 @@ class MEvent(_object):
     shiftKey = 1
 
 
-class MFeedbackLine(_object):
+class MFeedbackLine(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1127,7 +1127,7 @@ class MFeedbackLine(_object):
     __weakref__ = None
 
 
-class floatPtr(_object):
+class floatPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1158,7 +1158,7 @@ class floatPtr(_object):
     __weakref__ = None
 
 
-class MDrawInfo(_object):
+class MDrawInfo(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1304,7 +1304,7 @@ class MFnToolContext(OpenMaya.MFnBase):
     __swig_setmethods__ = {}
 
 
-class MDrawTraversal(_object):
+class MDrawTraversal(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1356,7 +1356,7 @@ class MDrawTraversal(_object):
     kTemplateItem = 1
 
 
-class M3dView(_object):
+class M3dView(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1768,7 +1768,7 @@ class M3dView(_object):
     kWireFrame = 3
 
 
-class MObjectListFilter(_object):
+class MObjectListFilter(object):
     def UIname(self, *args): pass
 
     def __del__(self): pass
@@ -1825,7 +1825,7 @@ class MObjectListFilter(_object):
     kNumberOfFilterTypes = 2
 
 
-class MDrawData(_object):
+class MDrawData(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1852,7 +1852,7 @@ class MDrawData(_object):
     __weakref__ = None
 
 
-class MMaterialArray(_object):
+class MMaterialArray(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1901,7 +1901,7 @@ class MMaterialArray(_object):
     __weakref__ = None
 
 
-class MDeviceState(_object):
+class MDeviceState(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
@@ -1935,7 +1935,7 @@ class MDeviceState(_object):
     __weakref__ = None
 
 
-class intPtr(_object):
+class intPtr(object):
     def __del__(self): pass
 
     def __getattr__(self, name): pass
