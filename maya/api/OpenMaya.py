@@ -4751,6 +4751,8 @@ class MSelectionList(object):
         Raises IndexError if index is out of range.
         """
         item = self._inner_ls[index]
+        if isinstance(item, str):
+            item = MDagPath()
         if not isinstance(item, MDagPath):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
         return item
@@ -4765,7 +4767,11 @@ class MSelectionList(object):
         Raises IndexError if index is out of range.
         """
         item = self._inner_ls[index]
-        if not isinstance(item, MObject):
+        if isinstance(item, str):
+            mobject = MObject()
+            mobject._name = item
+            return mobject
+        elif not isinstance(item, MObject):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
         return item
 
@@ -4777,11 +4783,15 @@ class MSelectionList(object):
         the item is not a plug. Raises IndexError if index is out of range.
         """
         item = self._inner_ls[index]
+        if isinstance(item, str):
+            mplug = MPlug()
+            mplug._name = index
+            return mplug
         if not isinstance(item, MPlug):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
         return item
 
-    def getSelectionStrings(*args, **kwargs):
+    def getSelectionStrings(self, index: str) -> tuple[str]:
         """
         getSelectionStrings(index=None) -> (string, string, ...)
 
