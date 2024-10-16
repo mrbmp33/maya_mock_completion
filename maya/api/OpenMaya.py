@@ -7,8 +7,8 @@
 # or hard copy form.
 """
 
-if False:
-    from typing import Dict, List, Tuple, Union, Optional
+import uuid
+from typing import Optional, Iterable, Union
 
 
 class MColor(object):
@@ -505,11 +505,11 @@ class MObjectHandle(object):
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, mobject: "MObject"):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._mobject = mobject
 
     def __le__(*args, **kwargs):
         """
@@ -539,13 +539,13 @@ class MObjectHandle(object):
         """
         pass
 
-    def hashCode(*args, **kwargs):
+    def hashCode(self, *args, **kwargs):
         """
         hashCode() -> int
 
         Returns a hash code for the internal Maya object referenced by the MObject within this MObjectHandle. If the MObject is null or no longer alive then 0 will be returned, otherwise the hash code is guaranteed to be non-zero
         """
-        pass
+        return hash(id(self._mobject._name))
 
     def isAlive(*args, **kwargs):
         """
@@ -569,7 +569,7 @@ class MObjectHandle(object):
 
         Returns the MObject associated with this handle. The returned MObject will be MObject.kNullObj if the object is invalid.
         """
-        pass
+        return self._mobject
 
 
 class MInt64Array(object):
@@ -4681,11 +4681,11 @@ class MSelectionList(object):
     items as another list.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._inner_ls = []
 
     def __str__(*args, **kwargs):
         """
@@ -4693,7 +4693,10 @@ class MSelectionList(object):
         """
         pass
 
-    def add(*args, **kwargs):
+    def add(self,
+            item: Union[str, "MPlug", "MObject", "MDagPath", Iterable["MDagPath", "MObject"]],
+            searchChildNamespaces=False,
+            mergeWithExisting=True):
         """
         add(pattern, searchChildNamespaces=False) -> self
         add(item, mergeWithExisting=True) -> self
@@ -4706,15 +4709,17 @@ class MSelectionList(object):
         item can be a plug (MPlug), a node (MObject), a DAG path (MDagPath)
         or a component (tuple of (MDagPath, MObject) ).
         """
-        pass
 
-    def clear(*args, **kwargs):
+        self._inner_ls.append(item)
+
+    def clear(self):
         """
         clear() -> self
 
         Empties the selection list.
         """
-        pass
+        self._inner_ls: list = []
+        return self
 
     def copy(*args, **kwargs):
         """
@@ -4737,7 +4742,7 @@ class MSelectionList(object):
         """
         pass
 
-    def getDagPath(*args, **kwargs):
+    def getDagPath(self, index: int) -> "MDagPath":
         """
         getDagPath(index) -> MDagPath
 
@@ -4745,9 +4750,12 @@ class MSelectionList(object):
         Raises TypeError if the item is neither a DAG path nor a component.
         Raises IndexError if index is out of range.
         """
-        pass
+        item = self._inner_ls[index]
+        if not isinstance(item, MDagPath):
+            raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
+        return item
 
-    def getDependNode(*args, **kwargs):
+    def getDependNode(self, index: int) -> "MObject":
         """
         getDependNode(index) -> MObject
 
@@ -4756,16 +4764,22 @@ class MSelectionList(object):
         Raises kFailure if there is no dependency node associated with the current item.
         Raises IndexError if index is out of range.
         """
-        pass
+        item = self._inner_ls[index]
+        if not isinstance(item, MObject):
+            raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
+        return item
 
-    def getPlug(*args, **kwargs):
+    def getPlug(self, index: int) -> "MPlug":
         """
         getPlug(index) -> MPlug
 
         Returns the index'th item of the list as a plug. Raises TypeError if
         the item is not a plug. Raises IndexError if index is out of range.
         """
-        pass
+        item = self._inner_ls[index]
+        if not isinstance(item, MPlug):
+            raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
+        return item
 
     def getSelectionStrings(*args, **kwargs):
         """
@@ -4818,13 +4832,13 @@ class MSelectionList(object):
         """
         pass
 
-    def length(*args, **kwargs):
+    def length(self) -> int:
         """
         length() -> int
 
         Returns the number of items on the selection list.
         """
-        pass
+        return len(self._inner_ls)
 
     def merge(*args, **kwargs):
         """
@@ -12799,11 +12813,12 @@ class MObject(object):
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._name = uuid.uuid4()
+        self._fn_type: Optional[int] = MFn.kDagNode
 
     def __le__(*args, **kwargs):
         """
@@ -12829,11 +12844,11 @@ class MObject(object):
         """
         pass
 
-    def hasFn(*args, **kwargs):
+    def hasFn(self, compare_fn_type: int):
         """
         Tests whether object is compatible with the specified function set.
         """
-        pass
+        return self._fn_type == compare_fn_type
 
     def isNull(*args, **kwargs):
         """
@@ -21276,11 +21291,11 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def create(*args, **kwargs):
+    def create(*args, **kwargs) -> MObject:
         """
         Creates a new node of the given type.
         """
-        pass
+        return MObject(*args, **kwargs)
 
     def dgCallbackIds(*args, **kwargs):
         """
@@ -22304,7 +22319,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def create(*args, **kwargs):
+    def create(*args, **kwargs) -> MObject:
         """
         create(type, name=None, parent=MObject.kNullObj) -> MObject
 
@@ -22326,7 +22341,7 @@ class MFnDagNode(MFnDependencyNode):
         parented under it, and the functionset will be attached to the
         transform. The transform will be returned.
         """
-        pass
+        return MObject(*args, **kwargs)
 
     def dagPath(*args, **kwargs):
         """
