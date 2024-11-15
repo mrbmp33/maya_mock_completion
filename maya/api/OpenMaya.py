@@ -6,7 +6,6 @@
 # or which otherwise accompanies this software in either electronic
 # or hard copy form.
 """
-
 import uuid
 from typing import Optional, Iterable, Union
 
@@ -547,23 +546,23 @@ class MObjectHandle(object):
         """
         return hash(id(self._mobject._name))
 
-    def isAlive(*args, **kwargs):
+    def isAlive(self) -> bool:
         """
         isAlive() -> bool
 
         Returns the live state of the associated MObject. An object can still be 'alive' but not 'valid' (eg. a deleted object that resides in the undo queue).
         """
-        pass
+        return getattr(self._mobject, '_isAlive', True)
 
-    def isValid(*args, **kwargs):
+    def isValid(self) -> bool:
         """
         isValid() -> bool
 
         Returns the validity of the associated MObject.
         """
-        pass
+        return getattr(self._mobject, '_isValid', True)
 
-    def object(*args, **kwargs):
+    def object(self):
         """
         object() -> MObject
 
@@ -1044,6 +1043,7 @@ class MTypeId(object):
     """
     Stores a Maya object type identifier.
     """
+    _node_types = None
 
     def __eq__(*args, **kwargs):
         """
@@ -1063,11 +1063,13 @@ class MTypeId(object):
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, value: int = 0, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._value = value
+        from maya import node_types
+        self.__class__._node_types = node_types
 
     def __le__(*args, **kwargs):
         """
@@ -1087,11 +1089,15 @@ class MTypeId(object):
         """
         pass
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self):
         """
         x.__repr__() <==> repr(x)
         """
-        pass
+        return "{class_name}({value}) <{as_str}".format(
+            class_name=self.__class__.__name__,
+            value=self._value,
+            as_str=self.__class__._node_types.TYPE_HEX_TO_STR[int(self._value, 16)]
+        )
 
     def __str__(*args, **kwargs):
         """
@@ -1099,11 +1105,11 @@ class MTypeId(object):
         """
         pass
 
-    def id(*args, **kwargs):
+    def id(self) -> int:
         """
         Returns the type id as a long.
         """
-        pass
+        return self._value
 
 
 class MMeshSmoothOptions(object):
@@ -1739,7 +1745,7 @@ class MDGModifier(object):
         """
         pass
 
-    def deleteNode(*args, **kwargs):
+    def deleteNode(self, node: "MObject"):
         """
         deleteNode(MObject node) -> self
 
@@ -1748,7 +1754,7 @@ class MDGModifier(object):
         on the same node (e.g. a disconnect) then they should be committed by
         calling the modifier's doIt() before the deleteNode operation is added.
         """
-        pass
+        node._alive = False
 
     def disconnect(*args, **kwargs):
         """
@@ -1763,7 +1769,7 @@ class MDGModifier(object):
         """
         pass
 
-    def doIt(*args, **kwargs):
+    def doIt(self):
         """
         doIt() -> self
 
@@ -1773,7 +1779,7 @@ class MDGModifier(object):
         executed. If undoIt() has been called then the next call to doIt() will
         do all operations.
         """
-        pass
+        return self
 
     def linkExtensionAttributeToPlugin(*args, **kwargs):
         """
@@ -1960,13 +1966,13 @@ class MDGModifier(object):
         """
         pass
 
-    def renameNode(*args, **kwargs):
+    def renameNode(self, node: "MObject", newName: str):
         """
         renameNode(MObject node, string newName) -> self
 
         Adds an operation to the modifer to rename a node.
         """
-        pass
+        node._name = newName
 
     def setNodeLockState(*args, **kwargs):
         """
@@ -3576,11 +3582,11 @@ class MUuid(object):
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._uuid = uuid.UUID('00000000-0000-0000-0000-000000000000')
 
     def __le__(*args, **kwargs):
         """
@@ -3606,19 +3612,19 @@ class MUuid(object):
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return str(self._uuid).upper()
 
-    def asString(*args, **kwargs):
+    def asString(self):
         """
         asString() -> string
 
         Return the UUID as a string.
         """
-        pass
+        return str(self)
 
     def copy(*args, **kwargs):
         """
@@ -3630,13 +3636,14 @@ class MUuid(object):
         """
         pass
 
-    def generate(*args, **kwargs):
+    def generate(self):
         """
         generate() -> self
 
         Generate a new UUID.
         """
-        pass
+        self._uuid = uuid.uuid4()
+        return self
 
     def valid(*args, **kwargs):
         """
@@ -4694,10 +4701,11 @@ class MSelectionList(object):
         pass
 
     def add(self,
-            item: Union[str, "MPlug", "MObject", "MDagPath", Iterable["MDagPath", "MObject"]],
+            item: Union[str, "MPlug", "MObject", "MDagPath", Iterable[Union["MDagPath", "MObject"]]],
             searchChildNamespaces=False,
             mergeWithExisting=True):
         """
+        add(pattern, searchChildNamespaces=False) -> self
         add(pattern, searchChildNamespaces=False) -> self
         add(item, mergeWithExisting=True) -> self
 
@@ -4757,6 +4765,7 @@ class MSelectionList(object):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
         return item
 
+    # noinspection PyProtectedMember
     def getDependNode(self, index: int) -> "MObject":
         """
         getDependNode(index) -> MObject
@@ -4770,6 +4779,8 @@ class MSelectionList(object):
         if isinstance(item, str):
             mobject = MObject()
             mobject._name = item
+            # todo: need to figure a better way to do this based on a str
+            mobject._typeId = MTypeId().__class__._node_types.TYPE_STR_TO_ID['transform']
             return mobject
         elif not isinstance(item, MObject):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
@@ -12827,8 +12838,11 @@ class MObject(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._name = uuid.uuid4()
+        self._uuid = MUuid().generate()
+        self._name = str(self._uuid)
         self._fn_type: Optional[int] = MFn.kDagNode
+        self._alive: bool = True
+        self._typeId: "MTypeId" = MTypeId()
 
     def __le__(*args, **kwargs):
         """
@@ -12860,11 +12874,11 @@ class MObject(object):
         """
         return self._fn_type == compare_fn_type
 
-    def isNull(*args, **kwargs):
+    def isNull(self) -> bool:
         """
         Tests whether there is an internal Maya object.
         """
-        pass
+        return not self._alive
 
     apiTypeStr = None
 
@@ -15516,29 +15530,29 @@ class MFnBase(object):
     Base class for function sets.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._mobject = None
 
-    def hasObj(*args, **kwargs):
+    def hasObj(*args, **kwargs) -> bool:
         """
         Returns True if the function set is compatible with the specified Maya object.
         """
         pass
 
-    def object(*args, **kwargs):
+    def object(self) -> MObject:
         """
         Returns a reference to the object to which the function set is currently attached, or MObject.kNullObj if none.
         """
-        pass
+        return self._mobject
 
-    def setObject(*args, **kwargs):
+    def setObject(self, mobject: MObject):
         """
         Attaches the function set to the specified Maya object.
         """
-        pass
+        self._mobject = mobject
 
     def type(*args, **kwargs):
         """
@@ -21242,16 +21256,17 @@ class MContainerMessage(MMessage):
         pass
 
 
+# noinspection PyProtectedMember,PyUnresolvedReferences
 class MFnDependencyNode(MFnBase):
     """
     Function set for operating on dependency nodes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
     def absoluteName(*args, **kwargs):
         """
@@ -21301,11 +21316,22 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def create(*args, **kwargs) -> MObject:
+    def create(self, typeId: Union["MTypeId", str], name: str = None) -> MObject:
         """
         Creates a new node of the given type.
         """
-        return MObject(*args, **kwargs)
+        mobject = MObject()
+        mobject._name = name
+
+        # If given a string as input, get the matching MTypeId
+        if isinstance(typeId, str):
+            # noinspection PyProtectedMember
+            mobject._typeId = MTypeId()._node_types.TYPE_STR_TO_ID[typeId]
+        mobject._typeId = typeId
+
+        self._mobject = mobject
+
+        return self._mobject
 
     def dgCallbackIds(*args, **kwargs):
         """
@@ -21506,11 +21532,11 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def uuid(*args, **kwargs):
+    def uuid(self) -> MUuid:
         """
         Returns the node's UUID.
         """
-        pass
+        return self._mobject._uuid
 
     @staticmethod
     def allocateFlag(*args, **kwargs):
@@ -21596,9 +21622,15 @@ class MFnDependencyNode(MFnBase):
 
     pluginName = None
 
-    typeId = None
+    @property
+    def typeId(self):
+        return self._mobject._typeId
 
-    typeName = None
+    @property
+    def typeName(self):
+        return self._mobject._typeId.__class__._node_types.TYPE_HEX_TO_STR[
+            int(hex(self._mobject._typeId.id()), 16)
+        ]
 
 
 class MDagModifier(MDGModifier):

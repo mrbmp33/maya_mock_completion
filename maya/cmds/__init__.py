@@ -1970,9 +1970,9 @@ def createLayeredPsdFile(imageFileName=list, ifn=list, psdFileName=str(), psf=st
     pass
 
 
-def createNode(name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(), skipSelect=bool(), ss=bool(), *args,
-               **kwargs):
-    pass
+def createNode(node_type:str, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(), skipSelect=bool(), ss=bool(),
+               *args, **kwargs):
+    return name or n
 
 
 def createRenderLayer(empty=bool(), e=bool(), g=bool(), makeCurrent=bool(), mc=bool(), name=str(), n=str(),
