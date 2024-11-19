@@ -6,7 +6,10 @@
 # or which otherwise accompanies this software in either electronic
 # or hard copy form.
 """
+import random
+import string
 import uuid
+import weakref
 from typing import Optional, Iterable, Union
 
 
@@ -12834,7 +12837,7 @@ class MObject(object):
         """
         pass
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
@@ -17070,47 +17073,54 @@ class MPlug(object):
     Create and access dependency node plugs.
     """
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, value) -> bool:
         """
         x.__eq__(y) <==> x==y
         """
-        pass
+        return self == value
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, value) -> bool:
         """
         x.__ge__(y) <==> x>=y
         """
-        pass
+        return self._value >= value
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, value) -> bool:
         """
         x.__gt__(y) <==> x>y
         """
-        pass
+        return self._value > value
 
-    def __init__(*args, **kwargs):
+    def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._owner = None
+        self._attr_name = None
+        self._network_plug = None
+        self._value = None
+        self._connections = {
+            'INPUTS': [],
+            'OUTPUTS': [],
+        }
 
-    def __le__(*args, **kwargs):
+    def __le__(self, value) -> bool:
         """
         x.__le__(y) <==> x<=y
         """
-        pass
+        return self._value <= value
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, value) -> bool:
         """
         x.__lt__(y) <==> x<y
         """
-        pass
+        return self._value < value
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, value) -> bool:
         """
         x.__ne__(y) <==> x!=y
         """
-        pass
+        return self._value != value
 
     def __str__(*args, **kwargs):
         """
@@ -17118,83 +17128,84 @@ class MPlug(object):
         """
         pass
 
-    def array(*args, **kwargs):
+    def array(self, *args, **kwargs):
         """
         Returns a plug for the array of plugs of which this plug is an element.
         """
-        pass
+        return [self, ]
 
-    def asBool(*args, **kwargs):
+    def asBool(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a boolean.
         """
-        pass
+        return bool(self._value)
 
-    def asChar(*args, **kwargs):
+    def asChar(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-byte integer.
         """
-        pass
+        return int(self._value or random.randint(-1_000_000, 1_000_000))
 
-    def asDouble(*args, **kwargs):
+    def asDouble(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a double-precision float.
         """
-        pass
+        return float(self._value or random.randint(-1_000_000, 1_000_000))
 
-    def asFloat(*args, **kwargs):
+    def asFloat(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-precision float.
         """
-        pass
+        return float(self._value or random.randint(-1_000_000, 1_000_000))
 
-    def asInt(*args, **kwargs):
+    def asInt(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a regular integer.
         """
-        pass
+        return int(self._value or random.randint(-1_000_000, 1_000_000))
 
-    def asMAngle(*args, **kwargs):
+    def asMAngle(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MAngle.
         """
-        pass
+        return MAngle(self._value or random.random())
 
-    def asMDataHandle(*args, **kwargs):
+    def asMDataHandle(self, *args, **kwargs):
         """
         Retrieve the current value of the attribute this plug references.
         """
-        pass
+        return MDataHandle(self._value)
 
-    def asMDistance(*args, **kwargs):
+    def asMDistance(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MDistance.
         """
-        pass
+        return MDistance(self._value or random.randint(-1_000_000, 1_000_000))
 
-    def asMObject(*args, **kwargs):
+    def asMObject(self, *args, **kwargs):
         """
         Retrieves the plug's value, as as an MObject containing a direct reference to the plug's data.
         """
-        pass
+        return MObject(self._value)
 
-    def asMTime(*args, **kwargs):
+    def asMTime(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MTime.
         """
-        pass
+        return MTime(self._value or random.randint(0, 1_000_000))
 
-    def asShort(*args, **kwargs):
+    def asShort(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a short integer.
         """
-        pass
+        return int(self._value or random.randint(-32767, 32767))
 
-    def asString(*args, **kwargs):
+    def asString(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a string.
         """
-        pass
+        return str(
+            self._value or "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15))))
 
     def attribute(*args, **kwargs):
         """
@@ -21381,11 +21392,15 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def findPlug(*args, **kwargs):
+    def findPlug(self, attr_name, want_network_plug):
         """
         Returns a plug for the given attribute.
         """
-        return MPlug()
+        mplug = MPlug()
+        mplug._owner = weakref.proxy(self)
+        mplug._attr_name = attr_name
+        mplug._network_plug = want_network_plug
+        return mplug
 
     def getAffectedAttributes(*args, **kwargs):
         """
