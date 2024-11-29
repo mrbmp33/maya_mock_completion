@@ -12925,7 +12925,8 @@ class MObject(object):
         pass
 
     def __repr__(self):
-        return f'MObject <{self.apiTypeStr}>; name = {self._name}'
+        return f'MObject <k{self.apiTypeStr[0].upper()}{self.apiTypeStr[1:]}>; name = {self._name}'
+
     def apiType(self) -> int:
         """
         Returns the function set type for the object.
