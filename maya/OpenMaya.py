@@ -9195,7 +9195,8 @@ class MDGModifier(object):
 
     def __getattr__(self, name): pass
 
-    def __init__(self, *args): pass
+    def __init__(self, *args):
+        self._queue = []
 
     def __repr__(self): pass
 
@@ -9209,7 +9210,8 @@ class MDGModifier(object):
 
     def connect(self, *args): pass
 
-    def createNode(self, *args): pass
+    def createNode(self, nd_type: str | 'MTypeId'):
+        pass
 
     def deleteMetadata(self, *args): pass
 

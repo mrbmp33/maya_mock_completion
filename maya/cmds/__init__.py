@@ -1,3 +1,8 @@
+from time import sleep
+
+import maya.mmc_hierarchy as _hierarchy
+from maya.api import OpenMaya as om
+
 def aaf2fcp(deleteFile=bool(), df=bool(), dstPath=str(), dst=str(), getFileName=int(), gfn=int(), progress=int(),
             pr=int(), srcFile=str(), src=str(), terminate=int(), t=int(), waitCompletion=int(), wc=int(), *args,
             **kwargs):
@@ -1972,6 +1977,23 @@ def createLayeredPsdFile(imageFileName=list, ifn=list, psdFileName=str(), psf=st
 
 def createNode(node_type:str, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(), skipSelect=bool(), ss=bool(),
                *args, **kwargs):
+    if not any((name, n)):
+        name = f'{node_type}1'
+    try:
+        if parent:
+            sl_ls = om.MSelectionList()
+            sl_ls.add(parent)
+            parent_mobject = om.MFnDagNode().create(node_type, name or n, sl_ls.getDependNode(0))
+            mobject = om.MFnDagNode().create(node_type, name or n, parent_mobject)
+            _hierarchy.register(parent_mobject)
+        else:
+            mobject = om.MFnDagNode().create(node_type, name or n)
+
+    except RuntimeError:
+        mobject = om.MFnDependencyNode(node_type, name or n)
+
+    _hierarchy.register(mobject)
+
     return name or n
 
 

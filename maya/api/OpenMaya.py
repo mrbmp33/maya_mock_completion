@@ -10,7 +10,9 @@ import random
 import string
 import uuid
 import weakref
+import enum
 from typing import Optional, Iterable, Union
+import maya.mmc_hierarchy as hierarchy
 
 
 class MColor(object):
@@ -1046,7 +1048,6 @@ class MTypeId(object):
     """
     Stores a Maya object type identifier.
     """
-    _node_types = None
 
     def __eq__(*args, **kwargs):
         """
@@ -1071,8 +1072,6 @@ class MTypeId(object):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         self._value = value
-        from maya import node_types
-        self.__class__._node_types = node_types
 
     def __le__(*args, **kwargs):
         """
@@ -1096,10 +1095,10 @@ class MTypeId(object):
         """
         x.__repr__() <==> repr(x)
         """
-        return "{class_name}({value}) <{as_str}".format(
+        return "{class_name}({value}) <{as_str}>".format(
             class_name=self.__class__.__name__,
             value=self._value,
-            as_str=self.__class__._node_types.TYPE_HEX_TO_STR[int(self._value, 16)]
+            as_str=_TYPE_HEX_TO_STR.get(int(hex(self._value), 16), 'kInvalid')
         )
 
     def __str__(*args, **kwargs):
@@ -1678,11 +1677,12 @@ class MDGModifier(object):
     Used to change the structure of the dependency graph.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._queue = []
+        self._done = False
 
     def addAttribute(*args, **kwargs):
         """
@@ -1735,7 +1735,7 @@ class MDGModifier(object):
         """
         pass
 
-    def createNode(*args, **kwargs):
+    def createNode(self, type_id: Union[str, 'MTypeId']) -> 'MObject':
         """
         createNode(typeName) -> MObject
         createNode(MTypeId typeId) -> MObject
@@ -1746,7 +1746,18 @@ class MDGModifier(object):
         TypeError if the named node type does not exist or if it is a DAG node
         type.
         """
-        pass
+        mobject = MObject()
+        mobject._alive = True
+        # If given a string as input, get the matching MTypeId
+        if isinstance(type_id, str):
+            # noinspection PyProtectedMember
+            mobject._typeId = _TYPE_STR_TO_ID[type_id]
+        else:
+            mobject._typeId = type_id
+
+        self._queue.append(('create', mobject))
+
+        return mobject
 
     def deleteNode(self, node: "MObject"):
         """
@@ -1757,7 +1768,8 @@ class MDGModifier(object):
         on the same node (e.g. a disconnect) then they should be committed by
         calling the modifier's doIt() before the deleteNode operation is added.
         """
-        node._alive = False
+        self._queue.append(('delete', node))
+        return self
 
     def disconnect(*args, **kwargs):
         """
@@ -1782,6 +1794,25 @@ class MDGModifier(object):
         executed. If undoIt() has been called then the next call to doIt() will
         do all operations.
         """
+
+        for action in self._queue:
+            if action[0] == 'create':
+                mobject: 'MObject' = action[1]
+                hierarchy.register(mobject)
+            elif action[0] == 'delete':
+                mobject: 'MObject' = action[1]
+                mobject._parent._children.remove(mobject)
+                hierarchy.deregister(mobject)
+            elif action[0] == 'rename':
+                mobject: 'MObject' = action[1]
+                mobject._name = action[2]
+            elif action[0] == 'reparent':
+                mobject: 'MObject' = action[1]
+                mobject._parent._children.remove(mobject)
+                mobject._parent = action[2]
+                mobject._parent._children.add(mobject)
+
+        self._done = True
         return self
 
     def linkExtensionAttributeToPlugin(*args, **kwargs):
@@ -1975,7 +2006,8 @@ class MDGModifier(object):
 
         Adds an operation to the modifer to rename a node.
         """
-        node._name = newName
+        self.queue.append(('rename', node, newName, node._name))
+        return self
 
     def setNodeLockState(*args, **kwargs):
         """
@@ -1985,7 +2017,7 @@ class MDGModifier(object):
         """
         pass
 
-    def undoIt(*args, **kwargs):
+    def undoIt(self, *args, **kwargs):
         """
         undoIt() -> self
 
@@ -1993,7 +2025,28 @@ class MDGModifier(object):
         is only valid to call this method after the doIt() method has been
         called.
         """
-        pass
+        if not self._done:
+            raise RuntimeError('Must use "doIt" before undoing.')
+
+        for action in self._queue:
+            if action[0] == 'create':
+                mobject: 'MObject' = action[1]
+                mobject._alive = False
+                mobject._parent._children.remove(mobject)
+                hierarchy.deregister(mobject)
+            elif action[0] == 'delete':
+                mobject: 'MObject' = action[1]
+                mobject._alive = True
+                hierarchy.register(mobject)
+            elif action[0] == 'rename':
+                mobject: 'MObject' = action[1]
+                mobject._name = action[3]
+            elif action[0] == 'reparent':
+                mobject: 'MObject' = action[1]
+                mobject._parent = action[3]
+
+        self._done = False
+        return self
 
     def unlinkExtensionAttributeFromPlugin(*args, **kwargs):
         """
@@ -4782,8 +4835,10 @@ class MSelectionList(object):
         if isinstance(item, str):
             mobject = MObject()
             mobject._name = item
+            mobject._alive = True
+
             # todo: need to figure a better way to do this based on a str
-            mobject._typeId = MTypeId().__class__._node_types.TYPE_STR_TO_ID['transform']
+            mobject._typeId = _TYPE_STR_TO_ID['transform']
             return mobject
         elif not isinstance(item, MObject):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
@@ -12814,6 +12869,7 @@ class MItMeshVertex(object):
         pass
 
 
+# noinspection PyPep8Naming
 class MObject(object):
     """
     Opaque wrapper for internal Maya objects.
@@ -12843,9 +12899,12 @@ class MObject(object):
         """
         self._uuid = MUuid().generate()
         self._name = str(self._uuid)
-        self._fn_type: Optional[int] = MFn.kDagNode
-        self._alive: bool = True
+        self._fn_type: list[int] = [MFn.kDependencyNode,]
+        self._alive: bool = False
         self._typeId: "MTypeId" = MTypeId()
+        self._parent: Optional['MObject'] = None
+        self._children = set()
+        self._is_world = False
 
     def __le__(*args, **kwargs):
         """
@@ -12865,17 +12924,21 @@ class MObject(object):
         """
         pass
 
-    def apiType(*args, **kwargs):
+    def __repr__(self):
+        return f'MObject <{self.apiTypeStr}>; name = {self._name}'
+    def apiType(self) -> int:
         """
         Returns the function set type for the object.
         """
-        pass
+        if self._is_world:
+            return MFn.kWorld
+        return getattr(MFn, f'k{self.apiTypeStr}')
 
-    def hasFn(self, compare_fn_type: int):
+    def hasFn(self, compare_fn_type: int) -> bool:
         """
         Tests whether object is compatible with the specified function set.
         """
-        return self._fn_type == compare_fn_type
+        return compare_fn_type in self._fn_type
 
     def isNull(self) -> bool:
         """
@@ -12883,9 +12946,16 @@ class MObject(object):
         """
         return not self._alive
 
-    apiTypeStr = None
+    def __hash__(self):
+        return hash(self._uuid._uuid)
 
-    kNullObj = None
+    @property
+    def apiTypeStr(self):
+        return _TYPE_HEX_TO_STR.get(int(hex(self._typeId.id()), 16), 'kInvalid')
+
+    @property
+    def kNullObj(cls) -> 'MObject':
+        return MObject()
 
 
 class MFloatPointArray(object):
@@ -13512,7 +13582,7 @@ class MDGContext(object):
     Dependency graph context.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(*args, time=None, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
@@ -17095,7 +17165,7 @@ class MPlug(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._owner = None
+        self._owner: 'MObject' = None
         self._attr_name = None
         self._network_plug = None
         self._value = None
@@ -17211,7 +17281,8 @@ class MPlug(object):
         """
         Returns the attribute currently referenced by this plug.
         """
-        return MObject()
+        mobject = MObject()
+        return mobject
 
     def child(*args, **kwargs):
         """
@@ -17314,11 +17385,11 @@ class MPlug(object):
         """
         pass
 
-    def name(*args, **kwargs):
+    def name(self):
         """
         Returns the name of the plug.
         """
-        pass
+        return self._attr_name
 
     def node(*args, **kwargs):
         """
@@ -17356,11 +17427,15 @@ class MPlug(object):
         """
         pass
 
-    def partialName(*args, **kwargs):
+    def partialName(self,
+                    includeNodeName=False,
+                    useLongNames=True,
+                    useFullAttributePath=False,
+                    includeInstancedIndices=True):
         """
         Returns the name of the plug, formatted according to various criteria.
         """
-        pass
+        return f'{self._owner._name}.{self._attr_name}'
 
     def selectAncestorLogicalIndex(*args, **kwargs):
         """
@@ -21333,12 +21408,14 @@ class MFnDependencyNode(MFnBase):
         """
         mobject = MObject()
         mobject._name = name
+        mobject._alive = True
 
         # If given a string as input, get the matching MTypeId
         if isinstance(typeId, str):
             # noinspection PyProtectedMember
-            mobject._typeId = MTypeId()._node_types.TYPE_STR_TO_ID[typeId]
-        mobject._typeId = typeId
+            mobject._typeId = _TYPE_STR_TO_ID[typeId]
+        else:
+            mobject._typeId = typeId
 
         self._mobject = mobject
 
@@ -21397,7 +21474,7 @@ class MFnDependencyNode(MFnBase):
         Returns a plug for the given attribute.
         """
         mplug = MPlug()
-        mplug._owner = weakref.proxy(self)
+        mplug._owner = self.object()
         mplug._attr_name = attr_name
         mplug._network_plug = want_network_plug
         return mplug
@@ -21469,11 +21546,11 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def name(*args, **kwargs):
+    def name(self) -> str:
         """
         Returns the node's name.
         """
-        pass
+        return self._mobject._name
 
     def plugsAlias(*args, **kwargs):
         """
@@ -21643,9 +21720,7 @@ class MFnDependencyNode(MFnBase):
 
     @property
     def typeName(self):
-        return self._mobject._typeId.__class__._node_types.TYPE_HEX_TO_STR[
-            int(hex(self._mobject._typeId.id()), 16)
-        ]
+        return _TYPE_HEX_TO_STR[int(hex(self._mobject._typeId.id()), 16)]
 
 
 class MDagModifier(MDGModifier):
@@ -21653,13 +21728,13 @@ class MDagModifier(MDGModifier):
     Used to change the structure of the DAG
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def createNode(*args, **kwargs):
+    def createNode(self, type_id: Union[str, 'MObject'], parent: Optional['MObject'] = None):
         """
         createNode(typeName, parent=MObject.kNullObj) -> new DAG node MObject
         createNode(typeId,   parent=MObject.kNullObj) -> new DAG node MObject
@@ -21677,9 +21752,18 @@ class MDagModifier(MDGModifier):
         None of the newly created nodes will be added to the DAG until the
         modifier's doIt() method is called.
         """
-        pass
+        mobject = super().createNode(type_id)
+        self._queue.pop(-1)
 
-    def reparentNode(*args, **kwargs):
+        if not parent:
+            parent = WORLD
+        mobject._parent = parent
+        parent._children.add(mobject)
+
+        self._queue.append(('create', mobject))
+        return mobject
+
+    def reparentNode(self, node: 'MObject', new_parent: 'MObject' = None):
         """
         reparentNode(MObject node, newParent=MObject.kNullObj) -> self
 
@@ -21690,7 +21774,12 @@ class MDagModifier(MDGModifier):
         world, so long as it is a transform type. If it is not a transform type
         then the doIt() will raise a RuntimeError.
         """
-        pass
+
+        if not new_parent:
+            new_parent = MObject().kNullObj
+        self._queue.append(('reparent', node, new_parent, node._parent))
+
+        return self
 
 
 class MFnData(MFnBase):
@@ -22346,11 +22435,11 @@ class MFnDagNode(MFnDependencyNode):
     DAG path.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, mobject : Optional['MObject']=None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(mobject)
 
     def addChild(*args, **kwargs):
         """
@@ -22376,7 +22465,8 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def create(*args, **kwargs) -> MObject:
+    def create(self, node_type: Union[str, MTypeId], name: Optional[str] = None,
+               parent: Optional[MObject] = None) -> MObject:
         """
         create(type, name=None, parent=MObject.kNullObj) -> MObject
 
@@ -22398,7 +22488,16 @@ class MFnDagNode(MFnDependencyNode):
         parented under it, and the functionset will be attached to the
         transform. The transform will be returned.
         """
-        return MObject(*args, **kwargs)
+
+        mobject = super().create(node_type, name)
+        mobject._fn_type.append(MFn.kDagNode)
+        if parent:
+            mobject._parent = parent
+            mobject._parent._children.add(mobject)
+        else:
+            mobject._parent = MObject().kNullObj
+
+        return mobject
 
     def dagPath(*args, **kwargs):
         """
@@ -22408,7 +22507,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def dagRoot(*args, **kwargs):
+    def dagRoot(self):
         """
         dagRoot() -> MObject
 
@@ -22449,13 +22548,13 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def getPath(*args, **kwargs):
+    def getPath(self) -> 'MDagPath':
         """
         getPath() -> MDagPath
 
         Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject.
         """
-        pass
+        return MDagPath()
 
     def hasChild(*args, **kwargs):
         """
@@ -22553,13 +22652,17 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def setObject(*args, **kwargs):
+    def setObject(self, mobject: Union['MObject', 'MDagPath']):
         """
         setObject(MObject or MDagPath) -> self
 
         Attaches the function set to the specified node or DAG path.
         """
-        pass
+        if isinstance(mobject, MDagPath):
+            self._dag_path = mobject
+        else:
+            self._mobject = mobject
+        return self
 
     def transformationMatrix(*args, **kwargs):
         """
@@ -28841,3 +28944,4122 @@ py2dict = {}
 key = 'MRampAttribute'
 
 ourdict = {}
+
+
+class World:
+    mobject = None
+
+    def __init__(self):
+        super().__init__()
+        sel_ls = MSelectionList()
+        sel_ls.add('persp')
+        mobject = sel_ls.getDependNode(0)
+        mobject._is_world = True
+        mobject._alive = True
+        mobject._name = 'world'
+        mobject._fn_type.append(MFn.kWorld)
+
+        type(self).mobject = mobject
+
+
+class _NodeTypeIds(enum.Enum):
+    AISEnvFacade = MTypeId(0x52454656)
+    AboutToSetValueTestNode = MTypeId(0x4153564e)
+    AbsOverride = MTypeId(0x58000378)
+    AbsUniqueOverride = MTypeId(0x580003a0)
+    Absolute = MTypeId(0x41425344)
+    Acos = MTypeId(0x41434f53)
+    AddDoubleLinear = MTypeId(0x4441444c)
+    AddMatrix = MTypeId(0x44414d58)
+    AdskMaterial = MTypeId(0x4144534d)
+    AimConstraint = MTypeId(0x44414d43)
+    AimMatrix = MTypeId(0x414d4154)
+    AirField = MTypeId(0x59414952)
+    AirManip = MTypeId(0x554d4958)
+    AlignCurve = MTypeId(0x4e414c43)
+    AlignManip = MTypeId(0x554d4144)
+    AlignSurface = MTypeId(0x4e414c53)
+    AmbientLight = MTypeId(0x414d424c)
+    And = MTypeId(0x414e4442)
+    AngleBetween = MTypeId(0x4e414254)
+    AngleDimension = MTypeId(0x4147444e)
+    AnimBlend = MTypeId(0x41424e44)
+    AnimBlendInOut = MTypeId(0x4142494f)
+    AnimBlendNodeAdditive = MTypeId(0x41424e41)
+    AnimBlendNodeAdditiveDA = MTypeId(0x41424141)
+    AnimBlendNodeAdditiveDL = MTypeId(0x4142414c)
+    AnimBlendNodeAdditiveF = MTypeId(0x41424146)
+    AnimBlendNodeAdditiveFA = MTypeId(0x41424641)
+    AnimBlendNodeAdditiveFL = MTypeId(0x4142464c)
+    AnimBlendNodeAdditiveI16 = MTypeId(0x41424153)
+    AnimBlendNodeAdditiveI32 = MTypeId(0x41424149)
+    AnimBlendNodeAdditiveRotation = MTypeId(0x41424e52)
+    AnimBlendNodeAdditiveScale = MTypeId(0x41424e53)
+    AnimBlendNodeBoolean = MTypeId(0x4142424f)
+    AnimBlendNodeEnum = MTypeId(0x41424e45)
+    AnimBlendNodeTime = MTypeId(0x41425449)
+    AnimClip = MTypeId(0x434c504e)
+    AnimCurveTA = MTypeId(0x50435441)
+    AnimCurveTL = MTypeId(0x5043544c)
+    AnimCurveTT = MTypeId(0x50435454)
+    AnimCurveTU = MTypeId(0x50435455)
+    AnimCurveUA = MTypeId(0x50435541)
+    AnimCurveUL = MTypeId(0x5043554c)
+    AnimCurveUT = MTypeId(0x50435554)
+    AnimCurveUU = MTypeId(0x50435555)
+    AnimLayer = MTypeId(0x414e4c52)
+    Anisotropic = MTypeId(0x52414e49)
+    AnnotationShape = MTypeId(0x414e4e53)
+    AovChildCollection = MTypeId(0x5800039c)
+    AovCollection = MTypeId(0x5800039b)
+    ApplyAbs2FloatsOverride = MTypeId(0x58000397)
+    ApplyAbs3FloatsOverride = MTypeId(0x58000381)
+    ApplyAbsBoolOverride = MTypeId(0x5800038a)
+    ApplyAbsEnumOverride = MTypeId(0x5800038c)
+    ApplyAbsFloatOverride = MTypeId(0x5800037d)
+    ApplyAbsIntOverride = MTypeId(0x58000391)
+    ApplyAbsStringOverride = MTypeId(0x58000393)
+    ApplyConnectionOverride = MTypeId(0x58000384)
+    ApplyRel2FloatsOverride = MTypeId(0x58000399)
+    ApplyRel3FloatsOverride = MTypeId(0x58000383)
+    ApplyRelFloatOverride = MTypeId(0x5800037f)
+    ApplyRelIntOverride = MTypeId(0x58000392)
+    ArcLengthDimension = MTypeId(0x41444d4e)
+    AreaLight = MTypeId(0x41524c54)
+    ArrayMapper = MTypeId(0x44414d50)
+    ArrowManip = MTypeId(0x554d4152)
+    ArubaTessellate = MTypeId(0x41544553)
+    Asin = MTypeId(0x4153494e)
+    Atan = MTypeId(0x4154414e)
+    Atan2 = MTypeId(0x41544132)
+    AttachCurve = MTypeId(0x4e415443)
+    AttachSurface = MTypeId(0x4e415453)
+    AttrHierarchyTest = MTypeId(0x41544854)
+    Audio = MTypeId(0x41554449)
+    Average = MTypeId(0x41565244)
+    AvgCurves = MTypeId(0x4e414352)
+    AvgNurbsSurfacePoints = MTypeId(0x4e414e50)
+    AvgSurfacePoints = MTypeId(0x4e415350)
+    AxisFromMatrix = MTypeId(0x584d4154)
+    BallProjManip = MTypeId(0x554d4250)
+    BarnDoorManip = MTypeId(0x554d4c4e)
+    BaseLattice = MTypeId(0x46424153)
+    BasicSelector = MTypeId(0x58000375)
+    Bevel = MTypeId(0x4e42564c)
+    BevelPlus = MTypeId(0x4e425356)
+    BezierCurve = MTypeId(0x42435256)
+    BezierCurveToNurbs = MTypeId(0x42544e52)
+    BlendColorSets = MTypeId(0x50424353)
+    BlendColors = MTypeId(0x52424c32)
+    BlendDevice = MTypeId(0x424c4456)
+    BlendFalloff = MTypeId(0x42464f46)
+    BlendMatrix = MTypeId(0x424d4154)
+    BlendShape = MTypeId(0x46424c53)
+    BlendTwoAttr = MTypeId(0x41424c32)
+    BlendWeighted = MTypeId(0x41424c57)
+    BlindDataTemplate = MTypeId(0x424c4454)
+    Blinn = MTypeId(0x52424c4e)
+    BoneLattice = MTypeId(0x4642554c)
+    Boolean = MTypeId(0x4e424f4c)
+    Boundary = MTypeId(0x4e424e44)
+    Brownian = MTypeId(0x5246424d)
+    Brush = MTypeId(0x42525348)
+    Bulge = MTypeId(0x52544255)
+    Bump2d = MTypeId(0x5242554d)
+    Bump3d = MTypeId(0x52425533)
+    ButtonManip = MTypeId(0x55465054)
+    CacheBlend = MTypeId(0x4354524b)
+    CacheFile = MTypeId(0x43434846)
+    Camera = MTypeId(0x4443414d)
+    CameraManip = MTypeId(0x554d4958)
+    CameraPlaneManip = MTypeId(0x554d4350)
+    CameraSet = MTypeId(0x44525452)
+    CameraView = MTypeId(0x44434156)
+    Ceil = MTypeId(0x43454944)
+    CenterManip = MTypeId(0x434e4d50)
+    Character = MTypeId(0x43484152)
+    CharacterMap = MTypeId(0x434d4150)
+    CharacterOffset = MTypeId(0x584f4646)
+    Checker = MTypeId(0x52544348)
+    Choice = MTypeId(0x43484345)
+    Chooser = MTypeId(0x43484f4f)
+    CircleManip = MTypeId(0x554d434c)
+    CircleSweepManip = MTypeId(0x5543534d)
+    Clamp = MTypeId(0x52434c33)
+    ClampRange = MTypeId(0x434c414d)
+    ClipGhostShape = MTypeId(0x43475348)
+    ClipLibrary = MTypeId(0x434c4950)
+    ClipScheduler = MTypeId(0x43534348)
+    ClipToGhostData = MTypeId(0x43324744)
+    CloseCurve = MTypeId(0x4e434355)
+    CloseSurface = MTypeId(0x4e435355)
+    ClosestPointOnMesh = MTypeId(0x43504f4d)
+    ClosestPointOnSurface = MTypeId(0x4e435053)
+    Cloth = MTypeId(0x5254434c)
+    Cloud = MTypeId(0x52544344)
+    Cluster = MTypeId(0x46434c53)
+    ClusterFlexorShape = MTypeId(0x464a4346)
+    ClusterHandle = MTypeId(0x46434c48)
+    CoiManip = MTypeId(0x55465054)
+    Collection = MTypeId(0x58000373)
+    CollisionModel = MTypeId(0x59434f4c)
+    ColorManagementGlobals = MTypeId(0x434d4742)
+    ColorProfile = MTypeId(0x434f4c50)
+    ColumnFromMatrix = MTypeId(0x434d4154)
+    CombinationShape = MTypeId(0x46434e53)
+    CompactPlugArrayTest = MTypeId(0x43504154)
+    ComponentFalloff = MTypeId(0x47464f46)
+    ComponentManip = MTypeId(0x5554544d)
+    ComponentMatch = MTypeId(0x544f504d)
+    ComponentTagBase = MTypeId(0x43544253)
+    ComposeMatrix = MTypeId(0x58000301)
+    ConcentricProjManip = MTypeId(0x554d434f)
+    Condition = MTypeId(0x52434e44)
+    ConnectionOverride = MTypeId(0x58000385)
+    ConnectionUniqueOverride = MTypeId(0x580003a2)
+    Container = MTypeId(0x434f4e54)
+    ContainerBase = MTypeId(0x434f4241)
+    Contrast = MTypeId(0x52434f4e)
+    Controller = MTypeId(0x43475250)
+    CopyColorSet = MTypeId(0x43504353)
+    CopyUVSet = MTypeId(0x43505553)
+    Cos = MTypeId(0x434f5349)
+    CpManip = MTypeId(0x554d4350)
+    Crater = MTypeId(0x52533430)
+    CreaseSet = MTypeId(0x43524541)
+    CreateColorSet = MTypeId(0x43524353)
+    CreateUVSet = MTypeId(0x43525553)
+    CrossProduct = MTypeId(0x43524f50)
+    CubicProjManip = MTypeId(0x554d4355)
+    CurveFromMeshCoM = MTypeId(0x4e434d43)
+    CurveFromMeshEdge = MTypeId(0x4e434d45)
+    CurveFromSubdivEdge = MTypeId(0x53435345)
+    CurveFromSubdivFace = MTypeId(0x53435346)
+    CurveFromSurfaceBnd = MTypeId(0x4e435342)
+    CurveFromSurfaceCoS = MTypeId(0x4e435343)
+    CurveFromSurfaceIso = MTypeId(0x4e435349)
+    CurveInfo = MTypeId(0x4e43494e)
+    CurveIntersect = MTypeId(0x4e434349)
+    CurveNormalizerAngle = MTypeId(0x434e5241)
+    CurveNormalizerLinear = MTypeId(0x434e524c)
+    CurveSegmentManip = MTypeId(0x554d5043)
+    CurveVarGroup = MTypeId(0x4e435647)
+    CylindricalProjManip = MTypeId(0x554d4359)
+    DagContainer = MTypeId(0x44414743)
+    DagPose = MTypeId(0x46504f53)
+    DataBlockTest = MTypeId(0x44425453)
+    DecomposeMatrix = MTypeId(0x58000300)
+    DefaultLightList = MTypeId(0x4445464c)
+    DefaultRenderUtilityList = MTypeId(0x4452554c)
+    DefaultRenderingList = MTypeId(0x44524e4c)
+    DefaultShaderList = MTypeId(0x5244534c)
+    DefaultTextureList = MTypeId(0x5244544c)
+    DeformBend = MTypeId(0x46444244)
+    DeformFlare = MTypeId(0x4644464c)
+    DeformSine = MTypeId(0x4644534e)
+    DeformSquash = MTypeId(0x46445351)
+    DeformTwist = MTypeId(0x46445457)
+    DeformWave = MTypeId(0x46445756)
+    DeleteColorSet = MTypeId(0x444c4353)
+    DeleteComponent = MTypeId(0x44454354)
+    DeleteUVSet = MTypeId(0x444c4d53)
+    DeltaMush = MTypeId(0x444c544d)
+    DetachCurve = MTypeId(0x4e445443)
+    DetachSurface = MTypeId(0x4e445453)
+    Determinant = MTypeId(0x4445544d)
+    DirectedDisc = MTypeId(0x44445343)
+    DirectionManip = MTypeId(0x55465054)
+    DirectionalLight = MTypeId(0x4449524c)
+    DiscManip = MTypeId(0x5544534d)
+    DiskCache = MTypeId(0x44534b43)
+    DisplacementShader = MTypeId(0x52445348)
+    DisplayLayer = MTypeId(0x4453504c)
+    DisplayLayerManager = MTypeId(0x44504c4d)
+    DistanceBetween = MTypeId(0x44444254)
+    DistanceDimShape = MTypeId(0x44444d4e)
+    DistanceManip = MTypeId(0x554d444d)
+    Divide = MTypeId(0x44495644)
+    Dof = MTypeId(0x444f4644)
+    DofManip = MTypeId(0x554d4350)
+    DotProduct = MTypeId(0x444f5450)
+    DoubleShadingSwitch = MTypeId(0x53574832)
+    DpBirailSrf = MTypeId(0x4e444253)
+    DragField = MTypeId(0x59445247)
+    DropoffLocator = MTypeId(0x444c4354)
+    DynAttenuationManip = MTypeId(0x554d444d)
+    DynController = MTypeId(0x5943544c)
+    DynGlobals = MTypeId(0x5944474c)
+    DynHolder = MTypeId(0x59484c44)
+    DynSpreadManip = MTypeId(0x554d444d)
+    DynamicConstraint = MTypeId(0x44434f4e)
+    EditMetadata = MTypeId(0x454d5444)
+    EditsManager = MTypeId(0x454d4752)
+    EmitterManip = MTypeId(0x554d4958)
+    EnableManip = MTypeId(0x454e4d50)
+    EnvBall = MTypeId(0x5245424c)
+    EnvChrome = MTypeId(0x52454348)
+    EnvCube = MTypeId(0x52454342)
+    EnvFacade = MTypeId(0x52454643)
+    EnvFog = MTypeId(0x52454647)
+    EnvSky = MTypeId(0x5245534b)
+    EnvSphere = MTypeId(0x52455350)
+    EnvironmentFog = MTypeId(0x454e5646)
+    Equal = MTypeId(0x4551554c)
+    ExplodeNurbsShell = MTypeId(0x4e455348)
+    Expression = MTypeId(0x44455850)
+    ExtendCurve = MTypeId(0x4e455843)
+    ExtendSurface = MTypeId(0x4e455853)
+    Extrude = MTypeId(0x4e455852)
+    Facade = MTypeId(0x4446434e)
+    FalloffEval = MTypeId(0x45464f46)
+    FfBlendSrf = MTypeId(0x4e424c54)
+    FfBlendSrfObsolete = MTypeId(0x4e424c53)
+    FfFilletSrf = MTypeId(0x4e464653)
+    Ffd = MTypeId(0x46464644)
+    FieldManip = MTypeId(0x554d4958)
+    FieldsManip = MTypeId(0x554d4958)
+    File = MTypeId(0x52544654)
+    FilletCurve = MTypeId(0x4e464352)
+    FitBspline = MTypeId(0x4e465443)
+    FlexorShape = MTypeId(0x464c5848)
+    Floor = MTypeId(0x464c4f4f)
+    Flow = MTypeId(0x464c4f57)
+    FluidEmitter = MTypeId(0x46454d49)
+    FluidShape = MTypeId(0x464c5549)
+    FluidSliceManip = MTypeId(0x46534c4d)
+    FluidTexture2D = MTypeId(0x464c5454)
+    FluidTexture3D = MTypeId(0x464c5458)
+    Follicle = MTypeId(0x48435256)
+    ForceUpdateManip = MTypeId(0x554d4655)
+    FosterParent = MTypeId(0x4650524e)
+    FourByFourMatrix = MTypeId(0x4642464d)
+    Fractal = MTypeId(0x52543246)
+    FrameCache = MTypeId(0x46434348)
+    FreePointManip = MTypeId(0x554d4650)
+    FreePointTriadManip = MTypeId(0x55465054)
+    GammaCorrect = MTypeId(0x5247414d)
+    GeoConnectable = MTypeId(0x5947434f)
+    GeoConnector = MTypeId(0x59474354)
+    GeomBind = MTypeId(0x4742494e)
+    GeometryConstraint = MTypeId(0x44474e43)
+    GeometryFilter = MTypeId(0x44474649)
+    GeometryOnLineManip = MTypeId(0x554d474c)
+    GeometryVarGroup = MTypeId(0x4e475647)
+    GlobalCacheControl = MTypeId(0x4743434c)
+    GlobalStitch = MTypeId(0x4e475354)
+    Granite = MTypeId(0x52544752)
+    GravityField = MTypeId(0x59475241)
+    GreasePencilSequence = MTypeId(0x47505351)
+    GreasePlane = MTypeId(0x4447504c)
+    GreasePlaneRenderShape = MTypeId(0x47505253)
+    GreaterThan = MTypeId(0x47525448)
+    Grid = MTypeId(0x52544744)
+    Group = MTypeId(0x580003a5)
+    GroupId = MTypeId(0x47504944)
+    GroupParts = MTypeId(0x47525050)
+    Guide = MTypeId(0x46475549)
+    HairConstraint = MTypeId(0x4850494e)
+    HairSystem = MTypeId(0x48535953)
+    HairTubeShader = MTypeId(0x52485442)
+    HardenPoint = MTypeId(0x4e484450)
+    HardwareRenderGlobals = MTypeId(0x48575247)
+    HardwareRenderingGlobals = MTypeId(0x48525247)
+    HeightField = MTypeId(0x4f435050)
+    HierarchyTestNode1 = MTypeId(0x48544e31)
+    HierarchyTestNode2 = MTypeId(0x48544e32)
+    HierarchyTestNode3 = MTypeId(0x48544e33)
+    HikEffector = MTypeId(0x4446494b)
+    HikFKJoint = MTypeId(0x4a54494b)
+    HikFloorContactMarker = MTypeId(0x4846434d)
+    HikGroundPlane = MTypeId(0x48474e44)
+    HikHandle = MTypeId(0x4b484948)
+    HikIKEffector = MTypeId(0x494b4546)
+    HikSolver = MTypeId(0x4b48494b)
+    HistorySwitch = MTypeId(0x48495353)
+    HoldMatrix = MTypeId(0x4450484d)
+    HsvToRgb = MTypeId(0x52483252)
+    HwReflectionMap = MTypeId(0x4857524d)
+    HwRenderGlobals = MTypeId(0x59485244)
+    HyperGraphInfo = MTypeId(0x48595052)
+    HyperLayout = MTypeId(0x4859504c)
+    HyperView = MTypeId(0x44485056)
+    IkEffector = MTypeId(0x4b454646)
+    IkHandle = MTypeId(0x4b48444c)
+    IkMCsolver = MTypeId(0x4b4d4353)
+    IkPASolver = MTypeId(0x4b504153)
+    IkRPsolver = MTypeId(0x4b525053)
+    IkSCsolver = MTypeId(0x4b534353)
+    IkSplineSolver = MTypeId(0x4b535053)
+    IkSystem = MTypeId(0x4b535953)
+    ImagePlane = MTypeId(0x4449504c)
+    ImplicitBox = MTypeId(0x46494258)
+    ImplicitCone = MTypeId(0x4649434f)
+    ImplicitSphere = MTypeId(0x46495350)
+    IndexManip = MTypeId(0x554d4958)
+    InsertKnotCurve = MTypeId(0x4e494b43)
+    InsertKnotSurface = MTypeId(0x4e494b53)
+    Instancer = MTypeId(0x594e5354)
+    IntersectSurface = MTypeId(0x4e495346)
+    InverseLerp = MTypeId(0x494c5250)
+    Jiggle = MTypeId(0x4a474446)
+    Joint = MTypeId(0x4a4f494e)
+    JointCluster = MTypeId(0x464a434c)
+    JointFfd = MTypeId(0x46464442)
+    JointLattice = MTypeId(0x4642454c)
+    KeyframeRegionManip = MTypeId(0x4b46524d)
+    KeyingGroup = MTypeId(0x4b475250)
+    Lambert = MTypeId(0x524c414d)
+    Lattice = MTypeId(0x464c4154)
+    LayeredShader = MTypeId(0x4c595253)
+    LayeredTexture = MTypeId(0x4c595254)
+    LeastSquaresModifier = MTypeId(0x4e4c534d)
+    Leather = MTypeId(0x52544c45)
+    Length = MTypeId(0x4c454e47)
+    Lerp = MTypeId(0x4c455250)
+    LessThan = MTypeId(0x4c535448)
+    LightEditor = MTypeId(0x580003e3)
+    LightFog = MTypeId(0x52464f47)
+    LightGroup = MTypeId(0x580003e2)
+    LightInfo = MTypeId(0x524c494e)
+    LightItem = MTypeId(0x580003e1)
+    LightLinker = MTypeId(0x524c4c4b)
+    LightList = MTypeId(0x4c4c5354)
+    LightManip = MTypeId(0x554d4958)
+    LightsChildCollection = MTypeId(0x5800039a)
+    LightsCollection = MTypeId(0x58000394)
+    LightsCollectionSelector = MTypeId(0x580003a4)
+    LimitManip = MTypeId(0x4c544d50)
+    LineManip = MTypeId(0x554d4c4e)
+    LineModifier = MTypeId(0x4c4d4f44)
+    Locator = MTypeId(0x4c4f4354)
+    LodGroup = MTypeId(0x4c4f4447)
+    LodThresholds = MTypeId(0x4c4f4454)
+    Loft = MTypeId(0x4e534b4e)
+    Log = MTypeId(0x4c4f4744)
+    LookAt = MTypeId(0x444c4154)
+    Luminance = MTypeId(0x524c554d)
+    MakeGroup = MTypeId(0x504d4752)
+    MakeIllustratorCurves = MTypeId(0x4e4d4943)
+    MakeNurbCircle = MTypeId(0x4e435243)
+    MakeNurbCone = MTypeId(0x4e434e45)
+    MakeNurbCube = MTypeId(0x4e435542)
+    MakeNurbCylinder = MTypeId(0x4e43594c)
+    MakeNurbPlane = MTypeId(0x4e504c4e)
+    MakeNurbSphere = MTypeId(0x4e535048)
+    MakeNurbTorus = MTypeId(0x4e544f52)
+    MakeNurbsSquare = MTypeId(0x4e535152)
+    MakeTextCurves = MTypeId(0x4e545843)
+    MakeThreePointCircularArc = MTypeId(0x4e334341)
+    MakeTwoPointCircularArc = MTypeId(0x4e324341)
+    Mandelbrot = MTypeId(0x52544d41)
+    Mandelbrot3D = MTypeId(0x52544d33)
+    Manip2DContainer = MTypeId(0x554d3243)
+    ManipContainer = MTypeId(0x554d4343)
+    Marble = MTypeId(0x52544d52)
+    MarkerManip = MTypeId(0x554d4d41)
+    MaterialFacade = MTypeId(0x524d4643)
+    MaterialInfo = MTypeId(0x444d5449)
+    MaterialOverride = MTypeId(0x58000387)
+    MaterialTemplate = MTypeId(0x4d544c41)
+    MaterialTemplateOverride = MTypeId(0x58000389)
+    Max = MTypeId(0x4d415844)
+    Membrane = MTypeId(0x4d454d42)
+    Mesh = MTypeId(0x444d5348)
+    MeshVarGroup = MTypeId(0x4e4d5647)
+    Min = MTypeId(0x4d494e44)
+    Modulo = MTypeId(0x4d4f4444)
+    Morph = MTypeId(0x4d525048)
+    MotionPath = MTypeId(0x4d505448)
+    MotionPathManip = MTypeId(0x554d4d41)
+    MotionTrail = MTypeId(0x4d4f5452)
+    MotionTrailShape = MTypeId(0x4d4f5348)
+    Mountain = MTypeId(0x52544d54)
+    MoveVertexManip = MTypeId(0x554d4650)
+    Movie = MTypeId(0x52544d56)
+    MpBirailSrf = MTypeId(0x4e4d4253)
+    MultDoubleLinear = MTypeId(0x444d444c)
+    MultMatrix = MTypeId(0x444d544d)
+    MultilisterLight = MTypeId(0x4d554c4c)
+    Multiply = MTypeId(0x4d554c54)
+    MultiplyDivide = MTypeId(0x524d4449)
+    MultiplyPointByMatrix = MTypeId(0x4d50424d)
+    MultiplyVectorByMatrix = MTypeId(0x4d56424d)
+    Mute = MTypeId(0x4d555445)
+    NCloth = MTypeId(0x4e434c4f)
+    NComponent = MTypeId(0x4e434d50)
+    NParticle = MTypeId(0x4e504152)
+    NRigid = MTypeId(0x4e524744)
+    NearestPointOnCurve = MTypeId(0x4e504f43)
+    Negate = MTypeId(0x4e454754)
+    Network = MTypeId(0x4e54574b)
+    NewtonField = MTypeId(0x594e4557)
+    NewtonManip = MTypeId(0x554d4958)
+    Noise = MTypeId(0x52544e33)
+    NonLinear = MTypeId(0x464e4c44)
+    NormalConstraint = MTypeId(0x444e4332)
+    Normalize = MTypeId(0x4e4f524d)
+    Not = MTypeId(0x4e4f5442)
+    Nucleus = MTypeId(0x4e535953)
+    NurbsCurve = MTypeId(0x4e435256)
+    NurbsCurveToBezier = MTypeId(0x4e525442)
+    NurbsSurface = MTypeId(0x4e535246)
+    NurbsTessellate = MTypeId(0x4e544553)
+    NurbsToSubdiv = MTypeId(0x534e5453)
+    NurbsToSubdivProc = MTypeId(0x534e5450)
+    ObjectAttrFilter = MTypeId(0x4f464154)
+    ObjectBinFilter = MTypeId(0x4f4b464c)
+    ObjectFilter = MTypeId(0x4f464c54)
+    ObjectMultiFilter = MTypeId(0x4f4d464c)
+    ObjectNameFilter = MTypeId(0x4f4e464c)
+    ObjectRenderFilter = MTypeId(0x4f52464c)
+    ObjectScriptFilter = MTypeId(0x4f53464c)
+    ObjectSet = MTypeId(0x4f425354)
+    ObjectTypeFilter = MTypeId(0x4f54464c)
+    Ocean = MTypeId(0x52544f43)
+    OceanShader = MTypeId(0x524f5053)
+    OffsetCos = MTypeId(0x4e4f4353)
+    OffsetCurve = MTypeId(0x4e4f4355)
+    OffsetSurface = MTypeId(0x4e4f5355)
+    OldBlindDataBase = MTypeId(0x42444454)
+    OldGeometryConstraint = MTypeId(0x44474d43)
+    OldNormalConstraint = MTypeId(0x444e5243)
+    OldTangentConstraint = MTypeId(0x44544e43)
+    OpticalFX = MTypeId(0x4f504658)
+    Or = MTypeId(0x4f52424f)
+    OrientConstraint = MTypeId(0x444f5243)
+    OrientationMarker = MTypeId(0x4f52544d)
+    PairBlend = MTypeId(0x4150424c)
+    ParamDimension = MTypeId(0x52444d4e)
+    ParentConstraint = MTypeId(0x44504152)
+    ParentMatrix = MTypeId(0x50524d54)
+    Particle = MTypeId(0x59504152)
+    ParticleAgeMapper = MTypeId(0x50414d41)
+    ParticleCloud = MTypeId(0x50434c44)
+    ParticleColorMapper = MTypeId(0x50434d41)
+    ParticleIncandMapper = MTypeId(0x50494d41)
+    ParticleSamplerInfo = MTypeId(0x5053494e)
+    ParticleTranspMapper = MTypeId(0x50544d41)
+    Partition = MTypeId(0x5052544e)
+    PassContributionMap = MTypeId(0x5053434d)
+    PassMatrix = MTypeId(0x4450534d)
+    PfxHair = MTypeId(0x50464841)
+    PfxToon = MTypeId(0x5046544f)
+    Phong = MTypeId(0x5250484f)
+    PhongE = MTypeId(0x52504845)
+    Pi = MTypeId(0x50494b44)
+    PickMatrix = MTypeId(0x504d4154)
+    PivotAndOrientManip = MTypeId(0x50414f4d)
+    Place2dTexture = MTypeId(0x52504c32)
+    Place3dTexture = MTypeId(0x52504c44)
+    PlanarProjManip = MTypeId(0x554d5050)
+    PlanarTrimSurface = MTypeId(0x4e504c54)
+    PlusMinusAverage = MTypeId(0x52504d41)
+    PointConstraint = MTypeId(0x44505443)
+    PointEmitter = MTypeId(0x59454d49)
+    PointLight = MTypeId(0x504f4954)
+    PointMatrixMult = MTypeId(0x44504d4d)
+    PointOnCurveInfo = MTypeId(0x4e504349)
+    PointOnCurveManip = MTypeId(0x554d5043)
+    PointOnLineManip = MTypeId(0x554d504c)
+    PointOnPolyConstraint = MTypeId(0x44505043)
+    PointOnSurfManip = MTypeId(0x554d5353)
+    PointOnSurfaceInfo = MTypeId(0x4e505349)
+    PointOnSurfaceManip = MTypeId(0x554d5053)
+    PoleVectorConstraint = MTypeId(0x44505643)
+    PolyAppend = MTypeId(0x50415050)
+    PolyAppendVertex = MTypeId(0x50415056)
+    PolyAutoProj = MTypeId(0x50415550)
+    PolyAverageVertex = MTypeId(0x50415656)
+    PolyAxis = MTypeId(0x50435244)
+    PolyBevel = MTypeId(0x5042564c)
+    PolyBevel2 = MTypeId(0x50425632)
+    PolyBevel3 = MTypeId(0x50425633)
+    PolyBlindData = MTypeId(0x4d424454)
+    PolyBoolOp = MTypeId(0x50424f50)
+    PolyBridgeEdge = MTypeId(0x50425245)
+    PolyCBoolOp = MTypeId(0x50435642)
+    PolyChipOff = MTypeId(0x50434849)
+    PolyCircularize = MTypeId(0x50435243)
+    PolyClean = MTypeId(0x504c434c)
+    PolyCloseBorder = MTypeId(0x50434c4f)
+    PolyCollapseEdge = MTypeId(0x50434f45)
+    PolyCollapseF = MTypeId(0x50434f46)
+    PolyColorDel = MTypeId(0x5043444c)
+    PolyColorMod = MTypeId(0x50434d4f)
+    PolyColorPerVertex = MTypeId(0x50435056)
+    PolyCone = MTypeId(0x50434f4e)
+    PolyConnectComponents = MTypeId(0x50434353)
+    PolyContourProj = MTypeId(0x50434e50)
+    PolyCopyUV = MTypeId(0x50435556)
+    PolyCrease = MTypeId(0x50435253)
+    PolyCreaseEdge = MTypeId(0x50435345)
+    PolyCreateFace = MTypeId(0x50435245)
+    PolyCube = MTypeId(0x50435542)
+    PolyCut = MTypeId(0x50504354)
+    PolyCylProj = MTypeId(0x50435950)
+    PolyCylinder = MTypeId(0x5043594c)
+    PolyDelEdge = MTypeId(0x50444545)
+    PolyDelFacet = MTypeId(0x50444546)
+    PolyDelVertex = MTypeId(0x50444556)
+    PolyDuplicateEdge = MTypeId(0x50445545)
+    PolyEdgeToCurve = MTypeId(0x50544356)
+    PolyEditEdgeFlow = MTypeId(0x50534546)
+    PolyExtrudeEdge = MTypeId(0x50455845)
+    PolyExtrudeFace = MTypeId(0x50455846)
+    PolyExtrudeVertex = MTypeId(0x50455856)
+    PolyFlipEdge = MTypeId(0x50464c45)
+    PolyFlipUV = MTypeId(0x50465556)
+    PolyHelix = MTypeId(0x48454c49)
+    PolyHoleFace = MTypeId(0x50484645)
+    PolyLayoutUV = MTypeId(0x504c5556)
+    PolyMapCut = MTypeId(0x504d4143)
+    PolyMapDel = MTypeId(0x504d4144)
+    PolyMapSew = MTypeId(0x504d4153)
+    PolyMapSewMove = MTypeId(0x5053454d)
+    PolyMergeEdge = MTypeId(0x504d4545)
+    PolyMergeFace = MTypeId(0x504d4546)
+    PolyMergeUV = MTypeId(0x504d4755)
+    PolyMergeVert = MTypeId(0x504d5645)
+    PolyMirror = MTypeId(0x504d4952)
+    PolyMoveEdge = MTypeId(0x504d4f45)
+    PolyMoveFace = MTypeId(0x504d4f46)
+    PolyMoveFacetUV = MTypeId(0x504d4655)
+    PolyMoveUV = MTypeId(0x504d5556)
+    PolyMoveVertex = MTypeId(0x504d4f56)
+    PolyNormal = MTypeId(0x504e4f52)
+    PolyNormalPerVertex = MTypeId(0x504e5056)
+    PolyNormalizeUV = MTypeId(0x504e5556)
+    PolyOptUvs = MTypeId(0x504f5556)
+    PolyPassThru = MTypeId(0x50595054)
+    PolyPinUV = MTypeId(0x50505556)
+    PolyPipe = MTypeId(0x50504950)
+    PolyPlanarProj = MTypeId(0x50504c50)
+    PolyPlane = MTypeId(0x504d4553)
+    PolyPlatonicSolid = MTypeId(0x534f4c49)
+    PolyPoke = MTypeId(0x5050504b)
+    PolyPrimitiveMisc = MTypeId(0x4d495343)
+    PolyPrism = MTypeId(0x50505249)
+    PolyProj = MTypeId(0x5050524f)
+    PolyProjectCurve = MTypeId(0x50504356)
+    PolyPyramid = MTypeId(0x50505952)
+    PolyQuad = MTypeId(0x50515541)
+    PolyReduce = MTypeId(0x50524544)
+    PolyRemesh = MTypeId(0x50524d48)
+    PolyRetopo = MTypeId(0x5052464d)
+    PolySeparate = MTypeId(0x50534550)
+    PolySewEdge = MTypeId(0x50535745)
+    PolySmooth = MTypeId(0x50534d54)
+    PolySmoothFace = MTypeId(0x50534d46)
+    PolySmoothProxy = MTypeId(0x50534d50)
+    PolySoftEdge = MTypeId(0x50534f45)
+    PolySphProj = MTypeId(0x50535050)
+    PolySphere = MTypeId(0x50535048)
+    PolySpinEdge = MTypeId(0x50535051)
+    PolySplit = MTypeId(0x5053504c)
+    PolySplitEdge = MTypeId(0x50534544)
+    PolySplitRing = MTypeId(0x50535052)
+    PolySplitVert = MTypeId(0x50535645)
+    PolyStraightenUVBorder = MTypeId(0x50535442)
+    PolySubdEdge = MTypeId(0x50535545)
+    PolySubdFace = MTypeId(0x50535546)
+    PolyToSubdiv = MTypeId(0x50534453)
+    PolyTorus = MTypeId(0x50544f52)
+    PolyTransfer = MTypeId(0x50544652)
+    PolyTriangulate = MTypeId(0x50545249)
+    PolyTweak = MTypeId(0x5054574b)
+    PolyTweakUV = MTypeId(0x50545556)
+    PolyUVRectangle = MTypeId(0x50555652)
+    PolyUnite = MTypeId(0x50554e49)
+    PolyUnsmooth = MTypeId(0x50555344)
+    PolyWedgeFace = MTypeId(0x50574643)
+    PoseInterpolatorManager = MTypeId(0x5053444d)
+    PositionMarker = MTypeId(0x504f534d)
+    PostProcessList = MTypeId(0x50505354)
+    Power = MTypeId(0x504f5744)
+    PrimitiveFalloff = MTypeId(0x53464f46)
+    ProjectCurve = MTypeId(0x4e504352)
+    ProjectTangent = MTypeId(0x4e50544e)
+    Projection = MTypeId(0x5250524a)
+    ProjectionManip = MTypeId(0x554d4354)
+    PropModManip = MTypeId(0x554d4354)
+    PropMoveTriadManip = MTypeId(0x554d5054)
+    ProximityFalloff = MTypeId(0x5058464f)
+    ProximityPin = MTypeId(0x50525850)
+    ProximityWrap = MTypeId(0x50575250)
+    ProxyManager = MTypeId(0x50584d47)
+    PsdFileTex = MTypeId(0x50534454)
+    QuadPtOnLineManip = MTypeId(0x554d504c)
+    QuadShadingSwitch = MTypeId(0x53574834)
+    RadialField = MTypeId(0x59524144)
+    Ramp = MTypeId(0x52545241)
+    RampShader = MTypeId(0x52525053)
+    RbfSrf = MTypeId(0x4e524246)
+    RebuildCurve = MTypeId(0x4e524243)
+    RebuildSurface = MTypeId(0x4e524253)
+    Record = MTypeId(0x52454344)
+    Reference = MTypeId(0x5245464e)
+    RelOverride = MTypeId(0x5800037a)
+    RelUniqueOverride = MTypeId(0x580003a1)
+    RemapColor = MTypeId(0x524d434c)
+    RemapHsv = MTypeId(0x524d4853)
+    RemapValue = MTypeId(0x524d564c)
+    RenderBox = MTypeId(0x524e4258)
+    RenderCone = MTypeId(0x524e434f)
+    RenderGlobals = MTypeId(0x52474c42)
+    RenderGlobalsList = MTypeId(0x5244474c)
+    RenderLayer = MTypeId(0x524e444c)
+    RenderLayerManager = MTypeId(0x524e4c4d)
+    RenderPass = MTypeId(0x524e5053)
+    RenderPassSet = MTypeId(0x52505353)
+    RenderQuality = MTypeId(0x52515541)
+    RenderRect = MTypeId(0x52524354)
+    RenderSettingsChildCollection = MTypeId(0x580003a3)
+    RenderSettingsCollection = MTypeId(0x58000395)
+    RenderSetup = MTypeId(0x58000371)
+    RenderSetupLayer = MTypeId(0x58000372)
+    RenderSphere = MTypeId(0x524e5350)
+    RenderTarget = MTypeId(0x524e5447)
+    RenderedImageSource = MTypeId(0x52434953)
+    ReorderUVSet = MTypeId(0x524f5553)
+    Resolution = MTypeId(0x524c544e)
+    ResultCurveTimeToAngular = MTypeId(0x52435441)
+    ResultCurveTimeToLinear = MTypeId(0x5243544c)
+    ResultCurveTimeToTime = MTypeId(0x52435454)
+    ResultCurveTimeToUnitless = MTypeId(0x52435455)
+    Reverse = MTypeId(0x52525653)
+    ReverseCurve = MTypeId(0x4e525643)
+    ReverseSurface = MTypeId(0x4e525653)
+    Revolve = MTypeId(0x4e52564c)
+    RgbToHsv = MTypeId(0x52523248)
+    RigidBody = MTypeId(0x59524744)
+    RigidConstraint = MTypeId(0x59435354)
+    RigidSolver = MTypeId(0x59534c56)
+    Rock = MTypeId(0x5254524b)
+    RotateLimitsManip = MTypeId(0x554d524c)
+    RotateManip = MTypeId(0x554d5241)
+    RotateUV2dManip = MTypeId(0x5532524f)
+    RotateVector = MTypeId(0x524f5456)
+    RotationFromMatrix = MTypeId(0x524f4d58)
+    Round = MTypeId(0x524f554e)
+    RoundConstantRadius = MTypeId(0x4e524352)
+    RowFromMatrix = MTypeId(0x524d4154)
+    Sampler = MTypeId(0x46534d50)
+    SamplerInfo = MTypeId(0x5253494e)
+    ScaleConstraint = MTypeId(0x44534343)
+    ScaleFromMatrix = MTypeId(0x534d4154)
+    ScaleLimitsManip = MTypeId(0x4c544d50)
+    ScaleManip = MTypeId(0x554d4650)
+    ScaleUV2dManip = MTypeId(0x55325343)
+    ScreenAlignedCircleManip = MTypeId(0x5341434d)
+    Script = MTypeId(0x53435250)
+    ScriptManip = MTypeId(0x554d5343)
+    Sculpt = MTypeId(0x46534350)
+    SelectionListOperator = MTypeId(0x534c4f50)
+    SequenceManager = MTypeId(0x53514d47)
+    Sequencer = MTypeId(0x53514e43)
+    SetRange = MTypeId(0x52524e47)
+    ShaderGlow = MTypeId(0x5348474c)
+    ShaderOverride = MTypeId(0x58000386)
+    ShadingEngine = MTypeId(0x53484144)
+    ShadingMap = MTypeId(0x53444d50)
+    ShapeEditorManager = MTypeId(0x53444d4c)
+    ShellTessellate = MTypeId(0x53544553)
+    Shot = MTypeId(0x53484f54)
+    ShrinkWrap = MTypeId(0x53575250)
+    SimpleSelector = MTypeId(0x5800039e)
+    SimpleTestNode = MTypeId(0x53544e44)
+    SimpleVolumeShader = MTypeId(0x53565348)
+    Sin = MTypeId(0x53494e45)
+    SingleShadingSwitch = MTypeId(0x53574831)
+    SketchPlane = MTypeId(0x534b504e)
+    SkinBinding = MTypeId(0x534b4244)
+    SkinCluster = MTypeId(0x4653434c)
+    SmoothCurve = MTypeId(0x4e534d43)
+    SmoothStep = MTypeId(0x534d5354)
+    SmoothTangentSrf = MTypeId(0x4e53544e)
+    SnapUV2dManip = MTypeId(0x5532534e)
+    Snapshot = MTypeId(0x534e5054)
+    SnapshotShape = MTypeId(0x53534841)
+    Snow = MTypeId(0x5254534e)
+    SoftMod = MTypeId(0x4653534c)
+    SoftModHandle = MTypeId(0x46535348)
+    SolidFractal = MTypeId(0x52544633)
+    Solidify = MTypeId(0x534f4c59)
+    SpBirailSrf = MTypeId(0x4e534253)
+    SphericalProjManip = MTypeId(0x554d5350)
+    SpotCylinderManip = MTypeId(0x53434d50)
+    SpotLight = MTypeId(0x5350544c)
+    SpotManip = MTypeId(0x554d4958)
+    Spring = MTypeId(0x59535052)
+    SquareSrf = MTypeId(0x4e535153)
+    StandardSurface = MTypeId(0x53544453)
+    Stencil = MTypeId(0x52545354)
+    StereoRigCamera = MTypeId(0x53524341)
+    StitchAsNurbsShell = MTypeId(0x4e535348)
+    StitchSrf = MTypeId(0x4e535453)
+    Stroke = MTypeId(0x5354524b)
+    StrokeGlobals = MTypeId(0x53544b47)
+    Stucco = MTypeId(0x52533630)
+    StyleCurve = MTypeId(0x4e535443)
+    SubCurve = MTypeId(0x4e534243)
+    SubSurface = MTypeId(0x4e535352)
+    SubdAddTopology = MTypeId(0x53415459)
+    SubdAutoProj = MTypeId(0x53415550)
+    SubdBlindData = MTypeId(0x53424454)
+    SubdCleanTopology = MTypeId(0x53435459)
+    SubdHierBlind = MTypeId(0x53485242)
+    SubdLayoutUV = MTypeId(0x534c5556)
+    SubdMapCut = MTypeId(0x534d4143)
+    SubdMapSewMove = MTypeId(0x5353454d)
+    SubdPlanarProj = MTypeId(0x53504c50)
+    SubdTweak = MTypeId(0x5354574b)
+    SubdTweakUV = MTypeId(0x53545556)
+    Subdiv = MTypeId(0x53445353)
+    SubdivCollapse = MTypeId(0x53434c50)
+    SubdivComponentId = MTypeId(0x53534944)
+    SubdivReverseFaces = MTypeId(0x53525646)
+    SubdivSurfaceVarGroup = MTypeId(0x53535647)
+    SubdivToNurbs = MTypeId(0x5344534e)
+    SubdivToPoly = MTypeId(0x53445350)
+    SubsetFalloff = MTypeId(0x5353464f)
+    Subtract = MTypeId(0x53554253)
+    Sum = MTypeId(0x53554d44)
+    SurfaceInfo = MTypeId(0x4e53494e)
+    SurfaceLuminance = MTypeId(0x52534c55)
+    SurfaceShader = MTypeId(0x52535348)
+    SurfaceVarGroup = MTypeId(0x4e535647)
+    SymmetryConstraint = MTypeId(0x44534d43)
+    Tan = MTypeId(0x54414e47)
+    TangentConstraint = MTypeId(0x44544332)
+    Tension = MTypeId(0x54454e53)
+    TextButtonManip = MTypeId(0x554d5442)
+    Texture3dManip = MTypeId(0x554d5458)
+    TextureBakeSet = MTypeId(0x5442414b)
+    TextureDeformer = MTypeId(0x54584446)
+    TextureDeformerHandle = MTypeId(0x54444844)
+    TextureToGeom = MTypeId(0x5454474f)
+    Time = MTypeId(0x54494d45)
+    TimeEditor = MTypeId(0x544d4544)
+    TimeEditorAnimSource = MTypeId(0x54454153)
+    TimeEditorClip = MTypeId(0x41434c43)
+    TimeEditorClipBase = MTypeId(0x414c434c)
+    TimeEditorClipEvaluator = MTypeId(0x4143524f)
+    TimeEditorInterpolator = MTypeId(0x54454950)
+    TimeEditorTracks = MTypeId(0x5445544b)
+    TimeFunction = MTypeId(0x7466786e)
+    TimeToUnitConversion = MTypeId(0x44544d55)
+    TimeWarp = MTypeId(0x54495741)
+    ToggleManip = MTypeId(0x554d5447)
+    ToggleOnLineManip = MTypeId(0x55544f4c)
+    ToolDrawManip = MTypeId(0x5454444d)
+    ToolDrawManip2D = MTypeId(0x54444d32)
+    ToonLineAttributes = MTypeId(0x544c4154)
+    TrackInfoManager = MTypeId(0x54494d47)
+    TransUV2dManip = MTypeId(0x55325452)
+    TransferAttributes = MTypeId(0x54524154)
+    TransferFalloff = MTypeId(0x50464f46)
+    Transform = MTypeId(0x5846524d)
+    TransformGeometry = MTypeId(0x5447454f)
+    TranslateLimitsManip = MTypeId(0x434e4d50)
+    TranslateManip = MTypeId(0x554d4650)
+    TranslateUVManip = MTypeId(0x554d5556)
+    TranslationFromMatrix = MTypeId(0x544d4154)
+    Trim = MTypeId(0x4e54524d)
+    TrimWithBoundaries = MTypeId(0x4e545742)
+    TriplanarProjManip = MTypeId(0x554d5452)
+    TripleShadingSwitch = MTypeId(0x53574833)
+    TrsInsertManip = MTypeId(0x554d4354)
+    TrsManip = MTypeId(0x5554544d)
+    Truncate = MTypeId(0x5452554e)
+    TurbulenceField = MTypeId(0x59545552)
+    TurbulenceManip = MTypeId(0x554d4958)
+    Tweak = MTypeId(0x464d5054)
+    UfeProxyCameraShape = MTypeId(0x55465043)
+    UfeProxyTransform = MTypeId(0x55465058)
+    UniformFalloff = MTypeId(0x55574754)
+    UniformField = MTypeId(0x59554e49)
+    UnitConversion = MTypeId(0x44554e54)
+    UnitToTimeConversion = MTypeId(0x4455544d)
+    Unknown = MTypeId(0x554e4b4e)
+    UnknownDag = MTypeId(0x554e4b44)
+    UnknownTransform = MTypeId(0x554e4b54)
+    Untrim = MTypeId(0x4e555452)
+    UseBackground = MTypeId(0x55534247)
+    Uv2dManip = MTypeId(0x5556324d)
+    UvChooser = MTypeId(0x55564348)
+    UvPin = MTypeId(0x55565256)
+    VectorProduct = MTypeId(0x52564543)
+    VertexBakeSet = MTypeId(0x5642414b)
+    ViewColorManager = MTypeId(0x5657434d)
+    VolumeAxisField = MTypeId(0x59565846)
+    VolumeFog = MTypeId(0x52564647)
+    VolumeLight = MTypeId(0x564f4c4c)
+    VolumeNoise = MTypeId(0x52545633)
+    VolumeShader = MTypeId(0x52565348)
+    VortexField = MTypeId(0x59564f52)
+    Water = MTypeId(0x52545741)
+    WeightGeometryFilter = MTypeId(0x44574746)
+    Wire = MTypeId(0x46574952)
+    Wood = MTypeId(0x52545744)
+    Wrap = MTypeId(0x46575250)
+    WtAddMatrix = MTypeId(0x4457414d)
+
+
+_TYPE_STR_TO_ID = {
+
+    "AISEnvFacade": MTypeId(0x52454656),
+
+    "aboutToSetValueTestNode": MTypeId(0x4153564e),
+
+    "absOverride": MTypeId(0x58000378),
+
+    "absUniqueOverride": MTypeId(0x580003a0),
+
+    "absolute": MTypeId(0x41425344),
+
+    "acos": MTypeId(0x41434f53),
+
+    "addDoubleLinear": MTypeId(0x4441444c),
+
+    "addMatrix": MTypeId(0x44414d58),
+
+    "adskMaterial": MTypeId(0x4144534d),
+
+    "aimConstraint": MTypeId(0x44414d43),
+
+    "aimMatrix": MTypeId(0x414d4154),
+
+    "airField": MTypeId(0x59414952),
+
+    "indexManip": MTypeId(0x554d4958),
+
+    "alignCurve": MTypeId(0x4e414c43),
+
+    "alignManip": MTypeId(0x554d4144),
+
+    "alignSurface": MTypeId(0x4e414c53),
+
+    "ambientLight": MTypeId(0x414d424c),
+
+    "and": MTypeId(0x414e4442),
+
+    "angleBetween": MTypeId(0x4e414254),
+
+    "angleDimension": MTypeId(0x4147444e),
+
+    "animBlend": MTypeId(0x41424e44),
+
+    "animBlendInOut": MTypeId(0x4142494f),
+
+    "animBlendNodeAdditive": MTypeId(0x41424e41),
+
+    "animBlendNodeAdditiveDA": MTypeId(0x41424141),
+
+    "animBlendNodeAdditiveDL": MTypeId(0x4142414c),
+
+    "animBlendNodeAdditiveF": MTypeId(0x41424146),
+
+    "animBlendNodeAdditiveFA": MTypeId(0x41424641),
+
+    "animBlendNodeAdditiveFL": MTypeId(0x4142464c),
+
+    "animBlendNodeAdditiveI16": MTypeId(0x41424153),
+
+    "animBlendNodeAdditiveI32": MTypeId(0x41424149),
+
+    "animBlendNodeAdditiveRotation": MTypeId(0x41424e52),
+
+    "animBlendNodeAdditiveScale": MTypeId(0x41424e53),
+
+    "animBlendNodeBoolean": MTypeId(0x4142424f),
+
+    "animBlendNodeEnum": MTypeId(0x41424e45),
+
+    "animBlendNodeTime": MTypeId(0x41425449),
+
+    "animClip": MTypeId(0x434c504e),
+
+    "animCurveTA": MTypeId(0x50435441),
+
+    "animCurveTL": MTypeId(0x5043544c),
+
+    "animCurveTT": MTypeId(0x50435454),
+
+    "animCurveTU": MTypeId(0x50435455),
+
+    "animCurveUA": MTypeId(0x50435541),
+
+    "animCurveUL": MTypeId(0x5043554c),
+
+    "animCurveUT": MTypeId(0x50435554),
+
+    "animCurveUU": MTypeId(0x50435555),
+
+    "animLayer": MTypeId(0x414e4c52),
+
+    "anisotropic": MTypeId(0x52414e49),
+
+    "annotationShape": MTypeId(0x414e4e53),
+
+    "aovChildCollection": MTypeId(0x5800039c),
+
+    "aovCollection": MTypeId(0x5800039b),
+
+    "applyAbs2FloatsOverride": MTypeId(0x58000397),
+
+    "applyAbs3FloatsOverride": MTypeId(0x58000381),
+
+    "applyAbsBoolOverride": MTypeId(0x5800038a),
+
+    "applyAbsEnumOverride": MTypeId(0x5800038c),
+
+    "applyAbsFloatOverride": MTypeId(0x5800037d),
+
+    "applyAbsIntOverride": MTypeId(0x58000391),
+
+    "applyAbsStringOverride": MTypeId(0x58000393),
+
+    "applyConnectionOverride": MTypeId(0x58000384),
+
+    "applyRel2FloatsOverride": MTypeId(0x58000399),
+
+    "applyRel3FloatsOverride": MTypeId(0x58000383),
+
+    "applyRelFloatOverride": MTypeId(0x5800037f),
+
+    "applyRelIntOverride": MTypeId(0x58000392),
+
+    "arcLengthDimension": MTypeId(0x41444d4e),
+
+    "areaLight": MTypeId(0x41524c54),
+
+    "arrayMapper": MTypeId(0x44414d50),
+
+    "arrowManip": MTypeId(0x554d4152),
+
+    "arubaTessellate": MTypeId(0x41544553),
+
+    "asin": MTypeId(0x4153494e),
+
+    "atan": MTypeId(0x4154414e),
+
+    "atan2": MTypeId(0x41544132),
+
+    "attachCurve": MTypeId(0x4e415443),
+
+    "attachSurface": MTypeId(0x4e415453),
+
+    "attrHierarchyTest": MTypeId(0x41544854),
+
+    "audio": MTypeId(0x41554449),
+
+    "average": MTypeId(0x41565244),
+
+    "avgCurves": MTypeId(0x4e414352),
+
+    "avgNurbsSurfacePoints": MTypeId(0x4e414e50),
+
+    "avgSurfacePoints": MTypeId(0x4e415350),
+
+    "axisFromMatrix": MTypeId(0x584d4154),
+
+    "ballProjManip": MTypeId(0x554d4250),
+
+    "lineManip": MTypeId(0x554d4c4e),
+
+    "baseLattice": MTypeId(0x46424153),
+
+    "basicSelector": MTypeId(0x58000375),
+
+    "bevel": MTypeId(0x4e42564c),
+
+    "bevelPlus": MTypeId(0x4e425356),
+
+    "bezierCurve": MTypeId(0x42435256),
+
+    "bezierCurveToNurbs": MTypeId(0x42544e52),
+
+    "blendColorSets": MTypeId(0x50424353),
+
+    "blendColors": MTypeId(0x52424c32),
+
+    "blendDevice": MTypeId(0x424c4456),
+
+    "blendFalloff": MTypeId(0x42464f46),
+
+    "blendMatrix": MTypeId(0x424d4154),
+
+    "blendShape": MTypeId(0x46424c53),
+
+    "blendTwoAttr": MTypeId(0x41424c32),
+
+    "blendWeighted": MTypeId(0x41424c57),
+
+    "blindDataTemplate": MTypeId(0x424c4454),
+
+    "blinn": MTypeId(0x52424c4e),
+
+    "boneLattice": MTypeId(0x4642554c),
+
+    "boolean": MTypeId(0x4e424f4c),
+
+    "boundary": MTypeId(0x4e424e44),
+
+    "brownian": MTypeId(0x5246424d),
+
+    "brush": MTypeId(0x42525348),
+
+    "bulge": MTypeId(0x52544255),
+
+    "bump2d": MTypeId(0x5242554d),
+
+    "bump3d": MTypeId(0x52425533),
+
+    "freePointTriadManip": MTypeId(0x55465054),
+
+    "cacheBlend": MTypeId(0x4354524b),
+
+    "cacheFile": MTypeId(0x43434846),
+
+    "camera": MTypeId(0x4443414d),
+
+    "cameraPlaneManip": MTypeId(0x554d4350),
+
+    "cameraSet": MTypeId(0x44525452),
+
+    "cameraView": MTypeId(0x44434156),
+
+    "ceil": MTypeId(0x43454944),
+
+    "centerManip": MTypeId(0x434e4d50),
+
+    "character": MTypeId(0x43484152),
+
+    "characterMap": MTypeId(0x434d4150),
+
+    "characterOffset": MTypeId(0x584f4646),
+
+    "checker": MTypeId(0x52544348),
+
+    "choice": MTypeId(0x43484345),
+
+    "chooser": MTypeId(0x43484f4f),
+
+    "circleManip": MTypeId(0x554d434c),
+
+    "circleSweepManip": MTypeId(0x5543534d),
+
+    "clamp": MTypeId(0x52434c33),
+
+    "clampRange": MTypeId(0x434c414d),
+
+    "clipGhostShape": MTypeId(0x43475348),
+
+    "clipLibrary": MTypeId(0x434c4950),
+
+    "clipScheduler": MTypeId(0x43534348),
+
+    "clipToGhostData": MTypeId(0x43324744),
+
+    "closeCurve": MTypeId(0x4e434355),
+
+    "closeSurface": MTypeId(0x4e435355),
+
+    "closestPointOnMesh": MTypeId(0x43504f4d),
+
+    "closestPointOnSurface": MTypeId(0x4e435053),
+
+    "cloth": MTypeId(0x5254434c),
+
+    "cloud": MTypeId(0x52544344),
+
+    "cluster": MTypeId(0x46434c53),
+
+    "clusterFlexorShape": MTypeId(0x464a4346),
+
+    "clusterHandle": MTypeId(0x46434c48),
+
+    "collection": MTypeId(0x58000373),
+
+    "collisionModel": MTypeId(0x59434f4c),
+
+    "colorManagementGlobals": MTypeId(0x434d4742),
+
+    "colorProfile": MTypeId(0x434f4c50),
+
+    "columnFromMatrix": MTypeId(0x434d4154),
+
+    "combinationShape": MTypeId(0x46434e53),
+
+    "compactPlugArrayTest": MTypeId(0x43504154),
+
+    "componentFalloff": MTypeId(0x47464f46),
+
+    "translateManip": MTypeId(0x5554544d),
+
+    "componentMatch": MTypeId(0x544f504d),
+
+    "componentTagBase": MTypeId(0x43544253),
+
+    "composeMatrix": MTypeId(0x58000301),
+
+    "concentricProjManip": MTypeId(0x554d434f),
+
+    "condition": MTypeId(0x52434e44),
+
+    "connectionOverride": MTypeId(0x58000385),
+
+    "connectionUniqueOverride": MTypeId(0x580003a2),
+
+    "container": MTypeId(0x434f4e54),
+
+    "containerBase": MTypeId(0x434f4241),
+
+    "contrast": MTypeId(0x52434f4e),
+
+    "controller": MTypeId(0x43475250),
+
+    "copyColorSet": MTypeId(0x43504353),
+
+    "copyUVSet": MTypeId(0x43505553),
+
+    "cos": MTypeId(0x434f5349),
+
+    "crater": MTypeId(0x52533430),
+
+    "creaseSet": MTypeId(0x43524541),
+
+    "createColorSet": MTypeId(0x43524353),
+
+    "createUVSet": MTypeId(0x43525553),
+
+    "crossProduct": MTypeId(0x43524f50),
+
+    "cubicProjManip": MTypeId(0x554d4355),
+
+    "curveFromMeshCoM": MTypeId(0x4e434d43),
+
+    "curveFromMeshEdge": MTypeId(0x4e434d45),
+
+    "curveFromSubdivEdge": MTypeId(0x53435345),
+
+    "curveFromSubdivFace": MTypeId(0x53435346),
+
+    "curveFromSurfaceBnd": MTypeId(0x4e435342),
+
+    "curveFromSurfaceCoS": MTypeId(0x4e435343),
+
+    "curveFromSurfaceIso": MTypeId(0x4e435349),
+
+    "curveInfo": MTypeId(0x4e43494e),
+
+    "curveIntersect": MTypeId(0x4e434349),
+
+    "curveNormalizerAngle": MTypeId(0x434e5241),
+
+    "curveNormalizerLinear": MTypeId(0x434e524c),
+
+    "pointOnCurveManip": MTypeId(0x554d5043),
+
+    "curveVarGroup": MTypeId(0x4e435647),
+
+    "cylindricalProjManip": MTypeId(0x554d4359),
+
+    "dagContainer": MTypeId(0x44414743),
+
+    "dagPose": MTypeId(0x46504f53),
+
+    "dataBlockTest": MTypeId(0x44425453),
+
+    "decomposeMatrix": MTypeId(0x58000300),
+
+    "defaultLightList": MTypeId(0x4445464c),
+
+    "defaultRenderUtilityList": MTypeId(0x4452554c),
+
+    "defaultRenderingList": MTypeId(0x44524e4c),
+
+    "defaultShaderList": MTypeId(0x5244534c),
+
+    "defaultTextureList": MTypeId(0x5244544c),
+
+    "deformBend": MTypeId(0x46444244),
+
+    "deformFlare": MTypeId(0x4644464c),
+
+    "deformSine": MTypeId(0x4644534e),
+
+    "deformSquash": MTypeId(0x46445351),
+
+    "deformTwist": MTypeId(0x46445457),
+
+    "deformWave": MTypeId(0x46445756),
+
+    "deleteColorSet": MTypeId(0x444c4353),
+
+    "deleteComponent": MTypeId(0x44454354),
+
+    "deleteUVSet": MTypeId(0x444c4d53),
+
+    "deltaMush": MTypeId(0x444c544d),
+
+    "detachCurve": MTypeId(0x4e445443),
+
+    "detachSurface": MTypeId(0x4e445453),
+
+    "determinant": MTypeId(0x4445544d),
+
+    "directedDisc": MTypeId(0x44445343),
+
+    "directionalLight": MTypeId(0x4449524c),
+
+    "discManip": MTypeId(0x5544534d),
+
+    "diskCache": MTypeId(0x44534b43),
+
+    "displacementShader": MTypeId(0x52445348),
+
+    "displayLayer": MTypeId(0x4453504c),
+
+    "displayLayerManager": MTypeId(0x44504c4d),
+
+    "distanceBetween": MTypeId(0x44444254),
+
+    "distanceDimShape": MTypeId(0x44444d4e),
+
+    "distanceManip": MTypeId(0x554d444d),
+
+    "divide": MTypeId(0x44495644),
+
+    "dof": MTypeId(0x444f4644),
+
+    "dotProduct": MTypeId(0x444f5450),
+
+    "doubleShadingSwitch": MTypeId(0x53574832),
+
+    "dpBirailSrf": MTypeId(0x4e444253),
+
+    "dragField": MTypeId(0x59445247),
+
+    "dropoffLocator": MTypeId(0x444c4354),
+
+    "dynController": MTypeId(0x5943544c),
+
+    "dynGlobals": MTypeId(0x5944474c),
+
+    "dynHolder": MTypeId(0x59484c44),
+
+    "dynamicConstraint": MTypeId(0x44434f4e),
+
+    "editMetadata": MTypeId(0x454d5444),
+
+    "editsManager": MTypeId(0x454d4752),
+
+    "enableManip": MTypeId(0x454e4d50),
+
+    "envBall": MTypeId(0x5245424c),
+
+    "envChrome": MTypeId(0x52454348),
+
+    "envCube": MTypeId(0x52454342),
+
+    "envFacade": MTypeId(0x52454643),
+
+    "envFog": MTypeId(0x52454647),
+
+    "envSky": MTypeId(0x5245534b),
+
+    "envSphere": MTypeId(0x52455350),
+
+    "environmentFog": MTypeId(0x454e5646),
+
+    "equal": MTypeId(0x4551554c),
+
+    "explodeNurbsShell": MTypeId(0x4e455348),
+
+    "expression": MTypeId(0x44455850),
+
+    "extendCurve": MTypeId(0x4e455843),
+
+    "extendSurface": MTypeId(0x4e455853),
+
+    "extrude": MTypeId(0x4e455852),
+
+    "facade": MTypeId(0x4446434e),
+
+    "falloffEval": MTypeId(0x45464f46),
+
+    "ffBlendSrf": MTypeId(0x4e424c54),
+
+    "ffBlendSrfObsolete": MTypeId(0x4e424c53),
+
+    "ffFilletSrf": MTypeId(0x4e464653),
+
+    "ffd": MTypeId(0x46464644),
+
+    "file": MTypeId(0x52544654),
+
+    "filletCurve": MTypeId(0x4e464352),
+
+    "fitBspline": MTypeId(0x4e465443),
+
+    "flexorShape": MTypeId(0x464c5848),
+
+    "floor": MTypeId(0x464c4f4f),
+
+    "flow": MTypeId(0x464c4f57),
+
+    "fluidEmitter": MTypeId(0x46454d49),
+
+    "fluidShape": MTypeId(0x464c5549),
+
+    "fluidSliceManip": MTypeId(0x46534c4d),
+
+    "fluidTexture2D": MTypeId(0x464c5454),
+
+    "fluidTexture3D": MTypeId(0x464c5458),
+
+    "follicle": MTypeId(0x48435256),
+
+    "forceUpdateManip": MTypeId(0x554d4655),
+
+    "fosterParent": MTypeId(0x4650524e),
+
+    "fourByFourMatrix": MTypeId(0x4642464d),
+
+    "fractal": MTypeId(0x52543246),
+
+    "frameCache": MTypeId(0x46434348),
+
+    "freePointManip": MTypeId(0x554d4650),
+
+    "gammaCorrect": MTypeId(0x5247414d),
+
+    "geoConnectable": MTypeId(0x5947434f),
+
+    "geoConnector": MTypeId(0x59474354),
+
+    "geomBind": MTypeId(0x4742494e),
+
+    "geometryConstraint": MTypeId(0x44474e43),
+
+    "geometryFilter": MTypeId(0x44474649),
+
+    "geometryOnLineManip": MTypeId(0x554d474c),
+
+    "geometryVarGroup": MTypeId(0x4e475647),
+
+    "globalCacheControl": MTypeId(0x4743434c),
+
+    "globalStitch": MTypeId(0x4e475354),
+
+    "granite": MTypeId(0x52544752),
+
+    "gravityField": MTypeId(0x59475241),
+
+    "greasePencilSequence": MTypeId(0x47505351),
+
+    "greasePlane": MTypeId(0x4447504c),
+
+    "greasePlaneRenderShape": MTypeId(0x47505253),
+
+    "greaterThan": MTypeId(0x47525448),
+
+    "grid": MTypeId(0x52544744),
+
+    "group": MTypeId(0x580003a5),
+
+    "groupId": MTypeId(0x47504944),
+
+    "groupParts": MTypeId(0x47525050),
+
+    "guide": MTypeId(0x46475549),
+
+    "hairConstraint": MTypeId(0x4850494e),
+
+    "hairSystem": MTypeId(0x48535953),
+
+    "hairTubeShader": MTypeId(0x52485442),
+
+    "hardenPoint": MTypeId(0x4e484450),
+
+    "hardwareRenderGlobals": MTypeId(0x48575247),
+
+    "hardwareRenderingGlobals": MTypeId(0x48525247),
+
+    "heightField": MTypeId(0x4f435050),
+
+    "hierarchyTestNode1": MTypeId(0x48544e31),
+
+    "hierarchyTestNode2": MTypeId(0x48544e32),
+
+    "hierarchyTestNode3": MTypeId(0x48544e33),
+
+    "hikEffector": MTypeId(0x4446494b),
+
+    "hikFKJoint": MTypeId(0x4a54494b),
+
+    "hikFloorContactMarker": MTypeId(0x4846434d),
+
+    "hikGroundPlane": MTypeId(0x48474e44),
+
+    "hikHandle": MTypeId(0x4b484948),
+
+    "hikIKEffector": MTypeId(0x494b4546),
+
+    "hikSolver": MTypeId(0x4b48494b),
+
+    "historySwitch": MTypeId(0x48495353),
+
+    "holdMatrix": MTypeId(0x4450484d),
+
+    "hsvToRgb": MTypeId(0x52483252),
+
+    "hwReflectionMap": MTypeId(0x4857524d),
+
+    "hwRenderGlobals": MTypeId(0x59485244),
+
+    "hyperGraphInfo": MTypeId(0x48595052),
+
+    "hyperLayout": MTypeId(0x4859504c),
+
+    "hyperView": MTypeId(0x44485056),
+
+    "ikEffector": MTypeId(0x4b454646),
+
+    "ikHandle": MTypeId(0x4b48444c),
+
+    "ikMCsolver": MTypeId(0x4b4d4353),
+
+    "ikPASolver": MTypeId(0x4b504153),
+
+    "ikRPsolver": MTypeId(0x4b525053),
+
+    "ikSCsolver": MTypeId(0x4b534353),
+
+    "ikSplineSolver": MTypeId(0x4b535053),
+
+    "ikSystem": MTypeId(0x4b535953),
+
+    "imagePlane": MTypeId(0x4449504c),
+
+    "implicitBox": MTypeId(0x46494258),
+
+    "implicitCone": MTypeId(0x4649434f),
+
+    "implicitSphere": MTypeId(0x46495350),
+
+    "insertKnotCurve": MTypeId(0x4e494b43),
+
+    "insertKnotSurface": MTypeId(0x4e494b53),
+
+    "instancer": MTypeId(0x594e5354),
+
+    "intersectSurface": MTypeId(0x4e495346),
+
+    "inverseLerp": MTypeId(0x494c5250),
+
+    "jiggle": MTypeId(0x4a474446),
+
+    "joint": MTypeId(0x4a4f494e),
+
+    "jointCluster": MTypeId(0x464a434c),
+
+    "jointFfd": MTypeId(0x46464442),
+
+    "jointLattice": MTypeId(0x4642454c),
+
+    "keyframeRegionManip": MTypeId(0x4b46524d),
+
+    "keyingGroup": MTypeId(0x4b475250),
+
+    "lambert": MTypeId(0x524c414d),
+
+    "lattice": MTypeId(0x464c4154),
+
+    "layeredShader": MTypeId(0x4c595253),
+
+    "layeredTexture": MTypeId(0x4c595254),
+
+    "leastSquaresModifier": MTypeId(0x4e4c534d),
+
+    "leather": MTypeId(0x52544c45),
+
+    "length": MTypeId(0x4c454e47),
+
+    "lerp": MTypeId(0x4c455250),
+
+    "lessThan": MTypeId(0x4c535448),
+
+    "lightEditor": MTypeId(0x580003e3),
+
+    "lightFog": MTypeId(0x52464f47),
+
+    "lightGroup": MTypeId(0x580003e2),
+
+    "lightInfo": MTypeId(0x524c494e),
+
+    "lightItem": MTypeId(0x580003e1),
+
+    "lightLinker": MTypeId(0x524c4c4b),
+
+    "lightList": MTypeId(0x4c4c5354),
+
+    "lightsChildCollection": MTypeId(0x5800039a),
+
+    "lightsCollection": MTypeId(0x58000394),
+
+    "lightsCollectionSelector": MTypeId(0x580003a4),
+
+    "limitManip": MTypeId(0x4c544d50),
+
+    "lineModifier": MTypeId(0x4c4d4f44),
+
+    "locator": MTypeId(0x4c4f4354),
+
+    "lodGroup": MTypeId(0x4c4f4447),
+
+    "lodThresholds": MTypeId(0x4c4f4454),
+
+    "loft": MTypeId(0x4e534b4e),
+
+    "log": MTypeId(0x4c4f4744),
+
+    "lookAt": MTypeId(0x444c4154),
+
+    "luminance": MTypeId(0x524c554d),
+
+    "makeGroup": MTypeId(0x504d4752),
+
+    "makeIllustratorCurves": MTypeId(0x4e4d4943),
+
+    "makeNurbCircle": MTypeId(0x4e435243),
+
+    "makeNurbCone": MTypeId(0x4e434e45),
+
+    "makeNurbCube": MTypeId(0x4e435542),
+
+    "makeNurbCylinder": MTypeId(0x4e43594c),
+
+    "makeNurbPlane": MTypeId(0x4e504c4e),
+
+    "makeNurbSphere": MTypeId(0x4e535048),
+
+    "makeNurbTorus": MTypeId(0x4e544f52),
+
+    "makeNurbsSquare": MTypeId(0x4e535152),
+
+    "makeTextCurves": MTypeId(0x4e545843),
+
+    "makeThreePointCircularArc": MTypeId(0x4e334341),
+
+    "makeTwoPointCircularArc": MTypeId(0x4e324341),
+
+    "mandelbrot": MTypeId(0x52544d41),
+
+    "mandelbrot3D": MTypeId(0x52544d33),
+
+    "manip2DContainer": MTypeId(0x554d3243),
+
+    "manipContainer": MTypeId(0x554d4343),
+
+    "marble": MTypeId(0x52544d52),
+
+    "markerManip": MTypeId(0x554d4d41),
+
+    "materialFacade": MTypeId(0x524d4643),
+
+    "materialInfo": MTypeId(0x444d5449),
+
+    "materialOverride": MTypeId(0x58000387),
+
+    "materialTemplate": MTypeId(0x4d544c41),
+
+    "materialTemplateOverride": MTypeId(0x58000389),
+
+    "max": MTypeId(0x4d415844),
+
+    "membrane": MTypeId(0x4d454d42),
+
+    "mesh": MTypeId(0x444d5348),
+
+    "meshVarGroup": MTypeId(0x4e4d5647),
+
+    "min": MTypeId(0x4d494e44),
+
+    "modulo": MTypeId(0x4d4f4444),
+
+    "morph": MTypeId(0x4d525048),
+
+    "motionPath": MTypeId(0x4d505448),
+
+    "motionTrail": MTypeId(0x4d4f5452),
+
+    "motionTrailShape": MTypeId(0x4d4f5348),
+
+    "mountain": MTypeId(0x52544d54),
+
+    "movie": MTypeId(0x52544d56),
+
+    "mpBirailSrf": MTypeId(0x4e4d4253),
+
+    "multDoubleLinear": MTypeId(0x444d444c),
+
+    "multMatrix": MTypeId(0x444d544d),
+
+    "multilisterLight": MTypeId(0x4d554c4c),
+
+    "multiply": MTypeId(0x4d554c54),
+
+    "multiplyDivide": MTypeId(0x524d4449),
+
+    "multiplyPointByMatrix": MTypeId(0x4d50424d),
+
+    "multiplyVectorByMatrix": MTypeId(0x4d56424d),
+
+    "mute": MTypeId(0x4d555445),
+
+    "nCloth": MTypeId(0x4e434c4f),
+
+    "nComponent": MTypeId(0x4e434d50),
+
+    "nParticle": MTypeId(0x4e504152),
+
+    "nRigid": MTypeId(0x4e524744),
+
+    "nearestPointOnCurve": MTypeId(0x4e504f43),
+
+    "negate": MTypeId(0x4e454754),
+
+    "network": MTypeId(0x4e54574b),
+
+    "newtonField": MTypeId(0x594e4557),
+
+    "noise": MTypeId(0x52544e33),
+
+    "nonLinear": MTypeId(0x464e4c44),
+
+    "normalConstraint": MTypeId(0x444e4332),
+
+    "normalize": MTypeId(0x4e4f524d),
+
+    "not": MTypeId(0x4e4f5442),
+
+    "nucleus": MTypeId(0x4e535953),
+
+    "nurbsCurve": MTypeId(0x4e435256),
+
+    "nurbsCurveToBezier": MTypeId(0x4e525442),
+
+    "nurbsSurface": MTypeId(0x4e535246),
+
+    "nurbsTessellate": MTypeId(0x4e544553),
+
+    "nurbsToSubdiv": MTypeId(0x534e5453),
+
+    "nurbsToSubdivProc": MTypeId(0x534e5450),
+
+    "objectAttrFilter": MTypeId(0x4f464154),
+
+    "objectBinFilter": MTypeId(0x4f4b464c),
+
+    "objectFilter": MTypeId(0x4f464c54),
+
+    "objectMultiFilter": MTypeId(0x4f4d464c),
+
+    "objectNameFilter": MTypeId(0x4f4e464c),
+
+    "objectRenderFilter": MTypeId(0x4f52464c),
+
+    "objectScriptFilter": MTypeId(0x4f53464c),
+
+    "objectSet": MTypeId(0x4f425354),
+
+    "objectTypeFilter": MTypeId(0x4f54464c),
+
+    "ocean": MTypeId(0x52544f43),
+
+    "oceanShader": MTypeId(0x524f5053),
+
+    "offsetCos": MTypeId(0x4e4f4353),
+
+    "offsetCurve": MTypeId(0x4e4f4355),
+
+    "offsetSurface": MTypeId(0x4e4f5355),
+
+    "oldBlindDataBase": MTypeId(0x42444454),
+
+    "oldGeometryConstraint": MTypeId(0x44474d43),
+
+    "oldNormalConstraint": MTypeId(0x444e5243),
+
+    "oldTangentConstraint": MTypeId(0x44544e43),
+
+    "opticalFX": MTypeId(0x4f504658),
+
+    "or": MTypeId(0x4f52424f),
+
+    "orientConstraint": MTypeId(0x444f5243),
+
+    "orientationMarker": MTypeId(0x4f52544d),
+
+    "pairBlend": MTypeId(0x4150424c),
+
+    "paramDimension": MTypeId(0x52444d4e),
+
+    "parentConstraint": MTypeId(0x44504152),
+
+    "parentMatrix": MTypeId(0x50524d54),
+
+    "particle": MTypeId(0x59504152),
+
+    "particleAgeMapper": MTypeId(0x50414d41),
+
+    "particleCloud": MTypeId(0x50434c44),
+
+    "particleColorMapper": MTypeId(0x50434d41),
+
+    "particleIncandMapper": MTypeId(0x50494d41),
+
+    "particleSamplerInfo": MTypeId(0x5053494e),
+
+    "particleTranspMapper": MTypeId(0x50544d41),
+
+    "partition": MTypeId(0x5052544e),
+
+    "passContributionMap": MTypeId(0x5053434d),
+
+    "passMatrix": MTypeId(0x4450534d),
+
+    "pfxHair": MTypeId(0x50464841),
+
+    "pfxToon": MTypeId(0x5046544f),
+
+    "phong": MTypeId(0x5250484f),
+
+    "phongE": MTypeId(0x52504845),
+
+    "pi": MTypeId(0x50494b44),
+
+    "pickMatrix": MTypeId(0x504d4154),
+
+    "pivotAndOrientManip": MTypeId(0x50414f4d),
+
+    "place2dTexture": MTypeId(0x52504c32),
+
+    "place3dTexture": MTypeId(0x52504c44),
+
+    "planarProjManip": MTypeId(0x554d5050),
+
+    "planarTrimSurface": MTypeId(0x4e504c54),
+
+    "plusMinusAverage": MTypeId(0x52504d41),
+
+    "pointConstraint": MTypeId(0x44505443),
+
+    "pointEmitter": MTypeId(0x59454d49),
+
+    "pointLight": MTypeId(0x504f4954),
+
+    "pointMatrixMult": MTypeId(0x44504d4d),
+
+    "pointOnCurveInfo": MTypeId(0x4e504349),
+
+    "pointOnLineManip": MTypeId(0x554d504c),
+
+    "pointOnPolyConstraint": MTypeId(0x44505043),
+
+    "pointOnSurfManip": MTypeId(0x554d5353),
+
+    "pointOnSurfaceInfo": MTypeId(0x4e505349),
+
+    "pointOnSurfaceManip": MTypeId(0x554d5053),
+
+    "poleVectorConstraint": MTypeId(0x44505643),
+
+    "polyAppend": MTypeId(0x50415050),
+
+    "polyAppendVertex": MTypeId(0x50415056),
+
+    "polyAutoProj": MTypeId(0x50415550),
+
+    "polyAverageVertex": MTypeId(0x50415656),
+
+    "polyAxis": MTypeId(0x50435244),
+
+    "polyBevel": MTypeId(0x5042564c),
+
+    "polyBevel2": MTypeId(0x50425632),
+
+    "polyBevel3": MTypeId(0x50425633),
+
+    "polyBlindData": MTypeId(0x4d424454),
+
+    "polyBoolOp": MTypeId(0x50424f50),
+
+    "polyBridgeEdge": MTypeId(0x50425245),
+
+    "polyCBoolOp": MTypeId(0x50435642),
+
+    "polyChipOff": MTypeId(0x50434849),
+
+    "polyCircularize": MTypeId(0x50435243),
+
+    "polyClean": MTypeId(0x504c434c),
+
+    "polyCloseBorder": MTypeId(0x50434c4f),
+
+    "polyCollapseEdge": MTypeId(0x50434f45),
+
+    "polyCollapseF": MTypeId(0x50434f46),
+
+    "polyColorDel": MTypeId(0x5043444c),
+
+    "polyColorMod": MTypeId(0x50434d4f),
+
+    "polyColorPerVertex": MTypeId(0x50435056),
+
+    "polyCone": MTypeId(0x50434f4e),
+
+    "polyConnectComponents": MTypeId(0x50434353),
+
+    "polyContourProj": MTypeId(0x50434e50),
+
+    "polyCopyUV": MTypeId(0x50435556),
+
+    "polyCrease": MTypeId(0x50435253),
+
+    "polyCreaseEdge": MTypeId(0x50435345),
+
+    "polyCreateFace": MTypeId(0x50435245),
+
+    "polyCube": MTypeId(0x50435542),
+
+    "polyCut": MTypeId(0x50504354),
+
+    "polyCylProj": MTypeId(0x50435950),
+
+    "polyCylinder": MTypeId(0x5043594c),
+
+    "polyDelEdge": MTypeId(0x50444545),
+
+    "polyDelFacet": MTypeId(0x50444546),
+
+    "polyDelVertex": MTypeId(0x50444556),
+
+    "polyDuplicateEdge": MTypeId(0x50445545),
+
+    "polyEdgeToCurve": MTypeId(0x50544356),
+
+    "polyEditEdgeFlow": MTypeId(0x50534546),
+
+    "polyExtrudeEdge": MTypeId(0x50455845),
+
+    "polyExtrudeFace": MTypeId(0x50455846),
+
+    "polyExtrudeVertex": MTypeId(0x50455856),
+
+    "polyFlipEdge": MTypeId(0x50464c45),
+
+    "polyFlipUV": MTypeId(0x50465556),
+
+    "polyHelix": MTypeId(0x48454c49),
+
+    "polyHoleFace": MTypeId(0x50484645),
+
+    "polyLayoutUV": MTypeId(0x504c5556),
+
+    "polyMapCut": MTypeId(0x504d4143),
+
+    "polyMapDel": MTypeId(0x504d4144),
+
+    "polyMapSew": MTypeId(0x504d4153),
+
+    "polyMapSewMove": MTypeId(0x5053454d),
+
+    "polyMergeEdge": MTypeId(0x504d4545),
+
+    "polyMergeFace": MTypeId(0x504d4546),
+
+    "polyMergeUV": MTypeId(0x504d4755),
+
+    "polyMergeVert": MTypeId(0x504d5645),
+
+    "polyMirror": MTypeId(0x504d4952),
+
+    "polyMoveEdge": MTypeId(0x504d4f45),
+
+    "polyMoveFace": MTypeId(0x504d4f46),
+
+    "polyMoveFacetUV": MTypeId(0x504d4655),
+
+    "polyMoveUV": MTypeId(0x504d5556),
+
+    "polyMoveVertex": MTypeId(0x504d4f56),
+
+    "polyNormal": MTypeId(0x504e4f52),
+
+    "polyNormalPerVertex": MTypeId(0x504e5056),
+
+    "polyNormalizeUV": MTypeId(0x504e5556),
+
+    "polyOptUvs": MTypeId(0x504f5556),
+
+    "polyPassThru": MTypeId(0x50595054),
+
+    "polyPinUV": MTypeId(0x50505556),
+
+    "polyPipe": MTypeId(0x50504950),
+
+    "polyPlanarProj": MTypeId(0x50504c50),
+
+    "polyPlane": MTypeId(0x504d4553),
+
+    "polyPlatonicSolid": MTypeId(0x534f4c49),
+
+    "polyPoke": MTypeId(0x5050504b),
+
+    "polyPrimitiveMisc": MTypeId(0x4d495343),
+
+    "polyPrism": MTypeId(0x50505249),
+
+    "polyProj": MTypeId(0x5050524f),
+
+    "polyProjectCurve": MTypeId(0x50504356),
+
+    "polyPyramid": MTypeId(0x50505952),
+
+    "polyQuad": MTypeId(0x50515541),
+
+    "polyReduce": MTypeId(0x50524544),
+
+    "polyRemesh": MTypeId(0x50524d48),
+
+    "polyRetopo": MTypeId(0x5052464d),
+
+    "polySeparate": MTypeId(0x50534550),
+
+    "polySewEdge": MTypeId(0x50535745),
+
+    "polySmooth": MTypeId(0x50534d54),
+
+    "polySmoothFace": MTypeId(0x50534d46),
+
+    "polySmoothProxy": MTypeId(0x50534d50),
+
+    "polySoftEdge": MTypeId(0x50534f45),
+
+    "polySphProj": MTypeId(0x50535050),
+
+    "polySphere": MTypeId(0x50535048),
+
+    "polySpinEdge": MTypeId(0x50535051),
+
+    "polySplit": MTypeId(0x5053504c),
+
+    "polySplitEdge": MTypeId(0x50534544),
+
+    "polySplitRing": MTypeId(0x50535052),
+
+    "polySplitVert": MTypeId(0x50535645),
+
+    "polyStraightenUVBorder": MTypeId(0x50535442),
+
+    "polySubdEdge": MTypeId(0x50535545),
+
+    "polySubdFace": MTypeId(0x50535546),
+
+    "polyToSubdiv": MTypeId(0x50534453),
+
+    "polyTorus": MTypeId(0x50544f52),
+
+    "polyTransfer": MTypeId(0x50544652),
+
+    "polyTriangulate": MTypeId(0x50545249),
+
+    "polyTweak": MTypeId(0x5054574b),
+
+    "polyTweakUV": MTypeId(0x50545556),
+
+    "polyUVRectangle": MTypeId(0x50555652),
+
+    "polyUnite": MTypeId(0x50554e49),
+
+    "polyUnsmooth": MTypeId(0x50555344),
+
+    "polyWedgeFace": MTypeId(0x50574643),
+
+    "poseInterpolatorManager": MTypeId(0x5053444d),
+
+    "positionMarker": MTypeId(0x504f534d),
+
+    "postProcessList": MTypeId(0x50505354),
+
+    "power": MTypeId(0x504f5744),
+
+    "primitiveFalloff": MTypeId(0x53464f46),
+
+    "projectCurve": MTypeId(0x4e504352),
+
+    "projectTangent": MTypeId(0x4e50544e),
+
+    "projection": MTypeId(0x5250524a),
+
+    "trsManip": MTypeId(0x554d4354),
+
+    "propMoveTriadManip": MTypeId(0x554d5054),
+
+    "proximityFalloff": MTypeId(0x5058464f),
+
+    "proximityPin": MTypeId(0x50525850),
+
+    "proximityWrap": MTypeId(0x50575250),
+
+    "proxyManager": MTypeId(0x50584d47),
+
+    "psdFileTex": MTypeId(0x50534454),
+
+    "quadShadingSwitch": MTypeId(0x53574834),
+
+    "radialField": MTypeId(0x59524144),
+
+    "ramp": MTypeId(0x52545241),
+
+    "rampShader": MTypeId(0x52525053),
+
+    "rbfSrf": MTypeId(0x4e524246),
+
+    "rebuildCurve": MTypeId(0x4e524243),
+
+    "rebuildSurface": MTypeId(0x4e524253),
+
+    "record": MTypeId(0x52454344),
+
+    "reference": MTypeId(0x5245464e),
+
+    "relOverride": MTypeId(0x5800037a),
+
+    "relUniqueOverride": MTypeId(0x580003a1),
+
+    "remapColor": MTypeId(0x524d434c),
+
+    "remapHsv": MTypeId(0x524d4853),
+
+    "remapValue": MTypeId(0x524d564c),
+
+    "renderBox": MTypeId(0x524e4258),
+
+    "renderCone": MTypeId(0x524e434f),
+
+    "renderGlobals": MTypeId(0x52474c42),
+
+    "renderGlobalsList": MTypeId(0x5244474c),
+
+    "renderLayer": MTypeId(0x524e444c),
+
+    "renderLayerManager": MTypeId(0x524e4c4d),
+
+    "renderPass": MTypeId(0x524e5053),
+
+    "renderPassSet": MTypeId(0x52505353),
+
+    "renderQuality": MTypeId(0x52515541),
+
+    "renderRect": MTypeId(0x52524354),
+
+    "renderSettingsChildCollection": MTypeId(0x580003a3),
+
+    "renderSettingsCollection": MTypeId(0x58000395),
+
+    "renderSetup": MTypeId(0x58000371),
+
+    "renderSetupLayer": MTypeId(0x58000372),
+
+    "renderSphere": MTypeId(0x524e5350),
+
+    "renderTarget": MTypeId(0x524e5447),
+
+    "renderedImageSource": MTypeId(0x52434953),
+
+    "reorderUVSet": MTypeId(0x524f5553),
+
+    "resolution": MTypeId(0x524c544e),
+
+    "resultCurveTimeToAngular": MTypeId(0x52435441),
+
+    "resultCurveTimeToLinear": MTypeId(0x5243544c),
+
+    "resultCurveTimeToTime": MTypeId(0x52435454),
+
+    "resultCurveTimeToUnitless": MTypeId(0x52435455),
+
+    "reverse": MTypeId(0x52525653),
+
+    "reverseCurve": MTypeId(0x4e525643),
+
+    "reverseSurface": MTypeId(0x4e525653),
+
+    "revolve": MTypeId(0x4e52564c),
+
+    "rgbToHsv": MTypeId(0x52523248),
+
+    "rigidBody": MTypeId(0x59524744),
+
+    "rigidConstraint": MTypeId(0x59435354),
+
+    "rigidSolver": MTypeId(0x59534c56),
+
+    "rock": MTypeId(0x5254524b),
+
+    "rotateLimitsManip": MTypeId(0x554d524c),
+
+    "rotateManip": MTypeId(0x554d5241),
+
+    "rotateUV2dManip": MTypeId(0x5532524f),
+
+    "rotateVector": MTypeId(0x524f5456),
+
+    "rotationFromMatrix": MTypeId(0x524f4d58),
+
+    "round": MTypeId(0x524f554e),
+
+    "roundConstantRadius": MTypeId(0x4e524352),
+
+    "rowFromMatrix": MTypeId(0x524d4154),
+
+    "sampler": MTypeId(0x46534d50),
+
+    "samplerInfo": MTypeId(0x5253494e),
+
+    "scaleConstraint": MTypeId(0x44534343),
+
+    "scaleFromMatrix": MTypeId(0x534d4154),
+
+    "scaleUV2dManip": MTypeId(0x55325343),
+
+    "screenAlignedCircleManip": MTypeId(0x5341434d),
+
+    "script": MTypeId(0x53435250),
+
+    "scriptManip": MTypeId(0x554d5343),
+
+    "sculpt": MTypeId(0x46534350),
+
+    "selectionListOperator": MTypeId(0x534c4f50),
+
+    "sequenceManager": MTypeId(0x53514d47),
+
+    "sequencer": MTypeId(0x53514e43),
+
+    "setRange": MTypeId(0x52524e47),
+
+    "shaderGlow": MTypeId(0x5348474c),
+
+    "shaderOverride": MTypeId(0x58000386),
+
+    "shadingEngine": MTypeId(0x53484144),
+
+    "shadingMap": MTypeId(0x53444d50),
+
+    "shapeEditorManager": MTypeId(0x53444d4c),
+
+    "shellTessellate": MTypeId(0x53544553),
+
+    "shot": MTypeId(0x53484f54),
+
+    "shrinkWrap": MTypeId(0x53575250),
+
+    "simpleSelector": MTypeId(0x5800039e),
+
+    "simpleTestNode": MTypeId(0x53544e44),
+
+    "simpleVolumeShader": MTypeId(0x53565348),
+
+    "sin": MTypeId(0x53494e45),
+
+    "singleShadingSwitch": MTypeId(0x53574831),
+
+    "sketchPlane": MTypeId(0x534b504e),
+
+    "skinBinding": MTypeId(0x534b4244),
+
+    "skinCluster": MTypeId(0x4653434c),
+
+    "smoothCurve": MTypeId(0x4e534d43),
+
+    "smoothStep": MTypeId(0x534d5354),
+
+    "smoothTangentSrf": MTypeId(0x4e53544e),
+
+    "snapUV2dManip": MTypeId(0x5532534e),
+
+    "snapshot": MTypeId(0x534e5054),
+
+    "snapshotShape": MTypeId(0x53534841),
+
+    "snow": MTypeId(0x5254534e),
+
+    "softMod": MTypeId(0x4653534c),
+
+    "softModHandle": MTypeId(0x46535348),
+
+    "solidFractal": MTypeId(0x52544633),
+
+    "solidify": MTypeId(0x534f4c59),
+
+    "spBirailSrf": MTypeId(0x4e534253),
+
+    "sphericalProjManip": MTypeId(0x554d5350),
+
+    "spotCylinderManip": MTypeId(0x53434d50),
+
+    "spotLight": MTypeId(0x5350544c),
+
+    "spring": MTypeId(0x59535052),
+
+    "squareSrf": MTypeId(0x4e535153),
+
+    "standardSurface": MTypeId(0x53544453),
+
+    "stencil": MTypeId(0x52545354),
+
+    "stereoRigCamera": MTypeId(0x53524341),
+
+    "stitchAsNurbsShell": MTypeId(0x4e535348),
+
+    "stitchSrf": MTypeId(0x4e535453),
+
+    "stroke": MTypeId(0x5354524b),
+
+    "strokeGlobals": MTypeId(0x53544b47),
+
+    "stucco": MTypeId(0x52533630),
+
+    "styleCurve": MTypeId(0x4e535443),
+
+    "subCurve": MTypeId(0x4e534243),
+
+    "subSurface": MTypeId(0x4e535352),
+
+    "subdAddTopology": MTypeId(0x53415459),
+
+    "subdAutoProj": MTypeId(0x53415550),
+
+    "subdBlindData": MTypeId(0x53424454),
+
+    "subdCleanTopology": MTypeId(0x53435459),
+
+    "subdHierBlind": MTypeId(0x53485242),
+
+    "subdLayoutUV": MTypeId(0x534c5556),
+
+    "subdMapCut": MTypeId(0x534d4143),
+
+    "subdMapSewMove": MTypeId(0x5353454d),
+
+    "subdPlanarProj": MTypeId(0x53504c50),
+
+    "subdTweak": MTypeId(0x5354574b),
+
+    "subdTweakUV": MTypeId(0x53545556),
+
+    "subdiv": MTypeId(0x53445353),
+
+    "subdivCollapse": MTypeId(0x53434c50),
+
+    "subdivComponentId": MTypeId(0x53534944),
+
+    "subdivReverseFaces": MTypeId(0x53525646),
+
+    "subdivSurfaceVarGroup": MTypeId(0x53535647),
+
+    "subdivToNurbs": MTypeId(0x5344534e),
+
+    "subdivToPoly": MTypeId(0x53445350),
+
+    "subsetFalloff": MTypeId(0x5353464f),
+
+    "subtract": MTypeId(0x53554253),
+
+    "sum": MTypeId(0x53554d44),
+
+    "surfaceInfo": MTypeId(0x4e53494e),
+
+    "surfaceLuminance": MTypeId(0x52534c55),
+
+    "surfaceShader": MTypeId(0x52535348),
+
+    "surfaceVarGroup": MTypeId(0x4e535647),
+
+    "symmetryConstraint": MTypeId(0x44534d43),
+
+    "tan": MTypeId(0x54414e47),
+
+    "tangentConstraint": MTypeId(0x44544332),
+
+    "tension": MTypeId(0x54454e53),
+
+    "textButtonManip": MTypeId(0x554d5442),
+
+    "texture3dManip": MTypeId(0x554d5458),
+
+    "textureBakeSet": MTypeId(0x5442414b),
+
+    "textureDeformer": MTypeId(0x54584446),
+
+    "textureDeformerHandle": MTypeId(0x54444844),
+
+    "textureToGeom": MTypeId(0x5454474f),
+
+    "time": MTypeId(0x54494d45),
+
+    "timeEditor": MTypeId(0x544d4544),
+
+    "timeEditorAnimSource": MTypeId(0x54454153),
+
+    "timeEditorClip": MTypeId(0x41434c43),
+
+    "timeEditorClipBase": MTypeId(0x414c434c),
+
+    "timeEditorClipEvaluator": MTypeId(0x4143524f),
+
+    "timeEditorInterpolator": MTypeId(0x54454950),
+
+    "timeEditorTracks": MTypeId(0x5445544b),
+
+    "timeFunction": MTypeId(0x7466786e),
+
+    "timeToUnitConversion": MTypeId(0x44544d55),
+
+    "timeWarp": MTypeId(0x54495741),
+
+    "toggleManip": MTypeId(0x554d5447),
+
+    "toggleOnLineManip": MTypeId(0x55544f4c),
+
+    "toolDrawManip": MTypeId(0x5454444d),
+
+    "toolDrawManip2D": MTypeId(0x54444d32),
+
+    "toonLineAttributes": MTypeId(0x544c4154),
+
+    "trackInfoManager": MTypeId(0x54494d47),
+
+    "transUV2dManip": MTypeId(0x55325452),
+
+    "transferAttributes": MTypeId(0x54524154),
+
+    "transferFalloff": MTypeId(0x50464f46),
+
+    "transform": MTypeId(0x5846524d),
+
+    "transformGeometry": MTypeId(0x5447454f),
+
+    "translateUVManip": MTypeId(0x554d5556),
+
+    "translationFromMatrix": MTypeId(0x544d4154),
+
+    "trim": MTypeId(0x4e54524d),
+
+    "trimWithBoundaries": MTypeId(0x4e545742),
+
+    "triplanarProjManip": MTypeId(0x554d5452),
+
+    "tripleShadingSwitch": MTypeId(0x53574833),
+
+    "truncate": MTypeId(0x5452554e),
+
+    "turbulenceField": MTypeId(0x59545552),
+
+    "tweak": MTypeId(0x464d5054),
+
+    "ufeProxyCameraShape": MTypeId(0x55465043),
+
+    "ufeProxyTransform": MTypeId(0x55465058),
+
+    "uniformFalloff": MTypeId(0x55574754),
+
+    "uniformField": MTypeId(0x59554e49),
+
+    "unitConversion": MTypeId(0x44554e54),
+
+    "unitToTimeConversion": MTypeId(0x4455544d),
+
+    "unknown": MTypeId(0x554e4b4e),
+
+    "unknownDag": MTypeId(0x554e4b44),
+
+    "unknownTransform": MTypeId(0x554e4b54),
+
+    "untrim": MTypeId(0x4e555452),
+
+    "useBackground": MTypeId(0x55534247),
+
+    "uv2dManip": MTypeId(0x5556324d),
+
+    "uvChooser": MTypeId(0x55564348),
+
+    "uvPin": MTypeId(0x55565256),
+
+    "vectorProduct": MTypeId(0x52564543),
+
+    "vertexBakeSet": MTypeId(0x5642414b),
+
+    "viewColorManager": MTypeId(0x5657434d),
+
+    "volumeAxisField": MTypeId(0x59565846),
+
+    "volumeFog": MTypeId(0x52564647),
+
+    "volumeLight": MTypeId(0x564f4c4c),
+
+    "volumeNoise": MTypeId(0x52545633),
+
+    "volumeShader": MTypeId(0x52565348),
+
+    "vortexField": MTypeId(0x59564f52),
+
+    "water": MTypeId(0x52545741),
+
+    "weightGeometryFilter": MTypeId(0x44574746),
+
+    "wire": MTypeId(0x46574952),
+
+    "wood": MTypeId(0x52545744),
+
+    "wrap": MTypeId(0x46575250),
+
+    "wtAddMatrix": MTypeId(0x4457414d),
+
+}
+
+_TYPE_HEX_TO_STR = {
+
+    0x52454656: "AISEnvFacade",
+
+    0x4153564e: "aboutToSetValueTestNode",
+
+    0x58000378: "absOverride",
+
+    0x580003a0: "absUniqueOverride",
+
+    0x41425344: "absolute",
+
+    0x41434f53: "acos",
+
+    0x4441444c: "addDoubleLinear",
+
+    0x44414d58: "addMatrix",
+
+    0x4144534d: "adskMaterial",
+
+    0x44414d43: "aimConstraint",
+
+    0x414d4154: "aimMatrix",
+
+    0x59414952: "airField",
+
+    0x554d4958: "indexManip",
+
+    0x4e414c43: "alignCurve",
+
+    0x554d4144: "alignManip",
+
+    0x4e414c53: "alignSurface",
+
+    0x414d424c: "ambientLight",
+
+    0x414e4442: "and",
+
+    0x4e414254: "angleBetween",
+
+    0x4147444e: "angleDimension",
+
+    0x41424e44: "animBlend",
+
+    0x4142494f: "animBlendInOut",
+
+    0x41424e41: "animBlendNodeAdditive",
+
+    0x41424141: "animBlendNodeAdditiveDA",
+
+    0x4142414c: "animBlendNodeAdditiveDL",
+
+    0x41424146: "animBlendNodeAdditiveF",
+
+    0x41424641: "animBlendNodeAdditiveFA",
+
+    0x4142464c: "animBlendNodeAdditiveFL",
+
+    0x41424153: "animBlendNodeAdditiveI16",
+
+    0x41424149: "animBlendNodeAdditiveI32",
+
+    0x41424e52: "animBlendNodeAdditiveRotation",
+
+    0x41424e53: "animBlendNodeAdditiveScale",
+
+    0x4142424f: "animBlendNodeBoolean",
+
+    0x41424e45: "animBlendNodeEnum",
+
+    0x41425449: "animBlendNodeTime",
+
+    0x434c504e: "animClip",
+
+    0x50435441: "animCurveTA",
+
+    0x5043544c: "animCurveTL",
+
+    0x50435454: "animCurveTT",
+
+    0x50435455: "animCurveTU",
+
+    0x50435541: "animCurveUA",
+
+    0x5043554c: "animCurveUL",
+
+    0x50435554: "animCurveUT",
+
+    0x50435555: "animCurveUU",
+
+    0x414e4c52: "animLayer",
+
+    0x52414e49: "anisotropic",
+
+    0x414e4e53: "annotationShape",
+
+    0x5800039c: "aovChildCollection",
+
+    0x5800039b: "aovCollection",
+
+    0x58000397: "applyAbs2FloatsOverride",
+
+    0x58000381: "applyAbs3FloatsOverride",
+
+    0x5800038a: "applyAbsBoolOverride",
+
+    0x5800038c: "applyAbsEnumOverride",
+
+    0x5800037d: "applyAbsFloatOverride",
+
+    0x58000391: "applyAbsIntOverride",
+
+    0x58000393: "applyAbsStringOverride",
+
+    0x58000384: "applyConnectionOverride",
+
+    0x58000399: "applyRel2FloatsOverride",
+
+    0x58000383: "applyRel3FloatsOverride",
+
+    0x5800037f: "applyRelFloatOverride",
+
+    0x58000392: "applyRelIntOverride",
+
+    0x41444d4e: "arcLengthDimension",
+
+    0x41524c54: "areaLight",
+
+    0x44414d50: "arrayMapper",
+
+    0x554d4152: "arrowManip",
+
+    0x41544553: "arubaTessellate",
+
+    0x4153494e: "asin",
+
+    0x4154414e: "atan",
+
+    0x41544132: "atan2",
+
+    0x4e415443: "attachCurve",
+
+    0x4e415453: "attachSurface",
+
+    0x41544854: "attrHierarchyTest",
+
+    0x41554449: "audio",
+
+    0x41565244: "average",
+
+    0x4e414352: "avgCurves",
+
+    0x4e414e50: "avgNurbsSurfacePoints",
+
+    0x4e415350: "avgSurfacePoints",
+
+    0x584d4154: "axisFromMatrix",
+
+    0x554d4250: "ballProjManip",
+
+    0x554d4c4e: "lineManip",
+
+    0x46424153: "baseLattice",
+
+    0x58000375: "basicSelector",
+
+    0x4e42564c: "bevel",
+
+    0x4e425356: "bevelPlus",
+
+    0x42435256: "bezierCurve",
+
+    0x42544e52: "bezierCurveToNurbs",
+
+    0x50424353: "blendColorSets",
+
+    0x52424c32: "blendColors",
+
+    0x424c4456: "blendDevice",
+
+    0x42464f46: "blendFalloff",
+
+    0x424d4154: "blendMatrix",
+
+    0x46424c53: "blendShape",
+
+    0x41424c32: "blendTwoAttr",
+
+    0x41424c57: "blendWeighted",
+
+    0x424c4454: "blindDataTemplate",
+
+    0x52424c4e: "blinn",
+
+    0x4642554c: "boneLattice",
+
+    0x4e424f4c: "boolean",
+
+    0x4e424e44: "boundary",
+
+    0x5246424d: "brownian",
+
+    0x42525348: "brush",
+
+    0x52544255: "bulge",
+
+    0x5242554d: "bump2d",
+
+    0x52425533: "bump3d",
+
+    0x55465054: "freePointTriadManip",
+
+    0x4354524b: "cacheBlend",
+
+    0x43434846: "cacheFile",
+
+    0x4443414d: "camera",
+
+    0x554d4350: "cameraPlaneManip",
+
+    0x44525452: "cameraSet",
+
+    0x44434156: "cameraView",
+
+    0x43454944: "ceil",
+
+    0x434e4d50: "centerManip",
+
+    0x43484152: "character",
+
+    0x434d4150: "characterMap",
+
+    0x584f4646: "characterOffset",
+
+    0x52544348: "checker",
+
+    0x43484345: "choice",
+
+    0x43484f4f: "chooser",
+
+    0x554d434c: "circleManip",
+
+    0x5543534d: "circleSweepManip",
+
+    0x52434c33: "clamp",
+
+    0x434c414d: "clampRange",
+
+    0x43475348: "clipGhostShape",
+
+    0x434c4950: "clipLibrary",
+
+    0x43534348: "clipScheduler",
+
+    0x43324744: "clipToGhostData",
+
+    0x4e434355: "closeCurve",
+
+    0x4e435355: "closeSurface",
+
+    0x43504f4d: "closestPointOnMesh",
+
+    0x4e435053: "closestPointOnSurface",
+
+    0x5254434c: "cloth",
+
+    0x52544344: "cloud",
+
+    0x46434c53: "cluster",
+
+    0x464a4346: "clusterFlexorShape",
+
+    0x46434c48: "clusterHandle",
+
+    0x58000373: "collection",
+
+    0x59434f4c: "collisionModel",
+
+    0x434d4742: "colorManagementGlobals",
+
+    0x434f4c50: "colorProfile",
+
+    0x434d4154: "columnFromMatrix",
+
+    0x46434e53: "combinationShape",
+
+    0x43504154: "compactPlugArrayTest",
+
+    0x47464f46: "componentFalloff",
+
+    0x5554544d: "translateManip",
+
+    0x544f504d: "componentMatch",
+
+    0x43544253: "componentTagBase",
+
+    0x58000301: "composeMatrix",
+
+    0x554d434f: "concentricProjManip",
+
+    0x52434e44: "condition",
+
+    0x58000385: "connectionOverride",
+
+    0x580003a2: "connectionUniqueOverride",
+
+    0x434f4e54: "container",
+
+    0x434f4241: "containerBase",
+
+    0x52434f4e: "contrast",
+
+    0x43475250: "controller",
+
+    0x43504353: "copyColorSet",
+
+    0x43505553: "copyUVSet",
+
+    0x434f5349: "cos",
+
+    0x52533430: "crater",
+
+    0x43524541: "creaseSet",
+
+    0x43524353: "createColorSet",
+
+    0x43525553: "createUVSet",
+
+    0x43524f50: "crossProduct",
+
+    0x554d4355: "cubicProjManip",
+
+    0x4e434d43: "curveFromMeshCoM",
+
+    0x4e434d45: "curveFromMeshEdge",
+
+    0x53435345: "curveFromSubdivEdge",
+
+    0x53435346: "curveFromSubdivFace",
+
+    0x4e435342: "curveFromSurfaceBnd",
+
+    0x4e435343: "curveFromSurfaceCoS",
+
+    0x4e435349: "curveFromSurfaceIso",
+
+    0x4e43494e: "curveInfo",
+
+    0x4e434349: "curveIntersect",
+
+    0x434e5241: "curveNormalizerAngle",
+
+    0x434e524c: "curveNormalizerLinear",
+
+    0x554d5043: "pointOnCurveManip",
+
+    0x4e435647: "curveVarGroup",
+
+    0x554d4359: "cylindricalProjManip",
+
+    0x44414743: "dagContainer",
+
+    0x46504f53: "dagPose",
+
+    0x44425453: "dataBlockTest",
+
+    0x58000300: "decomposeMatrix",
+
+    0x4445464c: "defaultLightList",
+
+    0x4452554c: "defaultRenderUtilityList",
+
+    0x44524e4c: "defaultRenderingList",
+
+    0x5244534c: "defaultShaderList",
+
+    0x5244544c: "defaultTextureList",
+
+    0x46444244: "deformBend",
+
+    0x4644464c: "deformFlare",
+
+    0x4644534e: "deformSine",
+
+    0x46445351: "deformSquash",
+
+    0x46445457: "deformTwist",
+
+    0x46445756: "deformWave",
+
+    0x444c4353: "deleteColorSet",
+
+    0x44454354: "deleteComponent",
+
+    0x444c4d53: "deleteUVSet",
+
+    0x444c544d: "deltaMush",
+
+    0x4e445443: "detachCurve",
+
+    0x4e445453: "detachSurface",
+
+    0x4445544d: "determinant",
+
+    0x44445343: "directedDisc",
+
+    0x4449524c: "directionalLight",
+
+    0x5544534d: "discManip",
+
+    0x44534b43: "diskCache",
+
+    0x52445348: "displacementShader",
+
+    0x4453504c: "displayLayer",
+
+    0x44504c4d: "displayLayerManager",
+
+    0x44444254: "distanceBetween",
+
+    0x44444d4e: "distanceDimShape",
+
+    0x554d444d: "distanceManip",
+
+    0x44495644: "divide",
+
+    0x444f4644: "dof",
+
+    0x444f5450: "dotProduct",
+
+    0x53574832: "doubleShadingSwitch",
+
+    0x4e444253: "dpBirailSrf",
+
+    0x59445247: "dragField",
+
+    0x444c4354: "dropoffLocator",
+
+    0x5943544c: "dynController",
+
+    0x5944474c: "dynGlobals",
+
+    0x59484c44: "dynHolder",
+
+    0x44434f4e: "dynamicConstraint",
+
+    0x454d5444: "editMetadata",
+
+    0x454d4752: "editsManager",
+
+    0x454e4d50: "enableManip",
+
+    0x5245424c: "envBall",
+
+    0x52454348: "envChrome",
+
+    0x52454342: "envCube",
+
+    0x52454643: "envFacade",
+
+    0x52454647: "envFog",
+
+    0x5245534b: "envSky",
+
+    0x52455350: "envSphere",
+
+    0x454e5646: "environmentFog",
+
+    0x4551554c: "equal",
+
+    0x4e455348: "explodeNurbsShell",
+
+    0x44455850: "expression",
+
+    0x4e455843: "extendCurve",
+
+    0x4e455853: "extendSurface",
+
+    0x4e455852: "extrude",
+
+    0x4446434e: "facade",
+
+    0x45464f46: "falloffEval",
+
+    0x4e424c54: "ffBlendSrf",
+
+    0x4e424c53: "ffBlendSrfObsolete",
+
+    0x4e464653: "ffFilletSrf",
+
+    0x46464644: "ffd",
+
+    0x52544654: "file",
+
+    0x4e464352: "filletCurve",
+
+    0x4e465443: "fitBspline",
+
+    0x464c5848: "flexorShape",
+
+    0x464c4f4f: "floor",
+
+    0x464c4f57: "flow",
+
+    0x46454d49: "fluidEmitter",
+
+    0x464c5549: "fluidShape",
+
+    0x46534c4d: "fluidSliceManip",
+
+    0x464c5454: "fluidTexture2D",
+
+    0x464c5458: "fluidTexture3D",
+
+    0x48435256: "follicle",
+
+    0x554d4655: "forceUpdateManip",
+
+    0x4650524e: "fosterParent",
+
+    0x4642464d: "fourByFourMatrix",
+
+    0x52543246: "fractal",
+
+    0x46434348: "frameCache",
+
+    0x554d4650: "freePointManip",
+
+    0x5247414d: "gammaCorrect",
+
+    0x5947434f: "geoConnectable",
+
+    0x59474354: "geoConnector",
+
+    0x4742494e: "geomBind",
+
+    0x44474e43: "geometryConstraint",
+
+    0x44474649: "geometryFilter",
+
+    0x554d474c: "geometryOnLineManip",
+
+    0x4e475647: "geometryVarGroup",
+
+    0x4743434c: "globalCacheControl",
+
+    0x4e475354: "globalStitch",
+
+    0x52544752: "granite",
+
+    0x59475241: "gravityField",
+
+    0x47505351: "greasePencilSequence",
+
+    0x4447504c: "greasePlane",
+
+    0x47505253: "greasePlaneRenderShape",
+
+    0x47525448: "greaterThan",
+
+    0x52544744: "grid",
+
+    0x580003a5: "group",
+
+    0x47504944: "groupId",
+
+    0x47525050: "groupParts",
+
+    0x46475549: "guide",
+
+    0x4850494e: "hairConstraint",
+
+    0x48535953: "hairSystem",
+
+    0x52485442: "hairTubeShader",
+
+    0x4e484450: "hardenPoint",
+
+    0x48575247: "hardwareRenderGlobals",
+
+    0x48525247: "hardwareRenderingGlobals",
+
+    0x4f435050: "heightField",
+
+    0x48544e31: "hierarchyTestNode1",
+
+    0x48544e32: "hierarchyTestNode2",
+
+    0x48544e33: "hierarchyTestNode3",
+
+    0x4446494b: "hikEffector",
+
+    0x4a54494b: "hikFKJoint",
+
+    0x4846434d: "hikFloorContactMarker",
+
+    0x48474e44: "hikGroundPlane",
+
+    0x4b484948: "hikHandle",
+
+    0x494b4546: "hikIKEffector",
+
+    0x4b48494b: "hikSolver",
+
+    0x48495353: "historySwitch",
+
+    0x4450484d: "holdMatrix",
+
+    0x52483252: "hsvToRgb",
+
+    0x4857524d: "hwReflectionMap",
+
+    0x59485244: "hwRenderGlobals",
+
+    0x48595052: "hyperGraphInfo",
+
+    0x4859504c: "hyperLayout",
+
+    0x44485056: "hyperView",
+
+    0x4b454646: "ikEffector",
+
+    0x4b48444c: "ikHandle",
+
+    0x4b4d4353: "ikMCsolver",
+
+    0x4b504153: "ikPASolver",
+
+    0x4b525053: "ikRPsolver",
+
+    0x4b534353: "ikSCsolver",
+
+    0x4b535053: "ikSplineSolver",
+
+    0x4b535953: "ikSystem",
+
+    0x4449504c: "imagePlane",
+
+    0x46494258: "implicitBox",
+
+    0x4649434f: "implicitCone",
+
+    0x46495350: "implicitSphere",
+
+    0x4e494b43: "insertKnotCurve",
+
+    0x4e494b53: "insertKnotSurface",
+
+    0x594e5354: "instancer",
+
+    0x4e495346: "intersectSurface",
+
+    0x494c5250: "inverseLerp",
+
+    0x4a474446: "jiggle",
+
+    0x4a4f494e: "joint",
+
+    0x464a434c: "jointCluster",
+
+    0x46464442: "jointFfd",
+
+    0x4642454c: "jointLattice",
+
+    0x4b46524d: "keyframeRegionManip",
+
+    0x4b475250: "keyingGroup",
+
+    0x524c414d: "lambert",
+
+    0x464c4154: "lattice",
+
+    0x4c595253: "layeredShader",
+
+    0x4c595254: "layeredTexture",
+
+    0x4e4c534d: "leastSquaresModifier",
+
+    0x52544c45: "leather",
+
+    0x4c454e47: "length",
+
+    0x4c455250: "lerp",
+
+    0x4c535448: "lessThan",
+
+    0x580003e3: "lightEditor",
+
+    0x52464f47: "lightFog",
+
+    0x580003e2: "lightGroup",
+
+    0x524c494e: "lightInfo",
+
+    0x580003e1: "lightItem",
+
+    0x524c4c4b: "lightLinker",
+
+    0x4c4c5354: "lightList",
+
+    0x5800039a: "lightsChildCollection",
+
+    0x58000394: "lightsCollection",
+
+    0x580003a4: "lightsCollectionSelector",
+
+    0x4c544d50: "limitManip",
+
+    0x4c4d4f44: "lineModifier",
+
+    0x4c4f4354: "locator",
+
+    0x4c4f4447: "lodGroup",
+
+    0x4c4f4454: "lodThresholds",
+
+    0x4e534b4e: "loft",
+
+    0x4c4f4744: "log",
+
+    0x444c4154: "lookAt",
+
+    0x524c554d: "luminance",
+
+    0x504d4752: "makeGroup",
+
+    0x4e4d4943: "makeIllustratorCurves",
+
+    0x4e435243: "makeNurbCircle",
+
+    0x4e434e45: "makeNurbCone",
+
+    0x4e435542: "makeNurbCube",
+
+    0x4e43594c: "makeNurbCylinder",
+
+    0x4e504c4e: "makeNurbPlane",
+
+    0x4e535048: "makeNurbSphere",
+
+    0x4e544f52: "makeNurbTorus",
+
+    0x4e535152: "makeNurbsSquare",
+
+    0x4e545843: "makeTextCurves",
+
+    0x4e334341: "makeThreePointCircularArc",
+
+    0x4e324341: "makeTwoPointCircularArc",
+
+    0x52544d41: "mandelbrot",
+
+    0x52544d33: "mandelbrot3D",
+
+    0x554d3243: "manip2DContainer",
+
+    0x554d4343: "manipContainer",
+
+    0x52544d52: "marble",
+
+    0x554d4d41: "markerManip",
+
+    0x524d4643: "materialFacade",
+
+    0x444d5449: "materialInfo",
+
+    0x58000387: "materialOverride",
+
+    0x4d544c41: "materialTemplate",
+
+    0x58000389: "materialTemplateOverride",
+
+    0x4d415844: "max",
+
+    0x4d454d42: "membrane",
+
+    0x444d5348: "mesh",
+
+    0x4e4d5647: "meshVarGroup",
+
+    0x4d494e44: "min",
+
+    0x4d4f4444: "modulo",
+
+    0x4d525048: "morph",
+
+    0x4d505448: "motionPath",
+
+    0x4d4f5452: "motionTrail",
+
+    0x4d4f5348: "motionTrailShape",
+
+    0x52544d54: "mountain",
+
+    0x52544d56: "movie",
+
+    0x4e4d4253: "mpBirailSrf",
+
+    0x444d444c: "multDoubleLinear",
+
+    0x444d544d: "multMatrix",
+
+    0x4d554c4c: "multilisterLight",
+
+    0x4d554c54: "multiply",
+
+    0x524d4449: "multiplyDivide",
+
+    0x4d50424d: "multiplyPointByMatrix",
+
+    0x4d56424d: "multiplyVectorByMatrix",
+
+    0x4d555445: "mute",
+
+    0x4e434c4f: "nCloth",
+
+    0x4e434d50: "nComponent",
+
+    0x4e504152: "nParticle",
+
+    0x4e524744: "nRigid",
+
+    0x4e504f43: "nearestPointOnCurve",
+
+    0x4e454754: "negate",
+
+    0x4e54574b: "network",
+
+    0x594e4557: "newtonField",
+
+    0x52544e33: "noise",
+
+    0x464e4c44: "nonLinear",
+
+    0x444e4332: "normalConstraint",
+
+    0x4e4f524d: "normalize",
+
+    0x4e4f5442: "not",
+
+    0x4e535953: "nucleus",
+
+    0x4e435256: "nurbsCurve",
+
+    0x4e525442: "nurbsCurveToBezier",
+
+    0x4e535246: "nurbsSurface",
+
+    0x4e544553: "nurbsTessellate",
+
+    0x534e5453: "nurbsToSubdiv",
+
+    0x534e5450: "nurbsToSubdivProc",
+
+    0x4f464154: "objectAttrFilter",
+
+    0x4f4b464c: "objectBinFilter",
+
+    0x4f464c54: "objectFilter",
+
+    0x4f4d464c: "objectMultiFilter",
+
+    0x4f4e464c: "objectNameFilter",
+
+    0x4f52464c: "objectRenderFilter",
+
+    0x4f53464c: "objectScriptFilter",
+
+    0x4f425354: "objectSet",
+
+    0x4f54464c: "objectTypeFilter",
+
+    0x52544f43: "ocean",
+
+    0x524f5053: "oceanShader",
+
+    0x4e4f4353: "offsetCos",
+
+    0x4e4f4355: "offsetCurve",
+
+    0x4e4f5355: "offsetSurface",
+
+    0x42444454: "oldBlindDataBase",
+
+    0x44474d43: "oldGeometryConstraint",
+
+    0x444e5243: "oldNormalConstraint",
+
+    0x44544e43: "oldTangentConstraint",
+
+    0x4f504658: "opticalFX",
+
+    0x4f52424f: "or",
+
+    0x444f5243: "orientConstraint",
+
+    0x4f52544d: "orientationMarker",
+
+    0x4150424c: "pairBlend",
+
+    0x52444d4e: "paramDimension",
+
+    0x44504152: "parentConstraint",
+
+    0x50524d54: "parentMatrix",
+
+    0x59504152: "particle",
+
+    0x50414d41: "particleAgeMapper",
+
+    0x50434c44: "particleCloud",
+
+    0x50434d41: "particleColorMapper",
+
+    0x50494d41: "particleIncandMapper",
+
+    0x5053494e: "particleSamplerInfo",
+
+    0x50544d41: "particleTranspMapper",
+
+    0x5052544e: "partition",
+
+    0x5053434d: "passContributionMap",
+
+    0x4450534d: "passMatrix",
+
+    0x50464841: "pfxHair",
+
+    0x5046544f: "pfxToon",
+
+    0x5250484f: "phong",
+
+    0x52504845: "phongE",
+
+    0x50494b44: "pi",
+
+    0x504d4154: "pickMatrix",
+
+    0x50414f4d: "pivotAndOrientManip",
+
+    0x52504c32: "place2dTexture",
+
+    0x52504c44: "place3dTexture",
+
+    0x554d5050: "planarProjManip",
+
+    0x4e504c54: "planarTrimSurface",
+
+    0x52504d41: "plusMinusAverage",
+
+    0x44505443: "pointConstraint",
+
+    0x59454d49: "pointEmitter",
+
+    0x504f4954: "pointLight",
+
+    0x44504d4d: "pointMatrixMult",
+
+    0x4e504349: "pointOnCurveInfo",
+
+    0x554d504c: "pointOnLineManip",
+
+    0x44505043: "pointOnPolyConstraint",
+
+    0x554d5353: "pointOnSurfManip",
+
+    0x4e505349: "pointOnSurfaceInfo",
+
+    0x554d5053: "pointOnSurfaceManip",
+
+    0x44505643: "poleVectorConstraint",
+
+    0x50415050: "polyAppend",
+
+    0x50415056: "polyAppendVertex",
+
+    0x50415550: "polyAutoProj",
+
+    0x50415656: "polyAverageVertex",
+
+    0x50435244: "polyAxis",
+
+    0x5042564c: "polyBevel",
+
+    0x50425632: "polyBevel2",
+
+    0x50425633: "polyBevel3",
+
+    0x4d424454: "polyBlindData",
+
+    0x50424f50: "polyBoolOp",
+
+    0x50425245: "polyBridgeEdge",
+
+    0x50435642: "polyCBoolOp",
+
+    0x50434849: "polyChipOff",
+
+    0x50435243: "polyCircularize",
+
+    0x504c434c: "polyClean",
+
+    0x50434c4f: "polyCloseBorder",
+
+    0x50434f45: "polyCollapseEdge",
+
+    0x50434f46: "polyCollapseF",
+
+    0x5043444c: "polyColorDel",
+
+    0x50434d4f: "polyColorMod",
+
+    0x50435056: "polyColorPerVertex",
+
+    0x50434f4e: "polyCone",
+
+    0x50434353: "polyConnectComponents",
+
+    0x50434e50: "polyContourProj",
+
+    0x50435556: "polyCopyUV",
+
+    0x50435253: "polyCrease",
+
+    0x50435345: "polyCreaseEdge",
+
+    0x50435245: "polyCreateFace",
+
+    0x50435542: "polyCube",
+
+    0x50504354: "polyCut",
+
+    0x50435950: "polyCylProj",
+
+    0x5043594c: "polyCylinder",
+
+    0x50444545: "polyDelEdge",
+
+    0x50444546: "polyDelFacet",
+
+    0x50444556: "polyDelVertex",
+
+    0x50445545: "polyDuplicateEdge",
+
+    0x50544356: "polyEdgeToCurve",
+
+    0x50534546: "polyEditEdgeFlow",
+
+    0x50455845: "polyExtrudeEdge",
+
+    0x50455846: "polyExtrudeFace",
+
+    0x50455856: "polyExtrudeVertex",
+
+    0x50464c45: "polyFlipEdge",
+
+    0x50465556: "polyFlipUV",
+
+    0x48454c49: "polyHelix",
+
+    0x50484645: "polyHoleFace",
+
+    0x504c5556: "polyLayoutUV",
+
+    0x504d4143: "polyMapCut",
+
+    0x504d4144: "polyMapDel",
+
+    0x504d4153: "polyMapSew",
+
+    0x5053454d: "polyMapSewMove",
+
+    0x504d4545: "polyMergeEdge",
+
+    0x504d4546: "polyMergeFace",
+
+    0x504d4755: "polyMergeUV",
+
+    0x504d5645: "polyMergeVert",
+
+    0x504d4952: "polyMirror",
+
+    0x504d4f45: "polyMoveEdge",
+
+    0x504d4f46: "polyMoveFace",
+
+    0x504d4655: "polyMoveFacetUV",
+
+    0x504d5556: "polyMoveUV",
+
+    0x504d4f56: "polyMoveVertex",
+
+    0x504e4f52: "polyNormal",
+
+    0x504e5056: "polyNormalPerVertex",
+
+    0x504e5556: "polyNormalizeUV",
+
+    0x504f5556: "polyOptUvs",
+
+    0x50595054: "polyPassThru",
+
+    0x50505556: "polyPinUV",
+
+    0x50504950: "polyPipe",
+
+    0x50504c50: "polyPlanarProj",
+
+    0x504d4553: "polyPlane",
+
+    0x534f4c49: "polyPlatonicSolid",
+
+    0x5050504b: "polyPoke",
+
+    0x4d495343: "polyPrimitiveMisc",
+
+    0x50505249: "polyPrism",
+
+    0x5050524f: "polyProj",
+
+    0x50504356: "polyProjectCurve",
+
+    0x50505952: "polyPyramid",
+
+    0x50515541: "polyQuad",
+
+    0x50524544: "polyReduce",
+
+    0x50524d48: "polyRemesh",
+
+    0x5052464d: "polyRetopo",
+
+    0x50534550: "polySeparate",
+
+    0x50535745: "polySewEdge",
+
+    0x50534d54: "polySmooth",
+
+    0x50534d46: "polySmoothFace",
+
+    0x50534d50: "polySmoothProxy",
+
+    0x50534f45: "polySoftEdge",
+
+    0x50535050: "polySphProj",
+
+    0x50535048: "polySphere",
+
+    0x50535051: "polySpinEdge",
+
+    0x5053504c: "polySplit",
+
+    0x50534544: "polySplitEdge",
+
+    0x50535052: "polySplitRing",
+
+    0x50535645: "polySplitVert",
+
+    0x50535442: "polyStraightenUVBorder",
+
+    0x50535545: "polySubdEdge",
+
+    0x50535546: "polySubdFace",
+
+    0x50534453: "polyToSubdiv",
+
+    0x50544f52: "polyTorus",
+
+    0x50544652: "polyTransfer",
+
+    0x50545249: "polyTriangulate",
+
+    0x5054574b: "polyTweak",
+
+    0x50545556: "polyTweakUV",
+
+    0x50555652: "polyUVRectangle",
+
+    0x50554e49: "polyUnite",
+
+    0x50555344: "polyUnsmooth",
+
+    0x50574643: "polyWedgeFace",
+
+    0x5053444d: "poseInterpolatorManager",
+
+    0x504f534d: "positionMarker",
+
+    0x50505354: "postProcessList",
+
+    0x504f5744: "power",
+
+    0x53464f46: "primitiveFalloff",
+
+    0x4e504352: "projectCurve",
+
+    0x4e50544e: "projectTangent",
+
+    0x5250524a: "projection",
+
+    0x554d4354: "trsManip",
+
+    0x554d5054: "propMoveTriadManip",
+
+    0x5058464f: "proximityFalloff",
+
+    0x50525850: "proximityPin",
+
+    0x50575250: "proximityWrap",
+
+    0x50584d47: "proxyManager",
+
+    0x50534454: "psdFileTex",
+
+    0x53574834: "quadShadingSwitch",
+
+    0x59524144: "radialField",
+
+    0x52545241: "ramp",
+
+    0x52525053: "rampShader",
+
+    0x4e524246: "rbfSrf",
+
+    0x4e524243: "rebuildCurve",
+
+    0x4e524253: "rebuildSurface",
+
+    0x52454344: "record",
+
+    0x5245464e: "reference",
+
+    0x5800037a: "relOverride",
+
+    0x580003a1: "relUniqueOverride",
+
+    0x524d434c: "remapColor",
+
+    0x524d4853: "remapHsv",
+
+    0x524d564c: "remapValue",
+
+    0x524e4258: "renderBox",
+
+    0x524e434f: "renderCone",
+
+    0x52474c42: "renderGlobals",
+
+    0x5244474c: "renderGlobalsList",
+
+    0x524e444c: "renderLayer",
+
+    0x524e4c4d: "renderLayerManager",
+
+    0x524e5053: "renderPass",
+
+    0x52505353: "renderPassSet",
+
+    0x52515541: "renderQuality",
+
+    0x52524354: "renderRect",
+
+    0x580003a3: "renderSettingsChildCollection",
+
+    0x58000395: "renderSettingsCollection",
+
+    0x58000371: "renderSetup",
+
+    0x58000372: "renderSetupLayer",
+
+    0x524e5350: "renderSphere",
+
+    0x524e5447: "renderTarget",
+
+    0x52434953: "renderedImageSource",
+
+    0x524f5553: "reorderUVSet",
+
+    0x524c544e: "resolution",
+
+    0x52435441: "resultCurveTimeToAngular",
+
+    0x5243544c: "resultCurveTimeToLinear",
+
+    0x52435454: "resultCurveTimeToTime",
+
+    0x52435455: "resultCurveTimeToUnitless",
+
+    0x52525653: "reverse",
+
+    0x4e525643: "reverseCurve",
+
+    0x4e525653: "reverseSurface",
+
+    0x4e52564c: "revolve",
+
+    0x52523248: "rgbToHsv",
+
+    0x59524744: "rigidBody",
+
+    0x59435354: "rigidConstraint",
+
+    0x59534c56: "rigidSolver",
+
+    0x5254524b: "rock",
+
+    0x554d524c: "rotateLimitsManip",
+
+    0x554d5241: "rotateManip",
+
+    0x5532524f: "rotateUV2dManip",
+
+    0x524f5456: "rotateVector",
+
+    0x524f4d58: "rotationFromMatrix",
+
+    0x524f554e: "round",
+
+    0x4e524352: "roundConstantRadius",
+
+    0x524d4154: "rowFromMatrix",
+
+    0x46534d50: "sampler",
+
+    0x5253494e: "samplerInfo",
+
+    0x44534343: "scaleConstraint",
+
+    0x534d4154: "scaleFromMatrix",
+
+    0x55325343: "scaleUV2dManip",
+
+    0x5341434d: "screenAlignedCircleManip",
+
+    0x53435250: "script",
+
+    0x554d5343: "scriptManip",
+
+    0x46534350: "sculpt",
+
+    0x534c4f50: "selectionListOperator",
+
+    0x53514d47: "sequenceManager",
+
+    0x53514e43: "sequencer",
+
+    0x52524e47: "setRange",
+
+    0x5348474c: "shaderGlow",
+
+    0x58000386: "shaderOverride",
+
+    0x53484144: "shadingEngine",
+
+    0x53444d50: "shadingMap",
+
+    0x53444d4c: "shapeEditorManager",
+
+    0x53544553: "shellTessellate",
+
+    0x53484f54: "shot",
+
+    0x53575250: "shrinkWrap",
+
+    0x5800039e: "simpleSelector",
+
+    0x53544e44: "simpleTestNode",
+
+    0x53565348: "simpleVolumeShader",
+
+    0x53494e45: "sin",
+
+    0x53574831: "singleShadingSwitch",
+
+    0x534b504e: "sketchPlane",
+
+    0x534b4244: "skinBinding",
+
+    0x4653434c: "skinCluster",
+
+    0x4e534d43: "smoothCurve",
+
+    0x534d5354: "smoothStep",
+
+    0x4e53544e: "smoothTangentSrf",
+
+    0x5532534e: "snapUV2dManip",
+
+    0x534e5054: "snapshot",
+
+    0x53534841: "snapshotShape",
+
+    0x5254534e: "snow",
+
+    0x4653534c: "softMod",
+
+    0x46535348: "softModHandle",
+
+    0x52544633: "solidFractal",
+
+    0x534f4c59: "solidify",
+
+    0x4e534253: "spBirailSrf",
+
+    0x554d5350: "sphericalProjManip",
+
+    0x53434d50: "spotCylinderManip",
+
+    0x5350544c: "spotLight",
+
+    0x59535052: "spring",
+
+    0x4e535153: "squareSrf",
+
+    0x53544453: "standardSurface",
+
+    0x52545354: "stencil",
+
+    0x53524341: "stereoRigCamera",
+
+    0x4e535348: "stitchAsNurbsShell",
+
+    0x4e535453: "stitchSrf",
+
+    0x5354524b: "stroke",
+
+    0x53544b47: "strokeGlobals",
+
+    0x52533630: "stucco",
+
+    0x4e535443: "styleCurve",
+
+    0x4e534243: "subCurve",
+
+    0x4e535352: "subSurface",
+
+    0x53415459: "subdAddTopology",
+
+    0x53415550: "subdAutoProj",
+
+    0x53424454: "subdBlindData",
+
+    0x53435459: "subdCleanTopology",
+
+    0x53485242: "subdHierBlind",
+
+    0x534c5556: "subdLayoutUV",
+
+    0x534d4143: "subdMapCut",
+
+    0x5353454d: "subdMapSewMove",
+
+    0x53504c50: "subdPlanarProj",
+
+    0x5354574b: "subdTweak",
+
+    0x53545556: "subdTweakUV",
+
+    0x53445353: "subdiv",
+
+    0x53434c50: "subdivCollapse",
+
+    0x53534944: "subdivComponentId",
+
+    0x53525646: "subdivReverseFaces",
+
+    0x53535647: "subdivSurfaceVarGroup",
+
+    0x5344534e: "subdivToNurbs",
+
+    0x53445350: "subdivToPoly",
+
+    0x5353464f: "subsetFalloff",
+
+    0x53554253: "subtract",
+
+    0x53554d44: "sum",
+
+    0x4e53494e: "surfaceInfo",
+
+    0x52534c55: "surfaceLuminance",
+
+    0x52535348: "surfaceShader",
+
+    0x4e535647: "surfaceVarGroup",
+
+    0x44534d43: "symmetryConstraint",
+
+    0x54414e47: "tan",
+
+    0x44544332: "tangentConstraint",
+
+    0x54454e53: "tension",
+
+    0x554d5442: "textButtonManip",
+
+    0x554d5458: "texture3dManip",
+
+    0x5442414b: "textureBakeSet",
+
+    0x54584446: "textureDeformer",
+
+    0x54444844: "textureDeformerHandle",
+
+    0x5454474f: "textureToGeom",
+
+    0x54494d45: "time",
+
+    0x544d4544: "timeEditor",
+
+    0x54454153: "timeEditorAnimSource",
+
+    0x41434c43: "timeEditorClip",
+
+    0x414c434c: "timeEditorClipBase",
+
+    0x4143524f: "timeEditorClipEvaluator",
+
+    0x54454950: "timeEditorInterpolator",
+
+    0x5445544b: "timeEditorTracks",
+
+    0x7466786e: "timeFunction",
+
+    0x44544d55: "timeToUnitConversion",
+
+    0x54495741: "timeWarp",
+
+    0x554d5447: "toggleManip",
+
+    0x55544f4c: "toggleOnLineManip",
+
+    0x5454444d: "toolDrawManip",
+
+    0x54444d32: "toolDrawManip2D",
+
+    0x544c4154: "toonLineAttributes",
+
+    0x54494d47: "trackInfoManager",
+
+    0x55325452: "transUV2dManip",
+
+    0x54524154: "transferAttributes",
+
+    0x50464f46: "transferFalloff",
+
+    0x5846524d: "transform",
+
+    0x5447454f: "transformGeometry",
+
+    0x554d5556: "translateUVManip",
+
+    0x544d4154: "translationFromMatrix",
+
+    0x4e54524d: "trim",
+
+    0x4e545742: "trimWithBoundaries",
+
+    0x554d5452: "triplanarProjManip",
+
+    0x53574833: "tripleShadingSwitch",
+
+    0x5452554e: "truncate",
+
+    0x59545552: "turbulenceField",
+
+    0x464d5054: "tweak",
+
+    0x55465043: "ufeProxyCameraShape",
+
+    0x55465058: "ufeProxyTransform",
+
+    0x55574754: "uniformFalloff",
+
+    0x59554e49: "uniformField",
+
+    0x44554e54: "unitConversion",
+
+    0x4455544d: "unitToTimeConversion",
+
+    0x554e4b4e: "unknown",
+
+    0x554e4b44: "unknownDag",
+
+    0x554e4b54: "unknownTransform",
+
+    0x4e555452: "untrim",
+
+    0x55534247: "useBackground",
+
+    0x5556324d: "uv2dManip",
+
+    0x55564348: "uvChooser",
+
+    0x55565256: "uvPin",
+
+    0x52564543: "vectorProduct",
+
+    0x5642414b: "vertexBakeSet",
+
+    0x5657434d: "viewColorManager",
+
+    0x59565846: "volumeAxisField",
+
+    0x52564647: "volumeFog",
+
+    0x564f4c4c: "volumeLight",
+
+    0x52545633: "volumeNoise",
+
+    0x52565348: "volumeShader",
+
+    0x59564f52: "vortexField",
+
+    0x52545741: "water",
+
+    0x44574746: "weightGeometryFilter",
+
+    0x46574952: "wire",
+
+    0x52545744: "wood",
+
+    0x46575250: "wrap",
+
+    0x4457414d: "wtAddMatrix",
+
+}
+
+# Reuse world
+WORLD = World.mobject or World().mobject
