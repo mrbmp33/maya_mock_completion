@@ -1,6 +1,6 @@
 """Mapping of all nodes inside MMC."""
 import typing
-import uuid
+import re
 
 # FKS modules
 if typing.TYPE_CHECKING:
@@ -11,15 +11,15 @@ if typing.TYPE_CHECKING:
 class NodePoolMeta(type):
     """Store all instances of node mobjects in a dictionary UUID : MObject."""
 
-    _node_instances: typing.MutableMapping[uuid.UUID, 'om.MObject'] = {}
+    _node_instances: typing.MutableMapping[int, 'om.MObject'] = {}
 
     @classmethod
     def __setitem__(cls, node: 'om.MObject'):
-        cls._node_instances[node._uuid._uuid] = node
+        cls._node_instances[hash(node._name)] = node
 
     @classmethod
     def __add__(cls, node: 'om.MObject'):
-        cls._node_instances[node._uuid._uuid] = node
+        cls._node_instances[hash(node._name)] = node
 
     @classmethod
     def add_object(cls, node: 'om.MObject'):
@@ -27,7 +27,7 @@ class NodePoolMeta(type):
 
     @classmethod
     def __getitem__(cls, node: 'om.MObject') -> 'om.MObject':
-        return cls._node_instances[node._uuid._uuid]
+        return cls._node_instances[hash(node._name)]
 
     @classmethod
     def get_node(cls, node: 'om.MObject') -> 'om.MObject':
@@ -35,19 +35,27 @@ class NodePoolMeta(type):
 
     @classmethod
     def __delitem__(cls, node: 'om.MObject'):
-        del cls._node_instances[node._uuid._uuid]
+        del cls._node_instances[hash(node._name)]
 
     @classmethod
     def remove_object(cls, node: 'om.MObject'):
-        cls._node_instances.pop(node._uuid._uuid, None)
+        cls._node_instances.pop(hash(node._name), None)
 
     @classmethod
     def __contains__(cls, node):
-        return node._uuid._uuid in cls._node_instances
+        return hash(node._name) in cls._node_instances
 
     @classmethod
     def object_exists(cls, node: 'om.MObject') -> bool:
         return cls.__contains__(node)
+
+    @classmethod
+    def hash_exists(cls, hash_num: int) -> bool:
+        return hash_num in cls._node_instances
+
+    @classmethod
+    def from_name(cls, name: int) -> 'om.MObject':
+        return cls._node_instances[hash(name)]
 
     @classmethod
     def reset(cls):
@@ -74,3 +82,20 @@ def register(node: 'om.MObject'):
 def deregister(node: 'om.MObject'):
     """Removes a node from the registry and hierarchy"""
     NodePool.remove_object(node)
+
+
+def find_first_available_name(name: str) -> str:
+    # Check if the name ends with a number
+    match = re.match(r"^(.*?)(\d+)$", name)
+    if match:
+        # Extract the base name and starting number
+        base_name = match.group(1)
+        idx = int(match.group(2)) + 1  # Increment the existing number
+    else:
+        # No number at the end of the name
+        base_name = name
+        idx = 1
+    while NodePool.hash_exists(hash(name)):
+        name = f'{base_name}{idx}'
+        idx += 1
+    return name

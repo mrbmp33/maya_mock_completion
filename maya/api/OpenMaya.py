@@ -21403,22 +21403,24 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def create(self, typeId: Union["MTypeId", str], name: str = None) -> MObject:
+    def create(self, type_id: Union["MTypeId", str], name: str = None) -> MObject:
         """
         Creates a new node of the given type.
         """
         mobject = MObject()
-        mobject._name = name
+        # If given a string as input, get the matching MTypeId
+        if isinstance(type_id, str):
+            # noinspection PyProtectedMember
+            mobject._typeId = _TYPE_STR_TO_ID[type_id]
+            name = hierarchy.find_first_available_name(name if name else f'{type_id}1')
+        else:
+            mobject._typeId = type_id
+        mobject._name = hierarchy.find_first_available_name(name)
         mobject._alive = True
 
-        # If given a string as input, get the matching MTypeId
-        if isinstance(typeId, str):
-            # noinspection PyProtectedMember
-            mobject._typeId = _TYPE_STR_TO_ID[typeId]
-        else:
-            mobject._typeId = typeId
-
         self._mobject = mobject
+
+        hierarchy.register(mobject)
 
         return self._mobject
 

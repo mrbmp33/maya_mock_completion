@@ -1978,7 +1978,8 @@ def createLayeredPsdFile(imageFileName=list, ifn=list, psdFileName=str(), psf=st
 def createNode(node_type:str, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(), skipSelect=bool(), ss=bool(),
                *args, **kwargs):
     if not any((name, n)):
-        name = f'{node_type}1'
+        name=f'{node_type}1'
+    name = _hierarchy.find_first_available_name(name)
     try:
         if parent:
             sl_ls = om.MSelectionList()
