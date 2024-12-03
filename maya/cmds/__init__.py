@@ -1979,14 +1979,19 @@ def createNode(node_type:str, name=str(), n=str(), parent=str(), p=str(), shared
                *args, **kwargs):
     if not any((name, n)):
         name=f'{node_type}1'
-    name = _hierarchy.find_first_available_name(name)
+    name = _hierarchy.find_first_available_name(name or n, parent_name=parent if parent != str() else None)
+
+    # try to create as dag node, if it fails it defaults to dependency node
     try:
         if parent:
-            sl_ls = om.MSelectionList()
-            sl_ls.add(parent)
-            parent_mobject = om.MFnDagNode().create(node_type, name or n, sl_ls.getDependNode(0))
+            parent_mobject = _hierarchy.NodePool.from_name(parent)
+            if not parent_mobject:
+                # If given a parent, but it doesn't exist yet, create if first
+                sl_ls = om.MSelectionList()
+                sl_ls.add(parent)
+                parent_mobject = om.MFnDagNode().create(node_type, name or n, sl_ls.getDependNode(0))
+                _hierarchy.register(parent_mobject)
             mobject = om.MFnDagNode().create(node_type, name or n, parent_mobject)
-            _hierarchy.register(parent_mobject)
         else:
             mobject = om.MFnDagNode().create(node_type, name or n)
 

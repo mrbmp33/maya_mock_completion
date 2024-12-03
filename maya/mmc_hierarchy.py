@@ -54,8 +54,8 @@ class NodePoolMeta(type):
         return hash_num in cls._node_instances
 
     @classmethod
-    def from_name(cls, name: int) -> 'om.MObject':
-        return cls._node_instances[hash(name)]
+    def from_name(cls, name: str) -> 'om.MObject':
+        return cls._node_instances.get(hash(name))
 
     @classmethod
     def reset(cls):
@@ -84,17 +84,23 @@ def deregister(node: 'om.MObject'):
     NodePool.remove_object(node)
 
 
-def find_first_available_name(name: str) -> str:
+def find_first_available_name(name: str, parent_name: str = None) -> str:
     # Check if the name ends with a number
     match = re.match(r"^(.*?)(\d+)$", name)
     if match:
         # Extract the base name and starting number
         base_name = match.group(1)
-        idx = int(match.group(2)) + 1  # Increment the existing number
+        idx = int(match.group(2))
     else:
         # No number at the end of the name
         base_name = name
         idx = 1
+
+    if NodePool.hash_exists(hash(name)):
+        if NodePool.from_name(name)._parent._name != parent_name:
+            base_name = f'{parent_name or ""}|{base_name}'
+            name = base_name
+
     while NodePool.hash_exists(hash(name)):
         name = f'{base_name}{idx}'
         idx += 1

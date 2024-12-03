@@ -4832,14 +4832,16 @@ class MSelectionList(object):
         Raises IndexError if index is out of range.
         """
         item = self._inner_ls[index]
+        # If the item is not an MObject but a string, retrieve the mobject from the pool
         if isinstance(item, str):
-            mobject = MObject()
-            mobject._name = item
-            mobject._alive = True
-
-            # todo: need to figure a better way to do this based on a str
-            mobject._typeId = _TYPE_STR_TO_ID['transform']
+            mobject = hierarchy.NodePool.from_name(item)
+            if not mobject:
+                # For nodes that already exist in the scene but are not inside the pool, initialize them as DependNodes
+                mobject = MFnDependencyNode().create('transform', item)  # this very rarely will be the case as it should already be created before adding it to the MSelectionList
+                hierarchy.register(mobject)
+            # Return converted str to mobject
             return mobject
+
         elif not isinstance(item, MObject):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
         return item
@@ -12925,7 +12927,8 @@ class MObject(object):
         pass
 
     def __repr__(self):
-        return f'MObject <k{self.apiTypeStr[0].upper()}{self.apiTypeStr[1:]}>; name = {self._name}'
+        typ_str = self.apiTypeStr
+        return f'MObject <k{typ_str[0].upper()}{typ_str[1:]}>; name = {self._name}'
 
     def apiType(self) -> int:
         """
@@ -12933,7 +12936,8 @@ class MObject(object):
         """
         if self._is_world:
             return MFn.kWorld
-        return getattr(MFn, f'k{self.apiTypeStr}')
+        typ_str = self.apiTypeStr
+        return getattr(MFn, f'k{typ_str[0].upper()}{typ_str[1:]}')
 
     def hasFn(self, compare_fn_type: int) -> bool:
         """
@@ -12952,7 +12956,9 @@ class MObject(object):
 
     @property
     def apiTypeStr(self):
-        return _TYPE_HEX_TO_STR.get(int(hex(self._typeId.id()), 16), 'kInvalid')
+        if self._is_world:
+            return 'world'
+        return _TYPE_HEX_TO_STR.get(int(hex(self._typeId.id()), 16), 'Invalid')
 
     @property
     def kNullObj(cls) -> 'MObject':
@@ -15152,11 +15158,12 @@ class MDagPath(object):
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
+        self._node: MObject = None
 
     def __le__(*args, **kwargs):
         """
@@ -15218,11 +15225,15 @@ class MDagPath(object):
         """
         pass
 
-    def fullPathName(*args, **kwargs):
+    def fullPathName(self) -> str:
         """
         Returns a string representation of the path from the DAG root to the path's last node.
         """
-        pass
+        ancestors = [x._name for x in self._iter_ancestors() or ()]
+        ancestors.reverse()
+        if not ancestors:
+            return self._node._name
+        return "|".join(ancestors) + f"|{self._node._name}"
 
     def getDisplayStatus(*args, **kwargs):
         """
@@ -15242,11 +15253,11 @@ class MDagPath(object):
         """
         pass
 
-    def hasFn(*args, **kwargs):
+    def hasFn(self, fn: int):
         """
         Returns True if the object at the end of the path supports the given function set.
         """
-        pass
+        return self._node.hasFn(fn)
 
     def inclusiveMatrix(*args, **kwargs):
         """
@@ -15290,17 +15301,17 @@ class MDagPath(object):
         """
         pass
 
-    def length(*args, **kwargs):
+    def length(self):
         """
         Returns the number of nodes on the path, not including the DAG's root node.
         """
-        pass
+        return len(list(self._iter_ancestors()))
 
-    def node(*args, **kwargs):
+    def node(self):
         """
         Returns the DAG node at the end of the path.
         """
-        pass
+        return self._node
 
     def numberOfShapesDirectlyBelow(*args, **kwargs):
         """
@@ -15357,6 +15368,19 @@ class MDagPath(object):
         Returns all paths to the given node.
         """
         pass
+
+    def _iter_ancestors(self, break_at=None):
+        """NOT FROM API, UTILITY METHOD FROM MAYA MOCK COMPLETION"""
+
+        break_at = break_at or WORLD
+        current = self._node
+
+        if current._parent is break_at:
+            return iter(())
+
+        while current._parent and current.parent is not break_at:
+            current = current._parent
+            yield current
 
 
 class MFloatVector(object):
@@ -22498,7 +22522,7 @@ class MFnDagNode(MFnDependencyNode):
             mobject._parent = parent
             mobject._parent._children.add(mobject)
         else:
-            mobject._parent = MObject().kNullObj
+            mobject._parent = WORLD
 
         return mobject
 
@@ -22557,7 +22581,10 @@ class MFnDagNode(MFnDependencyNode):
 
         Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject.
         """
-        return MDagPath()
+        dag_path = MDagPath()
+        dag_path._node = self._mobject
+        return dag_path
+
 
     def hasChild(*args, **kwargs):
         """
@@ -22615,13 +22642,15 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def parent(*args, **kwargs):
+    def parent(self, index: int):
         """
         parent(index) -> MObject
 
         Returns the specified parent of this node.
         """
-        pass
+        if index > 0:
+            raise NotImplementedError('Not implemented for parent values greater than 0, sorry.')
+        return self._mobject._parent or WORLD
 
     def parentCount(*args, **kwargs):
         """
