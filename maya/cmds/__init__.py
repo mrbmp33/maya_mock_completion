@@ -3323,11 +3323,15 @@ def geomToBBox(bakeAnimation=bool(), ba=bool(), combineMesh=bool(), cm=bool(), e
     pass
 
 
-def getAttr(asString=bool(), caching=bool(), ca=bool(), channelBox=bool(), cb=bool(), expandEnvironmentVariables=bool(),
+def getAttr(attribute_name, asString=bool(), caching=bool(), ca=bool(), channelBox=bool(), cb=bool(), expandEnvironmentVariables=bool(),
             x=bool(), keyable=bool(), k=bool(), lock=bool(), l=bool(), multiIndices=bool(), mi=bool(), settable=bool(),
             se=bool(), silent=bool(), sl=bool(), size=bool(), s=bool(), time=float(), t=float(), type=bool(),
             typ=bool(), *args, **kwargs):
-    pass
+
+    full_name: str = attribute_name
+    node_name, attr_name= full_name.split('.')
+    node_mobject = _hierarchy.NodePool.from_name(node_name)
+    return om.MFnDependencyNode(node_mobject).findPlug(attr_name, False).attribute()._value
 
 
 def getClassification(satisfies=str(), sat=str(), *args, **kwargs):
@@ -8160,10 +8164,15 @@ def sequenceManager(addSequencerAudio=str(), asa=str(), attachSequencerAudio=str
     pass
 
 
-def setAttr(alteredValue=bool(), av=bool(), caching=bool(), ca=bool(), capacityHint=int(), ch=int(), channelBox=bool(),
+def setAttr(attribute_name, new_value, alteredValue=bool(), av=bool(), caching=bool(), ca=bool(), capacityHint=int(), ch=int(), channelBox=bool(),
             cb=bool(), clamp=bool(), c=bool(), keyable=bool(), k=bool(), lock=bool(), l=bool(), size=int(), s=int(),
             type=str(), typ=str(), *args, **kwargs):
-    pass
+
+    full_name: str = attribute_name
+    new_value = new_value
+    node_name, attr_name = full_name.split('.')
+    node_mobject = _hierarchy.NodePool.from_name(node_name)
+    om.MFnDependencyNode(node_mobject).findPlug(attr_name, False).attribute()._value = new_value
 
 
 def setAttrMapping(absolute=bool(), a=bool(), attribute=str(), at=str(), axis=str(), ax=str(), clutch=str(), c=str(),

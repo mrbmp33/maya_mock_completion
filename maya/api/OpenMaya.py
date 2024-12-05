@@ -12922,9 +12922,11 @@ class MObject(object):
         # plug-specific properties
         self._long_name = None
         self._short_name = None
+        self._value = None
         self._is_array = None
         self._is_compound = None
         self._is_element = None
+        self._cached_plugs = {}
 
     def __le__(*args, **kwargs):
         """
@@ -15651,6 +15653,8 @@ class MFnBase(object):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         self._mobject = None
+        if args:
+            self._mobject = args[0]
 
     def hasObj(*args, **kwargs) -> bool:
         """
@@ -21577,6 +21581,20 @@ class MFnDependencyNode(MFnBase):
             long_name = attr_name
             short_name = attr_name
 
+        attribute_name = f'{self._mobject._name}.{long_name or attr_name}'
+        mplug_id = hash(f'{self._mobject._name}.{attribute_name}')
+
+        # If plug has already been found, return that one
+        cached_plug = self._mobject._cached_plugs.get(mplug_id)
+        if cached_plug:
+            return cached_plug
+
+        # Else initialize attribute values
+        mplug._id = mplug_id
+        attribute._name = attribute_name
+        attribute._long_name = long_name
+        attribute._short_name = short_name
+
         if long_name in _COMMON_ATTR_PROPERTIES:
             attr_properties = _COMMON_ATTR_PROPERTIES[long_name]
             attribute._is_array = attr_properties['is_array']
@@ -21586,13 +21604,9 @@ class MFnDependencyNode(MFnBase):
             if attr_type not in attribute._fn_type:
                 attribute._fn_type.append(attr_type)
 
-
-        attribute._name = f'{self._mobject._name}.{long_name or attr_name}'
-        attribute._long_name = long_name
-        attribute._short_name = short_name
-
-        mplug._id = hash(f'{self._mobject._name}.{attr_name}')
         mplug._network_plug = want_network_plug
+
+        self._mobject._cached_plugs[mplug._id] = mplug
 
         return mplug
 
