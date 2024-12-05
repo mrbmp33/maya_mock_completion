@@ -2910,7 +2910,8 @@ def file(absoluteName=bool(), an=bool(), activate=bool(), a=bool(), activeProxy=
          uc=bool(), uiLoadConfiguration=bool(), ulc=bool(), unloadReference=str(), ur=str(), unresolvedName=bool(),
          un=bool(), usingNamespaces=bool(), uns=bool(), withoutCopyNumber=bool(), wcn=bool(), writable=bool(), w=bool(),
          *args, **kwargs):
-    pass
+    if new or newFile and force or f:
+        _hierarchy.NodePool.reset()
 
 
 def fileBrowserDialog(actionName=str(), an=str(), dialogStyle=int(), ds=int(), fileCommand=str(), fc=str(),

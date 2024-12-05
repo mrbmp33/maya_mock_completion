@@ -1,8 +1,5 @@
 
-
-
-if False:
-    from typing import Dict, List, Tuple, Union, Optional
+from typing import Dict, List, Tuple, Union, Optional
 
 
 class MEvaluationNode(object):
@@ -9210,7 +9207,7 @@ class MDGModifier(object):
 
     def connect(self, *args): pass
 
-    def createNode(self, nd_type: str | 'MTypeId'):
+    def createNode(self, nd_type: Union[str, 'MTypeId']):
         pass
 
     def deleteMetadata(self, *args): pass

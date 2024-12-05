@@ -1286,253 +1286,256 @@ class MEulerRotation(object):
     X, Y and Z rotations, applied in a specified order.
     """
 
-    def __add__(*args, **kwargs):
+    def __add__(self, *args, **kwargs):
         """
         x.__add__(y) <==> x+y
         """
         pass
 
-    def __delitem__(*args, **kwargs):
+    def __iter__(self):
+        for _ in range(3): yield 0.0
+
+    def __delitem__(self, *args, **kwargs):
         """
         x.__delitem__(y) <==> del x[y]
         """
         pass
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, *args, **kwargs):
         """
         x.__eq__(y) <==> x==y
         """
         pass
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, *args, **kwargs):
         """
         x.__ge__(y) <==> x>=y
         """
         pass
 
-    def __getitem__(*args, **kwargs):
+    def __getitem__(self, *args, **kwargs):
         """
         x.__getitem__(y) <==> x[y]
         """
         pass
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, *args, **kwargs):
         """
         x.__gt__(y) <==> x>y
         """
         pass
 
-    def __iadd__(*args, **kwargs):
+    def __iadd__(self, *args, **kwargs):
         """
         x.__iadd__(y) <==> x+=y
         """
         pass
 
-    def __imul__(*args, **kwargs):
+    def __imul__(self, *args, **kwargs):
         """
         x.__imul__(y) <==> x*=y
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         pass
 
-    def __isub__(*args, **kwargs):
+    def __isub__(self, *args, **kwargs):
         """
         x.__isub__(y) <==> x-=y
         """
         pass
 
-    def __le__(*args, **kwargs):
+    def __le__(self, *args, **kwargs):
         """
         x.__le__(y) <==> x<=y
         """
         pass
 
-    def __len__(*args, **kwargs):
+    def __len__(self, *args, **kwargs):
         """
         x.__len__() <==> len(x)
         """
         pass
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, *args, **kwargs):
         """
         x.__lt__(y) <==> x<y
         """
         pass
 
-    def __mul__(*args, **kwargs):
+    def __mul__(self, *args, **kwargs):
         """
         x.__mul__(y) <==> x*y
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, *args, **kwargs):
         """
         x.__ne__(y) <==> x!=y
         """
         pass
 
-    def __neg__(*args, **kwargs):
+    def __neg__(self, *args, **kwargs):
         """
         x.__neg__() <==> -x
         """
         pass
 
-    def __radd__(*args, **kwargs):
+    def __radd__(self, *args, **kwargs):
         """
         x.__radd__(y) <==> y+x
         """
         pass
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self, *args, **kwargs):
         """
         x.__repr__() <==> repr(x)
         """
         pass
 
-    def __rmul__(*args, **kwargs):
+    def __rmul__(self, *args, **kwargs):
         """
         x.__rmul__(y) <==> y*x
         """
         pass
 
-    def __rsub__(*args, **kwargs):
+    def __rsub__(self, *args, **kwargs):
         """
         x.__rsub__(y) <==> y-x
         """
         pass
 
-    def __setitem__(*args, **kwargs):
+    def __setitem__(self, *args, **kwargs):
         """
         x.__setitem__(i, y) <==> x[i]=y
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self, *args, **kwargs):
         """
         x.__str__() <==> str(x)
         """
         pass
 
-    def __sub__(*args, **kwargs):
+    def __sub__(self, *args, **kwargs):
         """
         x.__sub__(y) <==> x-y
         """
         pass
 
-    def alternateSolution(*args, **kwargs):
+    def alternateSolution(self, *args, **kwargs):
         """
         Returns an equivalent rotation which is not simply a multiple.
         """
         pass
 
-    def asMatrix(*args, **kwargs):
+    def asMatrix(self, *args, **kwargs):
         """
         Returns the rotation as an equivalent matrix.
         """
         pass
 
-    def asQuaternion(*args, **kwargs):
+    def asQuaternion(self, *args, **kwargs):
         """
         Returns the rotation as an equivalent quaternion.
         """
         pass
 
-    def asVector(*args, **kwargs):
+    def asVector(self, *args, **kwargs):
         """
         Returns the X, Y and Z rotations as a vector.
         """
         pass
 
-    def bound(*args, **kwargs):
+    def bound(self, *args, **kwargs):
         """
         Returns a new MEulerRotation having this rotation, but with each rotation component bound within +/- PI.
         """
         pass
 
-    def boundIt(*args, **kwargs):
+    def boundIt(self, *args, **kwargs):
         """
         In-place bounding of each rotation component to lie wthin +/- PI.
         """
         pass
 
-    def closestCut(*args, **kwargs):
+    def closestCut(self, *args, **kwargs):
         """
         Returns the rotation which is full spin multiples of this one and comes closest to target.
         """
         pass
 
-    def closestSolution(*args, **kwargs):
+    def closestSolution(self, *args, **kwargs):
         """
         Returns the equivalent rotation which comes closest to a target.
         """
         pass
 
-    def incrementalRotateBy(*args, **kwargs):
+    def incrementalRotateBy(self, *args, **kwargs):
         """
         Increase this rotation by a given angle around the specified axis. The update is done in series of small increments to avoid flipping.
         """
         pass
 
-    def inverse(*args, **kwargs):
+    def inverse(self, *args, **kwargs):
         """
         Returns a new MEulerRotation containing the inverse rotation of this one and reversed rotation order.
         """
         pass
 
-    def invertIt(*args, **kwargs):
+    def invertIt(self, *args, **kwargs):
         """
         In-place inversion of the rotation. Rotation order is also reversed.
         """
         pass
 
-    def isEquivalent(*args, **kwargs):
+    def isEquivalent(self, *args, **kwargs):
         """
         Returns true if this rotation has the same order as another and their X, Y and Z components are within a tolerance of each other.
         """
         pass
 
-    def isZero(*args, **kwargs):
+    def isZero(self, *args, **kwargs):
         """
         Returns true if the X, Y and Z components are each within a tolerance of 0.0.
         """
         pass
 
-    def reorder(*args, **kwargs):
+    def reorder(self, *args, **kwargs):
         """
         Returns a new MEulerRotation having this rotation, reordered to use the given rotation order.
         """
         pass
 
-    def reorderIt(*args, **kwargs):
+    def reorderIt(self, *args, **kwargs):
         """
         In-place reordering to use the given rotation order.
         """
         pass
 
-    def setToAlternateSolution(*args, **kwargs):
+    def setToAlternateSolution(self, *args, **kwargs):
         """
         Replace this rotation with an alternate solution.
         """
         pass
 
-    def setToClosestCut(*args, **kwargs):
+    def setToClosestCut(self, *args, **kwargs):
         """
         Replace this rotation with the closest cut to a target.
         """
         pass
 
-    def setToClosestSolution(*args, **kwargs):
+    def setToClosestSolution(self, *args, **kwargs):
         """
         Replace this rotation with the closest solution to a target.
         """
         pass
 
-    def setValue(*args, **kwargs):
+    def setValue(self, *args, **kwargs):
         """
         Set the rotation.
         """
@@ -1801,7 +1804,8 @@ class MDGModifier(object):
                 hierarchy.register(mobject)
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
-                mobject._parent._children.remove(mobject)
+                if mobject._parent:
+                    mobject._parent._children.remove(mobject)
                 hierarchy.deregister(mobject)
             elif action[0] == 'rename':
                 mobject: 'MObject' = action[1]
@@ -2006,7 +2010,7 @@ class MDGModifier(object):
 
         Adds an operation to the modifer to rename a node.
         """
-        self.queue.append(('rename', node, newName, node._name))
+        self._queue.append(('rename', node, newName, node._name))
         return self
 
     def setNodeLockState(*args, **kwargs):
@@ -3260,205 +3264,205 @@ class MMatrix(object):
     4x4 matrix with double-precision elements.
     """
 
-    def __add__(*args, **kwargs):
+    def __add__(self, *args, **kwargs):
         """
         x.__add__(y) <==> x+y
         """
         pass
 
-    def __delitem__(*args, **kwargs):
+    def __delitem__(self, *args, **kwargs):
         """
         x.__delitem__(y) <==> del x[y]
         """
         pass
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, *args, **kwargs):
         """
         x.__eq__(y) <==> x==y
         """
         pass
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, *args, **kwargs):
         """
         x.__ge__(y) <==> x>=y
         """
         pass
 
-    def __getitem__(*args, **kwargs):
+    def __getitem__(self, *args, **kwargs):
         """
         x.__getitem__(y) <==> x[y]
         """
         pass
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, *args, **kwargs):
         """
         x.__gt__(y) <==> x>y
         """
         pass
 
-    def __iadd__(*args, **kwargs):
+    def __iadd__(self, *args, **kwargs):
         """
         x.__iadd__(y) <==> x+=y
         """
         pass
 
-    def __imul__(*args, **kwargs):
+    def __imul__(self, *args, **kwargs):
         """
         x.__imul__(y) <==> x*=y
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         pass
 
-    def __isub__(*args, **kwargs):
+    def __isub__(self, *args, **kwargs):
         """
         x.__isub__(y) <==> x-=y
         """
         pass
 
-    def __le__(*args, **kwargs):
+    def __le__(self, *args, **kwargs):
         """
         x.__le__(y) <==> x<=y
         """
         pass
 
-    def __len__(*args, **kwargs):
+    def __len__(self, *args, **kwargs):
         """
         x.__len__() <==> len(x)
         """
         pass
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, *args, **kwargs):
         """
         x.__lt__(y) <==> x<y
         """
         pass
 
-    def __mul__(*args, **kwargs):
+    def __mul__(self, *args, **kwargs):
         """
         x.__mul__(y) <==> x*y
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, *args, **kwargs):
         """
         x.__ne__(y) <==> x!=y
         """
         pass
 
-    def __radd__(*args, **kwargs):
+    def __radd__(self, *args, **kwargs):
         """
         x.__radd__(y) <==> y+x
         """
         pass
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self):
         """
         x.__repr__() <==> repr(x)
         """
-        pass
+        return self.__str__()
 
-    def __rmul__(*args, **kwargs):
+    def __rmul__(self, *args, **kwargs):
         """
         x.__rmul__(y) <==> y*x
         """
         pass
 
-    def __rsub__(*args, **kwargs):
+    def __rsub__(self, *args, **kwargs):
         """
         x.__rsub__(y) <==> y-x
         """
         pass
 
-    def __setitem__(*args, **kwargs):
+    def __setitem__(self, *args, **kwargs):
         """
         x.__setitem__(i, y) <==> x[i]=y
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return ''
 
-    def __sub__(*args, **kwargs):
+    def __sub__(self, *args, **kwargs):
         """
         x.__sub__(y) <==> x-y
         """
         pass
 
-    def adjoint(*args, **kwargs):
+    def adjoint(self, *args, **kwargs):
         """
         Returns a new matrix containing this matrix's adjoint.
         """
         pass
 
-    def det3x3(*args, **kwargs):
+    def det3x3(self, *args, **kwargs):
         """
         Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix.
         """
         pass
 
-    def det4x4(*args, **kwargs):
+    def det4x4(self, *args, **kwargs):
         """
         Returns this matrix's determinant.
         """
         pass
 
-    def getElement(*args, **kwargs):
+    def getElement(self, *args, **kwargs):
         """
         Returns the matrix element for the specified row and column.
         """
         pass
 
-    def homogenize(*args, **kwargs):
+    def homogenize(self, *args, **kwargs):
         """
         Returns a new matrix containing the homogenized version of this matrix.
         """
         pass
 
-    def inverse(*args, **kwargs):
+    def inverse(self):
         """
         Returns a new matrix containing this matrix's inverse.
         """
-        pass
+        return MMatrix()
 
-    def isEquivalent(*args, **kwargs):
+    def isEquivalent(self, *args, **kwargs):
         """
         Test for equivalence of two matrices, within a tolerance.
         """
         pass
 
-    def isSingular(*args, **kwargs):
+    def isSingular(self, *args, **kwargs):
         """
         Returns True if this matrix is singular.
         """
         pass
 
-    def setElement(*args, **kwargs):
+    def setElement(self, *args, **kwargs):
         """
         Sets the matrix element for the specified row and column.
         """
         pass
 
-    def setToIdentity(*args, **kwargs):
+    def setToIdentity(self, *args, **kwargs):
         """
         Sets this matrix to the identity.
         """
         pass
 
-    def setToProduct(*args, **kwargs):
+    def setToProduct(self, *args, **kwargs):
         """
         Sets this matrix to the product of the two matrices passed in.
         """
         pass
 
-    def transpose(*args, **kwargs):
+    def transpose(self, *args, **kwargs):
         """
         Returns a new matrix containing this matrix's transpose.
         """
@@ -4856,7 +4860,7 @@ class MSelectionList(object):
         item = self._inner_ls[index]
         if isinstance(item, str):
             mplug = MPlug()
-            mplug._name = index
+            mplug._name = item
             return mplug
         if not isinstance(item, MPlug):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
@@ -7484,223 +7488,226 @@ class MVector(object):
     3D vector with double-precision coordinates.
     """
 
-    def __add__(*args, **kwargs):
+    def __add__(self, *args, **kwargs):
         """
         x.__add__(y) <==> x+y
         """
         pass
 
-    def __delitem__(*args, **kwargs):
+    def __iter__(self):
+        return 0.0
+
+    def __delitem__(self, *args, **kwargs):
         """
         x.__delitem__(y) <==> del x[y]
         """
         pass
 
-    def __div__(*args, **kwargs):
+    def __div__(self, *args, **kwargs):
         """
         x.__div__(y) <==> x/y
         """
         pass
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, *args, **kwargs):
         """
         x.__eq__(y) <==> x==y
         """
         pass
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, *args, **kwargs):
         """
         x.__ge__(y) <==> x>=y
         """
         pass
 
-    def __getitem__(*args, **kwargs):
+    def __getitem__(self, *args, **kwargs):
         """
         x.__getitem__(y) <==> x[y]
         """
         pass
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, *args, **kwargs):
         """
         x.__gt__(y) <==> x>y
         """
         pass
 
-    def __iadd__(*args, **kwargs):
+    def __iadd__(self, *args, **kwargs):
         """
         x.__iadd__(y) <==> x+=y
         """
         pass
 
-    def __idiv__(*args, **kwargs):
+    def __idiv__(self, *args, **kwargs):
         """
         x.__idiv__(y) <==> x/=y
         """
         pass
 
-    def __imul__(*args, **kwargs):
+    def __imul__(self, *args, **kwargs):
         """
         x.__imul__(y) <==> x*=y
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         pass
 
-    def __isub__(*args, **kwargs):
+    def __isub__(self, *args, **kwargs):
         """
         x.__isub__(y) <==> x-=y
         """
         pass
 
-    def __le__(*args, **kwargs):
+    def __le__(self, *args, **kwargs):
         """
         x.__le__(y) <==> x<=y
         """
         pass
 
-    def __len__(*args, **kwargs):
+    def __len__(self, *args, **kwargs):
         """
         x.__len__() <==> len(x)
         """
         pass
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, *args, **kwargs):
         """
         x.__lt__(y) <==> x<y
         """
         pass
 
-    def __mul__(*args, **kwargs):
+    def __mul__(self, *args, **kwargs):
         """
         x.__mul__(y) <==> x*y
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, *args, **kwargs):
         """
         x.__ne__(y) <==> x!=y
         """
         pass
 
-    def __neg__(*args, **kwargs):
+    def __neg__(self, *args, **kwargs):
         """
         x.__neg__() <==> -x
         """
         pass
 
-    def __radd__(*args, **kwargs):
+    def __radd__(self, *args, **kwargs):
         """
         x.__radd__(y) <==> y+x
         """
         pass
 
-    def __rdiv__(*args, **kwargs):
+    def __rdiv__(self, *args, **kwargs):
         """
         x.__rdiv__(y) <==> y/x
         """
         pass
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self, *args, **kwargs):
         """
         x.__repr__() <==> repr(x)
         """
         pass
 
-    def __rmul__(*args, **kwargs):
+    def __rmul__(self, *args, **kwargs):
         """
         x.__rmul__(y) <==> y*x
         """
         pass
 
-    def __rsub__(*args, **kwargs):
+    def __rsub__(self, *args, **kwargs):
         """
         x.__rsub__(y) <==> y-x
         """
         pass
 
-    def __rxor__(*args, **kwargs):
+    def __rxor__(self, *args, **kwargs):
         """
         x.__rxor__(y) <==> y^x
         """
         pass
 
-    def __setitem__(*args, **kwargs):
+    def __setitem__(self, *args, **kwargs):
         """
         x.__setitem__(i, y) <==> x[i]=y
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self, *args, **kwargs):
         """
         x.__str__() <==> str(x)
         """
         pass
 
-    def __sub__(*args, **kwargs):
+    def __sub__(self, *args, **kwargs):
         """
         x.__sub__(y) <==> x-y
         """
         pass
 
-    def __xor__(*args, **kwargs):
+    def __xor__(self, *args, **kwargs):
         """
         x.__xor__(y) <==> x^y
         """
         pass
 
-    def angle(*args, **kwargs):
+    def angle(self, *args, **kwargs):
         """
         Returns the angle, in radians, between this vector and another.
         """
         pass
 
-    def isEquivalent(*args, **kwargs):
+    def isEquivalent(self, *args, **kwargs):
         """
         Returns True if this vector and another are within a given tolerance of being equal.
         """
         pass
 
-    def isParallel(*args, **kwargs):
+    def isParallel(self, *args, **kwargs):
         """
         Returns True if this vector and another are within the given tolerance of being parallel.
         """
         pass
 
-    def length(*args, **kwargs):
+    def length(self, *args, **kwargs):
         """
         Returns the magnitude of this vector.
         """
         pass
 
-    def normal(*args, **kwargs):
+    def normal(self, *args, **kwargs):
         """
         Returns a new vector containing the normalized version of this one.
         """
         pass
 
-    def normalize(*args, **kwargs):
+    def normalize(self, *args, **kwargs):
         """
         Normalizes this vector in-place and returns a new reference to it.
         """
         pass
 
-    def rotateBy(*args, **kwargs):
+    def rotateBy(self, *args, **kwargs):
         """
         Returns the vector resulting from rotating this one by the given amount.
         """
         pass
 
-    def rotateTo(*args, **kwargs):
+    def rotateTo(self, *args, **kwargs):
         """
         Returns the quaternion which will rotate this vector into another.
         """
         pass
 
-    def transformAsNormal(*args, **kwargs):
+    def transformAsNormal(self, *args, **kwargs):
         """
         Returns a new vector which is calculated by postmultiplying this vector by the transpose of the given matrix's inverse and then normalizing the result.
         """
@@ -7744,49 +7751,49 @@ class MBoundingBox(object):
     3D axis-aligned bounding box.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         pass
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self, *args, **kwargs):
         """
         x.__repr__() <==> repr(x)
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self, *args, **kwargs):
         """
         x.__str__() <==> str(x)
         """
         pass
 
-    def clear(*args, **kwargs):
+    def clear(self, *args, **kwargs):
         """
         Empties the bounding box, setting its corners to (0, 0, 0).
         """
         pass
 
-    def contains(*args, **kwargs):
+    def contains(self, *args, **kwargs):
         """
         Returns True if a point lies within the bounding box.
         """
         pass
 
-    def expand(*args, **kwargs):
+    def expand(self, *args, **kwargs):
         """
         Expands the bounding box to include a point or other bounding box.
         """
         pass
 
-    def intersects(*args, **kwargs):
+    def intersects(self, *args, **kwargs):
         """
         Returns True if any part of a given bounding box lies within this one.
         """
         pass
 
-    def transformUsing(*args, **kwargs):
+    def transformUsing(self, *args, **kwargs):
         """
         Multiplies the bounding box's corners by a matrix.
         """
@@ -12359,6 +12366,10 @@ class MPoint(object):
         """
         pass
 
+    def __iter__(self):
+        for _ in range(3):
+            yield 0.0
+
     def __le__(*args, **kwargs):
         """
         x.__le__(y) <==> x<=y
@@ -12908,6 +12919,13 @@ class MObject(object):
         self._children = set()
         self._is_world = False
 
+        # plug-specific properties
+        self._long_name = None
+        self._short_name = None
+        self._is_array = None
+        self._is_compound = None
+        self._is_element = None
+
     def __le__(*args, **kwargs):
         """
         x.__le__(y) <==> x<=y
@@ -13116,241 +13134,241 @@ class MTransformationMatrix(object):
     Manipulate the individual components of a transformation.
     """
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, *args, **kwargs):
         """
         x.__eq__(y) <==> x==y
         """
         pass
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, *args, **kwargs):
         """
         x.__ge__(y) <==> x>=y
         """
         pass
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, *args, **kwargs):
         """
         x.__gt__(y) <==> x>y
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         pass
 
-    def __le__(*args, **kwargs):
+    def __le__(self, *args, **kwargs):
         """
         x.__le__(y) <==> x<=y
         """
         pass
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, *args, **kwargs):
         """
         x.__lt__(y) <==> x<y
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, *args, **kwargs):
         """
         x.__ne__(y) <==> x!=y
         """
         pass
 
-    def asMatrix(*args, **kwargs):
+    def asMatrix(self, *args, **kwargs):
         """
         Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix.
         """
         pass
 
-    def asMatrixInverse(*args, **kwargs):
+    def asMatrixInverse(self, *args, **kwargs):
         """
         Returns the inverse of the matrix representing the transformation.
         """
         pass
 
-    def asRotateMatrix(*args, **kwargs):
+    def asRotateMatrix(self, *args, **kwargs):
         """
         Returns the matrix which takes points from object space to the space immediately following the scale/shear/rotation transformations.
         """
         pass
 
-    def asScaleMatrix(*args, **kwargs):
+    def asScaleMatrix(self, *args, **kwargs):
         """
         Returns the matrix which takes points from object space to the space immediately following scale and shear transformations.
         """
         pass
 
-    def isEquivalent(*args, **kwargs):
+    def isEquivalent(self, *args, **kwargs):
         """
         Returns true if this transformation's matrix is within tolerance of another's matrix.
         """
         pass
 
-    def reorderRotation(*args, **kwargs):
+    def reorderRotation(self, *args, **kwargs):
         """
         Reorders the transformation's rotate component to give the same overall rotation but using a new order or rotations.
         """
         pass
 
-    def rotateBy(*args, **kwargs):
+    def rotateBy(self, *args, **kwargs):
         """
         Adds to the transformation's rotation component.
         """
         pass
 
-    def rotateByComponents(*args, **kwargs):
+    def rotateByComponents(self, *args, **kwargs):
         """
         Adds to the transformation's rotation component.
         """
         pass
 
-    def rotatePivot(*args, **kwargs):
+    def rotatePivot(self, *args, **kwargs):
         """
         Returns the transformation's rotate pivot component.
         """
         pass
 
-    def rotatePivotTranslation(*args, **kwargs):
+    def rotatePivotTranslation(self, *args, **kwargs):
         """
         Returns the transformation's rotate pivot translation component.
         """
         pass
 
-    def rotation(*args, **kwargs):
+    def rotation(self, *args, **kwargs):
         """
         Returns the transformation's rotation component as either an Euler rotation or a quaternion.
         """
         pass
 
-    def rotationComponents(*args, **kwargs):
+    def rotationComponents(self, *args, **kwargs):
         """
         Returns a list containing the four components of the transformation's rotate component.
         """
         pass
 
-    def rotationOrder(*args, **kwargs):
+    def rotationOrder(self, *args, **kwargs):
         """
         Returns the order of rotations when the transformation's rotate component is expressed as an euler rotation.
         """
         pass
 
-    def rotationOrientation(*args, **kwargs):
+    def rotationOrientation(self, *args, **kwargs):
         """
         Returns a quaternion which orients the local rotation space.
         """
         pass
 
-    def scale(*args, **kwargs):
+    def scale(self, *args, **kwargs):
         """
         Returns a list containing the transformation's scale components.
         """
         pass
 
-    def scaleBy(*args, **kwargs):
+    def scaleBy(self, *args, **kwargs):
         """
         Multiplies the transformation's scale components by the three floats in the provided sequence.
         """
         pass
 
-    def scalePivot(*args, **kwargs):
+    def scalePivot(self, *args, **kwargs):
         """
         Returns the transformation's scale pivot component.
         """
         pass
 
-    def scalePivotTranslation(*args, **kwargs):
+    def scalePivotTranslation(self, *args, **kwargs):
         """
         Returns the transformation's scale pivot translation component.
         """
         pass
 
-    def setRotatePivot(*args, **kwargs):
+    def setRotatePivot(self, *args, **kwargs):
         """
         Sets the transformation's rotate pivot component.
         """
         pass
 
-    def setRotatePivotTranslation(*args, **kwargs):
+    def setRotatePivotTranslation(self, *args, **kwargs):
         """
         Sets the transformation's rotate pivot translation component.
         """
         pass
 
-    def setRotation(*args, **kwargs):
+    def setRotation(self, *args, **kwargs):
         """
         Sets the transformation's rotation component.
         """
         pass
 
-    def setRotationComponents(*args, **kwargs):
+    def setRotationComponents(self, *args, **kwargs):
         """
         Sets the transformation's rotate component from the four values in the provided sequence.
         """
         pass
 
-    def setRotationOrientation(*args, **kwargs):
+    def setRotationOrientation(self, *args, **kwargs):
         """
         Sets a quaternion which orients the local rotation space.
         """
         pass
 
-    def setScale(*args, **kwargs):
+    def setScale(self, *args, **kwargs):
         """
         Sets the transformation's scale components to the three floats in the provided sequence.
         """
         pass
 
-    def setScalePivot(*args, **kwargs):
+    def setScalePivot(self, *args, **kwargs):
         """
         Sets the transformation's scale pivot component.
         """
         pass
 
-    def setScalePivotTranslation(*args, **kwargs):
+    def setScalePivotTranslation(self, *args, **kwargs):
         """
         Sets the transformation's scale pivot translation component.
         """
         pass
 
-    def setShear(*args, **kwargs):
+    def setShear(self, *args, **kwargs):
         """
         Sets the transformation's shear component.
         """
         pass
 
-    def setToRotationAxis(*args, **kwargs):
+    def setToRotationAxis(self, *args, **kwargs):
         """
         Sets the transformation's rotate component to be a given axis vector and angle in radians.
         """
         pass
 
-    def setTranslation(*args, **kwargs):
+    def setTranslation(self, *args, **kwargs):
         """
         Sets the transformation's translation component.
         """
         pass
 
-    def shear(*args, **kwargs):
+    def shear(self, *args, **kwargs):
         """
         Returns a list containing the transformation's shear components.
         """
         pass
 
-    def shearBy(*args, **kwargs):
+    def shearBy(self, *args, **kwargs):
         """
         Multiplies the transformation's shear components by the three floats in the provided sequence.
         """
         pass
 
-    def translateBy(*args, **kwargs):
+    def translateBy(self, *args, **kwargs):
         """
         Adds a vector to the transformation's translation component.
         """
         pass
 
-    def translation(*args, **kwargs):
+    def translation(self, *args, **kwargs):
         """
         Returns the transformation's translation component as a vector.
         """
@@ -16388,229 +16406,229 @@ class MQuaternion(object):
     Quaternion math.
     """
 
-    def __add__(*args, **kwargs):
+    def __add__(self, *args, **kwargs):
         """
         x.__add__(y) <==> x+y
         """
         pass
 
-    def __delitem__(*args, **kwargs):
+    def __delitem__(self, *args, **kwargs):
         """
         x.__delitem__(y) <==> del x[y]
         """
         pass
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, *args, **kwargs):
         """
         x.__eq__(y) <==> x==y
         """
         pass
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, *args, **kwargs):
         """
         x.__ge__(y) <==> x>=y
         """
         pass
 
-    def __getitem__(*args, **kwargs):
+    def __getitem__(self, *args, **kwargs):
         """
         x.__getitem__(y) <==> x[y]
         """
         pass
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, *args, **kwargs):
         """
         x.__gt__(y) <==> x>y
         """
         pass
 
-    def __imul__(*args, **kwargs):
+    def __imul__(self, *args, **kwargs):
         """
         x.__imul__(y) <==> x*=y
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         pass
 
-    def __le__(*args, **kwargs):
+    def __le__(self, *args, **kwargs):
         """
         x.__le__(y) <==> x<=y
         """
         pass
 
-    def __len__(*args, **kwargs):
+    def __len__(self, *args, **kwargs):
         """
         x.__len__() <==> len(x)
         """
         pass
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, *args, **kwargs):
         """
         x.__lt__(y) <==> x<y
         """
         pass
 
-    def __mul__(*args, **kwargs):
+    def __mul__(self, *args, **kwargs):
         """
         x.__mul__(y) <==> x*y
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, *args, **kwargs):
         """
         x.__ne__(y) <==> x!=y
         """
         pass
 
-    def __neg__(*args, **kwargs):
+    def __neg__(self, *args, **kwargs):
         """
         x.__neg__() <==> -x
         """
         pass
 
-    def __radd__(*args, **kwargs):
+    def __radd__(self, *args, **kwargs):
         """
         x.__radd__(y) <==> y+x
         """
         pass
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self, *args, **kwargs):
         """
         x.__repr__() <==> repr(x)
         """
         pass
 
-    def __rmul__(*args, **kwargs):
+    def __rmul__(self, *args, **kwargs):
         """
         x.__rmul__(y) <==> y*x
         """
         pass
 
-    def __rsub__(*args, **kwargs):
+    def __rsub__(self, *args, **kwargs):
         """
         x.__rsub__(y) <==> y-x
         """
         pass
 
-    def __setitem__(*args, **kwargs):
+    def __setitem__(self, *args, **kwargs):
         """
         x.__setitem__(i, y) <==> x[i]=y
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self, *args, **kwargs):
         """
         x.__str__() <==> str(x)
         """
         pass
 
-    def __sub__(*args, **kwargs):
+    def __sub__(self, *args, **kwargs):
         """
         x.__sub__(y) <==> x-y
         """
         pass
 
-    def asAxisAngle(*args, **kwargs):
+    def asAxisAngle(self, *args, **kwargs):
         """
         Returns the rotation as a tuple containing an axis vector and an angle in radians about that axis.
         """
         pass
 
-    def asEulerRotation(*args, **kwargs):
+    def asEulerRotation(self, *args, **kwargs):
         """
         Returns the rotation as an equivalent MEulerRotation.
         """
         pass
 
-    def asMatrix(*args, **kwargs):
+    def asMatrix(self, *args, **kwargs):
         """
         Returns the rotation as an equivalent rotation matrix.
         """
         pass
 
-    def conjugate(*args, **kwargs):
+    def conjugate(self, *args, **kwargs):
         """
         Returns the conjugate of this quaternion (i.e. x, y and z components negated).
         """
         pass
 
-    def conjugateIt(*args, **kwargs):
+    def conjugateIt(self, *args, **kwargs):
         """
         In-place conjugation (i.e. negates the x, y and z components).
         """
         pass
 
-    def exp(*args, **kwargs):
+    def exp(self, *args, **kwargs):
         """
         Returns a new quaternion containing the exponent of this one.
         """
         pass
 
-    def inverse(*args, **kwargs):
+    def inverse(self, *args, **kwargs):
         """
         Returns a new quaternion containing the inverse of this one.
         """
         pass
 
-    def invertIt(*args, **kwargs):
+    def invertIt(self, *args, **kwargs):
         """
         In-place inversion.
         """
         pass
 
-    def isEquivalent(*args, **kwargs):
+    def isEquivalent(self, *args, **kwargs):
         """
         Returns True if the distance between the two quaternions (in quaternion space) is less than or equal to the given tolerance.
         """
         pass
 
-    def log(*args, **kwargs):
+    def log(self, *args, **kwargs):
         """
         Returns a new quaternion containing the natural log of this one.
         """
         pass
 
-    def negateIt(*args, **kwargs):
+    def negateIt(self, *args, **kwargs):
         """
         In-place negation of the x, y, z and w components.
         """
         pass
 
-    def normal(*args, **kwargs):
+    def normal(self, *args, **kwargs):
         """
         Returns a new quaternion containing the normalized version of this one (i.e. scaled to unit length).
         """
         pass
 
-    def normalizeIt(*args, **kwargs):
+    def normalizeIt(self, *args, **kwargs):
         """
         In-place normalization (i.e. scales the quaternion to unit length).
         """
         pass
 
-    def setToXAxis(*args, **kwargs):
+    def setToXAxis(self, *args, **kwargs):
         """
         Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the X-axis.
         """
         pass
 
-    def setToYAxis(*args, **kwargs):
+    def setToYAxis(self, *args, **kwargs):
         """
         Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the Y-axis.
         """
         pass
 
-    def setToZAxis(*args, **kwargs):
+    def setToZAxis(self, *args, **kwargs):
         """
         Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the Z-axis.
         """
         pass
 
-    def setValue(*args, **kwargs):
+    def setValue(self, *args, **kwargs):
         """
         Set the value of this quaternion to that of the specified MQuaternion, MEulerRotation, MMatrix or MVector and angle.
         """
@@ -17168,54 +17186,73 @@ class MPlug(object):
     Create and access dependency node plugs.
     """
 
-    def __eq__(self, value) -> bool:
+    def __eq__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
         x.__eq__(y) <==> x==y
         """
-        return self == value
+        if isinstance(value, MPlug):
+            value = value.attribute()
+        return hash(self.attribute()._name) == hash(value._name)
 
-    def __ge__(self, value) -> bool:
+    def __ge__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
         x.__ge__(y) <==> x>=y
         """
-        return self._value >= value
+        if isinstance(value, MPlug):
+            value = value.attribute()
+        return self.attribute() >= value
 
-    def __gt__(self, value) -> bool:
+    def __gt__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
         x.__gt__(y) <==> x>y
         """
-        return self._value > value
+        if isinstance(value, MPlug):
+            value = value.attribute()
+        return self.attribute() > value
 
     def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         self._owner: 'MObject' = None
-        self._attr_name = None
+        self._id = None
         self._network_plug = None
         self._value = None
+
         self._connections = {
             'INPUTS': [],
             'OUTPUTS': [],
         }
 
-    def __le__(self, value) -> bool:
+        self._children = []
+        self._parent = None
+
+        self._attribute = MObject()
+        self._attribute._fn_type.append(MFn.kAttribute)
+
+    def __le__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
         x.__le__(y) <==> x<=y
         """
-        return self._value <= value
+        if isinstance(value, MPlug):
+            value = value.attribute()
+        return self.attribute() <= value
 
-    def __lt__(self, value) -> bool:
+    def __lt__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
         x.__lt__(y) <==> x<y
         """
-        return self._value < value
+        if isinstance(value, MPlug):
+            value = value.attribute()
+        return self.attribute() < value
 
-    def __ne__(self, value) -> bool:
+    def __ne__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
         x.__ne__(y) <==> x!=y
         """
-        return self._value != value
+        if isinstance(value, MPlug):
+            value = value.attribute()
+        return self.attribute() != value
 
     def __str__(*args, **kwargs):
         """
@@ -17233,81 +17270,80 @@ class MPlug(object):
         """
         Retrieves the plug's value, as a boolean.
         """
-        return bool(self._value)
+        return bool(self._attribute._value)
 
     def asChar(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-byte integer.
         """
-        return int(self._value or random.randint(-1_000_000, 1_000_000))
+        return int(self._attribute._value or random.randint(-1_000_000, 1_000_000))
 
     def asDouble(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a double-precision float.
         """
-        return float(self._value or random.randint(-1_000_000, 1_000_000))
+        return float(self._attribute._value or random.randint(-1_000_000, 1_000_000))
 
     def asFloat(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-precision float.
         """
-        return float(self._value or random.randint(-1_000_000, 1_000_000))
+        return float(self._attribute._value or random.randint(-1_000_000, 1_000_000))
 
     def asInt(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a regular integer.
         """
-        return int(self._value or random.randint(-1_000_000, 1_000_000))
+        return int(self._attribute._value or random.randint(-1_000_000, 1_000_000))
 
     def asMAngle(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MAngle.
         """
-        return MAngle(self._value or random.random())
+        return MAngle(self._attribute._value or random.random())
 
     def asMDataHandle(self, *args, **kwargs):
         """
         Retrieve the current value of the attribute this plug references.
         """
-        return MDataHandle(self._value)
+        return MDataHandle(self._attribute._value)
 
     def asMDistance(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MDistance.
         """
-        return MDistance(self._value or random.randint(-1_000_000, 1_000_000))
+        return MDistance(self._attribute._value or random.randint(-1_000_000, 1_000_000))
 
     def asMObject(self, *args, **kwargs):
         """
         Retrieves the plug's value, as as an MObject containing a direct reference to the plug's data.
         """
-        return MObject(self._value)
+        return MObject(self._attribute._value)
 
     def asMTime(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MTime.
         """
-        return MTime(self._value or random.randint(0, 1_000_000))
+        return MTime(self._attribute._value or random.randint(0, 1_000_000))
 
     def asShort(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a short integer.
         """
-        return int(self._value or random.randint(-32767, 32767))
+        return int(self._attribute._value or random.randint(-32767, 32767))
 
     def asString(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a string.
         """
         return str(
-            self._value or "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15))))
+            self._attribute._value or "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15))))
 
-    def attribute(*args, **kwargs):
+    def attribute(self):
         """
         Returns the attribute currently referenced by this plug.
         """
-        mobject = MObject()
-        return mobject
+        return self._attribute
 
     def child(*args, **kwargs):
         """
@@ -17414,13 +17450,13 @@ class MPlug(object):
         """
         Returns the name of the plug.
         """
-        return self._attr_name
+        return self._attribute._name
 
     def node(*args, **kwargs):
         """
         Returns the node that this plug belongs to.
         """
-        pass
+        return self._owner
 
     def numChildren(*args, **kwargs):
         """
@@ -17446,11 +17482,12 @@ class MPlug(object):
         """
         pass
 
-    def parent(*args, **kwargs):
+    def parent() -> 'MPlug':
         """
         Returns a plug for the parent of this plug.
         """
-        pass
+        if self._parent:
+            return self._parent
 
     def partialName(self,
                     includeNodeName=False,
@@ -17460,7 +17497,22 @@ class MPlug(object):
         """
         Returns the name of the plug, formatted according to various criteria.
         """
-        return f'{self._owner._name}.{self._attr_name}'
+        owner_name = self._owner._name
+        short_name = self._attribute._short_name
+        long_name = self._attribute._long_name
+
+        return_str = ''
+        if includeNodeName:
+            return_str += f'{owner_name}.'
+        elif useFullAttributePath:
+            return_str += f'{owner_name}'
+
+        if useLongNames:
+            return_str += long_name
+        else:
+            return_str += short_name
+
+        return return_str
 
     def selectAncestorLogicalIndex(*args, **kwargs):
         """
@@ -17474,71 +17526,71 @@ class MPlug(object):
         """
         pass
 
-    def setBool(*args, **kwargs):
+    def setBool(self, value):
         """
         Sets the plug's value as a boolean.
         """
-        pass
+        self._attribute._value = value
 
-    def setChar(*args, **kwargs):
+    def setChar(self, value):
         """
         Sets the plug's value as a single-byte integer.
         """
-        pass
+        self._attribute._value = value
 
-    def setDouble(*args, **kwargs):
+    def setDouble(self, value):
         """
         Sets the plug's value as a double-precision float.
         """
-        pass
+        self._attribute._value = value
 
-    def setFloat(*args, **kwargs):
+    def setFloat(self, value):
         """
         Sets the plug's value as a single-precision float.
         """
-        pass
+        self._attribute._value = value
 
-    def setInt(*args, **kwargs):
+    def setInt(self, value):
         """
         Sets the plug's value as a regular integer.
         """
-        pass
+        self._attribute._value = value
 
-    def setMAngle(*args, **kwargs):
+    def setMAngle(self, value):
         """
         Sets the plug's value as an MAngle.
         """
-        pass
+        self._attribute._value = value
 
-    def setMDataHandle(*args, **kwargs):
+    def setMDataHandle(self, value):
         """
         Sets the plug's value as a data handle.
         """
-        pass
+        self._attribute._value = value
 
-    def setMDistance(*args, **kwargs):
+    def setMDistance(self, value):
         """
         Sets the plug's value as an MDistance.
         """
-        pass
+        self._attribute._value = value
 
-    def setMObject(*args, **kwargs):
+    def setMObject(self, value):
         """
         Sets the plug's value as an MObject.
         """
-        pass
+        self._attribute._value = value
 
-    def setMPxData(*args, **kwargs):
+    def setMPxData(self, value):
         """
         Sets the plug's value using custom plug-in data.
         """
-        pass
+        self._attribute._value = value
 
-    def setMTime(*args, **kwargs):
+    def setMTime(self, value):
         """
         Sets the plug's value as an MTime.
         """
-        pass
+        self._attribute._value = value
 
     def setNumElements(*args, **kwargs):
         """
@@ -17546,17 +17598,17 @@ class MPlug(object):
         """
         pass
 
-    def setShort(*args, **kwargs):
+    def setShort(self, value):
         """
         Sets the plug's value as a short integer.
         """
-        pass
+        self._attribute._value = value
 
-    def setString(*args, **kwargs):
+    def setString(self, value):
         """
         Sets the plug's value as a string.
         """
-        pass
+        self._attribute._value = value
 
     def source(*args, **kwargs):
         """
@@ -17577,15 +17629,21 @@ class MPlug(object):
 
     info = None
 
-    isArray = None
+    @property
+    def isArray(self) -> bool:
+        return self._attribute._is_array
 
     isCaching = None
 
     isChannelBox = None
 
-    isChild = None
+    @property
+    def isChild(self) -> bool:
+        return True if self._attribute._parent else False
 
-    isCompound = None
+    @property
+    def isCompound(self) -> bool:
+        return self._attribute._is_compound
 
     isConnected = None
 
@@ -17593,15 +17651,17 @@ class MPlug(object):
 
     isDynamic = None
 
-    isElement = None
+    @property
+    def isElement(self):
+        return self._attribute._is_element
 
     isFromReferencedFile = None
 
     isIgnoredWhenRendering = None
 
-    isKeyable = None
+    isKeyable = True
 
-    isLocked = None
+    isLocked = False
 
     isNetworked = None
 
@@ -21501,9 +21561,39 @@ class MFnDependencyNode(MFnBase):
         Returns a plug for the given attribute.
         """
         mplug = MPlug()
-        mplug._owner = self.object()
-        mplug._attr_name = attr_name
+        attribute = mplug._attribute
+        mplug._owner = self._mobject
+
+        short_name = ''
+        long_name = ''
+
+        if attr_name in _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME:
+            short_name = attr_name
+            long_name = _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME[short_name]
+        elif attr_name in _COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME:
+            long_name = attr_name
+            short_name = _COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME[long_name]
+        else:
+            long_name = attr_name
+            short_name = attr_name
+
+        if long_name in _COMMON_ATTR_PROPERTIES:
+            attr_properties = _COMMON_ATTR_PROPERTIES[long_name]
+            attribute._is_array = attr_properties['is_array']
+            attribute._is_compound = attr_properties['is_compound']
+            attribute._is_element = attr_properties['is_element']
+            attr_type = attr_properties['attr_type']
+            if attr_type not in attribute._fn_type:
+                attribute._fn_type.append(attr_type)
+
+
+        attribute._name = f'{self._mobject._name}.{long_name or attr_name}'
+        attribute._long_name = long_name
+        attribute._short_name = short_name
+
+        mplug._id = hash(f'{self._mobject._name}.{attr_name}')
         mplug._network_plug = want_network_plug
+
         return mplug
 
     def getAffectedAttributes(*args, **kwargs):
@@ -29836,6 +29926,149 @@ class _NodeTypeIds(enum.Enum):
     Wrap = MTypeId(0x46575250)
     WtAddMatrix = MTypeId(0x4457414d)
 
+
+_COMMON_ATTR_PROPERTIES = {
+    'hiddenInOutliner': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'overrideEnabled': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'overrideDisplayType': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kEnumAttribute},
+
+    'translate': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double},
+    'translateX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleLinearAttribute},
+    'translateY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleLinearAttribute},
+    'translateZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleLinearAttribute},
+
+    'rotate': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double},
+    'rotateX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
+    'rotateY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
+    'rotateZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
+
+    'scale': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double},
+    'scaleX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'scaleY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'scaleZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+
+    'visibility': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'template': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+
+    'inheritsTransform': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+
+    'matrix': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'inverseMatrix': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'worldMatrix': {'is_array': True, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'worldInverseMatrix': {'is_array': True, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'offsetParentMatrix': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kMatrixAttribute},
+    'parentMatrix': {'is_array': True, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'parentInverseMatrix': {'is_array': True, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'dagLocalMatrix': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kMatrixAttribute},
+    'dagLocalInverseMatrix': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kMatrixAttribute},
+
+    'drawStyle': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kEnumAttribute},
+    'radius': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'segmentScaleCompensate': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'rotateOrder': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kEnumAttribute},
+    'preferredAngleX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
+    'preferredAngleY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
+    'preferredAngleZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
+    'side': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kEnumAttribute},
+    'type': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kEnumAttribute},
+    'otherType': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'drawLabel': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+
+    'blender': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'color1': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Float},
+    'color1R': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'color1G': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'color1B': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'color2': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Float},
+    'color2R': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'color2G': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'color2B': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'outputR': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'outputG': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'outputB': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+
+    'attributesBlender': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+    'input': {'is_array': True, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
+
+    'inMesh': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'outMesh': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'worldMesh': {'is_array': True, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+
+    'outputCurve': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+    'create': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kTypedAttribute},
+
+
+}
+
+_COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME = {
+    'hio': 'hiddenInOutliner',
+    'ove': 'overrideEnabled',
+    'ovdt': 'overrideDisplayType',
+
+    't': 'translate',
+    'tx': 'translateX',
+    'ty': 'translateY',
+    'tz': 'translateZ',
+    'r': 'rotate',
+    'rx': 'rotateX',
+    'ry': 'rotateY',
+    'rz': 'rotateZ',
+    's': 'scale',
+    'sx': 'scaleX',
+    'sy': 'scaleY',
+    'sz': 'scaleZ',
+    'v': 'visibility',
+    'tmp': 'template',
+    'it': 'inheritsTransform',
+
+    'm': 'matrix',
+    'im': 'inverseMatrix',
+    'wm': 'worldMatrix',
+    'wim': 'worldInverseMatrix',
+    'opm': 'offsetParentMatrix',
+    'pm': 'parentMatrix',
+    'pim': 'parentInverseMatrix',
+    'dlm': 'dagLocalMatrix',
+    'dlim': 'dagLocalInverseMatrix',
+
+    'ds': 'drawStyle',
+    'radi': 'radius',
+    'ssc': 'segmentScaleCompensate',
+    'ro': 'rotateOrder',
+    'pax': 'preferredAngleX',
+    'pay': 'preferredAngleY',
+    'paz': 'preferredAngleZ',
+    'sd': 'side',
+    'typ': 'type',
+    'otp': 'otherType',
+    'dl': 'drawLabel',
+
+    'b': 'blender',
+    'c1': 'color1',
+    'c1r': 'color1R',
+    'c1g': 'color1G',
+    'c1b': 'color1B',
+    'c2': 'color2',
+    'c2r': 'color2R',
+    'c2g': 'color2G',
+    'c2b': 'color2B',
+    'opr': 'outputR',
+    'opg': 'outputG',
+    'opb': 'outputB',
+
+    'ab': 'attributesBlender',
+
+    'i': 'inMesh',
+    'o': 'outMesh',
+    'w': 'worldMesh',
+
+    'oc': 'outputCurve',
+    'cr': 'create',
+
+
+}
+
+_COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME = {ln: sn for sn, ln in _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME.items()}
 
 _TYPE_STR_TO_ID = {
 
