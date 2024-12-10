@@ -11,6 +11,7 @@ import string
 import uuid
 import weakref
 import enum
+import math
 from typing import Optional, Iterable, Union
 import maya.mmc_hierarchy as hierarchy
 
@@ -1098,7 +1099,7 @@ class MTypeId(object):
         return "{class_name}({value}) <{as_str}>".format(
             class_name=self.__class__.__name__,
             value=self._value,
-            as_str=_TYPE_HEX_TO_STR.get(int(hex(self._value), 16), 'kInvalid')
+            as_str=_TYPE_INT_TO_STR.get(self._value, 'kInvalid')
         )
 
     def __str__(*args, **kwargs):
@@ -8086,77 +8087,108 @@ class MDistance(object):
     Manipulate distance data.
     """
 
-    def __init__(*args, **kwargs):
+    _UNIT_CONST_TO_NAME = {
+        6 : 'kCentimeters',
+        2 : 'kFeet',
+        1 : 'kInches',
+        0 : 'kInvalid',
+        7 : 'kKilometers',
+        9 : 'kLast',
+        8 : 'kMeters',
+        4 : 'kMiles',
+        5 : 'kMillimeters',
+        3 : 'kYards',
+    }
+
+    _FROM_CENTIMETERS = {
+        6: 1,
+        2: 1 / 30.48,
+        1: 1 / 2.54,
+        7: 1 / 100000,
+        8: 1 / 100,
+        4: 1 / 160934,
+        5: 10,
+        3: 1 / 91.44,
+    }
+
+    # Conversion factors to centimeters from other units
+    _TO_CENTIMETERS = {unit: 1 / factor for unit, factor in _FROM_CENTIMETERS.items()}
+
+
+    def __init__(self, value: float = None, unit: int = None, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._unit = unit or MDistance.kCentimeters
+        self._value = value or random.uniform(-100, 100)
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self):
         """
         x.__repr__() <==> repr(x)
         """
-        pass
+        return f'MDistance: <{self._value} {type(self)._UNIT_CONST_TO_NAME[self._unit]}>'
 
-    def __str__(*args, **kwargs):
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return f'{self._value} {type(self)._UNIT_CONST_TO_NAME[self._unit]}'
 
-    def asCentimeters(*args, **kwargs):
+    def asCentimeters(self) -> float:
         """
         Return the distance value, converted to centimeters.
         """
-        pass
+        return self._value / MDistance._FROM_CENTIMETERS[self._unit]
 
-    def asFeet(*args, **kwargs):
+    def asFeet(self) -> float:
         """
         Return the distance value, converted to feet.
         """
-        pass
+        return sself.asUnits(MDistance.kFeet)
 
-    def asInches(*args, **kwargs):
+    def asInches(self) -> float:
         """
         Return the distance value, converted to inches.
         """
-        pass
+        return self.asUnits(MDistance.kInches)
 
-    def asKilometers(*args, **kwargs):
+    def asKilometers(self) -> float:
         """
         Return the distance value, converted to kilometers.
         """
-        pass
+        return self.asUnits(MDistance.kKilometers)
 
-    def asMeters(*args, **kwargs):
+    def asMeters(self) -> float:
         """
         Return the distance value, converted to meters.
         """
-        pass
+        return self.asUnits(MDistance.kMeters)
 
-    def asMiles(*args, **kwargs):
+    def asMiles(self) -> float:
         """
         Return the distance value, converted to miles.
         """
-        pass
+        return self.asUnits(MDistance.kMiles)
 
-    def asMillimeters(*args, **kwargs):
+    def asMillimeters(self) -> float:
         """
         Return the distance value, converted to millimeters.
         """
-        pass
+        return self.asUnits(MDistance.kMillimeters)
 
-    def asUnits(*args, **kwargs):
+    def asUnits(self, unit=6) -> float:
         """
         Return the distance value, converted to the specified units.
         """
-        pass
 
-    def asYards(*args, **kwargs):
+        value_in_cm = self.asCentimeters()
+        return value_in_cm * MDistance._FROM_CENTIMETERS[unit]
+
+    def asYards(self) -> float:
         """
         Return the distance value, converted to yards.
         """
-        pass
+        return self.asUnits(MDistance.kYards)
 
     @staticmethod
     def internalToUI(*args, **kwargs):
@@ -8213,9 +8245,13 @@ class MDistance(object):
 
     kYards = 3
 
-    unit = None
+    @property
+    def unit(self):
+        return self._unit
 
-    value = None
+    @property
+    def value(self):
+        return self._value
 
 
 class MFloatPoint(object):
@@ -9312,33 +9348,19 @@ class MFn(object):
     Static class providing constants for all API types.
     """
 
-    kAISEnvFacade = 972
+    kInvalid = 0
+
+    kBase = 1
+
+    kNamedObject = 2
+
+    kModel = 3
+
+    kDependencyNode = 4
 
     kAddDoubleLinear = 5
 
-    kAdskMaterial = 1062
-
     kAffect = 6
-
-    kAimConstraint = 111
-
-    kAir = 257
-
-    kAlignCurve = 41
-
-    kAlignManip = 907
-
-    kAlignSurface = 42
-
-    kAmbientLight = 303
-
-    kAngle = 270
-
-    kAngleBetween = 21
-
-    kAnimBlend = 789
-
-    kAnimBlendInOut = 790
 
     kAnimCurve = 7
 
@@ -9358,347 +9380,89 @@ class MFn(object):
 
     kAnimCurveUnitlessToUnitless = 15
 
-    kAnimLayer = 1015
+    kResultCurve = 16
 
-    kAnisotropy = 617
+    kResultCurveTimeToAngular = 17
 
-    kAnnotation = 271
+    kResultCurveTimeToDistance = 18
 
-    kAnyGeometryVarGroup = 115
+    kResultCurveTimeToTime = 19
 
-    kArcLength = 273
+    kResultCurveTimeToUnitless = 20
 
-    kAreaLight = 305
-
-    kArrayMapper = 524
-
-    kArrowManip = 123
-
-    kArubaTesselate = 1127
-
-    kAssembly = 1076
-
-    kAsset = 1013
-
-    kAttachCurve = 43
-
-    kAttachSurface = 44
-
-    kAttribute = 561
-
-    kAttribute2Double = 742
-
-    kAttribute2Float = 743
-
-    kAttribute2Int = 745
-
-    kAttribute2Long = 745
-
-    kAttribute2Short = 744
-
-    kAttribute3Double = 746
-
-    kAttribute3Float = 747
-
-    kAttribute3Int = 749
-
-    kAttribute3Long = 749
-
-    kAttribute3Short = 748
-
-    kAttribute4Double = 875
+    kAngleBetween = 21
 
     kAudio = 22
 
-    kAverageCurveManip = 149
-
-    kAvgCurves = 45
-
-    kAvgNurbsSurfacePoints = 47
-
-    kAvgSurfacePoints = 46
-
-    kAxesActionManip = 124
-
     kBackground = 23
 
-    kBallProjectionManip = 125
+    kColorBackground = 24
 
-    kBarnDoorManip = 150
+    kFileBackground = 25
 
-    kBase = 1
-
-    kBaseLattice = 249
-
-    kBendLattice = 335
-
-    kBevel = 48
-
-    kBevelManip = 151
-
-    kBevelPlus = 894
-
-    kBezierCurve = 1049
-
-    kBezierCurveData = 1050
-
-    kBezierCurveToNurbs = 1052
-
-    kBinaryData = 741
-
-    kBirailSrf = 49
+    kRampBackground = 26
 
     kBlend = 27
-
-    kBlendColorSet = 734
-
-    kBlendColors = 31
-
-    kBlendDevice = 30
-
-    kBlendManip = 152
-
-    kBlendNodeAdditiveRotation = 1028
-
-    kBlendNodeAdditiveScale = 1027
-
-    kBlendNodeBase = 1016
-
-    kBlendNodeBoolean = 1017
-
-    kBlendNodeDouble = 1018
-
-    kBlendNodeDoubleAngle = 1019
-
-    kBlendNodeDoubleLinear = 1020
-
-    kBlendNodeEnum = 1021
-
-    kBlendNodeFloat = 1022
-
-    kBlendNodeFloatAngle = 1023
-
-    kBlendNodeFloatLinear = 1024
-
-    kBlendNodeInt16 = 1025
-
-    kBlendNodeInt32 = 1026
-
-    kBlendNodeTime = 1047
-
-    kBlendShape = 336
 
     kBlendTwoAttr = 28
 
     kBlendWeighted = 29
 
-    kBlindData = 751
+    kBlendDevice = 30
 
-    kBlindDataTemplate = 752
-
-    kBlinn = 371
-
-    kBlinnMaterial = 386
-
-    kBoundary = 53
-
-    kBox = 862
-
-    kBoxData = 861
-
-    kBrownian = 504
-
-    kBrush = 760
-
-    kBulge = 493
-
-    kBulgeLattice = 338
+    kBlendColors = 31
 
     kBump = 32
 
     kBump3d = 33
 
-    kButtonManip = 153
-
-    kCacheBase = 994
-
-    kCacheBlend = 995
-
-    kCacheFile = 982
-
-    kCacheTrack = 996
-
-    kCacheableNode = 991
-
-    kCaddyManipBase = 1105
-
-    kCamera = 250
-
-    kCameraManip = 154
-
-    kCameraPlaneManip = 143
-
-    kCameraSet = 1006
-
     kCameraView = 34
-
-    kCenterManip = 134
 
     kChainToSpline = 35
 
-    kCharacter = 683
-
-    kCharacterMap = 798
-
-    kCharacterMappingData = 737
-
-    kCharacterOffset = 684
-
-    kChecker = 494
-
     kChoice = 36
-
-    kChooser = 767
-
-    kCircle = 54
-
-    kCircleManip = 126
-
-    kCirclePointManip = 231
-
-    kCircleSweepManip = 128
-
-    kClampColor = 39
-
-    kClientDevice = 1072
-
-    kClip = 804
-
-    kClipGhostShape = 1077
-
-    kClipLibrary = 775
-
-    kClipScheduler = 774
-
-    kClipToGhostData = 1078
-
-    kCloseCurve = 55
-
-    kCloseSurface = 57
-
-    kClosestPointOnMesh = 984
-
-    kClosestPointOnSurface = 56
-
-    kCloth = 495
-
-    kCloud = 505
-
-    kCluster = 251
-
-    kClusterFilter = 347
-
-    kClusterFlexor = 300
-
-    kCoiManip = 155
-
-    kCollision = 253
-
-    kColorBackground = 24
-
-    kColorMgtGlobals = 1096
-
-    kColorProfile = 1061
-
-    kCombinationShape = 337
-
-    kCommCornerManip = 608
-
-    kCommCornerOperManip = 609
-
-    kCommEdgeOperManip = 606
-
-    kCommEdgePtManip = 605
-
-    kCommEdgeSegmentManip = 607
-
-    kComponent = 531
-
-    kComponentListData = 579
-
-    kComponentManip = 669
-
-    kCompoundAttribute = 571
-
-    kConcentricProjectionManip = 129
 
     kCondition = 37
 
-    kCone = 96
-
-    kConstraint = 927
-
-    kContainer = 1008
-
-    kContainerBase = 1063
-
-    kContourProjectionManip = 1110
-
     kContrast = 38
 
-    kControl = 482
-
-    kControllerTag = 1123
-
-    kCopyColorSet = 733
-
-    kCopyUVSet = 802
-
-    kCpManip = 156
-
-    kCrater = 506
-
-    kCreaseSet = 1085
+    kClampColor = 39
 
     kCreate = 40
 
-    kCreateBPManip = 832
+    kAlignCurve = 41
 
-    kCreateBezierManip = 1048
+    kAlignSurface = 42
 
-    kCreateCVManip = 157
+    kAttachCurve = 43
 
-    kCreateColorSet = 731
+    kAttachSurface = 44
 
-    kCreateEPManip = 158
+    kAvgCurves = 45
 
-    kCreateSectionManip = 819
+    kAvgSurfacePoints = 46
 
-    kCreateUVSet = 803
+    kAvgNurbsSurfacePoints = 47
 
-    kCrossSectionEditManip = 820
+    kBevel = 48
 
-    kCrossSectionManager = 818
+    kBirailSrf = 49
 
-    kCubicProjectionManip = 130
+    kDPbirailSrf = 50
 
-    kCurve = 266
+    kMPbirailSrf = 51
 
-    kCurveCVComponent = 532
+    kSPbirailSrf = 52
 
-    kCurveCurveIntersect = 636
+    kBoundary = 53
 
-    kCurveEPComponent = 533
+    kCircle = 54
 
-    kCurveEdManip = 159
+    kCloseCurve = 55
 
-    kCurveFromMeshCoM = 929
+    kClosestPointOnSurface = 56
 
-    kCurveFromMeshEdge = 635
-
-    kCurveFromSubdivEdge = 831
-
-    kCurveFromSubdivFace = 837
+    kCloseSurface = 57
 
     kCurveFromSurface = 58
 
@@ -9710,259 +9474,537 @@ class MFn(object):
 
     kCurveInfo = 62
 
-    kCurveKnotComponent = 534
-
-    kCurveNormalizerAngle = 998
-
-    kCurveNormalizerLinear = 999
-
-    kCurveParamComponent = 535
-
-    kCurveSegmentManip = 160
-
-    kCurveVarGroup = 116
-
-    kCustomEvaluatorClusterNode = 1125
-
-    kCylinder = 98
-
-    kCylindricalProjectionManip = 131
-
-    kDOF = 323
-
-    kDPbirailSrf = 50
-
-    kDagContainer = 1064
-
-    kDagNode = 107
-
-    kDagPose = 685
-
-    kDagSelectionItem = 558
-
-    kData = 578
-
-    kData2Double = 588
-
-    kData2Float = 589
-
-    kData2Int = 590
-
-    kData2Long = 590
-
-    kData2Short = 591
-
-    kData3Double = 592
-
-    kData3Float = 593
-
-    kData3Int = 594
-
-    kData3Long = 594
-
-    kData3Short = 595
-
-    kData4Double = 876
-
-    kDblTrsManip = 190
-
-    kDecayRegionCapComponent = 544
-
-    kDecayRegionComponent = 545
-
-    kDefaultLightList = 317
-
-    kDeformBend = 620
-
-    kDeformBendManip = 626
-
-    kDeformFlare = 623
-
-    kDeformFlareManip = 629
-
-    kDeformFunc = 619
-
-    kDeformSine = 624
-
-    kDeformSineManip = 630
-
-    kDeformSquash = 622
-
-    kDeformSquashManip = 628
-
-    kDeformTwist = 621
-
-    kDeformTwistManip = 627
-
-    kDeformWave = 625
-
-    kDeformWaveManip = 631
-
-    kDeleteColorSet = 732
-
-    kDeleteComponent = 318
-
-    kDeleteUVSet = 795
-
-    kDeltaMush = 350
-
-    kDependencyNode = 4
-
     kDetachCurve = 63
 
     kDetachSurface = 64
 
-    kDiffuseMaterial = 384
-
-    kDimension = 269
-
-    kDimensionManip = 232
-
-    kDirectedDisc = 276
-
-    kDirectionManip = 161
-
-    kDirectionalLight = 308
-
-    kDiscManip = 132
-
-    kDiskCache = 858
-
-    kDispatchCompute = 319
-
-    kDisplacementShader = 321
-
-    kDisplayLayer = 728
-
-    kDisplayLayerManager = 729
-
-    kDistance = 272
-
-    kDistanceBetween = 322
-
-    kDistanceManip = 633
-
-    kDofManip = 162
-
-    kDoubleAngleAttribute = 563
-
-    kDoubleArrayData = 580
-
-    kDoubleIndexedComponent = 709
-
-    kDoubleLinearAttribute = 565
-
-    kDoubleShadingSwitch = 614
-
-    kDrag = 258
-
-    kDropOffFunction = 821
-
-    kDropoffLocator = 282
-
-    kDropoffManip = 163
-
-    kDummy = 254
-
-    kDummyConnectable = 324
-
-    kDynAirManip = 719
-
-    kDynArrayAttrsData = 724
-
-    kDynAttenuationManip = 723
-
-    kDynBase = 715
-
-    kDynBaseFieldManip = 718
-
-    kDynEmitterManip = 716
-
-    kDynFieldsManip = 717
-
-    kDynGlobals = 764
-
-    kDynNewtonManip = 720
-
-    kDynParticleSetComponent = 556
-
-    kDynSpreadManip = 722
-
-    kDynSweptGeometryData = 738
-
-    kDynTurbulenceManip = 721
-
-    kDynamicConstraint = 988
-
-    kDynamicsController = 325
-
-    kEdgeComponent = 541
-
-    kEditCurve = 816
-
-    kEditCurveManip = 817
-
-    kEditMetadata = 1084
-
-    kEditsManager = 1092
-
-    kEmitter = 255
-
-    kEnableManip = 136
-
-    kEnumAttribute = 568
-
-    kEnvBall = 487
-
-    kEnvChrome = 489
-
-    kEnvCube = 488
-
-    kEnvFacade = 971
-
-    kEnvFogMaterial = 378
-
-    kEnvFogShape = 278
-
-    kEnvSky = 490
-
-    kEnvSphere = 491
-
-    kExplodeNurbsShell = 687
-
-    kExpression = 327
-
     kExtendCurve = 65
-
-    kExtendCurveDistanceManip = 164
 
     kExtendSurface = 66
 
-    kExtendSurfaceDistanceManip = 711
-
-    kExtract = 328
-
     kExtrude = 67
-
-    kExtrudeManip = 165
-
-    kFFD = 339
 
     kFFblendSrf = 68
 
     kFFfilletSrf = 69
 
-    kFacade = 969
+    kFilletCurve = 70
 
-    kFfdDualBase = 340
+    kFitBspline = 71
+
+    kFlow = 72
+
+    kHardenPointCurve = 73
+
+    kIllustratorCurve = 74
+
+    kInsertKnotCrv = 75
+
+    kInsertKnotSrf = 76
+
+    kIntersectSurface = 77
+
+    kNurbsTesselate = 78
+
+    kNurbsPlane = 79
+
+    kNurbsCube = 80
+
+    kOffsetCos = 81
+
+    kOffsetCurve = 82
+
+    kPlanarTrimSrf = 83
+
+    kPointOnCurveInfo = 84
+
+    kPointOnSurfaceInfo = 85
+
+    kPrimitive = 86
+
+    kProjectCurve = 87
+
+    kProjectTangent = 88
+
+    kRBFsurface = 89
+
+    kRebuildCurve = 90
+
+    kRebuildSurface = 91
+
+    kReverseCurve = 92
+
+    kReverseSurface = 93
+
+    kRevolve = 94
+
+    kRevolvedPrimitive = 95
+
+    kCone = 96
+
+    kRenderCone = 97
+
+    kCylinder = 98
+
+    kSphere = 99
+
+    kSkin = 100
+
+    kStitchSrf = 101
+
+    kSubCurve = 102
+
+    kSurfaceInfo = 103
+
+    kTextCurves = 104
+
+    kTrim = 105
+
+    kUntrim = 106
+
+    kDagNode = 107
+
+    kProxy = 108
+
+    kUnderWorld = 109
+
+    kTransform = 110
+
+    kAimConstraint = 111
+
+    kLookAt = 112
+
+    kGeometryConstraint = 113
+
+    kGeometryVarGroup = 114
+
+    kAnyGeometryVarGroup = 115
+
+    kCurveVarGroup = 116
+
+    kMeshVarGroup = 117
+
+    kSurfaceVarGroup = 118
+
+    kIkEffector = 119
+
+    kIkHandle = 120
+
+    kJoint = 121
+
+    kManipulator3D = 122
+
+    kArrowManip = 123
+
+    kAxesActionManip = 124
+
+    kBallProjectionManip = 125
+
+    kCircleManip = 126
+
+    kScreenAlignedCircleManip = 127
+
+    kCircleSweepManip = 128
+
+    kConcentricProjectionManip = 129
+
+    kCubicProjectionManip = 130
+
+    kCylindricalProjectionManip = 131
+
+    kDiscManip = 132
+
+    kFreePointManip = 133
+
+    kCenterManip = 134
+
+    kLimitManip = 135
+
+    kEnableManip = 136
+
+    kFreePointTriadManip = 137
+
+    kPropMoveTriadManip = 138
+
+    kTowPointManip = 139
+
+    kPolyCreateToolManip = 140
+
+    kPolySplitToolManip = 141
+
+    kGeometryOnLineManip = 142
+
+    kCameraPlaneManip = 143
+
+    kToggleOnLineManip = 144
+
+    kStateManip = 145
+
+    kIsoparmManip = 146
+
+    kLineManip = 147
+
+    kManipContainer = 148
+
+    kAverageCurveManip = 149
+
+    kBarnDoorManip = 150
+
+    kBevelManip = 151
+
+    kBlendManip = 152
+
+    kButtonManip = 153
+
+    kCameraManip = 154
+
+    kCoiManip = 155
+
+    kCpManip = 156
+
+    kCreateCVManip = 157
+
+    kCreateEPManip = 158
+
+    kCurveEdManip = 159
+
+    kCurveSegmentManip = 160
+
+    kDirectionManip = 161
+
+    kDofManip = 162
+
+    kDropoffManip = 163
+
+    kExtendCurveDistanceManip = 164
+
+    kExtrudeManip = 165
+
+    kIkSplineManip = 166
+
+    kIkRPManip = 167
+
+    kJointClusterManip = 168
+
+    kLightManip = 169
+
+    kMotionPathManip = 170
+
+    kOffsetCosManip = 171
+
+    kOffsetCurveManip = 172
+
+    kProjectionManip = 173
+
+    kPolyProjectionManip = 174
+
+    kProjectionUVManip = 175
+
+    kProjectionMultiManip = 176
+
+    kProjectTangentManip = 177
+
+    kPropModManip = 178
+
+    kQuadPtOnLineManip = 179
+
+    kRbfSrfManip = 180
+
+    kReverseCurveManip = 181
+
+    kReverseCrvManip = 182
+
+    kReverseSurfaceManip = 183
+
+    kRevolveManip = 184
+
+    kRevolvedPrimitiveManip = 185
+
+    kSpotManip = 186
+
+    kSpotCylinderManip = 187
+
+    kTriplanarProjectionManip = 188
+
+    kTrsManip = 189
+
+    kDblTrsManip = 190
+
+    kPivotManip2D = 191
+
+    kManip2DContainer = 192
+
+    kPolyMoveUVManip = 193
+
+    kPolyMappingManip = 194
+
+    kPolyModifierManip = 195
+
+    kPolyMoveVertexManip = 196
+
+    kPolyVertexNormalManip = 197
+
+    kTexSmudgeUVManip = 198
+
+    kTexLatticeDeformManip = 199
+
+    kTexLattice = 200
+
+    kTexSmoothManip = 201
+
+    kTrsTransManip = 202
+
+    kTrsInsertManip = 203
+
+    kTrsXformManip = 204
+
+    kManipulator2D = 205
+
+    kTranslateManip2D = 206
+
+    kPlanarProjectionManip = 207
+
+    kPointOnCurveManip = 208
+
+    kTowPointOnCurveManip = 209
+
+    kMarkerManip = 210
+
+    kPointOnLineManip = 211
+
+    kPointOnSurfaceManip = 212
+
+    kTranslateUVManip = 213
+
+    kRotateBoxManip = 214
+
+    kRotateManip = 215
+
+    kHandleRotateManip = 216
+
+    kRotateLimitsManip = 217
+
+    kScaleLimitsManip = 218
+
+    kScaleManip = 219
+
+    kScalingBoxManip = 220
+
+    kScriptManip = 221
+
+    kSphericalProjectionManip = 222
+
+    kTextureManip3D = 223
+
+    kToggleManip = 224
+
+    kTranslateBoxManip = 225
+
+    kTranslateLimitsManip = 226
+
+    kTranslateManip = 227
+
+    kTrimManip = 228
+
+    kJointTranslateManip = 229
+
+    kManipulator = 230
+
+    kCirclePointManip = 231
+
+    kDimensionManip = 232
+
+    kFixedLineManip = 233
+
+    kLightProjectionGeometry = 234
+
+    kLineArrowManip = 235
+
+    kPointManip = 236
+
+    kTriadManip = 237
+
+    kNormalConstraint = 238
+
+    kOrientConstraint = 239
+
+    kPointConstraint = 240
+
+    kSymmetryConstraint = 241
+
+    kParentConstraint = 242
+
+    kPoleVectorConstraint = 243
+
+    kScaleConstraint = 244
+
+    kTangentConstraint = 245
+
+    kUnknownTransform = 246
+
+    kWorld = 247
+
+    kShape = 248
+
+    kBaseLattice = 249
+
+    kCamera = 250
+
+    kCluster = 251
+
+    kSoftMod = 252
+
+    kCollision = 253
+
+    kDummy = 254
+
+    kEmitter = 255
 
     kField = 256
 
-    kFileBackground = 25
+    kAir = 257
 
-    kFileTexture = 496
+    kDrag = 258
 
-    kFilletCurve = 70
+    kGravity = 259
+
+    kNewton = 260
+
+    kRadial = 261
+
+    kTurbulence = 262
+
+    kUniform = 263
+
+    kVortex = 264
+
+    kGeometric = 265
+
+    kCurve = 266
+
+    kNurbsCurve = 267
+
+    kNurbsCurveGeom = 268
+
+    kDimension = 269
+
+    kAngle = 270
+
+    kAnnotation = 271
+
+    kDistance = 272
+
+    kArcLength = 273
+
+    kRadius = 274
+
+    kParamDimension = 275
+
+    kDirectedDisc = 276
+
+    kRenderRect = 277
+
+    kEnvFogShape = 278
+
+    kLattice = 279
+
+    kLatticeGeom = 280
+
+    kLocator = 281
+
+    kDropoffLocator = 282
+
+    kMarker = 283
+
+    kOrientationMarker = 284
+
+    kPositionMarker = 285
+
+    kOrientationLocator = 286
+
+    kTrimLocator = 287
+
+    kPlane = 288
+
+    kSketchPlane = 289
+
+    kGroundPlane = 290
+
+    kOrthoGrid = 291
+
+    kSprite = 292
+
+    kSurface = 293
+
+    kNurbsSurface = 294
+
+    kNurbsSurfaceGeom = 295
+
+    kMesh = 296
+
+    kMeshGeom = 297
+
+    kRenderSphere = 298
+
+    kFlexor = 299
+
+    kClusterFlexor = 300
+
+    kGuideLine = 301
+
+    kLight = 302
+
+    kAmbientLight = 303
+
+    kNonAmbientLight = 304
+
+    kAreaLight = 305
+
+    kLinearLight = 306
+
+    kNonExtendedLight = 307
+
+    kDirectionalLight = 308
+
+    kPointLight = 309
+
+    kSpotLight = 310
+
+    kParticle = 311
+
+    kPolyToolFeedbackShape = 312
+
+    kRigidConstraint = 313
+
+    kRigid = 314
+
+    kSpring = 315
+
+    kUnknownDag = 316
+
+    kDefaultLightList = 317
+
+    kDeleteComponent = 318
+
+    kDispatchCompute = 319
+
+    kShadingEngine = 320
+
+    kDisplacementShader = 321
+
+    kDistanceBetween = 322
+
+    kDOF = 323
+
+    kDummyConnectable = 324
+
+    kDynamicsController = 325
+
+    kGeoConnectable = 326
+
+    kExpression = 327
+
+    kExtract = 328
 
     kFilter = 329
 
@@ -9972,1615 +10014,1751 @@ class MFn(object):
 
     kFilterSimplify = 332
 
-    kFitBspline = 71
-
-    kFixedLineManip = 233
-
-    kFlexor = 299
-
-    kFloatAngleAttribute = 564
-
-    kFloatArrayData = 1032
-
-    kFloatLinearAttribute = 566
-
-    kFloatMatrixAttribute = 575
-
-    kFloatVectorArrayData = 1009
-
-    kFlow = 72
-
-    kFluid = 909
-
-    kFluidData = 911
-
-    kFluidEmitter = 915
-
-    kFluidGeom = 910
-
-    kFluidTexture2D = 904
-
-    kFluidTexture3D = 903
-
-    kFollicle = 930
-
-    kForceUpdateManip = 690
-
-    kFosterParent = 1087
-
-    kFourByFourMatrix = 770
-
-    kFractal = 497
-
-    kFreePointManip = 133
-
-    kFreePointTriadManip = 137
-
     kGammaCorrect = 333
-
-    kGenericAttribute = 572
-
-    kGeoConnectable = 326
-
-    kGeoConnector = 917
-
-    kGeomBind = 1095
-
-    kGeometric = 265
-
-    kGeometryConstraint = 113
-
-    kGeometryData = 707
 
     kGeometryFilt = 334
 
-    kGeometryOnLineManip = 142
+    kBendLattice = 335
 
-    kGeometryVarGroup = 114
+    kBlendShape = 336
 
-    kGlobalCacheControls = 857
+    kCombinationShape = 337
 
-    kGlobalStitch = 696
+    kBulgeLattice = 338
 
-    kGranite = 507
+    kFFD = 339
 
-    kGravity = 259
-
-    kGreasePencilSequence = 1083
-
-    kGreasePlane = 1081
-
-    kGreasePlaneRenderShape = 1082
-
-    kGrid = 498
-
-    kGroundPlane = 290
-
-    kGroupId = 354
-
-    kGroupParts = 355
-
-    kGuide = 356
-
-    kGuideLine = 301
-
-    kHairConstraint = 935
-
-    kHairSystem = 931
-
-    kHairTubeShader = 942
-
-    kHandleRotateManip = 216
-
-    kHardenPointCurve = 73
-
-    kHardwareReflectionMap = 881
-
-    kHardwareRenderGlobals = 523
-
-    kHardwareRenderingGlobals = 1066
-
-    kHeightField = 916
-
-    kHikEffector = 956
-
-    kHikFKJoint = 958
-
-    kHikFloorContactMarker = 978
-
-    kHikGroundPlane = 979
-
-    kHikHandle = 960
-
-    kHikIKEffector = 957
-
-    kHikSolver = 959
-
-    kHistorySwitch = 983
-
-    kHsvToRgb = 357
-
-    kHwShaderNode = 884
-
-    kHyperGraphInfo = 358
-
-    kHyperLayout = 359
-
-    kHyperLayoutDG = 1000
-
-    kHyperView = 360
-
-    kIkEffector = 119
-
-    kIkHandle = 120
-
-    kIkRPManip = 167
-
-    kIkSolver = 361
-
-    kIkSplineManip = 166
-
-    kIkSystem = 367
-
-    kIllustratorCurve = 74
-
-    kImageAdd = 654
-
-    kImageBlur = 660
-
-    kImageColorCorrect = 659
-
-    kImageData = 648
-
-    kImageDepth = 662
-
-    kImageDiff = 655
-
-    kImageDisplay = 663
-
-    kImageFilter = 661
-
-    kImageLoad = 649
-
-    kImageMotionBlur = 665
-
-    kImageMultiply = 656
-
-    kImageNetDest = 652
-
-    kImageNetSrc = 651
-
-    kImageOver = 657
-
-    kImagePlane = 368
-
-    kImageRender = 653
-
-    kImageSave = 650
-
-    kImageSource = 786
-
-    kImageUnder = 658
-
-    kImageView = 664
-
-    kImplicitCone = 889
-
-    kImplicitSphere = 890
-
-    kInsertKnotCrv = 75
-
-    kInsertKnotSrf = 76
-
-    kInstancer = 757
-
-    kInt64ArrayData = 809
-
-    kIntArrayData = 581
-
-    kIntersectSurface = 77
-
-    kInvalid = 0
-
-    kIsoparmComponent = 536
-
-    kIsoparmManip = 146
-
-    kItemList = 560
-
-    kJiggleDeformer = 856
-
-    kJoint = 121
-
-    kJointCluster = 349
-
-    kJointClusterManip = 168
-
-    kJointTranslateManip = 229
-
-    kKeyframeDelta = 944
-
-    kKeyframeDeltaAddRemove = 947
-
-    kKeyframeDeltaBlockAddRemove = 948
-
-    kKeyframeDeltaBreakdown = 952
-
-    kKeyframeDeltaInfType = 949
-
-    kKeyframeDeltaMove = 945
-
-    kKeyframeDeltaScale = 946
-
-    kKeyframeDeltaTangent = 950
-
-    kKeyframeDeltaWeighted = 951
-
-    kKeyframeRegionManip = 997
-
-    kKeyingGroup = 682
-
-    kLambert = 369
-
-    kLambertMaterial = 385
-
-    kLast = 1130
-
-    kLattice = 279
-
-    kLatticeComponent = 542
-
-    kLatticeData = 582
-
-    kLatticeGeom = 280
-
-    kLayeredShader = 374
-
-    kLayeredTexture = 799
-
-    kLeastSquares = 376
-
-    kLeather = 508
-
-    kLight = 302
-
-    kLightDataAttribute = 573
-
-    kLightFogMaterial = 377
-
-    kLightInfo = 375
-
-    kLightLink = 763
-
-    kLightList = 379
-
-    kLightManip = 169
-
-    kLightProjectionGeometry = 234
-
-    kLightSource = 380
-
-    kLightSourceMaterial = 388
-
-    kLimitManip = 135
-
-    kLineArrowManip = 235
-
-    kLineManip = 147
-
-    kLineModifier = 973
-
-    kLinearLight = 306
-
-    kLocator = 281
-
-    kLodGroup = 768
-
-    kLodThresholds = 766
-
-    kLookAt = 112
-
-    kLuminance = 381
-
-    kMCsolver = 362
-
-    kMPbirailSrf = 51
-
-    kMakeGroup = 382
-
-    kMandelbrot = 1079
-
-    kMandelbrot3D = 1080
-
-    kManip2DContainer = 192
-
-    kManipContainer = 148
-
-    kManipulator = 230
-
-    kManipulator2D = 205
-
-    kManipulator3D = 122
-
-    kMarble = 509
-
-    kMarker = 283
-
-    kMarkerManip = 210
-
-    kMaterial = 383
-
-    kMaterialFacade = 970
-
-    kMaterialInfo = 389
-
-    kMatrixAdd = 390
-
-    kMatrixArrayData = 598
-
-    kMatrixAttribute = 574
-
-    kMatrixData = 583
-
-    kMatrixFloatData = 667
-
-    kMatrixHold = 391
-
-    kMatrixMult = 392
-
-    kMatrixPass = 393
-
-    kMatrixWtAdd = 394
-
-    kMembrane = 1033
-
-    kMentalRayTexture = 937
-
-    kMergeVertsToolManip = 1034
-
-    kMesh = 296
-
-    kMeshComponent = 546
-
-    kMeshData = 584
-
-    kMeshEdgeComponent = 547
-
-    kMeshFaceVertComponent = 551
-
-    kMeshFrEdgeComponent = 549
-
-    kMeshGeom = 297
-
-    kMeshMapComponent = 812
-
-    kMeshPolygonComponent = 548
-
-    kMeshVarGroup = 117
-
-    kMeshVertComponent = 550
-
-    kMeshVtxFaceComponent = 740
-
-    kMessageAttribute = 576
-
-    kMidModifier = 395
-
-    kMidModifierWithMatrix = 396
-
-    kModel = 3
-
-    kModifyEdgeBaseManip = 833
-
-    kModifyEdgeCrvManip = 824
-
-    kModifyEdgeManip = 825
-
-    kMotionPath = 441
-
-    kMotionPathManip = 170
-
-    kMountain = 499
-
-    kMoveUVShellManip2D = 705
-
-    kMoveVertexManip = 758
-
-    kMultDoubleLinear = 769
-
-    kMultiSubVertexComponent = 554
-
-    kMultilisterLight = 443
-
-    kMultiplyDivide = 444
-
-    kMute = 926
-
-    kNBase = 993
-
-    kNCloth = 1002
-
-    kNComponent = 989
-
-    kNId = 1031
-
-    kNIdData = 1030
-
-    kNLE = 1090
-
-    kNObject = 1011
-
-    kNObjectData = 1010
-
-    kNParticle = 1003
-
-    kNRigid = 1004
-
-    kNamedObject = 2
-
-    kNearestPointOnCurve = 1060
-
-    kNewton = 260
-
-    kNodeGraphEditorBookmarkInfo = 1113
-
-    kNodeGraphEditorBookmarks = 1112
-
-    kNodeGraphEditorInfo = 1111
-
-    kNoise = 874
-
-    kNonAmbientLight = 304
-
-    kNonDagSelectionItem = 559
-
-    kNonExtendedLight = 307
-
-    kNonLinear = 618
-
-    kNormalConstraint = 238
-
-    kNucleus = 992
-
-    kNumericAttribute = 562
-
-    kNumericData = 587
-
-    kNurbsBoolean = 688
-
-    kNurbsCircular2PtArc = 638
-
-    kNurbsCircular3PtArc = 637
-
-    kNurbsCube = 80
-
-    kNurbsCurve = 267
-
-    kNurbsCurveData = 586
-
-    kNurbsCurveGeom = 268
-
-    kNurbsCurveToBezier = 1051
-
-    kNurbsPlane = 79
-
-    kNurbsSquare = 616
-
-    kNurbsSurface = 294
-
-    kNurbsSurfaceData = 585
-
-    kNurbsSurfaceGeom = 295
-
-    kNurbsTesselate = 78
-
-    kNurbsToSubdiv = 755
-
-    kObjectAttrFilter = 675
-
-    kObjectBinFilter = 938
-
-    kObjectFilter = 671
-
-    kObjectMultiFilter = 672
-
-    kObjectNameFilter = 673
-
-    kObjectRenderFilter = 676
-
-    kObjectScriptFilter = 677
-
-    kObjectTypeFilter = 674
-
-    kOcean = 870
-
-    kOceanDeformer = 1121
-
-    kOceanShader = 893
-
-    kOffsetCos = 81
-
-    kOffsetCosManip = 171
-
-    kOffsetCurve = 82
-
-    kOffsetCurveManip = 172
-
-    kOffsetSurface = 639
-
-    kOffsetSurfaceManip = 647
-
-    kOldGeometryConstraint = 445
-
-    kOpticalFX = 446
-
-    kOrientConstraint = 239
-
-    kOrientationComponent = 552
-
-    kOrientationLocator = 286
-
-    kOrientationMarker = 284
-
-    kOrthoGrid = 291
-
-    kPASolver = 363
-
-    kPairBlend = 922
-
-    kParamDimension = 275
-
-    kParentConstraint = 242
-
-    kParticle = 311
-
-    kParticleAgeMapper = 447
-
-    kParticleCloud = 448
-
-    kParticleColorMapper = 449
-
-    kParticleIncandecenceMapper = 450
-
-    kParticleSamplerInfo = 801
-
-    kParticleTransparencyMapper = 451
-
-    kPartition = 452
-
-    kPassContributionMap = 782
-
-    kPfxGeometry = 940
-
-    kPfxHair = 941
-
-    kPfxToon = 966
-
-    kPhong = 372
-
-    kPhongExplorer = 373
-
-    kPhongMaterial = 387
-
-    kPinToGeometryProx = 986
-
-    kPinToGeometryUV = 985
-
-    kPivotComponent = 537
-
-    kPivotManip2D = 191
-
-    kPlace2dTexture = 453
-
-    kPlace3dTexture = 454
-
-    kPlanarProjectionManip = 207
-
-    kPlanarTrimSrf = 83
-
-    kPlane = 288
-
-    kPlugin = 577
-
-    kPluginBlendShape = 1116
-
-    kPluginCameraSet = 1007
-
-    kPluginClientDevice = 1073
-
-    kPluginConstraintNode = 1012
-
-    kPluginData = 596
-
-    kPluginDeformerNode = 610
-
-    kPluginDependNode = 455
-
-    kPluginEmitterNode = 726
-
-    kPluginFieldNode = 725
-
-    kPluginGeometryData = 762
-
-    kPluginGeometryFilter = 1115
-
-    kPluginHardwareShader = 885
-
-    kPluginHwShaderNode = 886
-
-    kPluginIkSolver = 756
-
-    kPluginImagePlaneNode = 1001
-
-    kPluginLocatorNode = 456
-
-    kPluginManipContainer = 691
-
-    kPluginManipulatorNode = 1029
-
-    kPluginMotionPathNode = 442
-
-    kPluginObjectSet = 919
-
-    kPluginParticleAttributeMapperNode = 1005
-
-    kPluginShape = 706
-
-    kPluginSkinCluster = 1114
-
-    kPluginSpringNode = 727
-
-    kPluginThreadedDevice = 1074
-
-    kPluginTransformNode = 908
-
-    kPlusMinusAverage = 457
-
-    kPointArrayData = 597
-
-    kPointConstraint = 240
-
-    kPointLight = 309
-
-    kPointManip = 236
-
-    kPointMatrixMult = 458
-
-    kPointOnCurveInfo = 84
-
-    kPointOnCurveManip = 208
-
-    kPointOnLineManip = 211
-
-    kPointOnPolyConstraint = 1055
-
-    kPointOnSurfaceInfo = 85
-
-    kPointOnSurfaceManip = 212
-
-    kPoleVectorConstraint = 243
-
-    kPolyAppend = 399
-
-    kPolyAppendVertex = 791
-
-    kPolyArrow = 974
-
-    kPolyAutoProj = 846
-
-    kPolyAutoProjManip = 962
-
-    kPolyAverageVertex = 845
-
-    kPolyBevel = 397
-
-    kPolyBevel2 = 1093
-
-    kPolyBevel3 = 1097
-
-    kPolyBlindData = 753
-
-    kPolyBoolOp = 612
-
-    kPolyBridgeEdge = 990
-
-    kPolyCBoolOp = 1094
-
-    kPolyCaddyManip = 1106
-
-    kPolyChipOff = 400
-
-    kPolyCircularize = 1126
-
-    kPolyClean = 1119
-
-    kPolyCloseBorder = 401
-
-    kPolyCollapseEdge = 402
-
-    kPolyCollapseF = 403
-
-    kPolyColorDel = 736
-
-    kPolyColorMod = 735
-
-    kPolyColorPerVertex = 730
-
-    kPolyComponentData = 980
-
-    kPolyCone = 433
-
-    kPolyConnectComponents = 1056
-
-    kPolyContourProj = 1109
-
-    kPolyCreaseEdge = 954
-
-    kPolyCreateFacet = 439
-
-    kPolyCreateToolManip = 140
-
-    kPolyCreator = 431
-
-    kPolyCube = 434
-
-    kPolyCut = 896
-
-    kPolyCutManip = 900
-
-    kPolyCutManipContainer = 899
-
-    kPolyCylProj = 404
-
-    kPolyCylinder = 435
-
-    kPolyDelEdge = 405
-
-    kPolyDelFacet = 406
-
-    kPolyDelVertex = 407
-
-    kPolyDuplicateEdge = 968
-
-    kPolyEdgeToCurve = 1014
-
-    kPolyEditEdgeFlow = 1086
-
-    kPolyExtrudeEdge = 788
-
-    kPolyExtrudeFacet = 408
-
-    kPolyExtrudeManip = 1069
-
-    kPolyExtrudeManipContainer = 1070
-
-    kPolyExtrudeVertex = 921
-
-    kPolyFlipEdge = 787
-
-    kPolyFlipUV = 883
-
-    kPolyHelix = 981
-
-    kPolyHoleFace = 1054
-
-    kPolyLayoutUV = 847
-
-    kPolyMapCut = 409
-
-    kPolyMapDel = 410
-
-    kPolyMapSew = 411
-
-    kPolyMapSewMove = 848
-
-    kPolyMappingManip = 194
-
-    kPolyMergeEdge = 412
-
-    kPolyMergeFacet = 413
-
-    kPolyMergeUV = 905
-
-    kPolyMergeVert = 693
-
-    kPolyMesh = 436
-
-    kPolyMirror = 953
-
-    kPolyMirrorManipContainer = 901
-
-    kPolyModifierManip = 195
-
-    kPolyModifierManipContainer = 1107
-
-    kPolyMoveEdge = 414
-
-    kPolyMoveFacet = 415
-
-    kPolyMoveFacetUV = 416
-
-    kPolyMoveUV = 417
-
-    kPolyMoveUVManip = 193
-
-    kPolyMoveVertex = 418
-
-    kPolyMoveVertexManip = 196
-
-    kPolyMoveVertexUV = 419
-
-    kPolyNormal = 420
-
-    kPolyNormalPerVertex = 754
-
-    kPolyNormalizeUV = 882
-
-    kPolyPassThru = 1117
-
-    kPolyPinUV = 955
-
-    kPolyPipe = 977
-
-    kPolyPlanProj = 421
-
-    kPolyPlatonicSolid = 976
-
-    kPolyPoke = 897
-
-    kPolyPokeManip = 902
-
-    kPolyPrimitive = 432
-
-    kPolyPrimitiveMisc = 975
-
-    kPolyPrism = 963
-
-    kPolyProj = 422
-
-    kPolyProjectCurve = 1067
-
-    kPolyProjectionManip = 174
-
-    kPolyPyramid = 964
-
-    kPolyQuad = 423
-
-    kPolyReduce = 765
-
-    kPolyRemesh = 1108
-
-    kPolySelectEditFeedbackManip = 1037
-
-    kPolySeparate = 459
-
-    kPolySewEdge = 692
-
-    kPolySmooth = 424
-
-    kPolySmoothFacet = 694
-
-    kPolySmoothProxy = 939
-
-    kPolySoftEdge = 425
-
-    kPolySphProj = 426
-
-    kPolySphere = 437
-
-    kPolySpinEdge = 1053
-
-    kPolySplit = 427
-
-    kPolySplitEdge = 810
-
-    kPolySplitRing = 965
-
-    kPolySplitToolManip = 141
-
-    kPolySplitVert = 805
-
-    kPolyStraightenUVBorder = 906
-
-    kPolySubdEdge = 428
-
-    kPolySubdFacet = 429
-
-    kPolyToSubdiv = 680
-
-    kPolyToolFeedbackManip = 1036
-
-    kPolyToolFeedbackShape = 312
-
-    kPolyTorus = 438
-
-    kPolyTransfer = 844
-
-    kPolyTriangulate = 430
-
-    kPolyTweak = 398
-
-    kPolyTweakUV = 704
-
-    kPolyUVRectangle = 1065
-
-    kPolyUnite = 440
-
-    kPolyVertexNormalManip = 197
-
-    kPolyWedgeFace = 898
-
-    kPoseInterpolatorManager = 1122
-
-    kPositionMarker = 285
-
-    kPostProcessList = 460
-
-    kPrecompExport = 783
-
-    kPrimitive = 86
-
-    kProjectCurve = 87
-
-    kProjectTangent = 88
-
-    kProjectTangentManip = 177
-
-    kProjection = 461
-
-    kProjectionManip = 173
-
-    kProjectionMultiManip = 176
-
-    kProjectionUVManip = 175
-
-    kPropModManip = 178
-
-    kPropMoveTriadManip = 138
-
-    kProxWrap = 352
-
-    kProxy = 108
-
-    kProxyManager = 961
-
-    kPsdFileTexture = 943
-
-    kQuadPtOnLineManip = 179
-
-    kQuadShadingSwitch = 920
-
-    kRBFsurface = 89
-
-    kRPsolver = 365
-
-    kRadial = 261
-
-    kRadius = 274
-
-    kRamp = 500
-
-    kRampBackground = 26
-
-    kRampShader = 891
-
-    kRbfSrfManip = 180
-
-    kReForm = 1124
-
-    kRebuildCurve = 90
-
-    kRebuildSurface = 91
-
-    kRecord = 462
-
-    kReference = 750
-
-    kReflect = 370
-
-    kRemapColor = 933
-
-    kRemapHsv = 934
-
-    kRemapValue = 932
-
-    kRenderBox = 863
-
-    kRenderCone = 97
-
-    kRenderGlobals = 519
-
-    kRenderGlobalsList = 520
-
-    kRenderLayer = 780
-
-    kRenderLayerManager = 781
-
-    kRenderPass = 778
-
-    kRenderPassSet = 779
-
-    kRenderQuality = 521
-
-    kRenderRect = 277
-
-    kRenderSetup = 518
-
-    kRenderSphere = 298
-
-    kRenderTarget = 784
-
-    kRenderUtilityList = 463
-
-    kRenderedImageSource = 785
-
-    kRenderingList = 1068
-
-    kReorderUVSet = 1128
-
-    kResolution = 522
-
-    kResultCurve = 16
-
-    kResultCurveTimeToAngular = 17
-
-    kResultCurveTimeToDistance = 18
-
-    kResultCurveTimeToTime = 19
-
-    kResultCurveTimeToUnitless = 20
-
-    kReverse = 464
-
-    kReverseCrvManip = 182
-
-    kReverseCurve = 92
-
-    kReverseCurveManip = 181
-
-    kReverseSurface = 93
-
-    kReverseSurfaceManip = 183
-
-    kRevolve = 94
-
-    kRevolveManip = 184
-
-    kRevolvedPrimitive = 95
-
-    kRevolvedPrimitiveManip = 185
-
-    kRgbToHsv = 465
-
-    kRigid = 314
-
-    kRigidConstraint = 313
+    kFfdDualBase = 340
 
     kRigidDeform = 341
 
-    kRigidSolver = 466
-
-    kRock = 510
-
-    kRotateBoxManip = 214
-
-    kRotateLimitsManip = 217
-
-    kRotateManip = 215
-
-    kRotateUVManip2D = 702
-
-    kRoundConstantRadius = 640
-
-    kRoundConstantRadiusManip = 643
-
-    kRoundRadiusCrvManip = 642
-
-    kRoundRadiusManip = 641
-
-    kSCsolver = 364
-
-    kSPbirailSrf = 52
-
-    kSamplerInfo = 474
-
-    kScaleConstraint = 244
-
-    kScaleLimitsManip = 218
-
-    kScaleManip = 219
-
-    kScalePointManip = 826
-
-    kScaleUVManip2D = 703
-
-    kScalingBoxManip = 220
-
-    kScreenAlignedCircleManip = 127
-
-    kScript = 634
-
-    kScriptManip = 221
-
     kSculpt = 342
-
-    kSectionManip = 813
-
-    kSelectionItem = 557
-
-    kSelectionList = 603
-
-    kSelectionListData = 670
-
-    kSelectionListOperator = 678
-
-    kSequenceManager = 1044
-
-    kSequencer = 1045
-
-    kSet = 467
-
-    kSetGroupComponent = 555
-
-    kSetRange = 470
-
-    kSfRevolveManip = 836
-
-    kShaderGlow = 471
-
-    kShaderList = 472
-
-    kShadingEngine = 320
-
-    kShadingMap = 473
-
-    kShape = 248
-
-    kShapeEditorManager = 1120
-
-    kShapeFragment = 475
-
-    kShot = 1046
-
-    kShrinkWrapFilter = 1091
-
-    kSimpleVolumeShader = 476
-
-    kSingleIndexedComponent = 708
-
-    kSingleShadingSwitch = 613
-
-    kSketchPlane = 289
-
-    kSkin = 100
-
-    kSkinBinding = 1057
-
-    kSkinClusterFilter = 681
-
-    kSkinShader = 668
-
-    kSl60 = 477
-
-    kSmear = 912
-
-    kSmoothCurve = 695
-
-    kSmoothTangentSrf = 777
-
-    kSnapUVManip2D = 1088
-
-    kSnapshot = 478
-
-    kSnapshotPath = 918
-
-    kSnapshotShape = 854
-
-    kSnow = 511
-
-    kSoftMod = 252
-
-    kSoftModFilter = 348
-
-    kSoftModManip = 632
-
-    kSolidFractal = 512
-
-    kSphere = 99
-
-    kSphereData = 599
-
-    kSphericalProjectionManip = 222
-
-    kSplineSolver = 366
-
-    kSpotCylinderManip = 187
-
-    kSpotLight = 310
-
-    kSpotManip = 186
-
-    kSpring = 315
-
-    kSprite = 292
-
-    kSquareSrf = 712
-
-    kSquareSrfManip = 713
-
-    kStateManip = 145
-
-    kStencil = 501
-
-    kStereoCameraMaster = 1043
-
-    kStitchAsNurbsShell = 686
-
-    kStitchSrf = 101
-
-    kStitchSrfManip = 689
-
-    kStoryBoard = 479
-
-    kStringArrayData = 601
-
-    kStringData = 600
-
-    kStringShadingSwitch = 913
-
-    kStroke = 759
-
-    kStrokeGlobals = 761
-
-    kStucco = 513
-
-    kStudioClearCoat = 914
-
-    kStyleCurve = 895
-
-    kSubCurve = 102
-
-    kSubSurface = 776
-
-    kSubVertexComponent = 553
-
-    kSubdAddTopology = 887
-
-    kSubdAutoProj = 872
-
-    kSubdBlindData = 797
-
-    kSubdBoolean = 822
-
-    kSubdCleanTopology = 888
-
-    kSubdCloseBorder = 859
-
-    kSubdDelFace = 853
-
-    kSubdExtrudeFace = 834
-
-    kSubdHierBlind = 796
-
-    kSubdLayoutUV = 868
-
-    kSubdMapCut = 867
-
-    kSubdMapSewMove = 869
-
-    kSubdMappingManip = 880
-
-    kSubdMergeVert = 860
-
-    kSubdModifier = 849
-
-    kSubdModifyEdge = 823
-
-    kSubdMoveEdge = 851
-
-    kSubdMoveFace = 852
-
-    kSubdMoveVertex = 850
-
-    kSubdPlanProj = 877
-
-    kSubdProjectionManip = 879
-
-    kSubdSplitFace = 864
-
-    kSubdSubdivideFace = 873
-
-    kSubdTweak = 878
-
-    kSubdTweakUV = 866
-
-    kSubdiv = 679
-
-    kSubdivCVComponent = 697
-
-    kSubdivCollapse = 800
-
-    kSubdivCompId = 793
-
-    kSubdivData = 806
-
-    kSubdivEdgeComponent = 698
-
-    kSubdivFaceComponent = 699
-
-    kSubdivGeom = 807
-
-    kSubdivMapComponent = 855
-
-    kSubdivReverseFaces = 811
-
-    kSubdivSurfaceVarGroup = 835
-
-    kSubdivToNurbs = 815
-
-    kSubdivToPoly = 714
-
-    kSummaryObject = 480
-
-    kSuper = 481
-
-    kSurface = 293
-
-    kSurfaceCVComponent = 538
-
-    kSurfaceEPComponent = 539
-
-    kSurfaceEdManip = 772
-
-    kSurfaceFaceComponent = 773
-
-    kSurfaceInfo = 103
-
-    kSurfaceKnotComponent = 540
-
-    kSurfaceLuminance = 483
-
-    kSurfaceRangeComponent = 543
-
-    kSurfaceShader = 484
-
-    kSurfaceVarGroup = 118
-
-    kSymmetryConstraint = 241
-
-    kSymmetryLocator = 828
-
-    kSymmetryMapCurve = 830
-
-    kSymmetryMapVector = 829
-
-    kTangentConstraint = 245
-
-    kTension = 351
-
-    kTexLattice = 200
-
-    kTexLatticeDeformManip = 199
-
-    kTexSmoothManip = 201
-
-    kTexSmudgeUVManip = 198
-
-    kTextButtonManip = 646
-
-    kTextCurves = 104
-
-    kTextManip = 923
-
-    kTexture2d = 492
-
-    kTexture3d = 503
-
-    kTextureBakeSet = 468
 
     kTextureDeformer = 343
 
     kTextureDeformerHandle = 344
 
-    kTextureEnv = 486
-
-    kTextureList = 485
-
-    kTextureManip3D = 223
-
-    kThreadedDevice = 1071
-
-    kThreePointArcManip = 644
-
-    kTime = 516
-
-    kTimeAttribute = 567
-
-    kTimeEditor = 1101
-
-    kTimeEditorAnimSource = 1104
-
-    kTimeEditorClip = 1100
-
-    kTimeEditorClipBase = 1098
-
-    kTimeEditorClipEvaluator = 1099
-
-    kTimeEditorInterpolator = 1103
-
-    kTimeEditorTracks = 1102
-
-    kTimeFunction = 936
-
-    kTimeToUnitConversion = 517
-
-    kTimeWarp = 1075
-
-    kToggleManip = 224
-
-    kToggleOnLineManip = 144
-
-    kToolContext = 1089
-
-    kToonLineAttributes = 967
-
-    kTorus = 611
-
-    kTowPointManip = 139
-
-    kTowPointOnCurveManip = 209
-
-    kTowPointOnSurfaceManip = 771
-
-    kTrackInfoManager = 1118
-
-    kTransferAttributes = 987
-
-    kTransform = 110
-
-    kTransformBoxManip = 827
-
-    kTransformGeometry = 604
-
-    kTranslateBoxManip = 225
-
-    kTranslateLimitsManip = 226
-
-    kTranslateManip = 227
-
-    kTranslateManip2D = 206
-
-    kTranslateUVManip = 213
-
-    kTranslateUVManip2D = 701
-
-    kTriadManip = 237
-
-    kTrim = 105
-
-    kTrimLocator = 287
-
-    kTrimManip = 228
-
-    kTrimWithBoundaries = 928
-
-    kTriplanarProjectionManip = 188
-
-    kTripleIndexedComponent = 710
-
-    kTripleShadingSwitch = 615
-
-    kTrsInsertManip = 203
-
-    kTrsManip = 189
-
-    kTrsTransManip = 202
-
-    kTrsXformManip = 204
-
-    kTurbulence = 262
-
     kTweak = 345
-
-    kTwoPointArcManip = 645
-
-    kTxSl = 514
-
-    kTypedAttribute = 570
-
-    kUInt64ArrayData = 808
-
-    kUVManip2D = 700
-
-    kUfeProxyTransform = 1129
-
-    kUint64SingleIndexedComponent = 1035
-
-    kUnderWorld = 109
-
-    kUniform = 263
-
-    kUnitAttribute = 569
-
-    kUnitConversion = 525
-
-    kUnitToTimeConversion = 526
-
-    kUnknown = 528
-
-    kUnknownDag = 316
-
-    kUnknownTransform = 246
-
-    kUntrim = 106
-
-    kUnused1 = 838
-
-    kUnused2 = 839
-
-    kUnused3 = 840
-
-    kUnused4 = 841
-
-    kUnused5 = 842
-
-    kUnused6 = 843
-
-    kUseBackground = 527
-
-    kUvChooser = 792
-
-    kVectorArrayData = 602
-
-    kVectorProduct = 529
-
-    kVertexBakeSet = 469
-
-    kVertexWeightSet = 1059
-
-    kViewColorManager = 666
-
-    kViewManip = 924
-
-    kVolumeAxis = 794
-
-    kVolumeBindManip = 1058
-
-    kVolumeFog = 865
-
-    kVolumeLight = 892
-
-    kVolumeNoise = 871
-
-    kVolumeShader = 530
-
-    kVortex = 264
-
-    kWater = 502
 
     kWeightGeometryFilt = 346
 
-    kWire = 353
+    kClusterFilter = 347
 
-    kWood = 515
+    kSoftModFilter = 348
 
-    kWorld = 247
+    kJointCluster = 349
 
-    kWrapFilter = 739
+    kDeltaMush = 350
 
-    kWriteToColorBuffer = 1039
+    kTension = 351
 
-    kWriteToDepthBuffer = 1041
+    kMorph = 352
 
-    kWriteToFrameBuffer = 1038
+    kSolidify = 353
 
-    kWriteToLabelBuffer = 1042
+    kProximityWrap = 354
 
-    kWriteToVectorBuffer = 1040
+    kWire = 355
 
-    kXformManip = 925
+    kGroupId = 356
 
-    kXsectionSubdivEdit = 814
+    kGroupParts = 357
+
+    kGuide = 358
+
+    kHsvToRgb = 359
+
+    kHyperGraphInfo = 360
+
+    kHyperLayout = 361
+
+    kHyperView = 362
+
+    kIkSolver = 363
+
+    kMCsolver = 364
+
+    kPASolver = 365
+
+    kSCsolver = 366
+
+    kRPsolver = 367
+
+    kSplineSolver = 368
+
+    kIkSystem = 369
+
+    kImagePlane = 370
+
+    kLambert = 371
+
+    kReflect = 372
+
+    kBlinn = 373
+
+    kPhong = 374
+
+    kPhongExplorer = 375
+
+    kLayeredShader = 376
+
+    kStandardSurface = 377
+
+    kLightInfo = 378
+
+    kLeastSquares = 379
+
+    kLightFogMaterial = 380
+
+    kEnvFogMaterial = 381
+
+    kLightList = 382
+
+    kLightSource = 383
+
+    kLuminance = 384
+
+    kMakeGroup = 385
+
+    kMaterial = 386
+
+    kDiffuseMaterial = 387
+
+    kLambertMaterial = 388
+
+    kBlinnMaterial = 389
+
+    kPhongMaterial = 390
+
+    kLightSourceMaterial = 391
+
+    kMaterialInfo = 392
+
+    kMaterialTemplate = 393
+
+    kMatrixAdd = 394
+
+    kMatrixHold = 395
+
+    kMatrixMult = 396
+
+    kMatrixPass = 397
+
+    kMatrixWtAdd = 398
+
+    kMidModifier = 399
+
+    kMidModifierWithMatrix = 400
+
+    kPolyBevel = 401
+
+    kPolyTweak = 402
+
+    kPolyAppend = 403
+
+    kPolyChipOff = 404
+
+    kPolyCloseBorder = 405
+
+    kPolyCollapseEdge = 406
+
+    kPolyCollapseF = 407
+
+    kPolyCylProj = 408
+
+    kPolyDelEdge = 409
+
+    kPolyDelFacet = 410
+
+    kPolyDelVertex = 411
+
+    kPolyExtrudeFacet = 412
+
+    kPolyMapCut = 413
+
+    kPolyMapDel = 414
+
+    kPolyMapSew = 415
+
+    kPolyMergeEdge = 416
+
+    kPolyMergeFacet = 417
+
+    kPolyMoveEdge = 418
+
+    kPolyMoveFacet = 419
+
+    kPolyMoveFacetUV = 420
+
+    kPolyMoveUV = 421
+
+    kPolyMoveVertex = 422
+
+    kPolyMoveVertexUV = 423
+
+    kPolyNormal = 424
+
+    kPolyPlanProj = 425
+
+    kPolyProj = 426
+
+    kPolyQuad = 427
+
+    kPolySmooth = 428
+
+    kPolySoftEdge = 429
+
+    kPolySphProj = 430
+
+    kPolySplit = 431
+
+    kPolySubdEdge = 432
+
+    kPolySubdFacet = 433
+
+    kPolyTriangulate = 434
+
+    kPolyCreator = 435
+
+    kPolyPrimitive = 436
+
+    kPolyCone = 437
+
+    kPolyCube = 438
+
+    kPolyCylinder = 439
+
+    kPolyMesh = 440
+
+    kPolySphere = 441
+
+    kPolyTorus = 442
+
+    kPolyCreateFacet = 443
+
+    kPolyUnite = 444
+
+    kMotionPath = 445
+
+    kPluginMotionPathNode = 446
+
+    kMultilisterLight = 447
+
+    kMultiplyDivide = 448
+
+    kOldGeometryConstraint = 449
+
+    kOpticalFX = 450
+
+    kParticleAgeMapper = 451
+
+    kParticleCloud = 452
+
+    kParticleColorMapper = 453
+
+    kParticleIncandecenceMapper = 454
+
+    kParticleTransparencyMapper = 455
+
+    kPartition = 456
+
+    kPlace2dTexture = 457
+
+    kPlace3dTexture = 458
+
+    kPluginDependNode = 459
+
+    kPluginLocatorNode = 460
+
+    kPlusMinusAverage = 461
+
+    kPointMatrixMult = 462
+
+    kPolySeparate = 463
+
+    kPostProcessList = 464
+
+    kProjection = 465
+
+    kRecord = 466
+
+    kRenderUtilityList = 467
+
+    kReverse = 468
+
+    kRgbToHsv = 469
+
+    kRigidSolver = 470
+
+    kSet = 471
+
+    kTextureBakeSet = 472
+
+    kVertexBakeSet = 473
+
+    kSetRange = 474
+
+    kShaderGlow = 475
+
+    kShaderList = 476
+
+    kShadingMap = 477
+
+    kSamplerInfo = 478
+
+    kShapeFragment = 479
+
+    kSimpleVolumeShader = 480
+
+    kSl60 = 481
+
+    kSnapshot = 482
+
+    kStoryBoard = 483
+
+    kSummaryObject = 484
+
+    kSuper = 485
+
+    kControl = 486
+
+    kSurfaceLuminance = 487
+
+    kSurfaceShader = 488
+
+    kTextureList = 489
+
+    kTextureEnv = 490
+
+    kEnvBall = 491
+
+    kEnvCube = 492
+
+    kEnvChrome = 493
+
+    kEnvSky = 494
+
+    kEnvSphere = 495
+
+    kTexture2d = 496
+
+    kBulge = 497
+
+    kChecker = 498
+
+    kCloth = 499
+
+    kFileTexture = 500
+
+    kFractal = 501
+
+    kGrid = 502
+
+    kMountain = 503
+
+    kRamp = 504
+
+    kStencil = 505
+
+    kWater = 506
+
+    kTexture3d = 507
+
+    kBrownian = 508
+
+    kCloud = 509
+
+    kCrater = 510
+
+    kGranite = 511
+
+    kLeather = 512
+
+    kMarble = 513
+
+    kRock = 514
+
+    kSnow = 515
+
+    kSolidFractal = 516
+
+    kStucco = 517
+
+    kTxSl = 518
+
+    kWood = 519
+
+    kTime = 520
+
+    kTimeToUnitConversion = 521
+
+    kRenderSetup = 522
+
+    kRenderGlobals = 523
+
+    kRenderGlobalsList = 524
+
+    kRenderQuality = 525
+
+    kResolution = 526
+
+    kHardwareRenderGlobals = 527
+
+    kArrayMapper = 528
+
+    kUnitConversion = 529
+
+    kUnitToTimeConversion = 530
+
+    kUseBackground = 531
+
+    kUnknown = 532
+
+    kVectorProduct = 533
+
+    kVolumeShader = 534
+
+    kComponent = 535
+
+    kCurveCVComponent = 536
+
+    kCurveEPComponent = 537
+
+    kCurveKnotComponent = 538
+
+    kCurveParamComponent = 539
+
+    kIsoparmComponent = 540
+
+    kPivotComponent = 541
+
+    kSurfaceCVComponent = 542
+
+    kSurfaceEPComponent = 543
+
+    kSurfaceKnotComponent = 544
+
+    kEdgeComponent = 545
+
+    kLatticeComponent = 546
+
+    kSurfaceRangeComponent = 547
+
+    kDecayRegionCapComponent = 548
+
+    kDecayRegionComponent = 549
+
+    kMeshComponent = 550
+
+    kMeshEdgeComponent = 551
+
+    kMeshPolygonComponent = 552
+
+    kMeshFrEdgeComponent = 553
+
+    kMeshVertComponent = 554
+
+    kMeshFaceVertComponent = 555
+
+    kOrientationComponent = 556
+
+    kSubVertexComponent = 557
+
+    kMultiSubVertexComponent = 558
+
+    kSetGroupComponent = 559
+
+    kDynParticleSetComponent = 560
+
+    kSelectionItem = 561
+
+    kDagSelectionItem = 562
+
+    kNonDagSelectionItem = 563
+
+    kItemList = 564
+
+    kAttribute = 565
+
+    kNumericAttribute = 566
+
+    kDoubleAngleAttribute = 567
+
+    kFloatAngleAttribute = 568
+
+    kDoubleLinearAttribute = 569
+
+    kFloatLinearAttribute = 570
+
+    kTimeAttribute = 571
+
+    kEnumAttribute = 572
+
+    kUnitAttribute = 573
+
+    kTypedAttribute = 574
+
+    kCompoundAttribute = 575
+
+    kGenericAttribute = 576
+
+    kLightDataAttribute = 577
+
+    kMatrixAttribute = 578
+
+    kFloatMatrixAttribute = 579
+
+    kMessageAttribute = 580
+
+    kOpaqueAttribute = 581
+
+    kPlugin = 582
+
+    kData = 583
+
+    kComponentListData = 584
+
+    kDoubleArrayData = 585
+
+    kIntArrayData = 586
+
+    kUintArrayData = 587
+
+    kLatticeData = 588
+
+    kMatrixData = 589
+
+    kMeshData = 590
+
+    kNurbsSurfaceData = 591
+
+    kNurbsCurveData = 592
+
+    kNumericData = 593
+
+    kData2Double = 594
+
+    kData2Float = 595
+
+    kData2Int = 596
+
+    kData2Short = 597
+
+    kData3Double = 598
+
+    kData3Float = 599
+
+    kData3Int = 600
+
+    kData3Short = 601
+
+    kPluginData = 602
+
+    kPointArrayData = 603
+
+    kMatrixArrayData = 604
+
+    kSphereData = 605
+
+    kStringData = 606
+
+    kStringArrayData = 607
+
+    kVectorArrayData = 608
+
+    kSelectionList = 609
+
+    kTransformGeometry = 610
+
+    kCommEdgePtManip = 611
+
+    kCommEdgeOperManip = 612
+
+    kCommEdgeSegmentManip = 613
+
+    kCommCornerManip = 614
+
+    kCommCornerOperManip = 615
+
+    kPluginDeformerNode = 616
+
+    kTorus = 617
+
+    kPolyBoolOp = 618
+
+    kSingleShadingSwitch = 619
+
+    kDoubleShadingSwitch = 620
+
+    kTripleShadingSwitch = 621
+
+    kNurbsSquare = 622
+
+    kAnisotropy = 623
+
+    kNonLinear = 624
+
+    kDeformFunc = 625
+
+    kDeformBend = 626
+
+    kDeformTwist = 627
+
+    kDeformSquash = 628
+
+    kDeformFlare = 629
+
+    kDeformSine = 630
+
+    kDeformWave = 631
+
+    kDeformBendManip = 632
+
+    kDeformTwistManip = 633
+
+    kDeformSquashManip = 634
+
+    kDeformFlareManip = 635
+
+    kDeformSineManip = 636
+
+    kDeformWaveManip = 637
+
+    kSoftModManip = 638
+
+    kDistanceManip = 639
+
+    kScript = 640
+
+    kCurveFromMeshEdge = 641
+
+    kCurveCurveIntersect = 642
+
+    kNurbsCircular3PtArc = 643
+
+    kNurbsCircular2PtArc = 644
+
+    kOffsetSurface = 645
+
+    kRoundConstantRadius = 646
+
+    kRoundRadiusManip = 647
+
+    kRoundRadiusCrvManip = 648
+
+    kRoundConstantRadiusManip = 649
+
+    kThreePointArcManip = 650
+
+    kTwoPointArcManip = 651
+
+    kTextButtonManip = 652
+
+    kOffsetSurfaceManip = 653
+
+    kImageData = 654
+
+    kImageLoad = 655
+
+    kImageSave = 656
+
+    kImageNetSrc = 657
+
+    kImageNetDest = 658
+
+    kImageRender = 659
+
+    kImageAdd = 660
+
+    kImageDiff = 661
+
+    kImageMultiply = 662
+
+    kImageOver = 663
+
+    kImageUnder = 664
+
+    kImageColorCorrect = 665
+
+    kImageBlur = 666
+
+    kImageFilter = 667
+
+    kImageDepth = 668
+
+    kImageDisplay = 669
+
+    kImageView = 670
+
+    kImageMotionBlur = 671
+
+    kViewColorManager = 672
+
+    kMatrixFloatData = 673
+
+    kSkinShader = 674
+
+    kComponentManip = 675
+
+    kSelectionListData = 676
+
+    kObjectFilter = 677
+
+    kObjectMultiFilter = 678
+
+    kObjectNameFilter = 679
+
+    kObjectTypeFilter = 680
+
+    kObjectAttrFilter = 681
+
+    kObjectRenderFilter = 682
+
+    kObjectScriptFilter = 683
+
+    kSelectionListOperator = 684
+
+    kSubdiv = 685
+
+    kPolyToSubdiv = 686
+
+    kSkinClusterFilter = 687
+
+    kKeyingGroup = 688
+
+    kCharacter = 689
+
+    kCharacterOffset = 690
+
+    kDagPose = 691
+
+    kStitchAsNurbsShell = 692
+
+    kExplodeNurbsShell = 693
+
+    kNurbsBoolean = 694
+
+    kStitchSrfManip = 695
+
+    kForceUpdateManip = 696
+
+    kPluginManipContainer = 697
+
+    kPolySewEdge = 698
+
+    kPolyMergeVert = 699
+
+    kPolySmoothFacet = 700
+
+    kSmoothCurve = 701
+
+    kGlobalStitch = 702
+
+    kSubdivCVComponent = 703
+
+    kSubdivEdgeComponent = 704
+
+    kSubdivFaceComponent = 705
+
+    kUVManip2D = 706
+
+    kTranslateUVManip2D = 707
+
+    kRotateUVManip2D = 708
+
+    kScaleUVManip2D = 709
+
+    kPolyTweakUV = 710
+
+    kMoveUVShellManip2D = 711
+
+    kPluginShape = 712
+
+    kGeometryData = 713
+
+    kSingleIndexedComponent = 714
+
+    kDoubleIndexedComponent = 715
+
+    kTripleIndexedComponent = 716
+
+    kExtendSurfaceDistanceManip = 717
+
+    kSquareSrf = 718
+
+    kSquareSrfManip = 719
+
+    kSubdivToPoly = 720
+
+    kDynBase = 721
+
+    kDynEmitterManip = 722
+
+    kDynFieldsManip = 723
+
+    kDynBaseFieldManip = 724
+
+    kDynAirManip = 725
+
+    kDynNewtonManip = 726
+
+    kDynTurbulenceManip = 727
+
+    kDynSpreadManip = 728
+
+    kDynAttenuationManip = 729
+
+    kDynArrayAttrsData = 730
+
+    kPluginFieldNode = 731
+
+    kPluginEmitterNode = 732
+
+    kPluginSpringNode = 733
+
+    kDisplayLayer = 734
+
+    kDisplayLayerManager = 735
+
+    kPolyColorPerVertex = 736
+
+    kCreateColorSet = 737
+
+    kDeleteColorSet = 738
+
+    kCopyColorSet = 739
+
+    kBlendColorSet = 740
+
+    kPolyColorMod = 741
+
+    kPolyColorDel = 742
+
+    kCharacterMappingData = 743
+
+    kDynSweptGeometryData = 744
+
+    kWrapFilter = 745
+
+    kMeshVtxFaceComponent = 746
+
+    kBinaryData = 747
+
+    kAttribute2Double = 748
+
+    kAttribute2Float = 749
+
+    kAttribute2Short = 750
+
+    kAttribute2Int = 751
+
+    kAttribute3Double = 752
+
+    kAttribute3Float = 753
+
+    kAttribute3Short = 754
+
+    kAttribute3Int = 755
+
+    kReference = 756
+
+    kBlindData = 757
+
+    kBlindDataTemplate = 758
+
+    kPolyBlindData = 759
+
+    kPolyNormalPerVertex = 760
+
+    kNurbsToSubdiv = 761
+
+    kPluginIkSolver = 762
+
+    kInstancer = 763
+
+    kMoveVertexManip = 764
+
+    kStroke = 765
+
+    kBrush = 766
+
+    kStrokeGlobals = 767
+
+    kPluginGeometryData = 768
+
+    kLightLink = 769
+
+    kDynGlobals = 770
+
+    kPolyReduce = 771
+
+    kLodThresholds = 772
+
+    kChooser = 773
+
+    kLodGroup = 774
+
+    kMultDoubleLinear = 775
+
+    kFourByFourMatrix = 776
+
+    kTowPointOnSurfaceManip = 777
+
+    kSurfaceEdManip = 778
+
+    kSurfaceFaceComponent = 779
+
+    kClipScheduler = 780
+
+    kClipLibrary = 781
+
+    kSubSurface = 782
+
+    kSmoothTangentSrf = 783
+
+    kRenderPass = 784
+
+    kRenderPassSet = 785
+
+    kRenderLayer = 786
+
+    kRenderLayerManager = 787
+
+    kPassContributionMap = 788
+
+    kPrecompExport = 789
+
+    kRenderTarget = 790
+
+    kRenderedImageSource = 791
+
+    kImageSource = 792
+
+    kPolyFlipEdge = 793
+
+    kPolyExtrudeEdge = 794
+
+    kAnimBlend = 795
+
+    kAnimBlendInOut = 796
+
+    kPolyAppendVertex = 797
+
+    kUvChooser = 798
+
+    kSubdivCompId = 799
+
+    kVolumeAxis = 800
+
+    kDeleteUVSet = 801
+
+    kSubdHierBlind = 802
+
+    kSubdBlindData = 803
+
+    kCharacterMap = 804
+
+    kLayeredTexture = 805
+
+    kSubdivCollapse = 806
+
+    kParticleSamplerInfo = 807
+
+    kCopyUVSet = 808
+
+    kCreateUVSet = 809
+
+    kClip = 810
+
+    kPolySplitVert = 811
+
+    kSubdivData = 812
+
+    kSubdivGeom = 813
+
+    kUInt64ArrayData = 814
+
+    kInt64ArrayData = 815
+
+    kPolySplitEdge = 816
+
+    kSubdivReverseFaces = 817
+
+    kMeshMapComponent = 818
+
+    kSectionManip = 819
+
+    kXsectionSubdivEdit = 820
+
+    kSubdivToNurbs = 821
+
+    kEditCurve = 822
+
+    kEditCurveManip = 823
+
+    kCrossSectionManager = 824
+
+    kCreateSectionManip = 825
+
+    kCrossSectionEditManip = 826
+
+    kDropOffFunction = 827
+
+    kSubdBoolean = 828
+
+    kSubdModifyEdge = 829
+
+    kModifyEdgeCrvManip = 830
+
+    kModifyEdgeManip = 831
+
+    kScalePointManip = 832
+
+    kTransformBoxManip = 833
+
+    kSymmetryLocator = 834
+
+    kSymmetryMapVector = 835
+
+    kSymmetryMapCurve = 836
+
+    kCurveFromSubdivEdge = 837
+
+    kCreateBPManip = 838
+
+    kModifyEdgeBaseManip = 839
+
+    kSubdExtrudeFace = 840
+
+    kSubdivSurfaceVarGroup = 841
+
+    kSfRevolveManip = 842
+
+    kCurveFromSubdivFace = 843
+
+    kUnused1 = 844
+
+    kUnused2 = 845
+
+    kUnused3 = 846
+
+    kUnused4 = 847
+
+    kUnused5 = 848
+
+    kUnused6 = 849
+
+    kPolyTransfer = 850
+
+    kPolyAverageVertex = 851
+
+    kPolyAutoProj = 852
+
+    kPolyLayoutUV = 853
+
+    kPolyMapSewMove = 854
+
+    kSubdModifier = 855
+
+    kSubdMoveVertex = 856
+
+    kSubdMoveEdge = 857
+
+    kSubdMoveFace = 858
+
+    kSubdDelFace = 859
+
+    kSnapshotShape = 860
+
+    kSubdivMapComponent = 861
+
+    kJiggleDeformer = 862
+
+    kGlobalCacheControls = 863
+
+    kDiskCache = 864
+
+    kSubdCloseBorder = 865
+
+    kSubdMergeVert = 866
+
+    kBoxData = 867
+
+    kBox = 868
+
+    kRenderBox = 869
+
+    kSubdSplitFace = 870
+
+    kVolumeFog = 871
+
+    kSubdTweakUV = 872
+
+    kSubdMapCut = 873
+
+    kSubdLayoutUV = 874
+
+    kSubdMapSewMove = 875
+
+    kOcean = 876
+
+    kVolumeNoise = 877
+
+    kSubdAutoProj = 878
+
+    kSubdSubdivideFace = 879
+
+    kNoise = 880
+
+    kAttribute4Double = 881
+
+    kData4Double = 882
+
+    kSubdPlanProj = 883
+
+    kSubdTweak = 884
+
+    kSubdProjectionManip = 885
+
+    kSubdMappingManip = 886
+
+    kHardwareReflectionMap = 887
+
+    kPolyNormalizeUV = 888
+
+    kPolyFlipUV = 889
+
+    kHwShaderNode = 890
+
+    kPluginHardwareShader = 891
+
+    kPluginHwShaderNode = 892
+
+    kSubdAddTopology = 893
+
+    kSubdCleanTopology = 894
+
+    kImplicitCone = 895
+
+    kImplicitSphere = 896
+
+    kRampShader = 897
+
+    kVolumeLight = 898
+
+    kOceanShader = 899
+
+    kBevelPlus = 900
+
+    kStyleCurve = 901
+
+    kPolyCut = 902
+
+    kPolyPoke = 903
+
+    kPolyWedgeFace = 904
+
+    kPolyCutManipContainer = 905
+
+    kPolyCutManip = 906
+
+    kPolyMirrorManipContainer = 907
+
+    kPolyPokeManip = 908
+
+    kFluidTexture3D = 909
+
+    kFluidTexture2D = 910
+
+    kPolyMergeUV = 911
+
+    kPolyStraightenUVBorder = 912
+
+    kAlignManip = 913
+
+    kPluginTransformNode = 914
+
+    kFluid = 915
+
+    kFluidGeom = 916
+
+    kFluidData = 917
+
+    kSmear = 918
+
+    kStringShadingSwitch = 919
+
+    kStudioClearCoat = 920
+
+    kFluidEmitter = 921
+
+    kHeightField = 922
+
+    kGeoConnector = 923
+
+    kSnapshotPath = 924
+
+    kPluginObjectSet = 925
+
+    kQuadShadingSwitch = 926
+
+    kPolyExtrudeVertex = 927
+
+    kPairBlend = 928
+
+    kTextManip = 929
+
+    kViewManip = 930
+
+    kXformManip = 931
+
+    kMute = 932
+
+    kConstraint = 933
+
+    kTrimWithBoundaries = 934
+
+    kCurveFromMeshCoM = 935
+
+    kFollicle = 936
+
+    kHairSystem = 937
+
+    kRemapValue = 938
+
+    kRemapColor = 939
+
+    kRemapHsv = 940
+
+    kHairConstraint = 941
+
+    kTimeFunction = 942
+
+    kMentalRayTexture = 943
+
+    kObjectBinFilter = 944
+
+    kPolySmoothProxy = 945
+
+    kPfxGeometry = 946
+
+    kPfxHair = 947
+
+    kHairTubeShader = 948
+
+    kPsdFileTexture = 949
+
+    kKeyframeDelta = 950
+
+    kKeyframeDeltaMove = 951
+
+    kKeyframeDeltaScale = 952
+
+    kKeyframeDeltaAddRemove = 953
+
+    kKeyframeDeltaBlockAddRemove = 954
+
+    kKeyframeDeltaInfType = 955
+
+    kKeyframeDeltaTangent = 956
+
+    kKeyframeDeltaWeighted = 957
+
+    kKeyframeDeltaBreakdown = 958
+
+    kPolyMirror = 959
+
+    kPolyCreaseEdge = 960
+
+    kPolyPinUV = 961
+
+    kHikEffector = 962
+
+    kHikIKEffector = 963
+
+    kHikFKJoint = 964
+
+    kHikSolver = 965
+
+    kHikHandle = 966
+
+    kProxyManager = 967
+
+    kPolyAutoProjManip = 968
+
+    kPolyPrism = 969
+
+    kPolyPyramid = 970
+
+    kPolySplitRing = 971
+
+    kPfxToon = 972
+
+    kToonLineAttributes = 973
+
+    kPolyDuplicateEdge = 974
+
+    kFacade = 975
+
+    kMaterialFacade = 976
+
+    kEnvFacade = 977
+
+    kAISEnvFacade = 978
+
+    kLineModifier = 979
+
+    kPolyArrow = 980
+
+    kPolyPrimitiveMisc = 981
+
+    kPolyPlatonicSolid = 982
+
+    kPolyPipe = 983
+
+    kHikFloorContactMarker = 984
+
+    kHikGroundPlane = 985
+
+    kPolyComponentData = 986
+
+    kPolyHelix = 987
+
+    kCacheFile = 988
+
+    kHistorySwitch = 989
+
+    kClosestPointOnMesh = 990
+
+    kUVPin = 991
+
+    kProximityPin = 992
+
+    kTransferAttributes = 993
+
+    kDynamicConstraint = 994
+
+    kNComponent = 995
+
+    kPolyBridgeEdge = 996
+
+    kCacheableNode = 997
+
+    kNucleus = 998
+
+    kNBase = 999
+
+    kCacheBase = 1000
+
+    kCacheBlend = 1001
+
+    kCacheTrack = 1002
+
+    kKeyframeRegionManip = 1003
+
+    kCurveNormalizerAngle = 1004
+
+    kCurveNormalizerLinear = 1005
+
+    kHyperLayoutDG = 1006
+
+    kPluginImagePlaneNode = 1007
+
+    kNCloth = 1008
+
+    kNParticle = 1009
+
+    kNRigid = 1010
+
+    kPluginParticleAttributeMapperNode = 1011
+
+    kCameraSet = 1012
+
+    kPluginCameraSet = 1013
+
+    kContainer = 1014
+
+    kFloatVectorArrayData = 1015
+
+    kNObjectData = 1016
+
+    kNObject = 1017
+
+    kPluginConstraintNode = 1018
+
+    kAsset = 1019
+
+    kPolyEdgeToCurve = 1020
+
+    kAnimLayer = 1021
+
+    kBlendNodeBase = 1022
+
+    kBlendNodeBoolean = 1023
+
+    kBlendNodeDouble = 1024
+
+    kBlendNodeDoubleAngle = 1025
+
+    kBlendNodeDoubleLinear = 1026
+
+    kBlendNodeEnum = 1027
+
+    kBlendNodeFloat = 1028
+
+    kBlendNodeFloatAngle = 1029
+
+    kBlendNodeFloatLinear = 1030
+
+    kBlendNodeInt16 = 1031
+
+    kBlendNodeInt32 = 1032
+
+    kBlendNodeAdditiveScale = 1033
+
+    kBlendNodeAdditiveRotation = 1034
+
+    kPluginManipulatorNode = 1035
+
+    kNIdData = 1036
+
+    kNId = 1037
+
+    kFloatArrayData = 1038
+
+    kMembrane = 1039
+
+    kMergeVertsToolManip = 1040
+
+    kUint64SingleIndexedComponent = 1041
+
+    kPolyToolFeedbackManip = 1042
+
+    kPolySelectEditFeedbackManip = 1043
+
+    kWriteToFrameBuffer = 1044
+
+    kWriteToColorBuffer = 1045
+
+    kWriteToVectorBuffer = 1046
+
+    kWriteToDepthBuffer = 1047
+
+    kWriteToLabelBuffer = 1048
+
+    kStereoCameraMaster = 1049
+
+    kSequenceManager = 1050
+
+    kSequencer = 1051
+
+    kShot = 1052
+
+    kBlendNodeTime = 1053
+
+    kCreateBezierManip = 1054
+
+    kBezierCurve = 1055
+
+    kBezierCurveData = 1056
+
+    kNurbsCurveToBezier = 1057
+
+    kBezierCurveToNurbs = 1058
+
+    kPolySpinEdge = 1059
+
+    kPolyHoleFace = 1060
+
+    kPointOnPolyConstraint = 1061
+
+    kPolyConnectComponents = 1062
+
+    kSkinBinding = 1063
+
+    kVolumeBindManip = 1064
+
+    kVertexWeightSet = 1065
+
+    kNearestPointOnCurve = 1066
+
+    kColorProfile = 1067
+
+    kAdskMaterial = 1068
+
+    kContainerBase = 1069
+
+    kDagContainer = 1070
+
+    kPolyUVRectangle = 1071
+
+    kHardwareRenderingGlobals = 1072
+
+    kPolyProjectCurve = 1073
+
+    kRenderingList = 1074
+
+    kPolyExtrudeManip = 1075
+
+    kPolyExtrudeManipContainer = 1076
+
+    kThreadedDevice = 1077
+
+    kClientDevice = 1078
+
+    kPluginClientDevice = 1079
+
+    kPluginThreadedDevice = 1080
+
+    kTimeWarp = 1081
+
+    kAssembly = 1082
+
+    kClipGhostShape = 1083
+
+    kClipToGhostData = 1084
+
+    kMandelbrot = 1085
+
+    kMandelbrot3D = 1086
+
+    kGreasePlane = 1087
+
+    kGreasePlaneRenderShape = 1088
+
+    kGreasePencilSequence = 1089
+
+    kEditMetadata = 1090
+
+    kCreaseSet = 1091
+
+    kPolyEditEdgeFlow = 1092
+
+    kFosterParent = 1093
+
+    kSnapUVManip2D = 1094
+
+    kToolContext = 1095
+
+    kNLE = 1096
+
+    kShrinkWrapFilter = 1097
+
+    kEditsManager = 1098
+
+    kPolyBevel2 = 1099
+
+    kPolyCBoolOp = 1100
+
+    kGeomBind = 1101
+
+    kColorMgtGlobals = 1102
+
+    kPolyBevel3 = 1103
+
+    kTimeEditorClipBase = 1104
+
+    kTimeEditorClipEvaluator = 1105
+
+    kTimeEditorClip = 1106
+
+    kTimeEditor = 1107
+
+    kTimeEditorTracks = 1108
+
+    kTimeEditorInterpolator = 1109
+
+    kTimeEditorAnimSource = 1110
+
+    kCaddyManipBase = 1111
+
+    kPolyCaddyManip = 1112
+
+    kPolyModifierManipContainer = 1113
+
+    kPolyRemesh = 1114
+
+    kPolyContourProj = 1115
+
+    kContourProjectionManip = 1116
+
+    kNodeGraphEditorInfo = 1117
+
+    kNodeGraphEditorBookmarks = 1118
+
+    kNodeGraphEditorBookmarkInfo = 1119
+
+    kPluginSkinCluster = 1120
+
+    kPluginGeometryFilter = 1121
+
+    kPluginBlendShape = 1122
+
+    kPolyPassThru = 1123
+
+    kTrackInfoManager = 1124
+
+    kPolyClean = 1125
+
+    kShapeEditorManager = 1126
+
+    kOceanDeformer = 1127
+
+    kPoseInterpolatorManager = 1128
+
+    kControllerTag = 1129
+
+    kReForm = 1130
+
+    kCustomEvaluatorClusterNode = 1131
+
+    kPolyCircularize = 1132
+
+    kArubaTesselate = 1133
+
+    kReorderUVSet = 1134
+
+    kUfeProxyTransform = 1135
+
+    kDecomposeMatrix = 1136
+
+    kComposeMatrix = 1137
+
+    kBlendMatrix = 1138
+
+    kPickMatrix = 1139
+
+    kAimMatrix = 1140
+
+    kPrimitiveFalloff = 1141
+
+    kBlendFalloff = 1142
+
+    kUniformFalloff = 1143
+
+    kTransferFalloff = 1144
+
+    kComponentFalloff = 1145
+
+    kProximityFalloff = 1146
+
+    kSubsetFalloff = 1147
+
+    kWeightFunctionData = 1148
+
+    kFalloffEval = 1149
+
+    kComponentMatch = 1150
+
+    kPolyUnsmooth = 1151
+
+    kPolyReFormManipContainer = 1152
+
+    kPolyReFormManip = 1153
+
+    kPolyAxis = 1154
+
+    kAngleToDoubleNode = 1155
+
+    kDoubleToAngleNode = 1156
+
+    kAbsolute = 1157
+
+    kACos = 1158
+
+    kAnd = 1159
+
+    kASin = 1160
+
+    kATan = 1161
+
+    kATan2 = 1162
+
+    kAverage = 1163
+
+    kCeil = 1164
+
+    kClampRange = 1165
+
+    kCos = 1166
+
+    kDeterminant = 1167
+
+    kEqual = 1168
+
+    kFloor = 1169
+
+    kGreaterThan = 1170
+
+    kInverseLinearInterpolation = 1171
+
+    kLength = 1172
+
+    kLessThan = 1173
+
+    kLinearInterpolation = 1174
+
+    kLog = 1175
+
+    kMax = 1176
+
+    kMin = 1177
+
+    kModulo = 1178
+
+    kMultiply = 1179
+
+    kNegate = 1180
+
+    kNormalize = 1181
+
+    kNot = 1182
+
+    kOr = 1183
+
+    kPIConstant = 1184
+
+    kPower = 1185
+
+    kRotateVector = 1186
+
+    kRound = 1187
+
+    kSin = 1188
+
+    kSmoothStep = 1189
+
+    kSum = 1190
+
+    kTan = 1191
+
+    kTruncate = 1192
+
+    kDotProduct = 1193
+
+    kCrossProduct = 1194
+
+    kMultiplyPointByMatrix = 1195
+
+    kMultiplyVectorByMatrix = 1196
+
+    kAxisFromMatrix = 1197
+
+    kDivide = 1198
+
+    kSubtract = 1199
+
+    kTranslationFromMatrix = 1200
+
+    kRowFromMatrix = 1201
+
+    kColumnFromMatrix = 1202
+
+    kScaleFromMatrix = 1203
+
+    kRotationFromMatrix = 1204
+
+    kParentMatrix = 1205
 
 
 class MDataHandle(object):
@@ -12977,8 +13155,8 @@ class MObject(object):
     @property
     def apiTypeStr(self):
         if self._is_world:
-            return 'world'
-        return _TYPE_HEX_TO_STR.get(int(hex(self._typeId.id()), 16), 'Invalid')
+            return 'KWorld'
+        return _TYPE_INT_TO_STR.get(self._typeId.id(), 'KInvalid')
 
     @property
     def kNullObj(cls) -> 'MObject':
@@ -13613,7 +13791,7 @@ class MDGContext(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__()
 
     def copy(*args, **kwargs):
         """
@@ -15673,6 +15851,7 @@ class MFnBase(object):
         Attaches the function set to the specified Maya object.
         """
         self._mobject = mobject
+        return self
 
     def type(*args, **kwargs):
         """
@@ -15928,53 +16107,92 @@ class MAngle(object):
     Manipulate angular data.
     """
 
-    def __init__(*args, **kwargs):
+    _UNIT_CONST_TO_NAME = {
+        3 : 'kAngMinutes',
+        4 : 'kAngSeconds',
+        2 : 'kDegrees',
+        0 : 'kInvalid',
+        5 : 'kLast',
+        1 : 'kRadians',
+    }
+
+    # Conversion factors to radians
+    _TO_RADIANS = {
+        1: 1,
+        2: math.pi / 180,
+        3: math.pi / (180 * 60),
+        4: math.pi / (180 * 3600),
+    }
+
+    # Conversion factors from radians to other units
+    _FROM_RADIANS = {
+        1: 1,
+        2: 180 / math.pi,
+        3: (180 * 60) / math.pi,
+        4: (180 * 3600) / math.pi,
+    }
+
+    def __init__(self, value: float | MEulerRotation = None, unit: int = None, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._unit = unit or MAngle.kRadians
+        self._value = value or random.uniform(-2 * math.pi, 2 * math.pi)
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self):
         """
         x.__repr__() <==> repr(x)
         """
-        pass
+        return f'{type(self).__name__}: <{self._value} {type(self)._UNIT_CONST_TO_NAME[self._unit]}>'
 
-    def __str__(*args, **kwargs):
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return f'{self._value} {type(self)._UNIT_CONST_TO_NAME[self._unit]}'
 
-    def asAngMinutes(*args, **kwargs):
+    def asAngMinutes(self) -> float:
         """
         Returns the angular value, converted to minutes of arc.
         """
-        pass
+        if self._unit == MAngle.kAngMinutes:
+            return self._value
+        return self.asDegrees() * 60
 
-    def asAngSeconds(*args, **kwargs):
+    def asAngSeconds(self) -> float:
         """
         Returns the angular value, converted to seconds of arc.
         """
-        pass
+        if self._unit == MAngle.kAngSeconds:
+            return self._value
+        return self.asDegrees() * 3600
 
-    def asDegrees(*args, **kwargs):
+    def asDegrees(self) -> float:
         """
         Returns the angular value, converted to degrees.
         """
-        pass
+        radians = self.asRadians()
+        return radians * MAngle._FROM_RADIANS[MAngle.kDegrees]
 
-    def asRadians(*args, **kwargs):
+    def asRadians(self) -> float:
         """
         Returns the angular value, converted to radians.
         """
-        pass
+        return self._value * MAngle._TO_RADIANS[self._unit]
 
-    def asUnits(*args, **kwargs):
+    def asUnits(self, unit=1) -> float:
         """
         Returns the angular value, converted to the specified units.
         """
-        pass
+        unit_to_conversion_func = {
+            MAngle.kRadians: self.asRadians,
+            MAngle.kDegrees: self.asDegrees,
+            MAngle.kAngMinutes: self.asAngMinutes,
+            MAngle.kAngSeconds: self.asAngSeconds,
+        }
+        if unit not in unit_to_conversion_func:
+            raise ValueError(f"Unsupported unit: {unit}")
+        return unit_to_conversion_func[unit]()
 
     @staticmethod
     def internalToUI(*args, **kwargs):
@@ -16023,9 +16241,13 @@ class MAngle(object):
 
     kRadians = 1
 
-    unit = None
+    @property
+    def unit(self):
+        return self._unit
 
-    value = None
+    @property
+    def value(self):
+        return self._value
 
 
 class MFloatVectorArray(object):
@@ -17222,17 +17444,21 @@ class MPlug(object):
         self._id = None
         self._network_plug = None
         self._value = None
+        self._children_plugs = None
 
         self._connections = {
             'INPUTS': [],
             'OUTPUTS': [],
         }
-
-        self._children = []
         self._parent = None
 
         self._attribute = MObject()
-        self._attribute._fn_type.append(MFn.kAttribute)
+        self._attribute._fn_type = [MFn.kAttribute, ]
+
+    def __repr__(self):
+        if not self._owner:
+            return super().__repr__()
+        return f'{type(self).__name__} <{self.name()}>'
 
     def __le__(self, value: Union['MPlug', 'MObject']) -> bool:
         """
@@ -17280,31 +17506,31 @@ class MPlug(object):
         """
         Retrieves the plug's value, as a single-byte integer.
         """
-        return int(self._attribute._value or random.randint(-1_000_000, 1_000_000))
+        return int(self._attribute._value or random.randint(-100, 100))
 
     def asDouble(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a double-precision float.
         """
-        return float(self._attribute._value or random.randint(-1_000_000, 1_000_000))
+        return float(self._attribute._value or random.uniform(-100, 100))
 
     def asFloat(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-precision float.
         """
-        return float(self._attribute._value or random.randint(-1_000_000, 1_000_000))
+        return float(self._attribute._value or random.uniform(-100, 100))
 
     def asInt(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a regular integer.
         """
-        return int(self._attribute._value or random.randint(-1_000_000, 1_000_000))
+        return int(self._attribute._value or random.randint(-100, 100))
 
     def asMAngle(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MAngle.
         """
-        return MAngle(self._attribute._value or random.random())
+        return MAngle(self._attribute._value or random.uniform(-360, 360))
 
     def asMDataHandle(self, *args, **kwargs):
         """
@@ -17316,7 +17542,7 @@ class MPlug(object):
         """
         Retrieves the plug's value, as an MDistance.
         """
-        return MDistance(self._attribute._value or random.randint(-1_000_000, 1_000_000))
+        return MDistance(self._attribute._value or random.uniform(-100, 100))
 
     def asMObject(self, *args, **kwargs):
         """
@@ -17349,11 +17575,15 @@ class MPlug(object):
         """
         return self._attribute
 
-    def child(*args, **kwargs):
+    def child(self, index) -> 'MPlug':
         """
         Returns a plug for the specified child attribute of this plug.
         """
-        pass
+        if not self.isCompound:
+            return RuntimeError(f'Trying to access children plugs of non-compound attribute: <{self.name}>')
+        child_plug = MFnDependencyNode(self._owner).findPlug(self._children_plugs[index], False)
+        child_plug._parent = weakref.proxy(self)
+        return child_plug
 
     def connectedTo(*args, **kwargs):
         """
@@ -17402,11 +17632,12 @@ class MPlug(object):
         """
         pass
 
-    def elementByLogicalIndex(*args, **kwargs):
+    def elementByLogicalIndex(self, index):
         """
         Returns a plug for the element of this plug array having the specified logical index.
         """
-        pass
+        return self._children_plugs[index]
+
 
     def elementByPhysicalIndex(*args, **kwargs):
         """
@@ -17456,17 +17687,17 @@ class MPlug(object):
         """
         return self._attribute._name
 
-    def node(*args, **kwargs):
+    def node(self) -> 'MObject':
         """
         Returns the node that this plug belongs to.
         """
         return self._owner
 
-    def numChildren(*args, **kwargs):
+    def numChildren(self, *args, **kwargs):
         """
         Returns the number of children this plug has.
         """
-        pass
+        return len(self._children_plugs)
 
     def numConnectedChildren(*args, **kwargs):
         """
@@ -21601,8 +21832,13 @@ class MFnDependencyNode(MFnBase):
             attribute._is_compound = attr_properties['is_compound']
             attribute._is_element = attr_properties['is_element']
             attr_type = attr_properties['attr_type']
+            attribute._typeId = MTypeId(attr_type)
+            children_plugs = attr_properties.get('children')
+            if children_plugs:
+                mplug._children_plugs = children_plugs
             if attr_type not in attribute._fn_type:
-                attribute._fn_type.append(attr_type)
+                type_name = _TYPE_INT_TO_STR[attr_type]
+                attribute._fn_type.append(f'k{type_name[0].upper()}{type_name[1:]}')
 
         mplug._network_plug = want_network_plug
 
@@ -21652,6 +21888,12 @@ class MFnDependencyNode(MFnBase):
         """
         # For the sake of using fksolver, let's assume this is trua although it might not always be the case
         return True
+
+    def uniqueName(self):
+        """For a DAG node, the unique name of a node is the full namespace path starting at (and including) the root
+        namespace, down to (and including) the node itself. For a non-DAG node, the uniqueName is just its name.
+        """
+        return self._mobject._name
 
     def hasUniqueName(*args, **kwargs):
         """
@@ -21851,7 +22093,7 @@ class MFnDependencyNode(MFnBase):
 
     @property
     def typeName(self):
-        return _TYPE_HEX_TO_STR[int(hex(self._mobject._typeId.id()), 16)]
+        return _TYPE_INT_TO_STR[self._mobject._typeId.id()]
 
 
 class MDagModifier(MDGModifier):
@@ -22066,7 +22308,7 @@ class MFnNumericAttribute(MFnAttribute):
         """
         pass
 
-    def numericType(*args, **kwargs):
+    def numericType(self):
         """
         Returns the numeric type of the attribute currently attached to the function set.
         """
@@ -24120,11 +24362,11 @@ class MFnCompoundAttribute(MFnAttribute):
     Functionset for creating and working with compound attributes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._children_attrs = []
 
     def addChild(*args, **kwargs):
         """
@@ -29946,17 +30188,17 @@ _COMMON_ATTR_PROPERTIES = {
     'overrideEnabled': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'overrideDisplayType': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kEnumAttribute},
 
-    'translate': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double},
+    'translate': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double, 'children': ['translateX', 'translateY', 'translateZ']},
     'translateX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleLinearAttribute},
     'translateY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleLinearAttribute},
     'translateZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleLinearAttribute},
 
-    'rotate': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double},
+    'rotate': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double, 'children': ['rotateX', 'rotateY', 'rotateZ']},
     'rotateX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
     'rotateY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
     'rotateZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kDoubleAngleAttribute},
 
-    'scale': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double},
+    'scale': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Double, 'children': ['scaleX', 'scaleY', 'scaleZ']},
     'scaleX': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'scaleY': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'scaleZ': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
@@ -29989,11 +30231,11 @@ _COMMON_ATTR_PROPERTIES = {
     'drawLabel': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
 
     'blender': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
-    'color1': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Float},
+    'color1': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Float, 'children': ['color1R', 'color1G', 'color1B']},
     'color1R': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'color1G': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'color1B': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
-    'color2': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Float},
+    'color2': {'is_array': False, 'is_compound': True, 'is_element': False, 'attr_type': MFn.kAttribute3Float, 'children': ['color2R', 'color2G', 'color2B']},
     'color2R': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'color2G': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
     'color2B': {'is_array': False, 'is_compound': False, 'is_element': False, 'attr_type': MFn.kNumericAttribute},
@@ -30085,3259 +30327,2421 @@ _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME = {
 _COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME = {ln: sn for sn, ln in _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME.items()}
 
 _TYPE_STR_TO_ID = {
-
-    "AISEnvFacade": MTypeId(0x52454656),
-
-    "aboutToSetValueTestNode": MTypeId(0x4153564e),
-
-    "absOverride": MTypeId(0x58000378),
-
-    "absUniqueOverride": MTypeId(0x580003a0),
-
-    "absolute": MTypeId(0x41425344),
-
-    "acos": MTypeId(0x41434f53),
-
-    "addDoubleLinear": MTypeId(0x4441444c),
-
-    "addMatrix": MTypeId(0x44414d58),
-
-    "adskMaterial": MTypeId(0x4144534d),
-
-    "aimConstraint": MTypeId(0x44414d43),
-
-    "aimMatrix": MTypeId(0x414d4154),
-
-    "airField": MTypeId(0x59414952),
-
-    "indexManip": MTypeId(0x554d4958),
-
-    "alignCurve": MTypeId(0x4e414c43),
-
-    "alignManip": MTypeId(0x554d4144),
-
-    "alignSurface": MTypeId(0x4e414c53),
-
-    "ambientLight": MTypeId(0x414d424c),
-
-    "and": MTypeId(0x414e4442),
-
-    "angleBetween": MTypeId(0x4e414254),
-
-    "angleDimension": MTypeId(0x4147444e),
-
-    "animBlend": MTypeId(0x41424e44),
-
-    "animBlendInOut": MTypeId(0x4142494f),
-
-    "animBlendNodeAdditive": MTypeId(0x41424e41),
-
-    "animBlendNodeAdditiveDA": MTypeId(0x41424141),
-
-    "animBlendNodeAdditiveDL": MTypeId(0x4142414c),
-
-    "animBlendNodeAdditiveF": MTypeId(0x41424146),
-
-    "animBlendNodeAdditiveFA": MTypeId(0x41424641),
-
-    "animBlendNodeAdditiveFL": MTypeId(0x4142464c),
-
-    "animBlendNodeAdditiveI16": MTypeId(0x41424153),
-
-    "animBlendNodeAdditiveI32": MTypeId(0x41424149),
-
-    "animBlendNodeAdditiveRotation": MTypeId(0x41424e52),
-
-    "animBlendNodeAdditiveScale": MTypeId(0x41424e53),
-
-    "animBlendNodeBoolean": MTypeId(0x4142424f),
-
-    "animBlendNodeEnum": MTypeId(0x41424e45),
-
-    "animBlendNodeTime": MTypeId(0x41425449),
-
-    "animClip": MTypeId(0x434c504e),
-
-    "animCurveTA": MTypeId(0x50435441),
-
-    "animCurveTL": MTypeId(0x5043544c),
-
-    "animCurveTT": MTypeId(0x50435454),
-
-    "animCurveTU": MTypeId(0x50435455),
-
-    "animCurveUA": MTypeId(0x50435541),
-
-    "animCurveUL": MTypeId(0x5043554c),
-
-    "animCurveUT": MTypeId(0x50435554),
-
-    "animCurveUU": MTypeId(0x50435555),
-
-    "animLayer": MTypeId(0x414e4c52),
-
-    "anisotropic": MTypeId(0x52414e49),
-
-    "annotationShape": MTypeId(0x414e4e53),
-
-    "aovChildCollection": MTypeId(0x5800039c),
-
-    "aovCollection": MTypeId(0x5800039b),
-
-    "applyAbs2FloatsOverride": MTypeId(0x58000397),
-
-    "applyAbs3FloatsOverride": MTypeId(0x58000381),
-
-    "applyAbsBoolOverride": MTypeId(0x5800038a),
-
-    "applyAbsEnumOverride": MTypeId(0x5800038c),
-
-    "applyAbsFloatOverride": MTypeId(0x5800037d),
-
-    "applyAbsIntOverride": MTypeId(0x58000391),
-
-    "applyAbsStringOverride": MTypeId(0x58000393),
-
-    "applyConnectionOverride": MTypeId(0x58000384),
-
-    "applyRel2FloatsOverride": MTypeId(0x58000399),
-
-    "applyRel3FloatsOverride": MTypeId(0x58000383),
-
-    "applyRelFloatOverride": MTypeId(0x5800037f),
-
-    "applyRelIntOverride": MTypeId(0x58000392),
-
-    "arcLengthDimension": MTypeId(0x41444d4e),
-
-    "areaLight": MTypeId(0x41524c54),
-
-    "arrayMapper": MTypeId(0x44414d50),
-
-    "arrowManip": MTypeId(0x554d4152),
-
-    "arubaTessellate": MTypeId(0x41544553),
-
-    "asin": MTypeId(0x4153494e),
-
-    "atan": MTypeId(0x4154414e),
-
-    "atan2": MTypeId(0x41544132),
-
-    "attachCurve": MTypeId(0x4e415443),
-
-    "attachSurface": MTypeId(0x4e415453),
-
-    "attrHierarchyTest": MTypeId(0x41544854),
-
-    "audio": MTypeId(0x41554449),
-
-    "average": MTypeId(0x41565244),
-
-    "avgCurves": MTypeId(0x4e414352),
-
-    "avgNurbsSurfacePoints": MTypeId(0x4e414e50),
-
-    "avgSurfacePoints": MTypeId(0x4e415350),
-
-    "axisFromMatrix": MTypeId(0x584d4154),
-
-    "ballProjManip": MTypeId(0x554d4250),
-
-    "lineManip": MTypeId(0x554d4c4e),
-
-    "baseLattice": MTypeId(0x46424153),
-
-    "basicSelector": MTypeId(0x58000375),
-
-    "bevel": MTypeId(0x4e42564c),
-
-    "bevelPlus": MTypeId(0x4e425356),
-
-    "bezierCurve": MTypeId(0x42435256),
-
-    "bezierCurveToNurbs": MTypeId(0x42544e52),
-
-    "blendColorSets": MTypeId(0x50424353),
-
-    "blendColors": MTypeId(0x52424c32),
-
-    "blendDevice": MTypeId(0x424c4456),
-
-    "blendFalloff": MTypeId(0x42464f46),
-
-    "blendMatrix": MTypeId(0x424d4154),
-
-    "blendShape": MTypeId(0x46424c53),
-
-    "blendTwoAttr": MTypeId(0x41424c32),
-
-    "blendWeighted": MTypeId(0x41424c57),
-
-    "blindDataTemplate": MTypeId(0x424c4454),
-
-    "blinn": MTypeId(0x52424c4e),
-
-    "boneLattice": MTypeId(0x4642554c),
-
-    "boolean": MTypeId(0x4e424f4c),
-
-    "boundary": MTypeId(0x4e424e44),
-
-    "brownian": MTypeId(0x5246424d),
-
-    "brush": MTypeId(0x42525348),
-
-    "bulge": MTypeId(0x52544255),
-
-    "bump2d": MTypeId(0x5242554d),
-
-    "bump3d": MTypeId(0x52425533),
-
-    "freePointTriadManip": MTypeId(0x55465054),
-
-    "cacheBlend": MTypeId(0x4354524b),
-
-    "cacheFile": MTypeId(0x43434846),
-
-    "camera": MTypeId(0x4443414d),
-
-    "cameraPlaneManip": MTypeId(0x554d4350),
-
-    "cameraSet": MTypeId(0x44525452),
-
-    "cameraView": MTypeId(0x44434156),
-
-    "ceil": MTypeId(0x43454944),
-
-    "centerManip": MTypeId(0x434e4d50),
-
-    "character": MTypeId(0x43484152),
-
-    "characterMap": MTypeId(0x434d4150),
-
-    "characterOffset": MTypeId(0x584f4646),
-
-    "checker": MTypeId(0x52544348),
-
-    "choice": MTypeId(0x43484345),
-
-    "chooser": MTypeId(0x43484f4f),
-
-    "circleManip": MTypeId(0x554d434c),
-
-    "circleSweepManip": MTypeId(0x5543534d),
-
-    "clamp": MTypeId(0x52434c33),
-
-    "clampRange": MTypeId(0x434c414d),
-
-    "clipGhostShape": MTypeId(0x43475348),
-
-    "clipLibrary": MTypeId(0x434c4950),
-
-    "clipScheduler": MTypeId(0x43534348),
-
-    "clipToGhostData": MTypeId(0x43324744),
-
-    "closeCurve": MTypeId(0x4e434355),
-
-    "closeSurface": MTypeId(0x4e435355),
-
-    "closestPointOnMesh": MTypeId(0x43504f4d),
-
-    "closestPointOnSurface": MTypeId(0x4e435053),
-
-    "cloth": MTypeId(0x5254434c),
-
-    "cloud": MTypeId(0x52544344),
-
-    "cluster": MTypeId(0x46434c53),
-
-    "clusterFlexorShape": MTypeId(0x464a4346),
-
-    "clusterHandle": MTypeId(0x46434c48),
-
-    "collection": MTypeId(0x58000373),
-
-    "collisionModel": MTypeId(0x59434f4c),
-
-    "colorManagementGlobals": MTypeId(0x434d4742),
-
-    "colorProfile": MTypeId(0x434f4c50),
-
-    "columnFromMatrix": MTypeId(0x434d4154),
-
-    "combinationShape": MTypeId(0x46434e53),
-
-    "compactPlugArrayTest": MTypeId(0x43504154),
-
-    "componentFalloff": MTypeId(0x47464f46),
-
-    "translateManip": MTypeId(0x5554544d),
-
-    "componentMatch": MTypeId(0x544f504d),
-
-    "componentTagBase": MTypeId(0x43544253),
-
-    "composeMatrix": MTypeId(0x58000301),
-
-    "concentricProjManip": MTypeId(0x554d434f),
-
-    "condition": MTypeId(0x52434e44),
-
-    "connectionOverride": MTypeId(0x58000385),
-
-    "connectionUniqueOverride": MTypeId(0x580003a2),
-
-    "container": MTypeId(0x434f4e54),
-
-    "containerBase": MTypeId(0x434f4241),
-
-    "contrast": MTypeId(0x52434f4e),
-
-    "controller": MTypeId(0x43475250),
-
-    "copyColorSet": MTypeId(0x43504353),
-
-    "copyUVSet": MTypeId(0x43505553),
-
-    "cos": MTypeId(0x434f5349),
-
-    "crater": MTypeId(0x52533430),
-
-    "creaseSet": MTypeId(0x43524541),
-
-    "createColorSet": MTypeId(0x43524353),
-
-    "createUVSet": MTypeId(0x43525553),
-
-    "crossProduct": MTypeId(0x43524f50),
-
-    "cubicProjManip": MTypeId(0x554d4355),
-
-    "curveFromMeshCoM": MTypeId(0x4e434d43),
-
-    "curveFromMeshEdge": MTypeId(0x4e434d45),
-
-    "curveFromSubdivEdge": MTypeId(0x53435345),
-
-    "curveFromSubdivFace": MTypeId(0x53435346),
-
-    "curveFromSurfaceBnd": MTypeId(0x4e435342),
-
-    "curveFromSurfaceCoS": MTypeId(0x4e435343),
-
-    "curveFromSurfaceIso": MTypeId(0x4e435349),
-
-    "curveInfo": MTypeId(0x4e43494e),
-
-    "curveIntersect": MTypeId(0x4e434349),
-
-    "curveNormalizerAngle": MTypeId(0x434e5241),
-
-    "curveNormalizerLinear": MTypeId(0x434e524c),
-
-    "pointOnCurveManip": MTypeId(0x554d5043),
-
-    "curveVarGroup": MTypeId(0x4e435647),
-
-    "cylindricalProjManip": MTypeId(0x554d4359),
-
-    "dagContainer": MTypeId(0x44414743),
-
-    "dagPose": MTypeId(0x46504f53),
-
-    "dataBlockTest": MTypeId(0x44425453),
-
-    "decomposeMatrix": MTypeId(0x58000300),
-
-    "defaultLightList": MTypeId(0x4445464c),
-
-    "defaultRenderUtilityList": MTypeId(0x4452554c),
-
-    "defaultRenderingList": MTypeId(0x44524e4c),
-
-    "defaultShaderList": MTypeId(0x5244534c),
-
-    "defaultTextureList": MTypeId(0x5244544c),
-
-    "deformBend": MTypeId(0x46444244),
-
-    "deformFlare": MTypeId(0x4644464c),
-
-    "deformSine": MTypeId(0x4644534e),
-
-    "deformSquash": MTypeId(0x46445351),
-
-    "deformTwist": MTypeId(0x46445457),
-
-    "deformWave": MTypeId(0x46445756),
-
-    "deleteColorSet": MTypeId(0x444c4353),
-
-    "deleteComponent": MTypeId(0x44454354),
-
-    "deleteUVSet": MTypeId(0x444c4d53),
-
-    "deltaMush": MTypeId(0x444c544d),
-
-    "detachCurve": MTypeId(0x4e445443),
-
-    "detachSurface": MTypeId(0x4e445453),
-
-    "determinant": MTypeId(0x4445544d),
-
-    "directedDisc": MTypeId(0x44445343),
-
-    "directionalLight": MTypeId(0x4449524c),
-
-    "discManip": MTypeId(0x5544534d),
-
-    "diskCache": MTypeId(0x44534b43),
-
-    "displacementShader": MTypeId(0x52445348),
-
-    "displayLayer": MTypeId(0x4453504c),
-
-    "displayLayerManager": MTypeId(0x44504c4d),
-
-    "distanceBetween": MTypeId(0x44444254),
-
-    "distanceDimShape": MTypeId(0x44444d4e),
-
-    "distanceManip": MTypeId(0x554d444d),
-
-    "divide": MTypeId(0x44495644),
-
-    "dof": MTypeId(0x444f4644),
-
-    "dotProduct": MTypeId(0x444f5450),
-
-    "doubleShadingSwitch": MTypeId(0x53574832),
-
-    "dpBirailSrf": MTypeId(0x4e444253),
-
-    "dragField": MTypeId(0x59445247),
-
-    "dropoffLocator": MTypeId(0x444c4354),
-
-    "dynController": MTypeId(0x5943544c),
-
-    "dynGlobals": MTypeId(0x5944474c),
-
-    "dynHolder": MTypeId(0x59484c44),
-
-    "dynamicConstraint": MTypeId(0x44434f4e),
-
-    "editMetadata": MTypeId(0x454d5444),
-
-    "editsManager": MTypeId(0x454d4752),
-
-    "enableManip": MTypeId(0x454e4d50),
-
-    "envBall": MTypeId(0x5245424c),
-
-    "envChrome": MTypeId(0x52454348),
-
-    "envCube": MTypeId(0x52454342),
-
-    "envFacade": MTypeId(0x52454643),
-
-    "envFog": MTypeId(0x52454647),
-
-    "envSky": MTypeId(0x5245534b),
-
-    "envSphere": MTypeId(0x52455350),
-
-    "environmentFog": MTypeId(0x454e5646),
-
-    "equal": MTypeId(0x4551554c),
-
-    "explodeNurbsShell": MTypeId(0x4e455348),
-
-    "expression": MTypeId(0x44455850),
-
-    "extendCurve": MTypeId(0x4e455843),
-
-    "extendSurface": MTypeId(0x4e455853),
-
-    "extrude": MTypeId(0x4e455852),
-
-    "facade": MTypeId(0x4446434e),
-
-    "falloffEval": MTypeId(0x45464f46),
-
-    "ffBlendSrf": MTypeId(0x4e424c54),
-
-    "ffBlendSrfObsolete": MTypeId(0x4e424c53),
-
-    "ffFilletSrf": MTypeId(0x4e464653),
-
-    "ffd": MTypeId(0x46464644),
-
-    "file": MTypeId(0x52544654),
-
-    "filletCurve": MTypeId(0x4e464352),
-
-    "fitBspline": MTypeId(0x4e465443),
-
-    "flexorShape": MTypeId(0x464c5848),
-
-    "floor": MTypeId(0x464c4f4f),
-
-    "flow": MTypeId(0x464c4f57),
-
-    "fluidEmitter": MTypeId(0x46454d49),
-
-    "fluidShape": MTypeId(0x464c5549),
-
-    "fluidSliceManip": MTypeId(0x46534c4d),
-
-    "fluidTexture2D": MTypeId(0x464c5454),
-
-    "fluidTexture3D": MTypeId(0x464c5458),
-
-    "follicle": MTypeId(0x48435256),
-
-    "forceUpdateManip": MTypeId(0x554d4655),
-
-    "fosterParent": MTypeId(0x4650524e),
-
-    "fourByFourMatrix": MTypeId(0x4642464d),
-
-    "fractal": MTypeId(0x52543246),
-
-    "frameCache": MTypeId(0x46434348),
-
-    "freePointManip": MTypeId(0x554d4650),
-
-    "gammaCorrect": MTypeId(0x5247414d),
-
-    "geoConnectable": MTypeId(0x5947434f),
-
-    "geoConnector": MTypeId(0x59474354),
-
-    "geomBind": MTypeId(0x4742494e),
-
-    "geometryConstraint": MTypeId(0x44474e43),
-
-    "geometryFilter": MTypeId(0x44474649),
-
-    "geometryOnLineManip": MTypeId(0x554d474c),
-
-    "geometryVarGroup": MTypeId(0x4e475647),
-
-    "globalCacheControl": MTypeId(0x4743434c),
-
-    "globalStitch": MTypeId(0x4e475354),
-
-    "granite": MTypeId(0x52544752),
-
-    "gravityField": MTypeId(0x59475241),
-
-    "greasePencilSequence": MTypeId(0x47505351),
-
-    "greasePlane": MTypeId(0x4447504c),
-
-    "greasePlaneRenderShape": MTypeId(0x47505253),
-
-    "greaterThan": MTypeId(0x47525448),
-
-    "grid": MTypeId(0x52544744),
-
-    "group": MTypeId(0x580003a5),
-
-    "groupId": MTypeId(0x47504944),
-
-    "groupParts": MTypeId(0x47525050),
-
-    "guide": MTypeId(0x46475549),
-
-    "hairConstraint": MTypeId(0x4850494e),
-
-    "hairSystem": MTypeId(0x48535953),
-
-    "hairTubeShader": MTypeId(0x52485442),
-
-    "hardenPoint": MTypeId(0x4e484450),
-
-    "hardwareRenderGlobals": MTypeId(0x48575247),
-
-    "hardwareRenderingGlobals": MTypeId(0x48525247),
-
-    "heightField": MTypeId(0x4f435050),
-
-    "hierarchyTestNode1": MTypeId(0x48544e31),
-
-    "hierarchyTestNode2": MTypeId(0x48544e32),
-
-    "hierarchyTestNode3": MTypeId(0x48544e33),
-
-    "hikEffector": MTypeId(0x4446494b),
-
-    "hikFKJoint": MTypeId(0x4a54494b),
-
-    "hikFloorContactMarker": MTypeId(0x4846434d),
-
-    "hikGroundPlane": MTypeId(0x48474e44),
-
-    "hikHandle": MTypeId(0x4b484948),
-
-    "hikIKEffector": MTypeId(0x494b4546),
-
-    "hikSolver": MTypeId(0x4b48494b),
-
-    "historySwitch": MTypeId(0x48495353),
-
-    "holdMatrix": MTypeId(0x4450484d),
-
-    "hsvToRgb": MTypeId(0x52483252),
-
-    "hwReflectionMap": MTypeId(0x4857524d),
-
-    "hwRenderGlobals": MTypeId(0x59485244),
-
-    "hyperGraphInfo": MTypeId(0x48595052),
-
-    "hyperLayout": MTypeId(0x4859504c),
-
-    "hyperView": MTypeId(0x44485056),
-
-    "ikEffector": MTypeId(0x4b454646),
-
-    "ikHandle": MTypeId(0x4b48444c),
-
-    "ikMCsolver": MTypeId(0x4b4d4353),
-
-    "ikPASolver": MTypeId(0x4b504153),
-
-    "ikRPsolver": MTypeId(0x4b525053),
-
-    "ikSCsolver": MTypeId(0x4b534353),
-
-    "ikSplineSolver": MTypeId(0x4b535053),
-
-    "ikSystem": MTypeId(0x4b535953),
-
-    "imagePlane": MTypeId(0x4449504c),
-
-    "implicitBox": MTypeId(0x46494258),
-
-    "implicitCone": MTypeId(0x4649434f),
-
-    "implicitSphere": MTypeId(0x46495350),
-
-    "insertKnotCurve": MTypeId(0x4e494b43),
-
-    "insertKnotSurface": MTypeId(0x4e494b53),
-
-    "instancer": MTypeId(0x594e5354),
-
-    "intersectSurface": MTypeId(0x4e495346),
-
-    "inverseLerp": MTypeId(0x494c5250),
-
-    "jiggle": MTypeId(0x4a474446),
-
-    "joint": MTypeId(0x4a4f494e),
-
-    "jointCluster": MTypeId(0x464a434c),
-
-    "jointFfd": MTypeId(0x46464442),
-
-    "jointLattice": MTypeId(0x4642454c),
-
-    "keyframeRegionManip": MTypeId(0x4b46524d),
-
-    "keyingGroup": MTypeId(0x4b475250),
-
-    "lambert": MTypeId(0x524c414d),
-
-    "lattice": MTypeId(0x464c4154),
-
-    "layeredShader": MTypeId(0x4c595253),
-
-    "layeredTexture": MTypeId(0x4c595254),
-
-    "leastSquaresModifier": MTypeId(0x4e4c534d),
-
-    "leather": MTypeId(0x52544c45),
-
-    "length": MTypeId(0x4c454e47),
-
-    "lerp": MTypeId(0x4c455250),
-
-    "lessThan": MTypeId(0x4c535448),
-
-    "lightEditor": MTypeId(0x580003e3),
-
-    "lightFog": MTypeId(0x52464f47),
-
-    "lightGroup": MTypeId(0x580003e2),
-
-    "lightInfo": MTypeId(0x524c494e),
-
-    "lightItem": MTypeId(0x580003e1),
-
-    "lightLinker": MTypeId(0x524c4c4b),
-
-    "lightList": MTypeId(0x4c4c5354),
-
-    "lightsChildCollection": MTypeId(0x5800039a),
-
-    "lightsCollection": MTypeId(0x58000394),
-
-    "lightsCollectionSelector": MTypeId(0x580003a4),
-
-    "limitManip": MTypeId(0x4c544d50),
-
-    "lineModifier": MTypeId(0x4c4d4f44),
-
-    "locator": MTypeId(0x4c4f4354),
-
-    "lodGroup": MTypeId(0x4c4f4447),
-
-    "lodThresholds": MTypeId(0x4c4f4454),
-
-    "loft": MTypeId(0x4e534b4e),
-
-    "log": MTypeId(0x4c4f4744),
-
-    "lookAt": MTypeId(0x444c4154),
-
-    "luminance": MTypeId(0x524c554d),
-
-    "makeGroup": MTypeId(0x504d4752),
-
-    "makeIllustratorCurves": MTypeId(0x4e4d4943),
-
-    "makeNurbCircle": MTypeId(0x4e435243),
-
-    "makeNurbCone": MTypeId(0x4e434e45),
-
-    "makeNurbCube": MTypeId(0x4e435542),
-
-    "makeNurbCylinder": MTypeId(0x4e43594c),
-
-    "makeNurbPlane": MTypeId(0x4e504c4e),
-
-    "makeNurbSphere": MTypeId(0x4e535048),
-
-    "makeNurbTorus": MTypeId(0x4e544f52),
-
-    "makeNurbsSquare": MTypeId(0x4e535152),
-
-    "makeTextCurves": MTypeId(0x4e545843),
-
-    "makeThreePointCircularArc": MTypeId(0x4e334341),
-
-    "makeTwoPointCircularArc": MTypeId(0x4e324341),
-
-    "mandelbrot": MTypeId(0x52544d41),
-
-    "mandelbrot3D": MTypeId(0x52544d33),
-
-    "manip2DContainer": MTypeId(0x554d3243),
-
-    "manipContainer": MTypeId(0x554d4343),
-
-    "marble": MTypeId(0x52544d52),
-
-    "markerManip": MTypeId(0x554d4d41),
-
-    "materialFacade": MTypeId(0x524d4643),
-
-    "materialInfo": MTypeId(0x444d5449),
-
-    "materialOverride": MTypeId(0x58000387),
-
-    "materialTemplate": MTypeId(0x4d544c41),
-
-    "materialTemplateOverride": MTypeId(0x58000389),
-
-    "max": MTypeId(0x4d415844),
-
-    "membrane": MTypeId(0x4d454d42),
-
-    "mesh": MTypeId(0x444d5348),
-
-    "meshVarGroup": MTypeId(0x4e4d5647),
-
-    "min": MTypeId(0x4d494e44),
-
-    "modulo": MTypeId(0x4d4f4444),
-
-    "morph": MTypeId(0x4d525048),
-
-    "motionPath": MTypeId(0x4d505448),
-
-    "motionTrail": MTypeId(0x4d4f5452),
-
-    "motionTrailShape": MTypeId(0x4d4f5348),
-
-    "mountain": MTypeId(0x52544d54),
-
-    "movie": MTypeId(0x52544d56),
-
-    "mpBirailSrf": MTypeId(0x4e4d4253),
-
-    "multDoubleLinear": MTypeId(0x444d444c),
-
-    "multMatrix": MTypeId(0x444d544d),
-
-    "multilisterLight": MTypeId(0x4d554c4c),
-
-    "multiply": MTypeId(0x4d554c54),
-
-    "multiplyDivide": MTypeId(0x524d4449),
-
-    "multiplyPointByMatrix": MTypeId(0x4d50424d),
-
-    "multiplyVectorByMatrix": MTypeId(0x4d56424d),
-
-    "mute": MTypeId(0x4d555445),
-
-    "nCloth": MTypeId(0x4e434c4f),
-
-    "nComponent": MTypeId(0x4e434d50),
-
-    "nParticle": MTypeId(0x4e504152),
-
-    "nRigid": MTypeId(0x4e524744),
-
-    "nearestPointOnCurve": MTypeId(0x4e504f43),
-
-    "negate": MTypeId(0x4e454754),
-
-    "network": MTypeId(0x4e54574b),
-
-    "newtonField": MTypeId(0x594e4557),
-
-    "noise": MTypeId(0x52544e33),
-
-    "nonLinear": MTypeId(0x464e4c44),
-
-    "normalConstraint": MTypeId(0x444e4332),
-
-    "normalize": MTypeId(0x4e4f524d),
-
-    "not": MTypeId(0x4e4f5442),
-
-    "nucleus": MTypeId(0x4e535953),
-
-    "nurbsCurve": MTypeId(0x4e435256),
-
-    "nurbsCurveToBezier": MTypeId(0x4e525442),
-
-    "nurbsSurface": MTypeId(0x4e535246),
-
-    "nurbsTessellate": MTypeId(0x4e544553),
-
-    "nurbsToSubdiv": MTypeId(0x534e5453),
-
-    "nurbsToSubdivProc": MTypeId(0x534e5450),
-
-    "objectAttrFilter": MTypeId(0x4f464154),
-
-    "objectBinFilter": MTypeId(0x4f4b464c),
-
-    "objectFilter": MTypeId(0x4f464c54),
-
-    "objectMultiFilter": MTypeId(0x4f4d464c),
-
-    "objectNameFilter": MTypeId(0x4f4e464c),
-
-    "objectRenderFilter": MTypeId(0x4f52464c),
-
-    "objectScriptFilter": MTypeId(0x4f53464c),
-
-    "objectSet": MTypeId(0x4f425354),
-
-    "objectTypeFilter": MTypeId(0x4f54464c),
-
-    "ocean": MTypeId(0x52544f43),
-
-    "oceanShader": MTypeId(0x524f5053),
-
-    "offsetCos": MTypeId(0x4e4f4353),
-
-    "offsetCurve": MTypeId(0x4e4f4355),
-
-    "offsetSurface": MTypeId(0x4e4f5355),
-
-    "oldBlindDataBase": MTypeId(0x42444454),
-
-    "oldGeometryConstraint": MTypeId(0x44474d43),
-
-    "oldNormalConstraint": MTypeId(0x444e5243),
-
-    "oldTangentConstraint": MTypeId(0x44544e43),
-
-    "opticalFX": MTypeId(0x4f504658),
-
-    "or": MTypeId(0x4f52424f),
-
-    "orientConstraint": MTypeId(0x444f5243),
-
-    "orientationMarker": MTypeId(0x4f52544d),
-
-    "pairBlend": MTypeId(0x4150424c),
-
-    "paramDimension": MTypeId(0x52444d4e),
-
-    "parentConstraint": MTypeId(0x44504152),
-
-    "parentMatrix": MTypeId(0x50524d54),
-
-    "particle": MTypeId(0x59504152),
-
-    "particleAgeMapper": MTypeId(0x50414d41),
-
-    "particleCloud": MTypeId(0x50434c44),
-
-    "particleColorMapper": MTypeId(0x50434d41),
-
-    "particleIncandMapper": MTypeId(0x50494d41),
-
-    "particleSamplerInfo": MTypeId(0x5053494e),
-
-    "particleTranspMapper": MTypeId(0x50544d41),
-
-    "partition": MTypeId(0x5052544e),
-
-    "passContributionMap": MTypeId(0x5053434d),
-
-    "passMatrix": MTypeId(0x4450534d),
-
-    "pfxHair": MTypeId(0x50464841),
-
-    "pfxToon": MTypeId(0x5046544f),
-
-    "phong": MTypeId(0x5250484f),
-
-    "phongE": MTypeId(0x52504845),
-
-    "pi": MTypeId(0x50494b44),
-
-    "pickMatrix": MTypeId(0x504d4154),
-
-    "pivotAndOrientManip": MTypeId(0x50414f4d),
-
-    "place2dTexture": MTypeId(0x52504c32),
-
-    "place3dTexture": MTypeId(0x52504c44),
-
-    "planarProjManip": MTypeId(0x554d5050),
-
-    "planarTrimSurface": MTypeId(0x4e504c54),
-
-    "plusMinusAverage": MTypeId(0x52504d41),
-
-    "pointConstraint": MTypeId(0x44505443),
-
-    "pointEmitter": MTypeId(0x59454d49),
-
-    "pointLight": MTypeId(0x504f4954),
-
-    "pointMatrixMult": MTypeId(0x44504d4d),
-
-    "pointOnCurveInfo": MTypeId(0x4e504349),
-
-    "pointOnLineManip": MTypeId(0x554d504c),
-
-    "pointOnPolyConstraint": MTypeId(0x44505043),
-
-    "pointOnSurfManip": MTypeId(0x554d5353),
-
-    "pointOnSurfaceInfo": MTypeId(0x4e505349),
-
-    "pointOnSurfaceManip": MTypeId(0x554d5053),
-
-    "poleVectorConstraint": MTypeId(0x44505643),
-
-    "polyAppend": MTypeId(0x50415050),
-
-    "polyAppendVertex": MTypeId(0x50415056),
-
-    "polyAutoProj": MTypeId(0x50415550),
-
-    "polyAverageVertex": MTypeId(0x50415656),
-
-    "polyAxis": MTypeId(0x50435244),
-
-    "polyBevel": MTypeId(0x5042564c),
-
-    "polyBevel2": MTypeId(0x50425632),
-
-    "polyBevel3": MTypeId(0x50425633),
-
-    "polyBlindData": MTypeId(0x4d424454),
-
-    "polyBoolOp": MTypeId(0x50424f50),
-
-    "polyBridgeEdge": MTypeId(0x50425245),
-
-    "polyCBoolOp": MTypeId(0x50435642),
-
-    "polyChipOff": MTypeId(0x50434849),
-
-    "polyCircularize": MTypeId(0x50435243),
-
-    "polyClean": MTypeId(0x504c434c),
-
-    "polyCloseBorder": MTypeId(0x50434c4f),
-
-    "polyCollapseEdge": MTypeId(0x50434f45),
-
-    "polyCollapseF": MTypeId(0x50434f46),
-
-    "polyColorDel": MTypeId(0x5043444c),
-
-    "polyColorMod": MTypeId(0x50434d4f),
-
-    "polyColorPerVertex": MTypeId(0x50435056),
-
-    "polyCone": MTypeId(0x50434f4e),
-
-    "polyConnectComponents": MTypeId(0x50434353),
-
-    "polyContourProj": MTypeId(0x50434e50),
-
-    "polyCopyUV": MTypeId(0x50435556),
-
-    "polyCrease": MTypeId(0x50435253),
-
-    "polyCreaseEdge": MTypeId(0x50435345),
-
-    "polyCreateFace": MTypeId(0x50435245),
-
-    "polyCube": MTypeId(0x50435542),
-
-    "polyCut": MTypeId(0x50504354),
-
-    "polyCylProj": MTypeId(0x50435950),
-
-    "polyCylinder": MTypeId(0x5043594c),
-
-    "polyDelEdge": MTypeId(0x50444545),
-
-    "polyDelFacet": MTypeId(0x50444546),
-
-    "polyDelVertex": MTypeId(0x50444556),
-
-    "polyDuplicateEdge": MTypeId(0x50445545),
-
-    "polyEdgeToCurve": MTypeId(0x50544356),
-
-    "polyEditEdgeFlow": MTypeId(0x50534546),
-
-    "polyExtrudeEdge": MTypeId(0x50455845),
-
-    "polyExtrudeFace": MTypeId(0x50455846),
-
-    "polyExtrudeVertex": MTypeId(0x50455856),
-
-    "polyFlipEdge": MTypeId(0x50464c45),
-
-    "polyFlipUV": MTypeId(0x50465556),
-
-    "polyHelix": MTypeId(0x48454c49),
-
-    "polyHoleFace": MTypeId(0x50484645),
-
-    "polyLayoutUV": MTypeId(0x504c5556),
-
-    "polyMapCut": MTypeId(0x504d4143),
-
-    "polyMapDel": MTypeId(0x504d4144),
-
-    "polyMapSew": MTypeId(0x504d4153),
-
-    "polyMapSewMove": MTypeId(0x5053454d),
-
-    "polyMergeEdge": MTypeId(0x504d4545),
-
-    "polyMergeFace": MTypeId(0x504d4546),
-
-    "polyMergeUV": MTypeId(0x504d4755),
-
-    "polyMergeVert": MTypeId(0x504d5645),
-
-    "polyMirror": MTypeId(0x504d4952),
-
-    "polyMoveEdge": MTypeId(0x504d4f45),
-
-    "polyMoveFace": MTypeId(0x504d4f46),
-
-    "polyMoveFacetUV": MTypeId(0x504d4655),
-
-    "polyMoveUV": MTypeId(0x504d5556),
-
-    "polyMoveVertex": MTypeId(0x504d4f56),
-
-    "polyNormal": MTypeId(0x504e4f52),
-
-    "polyNormalPerVertex": MTypeId(0x504e5056),
-
-    "polyNormalizeUV": MTypeId(0x504e5556),
-
-    "polyOptUvs": MTypeId(0x504f5556),
-
-    "polyPassThru": MTypeId(0x50595054),
-
-    "polyPinUV": MTypeId(0x50505556),
-
-    "polyPipe": MTypeId(0x50504950),
-
-    "polyPlanarProj": MTypeId(0x50504c50),
-
-    "polyPlane": MTypeId(0x504d4553),
-
-    "polyPlatonicSolid": MTypeId(0x534f4c49),
-
-    "polyPoke": MTypeId(0x5050504b),
-
-    "polyPrimitiveMisc": MTypeId(0x4d495343),
-
-    "polyPrism": MTypeId(0x50505249),
-
-    "polyProj": MTypeId(0x5050524f),
-
-    "polyProjectCurve": MTypeId(0x50504356),
-
-    "polyPyramid": MTypeId(0x50505952),
-
-    "polyQuad": MTypeId(0x50515541),
-
-    "polyReduce": MTypeId(0x50524544),
-
-    "polyRemesh": MTypeId(0x50524d48),
-
-    "polyRetopo": MTypeId(0x5052464d),
-
-    "polySeparate": MTypeId(0x50534550),
-
-    "polySewEdge": MTypeId(0x50535745),
-
-    "polySmooth": MTypeId(0x50534d54),
-
-    "polySmoothFace": MTypeId(0x50534d46),
-
-    "polySmoothProxy": MTypeId(0x50534d50),
-
-    "polySoftEdge": MTypeId(0x50534f45),
-
-    "polySphProj": MTypeId(0x50535050),
-
-    "polySphere": MTypeId(0x50535048),
-
-    "polySpinEdge": MTypeId(0x50535051),
-
-    "polySplit": MTypeId(0x5053504c),
-
-    "polySplitEdge": MTypeId(0x50534544),
-
-    "polySplitRing": MTypeId(0x50535052),
-
-    "polySplitVert": MTypeId(0x50535645),
-
-    "polyStraightenUVBorder": MTypeId(0x50535442),
-
-    "polySubdEdge": MTypeId(0x50535545),
-
-    "polySubdFace": MTypeId(0x50535546),
-
-    "polyToSubdiv": MTypeId(0x50534453),
-
-    "polyTorus": MTypeId(0x50544f52),
-
-    "polyTransfer": MTypeId(0x50544652),
-
-    "polyTriangulate": MTypeId(0x50545249),
-
-    "polyTweak": MTypeId(0x5054574b),
-
-    "polyTweakUV": MTypeId(0x50545556),
-
-    "polyUVRectangle": MTypeId(0x50555652),
-
-    "polyUnite": MTypeId(0x50554e49),
-
-    "polyUnsmooth": MTypeId(0x50555344),
-
-    "polyWedgeFace": MTypeId(0x50574643),
-
-    "poseInterpolatorManager": MTypeId(0x5053444d),
-
-    "positionMarker": MTypeId(0x504f534d),
-
-    "postProcessList": MTypeId(0x50505354),
-
-    "power": MTypeId(0x504f5744),
-
-    "primitiveFalloff": MTypeId(0x53464f46),
-
-    "projectCurve": MTypeId(0x4e504352),
-
-    "projectTangent": MTypeId(0x4e50544e),
-
-    "projection": MTypeId(0x5250524a),
-
-    "trsManip": MTypeId(0x554d4354),
-
-    "propMoveTriadManip": MTypeId(0x554d5054),
-
-    "proximityFalloff": MTypeId(0x5058464f),
-
-    "proximityPin": MTypeId(0x50525850),
-
-    "proximityWrap": MTypeId(0x50575250),
-
-    "proxyManager": MTypeId(0x50584d47),
-
-    "psdFileTex": MTypeId(0x50534454),
-
-    "quadShadingSwitch": MTypeId(0x53574834),
-
-    "radialField": MTypeId(0x59524144),
-
-    "ramp": MTypeId(0x52545241),
-
-    "rampShader": MTypeId(0x52525053),
-
-    "rbfSrf": MTypeId(0x4e524246),
-
-    "rebuildCurve": MTypeId(0x4e524243),
-
-    "rebuildSurface": MTypeId(0x4e524253),
-
-    "record": MTypeId(0x52454344),
-
-    "reference": MTypeId(0x5245464e),
-
-    "relOverride": MTypeId(0x5800037a),
-
-    "relUniqueOverride": MTypeId(0x580003a1),
-
-    "remapColor": MTypeId(0x524d434c),
-
-    "remapHsv": MTypeId(0x524d4853),
-
-    "remapValue": MTypeId(0x524d564c),
-
-    "renderBox": MTypeId(0x524e4258),
-
-    "renderCone": MTypeId(0x524e434f),
-
-    "renderGlobals": MTypeId(0x52474c42),
-
-    "renderGlobalsList": MTypeId(0x5244474c),
-
-    "renderLayer": MTypeId(0x524e444c),
-
-    "renderLayerManager": MTypeId(0x524e4c4d),
-
-    "renderPass": MTypeId(0x524e5053),
-
-    "renderPassSet": MTypeId(0x52505353),
-
-    "renderQuality": MTypeId(0x52515541),
-
-    "renderRect": MTypeId(0x52524354),
-
-    "renderSettingsChildCollection": MTypeId(0x580003a3),
-
-    "renderSettingsCollection": MTypeId(0x58000395),
-
-    "renderSetup": MTypeId(0x58000371),
-
-    "renderSetupLayer": MTypeId(0x58000372),
-
-    "renderSphere": MTypeId(0x524e5350),
-
-    "renderTarget": MTypeId(0x524e5447),
-
-    "renderedImageSource": MTypeId(0x52434953),
-
-    "reorderUVSet": MTypeId(0x524f5553),
-
-    "resolution": MTypeId(0x524c544e),
-
-    "resultCurveTimeToAngular": MTypeId(0x52435441),
-
-    "resultCurveTimeToLinear": MTypeId(0x5243544c),
-
-    "resultCurveTimeToTime": MTypeId(0x52435454),
-
-    "resultCurveTimeToUnitless": MTypeId(0x52435455),
-
-    "reverse": MTypeId(0x52525653),
-
-    "reverseCurve": MTypeId(0x4e525643),
-
-    "reverseSurface": MTypeId(0x4e525653),
-
-    "revolve": MTypeId(0x4e52564c),
-
-    "rgbToHsv": MTypeId(0x52523248),
-
-    "rigidBody": MTypeId(0x59524744),
-
-    "rigidConstraint": MTypeId(0x59435354),
-
-    "rigidSolver": MTypeId(0x59534c56),
-
-    "rock": MTypeId(0x5254524b),
-
-    "rotateLimitsManip": MTypeId(0x554d524c),
-
-    "rotateManip": MTypeId(0x554d5241),
-
-    "rotateUV2dManip": MTypeId(0x5532524f),
-
-    "rotateVector": MTypeId(0x524f5456),
-
-    "rotationFromMatrix": MTypeId(0x524f4d58),
-
-    "round": MTypeId(0x524f554e),
-
-    "roundConstantRadius": MTypeId(0x4e524352),
-
-    "rowFromMatrix": MTypeId(0x524d4154),
-
-    "sampler": MTypeId(0x46534d50),
-
-    "samplerInfo": MTypeId(0x5253494e),
-
-    "scaleConstraint": MTypeId(0x44534343),
-
-    "scaleFromMatrix": MTypeId(0x534d4154),
-
-    "scaleUV2dManip": MTypeId(0x55325343),
-
-    "screenAlignedCircleManip": MTypeId(0x5341434d),
-
-    "script": MTypeId(0x53435250),
-
-    "scriptManip": MTypeId(0x554d5343),
-
-    "sculpt": MTypeId(0x46534350),
-
-    "selectionListOperator": MTypeId(0x534c4f50),
-
-    "sequenceManager": MTypeId(0x53514d47),
-
-    "sequencer": MTypeId(0x53514e43),
-
-    "setRange": MTypeId(0x52524e47),
-
-    "shaderGlow": MTypeId(0x5348474c),
-
-    "shaderOverride": MTypeId(0x58000386),
-
-    "shadingEngine": MTypeId(0x53484144),
-
-    "shadingMap": MTypeId(0x53444d50),
-
-    "shapeEditorManager": MTypeId(0x53444d4c),
-
-    "shellTessellate": MTypeId(0x53544553),
-
-    "shot": MTypeId(0x53484f54),
-
-    "shrinkWrap": MTypeId(0x53575250),
-
-    "simpleSelector": MTypeId(0x5800039e),
-
-    "simpleTestNode": MTypeId(0x53544e44),
-
-    "simpleVolumeShader": MTypeId(0x53565348),
-
-    "sin": MTypeId(0x53494e45),
-
-    "singleShadingSwitch": MTypeId(0x53574831),
-
-    "sketchPlane": MTypeId(0x534b504e),
-
-    "skinBinding": MTypeId(0x534b4244),
-
-    "skinCluster": MTypeId(0x4653434c),
-
-    "smoothCurve": MTypeId(0x4e534d43),
-
-    "smoothStep": MTypeId(0x534d5354),
-
-    "smoothTangentSrf": MTypeId(0x4e53544e),
-
-    "snapUV2dManip": MTypeId(0x5532534e),
-
-    "snapshot": MTypeId(0x534e5054),
-
-    "snapshotShape": MTypeId(0x53534841),
-
-    "snow": MTypeId(0x5254534e),
-
-    "softMod": MTypeId(0x4653534c),
-
-    "softModHandle": MTypeId(0x46535348),
-
-    "solidFractal": MTypeId(0x52544633),
-
-    "solidify": MTypeId(0x534f4c59),
-
-    "spBirailSrf": MTypeId(0x4e534253),
-
-    "sphericalProjManip": MTypeId(0x554d5350),
-
-    "spotCylinderManip": MTypeId(0x53434d50),
-
-    "spotLight": MTypeId(0x5350544c),
-
-    "spring": MTypeId(0x59535052),
-
-    "squareSrf": MTypeId(0x4e535153),
-
-    "standardSurface": MTypeId(0x53544453),
-
-    "stencil": MTypeId(0x52545354),
-
-    "stereoRigCamera": MTypeId(0x53524341),
-
-    "stitchAsNurbsShell": MTypeId(0x4e535348),
-
-    "stitchSrf": MTypeId(0x4e535453),
-
-    "stroke": MTypeId(0x5354524b),
-
-    "strokeGlobals": MTypeId(0x53544b47),
-
-    "stucco": MTypeId(0x52533630),
-
-    "styleCurve": MTypeId(0x4e535443),
-
-    "subCurve": MTypeId(0x4e534243),
-
-    "subSurface": MTypeId(0x4e535352),
-
-    "subdAddTopology": MTypeId(0x53415459),
-
-    "subdAutoProj": MTypeId(0x53415550),
-
-    "subdBlindData": MTypeId(0x53424454),
-
-    "subdCleanTopology": MTypeId(0x53435459),
-
-    "subdHierBlind": MTypeId(0x53485242),
-
-    "subdLayoutUV": MTypeId(0x534c5556),
-
-    "subdMapCut": MTypeId(0x534d4143),
-
-    "subdMapSewMove": MTypeId(0x5353454d),
-
-    "subdPlanarProj": MTypeId(0x53504c50),
-
-    "subdTweak": MTypeId(0x5354574b),
-
-    "subdTweakUV": MTypeId(0x53545556),
-
-    "subdiv": MTypeId(0x53445353),
-
-    "subdivCollapse": MTypeId(0x53434c50),
-
-    "subdivComponentId": MTypeId(0x53534944),
-
-    "subdivReverseFaces": MTypeId(0x53525646),
-
-    "subdivSurfaceVarGroup": MTypeId(0x53535647),
-
-    "subdivToNurbs": MTypeId(0x5344534e),
-
-    "subdivToPoly": MTypeId(0x53445350),
-
-    "subsetFalloff": MTypeId(0x5353464f),
-
-    "subtract": MTypeId(0x53554253),
-
-    "sum": MTypeId(0x53554d44),
-
-    "surfaceInfo": MTypeId(0x4e53494e),
-
-    "surfaceLuminance": MTypeId(0x52534c55),
-
-    "surfaceShader": MTypeId(0x52535348),
-
-    "surfaceVarGroup": MTypeId(0x4e535647),
-
-    "symmetryConstraint": MTypeId(0x44534d43),
-
-    "tan": MTypeId(0x54414e47),
-
-    "tangentConstraint": MTypeId(0x44544332),
-
-    "tension": MTypeId(0x54454e53),
-
-    "textButtonManip": MTypeId(0x554d5442),
-
-    "texture3dManip": MTypeId(0x554d5458),
-
-    "textureBakeSet": MTypeId(0x5442414b),
-
-    "textureDeformer": MTypeId(0x54584446),
-
-    "textureDeformerHandle": MTypeId(0x54444844),
-
-    "textureToGeom": MTypeId(0x5454474f),
-
-    "time": MTypeId(0x54494d45),
-
-    "timeEditor": MTypeId(0x544d4544),
-
-    "timeEditorAnimSource": MTypeId(0x54454153),
-
-    "timeEditorClip": MTypeId(0x41434c43),
-
-    "timeEditorClipBase": MTypeId(0x414c434c),
-
-    "timeEditorClipEvaluator": MTypeId(0x4143524f),
-
-    "timeEditorInterpolator": MTypeId(0x54454950),
-
-    "timeEditorTracks": MTypeId(0x5445544b),
-
-    "timeFunction": MTypeId(0x7466786e),
-
-    "timeToUnitConversion": MTypeId(0x44544d55),
-
-    "timeWarp": MTypeId(0x54495741),
-
-    "toggleManip": MTypeId(0x554d5447),
-
-    "toggleOnLineManip": MTypeId(0x55544f4c),
-
-    "toolDrawManip": MTypeId(0x5454444d),
-
-    "toolDrawManip2D": MTypeId(0x54444d32),
-
-    "toonLineAttributes": MTypeId(0x544c4154),
-
-    "trackInfoManager": MTypeId(0x54494d47),
-
-    "transUV2dManip": MTypeId(0x55325452),
-
-    "transferAttributes": MTypeId(0x54524154),
-
-    "transferFalloff": MTypeId(0x50464f46),
-
-    "transform": MTypeId(0x5846524d),
-
-    "transformGeometry": MTypeId(0x5447454f),
-
-    "translateUVManip": MTypeId(0x554d5556),
-
-    "translationFromMatrix": MTypeId(0x544d4154),
-
-    "trim": MTypeId(0x4e54524d),
-
-    "trimWithBoundaries": MTypeId(0x4e545742),
-
-    "triplanarProjManip": MTypeId(0x554d5452),
-
-    "tripleShadingSwitch": MTypeId(0x53574833),
-
-    "truncate": MTypeId(0x5452554e),
-
-    "turbulenceField": MTypeId(0x59545552),
-
-    "tweak": MTypeId(0x464d5054),
-
-    "ufeProxyCameraShape": MTypeId(0x55465043),
-
-    "ufeProxyTransform": MTypeId(0x55465058),
-
-    "uniformFalloff": MTypeId(0x55574754),
-
-    "uniformField": MTypeId(0x59554e49),
-
-    "unitConversion": MTypeId(0x44554e54),
-
-    "unitToTimeConversion": MTypeId(0x4455544d),
-
-    "unknown": MTypeId(0x554e4b4e),
-
-    "unknownDag": MTypeId(0x554e4b44),
-
-    "unknownTransform": MTypeId(0x554e4b54),
-
-    "untrim": MTypeId(0x4e555452),
-
-    "useBackground": MTypeId(0x55534247),
-
-    "uv2dManip": MTypeId(0x5556324d),
-
-    "uvChooser": MTypeId(0x55564348),
-
-    "uvPin": MTypeId(0x55565256),
-
-    "vectorProduct": MTypeId(0x52564543),
-
-    "vertexBakeSet": MTypeId(0x5642414b),
-
-    "viewColorManager": MTypeId(0x5657434d),
-
-    "volumeAxisField": MTypeId(0x59565846),
-
-    "volumeFog": MTypeId(0x52564647),
-
-    "volumeLight": MTypeId(0x564f4c4c),
-
-    "volumeNoise": MTypeId(0x52545633),
-
-    "volumeShader": MTypeId(0x52565348),
-
-    "vortexField": MTypeId(0x59564f52),
-
-    "water": MTypeId(0x52545741),
-
-    "weightGeometryFilter": MTypeId(0x44574746),
-
-    "wire": MTypeId(0x46574952),
-
-    "wood": MTypeId(0x52545744),
-
-    "wrap": MTypeId(0x46575250),
-
-    "wtAddMatrix": MTypeId(0x4457414d),
-
+   "invalid": MTypeId(0),
+   "base": MTypeId(1),
+   "namedObject": MTypeId(2),
+   "model": MTypeId(3),
+   "dependencyNode": MTypeId(4),
+   "addDoubleLinear": MTypeId(5),
+   "affect": MTypeId(6),
+   "animCurve": MTypeId(7),
+   "animCurveTimeToAngular": MTypeId(8),
+   "animCurveTimeToDistance": MTypeId(9),
+   "animCurveTimeToTime": MTypeId(10),
+   "animCurveTimeToUnitless": MTypeId(11),
+   "animCurveUnitlessToAngular": MTypeId(12),
+   "animCurveUnitlessToDistance": MTypeId(13),
+   "animCurveUnitlessToTime": MTypeId(14),
+   "animCurveUnitlessToUnitless": MTypeId(15),
+   "resultCurve": MTypeId(16),
+   "resultCurveTimeToAngular": MTypeId(17),
+   "resultCurveTimeToDistance": MTypeId(18),
+   "resultCurveTimeToTime": MTypeId(19),
+   "resultCurveTimeToUnitless": MTypeId(20),
+   "angleBetween": MTypeId(21),
+   "audio": MTypeId(22),
+   "background": MTypeId(23),
+   "colorBackground": MTypeId(24),
+   "fileBackground": MTypeId(25),
+   "rampBackground": MTypeId(26),
+   "blend": MTypeId(27),
+   "blendTwoAttr": MTypeId(28),
+   "blendWeighted": MTypeId(29),
+   "blendDevice": MTypeId(30),
+   "blendColors": MTypeId(31),
+   "bump": MTypeId(32),
+   "bump3d": MTypeId(33),
+   "cameraView": MTypeId(34),
+   "chainToSpline": MTypeId(35),
+   "choice": MTypeId(36),
+   "condition": MTypeId(37),
+   "contrast": MTypeId(38),
+   "clampColor": MTypeId(39),
+   "create": MTypeId(40),
+   "alignCurve": MTypeId(41),
+   "alignSurface": MTypeId(42),
+   "attachCurve": MTypeId(43),
+   "attachSurface": MTypeId(44),
+   "avgCurves": MTypeId(45),
+   "avgSurfacePoints": MTypeId(46),
+   "avgNurbsSurfacePoints": MTypeId(47),
+   "bevel": MTypeId(48),
+   "birailSrf": MTypeId(49),
+   "dPbirailSrf": MTypeId(50),
+   "mPbirailSrf": MTypeId(51),
+   "sPbirailSrf": MTypeId(52),
+   "boundary": MTypeId(53),
+   "circle": MTypeId(54),
+   "closeCurve": MTypeId(55),
+   "closestPointOnSurface": MTypeId(56),
+   "closeSurface": MTypeId(57),
+   "curveFromSurface": MTypeId(58),
+   "curveFromSurfaceBnd": MTypeId(59),
+   "curveFromSurfaceCoS": MTypeId(60),
+   "curveFromSurfaceIso": MTypeId(61),
+   "curveInfo": MTypeId(62),
+   "detachCurve": MTypeId(63),
+   "detachSurface": MTypeId(64),
+   "extendCurve": MTypeId(65),
+   "extendSurface": MTypeId(66),
+   "extrude": MTypeId(67),
+   "fFblendSrf": MTypeId(68),
+   "fFfilletSrf": MTypeId(69),
+   "filletCurve": MTypeId(70),
+   "fitBspline": MTypeId(71),
+   "flow": MTypeId(72),
+   "hardenPointCurve": MTypeId(73),
+   "illustratorCurve": MTypeId(74),
+   "insertKnotCrv": MTypeId(75),
+   "insertKnotSrf": MTypeId(76),
+   "intersectSurface": MTypeId(77),
+   "nurbsTesselate": MTypeId(78),
+   "nurbsPlane": MTypeId(79),
+   "nurbsCube": MTypeId(80),
+   "offsetCos": MTypeId(81),
+   "offsetCurve": MTypeId(82),
+   "planarTrimSrf": MTypeId(83),
+   "pointOnCurveInfo": MTypeId(84),
+   "pointOnSurfaceInfo": MTypeId(85),
+   "primitive": MTypeId(86),
+   "projectCurve": MTypeId(87),
+   "projectTangent": MTypeId(88),
+   "rBFsurface": MTypeId(89),
+   "rebuildCurve": MTypeId(90),
+   "rebuildSurface": MTypeId(91),
+   "reverseCurve": MTypeId(92),
+   "reverseSurface": MTypeId(93),
+   "revolve": MTypeId(94),
+   "revolvedPrimitive": MTypeId(95),
+   "cone": MTypeId(96),
+   "renderCone": MTypeId(97),
+   "cylinder": MTypeId(98),
+   "sphere": MTypeId(99),
+   "skin": MTypeId(100),
+   "stitchSrf": MTypeId(101),
+   "subCurve": MTypeId(102),
+   "surfaceInfo": MTypeId(103),
+   "textCurves": MTypeId(104),
+   "trim": MTypeId(105),
+   "untrim": MTypeId(106),
+   "dagNode": MTypeId(107),
+   "proxy": MTypeId(108),
+   "underWorld": MTypeId(109),
+   "transform": MTypeId(110),
+   "aimConstraint": MTypeId(111),
+   "lookAt": MTypeId(112),
+   "geometryConstraint": MTypeId(113),
+   "geometryVarGroup": MTypeId(114),
+   "anyGeometryVarGroup": MTypeId(115),
+   "curveVarGroup": MTypeId(116),
+   "meshVarGroup": MTypeId(117),
+   "surfaceVarGroup": MTypeId(118),
+   "ikEffector": MTypeId(119),
+   "ikHandle": MTypeId(120),
+   "joint": MTypeId(121),
+   "manipulator3D": MTypeId(122),
+   "arrowManip": MTypeId(123),
+   "axesActionManip": MTypeId(124),
+   "ballProjectionManip": MTypeId(125),
+   "circleManip": MTypeId(126),
+   "screenAlignedCircleManip": MTypeId(127),
+   "circleSweepManip": MTypeId(128),
+   "concentricProjectionManip": MTypeId(129),
+   "cubicProjectionManip": MTypeId(130),
+   "cylindricalProjectionManip": MTypeId(131),
+   "discManip": MTypeId(132),
+   "freePointManip": MTypeId(133),
+   "centerManip": MTypeId(134),
+   "limitManip": MTypeId(135),
+   "enableManip": MTypeId(136),
+   "freePointTriadManip": MTypeId(137),
+   "propMoveTriadManip": MTypeId(138),
+   "towPointManip": MTypeId(139),
+   "polyCreateToolManip": MTypeId(140),
+   "polySplitToolManip": MTypeId(141),
+   "geometryOnLineManip": MTypeId(142),
+   "cameraPlaneManip": MTypeId(143),
+   "toggleOnLineManip": MTypeId(144),
+   "stateManip": MTypeId(145),
+   "isoparmManip": MTypeId(146),
+   "lineManip": MTypeId(147),
+   "manipContainer": MTypeId(148),
+   "averageCurveManip": MTypeId(149),
+   "barnDoorManip": MTypeId(150),
+   "bevelManip": MTypeId(151),
+   "blendManip": MTypeId(152),
+   "buttonManip": MTypeId(153),
+   "cameraManip": MTypeId(154),
+   "coiManip": MTypeId(155),
+   "cpManip": MTypeId(156),
+   "createCVManip": MTypeId(157),
+   "createEPManip": MTypeId(158),
+   "curveEdManip": MTypeId(159),
+   "curveSegmentManip": MTypeId(160),
+   "directionManip": MTypeId(161),
+   "dofManip": MTypeId(162),
+   "dropoffManip": MTypeId(163),
+   "extendCurveDistanceManip": MTypeId(164),
+   "extrudeManip": MTypeId(165),
+   "ikSplineManip": MTypeId(166),
+   "ikRPManip": MTypeId(167),
+   "jointClusterManip": MTypeId(168),
+   "lightManip": MTypeId(169),
+   "motionPathManip": MTypeId(170),
+   "offsetCosManip": MTypeId(171),
+   "offsetCurveManip": MTypeId(172),
+   "projectionManip": MTypeId(173),
+   "polyProjectionManip": MTypeId(174),
+   "projectionUVManip": MTypeId(175),
+   "projectionMultiManip": MTypeId(176),
+   "projectTangentManip": MTypeId(177),
+   "propModManip": MTypeId(178),
+   "quadPtOnLineManip": MTypeId(179),
+   "rbfSrfManip": MTypeId(180),
+   "reverseCurveManip": MTypeId(181),
+   "reverseCrvManip": MTypeId(182),
+   "reverseSurfaceManip": MTypeId(183),
+   "revolveManip": MTypeId(184),
+   "revolvedPrimitiveManip": MTypeId(185),
+   "spotManip": MTypeId(186),
+   "spotCylinderManip": MTypeId(187),
+   "triplanarProjectionManip": MTypeId(188),
+   "trsManip": MTypeId(189),
+   "dblTrsManip": MTypeId(190),
+   "pivotManip2D": MTypeId(191),
+   "manip2DContainer": MTypeId(192),
+   "polyMoveUVManip": MTypeId(193),
+   "polyMappingManip": MTypeId(194),
+   "polyModifierManip": MTypeId(195),
+   "polyMoveVertexManip": MTypeId(196),
+   "polyVertexNormalManip": MTypeId(197),
+   "texSmudgeUVManip": MTypeId(198),
+   "texLatticeDeformManip": MTypeId(199),
+   "texLattice": MTypeId(200),
+   "texSmoothManip": MTypeId(201),
+   "trsTransManip": MTypeId(202),
+   "trsInsertManip": MTypeId(203),
+   "trsXformManip": MTypeId(204),
+   "manipulator2D": MTypeId(205),
+   "translateManip2D": MTypeId(206),
+   "planarProjectionManip": MTypeId(207),
+   "pointOnCurveManip": MTypeId(208),
+   "towPointOnCurveManip": MTypeId(209),
+   "markerManip": MTypeId(210),
+   "pointOnLineManip": MTypeId(211),
+   "pointOnSurfaceManip": MTypeId(212),
+   "translateUVManip": MTypeId(213),
+   "rotateBoxManip": MTypeId(214),
+   "rotateManip": MTypeId(215),
+   "handleRotateManip": MTypeId(216),
+   "rotateLimitsManip": MTypeId(217),
+   "scaleLimitsManip": MTypeId(218),
+   "scaleManip": MTypeId(219),
+   "scalingBoxManip": MTypeId(220),
+   "scriptManip": MTypeId(221),
+   "sphericalProjectionManip": MTypeId(222),
+   "textureManip3D": MTypeId(223),
+   "toggleManip": MTypeId(224),
+   "translateBoxManip": MTypeId(225),
+   "translateLimitsManip": MTypeId(226),
+   "translateManip": MTypeId(227),
+   "trimManip": MTypeId(228),
+   "jointTranslateManip": MTypeId(229),
+   "manipulator": MTypeId(230),
+   "circlePointManip": MTypeId(231),
+   "dimensionManip": MTypeId(232),
+   "fixedLineManip": MTypeId(233),
+   "lightProjectionGeometry": MTypeId(234),
+   "lineArrowManip": MTypeId(235),
+   "pointManip": MTypeId(236),
+   "triadManip": MTypeId(237),
+   "normalConstraint": MTypeId(238),
+   "orientConstraint": MTypeId(239),
+   "pointConstraint": MTypeId(240),
+   "symmetryConstraint": MTypeId(241),
+   "parentConstraint": MTypeId(242),
+   "poleVectorConstraint": MTypeId(243),
+   "scaleConstraint": MTypeId(244),
+   "tangentConstraint": MTypeId(245),
+   "unknownTransform": MTypeId(246),
+   "world": MTypeId(247),
+   "shape": MTypeId(248),
+   "baseLattice": MTypeId(249),
+   "camera": MTypeId(250),
+   "cluster": MTypeId(251),
+   "softMod": MTypeId(252),
+   "collision": MTypeId(253),
+   "dummy": MTypeId(254),
+   "emitter": MTypeId(255),
+   "field": MTypeId(256),
+   "air": MTypeId(257),
+   "drag": MTypeId(258),
+   "gravity": MTypeId(259),
+   "newton": MTypeId(260),
+   "radial": MTypeId(261),
+   "turbulence": MTypeId(262),
+   "uniform": MTypeId(263),
+   "vortex": MTypeId(264),
+   "geometric": MTypeId(265),
+   "curve": MTypeId(266),
+   "nurbsCurve": MTypeId(267),
+   "nurbsCurveGeom": MTypeId(268),
+   "dimension": MTypeId(269),
+   "angle": MTypeId(270),
+   "annotation": MTypeId(271),
+   "distance": MTypeId(272),
+   "arcLength": MTypeId(273),
+   "radius": MTypeId(274),
+   "paramDimension": MTypeId(275),
+   "directedDisc": MTypeId(276),
+   "renderRect": MTypeId(277),
+   "envFogShape": MTypeId(278),
+   "lattice": MTypeId(279),
+   "latticeGeom": MTypeId(280),
+   "locator": MTypeId(281),
+   "dropoffLocator": MTypeId(282),
+   "marker": MTypeId(283),
+   "orientationMarker": MTypeId(284),
+   "positionMarker": MTypeId(285),
+   "orientationLocator": MTypeId(286),
+   "trimLocator": MTypeId(287),
+   "plane": MTypeId(288),
+   "sketchPlane": MTypeId(289),
+   "groundPlane": MTypeId(290),
+   "orthoGrid": MTypeId(291),
+   "sprite": MTypeId(292),
+   "surface": MTypeId(293),
+   "nurbsSurface": MTypeId(294),
+   "nurbsSurfaceGeom": MTypeId(295),
+   "mesh": MTypeId(296),
+   "meshGeom": MTypeId(297),
+   "renderSphere": MTypeId(298),
+   "flexor": MTypeId(299),
+   "clusterFlexor": MTypeId(300),
+   "guideLine": MTypeId(301),
+   "light": MTypeId(302),
+   "ambientLight": MTypeId(303),
+   "nonAmbientLight": MTypeId(304),
+   "areaLight": MTypeId(305),
+   "linearLight": MTypeId(306),
+   "nonExtendedLight": MTypeId(307),
+   "directionalLight": MTypeId(308),
+   "pointLight": MTypeId(309),
+   "spotLight": MTypeId(310),
+   "particle": MTypeId(311),
+   "polyToolFeedbackShape": MTypeId(312),
+   "rigidConstraint": MTypeId(313),
+   "rigid": MTypeId(314),
+   "spring": MTypeId(315),
+   "unknownDag": MTypeId(316),
+   "defaultLightList": MTypeId(317),
+   "deleteComponent": MTypeId(318),
+   "dispatchCompute": MTypeId(319),
+   "shadingEngine": MTypeId(320),
+   "displacementShader": MTypeId(321),
+   "distanceBetween": MTypeId(322),
+   "dOF": MTypeId(323),
+   "dummyConnectable": MTypeId(324),
+   "dynamicsController": MTypeId(325),
+   "geoConnectable": MTypeId(326),
+   "expression": MTypeId(327),
+   "extract": MTypeId(328),
+   "filter": MTypeId(329),
+   "filterClosestSample": MTypeId(330),
+   "filterEuler": MTypeId(331),
+   "filterSimplify": MTypeId(332),
+   "gammaCorrect": MTypeId(333),
+   "geometryFilt": MTypeId(334),
+   "bendLattice": MTypeId(335),
+   "blendShape": MTypeId(336),
+   "combinationShape": MTypeId(337),
+   "bulgeLattice": MTypeId(338),
+   "fFD": MTypeId(339),
+   "ffdDualBase": MTypeId(340),
+   "rigidDeform": MTypeId(341),
+   "sculpt": MTypeId(342),
+   "textureDeformer": MTypeId(343),
+   "textureDeformerHandle": MTypeId(344),
+   "tweak": MTypeId(345),
+   "weightGeometryFilt": MTypeId(346),
+   "clusterFilter": MTypeId(347),
+   "softModFilter": MTypeId(348),
+   "jointCluster": MTypeId(349),
+   "deltaMush": MTypeId(350),
+   "tension": MTypeId(351),
+   "morph": MTypeId(352),
+   "solidify": MTypeId(353),
+   "proximityWrap": MTypeId(354),
+   "wire": MTypeId(355),
+   "groupId": MTypeId(356),
+   "groupParts": MTypeId(357),
+   "guide": MTypeId(358),
+   "hsvToRgb": MTypeId(359),
+   "hyperGraphInfo": MTypeId(360),
+   "hyperLayout": MTypeId(361),
+   "hyperView": MTypeId(362),
+   "ikSolver": MTypeId(363),
+   "mCsolver": MTypeId(364),
+   "pASolver": MTypeId(365),
+   "sCsolver": MTypeId(366),
+   "rPsolver": MTypeId(367),
+   "splineSolver": MTypeId(368),
+   "ikSystem": MTypeId(369),
+   "imagePlane": MTypeId(370),
+   "lambert": MTypeId(371),
+   "reflect": MTypeId(372),
+   "blinn": MTypeId(373),
+   "phong": MTypeId(374),
+   "phongExplorer": MTypeId(375),
+   "layeredShader": MTypeId(376),
+   "standardSurface": MTypeId(377),
+   "lightInfo": MTypeId(378),
+   "leastSquares": MTypeId(379),
+   "lightFogMaterial": MTypeId(380),
+   "envFogMaterial": MTypeId(381),
+   "lightList": MTypeId(382),
+   "lightSource": MTypeId(383),
+   "luminance": MTypeId(384),
+   "makeGroup": MTypeId(385),
+   "material": MTypeId(386),
+   "diffuseMaterial": MTypeId(387),
+   "lambertMaterial": MTypeId(388),
+   "blinnMaterial": MTypeId(389),
+   "phongMaterial": MTypeId(390),
+   "lightSourceMaterial": MTypeId(391),
+   "materialInfo": MTypeId(392),
+   "materialTemplate": MTypeId(393),
+   "matrixAdd": MTypeId(394),
+   "matrixHold": MTypeId(395),
+   "matrixMult": MTypeId(396),
+   "matrixPass": MTypeId(397),
+   "matrixWtAdd": MTypeId(398),
+   "midModifier": MTypeId(399),
+   "midModifierWithMatrix": MTypeId(400),
+   "polyBevel": MTypeId(401),
+   "polyTweak": MTypeId(402),
+   "polyAppend": MTypeId(403),
+   "polyChipOff": MTypeId(404),
+   "polyCloseBorder": MTypeId(405),
+   "polyCollapseEdge": MTypeId(406),
+   "polyCollapseF": MTypeId(407),
+   "polyCylProj": MTypeId(408),
+   "polyDelEdge": MTypeId(409),
+   "polyDelFacet": MTypeId(410),
+   "polyDelVertex": MTypeId(411),
+   "polyExtrudeFacet": MTypeId(412),
+   "polyMapCut": MTypeId(413),
+   "polyMapDel": MTypeId(414),
+   "polyMapSew": MTypeId(415),
+   "polyMergeEdge": MTypeId(416),
+   "polyMergeFacet": MTypeId(417),
+   "polyMoveEdge": MTypeId(418),
+   "polyMoveFacet": MTypeId(419),
+   "polyMoveFacetUV": MTypeId(420),
+   "polyMoveUV": MTypeId(421),
+   "polyMoveVertex": MTypeId(422),
+   "polyMoveVertexUV": MTypeId(423),
+   "polyNormal": MTypeId(424),
+   "polyPlanProj": MTypeId(425),
+   "polyProj": MTypeId(426),
+   "polyQuad": MTypeId(427),
+   "polySmooth": MTypeId(428),
+   "polySoftEdge": MTypeId(429),
+   "polySphProj": MTypeId(430),
+   "polySplit": MTypeId(431),
+   "polySubdEdge": MTypeId(432),
+   "polySubdFacet": MTypeId(433),
+   "polyTriangulate": MTypeId(434),
+   "polyCreator": MTypeId(435),
+   "polyPrimitive": MTypeId(436),
+   "polyCone": MTypeId(437),
+   "polyCube": MTypeId(438),
+   "polyCylinder": MTypeId(439),
+   "polyMesh": MTypeId(440),
+   "polySphere": MTypeId(441),
+   "polyTorus": MTypeId(442),
+   "polyCreateFacet": MTypeId(443),
+   "polyUnite": MTypeId(444),
+   "motionPath": MTypeId(445),
+   "pluginMotionPathNode": MTypeId(446),
+   "multilisterLight": MTypeId(447),
+   "multiplyDivide": MTypeId(448),
+   "oldGeometryConstraint": MTypeId(449),
+   "opticalFX": MTypeId(450),
+   "particleAgeMapper": MTypeId(451),
+   "particleCloud": MTypeId(452),
+   "particleColorMapper": MTypeId(453),
+   "particleIncandecenceMapper": MTypeId(454),
+   "particleTransparencyMapper": MTypeId(455),
+   "partition": MTypeId(456),
+   "place2dTexture": MTypeId(457),
+   "place3dTexture": MTypeId(458),
+   "pluginDependNode": MTypeId(459),
+   "pluginLocatorNode": MTypeId(460),
+   "plusMinusAverage": MTypeId(461),
+   "pointMatrixMult": MTypeId(462),
+   "polySeparate": MTypeId(463),
+   "postProcessList": MTypeId(464),
+   "projection": MTypeId(465),
+   "record": MTypeId(466),
+   "renderUtilityList": MTypeId(467),
+   "reverse": MTypeId(468),
+   "rgbToHsv": MTypeId(469),
+   "rigidSolver": MTypeId(470),
+   "set": MTypeId(471),
+   "textureBakeSet": MTypeId(472),
+   "vertexBakeSet": MTypeId(473),
+   "setRange": MTypeId(474),
+   "shaderGlow": MTypeId(475),
+   "shaderList": MTypeId(476),
+   "shadingMap": MTypeId(477),
+   "samplerInfo": MTypeId(478),
+   "shapeFragment": MTypeId(479),
+   "simpleVolumeShader": MTypeId(480),
+   "sl60": MTypeId(481),
+   "snapshot": MTypeId(482),
+   "storyBoard": MTypeId(483),
+   "summaryObject": MTypeId(484),
+   "super": MTypeId(485),
+   "control": MTypeId(486),
+   "surfaceLuminance": MTypeId(487),
+   "surfaceShader": MTypeId(488),
+   "textureList": MTypeId(489),
+   "textureEnv": MTypeId(490),
+   "envBall": MTypeId(491),
+   "envCube": MTypeId(492),
+   "envChrome": MTypeId(493),
+   "envSky": MTypeId(494),
+   "envSphere": MTypeId(495),
+   "texture2d": MTypeId(496),
+   "bulge": MTypeId(497),
+   "checker": MTypeId(498),
+   "cloth": MTypeId(499),
+   "fileTexture": MTypeId(500),
+   "fractal": MTypeId(501),
+   "grid": MTypeId(502),
+   "mountain": MTypeId(503),
+   "ramp": MTypeId(504),
+   "stencil": MTypeId(505),
+   "water": MTypeId(506),
+   "texture3d": MTypeId(507),
+   "brownian": MTypeId(508),
+   "cloud": MTypeId(509),
+   "crater": MTypeId(510),
+   "granite": MTypeId(511),
+   "leather": MTypeId(512),
+   "marble": MTypeId(513),
+   "rock": MTypeId(514),
+   "snow": MTypeId(515),
+   "solidFractal": MTypeId(516),
+   "stucco": MTypeId(517),
+   "txSl": MTypeId(518),
+   "wood": MTypeId(519),
+   "time": MTypeId(520),
+   "timeToUnitConversion": MTypeId(521),
+   "renderSetup": MTypeId(522),
+   "renderGlobals": MTypeId(523),
+   "renderGlobalsList": MTypeId(524),
+   "renderQuality": MTypeId(525),
+   "resolution": MTypeId(526),
+   "hardwareRenderGlobals": MTypeId(527),
+   "arrayMapper": MTypeId(528),
+   "unitConversion": MTypeId(529),
+   "unitToTimeConversion": MTypeId(530),
+   "useBackground": MTypeId(531),
+   "unknown": MTypeId(532),
+   "vectorProduct": MTypeId(533),
+   "volumeShader": MTypeId(534),
+   "component": MTypeId(535),
+   "curveCVComponent": MTypeId(536),
+   "curveEPComponent": MTypeId(537),
+   "curveKnotComponent": MTypeId(538),
+   "curveParamComponent": MTypeId(539),
+   "isoparmComponent": MTypeId(540),
+   "pivotComponent": MTypeId(541),
+   "surfaceCVComponent": MTypeId(542),
+   "surfaceEPComponent": MTypeId(543),
+   "surfaceKnotComponent": MTypeId(544),
+   "edgeComponent": MTypeId(545),
+   "latticeComponent": MTypeId(546),
+   "surfaceRangeComponent": MTypeId(547),
+   "decayRegionCapComponent": MTypeId(548),
+   "decayRegionComponent": MTypeId(549),
+   "meshComponent": MTypeId(550),
+   "meshEdgeComponent": MTypeId(551),
+   "meshPolygonComponent": MTypeId(552),
+   "meshFrEdgeComponent": MTypeId(553),
+   "meshVertComponent": MTypeId(554),
+   "meshFaceVertComponent": MTypeId(555),
+   "orientationComponent": MTypeId(556),
+   "subVertexComponent": MTypeId(557),
+   "multiSubVertexComponent": MTypeId(558),
+   "setGroupComponent": MTypeId(559),
+   "dynParticleSetComponent": MTypeId(560),
+   "selectionItem": MTypeId(561),
+   "dagSelectionItem": MTypeId(562),
+   "nonDagSelectionItem": MTypeId(563),
+   "itemList": MTypeId(564),
+   "attribute": MTypeId(565),
+   "numericAttribute": MTypeId(566),
+   "doubleAngleAttribute": MTypeId(567),
+   "floatAngleAttribute": MTypeId(568),
+   "doubleLinearAttribute": MTypeId(569),
+   "floatLinearAttribute": MTypeId(570),
+   "timeAttribute": MTypeId(571),
+   "enumAttribute": MTypeId(572),
+   "unitAttribute": MTypeId(573),
+   "typedAttribute": MTypeId(574),
+   "compoundAttribute": MTypeId(575),
+   "genericAttribute": MTypeId(576),
+   "lightDataAttribute": MTypeId(577),
+   "matrixAttribute": MTypeId(578),
+   "floatMatrixAttribute": MTypeId(579),
+   "messageAttribute": MTypeId(580),
+   "opaqueAttribute": MTypeId(581),
+   "plugin": MTypeId(582),
+   "data": MTypeId(583),
+   "componentListData": MTypeId(584),
+   "doubleArrayData": MTypeId(585),
+   "intArrayData": MTypeId(586),
+   "uintArrayData": MTypeId(587),
+   "latticeData": MTypeId(588),
+   "matrixData": MTypeId(589),
+   "meshData": MTypeId(590),
+   "nurbsSurfaceData": MTypeId(591),
+   "nurbsCurveData": MTypeId(592),
+   "numericData": MTypeId(593),
+   "data2Double": MTypeId(594),
+   "data2Float": MTypeId(595),
+   "data2Int": MTypeId(596),
+   "data2Short": MTypeId(597),
+   "data3Double": MTypeId(598),
+   "data3Float": MTypeId(599),
+   "data3Int": MTypeId(600),
+   "data3Short": MTypeId(601),
+   "pluginData": MTypeId(602),
+   "pointArrayData": MTypeId(603),
+   "matrixArrayData": MTypeId(604),
+   "sphereData": MTypeId(605),
+   "stringData": MTypeId(606),
+   "stringArrayData": MTypeId(607),
+   "vectorArrayData": MTypeId(608),
+   "selectionList": MTypeId(609),
+   "transformGeometry": MTypeId(610),
+   "commEdgePtManip": MTypeId(611),
+   "commEdgeOperManip": MTypeId(612),
+   "commEdgeSegmentManip": MTypeId(613),
+   "commCornerManip": MTypeId(614),
+   "commCornerOperManip": MTypeId(615),
+   "pluginDeformerNode": MTypeId(616),
+   "torus": MTypeId(617),
+   "polyBoolOp": MTypeId(618),
+   "singleShadingSwitch": MTypeId(619),
+   "doubleShadingSwitch": MTypeId(620),
+   "tripleShadingSwitch": MTypeId(621),
+   "nurbsSquare": MTypeId(622),
+   "anisotropy": MTypeId(623),
+   "nonLinear": MTypeId(624),
+   "deformFunc": MTypeId(625),
+   "deformBend": MTypeId(626),
+   "deformTwist": MTypeId(627),
+   "deformSquash": MTypeId(628),
+   "deformFlare": MTypeId(629),
+   "deformSine": MTypeId(630),
+   "deformWave": MTypeId(631),
+   "deformBendManip": MTypeId(632),
+   "deformTwistManip": MTypeId(633),
+   "deformSquashManip": MTypeId(634),
+   "deformFlareManip": MTypeId(635),
+   "deformSineManip": MTypeId(636),
+   "deformWaveManip": MTypeId(637),
+   "softModManip": MTypeId(638),
+   "distanceManip": MTypeId(639),
+   "script": MTypeId(640),
+   "curveFromMeshEdge": MTypeId(641),
+   "curveCurveIntersect": MTypeId(642),
+   "nurbsCircular3PtArc": MTypeId(643),
+   "nurbsCircular2PtArc": MTypeId(644),
+   "offsetSurface": MTypeId(645),
+   "roundConstantRadius": MTypeId(646),
+   "roundRadiusManip": MTypeId(647),
+   "roundRadiusCrvManip": MTypeId(648),
+   "roundConstantRadiusManip": MTypeId(649),
+   "threePointArcManip": MTypeId(650),
+   "twoPointArcManip": MTypeId(651),
+   "textButtonManip": MTypeId(652),
+   "offsetSurfaceManip": MTypeId(653),
+   "imageData": MTypeId(654),
+   "imageLoad": MTypeId(655),
+   "imageSave": MTypeId(656),
+   "imageNetSrc": MTypeId(657),
+   "imageNetDest": MTypeId(658),
+   "imageRender": MTypeId(659),
+   "imageAdd": MTypeId(660),
+   "imageDiff": MTypeId(661),
+   "imageMultiply": MTypeId(662),
+   "imageOver": MTypeId(663),
+   "imageUnder": MTypeId(664),
+   "imageColorCorrect": MTypeId(665),
+   "imageBlur": MTypeId(666),
+   "imageFilter": MTypeId(667),
+   "imageDepth": MTypeId(668),
+   "imageDisplay": MTypeId(669),
+   "imageView": MTypeId(670),
+   "imageMotionBlur": MTypeId(671),
+   "viewColorManager": MTypeId(672),
+   "matrixFloatData": MTypeId(673),
+   "skinShader": MTypeId(674),
+   "componentManip": MTypeId(675),
+   "selectionListData": MTypeId(676),
+   "objectFilter": MTypeId(677),
+   "objectMultiFilter": MTypeId(678),
+   "objectNameFilter": MTypeId(679),
+   "objectTypeFilter": MTypeId(680),
+   "objectAttrFilter": MTypeId(681),
+   "objectRenderFilter": MTypeId(682),
+   "objectScriptFilter": MTypeId(683),
+   "selectionListOperator": MTypeId(684),
+   "subdiv": MTypeId(685),
+   "polyToSubdiv": MTypeId(686),
+   "skinClusterFilter": MTypeId(687),
+   "keyingGroup": MTypeId(688),
+   "character": MTypeId(689),
+   "characterOffset": MTypeId(690),
+   "dagPose": MTypeId(691),
+   "stitchAsNurbsShell": MTypeId(692),
+   "explodeNurbsShell": MTypeId(693),
+   "nurbsBoolean": MTypeId(694),
+   "stitchSrfManip": MTypeId(695),
+   "forceUpdateManip": MTypeId(696),
+   "pluginManipContainer": MTypeId(697),
+   "polySewEdge": MTypeId(698),
+   "polyMergeVert": MTypeId(699),
+   "polySmoothFacet": MTypeId(700),
+   "smoothCurve": MTypeId(701),
+   "globalStitch": MTypeId(702),
+   "subdivCVComponent": MTypeId(703),
+   "subdivEdgeComponent": MTypeId(704),
+   "subdivFaceComponent": MTypeId(705),
+   "uVManip2D": MTypeId(706),
+   "translateUVManip2D": MTypeId(707),
+   "rotateUVManip2D": MTypeId(708),
+   "scaleUVManip2D": MTypeId(709),
+   "polyTweakUV": MTypeId(710),
+   "moveUVShellManip2D": MTypeId(711),
+   "pluginShape": MTypeId(712),
+   "geometryData": MTypeId(713),
+   "singleIndexedComponent": MTypeId(714),
+   "doubleIndexedComponent": MTypeId(715),
+   "tripleIndexedComponent": MTypeId(716),
+   "extendSurfaceDistanceManip": MTypeId(717),
+   "squareSrf": MTypeId(718),
+   "squareSrfManip": MTypeId(719),
+   "subdivToPoly": MTypeId(720),
+   "dynBase": MTypeId(721),
+   "dynEmitterManip": MTypeId(722),
+   "dynFieldsManip": MTypeId(723),
+   "dynBaseFieldManip": MTypeId(724),
+   "dynAirManip": MTypeId(725),
+   "dynNewtonManip": MTypeId(726),
+   "dynTurbulenceManip": MTypeId(727),
+   "dynSpreadManip": MTypeId(728),
+   "dynAttenuationManip": MTypeId(729),
+   "dynArrayAttrsData": MTypeId(730),
+   "pluginFieldNode": MTypeId(731),
+   "pluginEmitterNode": MTypeId(732),
+   "pluginSpringNode": MTypeId(733),
+   "displayLayer": MTypeId(734),
+   "displayLayerManager": MTypeId(735),
+   "polyColorPerVertex": MTypeId(736),
+   "createColorSet": MTypeId(737),
+   "deleteColorSet": MTypeId(738),
+   "copyColorSet": MTypeId(739),
+   "blendColorSet": MTypeId(740),
+   "polyColorMod": MTypeId(741),
+   "polyColorDel": MTypeId(742),
+   "characterMappingData": MTypeId(743),
+   "dynSweptGeometryData": MTypeId(744),
+   "wrapFilter": MTypeId(745),
+   "meshVtxFaceComponent": MTypeId(746),
+   "binaryData": MTypeId(747),
+   "attribute2Double": MTypeId(748),
+   "attribute2Float": MTypeId(749),
+   "attribute2Short": MTypeId(750),
+   "attribute2Int": MTypeId(751),
+   "attribute3Double": MTypeId(752),
+   "attribute3Float": MTypeId(753),
+   "attribute3Short": MTypeId(754),
+   "attribute3Int": MTypeId(755),
+   "reference": MTypeId(756),
+   "blindData": MTypeId(757),
+   "blindDataTemplate": MTypeId(758),
+   "polyBlindData": MTypeId(759),
+   "polyNormalPerVertex": MTypeId(760),
+   "nurbsToSubdiv": MTypeId(761),
+   "pluginIkSolver": MTypeId(762),
+   "instancer": MTypeId(763),
+   "moveVertexManip": MTypeId(764),
+   "stroke": MTypeId(765),
+   "brush": MTypeId(766),
+   "strokeGlobals": MTypeId(767),
+   "pluginGeometryData": MTypeId(768),
+   "lightLink": MTypeId(769),
+   "dynGlobals": MTypeId(770),
+   "polyReduce": MTypeId(771),
+   "lodThresholds": MTypeId(772),
+   "chooser": MTypeId(773),
+   "lodGroup": MTypeId(774),
+   "multDoubleLinear": MTypeId(775),
+   "fourByFourMatrix": MTypeId(776),
+   "towPointOnSurfaceManip": MTypeId(777),
+   "surfaceEdManip": MTypeId(778),
+   "surfaceFaceComponent": MTypeId(779),
+   "clipScheduler": MTypeId(780),
+   "clipLibrary": MTypeId(781),
+   "subSurface": MTypeId(782),
+   "smoothTangentSrf": MTypeId(783),
+   "renderPass": MTypeId(784),
+   "renderPassSet": MTypeId(785),
+   "renderLayer": MTypeId(786),
+   "renderLayerManager": MTypeId(787),
+   "passContributionMap": MTypeId(788),
+   "precompExport": MTypeId(789),
+   "renderTarget": MTypeId(790),
+   "renderedImageSource": MTypeId(791),
+   "imageSource": MTypeId(792),
+   "polyFlipEdge": MTypeId(793),
+   "polyExtrudeEdge": MTypeId(794),
+   "animBlend": MTypeId(795),
+   "animBlendInOut": MTypeId(796),
+   "polyAppendVertex": MTypeId(797),
+   "uvChooser": MTypeId(798),
+   "subdivCompId": MTypeId(799),
+   "volumeAxis": MTypeId(800),
+   "deleteUVSet": MTypeId(801),
+   "subdHierBlind": MTypeId(802),
+   "subdBlindData": MTypeId(803),
+   "characterMap": MTypeId(804),
+   "layeredTexture": MTypeId(805),
+   "subdivCollapse": MTypeId(806),
+   "particleSamplerInfo": MTypeId(807),
+   "copyUVSet": MTypeId(808),
+   "createUVSet": MTypeId(809),
+   "clip": MTypeId(810),
+   "polySplitVert": MTypeId(811),
+   "subdivData": MTypeId(812),
+   "subdivGeom": MTypeId(813),
+   "uInt64ArrayData": MTypeId(814),
+   "int64ArrayData": MTypeId(815),
+   "polySplitEdge": MTypeId(816),
+   "subdivReverseFaces": MTypeId(817),
+   "meshMapComponent": MTypeId(818),
+   "sectionManip": MTypeId(819),
+   "xsectionSubdivEdit": MTypeId(820),
+   "subdivToNurbs": MTypeId(821),
+   "editCurve": MTypeId(822),
+   "editCurveManip": MTypeId(823),
+   "crossSectionManager": MTypeId(824),
+   "createSectionManip": MTypeId(825),
+   "crossSectionEditManip": MTypeId(826),
+   "dropOffFunction": MTypeId(827),
+   "subdBoolean": MTypeId(828),
+   "subdModifyEdge": MTypeId(829),
+   "modifyEdgeCrvManip": MTypeId(830),
+   "modifyEdgeManip": MTypeId(831),
+   "scalePointManip": MTypeId(832),
+   "transformBoxManip": MTypeId(833),
+   "symmetryLocator": MTypeId(834),
+   "symmetryMapVector": MTypeId(835),
+   "symmetryMapCurve": MTypeId(836),
+   "curveFromSubdivEdge": MTypeId(837),
+   "createBPManip": MTypeId(838),
+   "modifyEdgeBaseManip": MTypeId(839),
+   "subdExtrudeFace": MTypeId(840),
+   "subdivSurfaceVarGroup": MTypeId(841),
+   "sfRevolveManip": MTypeId(842),
+   "curveFromSubdivFace": MTypeId(843),
+   "unused1": MTypeId(844),
+   "unused2": MTypeId(845),
+   "unused3": MTypeId(846),
+   "unused4": MTypeId(847),
+   "unused5": MTypeId(848),
+   "unused6": MTypeId(849),
+   "polyTransfer": MTypeId(850),
+   "polyAverageVertex": MTypeId(851),
+   "polyAutoProj": MTypeId(852),
+   "polyLayoutUV": MTypeId(853),
+   "polyMapSewMove": MTypeId(854),
+   "subdModifier": MTypeId(855),
+   "subdMoveVertex": MTypeId(856),
+   "subdMoveEdge": MTypeId(857),
+   "subdMoveFace": MTypeId(858),
+   "subdDelFace": MTypeId(859),
+   "snapshotShape": MTypeId(860),
+   "subdivMapComponent": MTypeId(861),
+   "jiggleDeformer": MTypeId(862),
+   "globalCacheControls": MTypeId(863),
+   "diskCache": MTypeId(864),
+   "subdCloseBorder": MTypeId(865),
+   "subdMergeVert": MTypeId(866),
+   "boxData": MTypeId(867),
+   "box": MTypeId(868),
+   "renderBox": MTypeId(869),
+   "subdSplitFace": MTypeId(870),
+   "volumeFog": MTypeId(871),
+   "subdTweakUV": MTypeId(872),
+   "subdMapCut": MTypeId(873),
+   "subdLayoutUV": MTypeId(874),
+   "subdMapSewMove": MTypeId(875),
+   "ocean": MTypeId(876),
+   "volumeNoise": MTypeId(877),
+   "subdAutoProj": MTypeId(878),
+   "subdSubdivideFace": MTypeId(879),
+   "noise": MTypeId(880),
+   "attribute4Double": MTypeId(881),
+   "data4Double": MTypeId(882),
+   "subdPlanProj": MTypeId(883),
+   "subdTweak": MTypeId(884),
+   "subdProjectionManip": MTypeId(885),
+   "subdMappingManip": MTypeId(886),
+   "hardwareReflectionMap": MTypeId(887),
+   "polyNormalizeUV": MTypeId(888),
+   "polyFlipUV": MTypeId(889),
+   "hwShaderNode": MTypeId(890),
+   "pluginHardwareShader": MTypeId(891),
+   "pluginHwShaderNode": MTypeId(892),
+   "subdAddTopology": MTypeId(893),
+   "subdCleanTopology": MTypeId(894),
+   "implicitCone": MTypeId(895),
+   "implicitSphere": MTypeId(896),
+   "rampShader": MTypeId(897),
+   "volumeLight": MTypeId(898),
+   "oceanShader": MTypeId(899),
+   "bevelPlus": MTypeId(900),
+   "styleCurve": MTypeId(901),
+   "polyCut": MTypeId(902),
+   "polyPoke": MTypeId(903),
+   "polyWedgeFace": MTypeId(904),
+   "polyCutManipContainer": MTypeId(905),
+   "polyCutManip": MTypeId(906),
+   "polyMirrorManipContainer": MTypeId(907),
+   "polyPokeManip": MTypeId(908),
+   "fluidTexture3D": MTypeId(909),
+   "fluidTexture2D": MTypeId(910),
+   "polyMergeUV": MTypeId(911),
+   "polyStraightenUVBorder": MTypeId(912),
+   "alignManip": MTypeId(913),
+   "pluginTransformNode": MTypeId(914),
+   "fluid": MTypeId(915),
+   "fluidGeom": MTypeId(916),
+   "fluidData": MTypeId(917),
+   "smear": MTypeId(918),
+   "stringShadingSwitch": MTypeId(919),
+   "studioClearCoat": MTypeId(920),
+   "fluidEmitter": MTypeId(921),
+   "heightField": MTypeId(922),
+   "geoConnector": MTypeId(923),
+   "snapshotPath": MTypeId(924),
+   "pluginObjectSet": MTypeId(925),
+   "quadShadingSwitch": MTypeId(926),
+   "polyExtrudeVertex": MTypeId(927),
+   "pairBlend": MTypeId(928),
+   "textManip": MTypeId(929),
+   "viewManip": MTypeId(930),
+   "xformManip": MTypeId(931),
+   "mute": MTypeId(932),
+   "constraint": MTypeId(933),
+   "trimWithBoundaries": MTypeId(934),
+   "curveFromMeshCoM": MTypeId(935),
+   "follicle": MTypeId(936),
+   "hairSystem": MTypeId(937),
+   "remapValue": MTypeId(938),
+   "remapColor": MTypeId(939),
+   "remapHsv": MTypeId(940),
+   "hairConstraint": MTypeId(941),
+   "timeFunction": MTypeId(942),
+   "mentalRayTexture": MTypeId(943),
+   "objectBinFilter": MTypeId(944),
+   "polySmoothProxy": MTypeId(945),
+   "pfxGeometry": MTypeId(946),
+   "pfxHair": MTypeId(947),
+   "hairTubeShader": MTypeId(948),
+   "psdFileTexture": MTypeId(949),
+   "keyframeDelta": MTypeId(950),
+   "keyframeDeltaMove": MTypeId(951),
+   "keyframeDeltaScale": MTypeId(952),
+   "keyframeDeltaAddRemove": MTypeId(953),
+   "keyframeDeltaBlockAddRemove": MTypeId(954),
+   "keyframeDeltaInfType": MTypeId(955),
+   "keyframeDeltaTangent": MTypeId(956),
+   "keyframeDeltaWeighted": MTypeId(957),
+   "keyframeDeltaBreakdown": MTypeId(958),
+   "polyMirror": MTypeId(959),
+   "polyCreaseEdge": MTypeId(960),
+   "polyPinUV": MTypeId(961),
+   "hikEffector": MTypeId(962),
+   "hikIKEffector": MTypeId(963),
+   "hikFKJoint": MTypeId(964),
+   "hikSolver": MTypeId(965),
+   "hikHandle": MTypeId(966),
+   "proxyManager": MTypeId(967),
+   "polyAutoProjManip": MTypeId(968),
+   "polyPrism": MTypeId(969),
+   "polyPyramid": MTypeId(970),
+   "polySplitRing": MTypeId(971),
+   "pfxToon": MTypeId(972),
+   "toonLineAttributes": MTypeId(973),
+   "polyDuplicateEdge": MTypeId(974),
+   "facade": MTypeId(975),
+   "materialFacade": MTypeId(976),
+   "envFacade": MTypeId(977),
+   "aISEnvFacade": MTypeId(978),
+   "lineModifier": MTypeId(979),
+   "polyArrow": MTypeId(980),
+   "polyPrimitiveMisc": MTypeId(981),
+   "polyPlatonicSolid": MTypeId(982),
+   "polyPipe": MTypeId(983),
+   "hikFloorContactMarker": MTypeId(984),
+   "hikGroundPlane": MTypeId(985),
+   "polyComponentData": MTypeId(986),
+   "polyHelix": MTypeId(987),
+   "cacheFile": MTypeId(988),
+   "historySwitch": MTypeId(989),
+   "closestPointOnMesh": MTypeId(990),
+   "uVPin": MTypeId(991),
+   "proximityPin": MTypeId(992),
+   "transferAttributes": MTypeId(993),
+   "dynamicConstraint": MTypeId(994),
+   "nComponent": MTypeId(995),
+   "polyBridgeEdge": MTypeId(996),
+   "cacheableNode": MTypeId(997),
+   "nucleus": MTypeId(998),
+   "nBase": MTypeId(999),
+   "cacheBase": MTypeId(1000),
+   "cacheBlend": MTypeId(1001),
+   "cacheTrack": MTypeId(1002),
+   "keyframeRegionManip": MTypeId(1003),
+   "curveNormalizerAngle": MTypeId(1004),
+   "curveNormalizerLinear": MTypeId(1005),
+   "hyperLayoutDG": MTypeId(1006),
+   "pluginImagePlaneNode": MTypeId(1007),
+   "nCloth": MTypeId(1008),
+   "nParticle": MTypeId(1009),
+   "nRigid": MTypeId(1010),
+   "pluginParticleAttributeMapperNode": MTypeId(1011),
+   "cameraSet": MTypeId(1012),
+   "pluginCameraSet": MTypeId(1013),
+   "container": MTypeId(1014),
+   "floatVectorArrayData": MTypeId(1015),
+   "nObjectData": MTypeId(1016),
+   "nObject": MTypeId(1017),
+   "pluginConstraintNode": MTypeId(1018),
+   "asset": MTypeId(1019),
+   "polyEdgeToCurve": MTypeId(1020),
+   "animLayer": MTypeId(1021),
+   "blendNodeBase": MTypeId(1022),
+   "blendNodeBoolean": MTypeId(1023),
+   "blendNodeDouble": MTypeId(1024),
+   "blendNodeDoubleAngle": MTypeId(1025),
+   "blendNodeDoubleLinear": MTypeId(1026),
+   "blendNodeEnum": MTypeId(1027),
+   "blendNodeFloat": MTypeId(1028),
+   "blendNodeFloatAngle": MTypeId(1029),
+   "blendNodeFloatLinear": MTypeId(1030),
+   "blendNodeInt16": MTypeId(1031),
+   "blendNodeInt32": MTypeId(1032),
+   "blendNodeAdditiveScale": MTypeId(1033),
+   "blendNodeAdditiveRotation": MTypeId(1034),
+   "pluginManipulatorNode": MTypeId(1035),
+   "nIdData": MTypeId(1036),
+   "nId": MTypeId(1037),
+   "floatArrayData": MTypeId(1038),
+   "membrane": MTypeId(1039),
+   "mergeVertsToolManip": MTypeId(1040),
+   "uint64SingleIndexedComponent": MTypeId(1041),
+   "polyToolFeedbackManip": MTypeId(1042),
+   "polySelectEditFeedbackManip": MTypeId(1043),
+   "writeToFrameBuffer": MTypeId(1044),
+   "writeToColorBuffer": MTypeId(1045),
+   "writeToVectorBuffer": MTypeId(1046),
+   "writeToDepthBuffer": MTypeId(1047),
+   "writeToLabelBuffer": MTypeId(1048),
+   "stereoCameraMaster": MTypeId(1049),
+   "sequenceManager": MTypeId(1050),
+   "sequencer": MTypeId(1051),
+   "shot": MTypeId(1052),
+   "blendNodeTime": MTypeId(1053),
+   "createBezierManip": MTypeId(1054),
+   "bezierCurve": MTypeId(1055),
+   "bezierCurveData": MTypeId(1056),
+   "nurbsCurveToBezier": MTypeId(1057),
+   "bezierCurveToNurbs": MTypeId(1058),
+   "polySpinEdge": MTypeId(1059),
+   "polyHoleFace": MTypeId(1060),
+   "pointOnPolyConstraint": MTypeId(1061),
+   "polyConnectComponents": MTypeId(1062),
+   "skinBinding": MTypeId(1063),
+   "volumeBindManip": MTypeId(1064),
+   "vertexWeightSet": MTypeId(1065),
+   "nearestPointOnCurve": MTypeId(1066),
+   "colorProfile": MTypeId(1067),
+   "adskMaterial": MTypeId(1068),
+   "containerBase": MTypeId(1069),
+   "dagContainer": MTypeId(1070),
+   "polyUVRectangle": MTypeId(1071),
+   "hardwareRenderingGlobals": MTypeId(1072),
+   "polyProjectCurve": MTypeId(1073),
+   "renderingList": MTypeId(1074),
+   "polyExtrudeManip": MTypeId(1075),
+   "polyExtrudeManipContainer": MTypeId(1076),
+   "threadedDevice": MTypeId(1077),
+   "clientDevice": MTypeId(1078),
+   "pluginClientDevice": MTypeId(1079),
+   "pluginThreadedDevice": MTypeId(1080),
+   "timeWarp": MTypeId(1081),
+   "assembly": MTypeId(1082),
+   "clipGhostShape": MTypeId(1083),
+   "clipToGhostData": MTypeId(1084),
+   "mandelbrot": MTypeId(1085),
+   "mandelbrot3D": MTypeId(1086),
+   "greasePlane": MTypeId(1087),
+   "greasePlaneRenderShape": MTypeId(1088),
+   "greasePencilSequence": MTypeId(1089),
+   "editMetadata": MTypeId(1090),
+   "creaseSet": MTypeId(1091),
+   "polyEditEdgeFlow": MTypeId(1092),
+   "fosterParent": MTypeId(1093),
+   "snapUVManip2D": MTypeId(1094),
+   "toolContext": MTypeId(1095),
+   "nLE": MTypeId(1096),
+   "shrinkWrapFilter": MTypeId(1097),
+   "editsManager": MTypeId(1098),
+   "polyBevel2": MTypeId(1099),
+   "polyCBoolOp": MTypeId(1100),
+   "geomBind": MTypeId(1101),
+   "colorMgtGlobals": MTypeId(1102),
+   "polyBevel3": MTypeId(1103),
+   "timeEditorClipBase": MTypeId(1104),
+   "timeEditorClipEvaluator": MTypeId(1105),
+   "timeEditorClip": MTypeId(1106),
+   "timeEditor": MTypeId(1107),
+   "timeEditorTracks": MTypeId(1108),
+   "timeEditorInterpolator": MTypeId(1109),
+   "timeEditorAnimSource": MTypeId(1110),
+   "caddyManipBase": MTypeId(1111),
+   "polyCaddyManip": MTypeId(1112),
+   "polyModifierManipContainer": MTypeId(1113),
+   "polyRemesh": MTypeId(1114),
+   "polyContourProj": MTypeId(1115),
+   "contourProjectionManip": MTypeId(1116),
+   "nodeGraphEditorInfo": MTypeId(1117),
+   "nodeGraphEditorBookmarks": MTypeId(1118),
+   "nodeGraphEditorBookmarkInfo": MTypeId(1119),
+   "pluginSkinCluster": MTypeId(1120),
+   "pluginGeometryFilter": MTypeId(1121),
+   "pluginBlendShape": MTypeId(1122),
+   "polyPassThru": MTypeId(1123),
+   "trackInfoManager": MTypeId(1124),
+   "polyClean": MTypeId(1125),
+   "shapeEditorManager": MTypeId(1126),
+   "oceanDeformer": MTypeId(1127),
+   "poseInterpolatorManager": MTypeId(1128),
+   "controllerTag": MTypeId(1129),
+   "reForm": MTypeId(1130),
+   "customEvaluatorClusterNode": MTypeId(1131),
+   "polyCircularize": MTypeId(1132),
+   "arubaTesselate": MTypeId(1133),
+   "reorderUVSet": MTypeId(1134),
+   "ufeProxyTransform": MTypeId(1135),
+   "decomposeMatrix": MTypeId(1136),
+   "composeMatrix": MTypeId(1137),
+   "blendMatrix": MTypeId(1138),
+   "pickMatrix": MTypeId(1139),
+   "aimMatrix": MTypeId(1140),
+   "primitiveFalloff": MTypeId(1141),
+   "blendFalloff": MTypeId(1142),
+   "uniformFalloff": MTypeId(1143),
+   "transferFalloff": MTypeId(1144),
+   "componentFalloff": MTypeId(1145),
+   "proximityFalloff": MTypeId(1146),
+   "subsetFalloff": MTypeId(1147),
+   "weightFunctionData": MTypeId(1148),
+   "falloffEval": MTypeId(1149),
+   "componentMatch": MTypeId(1150),
+   "polyUnsmooth": MTypeId(1151),
+   "polyReFormManipContainer": MTypeId(1152),
+   "polyReFormManip": MTypeId(1153),
+   "polyAxis": MTypeId(1154),
+   "angleToDoubleNode": MTypeId(1155),
+   "doubleToAngleNode": MTypeId(1156),
+   "absolute": MTypeId(1157),
+   "aCos": MTypeId(1158),
+   "and": MTypeId(1159),
+   "aSin": MTypeId(1160),
+   "aTan": MTypeId(1161),
+   "aTan2": MTypeId(1162),
+   "average": MTypeId(1163),
+   "ceil": MTypeId(1164),
+   "clampRange": MTypeId(1165),
+   "cos": MTypeId(1166),
+   "determinant": MTypeId(1167),
+   "equal": MTypeId(1168),
+   "floor": MTypeId(1169),
+   "greaterThan": MTypeId(1170),
+   "inverseLinearInterpolation": MTypeId(1171),
+   "length": MTypeId(1172),
+   "lessThan": MTypeId(1173),
+   "linearInterpolation": MTypeId(1174),
+   "log": MTypeId(1175),
+   "max": MTypeId(1176),
+   "min": MTypeId(1177),
+   "modulo": MTypeId(1178),
+   "multiply": MTypeId(1179),
+   "negate": MTypeId(1180),
+   "normalize": MTypeId(1181),
+   "not": MTypeId(1182),
+   "or": MTypeId(1183),
+   "pIConstant": MTypeId(1184),
+   "power": MTypeId(1185),
+   "rotateVector": MTypeId(1186),
+   "round": MTypeId(1187),
+   "sin": MTypeId(1188),
+   "smoothStep": MTypeId(1189),
+   "sum": MTypeId(1190),
+   "tan": MTypeId(1191),
+   "truncate": MTypeId(1192),
+   "dotProduct": MTypeId(1193),
+   "crossProduct": MTypeId(1194),
+   "multiplyPointByMatrix": MTypeId(1195),
+   "multiplyVectorByMatrix": MTypeId(1196),
+   "axisFromMatrix": MTypeId(1197),
+   "divide": MTypeId(1198),
+   "subtract": MTypeId(1199),
+   "translationFromMatrix": MTypeId(1200),
+   "rowFromMatrix": MTypeId(1201),
+   "columnFromMatrix": MTypeId(1202),
+   "scaleFromMatrix": MTypeId(1203),
+   "rotationFromMatrix": MTypeId(1204),
+   "parentMatrix": MTypeId(1205),
 }
 
-_TYPE_HEX_TO_STR = {
-
-    0x52454656: "AISEnvFacade",
-
-    0x4153564e: "aboutToSetValueTestNode",
-
-    0x58000378: "absOverride",
-
-    0x580003a0: "absUniqueOverride",
-
-    0x41425344: "absolute",
-
-    0x41434f53: "acos",
-
-    0x4441444c: "addDoubleLinear",
-
-    0x44414d58: "addMatrix",
-
-    0x4144534d: "adskMaterial",
-
-    0x44414d43: "aimConstraint",
-
-    0x414d4154: "aimMatrix",
-
-    0x59414952: "airField",
-
-    0x554d4958: "indexManip",
-
-    0x4e414c43: "alignCurve",
-
-    0x554d4144: "alignManip",
-
-    0x4e414c53: "alignSurface",
-
-    0x414d424c: "ambientLight",
-
-    0x414e4442: "and",
-
-    0x4e414254: "angleBetween",
-
-    0x4147444e: "angleDimension",
-
-    0x41424e44: "animBlend",
-
-    0x4142494f: "animBlendInOut",
-
-    0x41424e41: "animBlendNodeAdditive",
-
-    0x41424141: "animBlendNodeAdditiveDA",
-
-    0x4142414c: "animBlendNodeAdditiveDL",
-
-    0x41424146: "animBlendNodeAdditiveF",
-
-    0x41424641: "animBlendNodeAdditiveFA",
-
-    0x4142464c: "animBlendNodeAdditiveFL",
-
-    0x41424153: "animBlendNodeAdditiveI16",
-
-    0x41424149: "animBlendNodeAdditiveI32",
-
-    0x41424e52: "animBlendNodeAdditiveRotation",
-
-    0x41424e53: "animBlendNodeAdditiveScale",
-
-    0x4142424f: "animBlendNodeBoolean",
-
-    0x41424e45: "animBlendNodeEnum",
-
-    0x41425449: "animBlendNodeTime",
-
-    0x434c504e: "animClip",
-
-    0x50435441: "animCurveTA",
-
-    0x5043544c: "animCurveTL",
-
-    0x50435454: "animCurveTT",
-
-    0x50435455: "animCurveTU",
-
-    0x50435541: "animCurveUA",
-
-    0x5043554c: "animCurveUL",
-
-    0x50435554: "animCurveUT",
-
-    0x50435555: "animCurveUU",
-
-    0x414e4c52: "animLayer",
-
-    0x52414e49: "anisotropic",
-
-    0x414e4e53: "annotationShape",
-
-    0x5800039c: "aovChildCollection",
-
-    0x5800039b: "aovCollection",
-
-    0x58000397: "applyAbs2FloatsOverride",
-
-    0x58000381: "applyAbs3FloatsOverride",
-
-    0x5800038a: "applyAbsBoolOverride",
-
-    0x5800038c: "applyAbsEnumOverride",
-
-    0x5800037d: "applyAbsFloatOverride",
-
-    0x58000391: "applyAbsIntOverride",
-
-    0x58000393: "applyAbsStringOverride",
-
-    0x58000384: "applyConnectionOverride",
-
-    0x58000399: "applyRel2FloatsOverride",
-
-    0x58000383: "applyRel3FloatsOverride",
-
-    0x5800037f: "applyRelFloatOverride",
-
-    0x58000392: "applyRelIntOverride",
-
-    0x41444d4e: "arcLengthDimension",
-
-    0x41524c54: "areaLight",
-
-    0x44414d50: "arrayMapper",
-
-    0x554d4152: "arrowManip",
-
-    0x41544553: "arubaTessellate",
-
-    0x4153494e: "asin",
-
-    0x4154414e: "atan",
-
-    0x41544132: "atan2",
-
-    0x4e415443: "attachCurve",
-
-    0x4e415453: "attachSurface",
-
-    0x41544854: "attrHierarchyTest",
-
-    0x41554449: "audio",
-
-    0x41565244: "average",
-
-    0x4e414352: "avgCurves",
-
-    0x4e414e50: "avgNurbsSurfacePoints",
-
-    0x4e415350: "avgSurfacePoints",
-
-    0x584d4154: "axisFromMatrix",
-
-    0x554d4250: "ballProjManip",
-
-    0x554d4c4e: "lineManip",
-
-    0x46424153: "baseLattice",
-
-    0x58000375: "basicSelector",
-
-    0x4e42564c: "bevel",
-
-    0x4e425356: "bevelPlus",
-
-    0x42435256: "bezierCurve",
-
-    0x42544e52: "bezierCurveToNurbs",
-
-    0x50424353: "blendColorSets",
-
-    0x52424c32: "blendColors",
-
-    0x424c4456: "blendDevice",
-
-    0x42464f46: "blendFalloff",
-
-    0x424d4154: "blendMatrix",
-
-    0x46424c53: "blendShape",
-
-    0x41424c32: "blendTwoAttr",
-
-    0x41424c57: "blendWeighted",
-
-    0x424c4454: "blindDataTemplate",
-
-    0x52424c4e: "blinn",
-
-    0x4642554c: "boneLattice",
-
-    0x4e424f4c: "boolean",
-
-    0x4e424e44: "boundary",
-
-    0x5246424d: "brownian",
-
-    0x42525348: "brush",
-
-    0x52544255: "bulge",
-
-    0x5242554d: "bump2d",
-
-    0x52425533: "bump3d",
-
-    0x55465054: "freePointTriadManip",
-
-    0x4354524b: "cacheBlend",
-
-    0x43434846: "cacheFile",
-
-    0x4443414d: "camera",
-
-    0x554d4350: "cameraPlaneManip",
-
-    0x44525452: "cameraSet",
-
-    0x44434156: "cameraView",
-
-    0x43454944: "ceil",
-
-    0x434e4d50: "centerManip",
-
-    0x43484152: "character",
-
-    0x434d4150: "characterMap",
-
-    0x584f4646: "characterOffset",
-
-    0x52544348: "checker",
-
-    0x43484345: "choice",
-
-    0x43484f4f: "chooser",
-
-    0x554d434c: "circleManip",
-
-    0x5543534d: "circleSweepManip",
-
-    0x52434c33: "clamp",
-
-    0x434c414d: "clampRange",
-
-    0x43475348: "clipGhostShape",
-
-    0x434c4950: "clipLibrary",
-
-    0x43534348: "clipScheduler",
-
-    0x43324744: "clipToGhostData",
-
-    0x4e434355: "closeCurve",
-
-    0x4e435355: "closeSurface",
-
-    0x43504f4d: "closestPointOnMesh",
-
-    0x4e435053: "closestPointOnSurface",
-
-    0x5254434c: "cloth",
-
-    0x52544344: "cloud",
-
-    0x46434c53: "cluster",
-
-    0x464a4346: "clusterFlexorShape",
-
-    0x46434c48: "clusterHandle",
-
-    0x58000373: "collection",
-
-    0x59434f4c: "collisionModel",
-
-    0x434d4742: "colorManagementGlobals",
-
-    0x434f4c50: "colorProfile",
-
-    0x434d4154: "columnFromMatrix",
-
-    0x46434e53: "combinationShape",
-
-    0x43504154: "compactPlugArrayTest",
-
-    0x47464f46: "componentFalloff",
-
-    0x5554544d: "translateManip",
-
-    0x544f504d: "componentMatch",
-
-    0x43544253: "componentTagBase",
-
-    0x58000301: "composeMatrix",
-
-    0x554d434f: "concentricProjManip",
-
-    0x52434e44: "condition",
-
-    0x58000385: "connectionOverride",
-
-    0x580003a2: "connectionUniqueOverride",
-
-    0x434f4e54: "container",
-
-    0x434f4241: "containerBase",
-
-    0x52434f4e: "contrast",
-
-    0x43475250: "controller",
-
-    0x43504353: "copyColorSet",
-
-    0x43505553: "copyUVSet",
-
-    0x434f5349: "cos",
-
-    0x52533430: "crater",
-
-    0x43524541: "creaseSet",
-
-    0x43524353: "createColorSet",
-
-    0x43525553: "createUVSet",
-
-    0x43524f50: "crossProduct",
-
-    0x554d4355: "cubicProjManip",
-
-    0x4e434d43: "curveFromMeshCoM",
-
-    0x4e434d45: "curveFromMeshEdge",
-
-    0x53435345: "curveFromSubdivEdge",
-
-    0x53435346: "curveFromSubdivFace",
-
-    0x4e435342: "curveFromSurfaceBnd",
-
-    0x4e435343: "curveFromSurfaceCoS",
-
-    0x4e435349: "curveFromSurfaceIso",
-
-    0x4e43494e: "curveInfo",
-
-    0x4e434349: "curveIntersect",
-
-    0x434e5241: "curveNormalizerAngle",
-
-    0x434e524c: "curveNormalizerLinear",
-
-    0x554d5043: "pointOnCurveManip",
-
-    0x4e435647: "curveVarGroup",
-
-    0x554d4359: "cylindricalProjManip",
-
-    0x44414743: "dagContainer",
-
-    0x46504f53: "dagPose",
-
-    0x44425453: "dataBlockTest",
-
-    0x58000300: "decomposeMatrix",
-
-    0x4445464c: "defaultLightList",
-
-    0x4452554c: "defaultRenderUtilityList",
-
-    0x44524e4c: "defaultRenderingList",
-
-    0x5244534c: "defaultShaderList",
-
-    0x5244544c: "defaultTextureList",
-
-    0x46444244: "deformBend",
-
-    0x4644464c: "deformFlare",
-
-    0x4644534e: "deformSine",
-
-    0x46445351: "deformSquash",
-
-    0x46445457: "deformTwist",
-
-    0x46445756: "deformWave",
-
-    0x444c4353: "deleteColorSet",
-
-    0x44454354: "deleteComponent",
-
-    0x444c4d53: "deleteUVSet",
-
-    0x444c544d: "deltaMush",
-
-    0x4e445443: "detachCurve",
-
-    0x4e445453: "detachSurface",
-
-    0x4445544d: "determinant",
-
-    0x44445343: "directedDisc",
-
-    0x4449524c: "directionalLight",
-
-    0x5544534d: "discManip",
-
-    0x44534b43: "diskCache",
-
-    0x52445348: "displacementShader",
-
-    0x4453504c: "displayLayer",
-
-    0x44504c4d: "displayLayerManager",
-
-    0x44444254: "distanceBetween",
-
-    0x44444d4e: "distanceDimShape",
-
-    0x554d444d: "distanceManip",
-
-    0x44495644: "divide",
-
-    0x444f4644: "dof",
-
-    0x444f5450: "dotProduct",
-
-    0x53574832: "doubleShadingSwitch",
-
-    0x4e444253: "dpBirailSrf",
-
-    0x59445247: "dragField",
-
-    0x444c4354: "dropoffLocator",
-
-    0x5943544c: "dynController",
-
-    0x5944474c: "dynGlobals",
-
-    0x59484c44: "dynHolder",
-
-    0x44434f4e: "dynamicConstraint",
-
-    0x454d5444: "editMetadata",
-
-    0x454d4752: "editsManager",
-
-    0x454e4d50: "enableManip",
-
-    0x5245424c: "envBall",
-
-    0x52454348: "envChrome",
-
-    0x52454342: "envCube",
-
-    0x52454643: "envFacade",
-
-    0x52454647: "envFog",
-
-    0x5245534b: "envSky",
-
-    0x52455350: "envSphere",
-
-    0x454e5646: "environmentFog",
-
-    0x4551554c: "equal",
-
-    0x4e455348: "explodeNurbsShell",
-
-    0x44455850: "expression",
-
-    0x4e455843: "extendCurve",
-
-    0x4e455853: "extendSurface",
-
-    0x4e455852: "extrude",
-
-    0x4446434e: "facade",
-
-    0x45464f46: "falloffEval",
-
-    0x4e424c54: "ffBlendSrf",
-
-    0x4e424c53: "ffBlendSrfObsolete",
-
-    0x4e464653: "ffFilletSrf",
-
-    0x46464644: "ffd",
-
-    0x52544654: "file",
-
-    0x4e464352: "filletCurve",
-
-    0x4e465443: "fitBspline",
-
-    0x464c5848: "flexorShape",
-
-    0x464c4f4f: "floor",
-
-    0x464c4f57: "flow",
-
-    0x46454d49: "fluidEmitter",
-
-    0x464c5549: "fluidShape",
-
-    0x46534c4d: "fluidSliceManip",
-
-    0x464c5454: "fluidTexture2D",
-
-    0x464c5458: "fluidTexture3D",
-
-    0x48435256: "follicle",
-
-    0x554d4655: "forceUpdateManip",
-
-    0x4650524e: "fosterParent",
-
-    0x4642464d: "fourByFourMatrix",
-
-    0x52543246: "fractal",
-
-    0x46434348: "frameCache",
-
-    0x554d4650: "freePointManip",
-
-    0x5247414d: "gammaCorrect",
-
-    0x5947434f: "geoConnectable",
-
-    0x59474354: "geoConnector",
-
-    0x4742494e: "geomBind",
-
-    0x44474e43: "geometryConstraint",
-
-    0x44474649: "geometryFilter",
-
-    0x554d474c: "geometryOnLineManip",
-
-    0x4e475647: "geometryVarGroup",
-
-    0x4743434c: "globalCacheControl",
-
-    0x4e475354: "globalStitch",
-
-    0x52544752: "granite",
-
-    0x59475241: "gravityField",
-
-    0x47505351: "greasePencilSequence",
-
-    0x4447504c: "greasePlane",
-
-    0x47505253: "greasePlaneRenderShape",
-
-    0x47525448: "greaterThan",
-
-    0x52544744: "grid",
-
-    0x580003a5: "group",
-
-    0x47504944: "groupId",
-
-    0x47525050: "groupParts",
-
-    0x46475549: "guide",
-
-    0x4850494e: "hairConstraint",
-
-    0x48535953: "hairSystem",
-
-    0x52485442: "hairTubeShader",
-
-    0x4e484450: "hardenPoint",
-
-    0x48575247: "hardwareRenderGlobals",
-
-    0x48525247: "hardwareRenderingGlobals",
-
-    0x4f435050: "heightField",
-
-    0x48544e31: "hierarchyTestNode1",
-
-    0x48544e32: "hierarchyTestNode2",
-
-    0x48544e33: "hierarchyTestNode3",
-
-    0x4446494b: "hikEffector",
-
-    0x4a54494b: "hikFKJoint",
-
-    0x4846434d: "hikFloorContactMarker",
-
-    0x48474e44: "hikGroundPlane",
-
-    0x4b484948: "hikHandle",
-
-    0x494b4546: "hikIKEffector",
-
-    0x4b48494b: "hikSolver",
-
-    0x48495353: "historySwitch",
-
-    0x4450484d: "holdMatrix",
-
-    0x52483252: "hsvToRgb",
-
-    0x4857524d: "hwReflectionMap",
-
-    0x59485244: "hwRenderGlobals",
-
-    0x48595052: "hyperGraphInfo",
-
-    0x4859504c: "hyperLayout",
-
-    0x44485056: "hyperView",
-
-    0x4b454646: "ikEffector",
-
-    0x4b48444c: "ikHandle",
-
-    0x4b4d4353: "ikMCsolver",
-
-    0x4b504153: "ikPASolver",
-
-    0x4b525053: "ikRPsolver",
-
-    0x4b534353: "ikSCsolver",
-
-    0x4b535053: "ikSplineSolver",
-
-    0x4b535953: "ikSystem",
-
-    0x4449504c: "imagePlane",
-
-    0x46494258: "implicitBox",
-
-    0x4649434f: "implicitCone",
-
-    0x46495350: "implicitSphere",
-
-    0x4e494b43: "insertKnotCurve",
-
-    0x4e494b53: "insertKnotSurface",
-
-    0x594e5354: "instancer",
-
-    0x4e495346: "intersectSurface",
-
-    0x494c5250: "inverseLerp",
-
-    0x4a474446: "jiggle",
-
-    0x4a4f494e: "joint",
-
-    0x464a434c: "jointCluster",
-
-    0x46464442: "jointFfd",
-
-    0x4642454c: "jointLattice",
-
-    0x4b46524d: "keyframeRegionManip",
-
-    0x4b475250: "keyingGroup",
-
-    0x524c414d: "lambert",
-
-    0x464c4154: "lattice",
-
-    0x4c595253: "layeredShader",
-
-    0x4c595254: "layeredTexture",
-
-    0x4e4c534d: "leastSquaresModifier",
-
-    0x52544c45: "leather",
-
-    0x4c454e47: "length",
-
-    0x4c455250: "lerp",
-
-    0x4c535448: "lessThan",
-
-    0x580003e3: "lightEditor",
-
-    0x52464f47: "lightFog",
-
-    0x580003e2: "lightGroup",
-
-    0x524c494e: "lightInfo",
-
-    0x580003e1: "lightItem",
-
-    0x524c4c4b: "lightLinker",
-
-    0x4c4c5354: "lightList",
-
-    0x5800039a: "lightsChildCollection",
-
-    0x58000394: "lightsCollection",
-
-    0x580003a4: "lightsCollectionSelector",
-
-    0x4c544d50: "limitManip",
-
-    0x4c4d4f44: "lineModifier",
-
-    0x4c4f4354: "locator",
-
-    0x4c4f4447: "lodGroup",
-
-    0x4c4f4454: "lodThresholds",
-
-    0x4e534b4e: "loft",
-
-    0x4c4f4744: "log",
-
-    0x444c4154: "lookAt",
-
-    0x524c554d: "luminance",
-
-    0x504d4752: "makeGroup",
-
-    0x4e4d4943: "makeIllustratorCurves",
-
-    0x4e435243: "makeNurbCircle",
-
-    0x4e434e45: "makeNurbCone",
-
-    0x4e435542: "makeNurbCube",
-
-    0x4e43594c: "makeNurbCylinder",
-
-    0x4e504c4e: "makeNurbPlane",
-
-    0x4e535048: "makeNurbSphere",
-
-    0x4e544f52: "makeNurbTorus",
-
-    0x4e535152: "makeNurbsSquare",
-
-    0x4e545843: "makeTextCurves",
-
-    0x4e334341: "makeThreePointCircularArc",
-
-    0x4e324341: "makeTwoPointCircularArc",
-
-    0x52544d41: "mandelbrot",
-
-    0x52544d33: "mandelbrot3D",
-
-    0x554d3243: "manip2DContainer",
-
-    0x554d4343: "manipContainer",
-
-    0x52544d52: "marble",
-
-    0x554d4d41: "markerManip",
-
-    0x524d4643: "materialFacade",
-
-    0x444d5449: "materialInfo",
-
-    0x58000387: "materialOverride",
-
-    0x4d544c41: "materialTemplate",
-
-    0x58000389: "materialTemplateOverride",
-
-    0x4d415844: "max",
-
-    0x4d454d42: "membrane",
-
-    0x444d5348: "mesh",
-
-    0x4e4d5647: "meshVarGroup",
-
-    0x4d494e44: "min",
-
-    0x4d4f4444: "modulo",
-
-    0x4d525048: "morph",
-
-    0x4d505448: "motionPath",
-
-    0x4d4f5452: "motionTrail",
-
-    0x4d4f5348: "motionTrailShape",
-
-    0x52544d54: "mountain",
-
-    0x52544d56: "movie",
-
-    0x4e4d4253: "mpBirailSrf",
-
-    0x444d444c: "multDoubleLinear",
-
-    0x444d544d: "multMatrix",
-
-    0x4d554c4c: "multilisterLight",
-
-    0x4d554c54: "multiply",
-
-    0x524d4449: "multiplyDivide",
-
-    0x4d50424d: "multiplyPointByMatrix",
-
-    0x4d56424d: "multiplyVectorByMatrix",
-
-    0x4d555445: "mute",
-
-    0x4e434c4f: "nCloth",
-
-    0x4e434d50: "nComponent",
-
-    0x4e504152: "nParticle",
-
-    0x4e524744: "nRigid",
-
-    0x4e504f43: "nearestPointOnCurve",
-
-    0x4e454754: "negate",
-
-    0x4e54574b: "network",
-
-    0x594e4557: "newtonField",
-
-    0x52544e33: "noise",
-
-    0x464e4c44: "nonLinear",
-
-    0x444e4332: "normalConstraint",
-
-    0x4e4f524d: "normalize",
-
-    0x4e4f5442: "not",
-
-    0x4e535953: "nucleus",
-
-    0x4e435256: "nurbsCurve",
-
-    0x4e525442: "nurbsCurveToBezier",
-
-    0x4e535246: "nurbsSurface",
-
-    0x4e544553: "nurbsTessellate",
-
-    0x534e5453: "nurbsToSubdiv",
-
-    0x534e5450: "nurbsToSubdivProc",
-
-    0x4f464154: "objectAttrFilter",
-
-    0x4f4b464c: "objectBinFilter",
-
-    0x4f464c54: "objectFilter",
-
-    0x4f4d464c: "objectMultiFilter",
-
-    0x4f4e464c: "objectNameFilter",
-
-    0x4f52464c: "objectRenderFilter",
-
-    0x4f53464c: "objectScriptFilter",
-
-    0x4f425354: "objectSet",
-
-    0x4f54464c: "objectTypeFilter",
-
-    0x52544f43: "ocean",
-
-    0x524f5053: "oceanShader",
-
-    0x4e4f4353: "offsetCos",
-
-    0x4e4f4355: "offsetCurve",
-
-    0x4e4f5355: "offsetSurface",
-
-    0x42444454: "oldBlindDataBase",
-
-    0x44474d43: "oldGeometryConstraint",
-
-    0x444e5243: "oldNormalConstraint",
-
-    0x44544e43: "oldTangentConstraint",
-
-    0x4f504658: "opticalFX",
-
-    0x4f52424f: "or",
-
-    0x444f5243: "orientConstraint",
-
-    0x4f52544d: "orientationMarker",
-
-    0x4150424c: "pairBlend",
-
-    0x52444d4e: "paramDimension",
-
-    0x44504152: "parentConstraint",
-
-    0x50524d54: "parentMatrix",
-
-    0x59504152: "particle",
-
-    0x50414d41: "particleAgeMapper",
-
-    0x50434c44: "particleCloud",
-
-    0x50434d41: "particleColorMapper",
-
-    0x50494d41: "particleIncandMapper",
-
-    0x5053494e: "particleSamplerInfo",
-
-    0x50544d41: "particleTranspMapper",
-
-    0x5052544e: "partition",
-
-    0x5053434d: "passContributionMap",
-
-    0x4450534d: "passMatrix",
-
-    0x50464841: "pfxHair",
-
-    0x5046544f: "pfxToon",
-
-    0x5250484f: "phong",
-
-    0x52504845: "phongE",
-
-    0x50494b44: "pi",
-
-    0x504d4154: "pickMatrix",
-
-    0x50414f4d: "pivotAndOrientManip",
-
-    0x52504c32: "place2dTexture",
-
-    0x52504c44: "place3dTexture",
-
-    0x554d5050: "planarProjManip",
-
-    0x4e504c54: "planarTrimSurface",
-
-    0x52504d41: "plusMinusAverage",
-
-    0x44505443: "pointConstraint",
-
-    0x59454d49: "pointEmitter",
-
-    0x504f4954: "pointLight",
-
-    0x44504d4d: "pointMatrixMult",
-
-    0x4e504349: "pointOnCurveInfo",
-
-    0x554d504c: "pointOnLineManip",
-
-    0x44505043: "pointOnPolyConstraint",
-
-    0x554d5353: "pointOnSurfManip",
-
-    0x4e505349: "pointOnSurfaceInfo",
-
-    0x554d5053: "pointOnSurfaceManip",
-
-    0x44505643: "poleVectorConstraint",
-
-    0x50415050: "polyAppend",
-
-    0x50415056: "polyAppendVertex",
-
-    0x50415550: "polyAutoProj",
-
-    0x50415656: "polyAverageVertex",
-
-    0x50435244: "polyAxis",
-
-    0x5042564c: "polyBevel",
-
-    0x50425632: "polyBevel2",
-
-    0x50425633: "polyBevel3",
-
-    0x4d424454: "polyBlindData",
-
-    0x50424f50: "polyBoolOp",
-
-    0x50425245: "polyBridgeEdge",
-
-    0x50435642: "polyCBoolOp",
-
-    0x50434849: "polyChipOff",
-
-    0x50435243: "polyCircularize",
-
-    0x504c434c: "polyClean",
-
-    0x50434c4f: "polyCloseBorder",
-
-    0x50434f45: "polyCollapseEdge",
-
-    0x50434f46: "polyCollapseF",
-
-    0x5043444c: "polyColorDel",
-
-    0x50434d4f: "polyColorMod",
-
-    0x50435056: "polyColorPerVertex",
-
-    0x50434f4e: "polyCone",
-
-    0x50434353: "polyConnectComponents",
-
-    0x50434e50: "polyContourProj",
-
-    0x50435556: "polyCopyUV",
-
-    0x50435253: "polyCrease",
-
-    0x50435345: "polyCreaseEdge",
-
-    0x50435245: "polyCreateFace",
-
-    0x50435542: "polyCube",
-
-    0x50504354: "polyCut",
-
-    0x50435950: "polyCylProj",
-
-    0x5043594c: "polyCylinder",
-
-    0x50444545: "polyDelEdge",
-
-    0x50444546: "polyDelFacet",
-
-    0x50444556: "polyDelVertex",
-
-    0x50445545: "polyDuplicateEdge",
-
-    0x50544356: "polyEdgeToCurve",
-
-    0x50534546: "polyEditEdgeFlow",
-
-    0x50455845: "polyExtrudeEdge",
-
-    0x50455846: "polyExtrudeFace",
-
-    0x50455856: "polyExtrudeVertex",
-
-    0x50464c45: "polyFlipEdge",
-
-    0x50465556: "polyFlipUV",
-
-    0x48454c49: "polyHelix",
-
-    0x50484645: "polyHoleFace",
-
-    0x504c5556: "polyLayoutUV",
-
-    0x504d4143: "polyMapCut",
-
-    0x504d4144: "polyMapDel",
-
-    0x504d4153: "polyMapSew",
-
-    0x5053454d: "polyMapSewMove",
-
-    0x504d4545: "polyMergeEdge",
-
-    0x504d4546: "polyMergeFace",
-
-    0x504d4755: "polyMergeUV",
-
-    0x504d5645: "polyMergeVert",
-
-    0x504d4952: "polyMirror",
-
-    0x504d4f45: "polyMoveEdge",
-
-    0x504d4f46: "polyMoveFace",
-
-    0x504d4655: "polyMoveFacetUV",
-
-    0x504d5556: "polyMoveUV",
-
-    0x504d4f56: "polyMoveVertex",
-
-    0x504e4f52: "polyNormal",
-
-    0x504e5056: "polyNormalPerVertex",
-
-    0x504e5556: "polyNormalizeUV",
-
-    0x504f5556: "polyOptUvs",
-
-    0x50595054: "polyPassThru",
-
-    0x50505556: "polyPinUV",
-
-    0x50504950: "polyPipe",
-
-    0x50504c50: "polyPlanarProj",
-
-    0x504d4553: "polyPlane",
-
-    0x534f4c49: "polyPlatonicSolid",
-
-    0x5050504b: "polyPoke",
-
-    0x4d495343: "polyPrimitiveMisc",
-
-    0x50505249: "polyPrism",
-
-    0x5050524f: "polyProj",
-
-    0x50504356: "polyProjectCurve",
-
-    0x50505952: "polyPyramid",
-
-    0x50515541: "polyQuad",
-
-    0x50524544: "polyReduce",
-
-    0x50524d48: "polyRemesh",
-
-    0x5052464d: "polyRetopo",
-
-    0x50534550: "polySeparate",
-
-    0x50535745: "polySewEdge",
-
-    0x50534d54: "polySmooth",
-
-    0x50534d46: "polySmoothFace",
-
-    0x50534d50: "polySmoothProxy",
-
-    0x50534f45: "polySoftEdge",
-
-    0x50535050: "polySphProj",
-
-    0x50535048: "polySphere",
-
-    0x50535051: "polySpinEdge",
-
-    0x5053504c: "polySplit",
-
-    0x50534544: "polySplitEdge",
-
-    0x50535052: "polySplitRing",
-
-    0x50535645: "polySplitVert",
-
-    0x50535442: "polyStraightenUVBorder",
-
-    0x50535545: "polySubdEdge",
-
-    0x50535546: "polySubdFace",
-
-    0x50534453: "polyToSubdiv",
-
-    0x50544f52: "polyTorus",
-
-    0x50544652: "polyTransfer",
-
-    0x50545249: "polyTriangulate",
-
-    0x5054574b: "polyTweak",
-
-    0x50545556: "polyTweakUV",
-
-    0x50555652: "polyUVRectangle",
-
-    0x50554e49: "polyUnite",
-
-    0x50555344: "polyUnsmooth",
-
-    0x50574643: "polyWedgeFace",
-
-    0x5053444d: "poseInterpolatorManager",
-
-    0x504f534d: "positionMarker",
-
-    0x50505354: "postProcessList",
-
-    0x504f5744: "power",
-
-    0x53464f46: "primitiveFalloff",
-
-    0x4e504352: "projectCurve",
-
-    0x4e50544e: "projectTangent",
-
-    0x5250524a: "projection",
-
-    0x554d4354: "trsManip",
-
-    0x554d5054: "propMoveTriadManip",
-
-    0x5058464f: "proximityFalloff",
-
-    0x50525850: "proximityPin",
-
-    0x50575250: "proximityWrap",
-
-    0x50584d47: "proxyManager",
-
-    0x50534454: "psdFileTex",
-
-    0x53574834: "quadShadingSwitch",
-
-    0x59524144: "radialField",
-
-    0x52545241: "ramp",
-
-    0x52525053: "rampShader",
-
-    0x4e524246: "rbfSrf",
-
-    0x4e524243: "rebuildCurve",
-
-    0x4e524253: "rebuildSurface",
-
-    0x52454344: "record",
-
-    0x5245464e: "reference",
-
-    0x5800037a: "relOverride",
-
-    0x580003a1: "relUniqueOverride",
-
-    0x524d434c: "remapColor",
-
-    0x524d4853: "remapHsv",
-
-    0x524d564c: "remapValue",
-
-    0x524e4258: "renderBox",
-
-    0x524e434f: "renderCone",
-
-    0x52474c42: "renderGlobals",
-
-    0x5244474c: "renderGlobalsList",
-
-    0x524e444c: "renderLayer",
-
-    0x524e4c4d: "renderLayerManager",
-
-    0x524e5053: "renderPass",
-
-    0x52505353: "renderPassSet",
-
-    0x52515541: "renderQuality",
-
-    0x52524354: "renderRect",
-
-    0x580003a3: "renderSettingsChildCollection",
-
-    0x58000395: "renderSettingsCollection",
-
-    0x58000371: "renderSetup",
-
-    0x58000372: "renderSetupLayer",
-
-    0x524e5350: "renderSphere",
-
-    0x524e5447: "renderTarget",
-
-    0x52434953: "renderedImageSource",
-
-    0x524f5553: "reorderUVSet",
-
-    0x524c544e: "resolution",
-
-    0x52435441: "resultCurveTimeToAngular",
-
-    0x5243544c: "resultCurveTimeToLinear",
-
-    0x52435454: "resultCurveTimeToTime",
-
-    0x52435455: "resultCurveTimeToUnitless",
-
-    0x52525653: "reverse",
-
-    0x4e525643: "reverseCurve",
-
-    0x4e525653: "reverseSurface",
-
-    0x4e52564c: "revolve",
-
-    0x52523248: "rgbToHsv",
-
-    0x59524744: "rigidBody",
-
-    0x59435354: "rigidConstraint",
-
-    0x59534c56: "rigidSolver",
-
-    0x5254524b: "rock",
-
-    0x554d524c: "rotateLimitsManip",
-
-    0x554d5241: "rotateManip",
-
-    0x5532524f: "rotateUV2dManip",
-
-    0x524f5456: "rotateVector",
-
-    0x524f4d58: "rotationFromMatrix",
-
-    0x524f554e: "round",
-
-    0x4e524352: "roundConstantRadius",
-
-    0x524d4154: "rowFromMatrix",
-
-    0x46534d50: "sampler",
-
-    0x5253494e: "samplerInfo",
-
-    0x44534343: "scaleConstraint",
-
-    0x534d4154: "scaleFromMatrix",
-
-    0x55325343: "scaleUV2dManip",
-
-    0x5341434d: "screenAlignedCircleManip",
-
-    0x53435250: "script",
-
-    0x554d5343: "scriptManip",
-
-    0x46534350: "sculpt",
-
-    0x534c4f50: "selectionListOperator",
-
-    0x53514d47: "sequenceManager",
-
-    0x53514e43: "sequencer",
-
-    0x52524e47: "setRange",
-
-    0x5348474c: "shaderGlow",
-
-    0x58000386: "shaderOverride",
-
-    0x53484144: "shadingEngine",
-
-    0x53444d50: "shadingMap",
-
-    0x53444d4c: "shapeEditorManager",
-
-    0x53544553: "shellTessellate",
-
-    0x53484f54: "shot",
-
-    0x53575250: "shrinkWrap",
-
-    0x5800039e: "simpleSelector",
-
-    0x53544e44: "simpleTestNode",
-
-    0x53565348: "simpleVolumeShader",
-
-    0x53494e45: "sin",
-
-    0x53574831: "singleShadingSwitch",
-
-    0x534b504e: "sketchPlane",
-
-    0x534b4244: "skinBinding",
-
-    0x4653434c: "skinCluster",
-
-    0x4e534d43: "smoothCurve",
-
-    0x534d5354: "smoothStep",
-
-    0x4e53544e: "smoothTangentSrf",
-
-    0x5532534e: "snapUV2dManip",
-
-    0x534e5054: "snapshot",
-
-    0x53534841: "snapshotShape",
-
-    0x5254534e: "snow",
-
-    0x4653534c: "softMod",
-
-    0x46535348: "softModHandle",
-
-    0x52544633: "solidFractal",
-
-    0x534f4c59: "solidify",
-
-    0x4e534253: "spBirailSrf",
-
-    0x554d5350: "sphericalProjManip",
-
-    0x53434d50: "spotCylinderManip",
-
-    0x5350544c: "spotLight",
-
-    0x59535052: "spring",
-
-    0x4e535153: "squareSrf",
-
-    0x53544453: "standardSurface",
-
-    0x52545354: "stencil",
-
-    0x53524341: "stereoRigCamera",
-
-    0x4e535348: "stitchAsNurbsShell",
-
-    0x4e535453: "stitchSrf",
-
-    0x5354524b: "stroke",
-
-    0x53544b47: "strokeGlobals",
-
-    0x52533630: "stucco",
-
-    0x4e535443: "styleCurve",
-
-    0x4e534243: "subCurve",
-
-    0x4e535352: "subSurface",
-
-    0x53415459: "subdAddTopology",
-
-    0x53415550: "subdAutoProj",
-
-    0x53424454: "subdBlindData",
-
-    0x53435459: "subdCleanTopology",
-
-    0x53485242: "subdHierBlind",
-
-    0x534c5556: "subdLayoutUV",
-
-    0x534d4143: "subdMapCut",
-
-    0x5353454d: "subdMapSewMove",
-
-    0x53504c50: "subdPlanarProj",
-
-    0x5354574b: "subdTweak",
-
-    0x53545556: "subdTweakUV",
-
-    0x53445353: "subdiv",
-
-    0x53434c50: "subdivCollapse",
-
-    0x53534944: "subdivComponentId",
-
-    0x53525646: "subdivReverseFaces",
-
-    0x53535647: "subdivSurfaceVarGroup",
-
-    0x5344534e: "subdivToNurbs",
-
-    0x53445350: "subdivToPoly",
-
-    0x5353464f: "subsetFalloff",
-
-    0x53554253: "subtract",
-
-    0x53554d44: "sum",
-
-    0x4e53494e: "surfaceInfo",
-
-    0x52534c55: "surfaceLuminance",
-
-    0x52535348: "surfaceShader",
-
-    0x4e535647: "surfaceVarGroup",
-
-    0x44534d43: "symmetryConstraint",
-
-    0x54414e47: "tan",
-
-    0x44544332: "tangentConstraint",
-
-    0x54454e53: "tension",
-
-    0x554d5442: "textButtonManip",
-
-    0x554d5458: "texture3dManip",
-
-    0x5442414b: "textureBakeSet",
-
-    0x54584446: "textureDeformer",
-
-    0x54444844: "textureDeformerHandle",
-
-    0x5454474f: "textureToGeom",
-
-    0x54494d45: "time",
-
-    0x544d4544: "timeEditor",
-
-    0x54454153: "timeEditorAnimSource",
-
-    0x41434c43: "timeEditorClip",
-
-    0x414c434c: "timeEditorClipBase",
-
-    0x4143524f: "timeEditorClipEvaluator",
-
-    0x54454950: "timeEditorInterpolator",
-
-    0x5445544b: "timeEditorTracks",
-
-    0x7466786e: "timeFunction",
-
-    0x44544d55: "timeToUnitConversion",
-
-    0x54495741: "timeWarp",
-
-    0x554d5447: "toggleManip",
-
-    0x55544f4c: "toggleOnLineManip",
-
-    0x5454444d: "toolDrawManip",
-
-    0x54444d32: "toolDrawManip2D",
-
-    0x544c4154: "toonLineAttributes",
-
-    0x54494d47: "trackInfoManager",
-
-    0x55325452: "transUV2dManip",
-
-    0x54524154: "transferAttributes",
-
-    0x50464f46: "transferFalloff",
-
-    0x5846524d: "transform",
-
-    0x5447454f: "transformGeometry",
-
-    0x554d5556: "translateUVManip",
-
-    0x544d4154: "translationFromMatrix",
-
-    0x4e54524d: "trim",
-
-    0x4e545742: "trimWithBoundaries",
-
-    0x554d5452: "triplanarProjManip",
-
-    0x53574833: "tripleShadingSwitch",
-
-    0x5452554e: "truncate",
-
-    0x59545552: "turbulenceField",
-
-    0x464d5054: "tweak",
-
-    0x55465043: "ufeProxyCameraShape",
-
-    0x55465058: "ufeProxyTransform",
-
-    0x55574754: "uniformFalloff",
-
-    0x59554e49: "uniformField",
-
-    0x44554e54: "unitConversion",
-
-    0x4455544d: "unitToTimeConversion",
-
-    0x554e4b4e: "unknown",
-
-    0x554e4b44: "unknownDag",
-
-    0x554e4b54: "unknownTransform",
-
-    0x4e555452: "untrim",
-
-    0x55534247: "useBackground",
-
-    0x5556324d: "uv2dManip",
-
-    0x55564348: "uvChooser",
-
-    0x55565256: "uvPin",
-
-    0x52564543: "vectorProduct",
-
-    0x5642414b: "vertexBakeSet",
-
-    0x5657434d: "viewColorManager",
-
-    0x59565846: "volumeAxisField",
-
-    0x52564647: "volumeFog",
-
-    0x564f4c4c: "volumeLight",
-
-    0x52545633: "volumeNoise",
-
-    0x52565348: "volumeShader",
-
-    0x59564f52: "vortexField",
-
-    0x52545741: "water",
-
-    0x44574746: "weightGeometryFilter",
-
-    0x46574952: "wire",
-
-    0x52545744: "wood",
-
-    0x46575250: "wrap",
-
-    0x4457414d: "wtAddMatrix",
-
+_TYPE_INT_TO_STR = {
+   0: "invalid",
+   1: "base",
+   2: "namedObject",
+   3: "model",
+   4: "dependencyNode",
+   5: "addDoubleLinear",
+   6: "affect",
+   7: "animCurve",
+   8: "animCurveTimeToAngular",
+   9: "animCurveTimeToDistance",
+   10: "animCurveTimeToTime",
+   11: "animCurveTimeToUnitless",
+   12: "animCurveUnitlessToAngular",
+   13: "animCurveUnitlessToDistance",
+   14: "animCurveUnitlessToTime",
+   15: "animCurveUnitlessToUnitless",
+   16: "resultCurve",
+   17: "resultCurveTimeToAngular",
+   18: "resultCurveTimeToDistance",
+   19: "resultCurveTimeToTime",
+   20: "resultCurveTimeToUnitless",
+   21: "angleBetween",
+   22: "audio",
+   23: "background",
+   24: "colorBackground",
+   25: "fileBackground",
+   26: "rampBackground",
+   27: "blend",
+   28: "blendTwoAttr",
+   29: "blendWeighted",
+   30: "blendDevice",
+   31: "blendColors",
+   32: "bump",
+   33: "bump3d",
+   34: "cameraView",
+   35: "chainToSpline",
+   36: "choice",
+   37: "condition",
+   38: "contrast",
+   39: "clampColor",
+   40: "create",
+   41: "alignCurve",
+   42: "alignSurface",
+   43: "attachCurve",
+   44: "attachSurface",
+   45: "avgCurves",
+   46: "avgSurfacePoints",
+   47: "avgNurbsSurfacePoints",
+   48: "bevel",
+   49: "birailSrf",
+   50: "dPbirailSrf",
+   51: "mPbirailSrf",
+   52: "sPbirailSrf",
+   53: "boundary",
+   54: "circle",
+   55: "closeCurve",
+   56: "closestPointOnSurface",
+   57: "closeSurface",
+   58: "curveFromSurface",
+   59: "curveFromSurfaceBnd",
+   60: "curveFromSurfaceCoS",
+   61: "curveFromSurfaceIso",
+   62: "curveInfo",
+   63: "detachCurve",
+   64: "detachSurface",
+   65: "extendCurve",
+   66: "extendSurface",
+   67: "extrude",
+   68: "fFblendSrf",
+   69: "fFfilletSrf",
+   70: "filletCurve",
+   71: "fitBspline",
+   72: "flow",
+   73: "hardenPointCurve",
+   74: "illustratorCurve",
+   75: "insertKnotCrv",
+   76: "insertKnotSrf",
+   77: "intersectSurface",
+   78: "nurbsTesselate",
+   79: "nurbsPlane",
+   80: "nurbsCube",
+   81: "offsetCos",
+   82: "offsetCurve",
+   83: "planarTrimSrf",
+   84: "pointOnCurveInfo",
+   85: "pointOnSurfaceInfo",
+   86: "primitive",
+   87: "projectCurve",
+   88: "projectTangent",
+   89: "rBFsurface",
+   90: "rebuildCurve",
+   91: "rebuildSurface",
+   92: "reverseCurve",
+   93: "reverseSurface",
+   94: "revolve",
+   95: "revolvedPrimitive",
+   96: "cone",
+   97: "renderCone",
+   98: "cylinder",
+   99: "sphere",
+   100: "skin",
+   101: "stitchSrf",
+   102: "subCurve",
+   103: "surfaceInfo",
+   104: "textCurves",
+   105: "trim",
+   106: "untrim",
+   107: "dagNode",
+   108: "proxy",
+   109: "underWorld",
+   110: "transform",
+   111: "aimConstraint",
+   112: "lookAt",
+   113: "geometryConstraint",
+   114: "geometryVarGroup",
+   115: "anyGeometryVarGroup",
+   116: "curveVarGroup",
+   117: "meshVarGroup",
+   118: "surfaceVarGroup",
+   119: "ikEffector",
+   120: "ikHandle",
+   121: "joint",
+   122: "manipulator3D",
+   123: "arrowManip",
+   124: "axesActionManip",
+   125: "ballProjectionManip",
+   126: "circleManip",
+   127: "screenAlignedCircleManip",
+   128: "circleSweepManip",
+   129: "concentricProjectionManip",
+   130: "cubicProjectionManip",
+   131: "cylindricalProjectionManip",
+   132: "discManip",
+   133: "freePointManip",
+   134: "centerManip",
+   135: "limitManip",
+   136: "enableManip",
+   137: "freePointTriadManip",
+   138: "propMoveTriadManip",
+   139: "towPointManip",
+   140: "polyCreateToolManip",
+   141: "polySplitToolManip",
+   142: "geometryOnLineManip",
+   143: "cameraPlaneManip",
+   144: "toggleOnLineManip",
+   145: "stateManip",
+   146: "isoparmManip",
+   147: "lineManip",
+   148: "manipContainer",
+   149: "averageCurveManip",
+   150: "barnDoorManip",
+   151: "bevelManip",
+   152: "blendManip",
+   153: "buttonManip",
+   154: "cameraManip",
+   155: "coiManip",
+   156: "cpManip",
+   157: "createCVManip",
+   158: "createEPManip",
+   159: "curveEdManip",
+   160: "curveSegmentManip",
+   161: "directionManip",
+   162: "dofManip",
+   163: "dropoffManip",
+   164: "extendCurveDistanceManip",
+   165: "extrudeManip",
+   166: "ikSplineManip",
+   167: "ikRPManip",
+   168: "jointClusterManip",
+   169: "lightManip",
+   170: "motionPathManip",
+   171: "offsetCosManip",
+   172: "offsetCurveManip",
+   173: "projectionManip",
+   174: "polyProjectionManip",
+   175: "projectionUVManip",
+   176: "projectionMultiManip",
+   177: "projectTangentManip",
+   178: "propModManip",
+   179: "quadPtOnLineManip",
+   180: "rbfSrfManip",
+   181: "reverseCurveManip",
+   182: "reverseCrvManip",
+   183: "reverseSurfaceManip",
+   184: "revolveManip",
+   185: "revolvedPrimitiveManip",
+   186: "spotManip",
+   187: "spotCylinderManip",
+   188: "triplanarProjectionManip",
+   189: "trsManip",
+   190: "dblTrsManip",
+   191: "pivotManip2D",
+   192: "manip2DContainer",
+   193: "polyMoveUVManip",
+   194: "polyMappingManip",
+   195: "polyModifierManip",
+   196: "polyMoveVertexManip",
+   197: "polyVertexNormalManip",
+   198: "texSmudgeUVManip",
+   199: "texLatticeDeformManip",
+   200: "texLattice",
+   201: "texSmoothManip",
+   202: "trsTransManip",
+   203: "trsInsertManip",
+   204: "trsXformManip",
+   205: "manipulator2D",
+   206: "translateManip2D",
+   207: "planarProjectionManip",
+   208: "pointOnCurveManip",
+   209: "towPointOnCurveManip",
+   210: "markerManip",
+   211: "pointOnLineManip",
+   212: "pointOnSurfaceManip",
+   213: "translateUVManip",
+   214: "rotateBoxManip",
+   215: "rotateManip",
+   216: "handleRotateManip",
+   217: "rotateLimitsManip",
+   218: "scaleLimitsManip",
+   219: "scaleManip",
+   220: "scalingBoxManip",
+   221: "scriptManip",
+   222: "sphericalProjectionManip",
+   223: "textureManip3D",
+   224: "toggleManip",
+   225: "translateBoxManip",
+   226: "translateLimitsManip",
+   227: "translateManip",
+   228: "trimManip",
+   229: "jointTranslateManip",
+   230: "manipulator",
+   231: "circlePointManip",
+   232: "dimensionManip",
+   233: "fixedLineManip",
+   234: "lightProjectionGeometry",
+   235: "lineArrowManip",
+   236: "pointManip",
+   237: "triadManip",
+   238: "normalConstraint",
+   239: "orientConstraint",
+   240: "pointConstraint",
+   241: "symmetryConstraint",
+   242: "parentConstraint",
+   243: "poleVectorConstraint",
+   244: "scaleConstraint",
+   245: "tangentConstraint",
+   246: "unknownTransform",
+   247: "world",
+   248: "shape",
+   249: "baseLattice",
+   250: "camera",
+   251: "cluster",
+   252: "softMod",
+   253: "collision",
+   254: "dummy",
+   255: "emitter",
+   256: "field",
+   257: "air",
+   258: "drag",
+   259: "gravity",
+   260: "newton",
+   261: "radial",
+   262: "turbulence",
+   263: "uniform",
+   264: "vortex",
+   265: "geometric",
+   266: "curve",
+   267: "nurbsCurve",
+   268: "nurbsCurveGeom",
+   269: "dimension",
+   270: "angle",
+   271: "annotation",
+   272: "distance",
+   273: "arcLength",
+   274: "radius",
+   275: "paramDimension",
+   276: "directedDisc",
+   277: "renderRect",
+   278: "envFogShape",
+   279: "lattice",
+   280: "latticeGeom",
+   281: "locator",
+   282: "dropoffLocator",
+   283: "marker",
+   284: "orientationMarker",
+   285: "positionMarker",
+   286: "orientationLocator",
+   287: "trimLocator",
+   288: "plane",
+   289: "sketchPlane",
+   290: "groundPlane",
+   291: "orthoGrid",
+   292: "sprite",
+   293: "surface",
+   294: "nurbsSurface",
+   295: "nurbsSurfaceGeom",
+   296: "mesh",
+   297: "meshGeom",
+   298: "renderSphere",
+   299: "flexor",
+   300: "clusterFlexor",
+   301: "guideLine",
+   302: "light",
+   303: "ambientLight",
+   304: "nonAmbientLight",
+   305: "areaLight",
+   306: "linearLight",
+   307: "nonExtendedLight",
+   308: "directionalLight",
+   309: "pointLight",
+   310: "spotLight",
+   311: "particle",
+   312: "polyToolFeedbackShape",
+   313: "rigidConstraint",
+   314: "rigid",
+   315: "spring",
+   316: "unknownDag",
+   317: "defaultLightList",
+   318: "deleteComponent",
+   319: "dispatchCompute",
+   320: "shadingEngine",
+   321: "displacementShader",
+   322: "distanceBetween",
+   323: "dOF",
+   324: "dummyConnectable",
+   325: "dynamicsController",
+   326: "geoConnectable",
+   327: "expression",
+   328: "extract",
+   329: "filter",
+   330: "filterClosestSample",
+   331: "filterEuler",
+   332: "filterSimplify",
+   333: "gammaCorrect",
+   334: "geometryFilt",
+   335: "bendLattice",
+   336: "blendShape",
+   337: "combinationShape",
+   338: "bulgeLattice",
+   339: "fFD",
+   340: "ffdDualBase",
+   341: "rigidDeform",
+   342: "sculpt",
+   343: "textureDeformer",
+   344: "textureDeformerHandle",
+   345: "tweak",
+   346: "weightGeometryFilt",
+   347: "clusterFilter",
+   348: "softModFilter",
+   349: "jointCluster",
+   350: "deltaMush",
+   351: "tension",
+   352: "morph",
+   353: "solidify",
+   354: "proximityWrap",
+   355: "wire",
+   356: "groupId",
+   357: "groupParts",
+   358: "guide",
+   359: "hsvToRgb",
+   360: "hyperGraphInfo",
+   361: "hyperLayout",
+   362: "hyperView",
+   363: "ikSolver",
+   364: "mCsolver",
+   365: "pASolver",
+   366: "sCsolver",
+   367: "rPsolver",
+   368: "splineSolver",
+   369: "ikSystem",
+   370: "imagePlane",
+   371: "lambert",
+   372: "reflect",
+   373: "blinn",
+   374: "phong",
+   375: "phongExplorer",
+   376: "layeredShader",
+   377: "standardSurface",
+   378: "lightInfo",
+   379: "leastSquares",
+   380: "lightFogMaterial",
+   381: "envFogMaterial",
+   382: "lightList",
+   383: "lightSource",
+   384: "luminance",
+   385: "makeGroup",
+   386: "material",
+   387: "diffuseMaterial",
+   388: "lambertMaterial",
+   389: "blinnMaterial",
+   390: "phongMaterial",
+   391: "lightSourceMaterial",
+   392: "materialInfo",
+   393: "materialTemplate",
+   394: "matrixAdd",
+   395: "matrixHold",
+   396: "matrixMult",
+   397: "matrixPass",
+   398: "matrixWtAdd",
+   399: "midModifier",
+   400: "midModifierWithMatrix",
+   401: "polyBevel",
+   402: "polyTweak",
+   403: "polyAppend",
+   404: "polyChipOff",
+   405: "polyCloseBorder",
+   406: "polyCollapseEdge",
+   407: "polyCollapseF",
+   408: "polyCylProj",
+   409: "polyDelEdge",
+   410: "polyDelFacet",
+   411: "polyDelVertex",
+   412: "polyExtrudeFacet",
+   413: "polyMapCut",
+   414: "polyMapDel",
+   415: "polyMapSew",
+   416: "polyMergeEdge",
+   417: "polyMergeFacet",
+   418: "polyMoveEdge",
+   419: "polyMoveFacet",
+   420: "polyMoveFacetUV",
+   421: "polyMoveUV",
+   422: "polyMoveVertex",
+   423: "polyMoveVertexUV",
+   424: "polyNormal",
+   425: "polyPlanProj",
+   426: "polyProj",
+   427: "polyQuad",
+   428: "polySmooth",
+   429: "polySoftEdge",
+   430: "polySphProj",
+   431: "polySplit",
+   432: "polySubdEdge",
+   433: "polySubdFacet",
+   434: "polyTriangulate",
+   435: "polyCreator",
+   436: "polyPrimitive",
+   437: "polyCone",
+   438: "polyCube",
+   439: "polyCylinder",
+   440: "polyMesh",
+   441: "polySphere",
+   442: "polyTorus",
+   443: "polyCreateFacet",
+   444: "polyUnite",
+   445: "motionPath",
+   446: "pluginMotionPathNode",
+   447: "multilisterLight",
+   448: "multiplyDivide",
+   449: "oldGeometryConstraint",
+   450: "opticalFX",
+   451: "particleAgeMapper",
+   452: "particleCloud",
+   453: "particleColorMapper",
+   454: "particleIncandecenceMapper",
+   455: "particleTransparencyMapper",
+   456: "partition",
+   457: "place2dTexture",
+   458: "place3dTexture",
+   459: "pluginDependNode",
+   460: "pluginLocatorNode",
+   461: "plusMinusAverage",
+   462: "pointMatrixMult",
+   463: "polySeparate",
+   464: "postProcessList",
+   465: "projection",
+   466: "record",
+   467: "renderUtilityList",
+   468: "reverse",
+   469: "rgbToHsv",
+   470: "rigidSolver",
+   471: "set",
+   472: "textureBakeSet",
+   473: "vertexBakeSet",
+   474: "setRange",
+   475: "shaderGlow",
+   476: "shaderList",
+   477: "shadingMap",
+   478: "samplerInfo",
+   479: "shapeFragment",
+   480: "simpleVolumeShader",
+   481: "sl60",
+   482: "snapshot",
+   483: "storyBoard",
+   484: "summaryObject",
+   485: "super",
+   486: "control",
+   487: "surfaceLuminance",
+   488: "surfaceShader",
+   489: "textureList",
+   490: "textureEnv",
+   491: "envBall",
+   492: "envCube",
+   493: "envChrome",
+   494: "envSky",
+   495: "envSphere",
+   496: "texture2d",
+   497: "bulge",
+   498: "checker",
+   499: "cloth",
+   500: "fileTexture",
+   501: "fractal",
+   502: "grid",
+   503: "mountain",
+   504: "ramp",
+   505: "stencil",
+   506: "water",
+   507: "texture3d",
+   508: "brownian",
+   509: "cloud",
+   510: "crater",
+   511: "granite",
+   512: "leather",
+   513: "marble",
+   514: "rock",
+   515: "snow",
+   516: "solidFractal",
+   517: "stucco",
+   518: "txSl",
+   519: "wood",
+   520: "time",
+   521: "timeToUnitConversion",
+   522: "renderSetup",
+   523: "renderGlobals",
+   524: "renderGlobalsList",
+   525: "renderQuality",
+   526: "resolution",
+   527: "hardwareRenderGlobals",
+   528: "arrayMapper",
+   529: "unitConversion",
+   530: "unitToTimeConversion",
+   531: "useBackground",
+   532: "unknown",
+   533: "vectorProduct",
+   534: "volumeShader",
+   535: "component",
+   536: "curveCVComponent",
+   537: "curveEPComponent",
+   538: "curveKnotComponent",
+   539: "curveParamComponent",
+   540: "isoparmComponent",
+   541: "pivotComponent",
+   542: "surfaceCVComponent",
+   543: "surfaceEPComponent",
+   544: "surfaceKnotComponent",
+   545: "edgeComponent",
+   546: "latticeComponent",
+   547: "surfaceRangeComponent",
+   548: "decayRegionCapComponent",
+   549: "decayRegionComponent",
+   550: "meshComponent",
+   551: "meshEdgeComponent",
+   552: "meshPolygonComponent",
+   553: "meshFrEdgeComponent",
+   554: "meshVertComponent",
+   555: "meshFaceVertComponent",
+   556: "orientationComponent",
+   557: "subVertexComponent",
+   558: "multiSubVertexComponent",
+   559: "setGroupComponent",
+   560: "dynParticleSetComponent",
+   561: "selectionItem",
+   562: "dagSelectionItem",
+   563: "nonDagSelectionItem",
+   564: "itemList",
+   565: "attribute",
+   566: "numericAttribute",
+   567: "doubleAngleAttribute",
+   568: "floatAngleAttribute",
+   569: "doubleLinearAttribute",
+   570: "floatLinearAttribute",
+   571: "timeAttribute",
+   572: "enumAttribute",
+   573: "unitAttribute",
+   574: "typedAttribute",
+   575: "compoundAttribute",
+   576: "genericAttribute",
+   577: "lightDataAttribute",
+   578: "matrixAttribute",
+   579: "floatMatrixAttribute",
+   580: "messageAttribute",
+   581: "opaqueAttribute",
+   582: "plugin",
+   583: "data",
+   584: "componentListData",
+   585: "doubleArrayData",
+   586: "intArrayData",
+   587: "uintArrayData",
+   588: "latticeData",
+   589: "matrixData",
+   590: "meshData",
+   591: "nurbsSurfaceData",
+   592: "nurbsCurveData",
+   593: "numericData",
+   594: "data2Double",
+   595: "data2Float",
+   596: "data2Int",
+   597: "data2Short",
+   598: "data3Double",
+   599: "data3Float",
+   600: "data3Int",
+   601: "data3Short",
+   602: "pluginData",
+   603: "pointArrayData",
+   604: "matrixArrayData",
+   605: "sphereData",
+   606: "stringData",
+   607: "stringArrayData",
+   608: "vectorArrayData",
+   609: "selectionList",
+   610: "transformGeometry",
+   611: "commEdgePtManip",
+   612: "commEdgeOperManip",
+   613: "commEdgeSegmentManip",
+   614: "commCornerManip",
+   615: "commCornerOperManip",
+   616: "pluginDeformerNode",
+   617: "torus",
+   618: "polyBoolOp",
+   619: "singleShadingSwitch",
+   620: "doubleShadingSwitch",
+   621: "tripleShadingSwitch",
+   622: "nurbsSquare",
+   623: "anisotropy",
+   624: "nonLinear",
+   625: "deformFunc",
+   626: "deformBend",
+   627: "deformTwist",
+   628: "deformSquash",
+   629: "deformFlare",
+   630: "deformSine",
+   631: "deformWave",
+   632: "deformBendManip",
+   633: "deformTwistManip",
+   634: "deformSquashManip",
+   635: "deformFlareManip",
+   636: "deformSineManip",
+   637: "deformWaveManip",
+   638: "softModManip",
+   639: "distanceManip",
+   640: "script",
+   641: "curveFromMeshEdge",
+   642: "curveCurveIntersect",
+   643: "nurbsCircular3PtArc",
+   644: "nurbsCircular2PtArc",
+   645: "offsetSurface",
+   646: "roundConstantRadius",
+   647: "roundRadiusManip",
+   648: "roundRadiusCrvManip",
+   649: "roundConstantRadiusManip",
+   650: "threePointArcManip",
+   651: "twoPointArcManip",
+   652: "textButtonManip",
+   653: "offsetSurfaceManip",
+   654: "imageData",
+   655: "imageLoad",
+   656: "imageSave",
+   657: "imageNetSrc",
+   658: "imageNetDest",
+   659: "imageRender",
+   660: "imageAdd",
+   661: "imageDiff",
+   662: "imageMultiply",
+   663: "imageOver",
+   664: "imageUnder",
+   665: "imageColorCorrect",
+   666: "imageBlur",
+   667: "imageFilter",
+   668: "imageDepth",
+   669: "imageDisplay",
+   670: "imageView",
+   671: "imageMotionBlur",
+   672: "viewColorManager",
+   673: "matrixFloatData",
+   674: "skinShader",
+   675: "componentManip",
+   676: "selectionListData",
+   677: "objectFilter",
+   678: "objectMultiFilter",
+   679: "objectNameFilter",
+   680: "objectTypeFilter",
+   681: "objectAttrFilter",
+   682: "objectRenderFilter",
+   683: "objectScriptFilter",
+   684: "selectionListOperator",
+   685: "subdiv",
+   686: "polyToSubdiv",
+   687: "skinClusterFilter",
+   688: "keyingGroup",
+   689: "character",
+   690: "characterOffset",
+   691: "dagPose",
+   692: "stitchAsNurbsShell",
+   693: "explodeNurbsShell",
+   694: "nurbsBoolean",
+   695: "stitchSrfManip",
+   696: "forceUpdateManip",
+   697: "pluginManipContainer",
+   698: "polySewEdge",
+   699: "polyMergeVert",
+   700: "polySmoothFacet",
+   701: "smoothCurve",
+   702: "globalStitch",
+   703: "subdivCVComponent",
+   704: "subdivEdgeComponent",
+   705: "subdivFaceComponent",
+   706: "uVManip2D",
+   707: "translateUVManip2D",
+   708: "rotateUVManip2D",
+   709: "scaleUVManip2D",
+   710: "polyTweakUV",
+   711: "moveUVShellManip2D",
+   712: "pluginShape",
+   713: "geometryData",
+   714: "singleIndexedComponent",
+   715: "doubleIndexedComponent",
+   716: "tripleIndexedComponent",
+   717: "extendSurfaceDistanceManip",
+   718: "squareSrf",
+   719: "squareSrfManip",
+   720: "subdivToPoly",
+   721: "dynBase",
+   722: "dynEmitterManip",
+   723: "dynFieldsManip",
+   724: "dynBaseFieldManip",
+   725: "dynAirManip",
+   726: "dynNewtonManip",
+   727: "dynTurbulenceManip",
+   728: "dynSpreadManip",
+   729: "dynAttenuationManip",
+   730: "dynArrayAttrsData",
+   731: "pluginFieldNode",
+   732: "pluginEmitterNode",
+   733: "pluginSpringNode",
+   734: "displayLayer",
+   735: "displayLayerManager",
+   736: "polyColorPerVertex",
+   737: "createColorSet",
+   738: "deleteColorSet",
+   739: "copyColorSet",
+   740: "blendColorSet",
+   741: "polyColorMod",
+   742: "polyColorDel",
+   743: "characterMappingData",
+   744: "dynSweptGeometryData",
+   745: "wrapFilter",
+   746: "meshVtxFaceComponent",
+   747: "binaryData",
+   748: "attribute2Double",
+   749: "attribute2Float",
+   750: "attribute2Short",
+   751: "attribute2Int",
+   752: "attribute3Double",
+   753: "attribute3Float",
+   754: "attribute3Short",
+   755: "attribute3Int",
+   756: "reference",
+   757: "blindData",
+   758: "blindDataTemplate",
+   759: "polyBlindData",
+   760: "polyNormalPerVertex",
+   761: "nurbsToSubdiv",
+   762: "pluginIkSolver",
+   763: "instancer",
+   764: "moveVertexManip",
+   765: "stroke",
+   766: "brush",
+   767: "strokeGlobals",
+   768: "pluginGeometryData",
+   769: "lightLink",
+   770: "dynGlobals",
+   771: "polyReduce",
+   772: "lodThresholds",
+   773: "chooser",
+   774: "lodGroup",
+   775: "multDoubleLinear",
+   776: "fourByFourMatrix",
+   777: "towPointOnSurfaceManip",
+   778: "surfaceEdManip",
+   779: "surfaceFaceComponent",
+   780: "clipScheduler",
+   781: "clipLibrary",
+   782: "subSurface",
+   783: "smoothTangentSrf",
+   784: "renderPass",
+   785: "renderPassSet",
+   786: "renderLayer",
+   787: "renderLayerManager",
+   788: "passContributionMap",
+   789: "precompExport",
+   790: "renderTarget",
+   791: "renderedImageSource",
+   792: "imageSource",
+   793: "polyFlipEdge",
+   794: "polyExtrudeEdge",
+   795: "animBlend",
+   796: "animBlendInOut",
+   797: "polyAppendVertex",
+   798: "uvChooser",
+   799: "subdivCompId",
+   800: "volumeAxis",
+   801: "deleteUVSet",
+   802: "subdHierBlind",
+   803: "subdBlindData",
+   804: "characterMap",
+   805: "layeredTexture",
+   806: "subdivCollapse",
+   807: "particleSamplerInfo",
+   808: "copyUVSet",
+   809: "createUVSet",
+   810: "clip",
+   811: "polySplitVert",
+   812: "subdivData",
+   813: "subdivGeom",
+   814: "uInt64ArrayData",
+   815: "int64ArrayData",
+   816: "polySplitEdge",
+   817: "subdivReverseFaces",
+   818: "meshMapComponent",
+   819: "sectionManip",
+   820: "xsectionSubdivEdit",
+   821: "subdivToNurbs",
+   822: "editCurve",
+   823: "editCurveManip",
+   824: "crossSectionManager",
+   825: "createSectionManip",
+   826: "crossSectionEditManip",
+   827: "dropOffFunction",
+   828: "subdBoolean",
+   829: "subdModifyEdge",
+   830: "modifyEdgeCrvManip",
+   831: "modifyEdgeManip",
+   832: "scalePointManip",
+   833: "transformBoxManip",
+   834: "symmetryLocator",
+   835: "symmetryMapVector",
+   836: "symmetryMapCurve",
+   837: "curveFromSubdivEdge",
+   838: "createBPManip",
+   839: "modifyEdgeBaseManip",
+   840: "subdExtrudeFace",
+   841: "subdivSurfaceVarGroup",
+   842: "sfRevolveManip",
+   843: "curveFromSubdivFace",
+   844: "unused1",
+   845: "unused2",
+   846: "unused3",
+   847: "unused4",
+   848: "unused5",
+   849: "unused6",
+   850: "polyTransfer",
+   851: "polyAverageVertex",
+   852: "polyAutoProj",
+   853: "polyLayoutUV",
+   854: "polyMapSewMove",
+   855: "subdModifier",
+   856: "subdMoveVertex",
+   857: "subdMoveEdge",
+   858: "subdMoveFace",
+   859: "subdDelFace",
+   860: "snapshotShape",
+   861: "subdivMapComponent",
+   862: "jiggleDeformer",
+   863: "globalCacheControls",
+   864: "diskCache",
+   865: "subdCloseBorder",
+   866: "subdMergeVert",
+   867: "boxData",
+   868: "box",
+   869: "renderBox",
+   870: "subdSplitFace",
+   871: "volumeFog",
+   872: "subdTweakUV",
+   873: "subdMapCut",
+   874: "subdLayoutUV",
+   875: "subdMapSewMove",
+   876: "ocean",
+   877: "volumeNoise",
+   878: "subdAutoProj",
+   879: "subdSubdivideFace",
+   880: "noise",
+   881: "attribute4Double",
+   882: "data4Double",
+   883: "subdPlanProj",
+   884: "subdTweak",
+   885: "subdProjectionManip",
+   886: "subdMappingManip",
+   887: "hardwareReflectionMap",
+   888: "polyNormalizeUV",
+   889: "polyFlipUV",
+   890: "hwShaderNode",
+   891: "pluginHardwareShader",
+   892: "pluginHwShaderNode",
+   893: "subdAddTopology",
+   894: "subdCleanTopology",
+   895: "implicitCone",
+   896: "implicitSphere",
+   897: "rampShader",
+   898: "volumeLight",
+   899: "oceanShader",
+   900: "bevelPlus",
+   901: "styleCurve",
+   902: "polyCut",
+   903: "polyPoke",
+   904: "polyWedgeFace",
+   905: "polyCutManipContainer",
+   906: "polyCutManip",
+   907: "polyMirrorManipContainer",
+   908: "polyPokeManip",
+   909: "fluidTexture3D",
+   910: "fluidTexture2D",
+   911: "polyMergeUV",
+   912: "polyStraightenUVBorder",
+   913: "alignManip",
+   914: "pluginTransformNode",
+   915: "fluid",
+   916: "fluidGeom",
+   917: "fluidData",
+   918: "smear",
+   919: "stringShadingSwitch",
+   920: "studioClearCoat",
+   921: "fluidEmitter",
+   922: "heightField",
+   923: "geoConnector",
+   924: "snapshotPath",
+   925: "pluginObjectSet",
+   926: "quadShadingSwitch",
+   927: "polyExtrudeVertex",
+   928: "pairBlend",
+   929: "textManip",
+   930: "viewManip",
+   931: "xformManip",
+   932: "mute",
+   933: "constraint",
+   934: "trimWithBoundaries",
+   935: "curveFromMeshCoM",
+   936: "follicle",
+   937: "hairSystem",
+   938: "remapValue",
+   939: "remapColor",
+   940: "remapHsv",
+   941: "hairConstraint",
+   942: "timeFunction",
+   943: "mentalRayTexture",
+   944: "objectBinFilter",
+   945: "polySmoothProxy",
+   946: "pfxGeometry",
+   947: "pfxHair",
+   948: "hairTubeShader",
+   949: "psdFileTexture",
+   950: "keyframeDelta",
+   951: "keyframeDeltaMove",
+   952: "keyframeDeltaScale",
+   953: "keyframeDeltaAddRemove",
+   954: "keyframeDeltaBlockAddRemove",
+   955: "keyframeDeltaInfType",
+   956: "keyframeDeltaTangent",
+   957: "keyframeDeltaWeighted",
+   958: "keyframeDeltaBreakdown",
+   959: "polyMirror",
+   960: "polyCreaseEdge",
+   961: "polyPinUV",
+   962: "hikEffector",
+   963: "hikIKEffector",
+   964: "hikFKJoint",
+   965: "hikSolver",
+   966: "hikHandle",
+   967: "proxyManager",
+   968: "polyAutoProjManip",
+   969: "polyPrism",
+   970: "polyPyramid",
+   971: "polySplitRing",
+   972: "pfxToon",
+   973: "toonLineAttributes",
+   974: "polyDuplicateEdge",
+   975: "facade",
+   976: "materialFacade",
+   977: "envFacade",
+   978: "aISEnvFacade",
+   979: "lineModifier",
+   980: "polyArrow",
+   981: "polyPrimitiveMisc",
+   982: "polyPlatonicSolid",
+   983: "polyPipe",
+   984: "hikFloorContactMarker",
+   985: "hikGroundPlane",
+   986: "polyComponentData",
+   987: "polyHelix",
+   988: "cacheFile",
+   989: "historySwitch",
+   990: "closestPointOnMesh",
+   991: "uVPin",
+   992: "proximityPin",
+   993: "transferAttributes",
+   994: "dynamicConstraint",
+   995: "nComponent",
+   996: "polyBridgeEdge",
+   997: "cacheableNode",
+   998: "nucleus",
+   999: "nBase",
+   1000: "cacheBase",
+   1001: "cacheBlend",
+   1002: "cacheTrack",
+   1003: "keyframeRegionManip",
+   1004: "curveNormalizerAngle",
+   1005: "curveNormalizerLinear",
+   1006: "hyperLayoutDG",
+   1007: "pluginImagePlaneNode",
+   1008: "nCloth",
+   1009: "nParticle",
+   1010: "nRigid",
+   1011: "pluginParticleAttributeMapperNode",
+   1012: "cameraSet",
+   1013: "pluginCameraSet",
+   1014: "container",
+   1015: "floatVectorArrayData",
+   1016: "nObjectData",
+   1017: "nObject",
+   1018: "pluginConstraintNode",
+   1019: "asset",
+   1020: "polyEdgeToCurve",
+   1021: "animLayer",
+   1022: "blendNodeBase",
+   1023: "blendNodeBoolean",
+   1024: "blendNodeDouble",
+   1025: "blendNodeDoubleAngle",
+   1026: "blendNodeDoubleLinear",
+   1027: "blendNodeEnum",
+   1028: "blendNodeFloat",
+   1029: "blendNodeFloatAngle",
+   1030: "blendNodeFloatLinear",
+   1031: "blendNodeInt16",
+   1032: "blendNodeInt32",
+   1033: "blendNodeAdditiveScale",
+   1034: "blendNodeAdditiveRotation",
+   1035: "pluginManipulatorNode",
+   1036: "nIdData",
+   1037: "nId",
+   1038: "floatArrayData",
+   1039: "membrane",
+   1040: "mergeVertsToolManip",
+   1041: "uint64SingleIndexedComponent",
+   1042: "polyToolFeedbackManip",
+   1043: "polySelectEditFeedbackManip",
+   1044: "writeToFrameBuffer",
+   1045: "writeToColorBuffer",
+   1046: "writeToVectorBuffer",
+   1047: "writeToDepthBuffer",
+   1048: "writeToLabelBuffer",
+   1049: "stereoCameraMaster",
+   1050: "sequenceManager",
+   1051: "sequencer",
+   1052: "shot",
+   1053: "blendNodeTime",
+   1054: "createBezierManip",
+   1055: "bezierCurve",
+   1056: "bezierCurveData",
+   1057: "nurbsCurveToBezier",
+   1058: "bezierCurveToNurbs",
+   1059: "polySpinEdge",
+   1060: "polyHoleFace",
+   1061: "pointOnPolyConstraint",
+   1062: "polyConnectComponents",
+   1063: "skinBinding",
+   1064: "volumeBindManip",
+   1065: "vertexWeightSet",
+   1066: "nearestPointOnCurve",
+   1067: "colorProfile",
+   1068: "adskMaterial",
+   1069: "containerBase",
+   1070: "dagContainer",
+   1071: "polyUVRectangle",
+   1072: "hardwareRenderingGlobals",
+   1073: "polyProjectCurve",
+   1074: "renderingList",
+   1075: "polyExtrudeManip",
+   1076: "polyExtrudeManipContainer",
+   1077: "threadedDevice",
+   1078: "clientDevice",
+   1079: "pluginClientDevice",
+   1080: "pluginThreadedDevice",
+   1081: "timeWarp",
+   1082: "assembly",
+   1083: "clipGhostShape",
+   1084: "clipToGhostData",
+   1085: "mandelbrot",
+   1086: "mandelbrot3D",
+   1087: "greasePlane",
+   1088: "greasePlaneRenderShape",
+   1089: "greasePencilSequence",
+   1090: "editMetadata",
+   1091: "creaseSet",
+   1092: "polyEditEdgeFlow",
+   1093: "fosterParent",
+   1094: "snapUVManip2D",
+   1095: "toolContext",
+   1096: "nLE",
+   1097: "shrinkWrapFilter",
+   1098: "editsManager",
+   1099: "polyBevel2",
+   1100: "polyCBoolOp",
+   1101: "geomBind",
+   1102: "colorMgtGlobals",
+   1103: "polyBevel3",
+   1104: "timeEditorClipBase",
+   1105: "timeEditorClipEvaluator",
+   1106: "timeEditorClip",
+   1107: "timeEditor",
+   1108: "timeEditorTracks",
+   1109: "timeEditorInterpolator",
+   1110: "timeEditorAnimSource",
+   1111: "caddyManipBase",
+   1112: "polyCaddyManip",
+   1113: "polyModifierManipContainer",
+   1114: "polyRemesh",
+   1115: "polyContourProj",
+   1116: "contourProjectionManip",
+   1117: "nodeGraphEditorInfo",
+   1118: "nodeGraphEditorBookmarks",
+   1119: "nodeGraphEditorBookmarkInfo",
+   1120: "pluginSkinCluster",
+   1121: "pluginGeometryFilter",
+   1122: "pluginBlendShape",
+   1123: "polyPassThru",
+   1124: "trackInfoManager",
+   1125: "polyClean",
+   1126: "shapeEditorManager",
+   1127: "oceanDeformer",
+   1128: "poseInterpolatorManager",
+   1129: "controllerTag",
+   1130: "reForm",
+   1131: "customEvaluatorClusterNode",
+   1132: "polyCircularize",
+   1133: "arubaTesselate",
+   1134: "reorderUVSet",
+   1135: "ufeProxyTransform",
+   1136: "decomposeMatrix",
+   1137: "composeMatrix",
+   1138: "blendMatrix",
+   1139: "pickMatrix",
+   1140: "aimMatrix",
+   1141: "primitiveFalloff",
+   1142: "blendFalloff",
+   1143: "uniformFalloff",
+   1144: "transferFalloff",
+   1145: "componentFalloff",
+   1146: "proximityFalloff",
+   1147: "subsetFalloff",
+   1148: "weightFunctionData",
+   1149: "falloffEval",
+   1150: "componentMatch",
+   1151: "polyUnsmooth",
+   1152: "polyReFormManipContainer",
+   1153: "polyReFormManip",
+   1154: "polyAxis",
+   1155: "angleToDoubleNode",
+   1156: "doubleToAngleNode",
+   1157: "absolute",
+   1158: "aCos",
+   1159: "and",
+   1160: "aSin",
+   1161: "aTan",
+   1162: "aTan2",
+   1163: "average",
+   1164: "ceil",
+   1165: "clampRange",
+   1166: "cos",
+   1167: "determinant",
+   1168: "equal",
+   1169: "floor",
+   1170: "greaterThan",
+   1171: "inverseLinearInterpolation",
+   1172: "length",
+   1173: "lessThan",
+   1174: "linearInterpolation",
+   1175: "log",
+   1176: "max",
+   1177: "min",
+   1178: "modulo",
+   1179: "multiply",
+   1180: "negate",
+   1181: "normalize",
+   1182: "not",
+   1183: "or",
+   1184: "pIConstant",
+   1185: "power",
+   1186: "rotateVector",
+   1187: "round",
+   1188: "sin",
+   1189: "smoothStep",
+   1190: "sum",
+   1191: "tan",
+   1192: "truncate",
+   1193: "dotProduct",
+   1194: "crossProduct",
+   1195: "multiplyPointByMatrix",
+   1196: "multiplyVectorByMatrix",
+   1197: "axisFromMatrix",
+   1198: "divide",
+   1199: "subtract",
+   1200: "translationFromMatrix",
+   1201: "rowFromMatrix",
+   1202: "columnFromMatrix",
+   1203: "scaleFromMatrix",
+   1204: "rotationFromMatrix",
+   1205: "parentMatrix",
 }
 
 # Reuse world
