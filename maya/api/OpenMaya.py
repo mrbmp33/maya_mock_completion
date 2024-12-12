@@ -14,6 +14,7 @@ import enum
 import math
 from typing import Optional, Iterable, Union
 import maya.mmc_hierarchy as hierarchy
+import maya.attribute_properties as attribute_properties
 
 
 class MColor(object):
@@ -13090,7 +13091,7 @@ class MObject(object):
         """
         self._uuid = MUuid().generate()
         self._name = str(self._uuid)
-        self._fn_type: list[int] = [MFn.kDependencyNode,]
+        self._fn_type: list[int] = [MFn.kDependencyNode, ]
         self._alive: bool = False
         self._typeId: "MTypeId" = MTypeId()
         self._parent: Optional['MObject'] = None
@@ -17444,7 +17445,7 @@ class MPlug(object):
         self._id = None
         self._network_plug = None
         self._value = None
-        self._children_plugs = None
+        self._children_plug_names = None
 
         self._connections = {
             'INPUTS': [],
@@ -17580,8 +17581,8 @@ class MPlug(object):
         Returns a plug for the specified child attribute of this plug.
         """
         if not self.isCompound:
-            return RuntimeError(f'Trying to access children plugs of non-compound attribute: <{self.name}>')
-        child_plug = MFnDependencyNode(self._owner).findPlug(self._children_plugs[index], False)
+            raise RuntimeError(f'Trying to access children plugs of non-compound attribute: <{self.name()}>')
+        child_plug = MFnDependencyNode(self._owner).findPlug(self._children_plug_names[index], False)
         child_plug._parent = weakref.proxy(self)
         return child_plug
 
@@ -17636,7 +17637,7 @@ class MPlug(object):
         """
         Returns a plug for the element of this plug array having the specified logical index.
         """
-        return self._children_plugs[index]
+        return self._children_plug_names[index]
 
 
     def elementByPhysicalIndex(*args, **kwargs):
@@ -17697,7 +17698,7 @@ class MPlug(object):
         """
         Returns the number of children this plug has.
         """
-        return len(self._children_plugs)
+        return len(self._children_plug_names)
 
     def numConnectedChildren(*args, **kwargs):
         """
@@ -21798,16 +21799,20 @@ class MFnDependencyNode(MFnBase):
         mplug = MPlug()
         attribute = mplug._attribute
         mplug._owner = self._mobject
+        node_type = self._mobject.apiTypeStr
+        node_type = f'{node_type[1].lower()}{node_type[2:]}'
 
         short_name = ''
         long_name = ''
 
-        if attr_name in _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME:
+        properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type, {}).get(attr_name)
+
+        if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
             short_name = attr_name
-            long_name = _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME[short_name]
-        elif attr_name in _COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME:
+            long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
+        elif properties:
             long_name = attr_name
-            short_name = _COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME[long_name]
+            short_name = properties['short_name']
         else:
             long_name = attr_name
             short_name = attr_name
@@ -21826,19 +21831,20 @@ class MFnDependencyNode(MFnBase):
         attribute._long_name = long_name
         attribute._short_name = short_name
 
-        if long_name in _COMMON_ATTR_PROPERTIES:
-            attr_properties = _COMMON_ATTR_PROPERTIES[long_name]
-            attribute._is_array = attr_properties['is_array']
-            attribute._is_compound = attr_properties['is_compound']
-            attribute._is_element = attr_properties['is_element']
-            attr_type = attr_properties['attr_type']
+        if properties:
+            attribute._is_array = properties['is_array']
+            attribute._is_compound = properties['is_compound']
+            attribute._is_element = properties['is_element']
+
+            attr_type = properties['type_str']
             attribute._typeId = MTypeId(attr_type)
-            children_plugs = attr_properties.get('children')
-            if children_plugs:
-                mplug._children_plugs = children_plugs
+
+            children_plug_names = properties.get('children')
+            if children_plug_names:
+                mplug._children_plug_names = children_plug_names
+
             if attr_type not in attribute._fn_type:
-                type_name = _TYPE_INT_TO_STR[attr_type]
-                attribute._fn_type.append(f'k{type_name[0].upper()}{type_name[1:]}')
+                attribute._fn_type.append(properties['type_str'])
 
         mplug._network_plug = want_network_plug
 
