@@ -1,5 +1,6 @@
 import ast
 import json
+import logging
 import pathlib
 import pprint
 import re
@@ -44,29 +45,30 @@ def get_attr_properties(nd):
                 for index in range(plug.numChildren()):
                     attr_properties['children'].append(plug.child(index).partialName(useLongNames=1))
 
-            if attr.apiType == om.MFn.kNumericAttribute:
+            if attr.apiType() == om.MFn.kNumericAttribute:
                 numeric = om.MFnNumericAttribute(attr)
                 attr_properties['numeric_type'] = numeric.numericType()
                 attr_properties['default_value'] = numeric.default
-            elif attr.apiType == om.MFn.kEnumAttribute:
+
+            elif attr.apiType() == om.MFn.kEnumAttribute:
                 enum = om.MFnEnumAttribute(attr)
                 fields = {}
                 for value in range(enum.getMax()):
                     fields[value] = enum.fieldName(value)
 
             all_attr_properties[attr_properties['long_name']] = attr_properties
-        except RuntimeError:
-            continue
+        except RuntimeError as err:
+            logging.debug(f'Could not complete attribute {attr_name}. {err}')
 
     return all_attr_properties, all_short_name_to_long_name
 
 
 def convert_booleans_to_python_style(json_str):
     # Debug print to ensure JSON booleans are being captured
-    print("Before regex replacement: ", json_str[:200])  # Print the first 200 chars to inspect
+    # print("Before regex replacement: ", json_str[:200])  # Print the first 200 chars to inspect
     json_str = re.sub(r'\btrue\b', 'True', json_str)
     json_str = re.sub(r'\bfalse\b', 'False', json_str)
-    print("After regex replacement: ", json_str[:200])  # Print the first 200 chars after replacing booleans
+    # print("After regex replacement: ", json_str[:200])  # Print the first 200 chars after replacing booleans
     return json_str
 
 
@@ -93,12 +95,12 @@ def create_attrs_dict(output_file):
 
         for name, content in data.items():
             f.write(f"{name} = ")
+
             # Convert to JSON string with pretty formatting
             json_str = json.dumps(content, indent=4)
-            print("Serialized JSON string: ", json_str[:200])  # Print part of the serialized JSON
+
             # Replace booleans with Python-style booleans
             formatted_str = convert_booleans_to_python_style(json_str)
-            print("Formatted string to write: ", formatted_str[:200])  # Print part of the formatted string
             f.write(formatted_str + "\n\n")
 
 

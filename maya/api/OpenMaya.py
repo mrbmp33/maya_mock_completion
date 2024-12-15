@@ -8145,7 +8145,7 @@ class MDistance(object):
         """
         Return the distance value, converted to feet.
         """
-        return sself.asUnits(MDistance.kFeet)
+        return self.asUnits(MDistance.kFeet)
 
     def asInches(self) -> float:
         """
@@ -13105,6 +13105,7 @@ class MObject(object):
         self._is_array = None
         self._is_compound = None
         self._is_element = None
+        self._numeric_type = None
         self._cached_plugs = {}
 
     def __le__(*args, **kwargs):
@@ -15831,7 +15832,7 @@ class MFnBase(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._mobject = None
+        self._mobject: 'MObject' = None
         if args:
             self._mobject = args[0]
 
@@ -17718,7 +17719,7 @@ class MPlug(object):
         """
         pass
 
-    def parent() -> 'MPlug':
+    def parent(self) -> 'MPlug':
         """
         Returns a plug for the parent of this plug.
         """
@@ -19794,11 +19795,11 @@ class MFnAttribute(MFnBase):
     Base class for attribute functionsets.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
     def accepts(*args, **kwargs):
         """
@@ -21799,8 +21800,8 @@ class MFnDependencyNode(MFnBase):
         mplug = MPlug()
         attribute = mplug._attribute
         mplug._owner = self._mobject
-        node_type = self._mobject.apiTypeStr
-        node_type = f'{node_type[1].lower()}{node_type[2:]}'
+        node_type = _TYPE_INT_TO_STR[self._mobject.apiType()]
+        node_type = node_type if not node_type.startswith('k') else node_type[1:]
 
         short_name = ''
         long_name = ''
@@ -21810,6 +21811,7 @@ class MFnDependencyNode(MFnBase):
         if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
             short_name = attr_name
             long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
+            properties = attribute_properties.ATTRIBUTES_PROPERTIES[node_type][long_name]
         elif properties:
             long_name = attr_name
             short_name = properties['short_name']
@@ -21836,15 +21838,18 @@ class MFnDependencyNode(MFnBase):
             attribute._is_compound = properties['is_compound']
             attribute._is_element = properties['is_element']
 
-            attr_type = properties['type_str']
+            attr_type_str = properties['type_str']
+            attr_type = getattr(MFn, attr_type_str)
             attribute._typeId = MTypeId(attr_type)
+            if attr_type not in attribute._fn_type:
+                attribute._fn_type.append(attr_type)
+
+            if properties.get('numeric_type'):
+                attribute._numeric_type = properties['numeric_type']
 
             children_plug_names = properties.get('children')
             if children_plug_names:
                 mplug._children_plug_names = children_plug_names
-
-            if attr_type not in attribute._fn_type:
-                attribute._fn_type.append(properties['type_str'])
 
         mplug._network_plug = want_network_plug
 
@@ -22230,11 +22235,11 @@ class MFnNumericAttribute(MFnAttribute):
     Functionset for creating and working with numeric attributes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
     def child(*args, **kwargs):
         """
@@ -22318,7 +22323,7 @@ class MFnNumericAttribute(MFnAttribute):
         """
         Returns the numeric type of the attribute currently attached to the function set.
         """
-        pass
+        return self._mobject._numeric_type
 
     def setMax(*args, **kwargs):
         """

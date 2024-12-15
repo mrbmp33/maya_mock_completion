@@ -16,7 +16,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -24,7 +26,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -32,15 +36,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -64,7 +62,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "blackBox": {
             "short_name": "bbx",
@@ -72,7 +72,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "borderConnections": {
             "short_name": "boc",
@@ -90,7 +92,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -155,15 +159,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "uiTreatment": {
-            "short_name": "uit",
-            "long_name": "uiTreatment",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -421,7 +419,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "intermediateObject": {
             "short_name": "io",
@@ -429,7 +429,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "template": {
             "short_name": "tmp",
@@ -437,7 +439,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "instObjGroups": {
             "short_name": "iog",
@@ -468,7 +472,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "objectColorG": {
             "short_name": "obcg",
@@ -476,7 +482,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -484,7 +492,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "wireColorRGB": {
             "short_name": "wfcc",
@@ -506,7 +516,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "wireColorG": {
             "short_name": "wfcg",
@@ -514,7 +526,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -522,7 +536,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -538,7 +554,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
         },
         "drawOverride": {
             "short_name": "do",
@@ -584,7 +602,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -592,7 +612,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -600,7 +622,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -608,7 +632,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -616,7 +642,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -624,7 +652,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -632,7 +662,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "overrideColor": {
             "short_name": "ovc",
@@ -640,7 +672,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 0
         },
         "overrideColorRGB": {
             "short_name": "ovrgb",
@@ -662,7 +696,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "overrideColorG": {
             "short_name": "ovcg",
@@ -670,7 +706,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -678,7 +716,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -686,7 +726,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -694,7 +736,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "renderInfo": {
             "short_name": "ri",
@@ -716,7 +760,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -724,7 +770,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -732,7 +780,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 0
         },
         "renderLayerInfo": {
             "short_name": "rlio",
@@ -749,7 +799,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -779,7 +831,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 3
         },
         "ghostPostFrames": {
             "short_name": "gpof",
@@ -787,7 +841,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 3
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -795,7 +851,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -824,7 +882,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.15000000596046448
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -832,7 +892,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -854,7 +916,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.44699999690055847
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -862,7 +926,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "ghostColorPreB": {
             "short_name": "gpb",
@@ -870,7 +936,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -892,7 +960,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.878000020980835
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -900,7 +970,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.6779999732971191
         },
         "ghostColorPostB": {
             "short_name": "gab",
@@ -908,7 +980,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.6629999876022339
         },
         "ghostDriver": {
             "short_name": "gdr",
@@ -924,7 +998,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -932,7 +1008,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -940,7 +1018,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "outlinerColor": {
             "short_name": "oclr",
@@ -962,7 +1042,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outlinerColorG": {
             "short_name": "oclrg",
@@ -970,7 +1052,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outlinerColorB": {
             "short_name": "oclrb",
@@ -978,7 +1062,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "translate": {
             "short_name": "t",
@@ -1084,7 +1170,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "scaleY": {
             "short_name": "sy",
@@ -1092,7 +1180,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "scaleZ": {
             "short_name": "sz",
@@ -1100,7 +1190,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "shear": {
             "short_name": "sh",
@@ -1122,7 +1214,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "shearXZ": {
             "short_name": "shxz",
@@ -1130,7 +1224,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "shearYZ": {
             "short_name": "shyz",
@@ -1138,7 +1234,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotatePivot": {
             "short_name": "rp",
@@ -1464,7 +1562,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minTransYLimitEnable": {
             "short_name": "mtye",
@@ -1472,7 +1572,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minTransZLimitEnable": {
             "short_name": "mtze",
@@ -1480,7 +1582,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxTransLimitEnable": {
             "short_name": "xtle",
@@ -1502,7 +1606,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxTransYLimitEnable": {
             "short_name": "xtye",
@@ -1510,7 +1616,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxTransZLimitEnable": {
             "short_name": "xtze",
@@ -1518,7 +1626,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minRotLimit": {
             "short_name": "mnrl",
@@ -1616,7 +1726,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minRotYLimitEnable": {
             "short_name": "mrye",
@@ -1624,7 +1736,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minRotZLimitEnable": {
             "short_name": "mrze",
@@ -1632,7 +1746,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxRotLimitEnable": {
             "short_name": "xrle",
@@ -1654,7 +1770,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxRotYLimitEnable": {
             "short_name": "xrye",
@@ -1662,7 +1780,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxRotZLimitEnable": {
             "short_name": "xrze",
@@ -1670,7 +1790,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minScaleLimit": {
             "short_name": "mnsl",
@@ -1692,7 +1814,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": -1.0
         },
         "minScaleYLimit": {
             "short_name": "msyl",
@@ -1700,7 +1824,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": -1.0
         },
         "minScaleZLimit": {
             "short_name": "mszl",
@@ -1708,7 +1834,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": -1.0
         },
         "maxScaleLimit": {
             "short_name": "mxsl",
@@ -1730,7 +1858,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "maxScaleYLimit": {
             "short_name": "xsyl",
@@ -1738,7 +1868,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "maxScaleZLimit": {
             "short_name": "xszl",
@@ -1746,7 +1878,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "minScaleLimitEnable": {
             "short_name": "msle",
@@ -1768,7 +1902,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minScaleYLimitEnable": {
             "short_name": "msye",
@@ -1776,7 +1912,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minScaleZLimitEnable": {
             "short_name": "msze",
@@ -1784,7 +1922,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxScaleLimitEnable": {
             "short_name": "xsle",
@@ -1806,7 +1946,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxScaleYLimitEnable": {
             "short_name": "xsye",
@@ -1814,7 +1956,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxScaleZLimitEnable": {
             "short_name": "xsze",
@@ -1822,7 +1966,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "offsetParentMatrix": {
             "short_name": "opm",
@@ -1892,7 +2038,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "displayHandle": {
             "short_name": "dh",
@@ -1900,7 +2048,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "displayScalePivot": {
             "short_name": "dsp",
@@ -1908,7 +2058,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "displayRotatePivot": {
             "short_name": "drp",
@@ -1916,7 +2068,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "displayLocalAxis": {
             "short_name": "dla",
@@ -1924,7 +2078,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "dynamics": {
             "short_name": "dyn",
@@ -1932,7 +2088,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "showManipDefault": {
             "short_name": "smd",
@@ -1971,7 +2129,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotateQuaternionY": {
             "short_name": "rqy",
@@ -1979,7 +2139,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotateQuaternionZ": {
             "short_name": "rqz",
@@ -1987,7 +2149,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotateQuaternionW": {
             "short_name": "rqw",
@@ -1995,15 +2159,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "rotationInterpolation": {
-            "short_name": "roi",
-            "long_name": "rotationInterpolation",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         }
     },
     "joint": {
@@ -2021,7 +2179,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -2029,7 +2189,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -2037,15 +2199,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -2069,7 +2225,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "blackBox": {
             "short_name": "bbx",
@@ -2077,7 +2235,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "borderConnections": {
             "short_name": "boc",
@@ -2095,7 +2255,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -2160,15 +2322,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "uiTreatment": {
-            "short_name": "uit",
-            "long_name": "uiTreatment",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -2426,7 +2582,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "intermediateObject": {
             "short_name": "io",
@@ -2434,7 +2592,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "template": {
             "short_name": "tmp",
@@ -2442,7 +2602,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "instObjGroups": {
             "short_name": "iog",
@@ -2473,7 +2635,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "objectColorG": {
             "short_name": "obcg",
@@ -2481,7 +2645,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -2489,7 +2655,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "wireColorRGB": {
             "short_name": "wfcc",
@@ -2511,7 +2679,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "wireColorG": {
             "short_name": "wfcg",
@@ -2519,7 +2689,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -2527,7 +2699,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -2543,7 +2717,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
         },
         "drawOverride": {
             "short_name": "do",
@@ -2589,7 +2765,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -2597,7 +2775,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -2605,7 +2785,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -2613,7 +2795,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -2621,7 +2805,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -2629,7 +2815,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -2637,7 +2825,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "overrideColor": {
             "short_name": "ovc",
@@ -2645,7 +2835,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 0
         },
         "overrideColorRGB": {
             "short_name": "ovrgb",
@@ -2667,7 +2859,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "overrideColorG": {
             "short_name": "ovcg",
@@ -2675,7 +2869,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -2683,7 +2879,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -2691,7 +2889,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -2699,7 +2899,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "renderInfo": {
             "short_name": "ri",
@@ -2721,7 +2923,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -2729,7 +2933,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -2737,7 +2943,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 0
         },
         "renderLayerInfo": {
             "short_name": "rlio",
@@ -2754,7 +2962,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -2784,7 +2994,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 3
         },
         "ghostPostFrames": {
             "short_name": "gpof",
@@ -2792,7 +3004,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 3
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -2800,7 +3014,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -2829,7 +3045,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.15000000596046448
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -2837,7 +3055,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -2859,7 +3079,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.44699999690055847
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -2867,7 +3089,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "ghostColorPreB": {
             "short_name": "gpb",
@@ -2875,7 +3099,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -2897,7 +3123,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.878000020980835
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -2905,7 +3133,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.6779999732971191
         },
         "ghostColorPostB": {
             "short_name": "gab",
@@ -2913,7 +3143,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.6629999876022339
         },
         "ghostDriver": {
             "short_name": "gdr",
@@ -2929,7 +3161,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -2937,7 +3171,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -2945,7 +3181,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "outlinerColor": {
             "short_name": "oclr",
@@ -2967,7 +3205,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outlinerColorG": {
             "short_name": "oclrg",
@@ -2975,7 +3215,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outlinerColorB": {
             "short_name": "oclrb",
@@ -2983,7 +3225,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "translate": {
             "short_name": "t",
@@ -3089,7 +3333,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "scaleY": {
             "short_name": "sy",
@@ -3097,7 +3343,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "scaleZ": {
             "short_name": "sz",
@@ -3105,7 +3353,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "shear": {
             "short_name": "sh",
@@ -3127,7 +3377,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "shearXZ": {
             "short_name": "shxz",
@@ -3135,7 +3387,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "shearYZ": {
             "short_name": "shyz",
@@ -3143,7 +3397,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotatePivot": {
             "short_name": "rp",
@@ -3469,7 +3725,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minTransYLimitEnable": {
             "short_name": "mtye",
@@ -3477,7 +3735,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minTransZLimitEnable": {
             "short_name": "mtze",
@@ -3485,7 +3745,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxTransLimitEnable": {
             "short_name": "xtle",
@@ -3507,7 +3769,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxTransYLimitEnable": {
             "short_name": "xtye",
@@ -3515,7 +3779,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxTransZLimitEnable": {
             "short_name": "xtze",
@@ -3523,7 +3789,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minRotLimit": {
             "short_name": "mnrl",
@@ -3621,7 +3889,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minRotYLimitEnable": {
             "short_name": "mrye",
@@ -3629,7 +3899,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minRotZLimitEnable": {
             "short_name": "mrze",
@@ -3637,7 +3909,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxRotLimitEnable": {
             "short_name": "xrle",
@@ -3659,7 +3933,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxRotYLimitEnable": {
             "short_name": "xrye",
@@ -3667,7 +3943,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxRotZLimitEnable": {
             "short_name": "xrze",
@@ -3675,7 +3953,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minScaleLimit": {
             "short_name": "mnsl",
@@ -3697,7 +3977,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": -1.0
         },
         "minScaleYLimit": {
             "short_name": "msyl",
@@ -3705,7 +3987,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": -1.0
         },
         "minScaleZLimit": {
             "short_name": "mszl",
@@ -3713,7 +3997,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": -1.0
         },
         "maxScaleLimit": {
             "short_name": "mxsl",
@@ -3735,7 +4021,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "maxScaleYLimit": {
             "short_name": "xsyl",
@@ -3743,7 +4031,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "maxScaleZLimit": {
             "short_name": "xszl",
@@ -3751,7 +4041,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "minScaleLimitEnable": {
             "short_name": "msle",
@@ -3773,7 +4065,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minScaleYLimitEnable": {
             "short_name": "msye",
@@ -3781,7 +4075,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "minScaleZLimitEnable": {
             "short_name": "msze",
@@ -3789,7 +4085,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxScaleLimitEnable": {
             "short_name": "xsle",
@@ -3811,7 +4109,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxScaleYLimitEnable": {
             "short_name": "xsye",
@@ -3819,7 +4119,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "maxScaleZLimitEnable": {
             "short_name": "xsze",
@@ -3827,7 +4129,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "offsetParentMatrix": {
             "short_name": "opm",
@@ -3897,7 +4201,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "displayHandle": {
             "short_name": "dh",
@@ -3905,7 +4211,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "displayScalePivot": {
             "short_name": "dsp",
@@ -3913,7 +4221,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "displayRotatePivot": {
             "short_name": "drp",
@@ -3921,7 +4231,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "displayLocalAxis": {
             "short_name": "dla",
@@ -3929,7 +4241,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "dynamics": {
             "short_name": "dyn",
@@ -3937,7 +4251,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "showManipDefault": {
             "short_name": "smd",
@@ -3976,7 +4292,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotateQuaternionY": {
             "short_name": "rqy",
@@ -3984,7 +4302,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotateQuaternionZ": {
             "short_name": "rqz",
@@ -3992,7 +4312,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "rotateQuaternionW": {
             "short_name": "rqw",
@@ -4000,15 +4322,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "rotationInterpolation": {
-            "short_name": "roi",
-            "long_name": "rotationInterpolation",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "jointOrientType": {
             "short_name": "jot",
@@ -4032,7 +4348,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "jointTypeY": {
             "short_name": "jty",
@@ -4040,7 +4358,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "jointTypeZ": {
             "short_name": "jtz",
@@ -4048,7 +4368,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "dofMask": {
             "short_name": "dm",
@@ -4056,7 +4378,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 2021227011
         },
         "jointOrient": {
             "short_name": "jo",
@@ -4102,7 +4426,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "inverseScale": {
             "short_name": "is",
@@ -4124,7 +4450,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "inverseScaleY": {
             "short_name": "isy",
@@ -4132,7 +4460,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "inverseScaleZ": {
             "short_name": "isz",
@@ -4140,7 +4470,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "stiffness": {
             "short_name": "st",
@@ -4162,7 +4494,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "stiffnessY": {
             "short_name": "sty",
@@ -4170,7 +4504,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "stiffnessZ": {
             "short_name": "stz",
@@ -4178,7 +4514,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "preferredAngle": {
             "short_name": "pa",
@@ -4276,7 +4614,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "minRotateDampStrengthY": {
             "short_name": "nsty",
@@ -4284,7 +4624,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "minRotateDampStrengthZ": {
             "short_name": "nstz",
@@ -4292,7 +4634,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "maxRotateDampRange": {
             "short_name": "xdr",
@@ -4352,7 +4696,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "maxRotateDampStrengthY": {
             "short_name": "xsty",
@@ -4360,7 +4706,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "maxRotateDampStrengthZ": {
             "short_name": "xstz",
@@ -4368,7 +4716,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "bindPose": {
             "short_name": "bps",
@@ -4550,7 +4900,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "bindInverseScaleY": {
             "short_name": "biy",
@@ -4558,7 +4910,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "bindInverseScaleZ": {
             "short_name": "biz",
@@ -4566,7 +4920,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "bindSegmentScaleCompensate": {
             "short_name": "bsc",
@@ -4574,7 +4930,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "isIKDirtyFlag": {
             "short_name": "idf",
@@ -4582,7 +4940,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "inIKSolveFlag": {
             "short_name": "isf",
@@ -4590,7 +4950,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "drawStyle": {
             "short_name": "ds",
@@ -4606,7 +4968,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "side": {
             "short_name": "sd",
@@ -4714,7 +5078,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "hikNodeID": {
             "short_name": "hni",
@@ -4722,7 +5088,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": -1
         },
         "hikFkJoint": {
             "short_name": "hfk",
@@ -4748,7 +5116,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -4756,7 +5126,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -4764,15 +5136,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -4822,7 +5188,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -4830,7 +5198,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -4838,15 +5208,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -4870,7 +5234,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "secondTerm": {
             "short_name": "st",
@@ -4878,7 +5244,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "colorIfTrue": {
             "short_name": "ct",
@@ -4900,7 +5268,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "colorIfTrueG": {
             "short_name": "ctg",
@@ -4908,7 +5278,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "colorIfTrueB": {
             "short_name": "ctb",
@@ -4916,7 +5288,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "colorIfFalse": {
             "short_name": "cf",
@@ -4938,7 +5312,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "colorIfFalseG": {
             "short_name": "cfg",
@@ -4946,7 +5322,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "colorIfFalseB": {
             "short_name": "cfb",
@@ -4954,7 +5332,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "outColor": {
             "short_name": "oc",
@@ -4976,7 +5356,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColorG": {
             "short_name": "ocg",
@@ -4984,7 +5366,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColorB": {
             "short_name": "ocb",
@@ -4992,7 +5376,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "clamp": {
@@ -5010,7 +5396,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5018,7 +5406,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5026,15 +5416,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5064,7 +5448,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "minG": {
             "short_name": "mng",
@@ -5072,7 +5458,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "minB": {
             "short_name": "mnb",
@@ -5080,7 +5468,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "max": {
             "short_name": "mx",
@@ -5102,7 +5492,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "maxG": {
             "short_name": "mxg",
@@ -5110,7 +5502,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "maxB": {
             "short_name": "mxb",
@@ -5118,7 +5512,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "input": {
             "short_name": "ip",
@@ -5140,7 +5536,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "inputG": {
             "short_name": "ipg",
@@ -5148,7 +5546,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "inputB": {
             "short_name": "ipb",
@@ -5156,7 +5556,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "renderPassMode": {
             "short_name": "arp",
@@ -5186,7 +5588,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outputG": {
             "short_name": "opg",
@@ -5194,7 +5598,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outputB": {
             "short_name": "opb",
@@ -5202,7 +5608,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "remapValue": {
@@ -5220,7 +5628,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5228,7 +5638,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5236,15 +5648,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5260,7 +5666,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "inputMin": {
             "short_name": "imn",
@@ -5268,7 +5676,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "inputMax": {
             "short_name": "imx",
@@ -5276,7 +5686,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "outputMin": {
             "short_name": "omn",
@@ -5284,7 +5696,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outputMax": {
             "short_name": "omx",
@@ -5292,7 +5706,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "value": {
             "short_name": "vl",
@@ -5318,7 +5734,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColor": {
             "short_name": "oc",
@@ -5340,7 +5758,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColorG": {
             "short_name": "ocg",
@@ -5348,7 +5768,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColorB": {
             "short_name": "ocb",
@@ -5356,7 +5778,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "remapColor": {
@@ -5374,7 +5798,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5382,7 +5808,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5390,15 +5818,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5428,7 +5850,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
         },
         "colorG": {
             "short_name": "cg",
@@ -5436,7 +5860,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
         },
         "colorB": {
             "short_name": "cb",
@@ -5444,7 +5870,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
         },
         "inputMin": {
             "short_name": "imn",
@@ -5452,7 +5880,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "inputMax": {
             "short_name": "imx",
@@ -5460,7 +5890,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "outputMin": {
             "short_name": "omn",
@@ -5468,7 +5900,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outputMax": {
             "short_name": "omx",
@@ -5476,7 +5910,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "red": {
             "short_name": "r",
@@ -5533,7 +5969,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColorG": {
             "short_name": "ocg",
@@ -5541,7 +5979,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outColorB": {
             "short_name": "ocb",
@@ -5549,7 +5989,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "uvPin": {
@@ -5567,7 +6009,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5575,7 +6019,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5583,15 +6029,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5672,7 +6112,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "outputTranslate": {
             "short_name": "ot",
@@ -5716,7 +6158,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5724,7 +6168,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5732,15 +6178,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5765,7 +6205,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "input2D": {
             "short_name": "i2",
@@ -5791,7 +6233,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "output2D": {
             "short_name": "o2",
@@ -5812,7 +6256,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "output2Dy": {
             "short_name": "o2y",
@@ -5820,7 +6266,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "output3D": {
             "short_name": "o3",
@@ -5842,7 +6290,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "output3Dy": {
             "short_name": "o3y",
@@ -5850,7 +6300,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "output3Dz": {
             "short_name": "o3z",
@@ -5858,7 +6310,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "blendTwoAttr": {
@@ -5876,7 +6330,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5884,7 +6340,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5892,15 +6350,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5917,7 +6369,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "output": {
             "short_name": "o",
@@ -5925,7 +6379,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "current": {
             "short_name": "c",
@@ -5933,7 +6389,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
         },
         "attributesBlender": {
             "short_name": "ab",
@@ -5941,7 +6399,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "blendColors": {
@@ -5959,7 +6419,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -5967,7 +6429,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5975,15 +6439,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5999,7 +6457,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
         },
         "color1": {
             "short_name": "c1",
@@ -6021,7 +6481,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "color1G": {
             "short_name": "c1g",
@@ -6029,7 +6491,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "color1B": {
             "short_name": "c1b",
@@ -6037,7 +6501,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "color2": {
             "short_name": "c2",
@@ -6059,7 +6525,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "color2G": {
             "short_name": "c2g",
@@ -6067,7 +6535,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "color2B": {
             "short_name": "c2b",
@@ -6075,7 +6545,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
         },
         "renderPassMode": {
             "short_name": "arp",
@@ -6105,7 +6577,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outputG": {
             "short_name": "opg",
@@ -6113,7 +6587,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         },
         "outputB": {
             "short_name": "opb",
@@ -6121,7 +6597,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
         }
     },
     "decomposeMatrix": {
@@ -6139,7 +6617,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -6147,7 +6627,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -6155,15 +6637,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -6285,7 +6761,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputScaleY": {
             "short_name": "osy",
@@ -6293,7 +6771,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputScaleZ": {
             "short_name": "osz",
@@ -6301,7 +6781,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputShear": {
             "short_name": "osh",
@@ -6323,7 +6805,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputShearY": {
             "short_name": "oshy",
@@ -6331,7 +6815,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputShearZ": {
             "short_name": "oshz",
@@ -6339,7 +6825,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputQuat": {
             "short_name": "oq",
@@ -6362,7 +6850,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputQuatY": {
             "short_name": "oqy",
@@ -6370,7 +6860,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputQuatZ": {
             "short_name": "oqz",
@@ -6378,7 +6870,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         },
         "outputQuatW": {
             "short_name": "oqw",
@@ -6386,7 +6880,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
         }
     },
     "inverseMatrix": {
@@ -6404,7 +6900,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -6412,7 +6910,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -6420,15 +6920,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -6470,7 +6964,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -6478,7 +6974,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -6486,15 +6984,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -6537,7 +7029,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "frozen": {
             "short_name": "fzn",
@@ -6545,7 +7039,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -6553,15 +7049,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
-        },
-        "nodeState": {
-            "short_name": "nds",
-            "long_name": "nodeState",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
         },
         "binMembership": {
             "short_name": "bnm",
@@ -6577,7 +7067,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
         },
         "envelope": {
             "short_name": "env",
@@ -6585,7 +7077,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute"
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
         },
         "target": {
             "short_name": "tgt",
