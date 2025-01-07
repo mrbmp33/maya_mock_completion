@@ -92,6 +92,7 @@ def create_attrs_dict(output_file):
     # Write to Python file
     with open(output_file, "w") as f:
         f.write("# Auto-generated Maya attributes file\n\n")
+        f.write("from typing import Literal, TypeAlias\n\n")
 
         for name, content in data.items():
             f.write(f"{name} = ")
@@ -102,6 +103,16 @@ def create_attrs_dict(output_file):
             # Replace booleans with Python-style booleans
             formatted_str = convert_booleans_to_python_style(json_str)
             f.write(formatted_str + "\n\n")
+
+        f.write("ATTRIBUTE_KEYS: TypeAlias = Literal[\n")
+
+        dicts_keys = []
+        for nd in attributes_properties.values():
+            dicts_keys.extend([x for x in nd.keys()])
+        dicts_keys.extend(attributes_short_names_map.keys())
+        for k in set(dicts_keys):
+            f.write(f'   "{k}",\n')
+        f.write("\n\n")
 
 
 if __name__ == '__main__':
