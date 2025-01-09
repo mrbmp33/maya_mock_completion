@@ -1288,267 +1288,202 @@ class MEulerRotation(object):
     X, Y and Z rotations, applied in a specified order.
     """
 
-    def __add__(self, *args, **kwargs):
+    kIdentity = (0.0, 0.0, 0.0)
+    kTolerance = 1e-10
+
+    # Rotation orders
+    kXYZ = 0
+    kXZY = 3
+    kYXZ = 4
+    kYZX = 1
+    kZXY = 2
+    kZYX = 5
+
+    def __init__(self, x=0.0, y=0.0, z=0.0, order=kXYZ):
         """
-        x.__add__(y) <==> x+y
+        Initializes the rotation with given x, y, z angles and rotation order.
         """
-        pass
+        self.x = x
+        self.y = y
+        self.z = z
+        self.order = order
+
+    def __add__(self, other):
+        """
+        Adds another rotation to this one.
+        """
+        if not isinstance(other, MEulerRotation):
+            return NotImplemented
+        return MEulerRotation(self.x + other.x, self.y + other.y, self.z + other.z, self.order)
+
+    def __iadd__(self, other):
+        """
+        In-place addition.
+        """
+        if not isinstance(other, MEulerRotation):
+            return NotImplemented
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        return self
+
+    def __sub__(self, other):
+        """
+        Subtracts another rotation from this one.
+        """
+        if not isinstance(other, MEulerRotation):
+            return NotImplemented
+        return MEulerRotation(self.x - other.x, self.y - other.y, self.z - other.z, self.order)
+
+    def __isub__(self, other):
+        """
+        In-place subtraction.
+        """
+        if not isinstance(other, MEulerRotation):
+            return NotImplemented
+        self.x -= other.x
+        self.y -= other.y
+        self.z -= other.z
+        return self
+
+    def __mul__(self, scalar):
+        """
+        Scales the rotation by a scalar.
+        """
+        if not isinstance(scalar, (int, float)):
+            return NotImplemented
+        return MEulerRotation(self.x * scalar, self.y * scalar, self.z * scalar, self.order)
+
+    def __imul__(self, scalar):
+        """
+        In-place scaling.
+        """
+        if not isinstance(scalar, (int, float)):
+            return NotImplemented
+        self.x *= scalar
+        self.y *= scalar
+        self.z *= scalar
+        return self
+
+    def __eq__(self, other):
+        """
+        Checks equality of two rotations within a tolerance.
+        """
+        if not isinstance(other, MEulerRotation):
+            return NotImplemented
+        return (math.isclose(self.x, other.x, abs_tol=self.kTolerance) and
+                math.isclose(self.y, other.y, abs_tol=self.kTolerance) and
+                math.isclose(self.z, other.z, abs_tol=self.kTolerance))
 
     def __iter__(self):
-        for _ in range(3): yield 0.0
+        """
+        Iterates over x, y, z components.
+        """
+        yield self.x
+        yield self.y
+        yield self.z
 
-    def __delitem__(self, *args, **kwargs):
+    def __len__(self):
         """
-        x.__delitem__(y) <==> del x[y]
+        Returns the length of the rotation (always 3 components).
         """
-        pass
+        return 3
 
-    def __eq__(self, *args, **kwargs):
+    def __getitem__(self, index):
         """
-        x.__eq__(y) <==> x==y
+        Index-based access to components.
         """
-        pass
+        return (self.x, self.y, self.z)[index]
 
-    def __ge__(self, *args, **kwargs):
+    def __setitem__(self, index, value):
         """
-        x.__ge__(y) <==> x>=y
+        Index-based setting of components.
         """
-        pass
+        if index == 0:
+            self.x = value
+        elif index == 1:
+            self.y = value
+        elif index == 2:
+            self.z = value
+        else:
+            raise IndexError("Index out of range for MEulerRotation")
 
-    def __getitem__(self, *args, **kwargs):
+    def __repr__(self):
         """
-        x.__getitem__(y) <==> x[y]
+        Returns a string representation of the rotation.
         """
-        pass
+        return f"MEulerRotation(x={self.x}, y={self.y}, z={self.z}, order={self.order})"
 
-    def __gt__(self, *args, **kwargs):
+    def asVector(self):
         """
-        x.__gt__(y) <==> x>y
+        Returns the X, Y, Z components as a vector.
         """
-        pass
+        return (self.x, self.y, self.z)
 
-    def __iadd__(self, *args, **kwargs):
+    def asMatrix(self):
         """
-        x.__iadd__(y) <==> x+=y
+        Returns the rotation as an equivalent 3x3 matrix.
         """
-        pass
+        # Placeholder: Actual matrix computation should depend on the rotation order.
+        return [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
 
-    def __imul__(self, *args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
-
-    def __init__(self, *args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
-
-    def __isub__(self, *args, **kwargs):
-        """
-        x.__isub__(y) <==> x-=y
-        """
-        pass
-
-    def __le__(self, *args, **kwargs):
-        """
-        x.__le__(y) <==> x<=y
-        """
-        pass
-
-    def __len__(self, *args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
-
-    def __lt__(self, *args, **kwargs):
-        """
-        x.__lt__(y) <==> x<y
-        """
-        pass
-
-    def __mul__(self, *args, **kwargs):
-        """
-        x.__mul__(y) <==> x*y
-        """
-        pass
-
-    def __ne__(self, *args, **kwargs):
-        """
-        x.__ne__(y) <==> x!=y
-        """
-        pass
-
-    def __neg__(self, *args, **kwargs):
-        """
-        x.__neg__() <==> -x
-        """
-        pass
-
-    def __radd__(self, *args, **kwargs):
-        """
-        x.__radd__(y) <==> y+x
-        """
-        pass
-
-    def __repr__(self, *args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
-
-    def __rmul__(self, *args, **kwargs):
-        """
-        x.__rmul__(y) <==> y*x
-        """
-        pass
-
-    def __rsub__(self, *args, **kwargs):
-        """
-        x.__rsub__(y) <==> y-x
-        """
-        pass
-
-    def __setitem__(self, *args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
-
-    def __str__(self, *args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
-
-    def __sub__(self, *args, **kwargs):
-        """
-        x.__sub__(y) <==> x-y
-        """
-        pass
-
-    def alternateSolution(self, *args, **kwargs):
-        """
-        Returns an equivalent rotation which is not simply a multiple.
-        """
-        pass
-
-    def asMatrix(self, *args, **kwargs):
-        """
-        Returns the rotation as an equivalent matrix.
-        """
-        pass
-
-    def asQuaternion(self, *args, **kwargs):
+    def asQuaternion(self):
         """
         Returns the rotation as an equivalent quaternion.
         """
-        pass
+        # Placeholder: Actual quaternion computation is needed here.
+        return (0, 0, 0, 1)
 
-    def asVector(self, *args, **kwargs):
+    def bound(self):
         """
-        Returns the X, Y and Z rotations as a vector.
+        Returns a new MEulerRotation with components bound within +/- PI.
         """
-        pass
+        def bound_angle(angle):
+            while angle > math.pi:
+                angle -= 2 * math.pi
+            while angle < -math.pi:
+                angle += 2 * math.pi
+            return angle
 
-    def bound(self, *args, **kwargs):
-        """
-        Returns a new MEulerRotation having this rotation, but with each rotation component bound within +/- PI.
-        """
-        pass
+        return MEulerRotation(bound_angle(self.x), bound_angle(self.y), bound_angle(self.z), self.order)
 
-    def boundIt(self, *args, **kwargs):
+    def boundIt(self):
         """
-        In-place bounding of each rotation component to lie wthin +/- PI.
+        In-place bounding of components within +/- PI.
         """
-        pass
+        def bound_angle(angle):
+            while angle > math.pi:
+                angle -= 2 * math.pi
+            while angle < -math.pi:
+                angle += 2 * math.pi
+            return angle
 
-    def closestCut(self, *args, **kwargs):
-        """
-        Returns the rotation which is full spin multiples of this one and comes closest to target.
-        """
-        pass
+        self.x = bound_angle(self.x)
+        self.y = bound_angle(self.y)
+        self.z = bound_angle(self.z)
 
-    def closestSolution(self, *args, **kwargs):
+    def isZero(self):
         """
-        Returns the equivalent rotation which comes closest to a target.
+        Returns true if all components are within the tolerance of zero.
         """
-        pass
-
-    def incrementalRotateBy(self, *args, **kwargs):
-        """
-        Increase this rotation by a given angle around the specified axis. The update is done in series of small increments to avoid flipping.
-        """
-        pass
-
-    def inverse(self, *args, **kwargs):
-        """
-        Returns a new MEulerRotation containing the inverse rotation of this one and reversed rotation order.
-        """
-        pass
-
-    def invertIt(self, *args, **kwargs):
-        """
-        In-place inversion of the rotation. Rotation order is also reversed.
-        """
-        pass
-
-    def isEquivalent(self, *args, **kwargs):
-        """
-        Returns true if this rotation has the same order as another and their X, Y and Z components are within a tolerance of each other.
-        """
-        pass
-
-    def isZero(self, *args, **kwargs):
-        """
-        Returns true if the X, Y and Z components are each within a tolerance of 0.0.
-        """
-        pass
-
-    def reorder(self, *args, **kwargs):
-        """
-        Returns a new MEulerRotation having this rotation, reordered to use the given rotation order.
-        """
-        pass
-
-    def reorderIt(self, *args, **kwargs):
-        """
-        In-place reordering to use the given rotation order.
-        """
-        pass
-
-    def setToAlternateSolution(self, *args, **kwargs):
-        """
-        Replace this rotation with an alternate solution.
-        """
-        pass
-
-    def setToClosestCut(self, *args, **kwargs):
-        """
-        Replace this rotation with the closest cut to a target.
-        """
-        pass
-
-    def setToClosestSolution(self, *args, **kwargs):
-        """
-        Replace this rotation with the closest solution to a target.
-        """
-        pass
-
-    def setValue(self, *args, **kwargs):
-        """
-        Set the rotation.
-        """
-        pass
+        return (math.isclose(self.x, 0.0, abs_tol=self.kTolerance) and
+                math.isclose(self.y, 0.0, abs_tol=self.kTolerance) and
+                math.isclose(self.z, 0.0, abs_tol=self.kTolerance))
 
     @staticmethod
-    def computeAlternateSolution(*args, **kwargs):
+    def computeBound(x, y, z):
         """
-        Returns an equivalent rotation which is not simply a multiple.
+        Returns equivalent rotations for the given x, y, z, bound within +/- PI.
         """
-        pass
+        def bound_angle(angle):
+            while angle > math.pi:
+                angle -= 2 * math.pi
+            while angle < -math.pi:
+                angle += 2 * math.pi
+            return angle
+
+        return (bound_angle(x), bound_angle(y), bound_angle(z))
+
 
     @staticmethod
     def computeBound(*args, **kwargs):
@@ -1577,24 +1512,6 @@ class MEulerRotation(object):
         Extracts a rotation from a matrix.
         """
         pass
-
-    kIdentity = None
-
-    kTolerance = 1e-10
-
-    kXYZ = 0
-
-    kXZY = 3
-
-    kYXZ = 4
-
-    kYZX = 1
-
-    kZXY = 2
-
-    kZYX = 5
-
-    order = None
 
     x = None
 
@@ -17763,53 +17680,54 @@ class MPlug(object):
         """
         pass
 
-    def setBool(self, value):
+    def setBool(self, value: bool):
         """
         Sets the plug's value as a boolean.
         """
         self._attribute._value = value
 
-    def setChar(self, value):
+    def setChar(self, value: int):
         """
         Sets the plug's value as a single-byte integer.
         """
         self._attribute._value = value
 
-    def setDouble(self, value):
+    def setDouble(self, value: float):
         """
         Sets the plug's value as a double-precision float.
         """
         self._attribute._value = value
 
-    def setFloat(self, value):
+    def setFloat(self, value: float):
         """
         Sets the plug's value as a single-precision float.
         """
         self._attribute._value = value
 
-    def setInt(self, value):
+    def setInt(self, value: int):
         """
         Sets the plug's value as a regular integer.
         """
         self._attribute._value = value
 
-    def setMAngle(self, value):
+    def setMAngle(self, value: 'MAngle'):
         """
         Sets the plug's value as an MAngle.
         """
-        self._attribute._value = value
 
-    def setMDataHandle(self, value):
+        self._attribute._value = value.asRadians()
+
+    def setMDataHandle(self, value: 'MDataHandle'):
         """
         Sets the plug's value as a data handle.
         """
         self._attribute._value = value
 
-    def setMDistance(self, value):
+    def setMDistance(self, value: 'MDistance'):
         """
         Sets the plug's value as an MDistance.
         """
-        self._attribute._value = value
+        self._attribute._value = value.asCentimeters()
 
     def setMObject(self, value):
         """
@@ -17823,11 +17741,11 @@ class MPlug(object):
         """
         self._attribute._value = value
 
-    def setMTime(self, value):
+    def setMTime(self, value: 'MTime'):
         """
         Sets the plug's value as an MTime.
         """
-        self._attribute._value = value
+        self._attribute._value = value.value
 
     def setNumElements(*args, **kwargs):
         """
@@ -21700,11 +21618,18 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def attribute(*args, **kwargs):
+    def attribute(self, attr_name: str) -> 'MObject':
         """
         Returns an attribute of the node, given either its index or name.
         """
-        pass
+        try:
+            mplug = self.findPlug(attr_name, False)
+            if not mplug or mplug.attribute().isNull():
+                raise KeyError
+            return mplug._attribute
+        
+        except KeyError as k_err:
+            raise KeyError(f'Node Type: <{self._mobject._name}> does not have attribute <{attr_name}>.')
 
     def attributeClass(*args, **kwargs):
         """
@@ -21800,7 +21725,10 @@ class MFnDependencyNode(MFnBase):
         mplug = MPlug()
         attribute = mplug._attribute
         mplug._owner = self._mobject
-        node_type = _TYPE_INT_TO_STR[self._mobject.apiType()]
+        try:
+            node_type = _TYPE_INT_TO_STR[self._mobject.apiType()]
+        except AttributeError:
+            raise RuntimeError(f'{self._mobject} does not exist yet. Please "create" it first.')
         node_type = node_type if not node_type.startswith('k') else node_type[1:]
 
         short_name = ''
@@ -21811,7 +21739,10 @@ class MFnDependencyNode(MFnBase):
         if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
             short_name = attr_name
             long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
-            properties = attribute_properties.ATTRIBUTES_PROPERTIES[node_type][long_name]
+            try:
+                properties = attribute_properties.ATTRIBUTES_PROPERTIES[node_type][long_name]
+            except KeyError:
+                raise KeyError(f'Node Type: <{node_type}> does not have attribute <{long_name}>')
         elif properties:
             long_name = attr_name
             short_name = properties['short_name']
@@ -21834,6 +21765,9 @@ class MFnDependencyNode(MFnBase):
         attribute._short_name = short_name
 
         if properties:
+            # Unless set to true it will assume the attribute does not exist | need to set alive when creating new attrs
+            attribute._alive = True
+            
             attribute._is_array = properties['is_array']
             attribute._is_compound = properties['is_compound']
             attribute._is_element = properties['is_element']
@@ -21893,12 +21827,11 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def hasAttribute(*args, **kwargs):
+    def hasAttribute(self, attribute_name: str) -> bool:
         """
         Returns True if the node has an attribute with the given name.
         """
-        # For the sake of using fksolver, let's assume this is trua although it might not always be the case
-        return True
+        return True if self.attribute(attribute_name) else False
 
     def uniqueName(self):
         """For a DAG node, the unique name of a node is the full namespace path starting at (and including) the root
