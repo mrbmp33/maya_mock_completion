@@ -21658,9 +21658,10 @@ class MFnDependencyNode(MFnBase):
         if isinstance(type_id, str):
             # noinspection PyProtectedMember
             mobject._typeId = _TYPE_STR_TO_ID[type_id]
-            name = hierarchy.find_first_available_name(name if name else f'{type_id}1')
+            name = name if name else f'{type_id}1'
         else:
             mobject._typeId = type_id
+            name = name if name else _TYPE_INT_TO_STR[type_id]
         mobject._name = hierarchy.find_first_available_name(name)
         mobject._alive = True
 
@@ -22037,7 +22038,14 @@ class MFnDependencyNode(MFnBase):
 
     @property
     def typeName(self):
-        return _TYPE_INT_TO_STR[self._mobject._typeId.id()]
+        try:
+            return _TYPE_INT_TO_STR[self._mobject._typeId.id()]
+        except AttributeError:
+            if not self._mobject:
+                raise RuntimeError('No MObject associated with this function set. Enusure the MObject has been created'
+                                   'first before adding it to the function set.')
+            if not self._mobject._alive:
+                raise RuntimeError(f'MObject: {self._mobject._name} does not exist yet. Cannot return type.')
 
 
 class MDagModifier(MDGModifier):

@@ -4244,7 +4244,7 @@ def joint(absolute=bool(), a=bool(), angleX=float(), ax=float(), angleY=float(),
           so=list, secondaryAxisOrient=str(), sao=str(), setPreferredAngles=bool(), spa=bool(), stiffnessX=float(),
           stx=float(), stiffnessY=float(), sty=float(), stiffnessZ=float(), stz=float(), symmetry=bool(), sym=bool(),
           symmetryAxis=str(), sa=str(), zeroScaleOrient=bool(), zso=bool(), *args, **kwargs):
-    pass
+    return createNode('joint', name=name)
 
 
 def jointCluster(aboveBound=float(), ab=float(), aboveCluster=bool(), ac=bool(), aboveDropoffType=str(), adt=str(),

@@ -97,7 +97,12 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
         idx = 1
 
     if NodePool.hash_exists(hash(name)):
-        if NodePool.from_name(name)._parent._name != parent_name:
+
+        as_node = NodePool.from_name(name)
+
+        if not as_node._parent:
+            ...
+        elif NodePool.from_name(name)._parent._name != parent_name:
             base_name = f'{parent_name or ""}|{base_name}'
             name = base_name
 
