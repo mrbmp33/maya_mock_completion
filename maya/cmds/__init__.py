@@ -2,6 +2,7 @@ from time import sleep
 
 import maya.mmc_hierarchy as _hierarchy
 from maya.api import OpenMaya as om
+from maya.node_types_literals import NODE_TYPES
 
 def aaf2fcp(deleteFile=bool(), df=bool(), dstPath=str(), dst=str(), getFileName=int(), gfn=int(), progress=int(),
             pr=int(), srcFile=str(), src=str(), terminate=int(), t=int(), waitCompletion=int(), wc=int(), *args,
@@ -1975,7 +1976,8 @@ def createLayeredPsdFile(imageFileName=list, ifn=list, psdFileName=str(), psf=st
     pass
 
 
-def createNode(node_type:str, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(), skipSelect=bool(), ss=bool(),
+def createNode(node_type: str | NODE_TYPES, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(),
+               skipSelect=bool(), ss=bool(),
                *args, **kwargs):
     if not any((name, n)):
         name=f'{node_type}1'
