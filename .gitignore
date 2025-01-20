@@ -1,2 +1,8 @@
 /build/
 /.venv/
+/maya_mock_completion.egg-info/dependency_links.txt
+/maya_mock_completion.egg-info/PKG-INFO
+/maya_mock_completion.egg-info/requires.txt
+/maya_mock_completion.egg-info/SOURCES.txt
+/maya_mock_completion.egg-info/top_level.txt
+*.pyc
