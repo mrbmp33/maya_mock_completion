@@ -12,7 +12,7 @@ import uuid
 import weakref
 import enum
 import math
-from typing import Optional, Iterable, Union
+from typing import Optional, Iterable, Union, Tuple
 import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
@@ -7403,268 +7403,212 @@ class MExternalContentLocationTable(object):
         pass
 
 
-class MVector(object):
+class _MVectorMeta(type):
+
+    def __init__(cls, name, bases, dct):
+        super().__init__(name, bases, dct)
+        cls.kTolerance = 1e-10
+        cls.kXaxis = 0
+        cls.kYaxis = 1
+        cls.kZaxis = 2
+        cls.kWaxis = 3
+        cls.kZeroVector = cls(0.0, 0.0, 0.0)
+        cls.kOneVector = cls(1.0, 1.0, 1.0)
+        cls.kXaxisVector = cls(1.0, 0.0, 0.0)
+        cls.kXnegAxisVector = cls(-1.0, 0.0, 0.0)
+        cls.kYaxisVector = cls(0.0, 1.0, 0.0)
+        cls.kYnegAxisVector = cls(0.0, -1.0, 0.0)
+        cls.kZaxisVector = cls(0.0, 0.0, 1.0)
+        cls.kZnegAxisVector = cls(0.0, 0.0, -1.0)
+
+class MVector(metaclass=_MVectorMeta):
     """
     3D vector with double-precision coordinates.
     """
 
-    def __add__(self, *args, **kwargs):
-        """
-        x.__add__(y) <==> x+y
-        """
-        pass
+    def __init__(self, x=0.0, y=0.0, z=0.0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __add__(self, other):
+        return MVector(self.x + other.x, self.y + other.y, self.z + other.z)
 
     def __iter__(self):
-        return 0.0
+        return iter([self.x, self.y, self.z])
 
-    def __delitem__(self, *args, **kwargs):
-        """
-        x.__delitem__(y) <==> del x[y]
-        """
-        pass
+    def __delitem__(self, index):
+        if index == 0:
+            self.x = 0.0
+        elif index == 1:
+            self.y = 0.0
+        elif index == 2:
+            self.z = 0.0
+        else:
+            raise IndexError("Index out of range")
 
-    def __div__(self, *args, **kwargs):
-        """
-        x.__div__(y) <==> x/y
-        """
-        pass
+    def __div__(self, scalar):
+        return MVector(self.x / scalar, self.y / scalar, self.z / scalar)
 
-    def __eq__(self, *args, **kwargs):
-        """
-        x.__eq__(y) <==> x==y
-        """
-        pass
+    def __eq__(self, other):
+        return (abs(self.x - other.x) < MVector.kTolerance and
+                abs(self.y - other.y) < MVector.kTolerance and
+                abs(self.z - other.z) < MVector.kTolerance)
 
-    def __ge__(self, *args, **kwargs):
-        """
-        x.__ge__(y) <==> x>=y
-        """
-        pass
+    def __ge__(self, other):
+        return self.length() >= other.length()
 
-    def __getitem__(self, *args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
+    def __getitem__(self, index):
+        if index == 0:
+            return self.x
+        elif index == 1:
+            return self.y
+        elif index == 2:
+            return self.z
+        else:
+            raise IndexError("Index out of range")
 
-    def __gt__(self, *args, **kwargs):
-        """
-        x.__gt__(y) <==> x>y
-        """
-        pass
+    def __gt__(self, other):
+        return self.length() > other.length()
 
-    def __iadd__(self, *args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        return self
 
-    def __idiv__(self, *args, **kwargs):
-        """
-        x.__idiv__(y) <==> x/=y
-        """
-        pass
+    def __idiv__(self, scalar):
+        self.x /= scalar
+        self.y /= scalar
+        self.z /= scalar
+        return self
 
-    def __imul__(self, *args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
+    def __imul__(self, scalar):
+        self.x *= scalar
+        self.y *= scalar
+        self.z *= scalar
+        return self
 
-    def __init__(self, *args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
+    def __isub__(self, other):
+        self.x -= other.x
+        self.y -= other.y
+        self.z -= other.z
+        return self
 
-    def __isub__(self, *args, **kwargs):
-        """
-        x.__isub__(y) <==> x-=y
-        """
-        pass
+    def __le__(self, other):
+        return self.length() <= other.length()
 
-    def __le__(self, *args, **kwargs):
-        """
-        x.__le__(y) <==> x<=y
-        """
-        pass
+    def __len__(self):
+        return 3
 
-    def __len__(self, *args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
+    def __lt__(self, other):
+        return self.length() < other.length()
 
-    def __lt__(self, *args, **kwargs):
-        """
-        x.__lt__(y) <==> x<y
-        """
-        pass
+    def __mul__(self, other: Union[float, int, 'MVector']) -> 'MVector':
+        if isinstance(other, (int, float)):  # Scalar multiplication
+            return MVector(self.x * other, self.y * other, self.z * other)
+        elif isinstance(other, MVector):  # Dot product
+            return self.x * other.x + self.y * other.y + self.z * other.z
+        else:
+            raise TypeError(f"Unsupported operand type(s) for *: 'MVector' and '{type(other).__name__}'")
 
-    def __mul__(self, *args, **kwargs):
-        """
-        x.__mul__(y) <==> x*y
-        """
-        pass
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
-    def __ne__(self, *args, **kwargs):
-        """
-        x.__ne__(y) <==> x!=y
-        """
-        pass
+    def __neg__(self):
+        return MVector(-self.x, -self.y, -self.z)
 
-    def __neg__(self, *args, **kwargs):
-        """
-        x.__neg__() <==> -x
-        """
-        pass
+    def __radd__(self, other):
+        return self.__add__(other)
 
-    def __radd__(self, *args, **kwargs):
-        """
-        x.__radd__(y) <==> y+x
-        """
-        pass
+    def __rdiv__(self, scalar):
+        return MVector(scalar / self.x, scalar / self.y, scalar / self.z)
 
-    def __rdiv__(self, *args, **kwargs):
-        """
-        x.__rdiv__(y) <==> y/x
-        """
-        pass
+    def __truediv__(self, scalar):
+        if not isinstance(scalar, (int, float)):
+            raise TypeError(f"Division not supported between MVector and {type(scalar)}")
+        if scalar == 0:
+            raise ZeroDivisionError("Cannot divide by zero")
+        return MVector(self.x / scalar, self.y / scalar, self.z / scalar)
+    
+    def __repr__(self):
+        return f'MVector({self.x}, {self.y}, {self.z})'
 
-    def __repr__(self, *args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
+    def __rmul__(self, scalar):
+        return self.__mul__(scalar)
 
-    def __rmul__(self, *args, **kwargs):
-        """
-        x.__rmul__(y) <==> y*x
-        """
-        pass
+    def __rsub__(self, other):
+        return MVector(other.x - self.x, other.y - self.y, other.z - self.z)
 
-    def __rsub__(self, *args, **kwargs):
-        """
-        x.__rsub__(y) <==> y-x
-        """
-        pass
+    def __rxor__(self, other):
+        return self.__xor__(other)
 
-    def __rxor__(self, *args, **kwargs):
-        """
-        x.__rxor__(y) <==> y^x
-        """
-        pass
+    def __setitem__(self, index, value):
+        if index == 0:
+            self.x = value
+        elif index == 1:
+            self.y = value
+        elif index == 2:
+            self.z = value
+        else:
+            raise IndexError("Index out of range")
 
-    def __setitem__(self, *args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
+    def __str__(self):
+        return f'({self.x}, {self.y}, {self.z})'
 
-    def __str__(self, *args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
+    def __sub__(self, other):
+        if not isinstance(other, MVector):
+            raise TypeError(f"Subtraction not supported between MVector and {type(other).__name__}")
+        return MVector(self.x - other.x, self.y - other.y, self.z - other.z)
 
-    def __sub__(self, *args, **kwargs):
-        """
-        x.__sub__(y) <==> x-y
-        """
-        pass
+    def __xor__(self, other):
+        return MVector(self.y * other.z - self.z * other.y,
+                       self.z * other.x - self.x * other.z,
+                       self.x * other.y - self.y * other.x)
 
-    def __xor__(self, *args, **kwargs):
-        """
-        x.__xor__(y) <==> x^y
-        """
-        pass
+    def angle(self, other):
+        dot_product = self.x * other.x + self.y * other.y + self.z * other.z
+        lengths_product = self.length() * other.length()
+        return math.acos(dot_product / lengths_product)
 
-    def angle(self, *args, **kwargs):
-        """
-        Returns the angle, in radians, between this vector and another.
-        """
-        pass
+    def isEquivalent(self, other, tolerance=1e-10):
+        return (abs(self.x - other.x) < tolerance and
+                abs(self.y - other.y) < tolerance and
+                abs(self.z - other.z) < tolerance)
 
-    def isEquivalent(self, *args, **kwargs):
-        """
-        Returns True if this vector and another are within a given tolerance of being equal.
-        """
-        pass
+    def isParallel(self, other, tolerance=1e-10):
+        cross_product = self.__xor__(other)
+        return cross_product.length() < tolerance
 
-    def isParallel(self, *args, **kwargs):
-        """
-        Returns True if this vector and another are within the given tolerance of being parallel.
-        """
-        pass
+    def length(self):
+        return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
-    def length(self, *args, **kwargs):
-        """
-        Returns the magnitude of this vector.
-        """
-        pass
+    def normal(self):
+        length = self.length()
+        if length == 0:
+            return MVector()
+        return self / length
 
-    def normal(self, *args, **kwargs):
-        """
-        Returns a new vector containing the normalized version of this one.
-        """
-        pass
+    def normalize(self):
+        length = self.length()
+        if length == 0:
+            return self
+        self.x /= length
+        self.y /= length
+        self.z /= length
+        return self
 
-    def normalize(self, *args, **kwargs):
-        """
-        Normalizes this vector in-place and returns a new reference to it.
-        """
-        pass
+    def rotateBy(self, quaternion):
+        # Simplified rotation by quaternion
+        return self
 
-    def rotateBy(self, *args, **kwargs):
-        """
-        Returns the vector resulting from rotating this one by the given amount.
-        """
-        pass
+    def rotateTo(self, other):
+        # Simplified rotation to another vector
+        return MQuaternion()
 
-    def rotateTo(self, *args, **kwargs):
-        """
-        Returns the quaternion which will rotate this vector into another.
-        """
-        pass
-
-    def transformAsNormal(self, *args, **kwargs):
-        """
-        Returns a new vector which is calculated by postmultiplying this vector by the transpose of the given matrix's inverse and then normalizing the result.
-        """
-        pass
-
-    kOneVector = None
-
-    kTolerance = 1e-10
-
-    kWaxis = 3
-
-    kXaxis = 0
-
-    kXaxisVector = None
-
-    kXnegAxisVector = None
-
-    kYaxis = 1
-
-    kYaxisVector = None
-
-    kYnegAxisVector = None
-
-    kZaxis = 2
-
-    kZaxisVector = None
-
-    kZeroVector = None
-
-    kZnegAxisVector = None
-
-    x = None
-
-    y = None
-
-    z = None
-
+    def transformAsNormal(self, matrix):
+        # Simplified transformation as normal
+        return self
 
 class MBoundingBox(object):
     """
@@ -13015,16 +12959,51 @@ class MObject(object):
         self._parent: Optional['MObject'] = None
         self._children = set()
         self._is_world = False
+        self._cached_plugs = {}
+        self._attributes = {}
 
         # plug-specific properties
+        if MFn.kAttribute in self._api_type:
+            self._init_attribute_fields()
+    
+    def _init_attribute_fields(self):
         self._long_name = None
         self._short_name = None
+        
         self._value = None
-        self._is_array = None
-        self._is_compound = None
-        self._is_element = None
+
+        self._is_array = False
+        self._is_compound = False
+        self._is_element = False
+        
         self._numeric_type = None
-        self._cached_plugs = {}
+        
+        self._affects_appearance = False
+        self._affects_world_space = False
+        self._channel_box = False
+        self._connectable = True
+        self._disconnect_behavior = MFnAttribute.kNothing
+        self._dynamic = False
+        self._extension = None
+        self._hidden = False
+        self._indeterminant = None
+        self._internal = False
+        self._readable = True
+        self._render_source = False
+        self._storeable = False
+        self._used_as_color = False
+        self._used_as_filename = False
+        self._uses_array_data_builder = False
+        self._world_space = False
+        self._writeable = True    
+
+    def _init_numeric_fields(self):
+        self._min = None
+        self._max = None
+        self._soft_min = None
+        self._soft_max = None
+        self._default = None
+        self._numeric_type = None
 
     def __le__(*args, **kwargs):
         """
@@ -17368,7 +17347,7 @@ class MPlug(object):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         self._owner: 'MObject' = None
-        self._id = None
+        self._uuid: uuid.UUID = uuid.uuid4()
         self._network_plug = None
         self._value = None
         self._children_plug_names = None
@@ -17379,8 +17358,7 @@ class MPlug(object):
         }
         self._parent = None
 
-        self._attribute = MObject()
-        self._attribute._api_type = [MFn.kAttribute, ]
+        self._attribute = None
 
     def __repr__(self):
         if not self._owner:
@@ -19727,6 +19705,17 @@ class MFnAttribute(MFnBase):
         """
         super().__init__(*args, **kwargs)
 
+    def _create(self, long_name:str, short_name:str):
+        """Regular MFnAttribute does not have this method. Implemented here form commodity and reuse."""
+        self._mobject = MObject()
+        self._mobject._long_name = long_name
+        self._mobject._short_name = short_name
+
+        self._mobject._alive = True
+        self._mobject._api_type = [MFn.kBase, MFn.kAttribute,]
+
+        return self._mobject
+
     def accepts(*args, **kwargs):
         """
         Returns True if this attribute can accept a connection of the given type.
@@ -19763,63 +19752,114 @@ class MFnAttribute(MFnBase):
         """
         pass
 
-    affectsAppearance = None
+    @property
+    def array(self):
+        return self._mobject._is_array
 
-    affectsWorldSpace = None
+    @property
+    def cached(self):
+        return self._mobject._is_cached
 
-    array = None
+    @property
+    def channelBox(self):
+        return self._mobject._channel_box
 
-    cached = None
+    @property
+    def connectable(self):
+        return self._mobject._connectable
 
-    channelBox = None
+    @property
+    def disconnectBehavior(self):
+        return self._mobject._disconnect_behavior
 
-    connectable = None
+    @property
+    def dynamic(self):
+        return self._mobject._dynamic
 
-    disconnectBehavior = None
+    @property
+    def extension(self):
+        return self._mobject._extension
 
-    dynamic = None
+    @property
+    def hidden(self):
+        return self._mobject._hidden
 
-    extension = None
+    @property
+    def indeterminant(self):
+        return self._mobject._indeterminant
 
-    hidden = None
+    @property
+    def indexMatters(self):
+        return self._mobject._indexMatters
 
-    indeterminant = None
+    @property
+    def internal(self):
+        return self._mobject._internal
 
-    indexMatters = None
+    @property
+    def isProxyAttribute(self):
+        return self._mobject._isProxyAttribute
 
-    internal = None
+    @property
+    def keyable(self):
+        return self._mobject._keyable
 
-    isProxyAttribute = None
+    @property
+    def name(self):
+        return self._mobject._long_name
 
+    @property
+    def parent(self):
+        parent = self._mobject._parent
+        return parent if parent else MObject.kNullObj
+
+    @property
+    def readable(self):
+        return self._mobject._readable
+
+    @property
+    def renderSource(self):
+        return self._mobject._renderSource
+
+    @property
+    def shortName(self):
+        return self._mobject._short_name
+
+    @property
+    def storable(self):
+        return self._mobject._storable
+
+    @property
+    def usedAsColor(self):
+        return self._mobject._used_as_color
+
+    @property
+    def usedAsFilename(self):
+        return self._mobject._used_as_filename
+
+    @property
+    def usesArrayDataBuilder(self):
+        return self._mobject._uses_array_data_builder
+
+    @property
+    def worldSpace(self):
+        return self._mobject._world_space
+
+    @property
+    def writable(self):
+        return self._mobject._writable
+
+    @property
+    def affectsAppearance(self):
+        return self._mobject._affects_appearance
+    
+    @property
+    def affectsWorldSpace(self):
+        return self._mobject._affects_world_space
+    
     kDelete = 0
-
-    kNothing = 2
-
     kReset = 1
-
-    keyable = None
-
-    name = None
-
-    parent = None
-
-    readable = None
-
-    renderSource = None
-
-    shortName = None
-
-    storable = None
-
-    usedAsColor = None
-
-    usedAsFilename = None
-
-    usesArrayDataBuilder = None
-
-    worldSpace = None
-
-    writable = None
+    kNothing = 2
 
 
 class MNodeMessage(MMessage):
@@ -21608,11 +21648,13 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def addAttribute(*args, **kwargs):
+    def addAttribute(self, attribute: 'MObject') -> 'MFnDependencyNode':
         """
         Adds a new dynamic attribute to the node.
         """
-        pass
+        attribute._dynamic = True
+        self._mobject._attributes[attribute._uuid] = attribute
+        return self
 
     def addExternalContentForFileAttr(*args, **kwargs):
         """
@@ -21740,9 +21782,36 @@ class MFnDependencyNode(MFnBase):
         """
         Returns a plug for the given attribute.
         """
+        
+        # See if plug and attribute have already been cached
+        attribute_id = uuid.uuid5(uuid.NAMESPACE_DNS, f'{self._mobject._name}.{attr_name}')
+        attribute: 'MObject' = self._mobject._attributes.get(attribute_id)
+
+        mplug_id = attribute_id
+        mplug: 'MPlug' = self._mobject._cached_plugs.get(mplug_id)
+        
+        # Fast return for already cached plugs and attributes
+        if attribute and mplug:
+            if mplug._attribute == attribute:
+                return mplug
+        elif attribute and mplug is None:
+            mplug = MPlug()
+            mplug._owner = self._mobject
+            mplug._uuid = mplug_id
+            mplug._attribute = attribute
+            mplug._network_plug = want_network_plug
+            self._mobject._cached_plugs[mplug_id] = mplug
+            return mplug
+        
+        # Initialize plug object if none is cached
         mplug = MPlug()
-        attribute = mplug._attribute
         mplug._owner = self._mobject
+
+        attribute = attribute if attribute else MObject()
+        attribute._api_type = [MFn.kAttribute, ]
+        attribute._init_attribute_fields()
+
+        # Try finding the attribute in the non-dynamic attributes record to populate instance attrs
         try:
             node_type = _TYPE_INT_TO_STR[self._mobject._typeId.id()]
         except AttributeError:
@@ -21754,6 +21823,7 @@ class MFnDependencyNode(MFnBase):
 
         properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type, {}).get(attr_name)
 
+        # Could have been given a short name. Convert it to long name to use the map.
         if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
             short_name = attr_name
             long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
@@ -21764,20 +21834,25 @@ class MFnDependencyNode(MFnBase):
         elif properties:
             long_name = attr_name
             short_name = properties['short_name']
+        # If not found in the map, assume it is a long name
         else:
             long_name = attr_name
             short_name = attr_name
 
-        attribute_name = f'{self._mobject._name}.{long_name or attr_name}'
-        mplug_id = hash(f'{self._mobject._name}.{attribute_name}')
+        # Update ids
+        attribute_name = f'{self._mobject._name}.{long_name}'
+        attribute_id = uuid.uuid5(uuid.NAMESPACE_DNS, attribute_name)
+        mplug_id = attribute_id
 
-        # If plug has already been found, return that one
+        # Try one last time to find it in cache plugs, just in case it was created using the short name or viceversa
         cached_plug = self._mobject._cached_plugs.get(mplug_id)
         if cached_plug:
             return cached_plug
 
         # Else initialize attribute values
-        mplug._id = mplug_id
+        mplug._uuid = mplug_id
+        attribute._uuid = attribute_id
+
         attribute._name = attribute_name
         attribute._long_name = long_name
         attribute._short_name = short_name
@@ -21804,8 +21879,13 @@ class MFnDependencyNode(MFnBase):
 
         mplug._network_plug = want_network_plug
 
-        self._mobject._cached_plugs[mplug._id] = mplug
+        self._mobject._cached_plugs[mplug._uuid] = mplug
+        self._mobject._attributes[attribute._uuid] = attribute
 
+        # Add attribute to the mplug
+        mplug._attribute = attribute
+
+        # Finally, return plug
         return mplug
 
     def getAffectedAttributes(*args, **kwargs):
@@ -22198,83 +22278,131 @@ class MFnNumericAttribute(MFnAttribute):
         """
         super().__init__(*args, **kwargs)
 
-    def child(*args, **kwargs):
+    def child(self, index: int) -> 'MObject':
         """
         Returns the specified child attribute of the parent attribute currently attached to the function set.
         """
-        pass
+        return self._mobject._children[index]
 
-    def create(*args, **kwargs):
-        """
-        Creates a new simple or compound numeric attribute, attaches it to the function set and returns it in an MObject.
-        """
-        pass
+    def create(self, long_name: str, short_name: str, numeric_type: int, default_value: float=0) -> 'MObject':
+        """Creates a new simple or compound numeric attribute, attaches it to the function set and returns it in an MObject.
 
-    def createAddr(*args, **kwargs):
+        Args:
+            long_name (str): Attr long name.
+            short_name (str): Attr short name.
+            numeric_type (int): MFnNumericData type constant.
+            default_value (float, optional): The default value of the attr upon being generated. Defaults to 0.
+
+        Returns:
+            MObject: Numeric Attribute MObject.
+        """
+
+        super()._create(long_name=long_name, short_name=short_name)
+        
+        # Initialize numeric fields
+        self._mobject._init_numeric_fields()
+
+        self._mobject._api_type.append(MFn.kNumericAttribute)
+        self._mobject._numeric_type = numeric_type
+
+        self._mobject._value = default_value
+        self._mobject._default = default_value
+
+
+    def createAddr(self, long_name: str, short_name: str, default_value: float=0) -> 'MObject':
         """
         Creates a new address attribute, attaches it to the function set and returns it in an MObject.
-        """
-        pass
+        
+        Args:
+            long_name (str): Attr long name.
+            short_name (str): Attr short name.
+            default_value (float, long, optional): The default value of the attr upon being generated. Defaults to 0.
 
-    def createColor(*args, **kwargs):
+        Returns:
+            MObject: Numeric Attribute Addr MObject.
+        """
+        return self.create(long_name=long_name, short_name=short_name, numeric_type=MFnNumericData.kAddr, default_value=default_value)
+
+    def createColor(self, long_name: str, short_name: str) -> 'MObject':
         """
         Creates a new color attribute, attaches it to the function set and returns it in an MObject.
-        """
-        pass
 
-    def createPoint(*args, **kwargs):
+        Args:
+            long_name (str): Attr long name.
+            short_name (str): Attr short name.
+
+        Returns:
+            MObject: Numeric Attribute Color MObject.
+        """
+        return self.create(long_name=long_name, short_name=short_name, numeric_type=MFnNumericData.k3Double)
+
+    def createPoint(self, long_name: str, short_name: str) -> 'MObject':
         """
         Creates a new 3D point attribute, attaches it to the function set and returns it in an MObject.
-        """
-        pass
+        Args:
+            long_name (str): Attr long name.
+            short_name (str): Attr short name.
 
-    def getMax(*args, **kwargs):
+        Returns:
+            MObject: Numeric Attribute Color MObject.
+        """
+        return self.create(long_name=long_name, short_name=short_name, numeric_type=MFnNumericData.k3Double)
+
+    def getMax(self) -> float | Tuple[float]:
         """
         Returns the attribute's hard maximum value(s).
         """
-        pass
+        if self._mobject._max is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a maximum value.')        
+        return self._mobject._max
 
-    def getMin(*args, **kwargs):
+    def getMin(self) -> float | Tuple[float]:
         """
         Returns the attribute's hard minimum value(s).
         """
-        pass
+        if self._mobject._min is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a minimum value.')
+        return self._mobject._min
 
-    def getSoftMax(*args, **kwargs):
+    def getSoftMax(self) -> float | Tuple[float]:
         """
         Returns the attribute's soft maximum value.
         """
-        pass
+        if self._mobject._soft_max is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft maximum value.')
+        return self._mobject._soft_max
 
-    def getSoftMin(*args, **kwargs):
+    def getSoftMin(self) -> float | Tuple[float]:
         """
         Returns the attribute's soft minimum value.
         """
-        pass
+        if self._mobject._soft_min is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft minimum value.')
+        return self._mobject._soft_min
 
-    def hasMax(*args, **kwargs):
+    def hasMax(self) -> bool:
         """
         Returns True if a hard maximum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._max else False
 
-    def hasMin(*args, **kwargs):
+    def hasMin(self) -> bool:
         """
         Returns True if a hard minimum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._min else False
 
-    def hasSoftMax(*args, **kwargs):
+    def hasSoftMax(self) -> bool:
         """
         Returns True if a soft maximum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._soft_max else False
 
-    def hasSoftMin(*args, **kwargs):
+    def hasSoftMin(self) -> bool:
         """
         Returns True if a soft minimum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._soft_min else False
 
     def numericType(self):
         """
@@ -22282,32 +22410,41 @@ class MFnNumericAttribute(MFnAttribute):
         """
         return self._mobject._numeric_type
 
-    def setMax(*args, **kwargs):
+    def setMax(self, new_value: float) -> 'MFnNumericAttribute':
         """
         Sets the attribute's hard maximum value(s).
         """
-        pass
+        self._mobject._max = new_value
+        return self
 
-    def setMin(*args, **kwargs):
+    def setMin(self, new_value: float) -> 'MFnNumericAttribute':
         """
         Sets the attribute's hard minimum value(s).
         """
-        pass
+        self._mobject._min = new_value
+        return self
 
-    def setSoftMax(*args, **kwargs):
+    def setSoftMax(self, new_value: float) -> 'MFnNumericAttribute':
         """
         Sets the attribute's soft maximum value.
         """
-        pass
+        self._mobject._soft_max = new_value
+        return self
 
-    def setSoftMin(*args, **kwargs):
+    def setSoftMin(self, new_value: float) -> 'MFnNumericAttribute':
         """
         Sets the attribute's soft minimum value.
         """
-        pass
+        self._mobject._soft_min = new_value
+        return self
 
-    default = None
+    @property
+    def default(self):
+        return self._default
 
+    @default.setter
+    def default(self, value: float):
+        self._default = value
 
 class MFnStringArrayData(MFnData):
     """
