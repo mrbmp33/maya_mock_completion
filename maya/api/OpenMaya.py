@@ -12987,10 +12987,11 @@ class MObject(object):
         self._extension = None
         self._hidden = False
         self._indeterminant = None
+        self._index_matters = False
         self._internal = False
         self._readable = True
         self._render_source = False
-        self._storeable = False
+        self._storable = False
         self._used_as_color = False
         self._used_as_filename = False
         self._uses_array_data_builder = False
@@ -19756,21 +19757,41 @@ class MFnAttribute(MFnBase):
     def array(self):
         return self._mobject._is_array
 
+    @array.setter
+    def array(self, value: bool):
+        self._mobject._is_array = value
+
     @property
-    def cached(self):
+    def cached(self) -> bool:
         return self._mobject._is_cached
 
+    @cached.setter
+    def cached(self, value: bool):
+        self._mobject._is_cached = value
+
     @property
-    def channelBox(self):
+    def channelBox(self) -> bool:
         return self._mobject._channel_box
 
-    @property
-    def connectable(self):
-        return self._mobject._connectable
+    @channelBox.setter
+    def channelBox(self, value: bool):
+        self._mobject._channel_box = value
 
     @property
-    def disconnectBehavior(self):
+    def connectable(self) -> bool:
+        return self._mobject._connectable
+
+    @connectable.setter
+    def connectable(self, value: bool):
+        self._mobject._connectable = value
+
+    @property
+    def disconnectBehavior(self) -> int:
         return self._mobject._disconnect_behavior
+
+    @disconnectBehavior.setter
+    def disconnectBehavior(self, value: int):
+        self._mobject._disconnect_behavior = value
 
     @property
     def dynamic(self):
@@ -19781,20 +19802,36 @@ class MFnAttribute(MFnBase):
         return self._mobject._extension
 
     @property
-    def hidden(self):
+    def hidden(self) -> bool:
         return self._mobject._hidden
 
+    @hidden.setter
+    def hidden(self, value: bool):
+        self._mobject._hidden = value
+
     @property
-    def indeterminant(self):
+    def indeterminant(self) -> bool:
         return self._mobject._indeterminant
 
-    @property
-    def indexMatters(self):
-        return self._mobject._indexMatters
+    @indeterminant.setter
+    def indeterminant(self, value: bool):
+        self._mobject._indeterminant = value
 
     @property
-    def internal(self):
+    def indexMatters(self) -> bool:
+        return self._mobject._index_matters
+
+    @indexMatters.setter
+    def indexMatters(self, value: bool):
+        self._mobject._indexMatters = value
+
+    @property
+    def internal(self) -> bool:
         return self._mobject._internal
+
+    @internal.setter
+    def internal(self, value: bool):
+        self._mobject._internal = value
 
     @property
     def isProxyAttribute(self):
@@ -19804,6 +19841,10 @@ class MFnAttribute(MFnBase):
     def keyable(self):
         return self._mobject._keyable
 
+    @keyable.setter
+    def keyable(self, value: bool):
+        self._mobject._keyable = value
+    
     @property
     def name(self):
         return self._mobject._long_name
@@ -19813,49 +19854,93 @@ class MFnAttribute(MFnBase):
         parent = self._mobject._parent
         return parent if parent else MObject.kNullObj
 
+    @parent.setter
+    def parent(self, value: 'MObject'):
+        self._mobject._parent = value
+
     @property
     def readable(self):
         return self._mobject._readable
 
+    @readable.setter
+    def readable(self, value: bool):
+        self._mobject._readable = value
+
     @property
     def renderSource(self):
         return self._mobject._renderSource
+
+    @renderSource.setter
+    def renderSource(self, value: bool):
+        self._mobject._renderSource = value
 
     @property
     def shortName(self):
         return self._mobject._short_name
 
     @property
-    def storable(self):
+    def storable(self) -> bool:
         return self._mobject._storable
 
+    @storable.setter
+    def storable(self, value: bool):
+        self._mobject._storable = value
+
     @property
-    def usedAsColor(self):
+    def usedAsColor(self) -> bool:
         return self._mobject._used_as_color
 
+    @usedAsColor.setter
+    def usedAsColor(self, value: bool):
+        self._mobject._used_as_color = value
+
     @property
-    def usedAsFilename(self):
+    def usedAsFilename(self) -> bool:
         return self._mobject._used_as_filename
 
+    @usedAsFilename.setter
+    def usedAsFilename(self, value: bool):
+        self._mobject._used_as_filename = value
+
     @property
-    def usesArrayDataBuilder(self):
+    def usesArrayDataBuilder(self) -> bool:
         return self._mobject._uses_array_data_builder
 
+    @usesArrayDataBuilder.setter
+    def usesArrayDataBuilder(self, value: bool):
+        self._mobject._uses_array_data_builder = value
+
     @property
-    def worldSpace(self):
+    def worldSpace(self) -> bool:
         return self._mobject._world_space
 
+    @worldSpace.setter
+    def worldSpace(self, value: bool):
+        self._mobject._world_space = value
+
     @property
-    def writable(self):
+    def writable(self) -> bool:
         return self._mobject._writable
 
+    @writable.setter
+    def writable(self, value: bool):
+        self._mobject._writable = value
+        
     @property
     def affectsAppearance(self):
         return self._mobject._affects_appearance
+
+    @affectsAppearance.setter
+    def affectsAppearance(self, value):
+        self._mobject._affects_appearance = value
     
     @property
     def affectsWorldSpace(self):
         return self._mobject._affects_world_space
+
+    @affectsWorldSpace.setter
+    def affectsWorldSpace(self, value):
+        self._mobject._affects_world_space = value
     
     kDelete = 0
     kReset = 1
