@@ -12957,7 +12957,7 @@ class MObject(object):
         self._alive: bool = False
         self._typeId: "MTypeId" = None
         self._parent: Optional['MObject'] = None
-        self._children = set()
+        self._children = []
         self._is_world = False
         self._cached_plugs = {}
         self._attributes = {}
@@ -17363,7 +17363,6 @@ class MPlug(object):
         self._uuid: uuid.UUID = uuid.uuid4()
         self._network_plug = None
         self._value = None
-        self._children_plug_names = None
 
         self._connections = {
             'INPUTS': [],
@@ -17499,7 +17498,7 @@ class MPlug(object):
         """
         if not self.isCompound:
             raise RuntimeError(f'Trying to access children plugs of non-compound attribute: <{self.name()}>')
-        child_plug = MFnDependencyNode(self._owner).findPlug(self._children_plug_names[index], False)
+        child_plug = MFnDependencyNode(self._owner).findPlug(self._attribute._children[index], False)
         child_plug._parent = weakref.proxy(self)
         return child_plug
 
@@ -17554,7 +17553,7 @@ class MPlug(object):
         """
         Returns a plug for the element of this plug array having the specified logical index.
         """
-        return self._children_plug_names[index]
+        return self._attribute._children[index]
 
 
     def elementByPhysicalIndex(*args, **kwargs):
@@ -17615,7 +17614,7 @@ class MPlug(object):
         """
         Returns the number of children this plug has.
         """
-        return len(self._children_plug_names)
+        return len(self._attribute._children)
 
     def numConnectedChildren(*args, **kwargs):
         """
@@ -22426,7 +22425,6 @@ class MFnNumericAttribute(MFnAttribute):
 
         return self._mobject
 
-
     def createAddr(self, long_name: str, short_name: str, default_value: float=0) -> 'MObject':
         """
         Creates a new address attribute, attaches it to the function set and returns it in an MObject.
@@ -22703,7 +22701,9 @@ class MFnEnumAttribute(MFnAttribute):
         Creates a new enumeration attribute, attaches it to the function set and returns it as an MObject.
         """
         super()._create(long_name=long_name, short_name=short_name)
-        self._default = default
+        self._mobject._api_type.append(MFn.kEnumAttribute)
+        self._mobject._default = default
+        self._mobject._value = default
         return self._mobject
 
     def fieldName(self, value: int) -> str:
@@ -24629,43 +24629,54 @@ class MFnCompoundAttribute(MFnAttribute):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._children_attrs = []
+        super().__init__(*args, **kwargs)
 
-    def addChild(*args, **kwargs):
+    def addChild(self, child: 'MObject') -> 'MFnCompoundAttribute':
         """
         Add a child attribute.
         """
-        pass
+        assert child._alive is True, 'Child MObject must be valid to be added to a compound attribute.'
+        self._mobject._children.append(child)
+        child._parent = self._mobject
+        return self
 
-    def child(*args, **kwargs):
+    def child(self, index: int) -> 'MObject':
         """
         Returns one of the attribute's children, specified by index.
         """
-        pass
+        return self._mobject._children[index]
 
-    def create(*args, **kwargs):
+    def create(self, long_name: str, short_name: str) -> 'MObject':
         """
         Creates a new compound attribute, attaches it to the function set and returns it as an MObject.
         """
-        pass
+        super()._create(long_name=long_name, short_name=short_name)
+        self._mobject._api_type.append(MFn.kCompoundAttribute)
+        self._mobject._is_compound = True
+        return self._mobject
 
-    def getAddAttrCmds(*args, **kwargs):
+    def getAddAttrCmds(self) -> list:
         """
         Returns a list of MEL 'addAttr' commands capable of recreating the attribute and all of its children.
         """
-        pass
+        cmds = [f'addAttr -ln "{self._mobject._long_name}" -sn "{self._mobject._short_name}" -at compound']
+        for child in self._mobject._children:
+            cmds.append(f'addAttr -p "{self._mobject._long_name}" -ln "{child._long_name}" -sn "{child._short_name}" -at {child._api_type[-1]}')
+        return cmds
 
-    def numChildren(*args, **kwargs):
+    def numChildren(self) -> int:
         """
         Returns number of child attributes currently parented under the compound attribute.
         """
-        pass
+        return len(self._mobject._children)
 
-    def removeChild(*args, **kwargs):
+    def removeChild(self, child: 'MObject') -> 'MFnCompoundAttribute':
         """
         Remove a child attribute.
         """
-        pass
+        self._mobject._children.remove(child)
+        child._parent = None
+        return self
 
 
 class MFnMatrixData(MFnData):
