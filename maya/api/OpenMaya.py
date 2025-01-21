@@ -12929,11 +12929,11 @@ class MObject(object):
     Opaque wrapper for internal Maya objects.
     """
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, other: 'MObject') -> bool:
         """
         x.__eq__(y) <==> x==y
         """
-        pass
+        return self._uuid == other._uuid
 
     def __ge__(*args, **kwargs):
         """
@@ -12951,9 +12951,9 @@ class MObject(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._uuid = MUuid().generate()
+        self._uuid = uuid.uuid4()
         self._name = str(self._uuid)
-        self._api_type: list[int] = []
+        self._api_type: list[int] = [MFn.kInvalid]
         self._alive: bool = False
         self._typeId: "MTypeId" = None
         self._parent: Optional['MObject'] = None
@@ -12967,8 +12967,10 @@ class MObject(object):
             self._init_attribute_fields()
     
     def _init_attribute_fields(self):
-        self._long_name = None
-        self._short_name = None
+        self._owner: 'MObject' = None
+        
+        self._long_name: str = None
+        self._short_name: str = None
         
         self._value = None
 
@@ -12976,7 +12978,7 @@ class MObject(object):
         self._is_compound = False
         self._is_element = False
         
-        self._numeric_type = None
+        self._numeric_type: int = MFnNumericData.kInvalid
         
         self._affects_appearance = False
         self._affects_world_space = False
@@ -13005,6 +13007,9 @@ class MObject(object):
         self._soft_max = None
         self._default = None
         self._numeric_type = None
+
+    def _init_typed_fields(self):
+        self._typed_attr_type: int = MFnData.kInvalid
 
     def __le__(*args, **kwargs):
         """
@@ -13052,7 +13057,7 @@ class MObject(object):
         return not self._alive
 
     def __hash__(self):
-        return hash(self._uuid._uuid)
+        return hash(self._uuid)
 
     @property
     def apiTypeStr(self):
@@ -15737,15 +15742,19 @@ class MFnBase(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._mobject: 'MObject' = None
+
+        self._fn_type = MFn.kBase
+
         if args:
             self._mobject = args[0]
+        else:
+            self._mobject = MObject()
 
-    def hasObj(*args, **kwargs) -> bool:
+    def hasObj(self, mobject: 'MObject') -> bool:
         """
         Returns True if the function set is compatible with the specified Maya object.
         """
-        pass
+        return self._mobject.hasFn(self.type())
 
     def object(self) -> MObject:
         """
@@ -15760,11 +15769,14 @@ class MFnBase(object):
         self._mobject = mobject
         return self
 
-    def type(*args, **kwargs):
+    def type(self) -> int:
         """
         Returns the type of the function set.
         """
-        pass
+        return self._fn_type
+
+    def _create(self):
+        self._mobject = MObject()
 
 
 class MUserData(object):
@@ -19705,13 +19717,21 @@ class MFnAttribute(MFnBase):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
+        self._fn_type = MFn.kAttribute
 
     def _create(self, long_name:str, short_name:str):
         """Regular MFnAttribute does not have this method. Implemented here form commodity and reuse."""
-        self._mobject = MObject()
+
+        # Spawn new MObject
+        super()._create()
+        self._mobject._init_attribute_fields()
+
+        # Set the attribute name
         self._mobject._long_name = long_name
         self._mobject._short_name = short_name
+        self._mobject._name = long_name
 
+        # Set valid and attribute type
         self._mobject._alive = True
         self._mobject._api_type = [MFn.kBase, MFn.kAttribute,]
 
@@ -19925,7 +19945,7 @@ class MFnAttribute(MFnBase):
     @writable.setter
     def writable(self, value: bool):
         self._mobject._writable = value
-        
+
     @property
     def affectsAppearance(self):
         return self._mobject._affects_appearance
@@ -21726,6 +21746,7 @@ class MFnDependencyNode(MFnBase):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
+        self._fn_type = MFn.kDependencyNode
 
     def absoluteName(*args, **kwargs):
         """
@@ -21737,8 +21758,12 @@ class MFnDependencyNode(MFnBase):
         """
         Adds a new dynamic attribute to the node.
         """
+
+        assert attribute._alive is True, 'Attribute MObject must be valid to be added to a node.'
         attribute._dynamic = True
-        self._mobject._attributes[attribute._uuid] = attribute
+        attribute._owner = self._mobject
+        dict_key = hash(f'{self._mobject._name}.{attribute._long_name}')
+        self._mobject._attributes[dict_key] = attribute
         return self
 
     def addExternalContentForFileAttr(*args, **kwargs):
@@ -21801,7 +21826,7 @@ class MFnDependencyNode(MFnBase):
             name = name if name else f'{type_str}1'
         
         # Add kDependencyNode in list of types and then the actual node type
-        mobject._api_type.extend([MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode])
+        mobject._api_type = [MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode]
         mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
         
         # Build name
@@ -21869,7 +21894,7 @@ class MFnDependencyNode(MFnBase):
         """
         
         # See if plug and attribute have already been cached
-        attribute_id = uuid.uuid5(uuid.NAMESPACE_DNS, f'{self._mobject._name}.{attr_name}')
+        attribute_id = hash(f'{self._mobject._name}.{attr_name}')
         attribute: 'MObject' = self._mobject._attributes.get(attribute_id)
 
         mplug_id = attribute_id
@@ -21894,7 +21919,10 @@ class MFnDependencyNode(MFnBase):
 
         attribute = attribute if attribute else MObject()
         attribute._api_type = [MFn.kAttribute, ]
-        attribute._init_attribute_fields()
+
+        # If attribute is not cached, initialize it
+        if not attribute._alive:
+            attribute._init_attribute_fields()
 
         # Try finding the attribute in the non-dynamic attributes record to populate instance attrs
         try:
@@ -21926,7 +21954,7 @@ class MFnDependencyNode(MFnBase):
 
         # Update ids
         attribute_name = f'{self._mobject._name}.{long_name}'
-        attribute_id = uuid.uuid5(uuid.NAMESPACE_DNS, attribute_name)
+        attribute_id = hash(attribute_name)
         mplug_id = attribute_id
 
         # Try one last time to find it in cache plugs, just in case it was created using the short name or viceversa
@@ -22372,6 +22400,9 @@ class MFnNumericAttribute(MFnAttribute):
     def create(self, long_name: str, short_name: str, numeric_type: int, default_value: float=0) -> 'MObject':
         """Creates a new simple or compound numeric attribute, attaches it to the function set and returns it in an MObject.
 
+        You will have to provide a "numeric type constant" to specify the type of numeric attribute you want to create. You will find
+        the values of those constants on the MFnNumericData class.
+
         Args:
             long_name (str): Attr long name.
             short_name (str): Attr short name.
@@ -22392,6 +22423,8 @@ class MFnNumericAttribute(MFnAttribute):
 
         self._mobject._value = default_value
         self._mobject._default = default_value
+
+        return self._mobject
 
 
     def createAddr(self, long_name: str, short_name: str, default_value: float=0) -> 'MObject':
@@ -22531,6 +22564,7 @@ class MFnNumericAttribute(MFnAttribute):
     def default(self, value: float):
         self._default = value
 
+
 class MFnStringArrayData(MFnData):
     """
     Function set for node data consisting of an array of string.
@@ -22650,55 +22684,75 @@ class MFnEnumAttribute(MFnAttribute):
     Functionset for creating and working with enumeration attributes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
+        self._enum_items = {}
 
-    def addField(*args, **kwargs):
+    def addField(self, name: str, value: int) -> 'MFnEnumAttribute':
         """
         Add an item to the enumeration with a specified UI name and corresponding attribute value.
         """
-        pass
+        self._enum_items[name] = value
+        return self
 
-    def create(*args, **kwargs):
+    def create(self, long_name: str, short_name: str, default: int = 0) -> 'MObject':
         """
         Creates a new enumeration attribute, attaches it to the function set and returns it as an MObject.
         """
-        pass
+        super()._create(long_name=long_name, short_name=short_name)
+        self._default = default
+        return self._mobject
 
-    def fieldName(*args, **kwargs):
+    def fieldName(self, value: int) -> str:
         """
         Returns the name of the enumeration item which has a given value.
         """
-        pass
+        for name, val in self._enum_items.items():
+            if val == value:
+                return name
+        raise ValueError(f"No field with value {value}")
 
-    def fieldValue(*args, **kwargs):
+    def fieldValue(self, name: str) -> int:
         """
         Returns the value of the enumeration item which has a given name.
         """
-        pass
+        if name in self._enum_items:
+            return self._enum_items[name]
+        raise ValueError(f"No field with name {name}")
 
-    def getMax(*args, **kwargs):
+    def getMax(self) -> int:
         """
         Returns the maximum value of all the enumeration items.
         """
-        pass
+        if not self._enum_items:
+            raise ValueError("No fields in the enumeration")
+        return max(self._enum_items.values())
 
-    def getMin(*args, **kwargs):
+    def getMin(self) -> int:
         """
         Returns the minimum value of all the enumeration items.
         """
-        pass
+        if not self._enum_items:
+            raise ValueError("No fields in the enumeration")
+        return min(self._enum_items.values())
 
-    def setDefaultByName(*args, **kwargs):
+    def setDefaultByName(self, name: str) -> 'MFnEnumAttribute':
         """
         Set the default value using the name of an enumeration item. Equivalent to: attr.default = attr.fieldValue(name)
         """
-        pass
+        self._default = self.fieldValue(name)
+        return self
 
-    default = None
+    @property
+    def default(self) -> int:
+        return self._default
+
+    @default.setter
+    def default(self, value: int):
+        self._default = value
 
 
 class MFnTypedAttribute(MFnAttribute):
@@ -22706,25 +22760,44 @@ class MFnTypedAttribute(MFnAttribute):
     Functionset for creating and working typed attributes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def attrType(*args, **kwargs):
+    def attrType(self):
         """
         Returns the type of data handled by the attribute.
         """
-        pass
+        return self._mobject._typed_attr_type
 
-    def create(*args, **kwargs):
+    def create(self, long_name: str, short_name: str, data_type: int, default_value=None) -> 'MObject':
         """
         Creates a new type attribute, attaches it to the function set and returns it as an MObject.
+        
+        You may choose a type form MFnData class to specify the type of data the attribute will handle.
         """
-        pass
+        super()._create(long_name=long_name, short_name=short_name)
+        
+        # Initialize typed attribute fields
+        self._mobject._init_typed_fields()
 
-    default = None
+        self._mobject._api_type.append(MFn.kTypedAttribute)
+        self._mobject._typed_attr_type = data_type
+
+        self._mobject._value = default_value
+        self._mobject._default = default_value
+
+        return self._mobject
+
+    @property
+    def default(self):
+        return self._mobject._default
+
+    @default.setter
+    def default(self, value):
+        self._mobject._default = value
 
 
 class MFnUInt64ArrayData(MFnData):
