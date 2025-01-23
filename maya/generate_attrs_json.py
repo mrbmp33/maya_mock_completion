@@ -11,7 +11,7 @@ from maya.api import OpenMaya as om
 sel_ls = om.MSelectionList()
 node_types = ('transform', 'joint', 'multDoubleLinear', 'condition', 'clamp', 'remapValue', 'remapColor', 'uvPin',
               'plusMinusAverage', 'blendTwoAttr', 'blendColors', 'decomposeMatrix', 'inverseMatrix', 'multMatrix',
-              'blendMatrix',)
+              'blendMatrix', 'nurbsCurve', 'nurbsSurface', 'mesh')
 
 
 def get_attr_properties(nd):
@@ -23,7 +23,7 @@ def get_attr_properties(nd):
     all_attr_properties = {}
     all_short_name_to_long_name = {}
 
-    for attr_name in mc.listAttr(nd):
+    for attr_name in sorted(mc.listAttr(nd)):
         try:
             plug = dg.findPlug(attr_name, 0)
             attr = plug.attribute()
@@ -37,8 +37,16 @@ def get_attr_properties(nd):
 
             all_short_name_to_long_name[attr_properties['short_name']] = attr_properties['long_name']
 
+            # See if it has a parent plug. Better ask forgiveness than permission
+            try:
+                parent_plug = plug.parent()
+                attr_properties['parent_plug'] = parent_plug.partialName(useLongNames=True)
+            except TypeError:
+                ...
+
             if plug.isArray:
                 attr_properties['num_elements'] = plug.numElements()
+            
             elif plug.isCompound:
                 attr_properties['num_children'] = plug.numChildren()
                 attr_properties['children'] = []
@@ -72,13 +80,18 @@ def convert_booleans_to_python_style(json_str):
     return json_str
 
 
-def create_attrs_dict(output_file):
+def create_attrs_dict(output_properties_file, output_literals_file: str = None):
     attributes_properties = {}
     attributes_short_names_map = {}
 
     for node_type in node_types:
         mc.file(newFile=1, force=1)
         node_name = mc.createNode(node_type)
+
+        if isinstance(node_name, (tuple, list)):
+            node_name, *_ = node_name
+            mc.select(clear=True)
+
         attrs_dict, short_name_to_long_name = get_attr_properties(node_name)
         attributes_properties[node_type] = attrs_dict
         attributes_short_names_map.update(short_name_to_long_name)
@@ -90,9 +103,8 @@ def create_attrs_dict(output_file):
     }
 
     # Write to Python file
-    with open(output_file, "w") as f:
+    with open(output_properties_file, "w") as f:
         f.write("# Auto-generated Maya attributes file\n\n")
-        f.write("from typing import Literal, TypeAlias\n\n")
 
         for name, content in data.items():
             f.write(f"{name} = ")
@@ -104,15 +116,26 @@ def create_attrs_dict(output_file):
             formatted_str = convert_booleans_to_python_style(json_str)
             f.write(formatted_str + "\n\n")
 
-        f.write("ATTRIBUTE_KEYS: TypeAlias = Literal[\n")
+    # If passed a file create separate literals file with possible attribute keys
+    if not output_literals_file:
+        return
+    
+    with open(output_literals_file, "w") as f1:
+        f1.write("# Auto-generated Maya attribute literals file\n\n")
+        f1.write("from typing import Literal, TypeAlias\n\n")
+        f1.write("ATTRIBUTE_KEYS: TypeAlias = Literal[\n")
 
         dicts_keys = []
         for nd in attributes_properties.values():
             dicts_keys.extend([x for x in nd.keys()])
+        
         dicts_keys.extend(attributes_short_names_map.keys())
+        
         for k in set(dicts_keys):
-            f.write(f'   "{k}",\n')
-        f.write("\n\n")
+            f1.write(f'    "{k}",\n')
+
+        f1.write("]")
+        f1.write("\n\n")
 
 
 if __name__ == '__main__':
