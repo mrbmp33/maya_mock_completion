@@ -3619,11 +3619,11 @@ class MUuid(object):
         """
         pass
 
-    def __init__(self):
+    def __init__(self, uid:str = None):
+        """UUID constructor. If passed a string representing a uuid, it will use that value.
+        If passed nothing, it will generate a new uuid with all zeros.
         """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        self._uuid = uuid.UUID('00000000-0000-0000-0000-000000000000')
+        self._uuid = uuid.UUID(uid or '00000000-0000-0000-0000-000000000000')
 
     def __le__(*args, **kwargs):
         """
@@ -22183,7 +22183,7 @@ class MFnDependencyNode(MFnBase):
         """
         Returns the node's UUID.
         """
-        return self._mobject._uuid
+        return MUuid(str(self._mobject._uuid))
 
     @staticmethod
     def allocateFlag(*args, **kwargs):
