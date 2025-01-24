@@ -15794,13 +15794,13 @@ class MFnBase(object):
     """
     Base class for function sets.
     """
+    
+    _fn_type = MFn.kBase
 
     def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-
-        self._fn_type = MFn.kBase
 
         if args:
             self._mobject = args[0]
@@ -19827,12 +19827,13 @@ class MFnAttribute(MFnBase):
     Base class for attribute functionsets.
     """
 
+    _fn_type = MFn.kAttribute
+
     def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
-        self._fn_type = MFn.kAttribute
 
     def _create(self, long_name:str, short_name:str) -> 'MObject':
         """Regular MFnAttribute does not have this method. Implemented here form commodity and reuse."""
@@ -21855,13 +21856,14 @@ class MFnDependencyNode(MFnBase):
     """
     Function set for operating on dependency nodes.
     """
+    
+    _fn_type = MFn.kDependencyNode
 
     def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
-        self._fn_type = MFn.kDependencyNode
 
     def absoluteName(*args, **kwargs):
         """
@@ -22082,6 +22084,7 @@ class MFnDependencyNode(MFnBase):
         # Only for numeric attributes
         if properties.get('numeric_type'):
             attribute._numeric_type = properties['numeric_type']
+            attribute._default = properties.get('default_value')
 
         # Only for compound attributes
         if properties.get('children'):
@@ -22662,11 +22665,11 @@ class MFnNumericAttribute(MFnAttribute):
 
     @property
     def default(self):
-        return self._default
+        return self._mobject._default
 
     @default.setter
     def default(self, value: float):
-        self._default = value
+        self._mobject._default = value
 
 
 class MFnStringArrayData(MFnData):
@@ -23181,6 +23184,8 @@ class MFnDagNode(MFnDependencyNode):
     DAG path.
     """
 
+    _fn_type = MFn.kDagNode
+
     def __init__(self, mobject : Optional['MObject']=None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
@@ -23647,108 +23652,139 @@ class MFnUnitAttribute(MFnAttribute):
     """
     Functionset for creating and working with angle, distance and time attributes.
     """
+    _fn_type = MFn.kUnitAttribute
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def create(*args, **kwargs):
+    def create(self,
+               long_name: str,
+               short_name: str,
+               unit_type: int,
+               default_value: Union[float, 'MAngle', 'MDistance', 'MTime'] = 0.0
+               ) -> 'MObject':
         """
         Creates a new unit attribute, attaches it to the function set and returns it as an MObject.
         """
-        pass
+        super()._create(long_name=long_name, short_name=short_name)
 
-    def getMax(*args, **kwargs):
-        """
-        Returns the attribute's hard maximum value. Returned MAngle and MDistance are always in radians and centimeters, respectively
-        """
-        pass
+        self._mobject._api_type.append(MFn.kUnitAttribute)
 
-    def getMin(*args, **kwargs):
-        """
-        Returns the attribute's hard minimum value. Returned MAngle and MDistance are always in radians and centimeters, respectively
-        """
-        pass
+        self._mobject._init_numeric_fields()
+        self._unit_type = unit_type
 
-    def getSoftMax(*args, **kwargs):
-        """
-        Returns the attribute's soft maximum value. Returned MAngle and MDistance are always in radians and centimeters, respectively
-        """
-        pass
+        self._mobject._value = default_value
+        self._mobject._default = default_value
 
-    def getSoftMin(*args, **kwargs):
+    def getMax(self) -> float | Tuple[float]:
         """
-        Returns the attribute's soft minimum value. Returned MAngle and MDistance are always in radians and centimeters, respectively
+        Returns the attribute's hard maximum value(s).
         """
-        pass
+        if self._mobject._max is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a maximum value.')
+        return self._mobject._max
 
-    def hasMax(*args, **kwargs):
+    def getMin(self) -> float | Tuple[float]:
         """
-        Returns True if the attribute has a hard maximum value.
+        Returns the attribute's hard minimum value(s).
         """
-        pass
+        if self._mobject._min is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a minimum value.')
+        return self._mobject._min
 
-    def hasMin(*args, **kwargs):
+    def getSoftMax(self) -> float | Tuple[float]:
         """
-        Returns True if the attribute has a hard minimum value.
+        Returns the attribute's soft maximum value.
         """
-        pass
+        if self._mobject._soft_max is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft maximum value.')
+        return self._mobject._soft_max
 
-    def hasSoftMax(*args, **kwargs):
+    def getSoftMin(self) -> float | Tuple[float]:
         """
-        Returns True if the attribute has a soft maximum value.
+        Returns the attribute's soft minimum value.
         """
-        pass
+        if self._mobject._soft_min is None:
+            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft minimum value.')
+        return self._mobject._soft_min
 
-    def hasSoftMin(*args, **kwargs):
+    def hasMax(self) -> bool:
         """
-        Returns True if the attribute has a soft minimum value.
+        Returns True if a hard maximum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._max else False
 
-    def setMax(*args, **kwargs):
+    def hasMin(self) -> bool:
         """
-        Sets the attribute's hard maximum value.
+        Returns True if a hard minimum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._min else False
 
-    def setMin(*args, **kwargs):
+    def hasSoftMax(self) -> bool:
         """
-        Sets the attribute's hard minimum value.
+        Returns True if a soft maximum value has been specified for the attribute.
         """
-        pass
+        return True if self._mobject._soft_max else False
 
-    def setSoftMax(*args, **kwargs):
+    def hasSoftMin(self) -> bool:
+        """
+        Returns True if a soft minimum value has been specified for the attribute.
+        """
+        return True if self._mobject._soft_min else False
+        """
+        Returns the numeric type of the attribute currently attached to the function set.
+        """
+        return self._mobject._numeric_type
+
+    def setMax(self, new_value: float) -> 'MFnNumericAttribute':
+        """
+        Sets the attribute's hard maximum value(s).
+        """
+        self._mobject._max = new_value
+        return self
+
+    def setMin(self, new_value: float) -> 'MFnNumericAttribute':
+        """
+        Sets the attribute's hard minimum value(s).
+        """
+        self._mobject._min = new_value
+        return self
+
+    def setSoftMax(self, new_value: float) -> 'MFnNumericAttribute':
         """
         Sets the attribute's soft maximum value.
         """
-        pass
+        self._mobject._soft_max = new_value
+        return self
 
-    def setSoftMin(*args, **kwargs):
+    def setSoftMin(self, new_value: float) -> 'MFnNumericAttribute':
         """
         Sets the attribute's soft minimum value.
         """
         pass
 
-    def unitType(*args, **kwargs):
+    def unitType(self) -> int:
         """
         Returns the type of data handled by the attribute.
         """
-        pass
+        self._unit_type
 
-    default = None
+    @property
+    def default(self):
+        return self._mobject._default
 
-    kAngle = 1
-
-    kDistance = 2
+    @default.setter
+    def default(self, value: float):
+        self._mobject._default = value
 
     kInvalid = 0
-
-    kLast = 4
-
+    kAngle = 1
+    kDistance = 2
     kTime = 3
+    kLast = 4
 
 
 class MFnReference(MFnDependencyNode):
@@ -24837,6 +24873,8 @@ class MFnTransform(MFnDagNode):
     """
     Function set for operating on transform nodes.
     """
+
+    _fn_type = MFn.kTransform
 
     def __init__(*args, **kwargs):
         """

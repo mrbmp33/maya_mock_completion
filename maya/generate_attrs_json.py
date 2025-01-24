@@ -9,9 +9,26 @@ from maya import cmds as mc
 from maya.api import OpenMaya as om
 
 sel_ls = om.MSelectionList()
-node_types = ('transform', 'joint', 'multDoubleLinear', 'condition', 'clamp', 'remapValue', 'remapColor', 'uvPin',
-              'plusMinusAverage', 'blendTwoAttr', 'blendColors', 'decomposeMatrix', 'inverseMatrix', 'multMatrix',
-              'blendMatrix', 'nurbsCurve', 'nurbsSurface', 'mesh')
+node_types = (
+    "transform",
+    "joint",
+    "multDoubleLinear",
+    "condition",
+    "clamp",
+    "remapValue",
+    "remapColor",
+    "uvPin",
+    "plusMinusAverage",
+    "blendTwoAttr",
+    "blendColors",
+    "decomposeMatrix",
+    "inverseMatrix",
+    "multMatrix",
+    "blendMatrix",
+    "nurbsCurve",
+    "nurbsSurface",
+    "mesh",
+)
 
 
 def get_attr_properties(nd):
@@ -28,35 +45,53 @@ def get_attr_properties(nd):
             plug = dg.findPlug(attr_name, 0)
             attr = plug.attribute()
 
-            attr_properties = {'short_name': plug.partialName(),
-                               'long_name': plug.partialName(useLongNames=1),
-                               'is_element': plug.isElement,
-                               'is_array': plug.isArray,
-                               'is_compound': plug.isCompound,
-                               'type_str': attr.apiTypeStr}
+            attr_properties = {
+                "short_name": plug.partialName(),
+                "long_name": plug.partialName(useLongNames=1),
+                "is_element": plug.isElement,
+                "is_array": plug.isArray,
+                "is_compound": plug.isCompound,
+                "type_str": attr.apiTypeStr,
+            }
 
-            all_short_name_to_long_name[attr_properties['short_name']] = attr_properties['long_name']
+            all_short_name_to_long_name[attr_properties["short_name"]] = (
+                attr_properties["long_name"]
+            )
 
             # See if it has a parent plug. Better ask forgiveness than permission
             try:
                 parent_plug = plug.parent()
-                attr_properties['parent_plug'] = parent_plug.partialName(useLongNames=True)
+                attr_properties["parent_plug"] = parent_plug.partialName(
+                    useLongNames=True
+                )
             except TypeError:
                 ...
 
             if plug.isArray:
-                attr_properties['num_elements'] = plug.numElements()
-            
+                attr_properties["num_elements"] = plug.numElements()
+
             elif plug.isCompound:
-                attr_properties['num_children'] = plug.numChildren()
-                attr_properties['children'] = []
+                attr_properties["num_children"] = plug.numChildren()
+                attr_properties["children"] = []
                 for index in range(plug.numChildren()):
-                    attr_properties['children'].append(plug.child(index).partialName(useLongNames=1))
+                    attr_properties["children"].append(
+                        plug.child(index).partialName(useLongNames=1)
+                    )
+
+            if attr.apiType() in (
+                om.MFn.kDoubleLinearAttribute,
+                om.MFn.kFloatLinearAttribute,
+                om.MFn.kDoubleAngleAttribute,
+                om.MFn.kFloatAngleAttribute,
+            ):
+                unit = om.MFnUnitAttribute(attr)
+                attr_properties["unit_type"] = unit.unitType()
+                attr_properties["default_value"] = unit.default
 
             if attr.apiType() == om.MFn.kNumericAttribute:
                 numeric = om.MFnNumericAttribute(attr)
-                attr_properties['numeric_type'] = numeric.numericType()
-                attr_properties['default_value'] = numeric.default
+                attr_properties["numeric_type"] = numeric.numericType()
+                attr_properties["default_value"] = numeric.default
 
             elif attr.apiType() == om.MFn.kEnumAttribute:
                 enum = om.MFnEnumAttribute(attr)
@@ -64,9 +99,9 @@ def get_attr_properties(nd):
                 for value in range(enum.getMax()):
                     fields[value] = enum.fieldName(value)
 
-            all_attr_properties[attr_properties['long_name']] = attr_properties
+            all_attr_properties[attr_properties["long_name"]] = attr_properties
         except RuntimeError as err:
-            logging.debug(f'Could not complete attribute {attr_name}. {err}')
+            logging.debug(f"Could not complete attribute {attr_name}. {err}")
 
     return all_attr_properties, all_short_name_to_long_name
 
@@ -74,8 +109,8 @@ def get_attr_properties(nd):
 def convert_booleans_to_python_style(json_str):
     # Debug print to ensure JSON booleans are being captured
     # print("Before regex replacement: ", json_str[:200])  # Print the first 200 chars to inspect
-    json_str = re.sub(r'\btrue\b', 'True', json_str)
-    json_str = re.sub(r'\bfalse\b', 'False', json_str)
+    json_str = re.sub(r"\btrue\b", "True", json_str)
+    json_str = re.sub(r"\bfalse\b", "False", json_str)
     # print("After regex replacement: ", json_str[:200])  # Print the first 200 chars after replacing booleans
     return json_str
 
@@ -99,7 +134,7 @@ def create_attrs_dict(output_properties_file, output_literals_file: str = None):
     # Prepare the data to be written
     data = {
         "ATTRIBUTES_PROPERTIES": attributes_properties,
-        "ATTRIBUTES_SHORT_NAMES_MAP": attributes_short_names_map
+        "ATTRIBUTES_SHORT_NAMES_MAP": attributes_short_names_map,
     }
 
     # Write to Python file
@@ -119,7 +154,7 @@ def create_attrs_dict(output_properties_file, output_literals_file: str = None):
     # If passed a file create separate literals file with possible attribute keys
     if not output_literals_file:
         return
-    
+
     with open(output_literals_file, "w") as f1:
         f1.write("# Auto-generated Maya attribute literals file\n\n")
         f1.write("from typing import Literal, TypeAlias\n\n")
@@ -128,9 +163,9 @@ def create_attrs_dict(output_properties_file, output_literals_file: str = None):
         dicts_keys = []
         for nd in attributes_properties.values():
             dicts_keys.extend([x for x in nd.keys()])
-        
+
         dicts_keys.extend(attributes_short_names_map.keys())
-        
+
         for k in set(dicts_keys):
             f1.write(f'    "{k}",\n')
 
@@ -138,6 +173,6 @@ def create_attrs_dict(output_properties_file, output_literals_file: str = None):
         f1.write("\n\n")
 
 
-if __name__ == '__main__':
-    out_file = ''
+if __name__ == "__main__":
+    out_file = ""
     create_attrs_dict(out_file)
