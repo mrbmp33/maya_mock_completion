@@ -48,16 +48,30 @@ def _get_node_type(mobject: 'MObject') -> str:
         raise RuntimeError(f'{mobject} does not exist yet. Please "create" it first.')
 
 def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
-    properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type, {}).get(attr_name)
-    if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
-        short_name = attr_name
-        long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
-        properties = attribute_properties.ATTRIBUTES_PROPERTIES[node_type].get(long_name)
-        if not properties:
-            raise KeyError(f'Node Type: <{node_type}> does not have attribute <{long_name}>')
-    else:
-        long_name = attr_name
-        short_name = properties['short_name'] if properties else attr_name
+    properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type)
+    if properties is None:
+        raise KeyError(f'Could not find attributes info on node type: <{node_type}>.'
+                       f'Check spellig or if the node type is supported in {attribute_properties}.')
+
+    try:
+        if attr_name in properties:
+            properties = properties[attr_name]
+            long_name = attr_name
+            short_name = properties['short_name']
+
+        elif attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
+            short_name = attr_name
+            long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
+            properties = properties[long_name]
+        
+        else:
+            raise KeyError
+
+    except KeyError:
+        raise KeyError(
+            f'Could not find attribute info on node type: <{node_type}>. Given attribute name: <{attr_name}>.'
+        )
+
     return properties, long_name, short_name
 
 
