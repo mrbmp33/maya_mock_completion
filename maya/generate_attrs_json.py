@@ -86,7 +86,7 @@ def get_attr_properties(nd):
             ):
                 unit = om.MFnUnitAttribute(attr)
                 attr_properties["unit_type"] = unit.unitType()
-                attr_properties["default_value"] = unit.default
+                attr_properties["default_value"] = unit.default.value
 
             if attr.apiType() == om.MFn.kNumericAttribute:
                 numeric = om.MFnNumericAttribute(attr)

@@ -50,7 +50,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterY": {
             "short_name": "bcy",
@@ -59,7 +61,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterZ": {
             "short_name": "bcz",
@@ -68,7 +72,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMax": {
             "short_name": "bbmx",
@@ -92,7 +98,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxY": {
             "short_name": "bbxy",
@@ -101,7 +109,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxZ": {
             "short_name": "bbxz",
@@ -110,7 +120,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMin": {
             "short_name": "bbmn",
@@ -134,7 +146,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinY": {
             "short_name": "bbny",
@@ -143,7 +157,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinZ": {
             "short_name": "bbnz",
@@ -152,7 +168,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSize": {
             "short_name": "bbsi",
@@ -176,7 +194,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeY": {
             "short_name": "bbsy",
@@ -185,7 +205,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeZ": {
             "short_name": "bbsz",
@@ -194,7 +216,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "caching": {
             "short_name": "cch",
@@ -770,7 +794,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotLimit"
+            "parent_plug": "maxRotLimit",
+            "unit_type": 1,
+            "default_value": 0.7853981633974483
         },
         "maxRotXLimitEnable": {
             "short_name": "xrxe",
@@ -790,7 +816,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotLimit"
+            "parent_plug": "maxRotLimit",
+            "unit_type": 1,
+            "default_value": 0.7853981633974483
         },
         "maxRotYLimitEnable": {
             "short_name": "xrye",
@@ -810,7 +838,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotLimit"
+            "parent_plug": "maxRotLimit",
+            "unit_type": 1,
+            "default_value": 0.7853981633974483
         },
         "maxRotZLimitEnable": {
             "short_name": "xrze",
@@ -952,7 +982,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "maxTransLimit"
+            "parent_plug": "maxTransLimit",
+            "unit_type": 2,
+            "default_value": 1.0
         },
         "maxTransXLimitEnable": {
             "short_name": "xtxe",
@@ -972,7 +1004,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "maxTransLimit"
+            "parent_plug": "maxTransLimit",
+            "unit_type": 2,
+            "default_value": 1.0
         },
         "maxTransYLimitEnable": {
             "short_name": "xtye",
@@ -992,7 +1026,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "maxTransLimit"
+            "parent_plug": "maxTransLimit",
+            "unit_type": 2,
+            "default_value": 1.0
         },
         "maxTransZLimitEnable": {
             "short_name": "xtze",
@@ -1048,7 +1084,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotLimit"
+            "parent_plug": "minRotLimit",
+            "unit_type": 1,
+            "default_value": -0.7853981633974483
         },
         "minRotXLimitEnable": {
             "short_name": "mrxe",
@@ -1068,7 +1106,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotLimit"
+            "parent_plug": "minRotLimit",
+            "unit_type": 1,
+            "default_value": -0.7853981633974483
         },
         "minRotYLimitEnable": {
             "short_name": "mrye",
@@ -1088,7 +1128,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotLimit"
+            "parent_plug": "minRotLimit",
+            "unit_type": 1,
+            "default_value": -0.7853981633974483
         },
         "minRotZLimitEnable": {
             "short_name": "mrze",
@@ -1230,7 +1272,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "minTransLimit"
+            "parent_plug": "minTransLimit",
+            "unit_type": 2,
+            "default_value": -1.0
         },
         "minTransXLimitEnable": {
             "short_name": "mtxe",
@@ -1250,7 +1294,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "minTransLimit"
+            "parent_plug": "minTransLimit",
+            "unit_type": 2,
+            "default_value": -1.0
         },
         "minTransYLimitEnable": {
             "short_name": "mtye",
@@ -1270,7 +1316,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "minTransLimit"
+            "parent_plug": "minTransLimit",
+            "unit_type": 2,
+            "default_value": -1.0
         },
         "minTransZLimitEnable": {
             "short_name": "mtze",
@@ -1642,7 +1690,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotateAxis"
+            "parent_plug": "rotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateAxisY": {
             "short_name": "ray",
@@ -1651,7 +1701,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotateAxis"
+            "parent_plug": "rotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateAxisZ": {
             "short_name": "raz",
@@ -1660,7 +1712,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotateAxis"
+            "parent_plug": "rotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateOrder": {
             "short_name": "ro",
@@ -1705,7 +1759,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivotTranslate"
+            "parent_plug": "rotatePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotTranslateY": {
             "short_name": "rpty",
@@ -1714,7 +1770,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivotTranslate"
+            "parent_plug": "rotatePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotTranslateZ": {
             "short_name": "rptz",
@@ -1723,7 +1781,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivotTranslate"
+            "parent_plug": "rotatePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotX": {
             "short_name": "rpx",
@@ -1732,7 +1792,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivot"
+            "parent_plug": "rotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotY": {
             "short_name": "rpy",
@@ -1741,7 +1803,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivot"
+            "parent_plug": "rotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotZ": {
             "short_name": "rpz",
@@ -1750,7 +1814,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivot"
+            "parent_plug": "rotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotateQuaternion": {
             "short_name": "rq",
@@ -1818,7 +1884,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotate"
+            "parent_plug": "rotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateY": {
             "short_name": "ry",
@@ -1827,7 +1895,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotate"
+            "parent_plug": "rotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateZ": {
             "short_name": "rz",
@@ -1836,7 +1906,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotate"
+            "parent_plug": "rotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "scale": {
             "short_name": "s",
@@ -1887,7 +1959,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivotTranslate"
+            "parent_plug": "scalePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotTranslateY": {
             "short_name": "spty",
@@ -1896,7 +1970,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivotTranslate"
+            "parent_plug": "scalePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotTranslateZ": {
             "short_name": "sptz",
@@ -1905,7 +1981,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivotTranslate"
+            "parent_plug": "scalePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotX": {
             "short_name": "spx",
@@ -1914,7 +1992,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivot"
+            "parent_plug": "scalePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotY": {
             "short_name": "spy",
@@ -1923,7 +2003,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivot"
+            "parent_plug": "scalePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotZ": {
             "short_name": "spz",
@@ -1932,7 +2014,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivot"
+            "parent_plug": "scalePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scaleX": {
             "short_name": "sx",
@@ -1988,7 +2072,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "selectHandle"
+            "parent_plug": "selectHandle",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "selectHandleY": {
             "short_name": "hdly",
@@ -1997,7 +2083,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "selectHandle"
+            "parent_plug": "selectHandle",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "selectHandleZ": {
             "short_name": "hdlz",
@@ -2006,7 +2094,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "selectHandle"
+            "parent_plug": "selectHandle",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -2138,7 +2228,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "transMinusRotatePivot"
+            "parent_plug": "transMinusRotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "transMinusRotatePivotY": {
             "short_name": "tmry",
@@ -2147,7 +2239,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "transMinusRotatePivot"
+            "parent_plug": "transMinusRotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "transMinusRotatePivotZ": {
             "short_name": "tmrz",
@@ -2156,7 +2250,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "transMinusRotatePivot"
+            "parent_plug": "transMinusRotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "translate": {
             "short_name": "t",
@@ -2179,7 +2275,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "translate"
+            "parent_plug": "translate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "translateY": {
             "short_name": "ty",
@@ -2188,7 +2286,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "translate"
+            "parent_plug": "translate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "translateZ": {
             "short_name": "tz",
@@ -2197,7 +2297,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "translate"
+            "parent_plug": "translate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -2394,7 +2496,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindJointOrient"
+            "parent_plug": "bindJointOrient",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindJointOrientY": {
             "short_name": "bjy",
@@ -2403,7 +2507,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindJointOrient"
+            "parent_plug": "bindJointOrient",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindJointOrientZ": {
             "short_name": "bjz",
@@ -2412,7 +2518,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindJointOrient"
+            "parent_plug": "bindJointOrient",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindPose": {
             "short_name": "bps",
@@ -2443,7 +2551,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindRotateAxis"
+            "parent_plug": "bindRotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindRotateAxisY": {
             "short_name": "bray",
@@ -2452,7 +2562,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindRotateAxis"
+            "parent_plug": "bindRotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindRotateAxisZ": {
             "short_name": "braz",
@@ -2461,7 +2573,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindRotateAxis"
+            "parent_plug": "bindRotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindRotation": {
             "short_name": "br",
@@ -2484,7 +2598,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindRotation"
+            "parent_plug": "bindRotation",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindRotationY": {
             "short_name": "bry",
@@ -2493,7 +2609,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindRotation"
+            "parent_plug": "bindRotation",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindRotationZ": {
             "short_name": "brz",
@@ -2502,7 +2620,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindRotation"
+            "parent_plug": "bindRotation",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "bindScale": {
             "short_name": "bs",
@@ -2525,7 +2645,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindScale"
+            "parent_plug": "bindScale",
+            "unit_type": 1,
+            "default_value": 1.0
         },
         "bindScaleY": {
             "short_name": "bsy",
@@ -2534,7 +2656,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindScale"
+            "parent_plug": "bindScale",
+            "unit_type": 1,
+            "default_value": 1.0
         },
         "bindScaleZ": {
             "short_name": "bsz",
@@ -2543,7 +2667,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "bindScale"
+            "parent_plug": "bindScale",
+            "unit_type": 1,
+            "default_value": 1.0
         },
         "bindSegmentScaleCompensate": {
             "short_name": "bsc",
@@ -2595,7 +2721,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterY": {
             "short_name": "bcy",
@@ -2604,7 +2732,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterZ": {
             "short_name": "bcz",
@@ -2613,7 +2743,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMax": {
             "short_name": "bbmx",
@@ -2637,7 +2769,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxY": {
             "short_name": "bbxy",
@@ -2646,7 +2780,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxZ": {
             "short_name": "bbxz",
@@ -2655,7 +2791,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMin": {
             "short_name": "bbmn",
@@ -2679,7 +2817,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinY": {
             "short_name": "bbny",
@@ -2688,7 +2828,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinZ": {
             "short_name": "bbnz",
@@ -2697,7 +2839,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSize": {
             "short_name": "bbsi",
@@ -2721,7 +2865,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeY": {
             "short_name": "bbsy",
@@ -2730,7 +2876,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeZ": {
             "short_name": "bbsz",
@@ -2739,7 +2887,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "caching": {
             "short_name": "cch",
@@ -2935,7 +3085,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "fkRotate"
+            "parent_plug": "fkRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "fkRotateY": {
             "short_name": "fry",
@@ -2944,7 +3096,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "fkRotate"
+            "parent_plug": "fkRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "fkRotateZ": {
             "short_name": "frz",
@@ -2953,7 +3107,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "fkRotate"
+            "parent_plug": "fkRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -3280,7 +3436,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "ikRotate"
+            "parent_plug": "ikRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "ikRotateY": {
             "short_name": "iry",
@@ -3289,7 +3447,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "ikRotate"
+            "parent_plug": "ikRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "ikRotateZ": {
             "short_name": "irz",
@@ -3298,7 +3458,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "ikRotate"
+            "parent_plug": "ikRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "inIKSolveFlag": {
             "short_name": "isf",
@@ -3464,7 +3626,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "jointOrient"
+            "parent_plug": "jointOrient",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "jointOrientY": {
             "short_name": "joy",
@@ -3473,7 +3637,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "jointOrient"
+            "parent_plug": "jointOrient",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "jointOrientZ": {
             "short_name": "joz",
@@ -3482,7 +3648,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "jointOrient"
+            "parent_plug": "jointOrient",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "jointType": {
             "short_name": "jt",
@@ -3597,7 +3765,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotLimit"
+            "parent_plug": "maxRotLimit",
+            "unit_type": 1,
+            "default_value": 0.7853981633974483
         },
         "maxRotXLimitEnable": {
             "short_name": "xrxe",
@@ -3617,7 +3787,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotLimit"
+            "parent_plug": "maxRotLimit",
+            "unit_type": 1,
+            "default_value": 0.7853981633974483
         },
         "maxRotYLimitEnable": {
             "short_name": "xrye",
@@ -3637,7 +3809,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotLimit"
+            "parent_plug": "maxRotLimit",
+            "unit_type": 1,
+            "default_value": 0.7853981633974483
         },
         "maxRotZLimitEnable": {
             "short_name": "xrze",
@@ -3671,7 +3845,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotateDampRange"
+            "parent_plug": "maxRotateDampRange",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "maxRotateDampRangeY": {
             "short_name": "xdy",
@@ -3680,7 +3856,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotateDampRange"
+            "parent_plug": "maxRotateDampRange",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "maxRotateDampRangeZ": {
             "short_name": "xdz",
@@ -3689,7 +3867,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "maxRotateDampRange"
+            "parent_plug": "maxRotateDampRange",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "maxRotateDampStrength": {
             "short_name": "xst",
@@ -3867,7 +4047,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "maxTransLimit"
+            "parent_plug": "maxTransLimit",
+            "unit_type": 2,
+            "default_value": 1.0
         },
         "maxTransXLimitEnable": {
             "short_name": "xtxe",
@@ -3887,7 +4069,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "maxTransLimit"
+            "parent_plug": "maxTransLimit",
+            "unit_type": 2,
+            "default_value": 1.0
         },
         "maxTransYLimitEnable": {
             "short_name": "xtye",
@@ -3907,7 +4091,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "maxTransLimit"
+            "parent_plug": "maxTransLimit",
+            "unit_type": 2,
+            "default_value": 1.0
         },
         "maxTransZLimitEnable": {
             "short_name": "xtze",
@@ -3963,7 +4149,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotLimit"
+            "parent_plug": "minRotLimit",
+            "unit_type": 1,
+            "default_value": -0.7853981633974483
         },
         "minRotXLimitEnable": {
             "short_name": "mrxe",
@@ -3983,7 +4171,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotLimit"
+            "parent_plug": "minRotLimit",
+            "unit_type": 1,
+            "default_value": -0.7853981633974483
         },
         "minRotYLimitEnable": {
             "short_name": "mrye",
@@ -4003,7 +4193,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotLimit"
+            "parent_plug": "minRotLimit",
+            "unit_type": 1,
+            "default_value": -0.7853981633974483
         },
         "minRotZLimitEnable": {
             "short_name": "mrze",
@@ -4037,7 +4229,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotateDampRange"
+            "parent_plug": "minRotateDampRange",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "minRotateDampRangeY": {
             "short_name": "ndy",
@@ -4046,7 +4240,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotateDampRange"
+            "parent_plug": "minRotateDampRange",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "minRotateDampRangeZ": {
             "short_name": "ndz",
@@ -4055,7 +4251,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "minRotateDampRange"
+            "parent_plug": "minRotateDampRange",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "minRotateDampStrength": {
             "short_name": "nst",
@@ -4233,7 +4431,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "minTransLimit"
+            "parent_plug": "minTransLimit",
+            "unit_type": 2,
+            "default_value": -1.0
         },
         "minTransXLimitEnable": {
             "short_name": "mtxe",
@@ -4253,7 +4453,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "minTransLimit"
+            "parent_plug": "minTransLimit",
+            "unit_type": 2,
+            "default_value": -1.0
         },
         "minTransYLimitEnable": {
             "short_name": "mtye",
@@ -4273,7 +4475,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "minTransLimit"
+            "parent_plug": "minTransLimit",
+            "unit_type": 2,
+            "default_value": -1.0
         },
         "minTransZLimitEnable": {
             "short_name": "mtze",
@@ -4599,7 +4803,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "preferredAngle"
+            "parent_plug": "preferredAngle",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "preferredAngleY": {
             "short_name": "pay",
@@ -4608,7 +4814,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "preferredAngle"
+            "parent_plug": "preferredAngle",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "preferredAngleZ": {
             "short_name": "paz",
@@ -4617,7 +4825,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "preferredAngle"
+            "parent_plug": "preferredAngle",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -4704,7 +4914,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotateAxis"
+            "parent_plug": "rotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateAxisY": {
             "short_name": "ray",
@@ -4713,7 +4925,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotateAxis"
+            "parent_plug": "rotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateAxisZ": {
             "short_name": "raz",
@@ -4722,7 +4936,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotateAxis"
+            "parent_plug": "rotateAxis",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateOrder": {
             "short_name": "ro",
@@ -4767,7 +4983,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivotTranslate"
+            "parent_plug": "rotatePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotTranslateY": {
             "short_name": "rpty",
@@ -4776,7 +4994,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivotTranslate"
+            "parent_plug": "rotatePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotTranslateZ": {
             "short_name": "rptz",
@@ -4785,7 +5005,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivotTranslate"
+            "parent_plug": "rotatePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotX": {
             "short_name": "rpx",
@@ -4794,7 +5016,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivot"
+            "parent_plug": "rotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotY": {
             "short_name": "rpy",
@@ -4803,7 +5027,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivot"
+            "parent_plug": "rotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotatePivotZ": {
             "short_name": "rpz",
@@ -4812,7 +5038,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "rotatePivot"
+            "parent_plug": "rotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "rotateQuaternion": {
             "short_name": "rq",
@@ -4880,7 +5108,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotate"
+            "parent_plug": "rotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateY": {
             "short_name": "ry",
@@ -4889,7 +5119,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotate"
+            "parent_plug": "rotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "rotateZ": {
             "short_name": "rz",
@@ -4898,7 +5130,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "rotate"
+            "parent_plug": "rotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "scale": {
             "short_name": "s",
@@ -4949,7 +5183,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivotTranslate"
+            "parent_plug": "scalePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotTranslateY": {
             "short_name": "spty",
@@ -4958,7 +5194,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivotTranslate"
+            "parent_plug": "scalePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotTranslateZ": {
             "short_name": "sptz",
@@ -4967,7 +5205,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivotTranslate"
+            "parent_plug": "scalePivotTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotX": {
             "short_name": "spx",
@@ -4976,7 +5216,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivot"
+            "parent_plug": "scalePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotY": {
             "short_name": "spy",
@@ -4985,7 +5227,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivot"
+            "parent_plug": "scalePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scalePivotZ": {
             "short_name": "spz",
@@ -4994,7 +5238,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "scalePivot"
+            "parent_plug": "scalePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "scaleX": {
             "short_name": "sx",
@@ -5060,7 +5306,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "selectHandle"
+            "parent_plug": "selectHandle",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "selectHandleY": {
             "short_name": "hdly",
@@ -5069,7 +5317,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "selectHandle"
+            "parent_plug": "selectHandle",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "selectHandleZ": {
             "short_name": "hdlz",
@@ -5078,7 +5328,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "selectHandle"
+            "parent_plug": "selectHandle",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -5265,7 +5517,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "transMinusRotatePivot"
+            "parent_plug": "transMinusRotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "transMinusRotatePivotY": {
             "short_name": "tmry",
@@ -5274,7 +5528,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "transMinusRotatePivot"
+            "parent_plug": "transMinusRotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "transMinusRotatePivotZ": {
             "short_name": "tmrz",
@@ -5283,7 +5539,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "transMinusRotatePivot"
+            "parent_plug": "transMinusRotatePivot",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "translate": {
             "short_name": "t",
@@ -5306,7 +5564,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "translate"
+            "parent_plug": "translate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "translateY": {
             "short_name": "ty",
@@ -5315,7 +5575,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "translate"
+            "parent_plug": "translate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "translateZ": {
             "short_name": "tz",
@@ -5324,7 +5586,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "translate"
+            "parent_plug": "translate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "type": {
             "short_name": "typ",
@@ -5487,7 +5751,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleLinearAttribute"
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "input2": {
             "short_name": "i2",
@@ -5495,7 +5761,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleLinearAttribute"
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -5521,7 +5789,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleLinearAttribute"
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 0.0
         }
     },
     "condition": {
@@ -7156,7 +7426,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "outputRotate"
+            "parent_plug": "outputRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "outputRotateY": {
             "short_name": "ory",
@@ -7165,7 +7437,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "outputRotate"
+            "parent_plug": "outputRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "outputRotateZ": {
             "short_name": "orz",
@@ -7174,7 +7448,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
-            "parent_plug": "outputRotate"
+            "parent_plug": "outputRotate",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "outputScale": {
             "short_name": "os",
@@ -7291,7 +7567,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "outputTranslate"
+            "parent_plug": "outputTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "outputTranslateY": {
             "short_name": "oty",
@@ -7300,7 +7578,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "outputTranslate"
+            "parent_plug": "outputTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "outputTranslateZ": {
             "short_name": "otz",
@@ -7309,7 +7589,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "outputTranslate"
+            "parent_plug": "outputTranslate",
+            "unit_type": 2,
+            "default_value": 0.0
         }
     },
     "inverseMatrix": {
@@ -7638,7 +7920,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterY": {
             "short_name": "bcy",
@@ -7647,7 +7931,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterZ": {
             "short_name": "bcz",
@@ -7656,7 +7942,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMax": {
             "short_name": "bbmx",
@@ -7680,7 +7968,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxY": {
             "short_name": "bbxy",
@@ -7689,7 +7979,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxZ": {
             "short_name": "bbxz",
@@ -7698,7 +7990,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMin": {
             "short_name": "bbmn",
@@ -7722,7 +8016,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinY": {
             "short_name": "bbny",
@@ -7731,7 +8027,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinZ": {
             "short_name": "bbnz",
@@ -7740,7 +8038,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSize": {
             "short_name": "bbsi",
@@ -7764,7 +8064,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeY": {
             "short_name": "bbsy",
@@ -7773,7 +8075,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeZ": {
             "short_name": "bbsz",
@@ -7782,7 +8086,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "cached": {
             "short_name": "cc",
@@ -9395,7 +9701,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterY": {
             "short_name": "bcy",
@@ -9404,7 +9712,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterZ": {
             "short_name": "bcz",
@@ -9413,7 +9723,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMax": {
             "short_name": "bbmx",
@@ -9437,7 +9749,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxY": {
             "short_name": "bbxy",
@@ -9446,7 +9760,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxZ": {
             "short_name": "bbxz",
@@ -9455,7 +9771,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMin": {
             "short_name": "bbmn",
@@ -9479,7 +9797,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinY": {
             "short_name": "bbny",
@@ -9488,7 +9808,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinZ": {
             "short_name": "bbnz",
@@ -9497,7 +9819,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxScale": {
             "short_name": "bbs",
@@ -9568,7 +9892,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeY": {
             "short_name": "bbsy",
@@ -9577,7 +9903,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeZ": {
             "short_name": "bbsz",
@@ -9586,7 +9914,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "cached": {
             "short_name": "cc",
@@ -11784,7 +12114,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterY": {
             "short_name": "bcy",
@@ -11793,7 +12125,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxCenterZ": {
             "short_name": "bcz",
@@ -11802,7 +12136,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "center"
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMax": {
             "short_name": "bbmx",
@@ -11826,7 +12162,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxY": {
             "short_name": "bbxy",
@@ -11835,7 +12173,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMaxZ": {
             "short_name": "bbxz",
@@ -11844,7 +12184,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMax"
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMin": {
             "short_name": "bbmn",
@@ -11868,7 +12210,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinY": {
             "short_name": "bbny",
@@ -11877,7 +12221,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxMinZ": {
             "short_name": "bbnz",
@@ -11886,7 +12232,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxMin"
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxScale": {
             "short_name": "bbs",
@@ -11957,7 +12305,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeY": {
             "short_name": "bbsy",
@@ -11966,7 +12316,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "boundingBoxSizeZ": {
             "short_name": "bbsz",
@@ -11975,7 +12327,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "boundingBoxSize"
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
         },
         "cachedInMesh": {
             "short_name": "ci",
@@ -14000,7 +14354,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleAngleAttribute"
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "tangentSmoothingAngle": {
             "short_name": "tsa",
@@ -14008,7 +14364,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleAngleAttribute"
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.0
         },
         "tangentSpace": {
             "short_name": "tgsp",

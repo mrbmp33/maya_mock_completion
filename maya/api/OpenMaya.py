@@ -8035,12 +8035,27 @@ class MDistance(object):
     _TO_CENTIMETERS = {unit: 1 / factor for unit, factor in _FROM_CENTIMETERS.items()}
 
 
-    def __init__(self, value: float = None, unit: int = None, *args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        self._unit = unit or MDistance.kCentimeters
-        self._value = value or random.uniform(-100, 100)
+    def __init__(self, *args):
+
+        if not args:
+            self._unit = MDistance.kCentimeters
+            self._value = 0.0
+        else:
+            if len(args) == 1:
+                if isinstance(args[0], (int, float)):
+                    self._unit = MDistance.kCentimeters
+                    self._value = args[0]
+                elif isinstance(args[0], MDistance):
+                    self._unit = args[0].unit
+                    self._value = args[0].value
+                else:
+                    raise TypeError(f"MDistance() argument 1 must be MDistance or int or float, not {type(args[0]).__name__}")
+            elif len(args) == 2:
+                if isinstance(args[0], (int, float)) and isinstance(args[1], int):
+                    self._value = args[0]
+                    self._unit = args[1]
+                else:
+                    raise TypeError(f"MDistance() argument 1 must be int or float, not {type(args[0]).__name__}")
 
     def __repr__(self):
         """
@@ -22082,12 +22097,19 @@ class MFnDependencyNode(MFnBase):
             attribute._api_type.append(attr_type)
 
         # Only for numeric attributes
-        if properties.get('numeric_type'):
+        if properties.get('numeric_type') is not None:
             attribute._numeric_type = properties['numeric_type']
-            attribute._default = properties.get('default_value')
+        
+        if properties.get('default_value') is not None:
+            attribute._default = properties['default_value']
+            attribute._value = properties['default_value']
+        
+        # For Unit Attributes like distance, angle, time...
+        if properties.get('unit_type') is not None:
+            attribute._unit_type = properties['unit_type']
 
         # Only for compound attributes
-        if properties.get('children'):
+        if properties.get('children') is not None:
 
             # Might have to bite the bullet and initialize the children here
             for child in properties['children']:
@@ -23674,7 +23696,7 @@ class MFnUnitAttribute(MFnAttribute):
         self._mobject._api_type.append(MFn.kUnitAttribute)
 
         self._mobject._init_numeric_fields()
-        self._unit_type = unit_type
+        self._mobject._unit_type = unit_type
 
         self._mobject._value = default_value
         self._mobject._default = default_value
@@ -23770,15 +23792,24 @@ class MFnUnitAttribute(MFnAttribute):
         """
         Returns the type of data handled by the attribute.
         """
-        self._unit_type
+        return self._mobject._unit_type
 
     @property
     def default(self):
+        units_map = {1: MAngle, 2: MDistance, 3: MTime}
+        unit_typ = units_map[self.unitType()]
+        if not isinstance(self._mobject._default, unit_typ):
+            self._mobject._default = unit_typ(self._mobject._default or 0)
         return self._mobject._default
 
     @default.setter
-    def default(self, value: float):
-        self._mobject._default = value
+    def default(self, value: Union[float, 'MAngle', 'MDistance', 'MTime']):
+        units_map = {1: MDistance, 2: MAngle, 3: MTime}
+        unit_typ = units_map[self._unit_type]
+        if isinstance(value, float):
+            self._mobject._default = unit_typ(value)
+        else:
+            self._mobject._default = value
 
     kInvalid = 0
     kAngle = 1
