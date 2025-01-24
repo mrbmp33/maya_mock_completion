@@ -18,6 +18,49 @@ import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
 
 
+def _get_attribute_id(attribute_full_name: str) -> uuid.UUID:
+    """Attribute fullname = node_name.attribute_name"""
+    return uuid.uuid5(uuid.NAMESPACE_DNS, attribute_full_name)
+
+def _initialize_mplug(owner: 'MObject',
+                     mplug: 'MPlug',
+                     attribute: 'MObject',
+                     mplug_id: uuid.UUID,
+                     want_network_plug=False) -> 'MPlug':
+    mplug._owner = owner
+    mplug._uuid = mplug_id
+    mplug._attribute = attribute
+    mplug._network_plug = want_network_plug
+    owner._cached_plugs[mplug_id] = mplug
+    return mplug
+
+def _initialize_attribute(attribute) -> 'MObject':
+    if not attribute._alive:
+        attribute._init_attribute_fields()
+    attribute._api_type = [MFn.kAttribute]
+    return attribute
+
+def _get_node_type(mobject: 'MObject') -> str:
+    try:
+        node_type = _TYPE_INT_TO_STR[mobject._typeId.id()]
+        return node_type[1:] if node_type.startswith('k') else node_type
+    except AttributeError:
+        raise RuntimeError(f'{mobject} does not exist yet. Please "create" it first.')
+
+def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
+    properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type, {}).get(attr_name)
+    if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
+        short_name = attr_name
+        long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
+        properties = attribute_properties.ATTRIBUTES_PROPERTIES[node_type].get(long_name)
+        if not properties:
+            raise KeyError(f'Node Type: <{node_type}> does not have attribute <{long_name}>')
+    else:
+        long_name = attr_name
+        short_name = properties['short_name'] if properties else attr_name
+    return properties, long_name, short_name
+
+
 class MColor(object):
     """
     Manipulate color data.
@@ -12947,7 +12990,7 @@ class MObject(object):
         """
         pass
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs): 
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
@@ -13057,7 +13100,7 @@ class MObject(object):
         return not self._alive
 
     def __hash__(self):
-        return hash(self._uuid._uuid)
+        return hash(self._uuid)
 
     @property
     def apiTypeStr(self):
@@ -17484,8 +17527,8 @@ class MPlug(object):
         """
         Retrieves the plug's value, as a string.
         """
-        return str(
-            self._attribute._value or "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15))))
+        value = self._attribute._value
+        return str(value) if value is not None else "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15)))
 
     def attribute(self):
         """
@@ -17499,7 +17542,7 @@ class MPlug(object):
         """
         if not self.isCompound:
             raise RuntimeError(f'Trying to access children plugs of non-compound attribute: <{self.name()}>')
-        child_plug = MFnDependencyNode(self._owner).findPlug(self._children_plug_names[index], False)
+        child_plug = MFnDependencyNode(self._owner).findPlug(self._attribute._children[index]._long_name, False)
         child_plug._parent = weakref.proxy(self)
         return child_plug
 
@@ -19719,7 +19762,7 @@ class MFnAttribute(MFnBase):
         super().__init__(*args, **kwargs)
         self._fn_type = MFn.kAttribute
 
-    def _create(self, long_name:str, short_name:str):
+    def _create(self, long_name:str, short_name:str) -> 'MObject':
         """Regular MFnAttribute does not have this method. Implemented here form commodity and reuse."""
 
         # Spawn new MObject
@@ -21762,8 +21805,13 @@ class MFnDependencyNode(MFnBase):
         assert attribute._alive is True, 'Attribute MObject must be valid to be added to a node.'
         attribute._dynamic = True
         attribute._owner = self._mobject
-        dict_key = hash(f'{self._mobject._name}.{attribute._long_name}')
+        dict_key = _get_attribute_id(f'{self._mobject._name}.{attribute._long_name}')
         self._mobject._attributes[dict_key] = attribute
+
+        # For compound attrs, add the children in the map as well
+        for child in attribute._children:
+            self._mobject._attributes[_get_attribute_id(f'{self._mobject._name}.{child._long_name}')] = child
+
         return self
 
     def addExternalContentForFileAttr(*args, **kwargs):
@@ -21888,117 +21936,83 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def findPlug(self, attr_name: str | ATTRIBUTE_KEYS, want_network_plug: bool) -> 'MPlug':
+    def findPlug(self, attr_name: str, want_network_plug):
         """
         Returns a plug for the given attribute.
         """
 
-        # See if plug and attribute have already been cached
-        attribute_id = hash(f'{self._mobject._name}.{attr_name}')
-        attribute: 'MObject' = self._mobject._attributes.get(attribute_id)
+        # See if the attribute and/or the plug are already cached
+        attribute_id = _get_attribute_id(f'{self._mobject._name}.{attr_name}')
+        attribute = self._mobject._attributes.get(attribute_id)
+        mplug = self._mobject._cached_plugs.get(attribute_id)
 
-        mplug_id = attribute_id
-        mplug: 'MPlug' = self._mobject._cached_plugs.get(mplug_id)
-
-        # Fast return for already cached plugs and attributes
+        # Fast return if both attr and mplug are cached
         if attribute and mplug:
             if mplug._attribute == attribute:
                 return mplug
-        elif attribute and mplug is None:
-            mplug = MPlug()
-            mplug._owner = self._mobject
-            mplug._uuid = mplug_id
-            mplug._attribute = attribute
-            mplug._network_plug = want_network_plug
-            self._mobject._cached_plugs[mplug_id] = mplug
-            return mplug
 
-        # Initialize plug object if none is cached
+        # If only the plug is not cached, initialize a new one
+        elif attribute and not mplug:
+            return _initialize_mplug(self._mobject,
+                                     MPlug(),
+                                     attribute,
+                                     attribute_id,
+                                     want_network_plug=want_network_plug)
+
+        # Else, assume it's the first time the attribute is being accessed
         mplug = MPlug()
         mplug._owner = self._mobject
+        attribute = _initialize_attribute(attribute or MObject())
 
-        attribute = attribute if attribute else MObject()
-        attribute._api_type = [MFn.kAttribute, ]
+        # Try to find attribute in list of known attributes based on the node type
+        node_type = _get_node_type(self._mobject)
+        properties, long_name, short_name = _get_attribute_properties(node_type, attr_name)
 
-        # If attribute is not cached, initialize it
-        if not attribute._alive:
-            attribute._init_attribute_fields()
-
-        # Try finding the attribute in the non-dynamic attributes record to populate instance attrs
-        try:
-            node_type = _TYPE_INT_TO_STR[self._mobject._typeId.id()]
-        except AttributeError:
-            raise RuntimeError(f'{self._mobject} does not exist yet. Please "create" it first.')
-        node_type = node_type if not node_type.startswith('k') else node_type[1:]
-
-        short_name = ''
-        long_name = ''
-
-        properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type, {}).get(attr_name)
-
-        # Could have been given a short name. Convert it to long name to use the map.
-        if attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
-            short_name = attr_name
-            long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
-            try:
-                properties = attribute_properties.ATTRIBUTES_PROPERTIES[node_type][long_name]
-            except KeyError:
-                raise KeyError(f'Node Type: <{node_type}> does not have attribute <{long_name}>')
-        elif properties:
-            long_name = attr_name
-            short_name = properties['short_name']
-        # If not found in the map, assume it is a long name
-        else:
-            long_name = attr_name
-            short_name = attr_name
-
-        # Update ids
         attribute_name = f'{self._mobject._name}.{long_name}'
-        attribute_id = hash(attribute_name)
+        attribute_id = _get_attribute_id(attribute_name)
         mplug_id = attribute_id
 
-        # Try one last time to find it in cache plugs, just in case it was created using the short name or viceversa
+        # Try to find the mplug in the list of cached plugs. Just in case it was given the short name
         cached_plug = self._mobject._cached_plugs.get(mplug_id)
         if cached_plug:
             return cached_plug
 
-        # Else initialize attribute values
+        # Initialize the mplug and attribute
         mplug._uuid = mplug_id
         attribute._uuid = attribute_id
-
         attribute._name = attribute_name
         attribute._long_name = long_name
         attribute._short_name = short_name
+        mplug._network_plug = want_network_plug
 
+
+        # Fill-in maya native attributes based on dict info
         if properties:
-            # Unless set to true it will assume the attribute does not exist | need to set alive when creating new attrs
-            attribute._alive = True
-
             attribute._is_array = properties['is_array']
             attribute._is_compound = properties['is_compound']
             attribute._is_element = properties['is_element']
 
-            attr_type_str = properties['type_str']
-            attr_type = getattr(MFn, attr_type_str)
+            # Add type constant based on the type str
+            attr_type = getattr(MFn, properties['type_str'])
             if attr_type not in attribute._api_type:
                 attribute._api_type.append(attr_type)
 
+            # Only for numeric attributes
             if properties.get('numeric_type'):
                 attribute._numeric_type = properties['numeric_type']
 
-            children_plug_names = properties.get('children')
-            if children_plug_names:
-                mplug._children_plug_names = children_plug_names
+            # Only for compound attributes
+            if properties.get('children'):
+                mplug._children_plug_names = properties['children']
 
-        mplug._network_plug = want_network_plug
-
+        # Update the plugs & attrs cache
         self._mobject._cached_plugs[mplug._uuid] = mplug
         self._mobject._attributes[attribute._uuid] = attribute
 
-        # Add attribute to the mplug
+        # Flag the attribute as a valid MObject and set it as the attribute of the mplug
+        attribute._alive = True
         mplug._attribute = attribute
 
-        # Finally, return plug
         return mplug
 
     def getAffectedAttributes(*args, **kwargs):
@@ -22786,6 +22800,10 @@ class MFnTypedAttribute(MFnAttribute):
 
         self._mobject._api_type.append(MFn.kTypedAttribute)
         self._mobject._typed_attr_type = data_type
+
+        # Handle defaults based on specific data types
+        if data_type == MFnData.kString:
+            default_value = ''
 
         self._mobject._value = default_value
         self._mobject._default = default_value
@@ -24631,6 +24649,8 @@ class MFnCompoundAttribute(MFnAttribute):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
+        
+        self._fn_type = MFn.kCompoundAttribute
 
     def addChild(self, child: 'MObject') -> 'MFnCompoundAttribute':
         """
@@ -29599,20 +29619,14 @@ key = 'MRampAttribute'
 ourdict = {}
 
 
-class World:
-    mobject = None
+class World(MObject):
 
     def __init__(self):
         super().__init__()
-        sel_ls = MSelectionList()
-        sel_ls.add('persp')
-        mobject = sel_ls.getDependNode(0)
-        mobject._is_world = True
-        mobject._alive = True
-        mobject._name = 'world'
-        mobject._api_type.append(MFn.kWorld)
-
-        type(self).mobject = mobject
+        self._is_world = True
+        self._alive = True
+        self._name = 'world'
+        self._api_type.append(MFn.kWorld)
 
 
 class _NodeTypeIds(enum.Enum):
@@ -35068,4 +35082,4 @@ _API_TYPES_INT_TO_STR = {
 
 
 # Reuse world
-WORLD = World.mobject or World().mobject
+WORLD = World()
