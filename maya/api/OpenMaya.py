@@ -17420,13 +17420,14 @@ class MPlug(object):
         self._uuid: uuid.UUID = uuid.uuid4()
         self._network_plug = None
         self._value = None
-        self._children_plug_names = None
+        self._children_names = None
 
         self._connections = {
             'INPUTS': [],
             'OUTPUTS': [],
         }
         self._parent = None
+        self._parent_name = None
 
         self._attribute = None
 
@@ -17613,7 +17614,6 @@ class MPlug(object):
         """
         return self._attribute._children[index]
 
-
     def elementByPhysicalIndex(*args, **kwargs):
         """
         Returns a plug for the element of this plug array having the specified physical index.
@@ -17698,7 +17698,10 @@ class MPlug(object):
         """
         if self._parent:
             return self._parent
-
+        elif self._parent_name:
+            return MFnDependencyNode(self._owner).findPlug(self._parent_name, False)
+        raise TypeError(f'Plug <{self.name()}> has no parent')
+    
     def partialName(self,
                     includeNodeName=False,
                     useLongNames=True,
@@ -22017,7 +22020,13 @@ class MFnDependencyNode(MFnBase):
 
             # Only for compound attributes
             if properties.get('children'):
-                mplug._children_plug_names = properties['children']
+                mplug._children_names = properties['children']
+                attribute._children_names = properties['children']
+            
+            # Add reference to parent name in case is needed later
+            if parent := properties.get('parent_plug'):
+                mplug._parent_name = parent
+                attribute._parent_name = parent
 
         # Update the plugs & attrs cache
         self._mobject._cached_plugs[mplug._uuid] = mplug
