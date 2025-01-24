@@ -17420,7 +17420,7 @@ class MPlug(object):
         self._uuid: uuid.UUID = uuid.uuid4()
         self._network_plug = None
         self._value = None
-        self._children_names = None
+        self._children_plugs = []
 
         self._connections = {
             'INPUTS': [],
@@ -17476,37 +17476,49 @@ class MPlug(object):
         """
         Retrieves the plug's value, as a boolean.
         """
+        if self._attribute._value is None:
+            self._attribute._value = bool(random.getrandbits(1))
         return bool(self._attribute._value)
 
     def asChar(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-byte integer.
         """
-        return int(self._attribute._value or random.randint(-100, 100))
+        if self._attribute._value is None:
+            self._attribute._value = random.randint(-100, 100)
+        return int(self._attribute._value)
 
     def asDouble(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a double-precision float.
         """
-        return float(self._attribute._value or random.uniform(-100, 100))
+        if self._attribute._value is None:
+            self._attribute._value = random.uniform(-100, 100)
+        return float(self._attribute._value)
 
     def asFloat(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a single-precision float.
         """
-        return float(self._attribute._value or random.uniform(-100, 100))
+        if self._attribute._value is None:
+            self._attribute._value = random.uniform(-100, 100)
+        return float(self._attribute._value)
 
     def asInt(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a regular integer.
         """
-        return int(self._attribute._value or random.randint(-100, 100))
+        if self._attribute._value is None:
+            self._attribute._value = random.randint(-100, 100)
+        return int(self._attribute._value)
 
     def asMAngle(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MAngle.
         """
-        return MAngle(self._attribute._value or random.uniform(-360, 360))
+        if self._attribute._value is None:
+            self._attribute._value = random.uniform(-360, 360)
+        return MAngle(self._attribute._value)
 
     def asMDataHandle(self, *args, **kwargs):
         """
@@ -17518,7 +17530,9 @@ class MPlug(object):
         """
         Retrieves the plug's value, as an MDistance.
         """
-        return MDistance(self._attribute._value or random.uniform(-100, 100))
+        if self._attribute._value is None:
+            self._attribute._value = random.uniform(-100, 100)
+        return MDistance(self._attribute._value)
 
     def asMObject(self, *args, **kwargs):
         """
@@ -17530,20 +17544,25 @@ class MPlug(object):
         """
         Retrieves the plug's value, as an MTime.
         """
-        return MTime(self._attribute._value or random.randint(0, 1_000_000))
+        if self._attribute._value is None:
+            self._attribute._value = 0
+        return MTime(self._attribute._value)
 
     def asShort(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a short integer.
         """
-        return int(self._attribute._value or random.randint(-32767, 32767))
+        if self._attribute._value is None:
+            self._attribute._value = random.randint(-32767, 32767)
+        return int(self._attribute._value)
 
     def asString(self, *args, **kwargs):
         """
         Retrieves the plug's value, as a string.
         """
-        value = self._attribute._value
-        return str(value) if value is not None else "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15)))
+        if self._attribute._value is None:
+            self._attribute._value = "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15)))
+        return str(self._attribute._value)
 
     def attribute(self):
         """
@@ -17672,7 +17691,7 @@ class MPlug(object):
         """
         Returns the number of children this plug has.
         """
-        return len(self._attribute._children)
+        return max(len(self._attribute._children), len(self._children_plugs))
 
     def numConnectedChildren(*args, **kwargs):
         """
@@ -22020,13 +22039,20 @@ class MFnDependencyNode(MFnBase):
 
             # Only for compound attributes
             if properties.get('children'):
-                mplug._children_names = properties['children']
-                attribute._children_names = properties['children']
+
+                # Might have to bite the bullet and initialize the children here
+                for child in properties['children']:
+                    child_plug = self.findPlug(child, want_network_plug)
+                    
+                    if child_plug not in attribute._children:
+                        attribute._children.append(child_plug._attribute)
+                    if child_plug not in mplug._children_plugs:
+                        mplug._children_plugs.append(child_plug)
             
             # Add reference to parent name in case is needed later
             if parent := properties.get('parent_plug'):
                 mplug._parent_name = parent
-                attribute._parent_name = parent
+                attribute._parent = parent
 
         # Update the plugs & attrs cache
         self._mobject._cached_plugs[mplug._uuid] = mplug
