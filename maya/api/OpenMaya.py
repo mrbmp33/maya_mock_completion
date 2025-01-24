@@ -17723,28 +17723,64 @@ class MPlug(object):
     
     def partialName(self,
                     includeNodeName=False,
-                    useLongNames=True,
+                    includeNonMandatoryIndices=False,
+                    includeInstancedIndices=False,
+                    useAlias=False,
                     useFullAttributePath=False,
-                    includeInstancedIndices=True):
-        """
-        Returns the name of the plug, formatted according to various criteria.
+                    useLongNames=False) -> str:
+        """Returns the name of the plug, formatted according to various criteria.
+
+        Args:
+            includeNodeName (bool, optional): Should the name of the owner node be added? Defaults to False.
+            includeNonMandatoryIndices (bool, optional): No idea. Defaults to False.
+            includeInstancedIndices (bool, optional): Include the index of an array plug. Defaults to False.
+            useAlias (bool, optional): Use the alias instad of the name of the node. Defaults to False.
+            useFullAttributePath (bool, optional): For compound attributes, add the parents of the attr. Defaults to False.
+            useLongNames (bool, optional): Use long name instead of short name. Defaults to False.
+
+        Returns:
+            str: _description_
+        """        """
         """
         owner_name = self._owner._name
         short_name = self._attribute._short_name
         long_name = self._attribute._long_name
 
+        parent_name = ''
+        logical_index = ''
+
         return_str = ''
+
         if includeNodeName:
-            return_str += f'{owner_name}.'
-        elif useFullAttributePath:
-            return_str += f'{owner_name}'
+            return_str += '{owner_name}.'
+
+        if useFullAttributePath:
+            return_str += '{parent_name}.{attribute_name}'
+        else:
+            return_str += '{attribute_name}'
 
         if useLongNames:
-            return_str += long_name
+            if self._attribute._parent:
+                parent_name = self._attribute._parent._long_name
+            attribute_name = long_name
         else:
-            return_str += short_name
+            if self._attribute._parent:
+                parent_name = self._attribute._parent._short_name
+            attribute_name = short_name
+        
+        if useAlias and hasattr(self._attribute, '_alias'):
+            attribute_name = self._attribute._alias
 
-        return return_str
+        if includeInstancedIndices:  # For array attributes
+            if self._attribute._is_element:
+                logical_index = str(self.logicalIndex())
+                return_str += '[{logical_index}]'
+        
+        return return_str.format(owner_name=owner_name,
+                                 parent_name=parent_name,
+                                 attribute_name=attribute_name,
+                                 logical_index=logical_index
+                                 )
 
     def selectAncestorLogicalIndex(*args, **kwargs):
         """
@@ -22021,39 +22057,6 @@ class MFnDependencyNode(MFnBase):
         attribute._short_name = short_name
         mplug._network_plug = want_network_plug
 
-
-        # Fill-in maya native attributes based on dict info
-        if properties:
-            attribute._is_array = properties['is_array']
-            attribute._is_compound = properties['is_compound']
-            attribute._is_element = properties['is_element']
-
-            # Add type constant based on the type str
-            attr_type = getattr(MFn, properties['type_str'])
-            if attr_type not in attribute._api_type:
-                attribute._api_type.append(attr_type)
-
-            # Only for numeric attributes
-            if properties.get('numeric_type'):
-                attribute._numeric_type = properties['numeric_type']
-
-            # Only for compound attributes
-            if properties.get('children'):
-
-                # Might have to bite the bullet and initialize the children here
-                for child in properties['children']:
-                    child_plug = self.findPlug(child, want_network_plug)
-                    
-                    if child_plug not in attribute._children:
-                        attribute._children.append(child_plug._attribute)
-                    if child_plug not in mplug._children_plugs:
-                        mplug._children_plugs.append(child_plug)
-            
-            # Add reference to parent name in case is needed later
-            if parent := properties.get('parent_plug'):
-                mplug._parent_name = parent
-                attribute._parent = parent
-
         # Update the plugs & attrs cache
         self._mobject._cached_plugs[mplug._uuid] = mplug
         self._mobject._attributes[attribute._uuid] = attribute
@@ -22061,6 +22064,45 @@ class MFnDependencyNode(MFnBase):
         # Flag the attribute as a valid MObject and set it as the attribute of the mplug
         attribute._alive = True
         mplug._attribute = attribute
+
+        # If no properties are found, return the mplug as is. Else, fill-in the mplug's attrs
+        if not properties:
+            return mplug
+        
+        # Fill-in maya native attributes based on dict info
+        attribute._is_array = properties['is_array']
+        attribute._is_compound = properties['is_compound']
+        attribute._is_element = properties['is_element']
+
+        # Add type constant based on the type str
+        attr_type = getattr(MFn, properties['type_str'])
+        if attr_type not in attribute._api_type:
+            attribute._api_type.append(attr_type)
+
+        # Only for numeric attributes
+        if properties.get('numeric_type'):
+            attribute._numeric_type = properties['numeric_type']
+
+        # Only for compound attributes
+        if properties.get('children'):
+
+            # Might have to bite the bullet and initialize the children here
+            for child in properties['children']:
+                child_plug = self.findPlug(child, want_network_plug)
+                
+                if child_plug not in attribute._children:
+                    attribute._children.append(child_plug._attribute)
+                if child_plug not in mplug._children_plugs:
+                    mplug._children_plugs.append(child_plug)
+        
+        # Add reference to parent name in case is needed later
+        if parent_name := properties.get('parent_plug'):
+            if not mplug._parent and not attribute._parent:
+                parent_plug = self.findPlug(parent_name, want_network_plug)
+                mplug._parent = parent_plug
+                mplug._parent_name = parent_name
+                attribute._parent = parent_plug._attribute
+                attribute._parent_name = parent_name
 
         return mplug
 
