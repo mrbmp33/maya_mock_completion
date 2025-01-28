@@ -68,7 +68,7 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
             raise KeyError
 
     except KeyError:
-        raise KeyError(
+        raise RuntimeError(
             f'Could not find attribute info on node type: <{node_type}>. Given attribute name: <{attr_name}>.'
         )
 
