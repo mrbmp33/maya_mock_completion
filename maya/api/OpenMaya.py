@@ -6,13 +6,14 @@
 # or which otherwise accompanies this software in either electronic
 # or hard copy form.
 """
+import copy
 import random
 import string
 import uuid
 import weakref
 import enum
 import math
-from typing import Optional, Iterable, Union, Tuple
+from typing import Optional, Iterable, Union, Tuple, List
 import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
@@ -1664,7 +1665,7 @@ class MDGModifier(object):
         self._queue = []
         self._done = False
 
-    def addAttribute(*args, **kwargs):
+    def addAttribute(self, node: 'MObject', attribute: 'MObject') -> 'MDGModifier':
         """
         addAttribute(MObject node, MObject attribute) -> self
 
@@ -1672,7 +1673,8 @@ class MDGModifier(object):
         given dependency node. If the attribute is a compound its children will
         be added as well, so only the parent needs to be added using this method.
         """
-        pass
+        self._queue.append(('addAttribute', node, attribute))
+        return self
 
     def addExtensionAttribute(*args, **kwargs):
         """
@@ -1699,21 +1701,46 @@ class MDGModifier(object):
         """
         pass
 
-    def connect(*args, **kwargs):
+    def connect(self, *args) -> 'MDGModifier':
         """
         connect(MPlug source, MPlug dest) -> self
         connect(MObject sourceNode, MObject sourceAttr,
                 MObject destNode,   MObject destAttr) -> self
 
-        Adds an operation to the modifier that connects two plugs in the
-        dependency graph. It is the user's responsibility to ensure that the
+        Adds an operation to the modifier that connects two plugs in the 
+        dependency graph. It is the user's responsibility to ensure that the 
         source and destination attributes are of compatible types. For instance,
         if the source attribute is a nurbs surface then the destination must
         also be a nurbs surface.
         Plugs can either be specified with node and attribute MObjects or with
         MPlugs.
+
+        Args:
+            source (MPlug/MObject): The source plug or node.
+            dest (MPlug/MObject): The destination plug or node.
         """
-        pass
+        # Case 1: Two MPlugs as input
+        if len(args) == 2 and isinstance(args[0], MPlug) and isinstance(args[1], MPlug):
+            source_plug = args[0] 
+            dest_plug = args[1]
+            
+        # Case 2: Source node, source attr, dest node, dest attr as MObjects
+        elif len(args) == 4:
+            source_node = args[0]
+            source_attr = args[1] 
+            dest_node = args[2]
+            dest_attr = args[3]
+            
+            # Create plugs
+            source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
+            dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+            
+        # Invalid arguments
+        else:
+            raise TypeError('Invalid arguments for connect()')
+
+        self._queue.append(('connect', source_plug, dest_plug))
+        return self
 
     def createNode(self, type_id: Union[str, NODE_TYPES, 'MTypeId']) -> 'MObject':
         """
@@ -1751,7 +1778,7 @@ class MDGModifier(object):
         self._queue.append(('delete', node))
         return self
 
-    def disconnect(*args, **kwargs):
+    def disconnect(self, *args) -> 'MDGModifier':
         """
         disconnect(MPlug source, MPlug dest) -> self
         disconnect(MObject sourceNode, MObject sourceAttr,
@@ -1762,7 +1789,28 @@ class MDGModifier(object):
         Plugs can either be specified with node and attribute MObjects or with
         MPlugs.
         """
-        pass
+        # Case 1: Two MPlugs as input
+        if len(args) == 2 and isinstance(args[0], MPlug) and isinstance(args[1], MPlug):
+            source_plug = args[0] 
+            dest_plug = args[1]
+            
+        # Case 2: Source node, source attr, dest node, dest attr as MObjects
+        elif len(args) == 4:
+            source_node = args[0]
+            source_attr = args[1] 
+            dest_node = args[2]
+            dest_attr = args[3]
+            
+            # Create plugs
+            source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
+            dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+            
+        # Invalid arguments
+        else:
+            raise TypeError('Invalid arguments for connect()')
+
+        self._queue.append(('connect', source_plug, dest_plug))
+        return self
 
     def doIt(self):
         """
@@ -1792,6 +1840,43 @@ class MDGModifier(object):
                 mobject._parent._children.remove(mobject)
                 mobject._parent = action[2]
                 mobject._parent._children.add(mobject)
+            elif action[0] == 'connect':
+                source_plug: MPlug = action[1]
+                dest_plug: MPlug = action[2]
+                # Add connection to cached connections
+                dest_plug._connections['INPUTS'].append(source_plug)
+                source_plug._connections['OUTPUTS'].append(dest_plug)
+            elif action[0] == 'disconnect':
+                source_plug: MPlug = action[1]
+                dest_plug: MPlug = action[2]
+                # Remove connection from cached connections
+                dest_plug._connections['INPUTS'].remove(source_plug)
+                source_plug._connections['OUTPUTS'].remove(dest_plug)
+            elif action[0] == 'addAttribute':
+                node: 'MObject' = action[1]
+                attribute: 'MObject' = action[2]
+                attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
+                node._attributes[attr_id] = attribute
+            elif action[0] == 'removeAttribute':
+                node: 'MObject' = action[1]
+                attribute: 'MObject' = action[2]
+                attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
+                del node._attributes[attr_id]
+            elif action[0] == 'renameAttribute':
+                node: 'MObject' = action[1]
+                attribute: 'MObject' = action[2]
+
+                # Delete previous key
+                attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
+                del node._attributes[attr_id]
+
+                # Rename attribute
+                attribute._short_name = action[3]
+                attribute._long_name = action[4]
+                attribute._name = node._name + '.' + action[4]
+
+                # Add new key with new name
+                node._attributes[_get_attribute_id(attribute._name)] = attribute
 
         self._done = True
         return self
@@ -1923,7 +2008,7 @@ class MDGModifier(object):
         """
         pass
 
-    def removeAttribute(*args, **kwargs):
+    def removeAttribute(self, node: 'MObject', attribute: 'MObject') -> 'MDGModifier':
         """
         removeAttribute(MObject node, MObject attribute) -> self
 
@@ -1934,7 +2019,8 @@ class MDGModifier(object):
         should be no function sets attached to the attribute at the time of the
         call as their behaviour may become unpredictable.
         """
-        pass
+        self._queue.append(('removeAttribute', node, attribute))
+        return self
 
     def removeExtensionAttribute(*args, **kwargs):
         """
@@ -1972,14 +2058,15 @@ class MDGModifier(object):
         """
         pass
 
-    def renameAttribute(*args, **kwargs):
+    def renameAttribute(self, node: 'MObject', attribute: 'MObject', newShortName: str, newLongName: str) -> 'MDGModifier':
         """
         renameAttribute(MObject node, MObject attribute,
         string newShortName, string newShortName) -> self
 
         Adds an operation to the modifer that renames a dynamic attribute on the given dependency node.
         """
-        pass
+        self._queue.append(('rename', node, attribute, newShortName, newLongName, attribute._short_name, attribute._long_name))
+        return self
 
     def renameNode(self, node: "MObject", newName: str):
         """
@@ -1998,7 +2085,7 @@ class MDGModifier(object):
         """
         pass
 
-    def undoIt(self, *args, **kwargs):
+    def undoIt(self) -> 'MDGModifier':
         """
         undoIt() -> self
 
@@ -2025,7 +2112,40 @@ class MDGModifier(object):
             elif action[0] == 'reparent':
                 mobject: 'MObject' = action[1]
                 mobject._parent = action[3]
+            elif action[0] == 'connect':
+                source_plug: MPlug = action[1]
+                dest_plug: MPlug = action[2]
+                # Remove connection from cached connections
+                dest_plug._connections['INPUTS'].remove(source_plug)
+                source_plug._connections['OUTPUTS'].remove(dest_plug)
+            elif action[0] == 'disconnect':
+                source_plug: MPlug = action[1]
+                dest_plug: MPlug = action[2]
+                # Add connection to cached connections
+                dest_plug._connections['INPUTS'].append(source_plug)
+                source_plug._connections['OUTPUTS'].append(dest_plug)
+            elif action[0] == 'addAttribute':
+                node: 'MObject' = action[1]
+                attribute: 'MObject' = action[2]
+                del node._attributes[_get_attribute_id(f'{node._name}.{attribute._long_name}')]
+            elif action[0] == 'removeAttribute':
+                node: 'MObject' = action[1]
+                attribute: 'MObject' = action[2]
+                attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
+                node._attributes[attr_id] = attribute
+            elif action[0] == 'renameAttribute':
+                node: 'MObject' = action[1]
+                attribute: 'MObject' = action[2]
+                attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
 
+                del node._attributes[_get_attribute_id(f'{node._name}.{action[4]}')]
+
+                attribute._short_name = action[5]
+                attribute._long_name = action[6]
+                attribute._name = node._name + '.' + action[6]
+                attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
+                node._attributes[attr_id] = attribute
+                
         self._done = False
         return self
 
@@ -2592,6 +2712,7 @@ class MDataBlock(object):
 
 
 class MFloatArray(object):
+
     """
     Array of float values.
     """
@@ -17545,11 +17666,16 @@ class MPlug(object):
         """
         pass
 
-    def array(self, *args, **kwargs):
+    def array(self) -> 'MPlug':
         """
         Returns a plug for the array of plugs of which this plug is an element.
         """
-        return [self, ]
+        if not self.isArray:
+            raise TypeError(f'Plug <{self.name()}> is not an array plug.')
+        
+        if self._parent:
+            return self._parent
+        return MFnDependencyNode(self._owner).findPlug(self._parent_name, False)
 
     def asBool(self, *args, **kwargs):
         """
@@ -17666,52 +17792,69 @@ class MPlug(object):
         child_plug._parent = weakref.proxy(self)
         return child_plug
 
-    def connectedTo(*args, **kwargs):
+    def connectedTo(self, asDest: bool = False, asSrc: bool = False) -> List['MPlug']:
         """
         Returns an array of plugs which are connected to this one.
         """
-        pass
-
-    def connectionByPhysicalIndex(*args, **kwargs):
+        plug_array = MPlugArray()
+        if asDest and asSrc:
+            plug_array._plugs = self._connections['INPUTS'] + self._connections['OUTPUTS']
+            return plug_array
+        elif asDest:
+            plug_array._plugs = self._connections['INPUTS']
+            return plug_array
+        elif asSrc:
+            plug_array._plugs = self._connections['OUTPUTS']
+            return plug_array
+        return plug_array
+    
+    def connectionByPhysicalIndex(self, index: int) -> 'MPlug':
         """
         Returns a plug for the index'th connected element of this plug.
         """
-        pass
+        try:
+            all_connections = self._connections['INPUTS'] + self._connections['OUTPUTS']
+            return all_connections[index]
+        except IndexError:
+            raise TypeError(f'Plug <{self.name()}> is not an array plug.')
 
-    def constructHandle(*args, **kwargs):
+    def constructHandle(self, block: 'MDataBlock') -> 'MDataHandle':
         """
         Constructs a data handle for the plug.
         """
-        pass
+        return block.inputValue(self)
 
-    def copy(*args, **kwargs):
+    def copy(self, other: 'MPlug') -> None:
         """
         Copies one plug to another.
         """
-        pass
+        self._attribute = copy.copy(other._attribute)
 
-    def destinations(*args, **kwargs):
+    def destinations(self) -> Optional[List['MPlug']]:
         """
         If this plug is a source, return the destination plugs connected to it.
         If this plug is not a source, a null plug is returned.
         This method will produce the networked version of the connected plug.
         """
-        pass
+        if self.isSource:
+            return self._connections['OUTPUTS']
+        return None
 
-    def destinationsWithConversions(*args, **kwargs):
+    def destinationsWithConversions(self) -> Optional[List['MPlug']]:
         """
         If this plug is a source, return the destination plugs connected to it.
         This method is very similar to the destinations() method.  The only difference is that the destinations() method skips over any unit conversion node connected to this source, and returns the destination of the unit conversion node.
         destinationsWithConversionNode() does not skip over unit conversion nodes, and returns the destination plug on a unit conversion node, if present.
         Note that the behavior of connectedTo() is identical to destinationsWithConversions(), that is, do not skip over unit conversion nodes.
         """
-        pass
+        return self.destinations()
 
-    def destructHandle(*args, **kwargs):
+    def destructHandle(self, handle: 'MDataHandle') -> 'MPlug':
         """
         Destroys a data handle previously constructed using constructHandle().
         """
-        pass
+        del handle
+        return self
 
     def elementByLogicalIndex(self, index):
         """
@@ -17719,47 +17862,50 @@ class MPlug(object):
         """
         return self._attribute._children[index]
 
-    def elementByPhysicalIndex(*args, **kwargs):
+    def elementByPhysicalIndex(self, index: int) -> 'MPlug':
         """
         Returns a plug for the element of this plug array having the specified physical index.
         """
-        pass
+        return self._children_plugs[index]
 
-    def evaluateNumElements(*args, **kwargs):
+    def evaluateNumElements(self) -> int:
         """
         Like numElements() but evaluates all connected elements first to ensure that they are included in the count.
         """
-        pass
+        return len(self._children_plugs)
 
-    def getExistingArrayAttributeIndices(*args, **kwargs):
+    def getExistingArrayAttributeIndices(self) -> 'MIntArray':
         """
         Returns an array of all the plug's logical indices which are currently in use.
         """
-        pass
+        return [i for i, plug in enumerate(self._children_plugs) if plug is not None]
 
-    def getSetAttrCmds(*args, **kwargs):
+    def getSetAttrCmds(self, valueSelector=0, useLongNames=False) -> List[str]:
         """
         Returns a list of strings containing the setAttr commands (in MEL syntax) for this plug and all of its descendents.
         """
-        pass
+        cmds = []
+        for child in self._children_plugs:
+            cmds.append(f'setAttr {self.name()}.{child.name()} {child._attribute._value}')
+        return cmds
 
-    def isDefaultValue(*args, **kwargs):
+    def isDefaultValue(self) -> bool:
         """
         Returns a value indicating if the plug's value is equivalent to the plug's default value.
         """
-        pass
+        return self._attribute._value == self._attribute._default_value
 
-    def isFreeToChange(*args, **kwargs):
+    def isFreeToChange(self, checkAncestors=True, checkChildren=True) -> bool:
         """
         Returns a value indicating if the plug's value can be changed, after taking into account the effects of locking and connections.
         """
-        pass
-
-    def logicalIndex(*args, **kwargs):
+        return not self.isLocked and not self.isConnected
+    
+    def logicalIndex(self) -> int:
         """
         Returns this plug's logical index within its parent array.
         """
-        pass
+        return self._attribute._logical_index
 
     def name(self):
         """
@@ -17779,23 +17925,23 @@ class MPlug(object):
         """
         return max(len(self._attribute._children), len(self._children_plugs))
 
-    def numConnectedChildren(*args, **kwargs):
+    def numConnectedChildren(self) -> int:
         """
         Returns the number of this plug's children which have connections.
         """
-        pass
+        return len([child for child in self._children_plugs if child.isConnected])
 
-    def numConnectedElements(*args, **kwargs):
+    def numConnectedElements(self) -> int:
         """
         Returns the number of this plug's elements which have connections.
         """
-        pass
+        return len([child for child in self._children_plugs if child.isConnected])
 
-    def numElements(*args, **kwargs):
+    def numElements(self) -> int:
         """
         Returns the number of the plug's logical indices which are currently in use. Connected elements which have not yet been evaluated may not yet fully exist and may be excluded from the count.
         """
-        pass
+        return len(self._children_plugs)
 
     def parent(self) -> 'MPlug':
         """
@@ -17868,119 +18014,137 @@ class MPlug(object):
                                  logical_index=logical_index
                                  )
 
-    def selectAncestorLogicalIndex(*args, **kwargs):
+    def selectAncestorLogicalIndex(self, index: int, attribute=MObject.kNullObj) -> 'MPlug':
         """
         Changes the logical index of the specified attribute in the plug's path.
         """
-        pass
-
-    def setAttribute(*args, **kwargs):
+        self._attribute._logical_index = index
+        return self
+    
+    def setAttribute(self, attribute: 'MObject') -> 'MPlug':
         """
         Switches the plug to reference the given attribute of the same node as the previously referenced attribute.
         """
-        pass
+        self._attribute = attribute
+        return self
 
-    def setBool(self, value: bool):
+    def setBool(self, value: bool) -> 'MPlug':
         """
         Sets the plug's value as a boolean.
         """
         self._attribute._value = value
+        return self
 
-    def setChar(self, value: int):
+    def setChar(self, value: int) -> 'MPlug':
         """
         Sets the plug's value as a single-byte integer.
         """
         self._attribute._value = value
+        return self
 
-    def setDouble(self, value: float):
+    def setDouble(self, value: float) -> 'MPlug':
         """
         Sets the plug's value as a double-precision float.
         """
         self._attribute._value = value
+        return self
 
-    def setFloat(self, value: float):
+    def setFloat(self, value: float) -> 'MPlug':
         """
         Sets the plug's value as a single-precision float.
         """
         self._attribute._value = value
+        return self
 
-    def setInt(self, value: int):
+    def setInt(self, value: int) -> 'MPlug':
         """
         Sets the plug's value as a regular integer.
         """
         self._attribute._value = value
+        return self
 
-    def setMAngle(self, value: 'MAngle'):
+    def setMAngle(self, value: 'MAngle') -> 'MPlug':
         """
         Sets the plug's value as an MAngle.
         """
 
         self._attribute._value = value.asRadians()
+        return self
 
-    def setMDataHandle(self, value: 'MDataHandle'):
+    def setMDataHandle(self, value: 'MDataHandle') -> 'MPlug':
         """
         Sets the plug's value as a data handle.
         """
         self._attribute._value = value
+        return self
 
-    def setMDistance(self, value: 'MDistance'):
+    def setMDistance(self, value: 'MDistance') -> 'MPlug':
         """
         Sets the plug's value as an MDistance.
         """
         self._attribute._value = value.asCentimeters()
+        return self
 
-    def setMObject(self, value):
+    def setMObject(self, value) -> 'MPlug':
         """
         Sets the plug's value as an MObject.
         """
         self._attribute._value = value
+        return self
 
-    def setMPxData(self, value):
+    def setMPxData(self, value) -> 'MPlug':
         """
         Sets the plug's value using custom plug-in data.
         """
         self._attribute._value = value
+        return self
 
-    def setMTime(self, value: 'MTime'):
+    def setMTime(self, value: 'MTime') -> 'MPlug':
         """
         Sets the plug's value as an MTime.
         """
         self._attribute._value = value.value
+        return self
 
-    def setNumElements(*args, **kwargs):
+    def setNumElements(self, count: int) -> 'MPlug':
         """
         Pre-allocates space for count elements in an array of plugs.
         """
-        pass
+        self._children_plugs = [None] * count
+        return self
 
-    def setShort(self, value):
+    def setShort(self, value) -> 'MPlug':
         """
         Sets the plug's value as a short integer.
         """
         self._attribute._value = value
+        return self
 
-    def setString(self, value):
+    def setString(self, value) -> 'MPlug':
         """
         Sets the plug's value as a string.
         """
         self._attribute._value = value
+        return self
 
-    def source(*args, **kwargs):
+    def source(self) -> Optional['MPlug']:
         """
         If this plug is a destination, return the source plug connected to it.
         If this plug is not a destination, a null plug is returned.
-        This method will produce the networked version of the connectedplug.
+        This method will produce the networked version of the connected plug.
         """
-        pass
+        if self.isDestination:
+            return self._connections['INPUTS'][0] if self._connections['INPUTS'] else None
+        return None
 
-    def sourceWithConversion(*args, **kwargs):
+    def sourceWithConversion(self) -> Optional['MPlug']:
         """
         If this plug is a destination, return the source plug connected to it.
-        This method is very similar to the source() method.  The only difference is that the source() method skips over any unit conversionnode connected to this destination, and returns the source of the unit conversion node.
-        sourceWithConversion() does not skip over unitconversion nodes, and returns the source plug on a unit conversionnode, if present.
+        This method is very similar to the source() method.  The only difference is that the source() method skips over any unit conversion node connected to this destination, and returns the source of the unit conversion node.
+        sourceWithConversion() does not skip over unit conversion nodes, and returns the source plug on a unit conversion node, if present.
         Note that the behavior of connectedTo() is identical to sourceWithConversion(), that is, do not skip over unit conversion nodes.
         """
-        pass
+        return self.source()
 
     info = None
 
@@ -17999,32 +18163,66 @@ class MPlug(object):
     @property
     def isCompound(self) -> bool:
         return self._attribute._is_compound
-
-    isConnected = None
-
-    isDestination = None
-
-    isDynamic = None
+    
+    @property
+    def isConnected(self) -> bool:
+        """Returns True if the plug is connected, False otherwise."""
+        return len(self._connections['INPUTS'] + self._connections['OUTPUTS']) > 0
 
     @property
-    def isElement(self):
+    def isDestination(self) -> bool:
+        """Returns True if the plug is a destination of a connection, False otherwise."""
+        return len(self._connections['INPUTS']) > 0
+
+    @property 
+    def isDynamic(self) -> bool:
+        """Returns True if the plug was created dynamically, False otherwise."""
+        return self._attribute._dynamic
+
+    @property
+    def isElement(self) -> bool:
+        """Returns True if the plug is an element in an array, False otherwise."""
         return self._attribute._is_element
 
-    isFromReferencedFile = None
+    @property
+    def isFromReferencedFile(self) -> bool:
+        """Returns True if the plug is coming from a referenced file, False otherwise."""
+        return False # Mock always returns False as this is Mock completion
 
-    isIgnoredWhenRendering = None
+    @property  
+    def isIgnoredWhenRendering(self) -> bool:
+        """Returns True if the plug will not be processed during render time, False otherwise."""
+        return False # Mock always returns False as this is Mock completion
 
-    isKeyable = True
+    @property
+    def isKeyable(self) -> bool:
+        """Returns True if the plug is keyable, False otherwise."""    
+        return True
 
-    isLocked = False
+    @property
+    def isLocked(self) -> bool:
+        """Returns True if the plug is locked or the owning node is locked, False otherwise."""
+        return False
+        
+    @property
+    def isNetworked(self) -> bool:
+        """Returns True if the plug is networked, False otherwise."""
+        return self._network_plug 
 
-    isNetworked = None
+    @property
+    def isNull(self) -> bool:
+        """Returns True if the plug is null (uninitialized), False otherwise."""
+        return self._owner is None
 
-    isNull = None
+    @property
+    def isProcedural(self) -> bool:
+        """Returns True if the plug is procedural, False otherwise."""  
+        return False # Mock always returns False as this is Mock completion
 
-    isProcedural = None
-
-    isSource = None
+    @property
+    def isSource(self) -> bool:
+        """Returns True if the plug is a source of a connection, False otherwise."""
+        return len(self._connections['OUTPUTS']) > 0
 
     kAll = 0
 
