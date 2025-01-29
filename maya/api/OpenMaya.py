@@ -3241,215 +3241,244 @@ class MMatrix(object):
     4x4 matrix with double-precision elements.
     """
 
-    def __add__(self, *args, **kwargs):
-        """
-        x.__add__(y) <==> x+y
-        """
-        pass
+    def __init__(self, matrix=None):
+        """Initialize matrix with identity if no argument passed"""
+        if matrix is None:
+            # Initialize 4x4 identity matrix as nested list
+            self._matrix = [[1.0 if i == j else 0.0 for j in range(4)] for i in range(4)]
+        else:
+            # Copy input matrix
+            self._matrix = [[matrix[i][j] for j in range(4)] for i in range(4)]
 
-    def __delitem__(self, *args, **kwargs):
-        """
-        x.__delitem__(y) <==> del x[y]
-        """
-        pass
 
-    def __eq__(self, *args, **kwargs):
-        """
-        x.__eq__(y) <==> x==y
-        """
-        pass
+    def __add__(self, other):
+        """Matrix addition"""
+        result = MMatrix()
+        for i in range(4):
+            for j in range(4):
+                result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j]
+        return result
 
-    def __ge__(self, *args, **kwargs):
-        """
-        x.__ge__(y) <==> x>=y
-        """
-        pass
+    def __delitem__(self, index):
+        """Delete row at index - not typically used for matrices"""
+        del self._matrix[index] 
 
-    def __getitem__(self, *args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
+    def __eq__(self, other):
+        """Compare matrices with tolerance"""
+        if not isinstance(other, MMatrix):
+            return False
+        for i in range(4):
+            for j in range(4):
+                if abs(self._matrix[i][j] - other._matrix[i][j]) > self.kTolerance:
+                    return False
+        return True
 
-    def __gt__(self, *args, **kwargs):
-        """
-        x.__gt__(y) <==> x>y
-        """
-        pass
+    def __ge__(self, other):
+        """Compare matrices by comparing elements"""
+        for i in range(4):
+            for j in range(4):
+                if self._matrix[i][j] < other._matrix[i][j]:
+                    return False
+        return True
 
-    def __iadd__(self, *args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
+    def __getitem__(self, index):
+        """Get matrix row"""
+        return self._matrix[index]
 
-    def __imul__(self, *args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
+    def __gt__(self, other):
+        """Greater than comparison"""
+        for i in range(4):
+            for j in range(4):
+                if self._matrix[i][j] <= other._matrix[i][j]:
+                    return False
+        return True
 
-    def __init__(self, *args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
+    def __iadd__(self, other):
+        """In-place addition"""
+        for i in range(4):
+            for j in range(4):
+                self._matrix[i][j] += other._matrix[i][j]
+        return self
 
-    def __isub__(self, *args, **kwargs):
-        """
-        x.__isub__(y) <==> x-=y
-        """
-        pass
+    def __imul__(self, other):
+        """In-place multiplication"""
+        result = self * other
+        self._matrix = result._matrix
+        return self
 
-    def __le__(self, *args, **kwargs):
-        """
-        x.__le__(y) <==> x<=y
-        """
-        pass
+    def __isub__(self, other):
+        """In-place subtraction"""
+        for i in range(4):
+            for j in range(4):
+                self._matrix[i][j] -= other._matrix[i][j]
+        return self
 
-    def __len__(self, *args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
+    def __le__(self, other):
+        """Less than or equal comparison"""
+        for i in range(4):
+            for j in range(4):
+                if self._matrix[i][j] > other._matrix[i][j]:
+                    return False
+        return True
 
-    def __lt__(self, *args, **kwargs):
-        """
-        x.__lt__(y) <==> x<y
-        """
-        pass
+    def __len__(self):
+        """Return number of rows"""
+        return 4
 
-    def __mul__(self, *args, **kwargs):
-        """
-        x.__mul__(y) <==> x*y
-        """
-        pass
+    def __lt__(self, other):
+        """Less than comparison"""
+        for i in range(4):
+            for j in range(4):
+                if self._matrix[i][j] >= other._matrix[i][j]:
+                    return False
+        return True
 
-    def __ne__(self, *args, **kwargs):
-        """
-        x.__ne__(y) <==> x!=y
-        """
-        pass
+    def __mul__(self, other):
+        """Matrix multiplication"""
+        result = MMatrix()
+        if isinstance(other, (int, float)):
+            # Scalar multiplication
+            for i in range(4):
+                for j in range(4):
+                    result._matrix[i][j] = self._matrix[i][j] * other
+            return result
+            
+        # Matrix multiplication
+        for i in range(4):
+            for j in range(4):
+                result._matrix[i][j] = sum(self._matrix[i][k] * other._matrix[k][j] for k in range(4))
+        return result
 
-    def __radd__(self, *args, **kwargs):
-        """
-        x.__radd__(y) <==> y+x
-        """
-        pass
+    def __ne__(self, other):
+        """Not equals"""
+        return not self.__eq__(other)
 
-    def __repr__(self):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        return self.__str__()
+    def __radd__(self, other):
+        """Reverse addition"""
+        return self + other
 
-    def __rmul__(self, *args, **kwargs):
-        """
-        x.__rmul__(y) <==> y*x
-        """
-        pass
+    def __rmul__(self, other):
+        """Reverse multiplication"""
+        return self * other
 
-    def __rsub__(self, *args, **kwargs):
-        """
-        x.__rsub__(y) <==> y-x
-        """
-        pass
+    def __rsub__(self, other):
+        """Reverse subtraction"""
+        result = MMatrix()
+        for i in range(4):
+            for j in range(4):
+                result._matrix[i][j] = other._matrix[i][j] - self._matrix[i][j]
+        return result
 
-    def __setitem__(self, *args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
+    def __setitem__(self, index, value):
+        """Set matrix row"""
+        self._matrix[index] = value
 
     def __str__(self):
-        """
-        x.__str__() <==> str(x)
-        """
-        return ''
+        """String representation"""
+        rows = []
+        for i in range(4):
+            row = ' '.join(f'{x:8.6f}' for x in self._matrix[i])
+            rows.append(f'[{row}]')
+        return '\n'.join(rows)
 
-    def __sub__(self, *args, **kwargs):
-        """
-        x.__sub__(y) <==> x-y
-        """
-        pass
+    def __sub__(self, other):
+        """Matrix subtraction"""
+        result = MMatrix() 
+        for i in range(4):
+            for j in range(4):
+                result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j]
+        return result
 
-    def adjoint(self, *args, **kwargs):
-        """
-        Returns a new matrix containing this matrix's adjoint.
-        """
-        pass
+    def adjoint(self):
+        """Returns adjoint matrix"""
+        result = MMatrix()
+        # TODO: Implement proper adjoint calculation
+        return result
 
-    def det3x3(self, *args, **kwargs):
-        """
-        Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix.
-        """
-        pass
+    def det3x3(self):
+        """3x3 determinant of upper left submatrix"""
+        m = self._matrix
+        return (m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+                m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+                m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]))
 
-    def det4x4(self, *args, **kwargs):
-        """
-        Returns this matrix's determinant.
-        """
-        pass
+    def det4x4(self):
+        """4x4 determinant"""
+        m = self._matrix
+        return (m[0][0] * m[1][1] * m[2][2] * m[3][3] -
+                m[0][0] * m[1][1] * m[2][3] * m[3][2] -
+                m[0][0] * m[1][2] * m[2][1] * m[3][3] +
+                m[0][0] * m[1][2] * m[2][3] * m[3][1] +
+                m[0][0] * m[1][3] * m[2][1] * m[3][2] -
+                m[0][0] * m[1][3] * m[2][2] * m[3][1])
 
-    def getElement(self, *args, **kwargs):
-        """
-        Returns the matrix element for the specified row and column.
-        """
-        pass
+    def getElement(self, row, col):
+        """Get element at row,col"""
+        return self._matrix[row][col]
 
-    def homogenize(self, *args, **kwargs):
-        """
-        Returns a new matrix containing the homogenized version of this matrix.
-        """
-        pass
+    def homogenize(self):
+        """Returns homogenized matrix"""
+        result = MMatrix(self)
+        w = self._matrix[3][3]
+        if abs(w) > self.kTolerance:
+            for i in range(4):
+                for j in range(4):
+                    result._matrix[i][j] /= w
+        return result
 
     def inverse(self):
-        """
-        Returns a new matrix containing this matrix's inverse.
-        """
-        return MMatrix()
+        """Returns inverse matrix"""
+        det = self.det4x4()
+        if abs(det) < self.kTolerance:
+            raise ValueError("Matrix is singular")
+            
+        result = self.adjoint()
+        for i in range(4):
+            for j in range(4):
+                result._matrix[i][j] /= det
+                
+        return result
 
-    def isEquivalent(self, *args, **kwargs):
-        """
-        Test for equivalence of two matrices, within a tolerance.
-        """
-        pass
+    def isEquivalent(self, other, tolerance:float = 1e-10):
+        """Test equivalence within tolerance"""
+        for i in range(4):
+            for j in range(4):
+                if abs(self._matrix[i][j] - other._matrix[i][j]) > tolerance:
+                    return False
+        return True
 
-    def isSingular(self, *args, **kwargs):
-        """
-        Returns True if this matrix is singular.
-        """
-        pass
+    def isSingular(self):
+        """Test if matrix is singular"""
+        return abs(self.det4x4()) < self.kTolerance
 
-    def setElement(self, *args, **kwargs):
-        """
-        Sets the matrix element for the specified row and column.
-        """
-        pass
+    def setElement(self, row, col, value):
+        """Set element at row,col"""
+        self._matrix[row][col] = value
 
-    def setToIdentity(self, *args, **kwargs):
-        """
-        Sets this matrix to the identity.
-        """
-        pass
+    def setToIdentity(self):
+        """Reset to identity matrix"""
+        for i in range(4):
+            for j in range(4):
+                self._matrix[i][j] = 1.0 if i == j else 0.0
 
-    def setToProduct(self, *args, **kwargs):
-        """
-        Sets this matrix to the product of the two matrices passed in.
-        """
-        pass
+    def setToProduct(self, left, right):
+        """Set this matrix to product of two others"""
+        self._matrix = (left * right)._matrix
 
-    def transpose(self, *args, **kwargs):
-        """
-        Returns a new matrix containing this matrix's transpose.
-        """
-        pass
-
-    kIdentity = None
+    def transpose(self):
+        """Returns transposed matrix"""
+        result = MMatrix()
+        for i in range(4):
+            for j in range(4):
+                result._matrix[i][j] = self._matrix[j][i]
+        return result
 
     kTolerance = 1e-10
 
-
+    @property
+    def kIdentity(self):
+        return type(self)([[1.0 if i == j else 0.0 for j in range(4)] for i in range(4)])
+    
 class MUintArray(object):
     """
     Array of unsigned int values.
@@ -13072,6 +13101,11 @@ class MObject(object):
         self._world_space = False
         self._writeable = True
 
+    def _init_unit_fields(self):
+        self._unit: int = None
+        self._unit_type: int = None
+        self._init_numeric_fields()
+
     def _init_numeric_fields(self):
         self._min = None
         self._max = None
@@ -13082,6 +13116,10 @@ class MObject(object):
 
     def _init_typed_fields(self):
         self._typed_attr_type: int = MFnData.kInvalid
+
+    def _init_matrix_fields(self):
+        self._matrix_type: int = MFnMatrixData.kMatrix
+        self._matrix = None
 
     def __le__(*args, **kwargs):
         """
@@ -13846,137 +13884,218 @@ class MTime(object):
     Manipulate time data.
     """
 
-    def __add__(*args, **kwargs):
+    def __add__(self, other):
         """
         x.__add__(y) <==> x+y
         """
-        pass
+        if isinstance(other, MTime):
+            return MTime(self.value + other.value, self.unit)
+        return MTime(self.value + other, self.unit) 
 
-    def __div__(*args, **kwargs):
+    def __div__(self, other):
         """
         x.__div__(y) <==> x/y
-        """
-        pass
+        """ 
+        if isinstance(other, MTime):
+            return MTime(self.value / other.value, self.unit)
+        return MTime(self.value / other, self.unit)
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, other):
         """
         x.__eq__(y) <==> x==y
         """
-        pass
+        if isinstance(other, MTime):
+            return self.value == other.value and self.unit == other.unit
+        return self.value == other
 
-    def __ge__(*args, **kwargs):
+    def __ge__(self, other):
         """
         x.__ge__(y) <==> x>=y
         """
-        pass
+        if isinstance(other, MTime):
+            return self.value >= other.value
+        return self.value >= other
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, other):
         """
         x.__gt__(y) <==> x>y
         """
-        pass
+        if isinstance(other, MTime):
+            return self.value > other.value
+        return self.value > other
 
-    def __iadd__(*args, **kwargs):
+    def __iadd__(self, other):
         """
         x.__iadd__(y) <==> x+=y
         """
-        pass
+        if isinstance(other, MTime):
+            self._value += other.value
+        else:
+            self._value += other
+        return self
 
-    def __idiv__(*args, **kwargs):
+    def __idiv__(self, other):
         """
         x.__idiv__(y) <==> x/=y
         """
-        pass
+        if isinstance(other, MTime):
+            self._value /= other.value
+        else:
+            self._value /= other
+        return self
 
-    def __imul__(*args, **kwargs):
+    def __imul__(self, other):
         """
         x.__imul__(y) <==> x*=y
         """
-        pass
+        if isinstance(other, MTime):
+            self._value *= other.value
+        else:
+            self._value *= other
+        return self
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, unit=6):
+        """Initialize MTime from various input types
+        
+        Args:
+            *args: Can be nothing, MTime, or time value + optional unit
+            unit (int): Default unit if not specified (defaults to kFilm)
         """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
+        super().__init__()
+        
+        match args:
+            case (): # No args
+                self._unit = MTime.kFilm
+                self._value = 1
+                
+            case (time,) if isinstance(time, MTime): # MTime arg
+                self._unit = time.unit
+                self._value = time.value
+                
+            case (value,) if isinstance(value, (int, float)): # Single value
+                self._unit = unit
+                self._value = value
+                
+            case (value, unit) if isinstance(value, (int, float)): # Value + unit
+                self._unit = unit
+                self._value = value
+                
+            case _:
+                raise TypeError(f'Invalid arguments: {args}')
 
-    def __isub__(*args, **kwargs):
+    def __isub__(self, other):
         """
         x.__isub__(y) <==> x-=y
         """
-        pass
+        if isinstance(other, MTime):
+            self._value -= other.value
+        else:
+            self._value -= other
+        return self
 
-    def __le__(*args, **kwargs):
+    def __le__(self, other):
         """
         x.__le__(y) <==> x<=y
         """
-        pass
+        if isinstance(other, MTime):
+            return self.value <= other.value
+        return self.value <= other
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, other):
         """
         x.__lt__(y) <==> x<y
         """
-        pass
+        if isinstance(other, MTime):
+            return self.value < other.value
+        return self.value < other
 
-    def __mul__(*args, **kwargs):
+    def __mul__(self, other):
         """
         x.__mul__(y) <==> x*y
         """
-        pass
+        if isinstance(other, MTime):
+            return MTime(self.value * other.value, self.unit)
+        return MTime(self.value * other, self.unit)
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, other):
         """
         x.__ne__(y) <==> x!=y
         """
-        pass
+        return not self.__eq__(other)
 
-    def __radd__(*args, **kwargs):
+    def __radd__(self, other):
         """
         x.__radd__(y) <==> y+x
         """
-        pass
+        return self.__add__(other)
 
-    def __rdiv__(*args, **kwargs):
+    def __rdiv__(self, other):
         """
         x.__rdiv__(y) <==> y/x
         """
-        pass
+        return MTime(other / self.value, self.unit)
 
-    def __repr__(*args, **kwargs):
+    def __repr__(self):
         """
         x.__repr__() <==> repr(x)
         """
-        pass
+        return f'MTime({self.value}, {self.unit})'
 
-    def __rmul__(*args, **kwargs):
+    def __rmul__(self, other):
         """
         x.__rmul__(y) <==> y*x
         """
-        pass
+        return self.__mul__(other)
 
-    def __rsub__(*args, **kwargs):
+    def __rsub__(self, other):
         """
         x.__rsub__(y) <==> y-x
         """
-        pass
+        return MTime(other - self.value, self.unit)
 
-    def __str__(*args, **kwargs):
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return str(self.value)
 
-    def __sub__(*args, **kwargs):
+    def __sub__(self, other):
         """
         x.__sub__(y) <==> x-y
         """
-        pass
+        if isinstance(other, MTime):
+            return MTime(self.value - other.value, self.unit)
+        return MTime(self.value - other, self.unit)
 
-    def asUnits(*args, **kwargs):
+    def asUnits(self, unit: int) -> float:
         """
         Return the time value, converted to the specified units.
+        
+        This is done by first converting the value to seconds and then 
+        to the target unit using conversion factors.
         """
-        pass
+        # Map of time units to their conversion factors relative to seconds 
+        UNIT_TO_SECONDS = {
+            # Frames per second values
+            MTime.k2FPS: 0.5, MTime.k3FPS: 1/3, MTime.k4FPS: 0.25, MTime.k5FPS: 0.2, MTime.k6FPS: 1/6,
+            MTime.k8FPS: 0.125, MTime.k10FPS: 0.1, MTime.k12FPS: 1/12, MTime.k15FPS: 1/15,
+            MTime.k16FPS: 0.0625, MTime.k20FPS: 0.05, MTime.k23_976FPS: 1/23.976,
+            MTime.k24FPS: 1/24, MTime.k25FPS: 0.04, MTime.k29_97FPS: 1/29.97, MTime.k30FPS: 1/30, 
+            MTime.k40FPS: 0.025, MTime.k48FPS: 1/48, MTime.k50FPS: 0.02, MTime.k60FPS: 1/60,
+            MTime.k75FPS: 1/75, MTime.k80FPS: 0.0125, MTime.k100FPS: 0.01, MTime.k120FPS: 1/120,
+            MTime.k125FPS: 0.008, MTime.k150FPS: 1/150, MTime.k200FPS: 0.005, MTime.k240FPS: 1/240,
+            MTime.k250FPS: 0.004, MTime.k300FPS: 1/300, MTime.k375FPS: 1/375, MTime.k400FPS: 0.0025,
+            MTime.k500FPS: 0.002, MTime.k600FPS: 1/600, MTime.k750FPS: 1/750,
+            # Time units
+            MTime.kHours: 3600.0, MTime.kMinutes: 60.0, MTime.kSeconds: 1.0,
+            MTime.kMilliseconds: 0.001,
+        }
+        
+        # Convert current value to seconds first
+        seconds = self.value * UNIT_TO_SECONDS[self.unit]
+        
+        # Convert seconds to target unit
+        return seconds / UNIT_TO_SECONDS[unit]
 
     @staticmethod
     def setUIUnit(*args, **kwargs):
@@ -13985,143 +14104,88 @@ class MTime(object):
         """
         pass
 
-    @staticmethod
-    def ticksPerSecond(*args, **kwargs):
+    @staticmethod 
+    def ticksPerSecond():
         """
         Returns the number of ticks per second, the smallest unit of time available.
         """
-        pass
+        return 6000
 
     @staticmethod
-    def uiUnit(*args, **kwargs):
+    def uiUnit():
         """
         Return the units used to display time in Maya's UI.
         """
-        pass
+        return MTime.kFilm
 
     k100FPS = 25
-
     k10FPS = 18
-
     k1200FPS = 38
-
     k120FPS = 26
-
     k125FPS = 27
-
     k12FPS = 19
-
     k1500FPS = 39
-
     k150FPS = 28
-
     k15FPS = 5
-
     k16FPS = 20
-
     k2000FPS = 40
-
     k200FPS = 29
-
     k20FPS = 21
-
     k23_976FPS = 43
-
     k240FPS = 30
-
     k24FPS = 6
-
     k250FPS = 31
-
     k25FPS = 7
-
     k29_97DF = 45
-
     k29_97FPS = 44
-
     k2FPS = 12
-
     k3000FPS = 41
-
     k300FPS = 32
-
     k30FPS = 8
-
     k375FPS = 33
-
     k3FPS = 13
-
     k400FPS = 34
-
     k40FPS = 22
-
     k44100FPS = 48
-
     k47_952FPS = 46
-
     k48000FPS = 49
-
     k48FPS = 9
-
     k4FPS = 14
-
     k500FPS = 35
-
     k50FPS = 10
-
     k59_94FPS = 47
-
     k5FPS = 15
-
     k6000FPS = 42
-
     k600FPS = 36
-
     k60FPS = 11
-
     k6FPS = 16
-
     k750FPS = 37
-
     k75FPS = 23
-
     k80FPS = 24
-
     k8FPS = 17
-
     k90FPS = 50
-
     kFilm = 6
-
     kGames = 5
-
     kHours = 1
-
     kInvalid = 0
-
     kLast = 52
-
     kMilliseconds = 4
-
     kMinutes = 2
-
     kNTSCField = 11
-
     kNTSCFrame = 8
-
     kPALField = 10
-
     kPALFrame = 7
-
     kSeconds = 3
-
     kShowScan = 9
-
     kUserDef = 51
 
-    unit = None
-
-    value = None
+    @property
+    def unit(self):
+        return self._unit
+    
+    @property
+    def value(self):
+        return self._value
 
 
 class MArrayDataHandle(object):
@@ -17553,15 +17617,22 @@ class MPlug(object):
         """
         Retrieves the plug's value, as as an MObject containing a direct reference to the plug's data.
         """
-        return MObject(self._attribute._value)
+        return self._attribute
 
     def asMTime(self, *args, **kwargs):
         """
         Retrieves the plug's value, as an MTime.
         """
+        
+        unit = 6  # MTime.kFilm
+
         if self._attribute._value is None:
-            self._attribute._value = 0
-        return MTime(self._attribute._value)
+            self._attribute._value = 1.0
+
+        if hasattr(self._attribute, '_unit'):
+            unit = self._attribute._unit
+
+        return MTime(self._attribute._value, unit=unit)
 
     def asShort(self, *args, **kwargs):
         """
@@ -22451,11 +22522,11 @@ class MFnData(MFnBase):
     Base class for dependency graph data function sets.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
     kAny = 24
 
@@ -23677,142 +23748,170 @@ class MFnUnitAttribute(MFnAttribute):
     _fn_type = MFn.kUnitAttribute
 
     def __init__(self, *args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
+        """Initialize the function set."""
         super().__init__(*args, **kwargs)
 
-    def create(self,
-               long_name: str,
-               short_name: str,
-               unit_type: int,
-               default_value: Union[float, 'MAngle', 'MDistance', 'MTime'] = 0.0
-               ) -> 'MObject':
+    def create(self, long_name: str, short_name: str, 
+               unit_type: Union[int, 'MAngle', 'MDistance', 'MTime'],
+               default_value: float = 0.0) -> 'MObject':
+        """Creates a new unit attribute.
+        
+        Args:
+            long_name: Long name of the attribute
+            short_name: Short name of the attribute
+            unit_type: Type of unit (angle, distance, time) 
+            default_value: Default value for the attribute
+            
+        Returns:
+            New unit attribute as an MObject
         """
-        Creates a new unit attribute, attaches it to the function set and returns it as an MObject.
-        """
+
+        # Map of unit type constants to Maya API types
+        _UNIT_CONSTANTS_TO_TYPES_MAP = {
+            0: MFn.kUnitAttribute, # kInvalid
+            1: MFn.kDoubleAngleAttribute, # kAngle
+            MAngle: MFn.kDoubleAngleAttribute,
+
+            2: MFn.kDoubleLinearAttribute, # kDistance  
+            MDistance: MFn.kDoubleLinearAttribute,
+
+            3: MFn.kTimeAttribute, # kTime
+            MTime: MFn.kTimeAttribute
+        }
+
         super()._create(long_name=long_name, short_name=short_name)
+        
+        # Initialize numeric fields
+        self._mobject._init_unit_fields()
+        
+        # Handle both unit type constants and unit objects
+        if isinstance(unit_type, (MAngle, MDistance, MTime)): 
+            self._mobject._value = unit_type._value
+            self._mobject._default = unit_type._value
+            self._mobject._unit = unit_type._unit
+            type_constant = _UNIT_CONSTANTS_TO_TYPES_MAP[type(unit_type)]
 
-        self._mobject._api_type.append(MFn.kUnitAttribute)
+        elif isinstance(unit_type, int):
+            self._mobject._value = default_value
+            self._mobject._default = default_value
+            type_constant = unit_type
+        else:
+            raise TypeError(f'Invalid unit type: {unit_type}')
 
-        self._mobject._init_numeric_fields()
-        self._mobject._unit_type = unit_type
+        # Add attribute type // unit attrs have different api types depending on unit which type
+        self._mobject._api_type.extend([
+            MFn.kUnitAttribute,
+            type_constant
+        ])
 
-        self._mobject._value = default_value
-        self._mobject._default = default_value
+        self._mobject._unit_type = type_constant
+        return self._mobject
 
-    def getMax(self) -> float | Tuple[float]:
-        """
-        Returns the attribute's hard maximum value(s).
-        """
+    def getMax(self) -> float:
+        """Get hard maximum value."""
         if self._mobject._max is None:
             raise RuntimeError(f'Attribute: {self._mobject._name} does not have a maximum value.')
         return self._mobject._max
 
-    def getMin(self) -> float | Tuple[float]:
-        """
-        Returns the attribute's hard minimum value(s).
-        """
+    def getMin(self) -> float:
+        """Get hard minimum value."""
         if self._mobject._min is None:
             raise RuntimeError(f'Attribute: {self._mobject._name} does not have a minimum value.')
         return self._mobject._min
-
-    def getSoftMax(self) -> float | Tuple[float]:
-        """
-        Returns the attribute's soft maximum value.
-        """
+        
+    def getSoftMax(self) -> float:
+        """Get soft maximum value."""
         if self._mobject._soft_max is None:
             raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft maximum value.')
         return self._mobject._soft_max
 
-    def getSoftMin(self) -> float | Tuple[float]:
-        """
-        Returns the attribute's soft minimum value.
-        """
+    def getSoftMin(self) -> float:
+        """Get soft minimum value."""
         if self._mobject._soft_min is None:
             raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft minimum value.')
         return self._mobject._soft_min
 
     def hasMax(self) -> bool:
-        """
-        Returns True if a hard maximum value has been specified for the attribute.
-        """
-        return True if self._mobject._max else False
+        """Check if attribute has hard maximum."""
+        return self._mobject._max is not None
 
     def hasMin(self) -> bool:
-        """
-        Returns True if a hard minimum value has been specified for the attribute.
-        """
-        return True if self._mobject._min else False
+        """Check if attribute has hard minimum."""
+        return self._mobject._min is not None
 
     def hasSoftMax(self) -> bool:
-        """
-        Returns True if a soft maximum value has been specified for the attribute.
-        """
-        return True if self._mobject._soft_max else False
+        """Check if attribute has soft maximum."""
+        return self._mobject._soft_max is not None
 
     def hasSoftMin(self) -> bool:
-        """
-        Returns True if a soft minimum value has been specified for the attribute.
-        """
-        return True if self._mobject._soft_min else False
-        """
-        Returns the numeric type of the attribute currently attached to the function set.
-        """
-        return self._mobject._numeric_type
+        """Check if attribute has soft minimum."""
+        return self._mobject._soft_min is not None
 
-    def setMax(self, new_value: float) -> 'MFnNumericAttribute':
-        """
-        Sets the attribute's hard maximum value(s).
-        """
-        self._mobject._max = new_value
+    def setMax(self, value: float) -> 'MFnUnitAttribute':
+        """Set hard maximum value."""
+        self._mobject._max = value
         return self
 
-    def setMin(self, new_value: float) -> 'MFnNumericAttribute':
-        """
-        Sets the attribute's hard minimum value(s).
-        """
-        self._mobject._min = new_value
+    def setMin(self, value: float) -> 'MFnUnitAttribute':
+        """Set hard minimum value."""
+        self._mobject._min = value 
         return self
 
-    def setSoftMax(self, new_value: float) -> 'MFnNumericAttribute':
-        """
-        Sets the attribute's soft maximum value.
-        """
-        self._mobject._soft_max = new_value
+    def setSoftMax(self, value: float) -> 'MFnUnitAttribute':
+        """Set soft maximum value."""
+        self._mobject._soft_max = value
         return self
 
-    def setSoftMin(self, new_value: float) -> 'MFnNumericAttribute':
-        """
-        Sets the attribute's soft minimum value.
-        """
-        pass
+    def setSoftMin(self, value: float) -> 'MFnUnitAttribute':
+        """Set soft minimum value."""
+        self._mobject._soft_min = value
+        return self
 
     def unitType(self) -> int:
-        """
-        Returns the type of data handled by the attribute.
-        """
+        """Get the unit type."""
         return self._mobject._unit_type
 
     @property
     def default(self):
-        units_map = {1: MAngle, 2: MDistance, 3: MTime}
-        unit_typ = units_map[self.unitType()]
-        if not isinstance(self._mobject._default, unit_typ):
-            self._mobject._default = unit_typ(self._mobject._default or 0)
+        """Get the default value.
+        
+        Returns:
+            Default value as appropriate unit type (MAngle, MDistance, or MTime)
+        """
+        unit_map = {
+            self.kAngle: MAngle,
+            self.kDistance: MDistance, 
+            self.kTime: MTime
+        }
+        unit_type = unit_map[self.unitType()]
+        
+        if not isinstance(self._mobject._default, unit_type):
+            self._mobject._default = unit_type(self._mobject._default or 0)
+            
         return self._mobject._default
 
-    @default.setter
+    @default.setter 
     def default(self, value: Union[float, 'MAngle', 'MDistance', 'MTime']):
-        units_map = {1: MDistance, 2: MAngle, 3: MTime}
-        unit_typ = units_map[self._unit_type]
-        if isinstance(value, float):
-            self._mobject._default = unit_typ(value)
+        """Set the default value.
+        
+        Args:
+            value: New default value as float or unit type
+        """
+        unit_map = {
+            self.kAngle: MAngle,
+            self.kDistance: MDistance,
+            self.kTime: MTime 
+        }
+        unit_type = unit_map[self._mobject._unit_type]
+        
+        if isinstance(value, (float, int)):
+            self._mobject._default = unit_type(value)
         else:
             self._mobject._default = value
 
+    # Unit type constants
     kInvalid = 0
-    kAngle = 1
+    kAngle = 1  
     kDistance = 2
     kTime = 3
     kLast = 4
@@ -24221,17 +24320,23 @@ class MFnMatrixAttribute(MFnAttribute):
     Functionset for creating and working with matrix attributes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def create(*args, **kwargs):
+    def create(self, long_name: str, short_name: str, type=1) -> 'MObject':
         """
         Creates a new matrix attribute, attaches it to the function set and returns it as an MObject.
         """
-        pass
+        super()._create(long_name=long_name, short_name=short_name)
+        self._mobject._init_matrix_fields()
+
+        self._mobject._api_type.append(MFn.kMatrixAttribute)
+        
+        self._mobject._matrix = MMatrix()
+        return self._mobject
 
     default = None
 
@@ -24861,43 +24966,74 @@ class MFnCompoundAttribute(MFnAttribute):
 class MFnMatrixData(MFnData):
     """
     Function set for matrix node data.
+    
+    This class is used to manipulate matrix data in the data block. It provides 
+    methods for getting/setting/creating MMatrix data and transforming between 
+    MMatrix and MTransformationMatrix formats.
     """
+    
+    def __init__(self, *args, **kwargs):
+        """Initialize self.  See help(type(self)) for accurate signature."""
+        super().__init__(*args, **kwargs)
 
-    def __init__(*args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
-
-    def create(*args, **kwargs):
+    def create(self, matrix: Union['MMatrix', 'MTransformationMatrix']) -> 'MObject':
         """
         Creates a new matrix data object.
+        
+        Returns: New matrix data MObject
         """
-        pass
-
-    def isTransformation(*args, **kwargs):
-        """
-        Returns True if the attached object is an MTransformationMatrix, False if it is an MMatrix.
-        """
-        pass
-
-    def matrix(*args, **kwargs):
+        super()._create()
+        self._mobject._init_matrix_fields()
+        self._matrix = matrix
+        self._mobject._api_type.append(MFn.kMatrixData)
+        return self._mobject
+        
+    def matrix(self) -> 'MMatrix':
         """
         Returns the encapsulated matrix as an MMatrix.
+        
+        Returns: MMatrix object representing the data
         """
-        pass
-
-    def set(*args, **kwargs):
+        if isinstance(self._mobject._matrix, MTransformationMatrix):
+            # Cast to matrix
+            return self._mobject._matrix.asMatrix()
+        return self._mobject._matrix
+        
+    def set(self, matrix: 'MMatrix') -> 'MFnMatrixData':
         """
         Sets the value of the encapsulated matrix.
+        
+        Args:
+            matrix (MMatrix): The new matrix value to set
         """
-        pass
+        if isinstance(matrix, MTransformationMatrix):
+            self._mobject._matrix_type = matrix.asMatrix()
+            self._mobject._is_transformation = True
+        else:
+            self._mobject._matrix_type = matrix
+            self._mobject._is_transformation = False
+        return self
 
-    def transformation(*args, **kwargs):
+    def transformation(self) -> 'MTransformationMatrix':
         """
         Returns the encapsulated matrix as an MTransformationMatrix.
+        Raises TypeError if matrix cannot be converted to an MTransformationMatrix.
+        
+        Returns: Matrix data as an MTransformationMatrix
         """
-        pass
+        if isinstance(self._matrix, MTransformationMatrix):
+            return self._matrix
+        else:
+            return MTransformationMatrix(self._matrix)
+
+    def isTransformation(self) -> bool:
+        """
+        Returns True if the attached object is an MTransformationMatrix, 
+        False if it is an MMatrix.
+
+        Returns: bool indicating whether object is an MTransformationMatrix
+        """
+        return True if isinstance(self._matrix, MTransformationMatrix) else False
 
 
 class MFnTransform(MFnDagNode):
