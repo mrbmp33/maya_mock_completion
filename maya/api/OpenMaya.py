@@ -7,6 +7,7 @@
 # or hard copy form.
 """
 import copy
+import re
 import random
 import string
 import uuid
@@ -17856,11 +17857,31 @@ class MPlug(object):
         del handle
         return self
 
-    def elementByLogicalIndex(self, index):
+    def elementByLogicalIndex(self, index) -> 'MPlug':
         """
         Returns a plug for the element of this plug array having the specified logical index.
         """
-        return self._attribute._children[index]
+        if not self.isArray:
+            raise TypeError(f'Plug <{self.name()}> is not an array plug.')
+
+        if not index >= len(self._children_plugs):
+            return self._children_plugs[index]
+        else:
+            long_name = f'{self._attribute._long_name}[{index}]'
+            short_name = f'{self._attribute._short_name}[{index}]'
+            name = f'{self._attribute._name}[{index}]'
+            
+            # If not cached yet, create a new plug and attribute
+            if self._attribute.apiType() == MFn.kTypedAttribute:
+                array_type = MFnTypedAttribute(self._attribute).attrType()
+                mplug = MPlug()
+                attribute = MFnTypedAttribute().create(long_name, short_name, array_type)
+                mplug._attribute = attribute
+                mplug._owner = self._owner
+                mplug._parent = weakref.proxy(self)
+                mplug._parent_name = self._attribute._long_name
+                self._children_plugs.append(mplug)
+                return mplug
 
     def elementByPhysicalIndex(self, index: int) -> 'MPlug':
         """
@@ -22365,6 +22386,13 @@ class MFnDependencyNode(MFnBase):
         if attr_type not in attribute._api_type:
             attribute._api_type.append(attr_type)
 
+        if attr_type == MFn.kNumericAttribute:
+            attribute._init_numeric_fields()
+        elif attr_type == MFn.kUnitAttribute:
+            attribute._init_unit_fields()
+        elif attr_type == MFn.kTypedAttribute:
+            attribute._init_typed_fields()
+        
         # Only for numeric attributes
         if properties.get('numeric_type') is not None:
             attribute._numeric_type = properties['numeric_type']
@@ -22376,6 +22404,10 @@ class MFnDependencyNode(MFnBase):
         # For Unit Attributes like distance, angle, time...
         if properties.get('unit_type') is not None:
             attribute._unit_type = properties['unit_type']
+
+        # For Typed Attribtues like Enum, String, Matrix...
+        if properties.get('typed_type') is not None:
+            attribute._typed_attr_type = properties['typed_type']
 
         # Only for compound attributes
         if properties.get('children') is not None:

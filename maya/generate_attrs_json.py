@@ -98,6 +98,10 @@ def get_attr_properties(nd):
                 fields = {}
                 for value in range(enum.getMax()):
                     fields[value] = enum.fieldName(value)
+            
+            elif attr.apiType() == om.MFn.kTypedAttribute:
+                typed = om.MFnTypedAttribute(attr)
+                attr_properties["typed_type"] = typed.attrType()
 
             all_attr_properties[attr_properties["long_name"]] = attr_properties
         except RuntimeError as err:

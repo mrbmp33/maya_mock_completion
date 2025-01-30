@@ -8,7 +8,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "blackBox": {
             "short_name": "bbx",
@@ -250,7 +251,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creationDate": {
             "short_name": "cdat",
@@ -258,7 +260,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creator": {
             "short_name": "ctor",
@@ -266,7 +269,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -274,7 +278,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "dagLocalInverseMatrix": {
             "short_name": "dlim",
@@ -516,7 +521,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -638,7 +644,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "identification": {
             "short_name": "rlid",
@@ -686,7 +693,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "isCollapsed": {
             "short_name": "isc",
@@ -757,7 +765,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "maxRotLimit": {
             "short_name": "mxrl",
@@ -1604,7 +1613,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "parentMatrix": {
             "short_name": "pm",
@@ -1613,7 +1623,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -1653,7 +1664,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "rotate": {
             "short_name": "r",
@@ -2169,7 +2181,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 24
         },
         "template": {
             "short_name": "tmp",
@@ -2187,7 +2200,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templatePath": {
             "short_name": "tpt",
@@ -2195,7 +2209,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templateVersion": {
             "short_name": "tpv",
@@ -2333,7 +2348,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "visibility": {
             "short_name": "v",
@@ -2399,7 +2415,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldMatrix": {
             "short_name": "wm",
@@ -2408,7 +2425,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "xformMatrix": {
             "short_name": "xm",
@@ -2416,7 +2434,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         }
     },
     "joint": {
@@ -2426,7 +2445,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "bindInverseScale": {
             "short_name": "bis",
@@ -2528,7 +2548,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "bindRotateAxis": {
             "short_name": "bra",
@@ -2921,7 +2942,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creationDate": {
             "short_name": "cdat",
@@ -2929,7 +2951,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creator": {
             "short_name": "ctor",
@@ -2937,7 +2960,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -2945,7 +2969,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "dagLocalInverseMatrix": {
             "short_name": "dlim",
@@ -3262,7 +3287,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -3402,7 +3428,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "identification": {
             "short_name": "rlid",
@@ -3507,7 +3534,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "inverseScale": {
             "short_name": "is",
@@ -3617,7 +3645,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "jointOrientX": {
             "short_name": "jox",
@@ -3658,7 +3687,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "jointTypeX": {
             "short_name": "jtx",
@@ -3728,7 +3758,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "maxRotLimit": {
             "short_name": "mxrl",
@@ -4561,7 +4592,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "outlinerColor": {
             "short_name": "oclr",
@@ -4771,7 +4803,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "parentMatrix": {
             "short_name": "pm",
@@ -4780,7 +4813,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "preferredAngle": {
             "short_name": "pa",
@@ -4877,7 +4911,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "rotate": {
             "short_name": "r",
@@ -5411,7 +5446,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 24
         },
         "stiffness": {
             "short_name": "st",
@@ -5476,7 +5512,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templatePath": {
             "short_name": "tpt",
@@ -5484,7 +5521,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templateVersion": {
             "short_name": "tpv",
@@ -5630,7 +5668,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "visibility": {
             "short_name": "v",
@@ -5696,7 +5735,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldMatrix": {
             "short_name": "wm",
@@ -5705,7 +5745,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "xformMatrix": {
             "short_name": "xm",
@@ -5713,7 +5754,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         }
     },
     "multDoubleLinear": {
@@ -5723,7 +5765,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -5801,7 +5844,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -6018,7 +6062,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -6262,7 +6307,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -6435,7 +6481,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "blue": {
             "short_name": "b",
@@ -6652,7 +6699,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "cacheSetup": {
             "short_name": "csp",
@@ -6687,7 +6735,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "frozen": {
             "short_name": "fzn",
@@ -6749,7 +6798,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "outputMatrix": {
             "short_name": "omat",
@@ -6775,7 +6825,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "relativeSpaceMatrix": {
             "short_name": "rsmat",
@@ -6807,7 +6858,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         }
     },
     "plusMinusAverage": {
@@ -6817,7 +6869,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -7004,7 +7057,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -7083,7 +7137,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "blender": {
             "short_name": "b",
@@ -7290,7 +7345,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -7601,7 +7657,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -7665,7 +7722,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -7730,7 +7788,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "caching": {
             "short_name": "cch",
@@ -7869,7 +7928,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "blackBox": {
             "short_name": "bbx",
@@ -8096,7 +8156,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 16
         },
         "caching": {
             "short_name": "cch",
@@ -8165,7 +8226,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "controlPoints": {
             "short_name": "cp",
@@ -8182,7 +8244,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 16
         },
         "creationDate": {
             "short_name": "cdat",
@@ -8190,7 +8253,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creator": {
             "short_name": "ctor",
@@ -8198,7 +8262,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "currentColorSet": {
             "short_name": "ccls",
@@ -8206,7 +8271,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "currentUVSet": {
             "short_name": "cuvs",
@@ -8214,7 +8280,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -8222,7 +8289,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "degree": {
             "short_name": "d",
@@ -8300,7 +8368,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "displayColors": {
             "short_name": "dcol",
@@ -8515,7 +8584,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -8618,7 +8688,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -8655,7 +8726,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "identification": {
             "short_name": "rlid",
@@ -8722,7 +8794,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "isCollapsed": {
             "short_name": "isc",
@@ -8793,7 +8866,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 16
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -8811,7 +8885,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "maxShadingSamples": {
             "short_name": "msa",
@@ -9161,7 +9236,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "parentMatrix": {
             "short_name": "pm",
@@ -9170,7 +9246,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "pickTexture": {
             "short_name": "pte",
@@ -9276,7 +9353,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -9334,7 +9412,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templatePath": {
             "short_name": "tpt",
@@ -9342,7 +9421,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templateVersion": {
             "short_name": "tpv",
@@ -9370,7 +9450,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 24
         },
         "tweakSize": {
             "short_name": "ts",
@@ -9458,7 +9539,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "visibility": {
             "short_name": "v",
@@ -9585,7 +9667,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldMatrix": {
             "short_name": "wm",
@@ -9594,7 +9677,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldNormal": {
             "short_name": "wn",
@@ -9612,7 +9696,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 16
         }
     },
     "nurbsSurface": {
@@ -9650,7 +9735,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "blackBox": {
             "short_name": "bbx",
@@ -9924,7 +10010,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 17
         },
         "caching": {
             "short_name": "cch",
@@ -10049,7 +10136,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "controlPoints": {
             "short_name": "cp",
@@ -10066,7 +10154,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 17
         },
         "creationDate": {
             "short_name": "cdat",
@@ -10074,7 +10163,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creator": {
             "short_name": "ctor",
@@ -10082,7 +10172,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "currentColorSet": {
             "short_name": "ccls",
@@ -10090,7 +10181,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "currentUVSet": {
             "short_name": "cuvs",
@@ -10098,7 +10190,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "curvatureTolerance": {
             "short_name": "cvto",
@@ -10134,7 +10227,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "degreeU": {
             "short_name": "du",
@@ -10247,7 +10341,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "displayColors": {
             "short_name": "dcol",
@@ -10561,7 +10656,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -10684,7 +10780,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -10731,7 +10828,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "identification": {
             "short_name": "rlid",
@@ -10818,7 +10916,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "isCollapsed": {
             "short_name": "isc",
@@ -10879,7 +10978,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 17
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -10897,7 +10997,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "maxShadingSamples": {
             "short_name": "msa",
@@ -11352,7 +11453,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "parentMatrix": {
             "short_name": "pm",
@@ -11361,7 +11463,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "patchUVIds": {
             "short_name": "pu",
@@ -11370,7 +11473,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 0
         },
         "pickTexture": {
             "short_name": "pte",
@@ -11486,7 +11590,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "selCVDisp": {
             "short_name": "scvd",
@@ -11639,7 +11744,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templatePath": {
             "short_name": "tpt",
@@ -11647,7 +11753,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templateVersion": {
             "short_name": "tpv",
@@ -11676,7 +11783,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 0
         },
         "tweak": {
             "short_name": "tw",
@@ -11694,7 +11802,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 24
         },
         "tweakSizeU": {
             "short_name": "tsu",
@@ -11842,7 +11951,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "visibility": {
             "short_name": "v",
@@ -11969,7 +12079,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldMatrix": {
             "short_name": "wm",
@@ -11978,7 +12089,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldSpace": {
             "short_name": "ws",
@@ -11987,7 +12099,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 17
         }
     },
     "mesh": {
@@ -12045,7 +12158,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "blackBox": {
             "short_name": "bbx",
@@ -12337,7 +12451,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 14
         },
         "cachedSmoothMesh": {
             "short_name": "cs",
@@ -12345,7 +12460,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 14
         },
         "caching": {
             "short_name": "cch",
@@ -12481,7 +12597,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "continuity": {
             "short_name": "co",
@@ -12508,7 +12625,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "creaseVertexData": {
             "short_name": "cvd",
@@ -12516,7 +12634,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "creationDate": {
             "short_name": "cdat",
@@ -12524,7 +12643,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "creator": {
             "short_name": "ctor",
@@ -12532,7 +12652,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "currentColorSet": {
             "short_name": "ccls",
@@ -12540,7 +12661,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "currentUVSet": {
             "short_name": "cuvs",
@@ -12548,7 +12670,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -12556,7 +12679,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "depthJitter": {
             "short_name": "dej",
@@ -12640,7 +12764,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "displayColors": {
             "short_name": "dcol",
@@ -12897,7 +13022,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 0
         },
         "faceColorIndices": {
             "short_name": "fcid",
@@ -12906,7 +13032,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 9
         },
         "faceIdMap": {
             "short_name": "fmap",
@@ -13092,7 +13219,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
         },
         "ghostNearOpacity": {
             "short_name": "gnro",
@@ -13226,7 +13354,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -13242,7 +13371,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "identification": {
             "short_name": "rlid",
@@ -13291,7 +13421,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 14
         },
         "initialSampleRate": {
             "short_name": "dsr",
@@ -13337,7 +13468,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "isCollapsed": {
             "short_name": "isc",
@@ -13454,7 +13586,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
         },
         "maxEdgeLength": {
             "short_name": "mxe",
@@ -13580,7 +13713,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "normalPerVertex": {
             "short_name": "npvx",
@@ -13770,7 +13904,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 14
         },
         "outSmoothMesh": {
             "short_name": "os",
@@ -13778,7 +13913,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 14
         },
         "outSmoothMeshSubdError": {
             "short_name": "osde",
@@ -13998,7 +14134,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "parentMatrix": {
             "short_name": "pm",
@@ -14007,7 +14144,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "perInstanceIndex": {
             "short_name": "pii",
@@ -14046,7 +14184,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 0
         },
         "pnts": {
             "short_name": "pt",
@@ -14191,7 +14330,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -14392,7 +14532,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templatePath": {
             "short_name": "tpt",
@@ -14400,7 +14541,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "templateVersion": {
             "short_name": "tpv",
@@ -14438,7 +14580,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 24
         },
         "useGlobalSmoothDrawType": {
             "short_name": "ugsdt",
@@ -14574,7 +14717,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "uvPivot": {
             "short_name": "pv",
@@ -14636,7 +14780,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 24
         },
         "uvpt": {
             "short_name": "uv",
@@ -14727,7 +14872,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kTypedAttribute"
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
         },
         "visibility": {
             "short_name": "v",
@@ -14863,7 +15009,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldMatrix": {
             "short_name": "wm",
@@ -14872,7 +15019,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 5
         },
         "worldMesh": {
             "short_name": "w",
@@ -14881,7 +15029,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "num_elements": 0
+            "num_elements": 0,
+            "typed_type": 14
         }
     }
 }
