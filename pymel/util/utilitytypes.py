@@ -1,5 +1,3 @@
-import exceptions
-
 """
 Defines common types and type related utilities:  Singleton, etc.
 These types can be shared by other utils modules and imported into util main namespace for use by other pymel modules
@@ -593,7 +591,7 @@ class ProxyUnicode(object):
     __weakref__ = None
 
 
-class LazyDocStringError(exceptions.Exception):
+class LazyDocStringError(Exception):
     __weakref__ = None
 
 

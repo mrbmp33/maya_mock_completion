@@ -11,7 +11,7 @@ simply add a __melobject__ function that returns a mel-friendly result and pass 
 The wrapped commands in this module are the starting point for any other pymel customizations.
 """
 
-from exceptions import ValueError as objectErrorType
+objectErrorType = ValueError
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional

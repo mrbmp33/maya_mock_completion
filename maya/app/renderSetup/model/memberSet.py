@@ -1,4 +1,4 @@
-import exceptions
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
@@ -33,7 +33,7 @@ class Node(object):
     __weakref__ = None
 
 
-class AlreadyHasStatus(exceptions.Exception):
+class AlreadyHasStatus(Exception):
     __weakref__ = None
 
 

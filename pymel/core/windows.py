@@ -1,4 +1,4 @@
-import exceptions
+
 
 from pymel.internal.pmcmds import showSelectionInTitle
 from pymel.internal.pmcmds import grabColor
@@ -71,7 +71,7 @@ if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class PopupError(exceptions.Exception):
+class PopupError(Exception):
     """
     Raise this exception in your scripts to cause a confirmDialog to be opened displaying the error message.
     After the user presses 'OK', the exception will be raised as normal. In batch mode the promptDialog is not opened.

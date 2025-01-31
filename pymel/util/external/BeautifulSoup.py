@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 Beautiful Soup
@@ -289,7 +289,7 @@ class ResultSet(list):
     __weakref__ = None
 
 
-class StopParsing(exceptions.Exception):
+class StopParsing(Exception):
     __weakref__ = None
 
 

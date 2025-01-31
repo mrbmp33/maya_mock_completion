@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 Original author:
@@ -27,12 +27,13 @@ path.py requires Python 2.5 or later.
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
+import types
 
-class TreeWalkWarning(exceptions.Warning):
+class TreeWalkWarning(Warning):
     __weakref__ = None
 
 
-class path(unicode):
+class path(str):
     """
     Represents a filesystem path.
     
@@ -1095,7 +1096,7 @@ class multimethod(object):
     __weakref__ = None
 
 
-class CaseInsensitivePattern(unicode):
+class CaseInsensitivePattern(str):
     """
     A string with a 'normcase' property, suitable for passing to
     :meth:`listdir`, :meth:`dirs`, :meth:`files`, :meth:`walk`,

@@ -1,10 +1,8 @@
-import exceptions
-
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class ReportableException(exceptions.Exception):
+class ReportableException(Exception):
     def __init__(self, text): pass
 
     def __str__(self): pass

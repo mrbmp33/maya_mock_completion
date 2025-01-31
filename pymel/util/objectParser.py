@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 .. dotgraph::
@@ -56,11 +56,11 @@ class Parser(object):
     classes = {}
 
 
-class NameParseError(exceptions.Exception):
+class NameParseError(Exception):
     __weakref__ = None
 
 
-class ParsingWarning(exceptions.UserWarning):
+class ParsingWarning(UserWarning):
     __weakref__ = None
 
 

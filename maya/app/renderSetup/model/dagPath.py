@@ -1,4 +1,4 @@
-import exceptions
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
@@ -98,7 +98,7 @@ class DagPath(object):
     __weakref__ = None
 
 
-class _PlugNotFound(exceptions.Exception):
+class _PlugNotFound(Exception):
     __weakref__ = None
 
 

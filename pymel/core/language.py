@@ -1,4 +1,4 @@
-import exceptions
+
 
 from pymel.internal.pmcmds import melOptions
 from pymel.internal.pmcmds import evalEcho
@@ -41,7 +41,7 @@ class Catch(object):
     success = None
 
 
-class MelError(exceptions.RuntimeError):
+class MelError(RuntimeError):
     """
     Generic MEL error
     """
@@ -395,7 +395,7 @@ class _Container(object):
     __weakref__ = None
 
 
-class MelArgumentError(MelError, exceptions.TypeError):
+class MelArgumentError(MelError, TypeError):
     """
     The arguments passed to the MEL script are incorrect
     """
@@ -467,7 +467,7 @@ class _Mapping(_Sized, _Iterable, _Container):
     __hash__ = None
 
 
-class MelSyntaxError(MelError, exceptions.SyntaxError):
+class MelSyntaxError(MelError, SyntaxError):
     """
     The MEL script has a syntactical error
     """
@@ -475,7 +475,7 @@ class MelSyntaxError(MelError, exceptions.SyntaxError):
     __weakref__ = None
 
 
-class MelConversionError(MelError, exceptions.TypeError):
+class MelConversionError(MelError, TypeError):
     """
     MEL cannot process a conversion or cast between data types
     """
@@ -483,7 +483,7 @@ class MelConversionError(MelError, exceptions.TypeError):
     pass
 
 
-class MelUnknownProcedureError(MelError, exceptions.NameError):
+class MelUnknownProcedureError(MelError, NameError):
     """
     The called MEL procedure does not exist or has not been sourced
     """

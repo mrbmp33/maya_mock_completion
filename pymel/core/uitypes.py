@@ -139,7 +139,7 @@ class AETemplate(object):
     __weakref__ = None
 
 
-class PyUI(unicode):
+class PyUI(str):
     def __repr__(self): pass
     def asQtObject(mayaName):
         """

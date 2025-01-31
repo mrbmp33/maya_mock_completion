@@ -453,7 +453,7 @@ if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class NameParser(unicode):
+class NameParser(str):
     def __getattr__(self, attr):
         """
         >>> NameParser('foo:bar').spangle

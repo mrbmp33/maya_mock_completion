@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 #------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class NO_DATA(exceptions.Exception):
+class NO_DATA(Exception):
     __weakref__ = None
 
 

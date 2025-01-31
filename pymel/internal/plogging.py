@@ -91,7 +91,7 @@ def _addOldHandlers(logger, oldHandlers, secName, configParser): pass
 def nameToLevel(name): pass
 
 
-def raiseLog(logger, level, message, errorClass='"<type \'exceptions.RuntimeError\'>"'):
+def raiseLog(logger, level, message, errorClass='"<type \'RuntimeError\'>"'):
     """
     For use in situations in which you may wish to raise an error or simply
     print to a logger.

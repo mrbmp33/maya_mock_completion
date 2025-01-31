@@ -852,7 +852,7 @@ class _Sized(object):
     __weakref__ = None
 
 
-class Namespace(unicode):
+class Namespace(str):
     """
     # ==============================================================================
     # Namespace

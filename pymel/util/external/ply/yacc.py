@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 # -----------------------------------------------------------------------------
@@ -140,7 +140,7 @@ class Grammar(object):
     __weakref__ = None
 
 
-class YaccError(exceptions.Exception):
+class YaccError(Exception):
     """
     # Exception raised for yacc-related errors
     """

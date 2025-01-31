@@ -1,10 +1,10 @@
-import exceptions
+
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class InvalidNodeTypeError(exceptions.Exception):
+class InvalidNodeTypeError(Exception):
     __weakref__ = None
 
 

@@ -1,4 +1,4 @@
-import exceptions
+
 
 from pymel.internal.docstrings import PyDocstringBuilder as docBuilderCls
 from collections import namedtuple as _namedtuple
@@ -57,7 +57,7 @@ class MetaMayaTypeRegistry(util.metaReadOnlyAttr):
     def __new__(cls, classname, bases, classdict): pass
 
 
-class MissingInCacheError(exceptions.Exception):
+class MissingInCacheError(Exception):
     __weakref__ = None
 
 
@@ -195,7 +195,7 @@ class VirtualClassManager(object):
     __weakref__ = None
 
 
-class VirtualClassError(exceptions.Exception):
+class VirtualClassError(Exception):
     __weakref__ = None
 
 

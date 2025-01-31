@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 For the rest of the class hierarchy, including `DependNode <pymel.core.nodetypes.DependNode>`, `Transform <pymel.core.nodetypes.Transform>`,
@@ -801,11 +801,11 @@ class ComponentIndex(tuple):
     __dict__ = None
 
 
-class AmbiguityWarning(exceptions.Warning):
+class AmbiguityWarning(Warning):
     __weakref__ = None
 
 
-class MayaObjectError(exceptions.TypeError):
+class MayaObjectError(TypeError):
     """
     # -------------------------
     # PyNode Exceptions
@@ -819,7 +819,7 @@ class MayaObjectError(exceptions.TypeError):
     __weakref__ = None
 
 
-class MayaAttributeError(MayaObjectError, exceptions.AttributeError):
+class MayaAttributeError(MayaObjectError, AttributeError):
     pass
 
 

@@ -1,5 +1,3 @@
-import exceptions
-
 """
 Redefine format warning to avoid getting garbage at end of line when raised directly from Maya console
 and define a UserWarning class that does only print it's message (no line or module info)
@@ -9,7 +7,7 @@ if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class PymelBaseWarning(exceptions.Warning):
+class PymelBaseWarning(Warning):
     """
     # Subclass just to allow users to configure filtering of pymel-specific
     # deprecations
@@ -22,7 +20,7 @@ class PymelBaseDeprecationWarning(PymelBaseWarning):
     pass
 
 
-class ExecutionWarning(exceptions.UserWarning, PymelBaseWarning):
+class ExecutionWarning(UserWarning, PymelBaseWarning):
     """
     Simple Warning class that doesn't print any information besides warning message
     """
@@ -30,7 +28,7 @@ class ExecutionWarning(exceptions.UserWarning, PymelBaseWarning):
     __weakref__ = None
 
 
-class PymelFutureWarning(exceptions.FutureWarning, PymelBaseDeprecationWarning):
+class PymelFutureWarning(FutureWarning, PymelBaseDeprecationWarning):
     """
     # Subclass from FutureWarning so it's displayed by default
     """
@@ -38,7 +36,7 @@ class PymelFutureWarning(exceptions.FutureWarning, PymelBaseDeprecationWarning):
     __weakref__ = None
 
 
-class MayaDeprecationWarning(exceptions.DeprecationWarning, PymelBaseDeprecationWarning):
+class MayaDeprecationWarning(DeprecationWarning, PymelBaseDeprecationWarning):
     """
     # Subclass from DeprecationWarning so it's not displayed by default
     """

@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 A quick example::
@@ -151,7 +151,7 @@ class _DummyPluginNodesMaker(object):
     __weakref__ = None
 
 
-class PluginError(exceptions.Exception):
+class PluginError(Exception):
     __weakref__ = None
 
 

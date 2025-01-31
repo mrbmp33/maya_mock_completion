@@ -1,13 +1,7 @@
-from __builtin__ import all as _all
-from __builtin__ import min as _min
 from pymel.util.utilitytypes import readonly
-from __builtin__ import max as _max
-from __builtin__ import abs as _abs
 from pymel.util.arguments import clsname
 from pymel.util.arguments import isNumeric
-from __builtin__ import any as _any
 from pymel.util.utilitytypes import metaReadOnlyAttr
-from __builtin__ import sum as _sum
 
 if False:
     from typing import Dict, List, Tuple, Union, Optional

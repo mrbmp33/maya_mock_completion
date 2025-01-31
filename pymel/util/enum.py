@@ -1,5 +1,3 @@
-import exceptions
-
 """
 This package provides a module for robust enumerations in Python.
 
@@ -184,7 +182,7 @@ class EnumDict(utilitytypes.EquivalencePairs):
         pass
 
 
-class EnumException(exceptions.Exception):
+class EnumException(Exception):
     """
     Base class for all exceptions in this module
     """
@@ -348,7 +346,7 @@ class Enum(object):
 EnumType = Enum
 
 
-class EnumBadDefaultKeyError(exceptions.ValueError, EnumException):
+class EnumBadDefaultKeyError(ValueError, EnumException):
     """
     Raised when a supplied default key for a value was not present
     """
@@ -360,7 +358,7 @@ class EnumBadDefaultKeyError(exceptions.ValueError, EnumException):
     __weakref__ = None
 
 
-class EnumImmutableError(exceptions.TypeError, EnumException):
+class EnumImmutableError(TypeError, EnumException):
     """
     Raised when attempting to modify an Enum
     """
@@ -372,7 +370,7 @@ class EnumImmutableError(exceptions.TypeError, EnumException):
     __weakref__ = None
 
 
-class EnumBadKeyError(exceptions.TypeError, EnumException):
+class EnumBadKeyError(TypeError, EnumException):
     """
     Raised when creating an Enum with non-string keys
     """
@@ -384,7 +382,7 @@ class EnumBadKeyError(exceptions.TypeError, EnumException):
     __weakref__ = None
 
 
-class EnumEmptyError(exceptions.AssertionError, EnumException):
+class EnumEmptyError(AssertionError, EnumException):
     """
     Raised when attempting to create an empty enumeration
     """

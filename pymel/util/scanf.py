@@ -1,4 +1,4 @@
-import exceptions
+
 
 """
 Danny Yoo (dyoo@hkn.eecs.berkeley.edu)
@@ -142,7 +142,7 @@ if False:
     from typing import Dict, List, Tuple, Union, Optional
 
 
-class FormatError(exceptions.ValueError):
+class FormatError(ValueError):
     """
     A FormatError is raised if we run into errors while scanning
     for input.
@@ -198,7 +198,7 @@ class CharacterBuffer(object):
     __weakref__ = None
 
 
-class IncompleteCaptureError(exceptions.ValueError):
+class IncompleteCaptureError(ValueError):
     """
     The *scanf() functions raise IncompleteCaptureError if a problem
     occurs doing scanning.

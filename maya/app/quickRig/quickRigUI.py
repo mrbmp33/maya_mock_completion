@@ -1,5 +1,3 @@
-import exceptions
-
 """
 This module contains the UI code for the QuickRig tool.
 
@@ -72,7 +70,7 @@ class HIKContext(object):
     __weakref__ = None
 
 
-class UserException(exceptions.Exception):
+class UserException(Exception):
     """
     This class is the exception class for errors caused by improper user
     interaction.

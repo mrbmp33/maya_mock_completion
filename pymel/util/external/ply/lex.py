@@ -1,5 +1,3 @@
-import exceptions
-
 """
 # -----------------------------------------------------------------------------
 # ply: lex.py
@@ -67,7 +65,7 @@ class LexToken(object):
     __weakref__ = None
 
 
-class LexError(exceptions.Exception):
+class LexError(Exception):
     def __init__(self, message, s): pass
 
     __weakref__ = None

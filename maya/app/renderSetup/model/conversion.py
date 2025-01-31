@@ -1,4 +1,4 @@
-import exceptions
+
 
 from maya.app.renderSetup.common.devtools import *
 from maya.app.renderSetup.model.selector import *
@@ -12,7 +12,7 @@ class Issue2016R2Collection(Issue):
     def __init__(self, resolveCallback='None'): pass
 
 
-class ConversionFailed(exceptions.Exception):
+class ConversionFailed(Exception):
     __weakref__ = None
 
 
