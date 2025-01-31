@@ -20,9 +20,48 @@ import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
 
 
+def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 'MObject':
+    
+    mobject = MObject()
+    
+    # If given a string as input, get the matching MTypeId
+    if isinstance(type_id, str):
+        # noinspection PyProtectedMember
+        mobject._typeId = _TYPE_STR_TO_ID[type_id]
+        name = name if name else f'{type_id}1'
+        type_str = type_id
+    else:
+        mobject._typeId = type_id
+        type_str = _TYPE_INT_TO_STR[type_id.id()]
+        name = name if name else f'{type_str}1'
+
+    # Add kDependencyNode in list of types and then the actual node type
+    mobject._api_type = [MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode]
+    mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
+
+    mobject._name = hierarchy.find_first_available_name(name)
+    return mobject
+
+
+def _initialize_dag_path_from_mobject(mobject: 'MObject') -> 'MDagPath':
+    dag_path = MDagPath()
+    dag_path._node = mobject
+    ancestors = list(dag_path._iter_ancestors(mobject))
+    descendants = dag_path._iter_descendants(mobject)
+    dag_path._ancestors = ancestors
+    dag_path._descendants = descendants
+
+    ls = copy.copy(ancestors)
+    ls.append(mobject)
+
+    dag_path._mobject_ls = ls
+    return dag_path
+
+
 def _get_attribute_id(attribute_full_name: str) -> uuid.UUID:
     """Attribute fullname = node_name.attribute_name"""
     return uuid.uuid5(uuid.NAMESPACE_DNS, attribute_full_name)
+
 
 def _initialize_mplug(owner: 'MObject',
                      mplug: 'MPlug',
@@ -36,11 +75,13 @@ def _initialize_mplug(owner: 'MObject',
     owner._cached_plugs[mplug_id] = mplug
     return mplug
 
+
 def _initialize_attribute(attribute) -> 'MObject':
     if not attribute._alive:
         attribute._init_attribute_fields()
     attribute._api_type = [MFn.kAttribute]
     return attribute
+
 
 def _get_node_type(mobject: 'MObject') -> str:
     try:
@@ -48,6 +89,7 @@ def _get_node_type(mobject: 'MObject') -> str:
         return node_type[1:] if node_type.startswith('k') else node_type
     except AttributeError:
         raise RuntimeError(f'{mobject} does not exist yet. Please "create" it first.')
+
 
 def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
     properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(node_type)
@@ -1665,6 +1707,7 @@ class MDGModifier(object):
         """
         self._queue = []
         self._done = False
+        self._undone = False
 
     def addAttribute(self, node: 'MObject', attribute: 'MObject') -> 'MDGModifier':
         """
@@ -1754,17 +1797,13 @@ class MDGModifier(object):
         TypeError if the named node type does not exist or if it is a DAG node
         type.
         """
-        mobject = MObject()
-        mobject._alive = True
-        # If given a string as input, get the matching MTypeId
-        if isinstance(type_id, str):
-            # noinspection PyProtectedMember
-            mobject._typeId = _TYPE_STR_TO_ID[type_id]
-        else:
-            mobject._typeId = type_id
+        
+        mobject = _create_node_from_type(type_id)
+        
+        # Register node for namespace
+        hierarchy.register(mobject)
 
         self._queue.append(('create', mobject))
-
         return mobject
 
     def deleteNode(self, node: "MObject"):
@@ -1776,8 +1815,13 @@ class MDGModifier(object):
         on the same node (e.g. a disconnect) then they should be committed by
         calling the modifier's doIt() before the deleteNode operation is added.
         """
-        self._queue.append(('delete', node))
+        self._queue.append(('delete', node, ))
         return self
+
+    def _iter_descendants(self, node: 'MObject'):
+        for nd in node._children:
+            yield from self._iter_descendants(nd)
+            yield nd
 
     def disconnect(self, *args) -> 'MDGModifier':
         """
@@ -1810,7 +1854,7 @@ class MDGModifier(object):
         else:
             raise TypeError('Invalid arguments for connect()')
 
-        self._queue.append(('connect', source_plug, dest_plug))
+        self._queue.append(('disconnect', source_plug, dest_plug))
         return self
 
     def doIt(self):
@@ -1824,12 +1868,28 @@ class MDGModifier(object):
         do all operations.
         """
 
+        # If the modifier hasn't been undone and called doIt() again with new instructions, delete the old ones
+        if self._done and not self._undone:
+            previous_acitons = self._queue[:self._executed]
+
+            # Since there is no going back, remove dead mobjects from hierarchy
+            dead_mobjects = [
+                action[1] for action in previous_acitons if action[0] == 'create' and not action[1]._alive
+                ]
+            for mobject in dead_mobjects:
+                hierarchy.deregister(mobject)
+
+            self._queue = self._queue[self._executed:]
+        
+        # Execute operations
         for action in self._queue:
             if action[0] == 'create':
                 mobject: 'MObject' = action[1]
+                mobject._alive = True
                 hierarchy.register(mobject)
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
+                mobject._alive = False
                 if mobject._parent:
                     mobject._parent._children.remove(mobject)
                 hierarchy.deregister(mobject)
@@ -1840,19 +1900,41 @@ class MDGModifier(object):
                 mobject: 'MObject' = action[1]
                 mobject._parent._children.remove(mobject)
                 mobject._parent = action[2]
-                mobject._parent._children.add(mobject)
+                mobject._parent._children.append(mobject)
             elif action[0] == 'connect':
-                source_plug: MPlug = action[1]
-                dest_plug: MPlug = action[2]
-                # Add connection to cached connections
-                dest_plug._connections['INPUTS'].append(source_plug)
-                source_plug._connections['OUTPUTS'].append(dest_plug)
+                if len(action) == 3:
+                    source_plug: MPlug = action[1]
+                    dest_plug: MPlug = action[2]
+                    # Add connection to cached connections
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
+                elif len(action) == 5:
+                    source_node: 'MObject' = action[1]
+                    source_attr: 'MObject' = action[2]
+                    dest_node: 'MObject' = action[3]
+                    dest_attr: 'MObject' = action[4]
+                    source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
+                    dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+                    # Add connection to cached connections
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
             elif action[0] == 'disconnect':
-                source_plug: MPlug = action[1]
-                dest_plug: MPlug = action[2]
-                # Remove connection from cached connections
-                dest_plug._connections['INPUTS'].remove(source_plug)
-                source_plug._connections['OUTPUTS'].remove(dest_plug)
+                if len(action) == 3:
+                    source_plug: MPlug = action[1]
+                    dest_plug: MPlug = action[2]
+                    # Remove connection from cached connections
+                    del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
+                    del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
+                elif len(action) == 5:
+                    source_node: 'MObject' = action[1]
+                    source_attr: 'MObject' = action[2]
+                    dest_node: 'MObject' = action[3]
+                    dest_attr: 'MObject' = action[4]
+                    source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
+                    dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+                    # Remove connection from cached connections
+                    del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
+                    del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
             elif action[0] == 'addAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
@@ -1880,6 +1962,8 @@ class MDGModifier(object):
                 node._attributes[_get_attribute_id(attribute._name)] = attribute
 
         self._done = True
+        self._executed = len(self._queue)
+
         return self
 
     def linkExtensionAttributeToPlugin(*args, **kwargs):
@@ -2097,7 +2181,7 @@ class MDGModifier(object):
         if not self._done:
             raise RuntimeError('Must use "doIt" before undoing.')
 
-        for action in self._queue:
+        for action in reversed(self._queue):
             if action[0] == 'create':
                 mobject: 'MObject' = action[1]
                 mobject._alive = False
@@ -2117,14 +2201,25 @@ class MDGModifier(object):
                 source_plug: MPlug = action[1]
                 dest_plug: MPlug = action[2]
                 # Remove connection from cached connections
-                dest_plug._connections['INPUTS'].remove(source_plug)
-                source_plug._connections['OUTPUTS'].remove(dest_plug)
+                del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
+                del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
             elif action[0] == 'disconnect':
-                source_plug: MPlug = action[1]
-                dest_plug: MPlug = action[2]
-                # Add connection to cached connections
-                dest_plug._connections['INPUTS'].append(source_plug)
-                source_plug._connections['OUTPUTS'].append(dest_plug)
+                if len(action) == 3:
+                    source_plug: MPlug = action[1]
+                    dest_plug: MPlug = action[2]
+                    # Add connection to cached connections
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
+                elif len(action) == 5:
+                    source_node: 'MObject' = action[1]
+                    source_attr: 'MObject' = action[2]
+                    dest_node: 'MObject' = action[3]
+                    dest_attr: 'MObject' = action[4]
+                    source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
+                    dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+                    # Add connection to cached connections
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
             elif action[0] == 'addAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
@@ -2148,6 +2243,7 @@ class MDGModifier(object):
                 node._attributes[attr_id] = attribute
                 
         self._done = False
+        self._undone = True
         return self
 
     def unlinkExtensionAttributeFromPlugin(*args, **kwargs):
@@ -3600,7 +3696,8 @@ class MMatrix(object):
     @property
     def kIdentity(self):
         return type(self)([[1.0 if i == j else 0.0 for j in range(4)] for i in range(4)])
-    
+
+
 class MUintArray(object):
     """
     Array of unsigned int values.
@@ -4907,6 +5004,7 @@ class MSelectionList(object):
         """
 
         self._inner_ls.append(item)
+        return self
 
     def clear(self):
         """
@@ -4947,11 +5045,17 @@ class MSelectionList(object):
         Raises IndexError if index is out of range.
         """
         item = self._inner_ls[index]
+        
+        # Get the mobject from the pool if the item is a string
         if isinstance(item, str):
-            item = MDagPath()
-        if not isinstance(item, MDagPath):
-            raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
-        return item
+            mobject = hierarchy.NodePool.from_name(item)
+            if not mobject:
+                mobject = self.getDependNode(index)
+        elif isinstance(item, MObject):
+            mobject = item
+
+        path = _initialize_dag_path_from_mobject(mobject)
+        return path
 
     # noinspection PyProtectedMember
     def getDependNode(self, index: int) -> "MObject":
@@ -15508,94 +15612,116 @@ class MDagPath(object):
     Path to a DAG node from the top of the DAG.
     """
 
-    def __eq__(*args, **kwargs):
+    def _mobjects_to_ids(self):
+        for x in self._mobject_ls:
+            yield x._id
+
+    def __eq__(self, other: 'MDagPath') -> bool:
         """
         x.__eq__(y) <==> x==y
         """
-        pass
-
-    def __ge__(*args, **kwargs):
+        if len(self._mobject_ls) != len(other._mobject_ls):
+            return False
+        return all(map(lambda pair: pair[0] == pair[1], [(x, y) for x, y in zip(range(3), range(3))]))
+            
+    def __ge__(self, other: 'MDagPath') -> bool:
         """
         x.__ge__(y) <==> x>=y
         """
         pass
 
-    def __gt__(*args, **kwargs):
+    def __gt__(self, other: 'MDagPath') -> bool:
         """
         x.__gt__(y) <==> x>y
         """
         pass
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, dag_path: 'MDagPath' = None):
+        """Initialize the MDagPath
+        
+        Args:
+            node (MObject, optional): Node to point to. Defaults to None.
         """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        super().__init__(*args, **kwargs)
-        self._node: MObject = None
+        super().__init__()
+        self._mobject_ls = []
 
-    def __le__(*args, **kwargs):
+        if dag_path is not None:
+            self._mobject_ls = dag_path._mobject_ls
+
+        if len(self._mobject_ls) > 0:
+            self._node = self._mobject_ls[-1]
+
+    def __le__(self, other: 'MDagPath') -> bool:
         """
         x.__le__(y) <==> x<=y
         """
         pass
 
-    def __lt__(*args, **kwargs):
+    def __lt__(self, other: 'MDagPath') -> bool:
         """
         x.__lt__(y) <==> x<y
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, other: 'MDagPath') -> bool:
         """
         x.__ne__(y) <==> x!=y
         """
-        pass
-
-    def __str__(*args, **kwargs):
+        return not self.__eq__(other)
+    
+    def __str__(self) -> str:
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return self.fullPathName()
+    
+    def apiType(self) -> int:
+        """Returns the type of the object at the end of the path."""
+        return self._mobject_ls[-1].apiType()
 
-    def apiType(*args, **kwargs):
+    def child(self, index: int) -> 'MObject':
+        """Returns the specified child of the object at the end of the path.
+        
+        Args:
+            index (int): Child index
+            
+        Returns:
+            MObject: Child object at index
         """
-        Returns the type of the object at the end of the path.
-        """
-        pass
+        return self._mobject_ls[-1]._children[index]
 
-    def child(*args, **kwargs):
-        """
-        Returns the specified child of the object at the end of the path.
-        """
-        pass
+    def childCount(self) -> int:
+        """Returns number of objects parented directly beneath the object at path end."""
+        return len(self._mobject_ls[-1]._children)
 
-    def childCount(*args, **kwargs):
-        """
-        Returns the number of objects parented directly beneath the object at the end of the path.
-        """
-        pass
+    def exclusiveMatrix(self) -> 'MMatrix':
+        """Returns matrix for all transforms in path, excluding end object."""
+        return [MMatrix() for _ in range(len(self._mobject_ls) - 1)]
 
-    def exclusiveMatrix(*args, **kwargs):
-        """
-        Returns the matrix for all transforms in the path, excluding the end object.
-        """
-        pass
+    def exclusiveMatrixInverse(self) -> 'MMatrix':
+        """Returns the inverse of exclusiveMatrix()."""
+        return [MMatrix().inverse for _ in range(len(self._mobject_ls) - 1)]
 
-    def exclusiveMatrixInverse(*args, **kwargs):
-        """
-        Returns the inverse of exclusiveMatrix().
-        """
-        pass
+    def extendToShape(self, index: int = 0) -> 'MDagPath':
+        """Extends path to specified shape node beneath the current transform.
+        
+        Args:
+            index (int, optional): Shape index. Defaults to 0.
 
-    def extendToShape(*args, **kwargs):
+        Returns:
+            MDagPath: Extended path
         """
-        Extends the path to the specified shape node parented directly beneath the transform at the current end of the path.
-        """
-        pass
+        for child in self._node._children:
+            if child.hasFn(MFn.kShape):
+                self._node = child
+                break
+        return self
 
     def fullPathName(self) -> str:
-        """
-        Returns a string representation of the path from the DAG root to the path's last node.
+        """Returns a string representation of path from DAG root to last node.
+        
+        Returns:
+            str: Full path name
         """
         ancestors = [x._name for x in self._iter_ancestors() or ()]
         ancestors.reverse()
@@ -15603,142 +15729,152 @@ class MDagPath(object):
             return self._node._name
         return "|".join(ancestors) + f"|{self._node._name}"
 
-    def getDisplayStatus(*args, **kwargs):
-        """
-        Returns the display status for this path.
-        """
-        pass
+    def getDisplayStatus(self) -> str:
+        """Returns display status for this path."""
+        # Mock - assume normal display
+        return "normal"
 
-    def getDrawOverrideInfo(*args, **kwargs):
-        """
-        Returns the draw override information for this path.
-        """
-        pass
+    def getDrawOverrideInfo(self) -> 'MDAGDrawOverrideInfo':
+        """Returns draw override information for this path."""
+        return MDAGDrawOverrideInfo()
+    
+    def getPath(self, index: int) -> 'MDagPath':
+        """Returns specified sub-path of this path."""
+        return MDagPath(self._node)
 
-    def getPath(*args, **kwargs):
-        """
-        Returns the specified sub-path of this path.
-        """
-        pass
-
-    def hasFn(self, fn: int):
-        """
-        Returns True if the object at the end of the path supports the given function set.
-        """
+    def hasFn(self, fn: int) -> bool:
+        """Returns True if object at path end supports given function set."""
         return self._node.hasFn(fn)
 
-    def inclusiveMatrix(*args, **kwargs):
-        """
-        Returns the matrix for all transforms in the path, including the end object, if it is a transform.
-        """
-        pass
+    def inclusiveMatrix(self) -> 'MMatrix':
+        """Returns matrix for all transforms in path, including end object."""
+        return MMatrix()
+    
+    def inclusiveMatrixInverse(self) -> 'MMatrix':
+        """Returns inverse of inclusiveMatrix()."""
+        return MMatrix()
 
-    def inclusiveMatrixInverse(*args, **kwargs):
-        """
-        Returns the inverse of inclusiveMatrix().
-        """
-        pass
+    def instanceNumber(self) -> int:
+        """Returns instance number of path to end object."""
+        return 0  # Mock assumes first instance
 
-    def instanceNumber(*args, **kwargs):
-        """
-        Returns the instance number of this path to the object at the end.
-        """
-        pass
+    def isInstanced(self) -> bool:
+        """Returns True if end object can be reached by multiple paths."""
+        return False  # Mock assumes no instancing
+    
+    def isTemplated(self) -> bool:
+        """Returns True if DAG Node at path end is templated."""
+        return False  # Mock assumes not templated
 
-    def isInstanced(*args, **kwargs):
-        """
-        Returns True if the object at the end of the path can be reached by more than one path.
-        """
-        pass
+    def isValid(self) -> bool:
+        """Returns True if this is a valid path."""
+        return all(nd._alive for nd in self._mobject_ls)
 
-    def isTemplated(*args, **kwargs):
-        """
-        Returns true if the DAG Node at the end of the path is templated.
-        """
-        pass
-
-    def isValid(*args, **kwargs):
-        """
-        Returns True if this is a valid path.
-        """
-        pass
-
-    def isVisible(*args, **kwargs):
-        """
-        Returns true if the DAG Node at the end of the path is visible.
-        """
-        pass
-
-    def length(self):
-        """
-        Returns the number of nodes on the path, not including the DAG's root node.
-        """
+    def isVisible(self) -> bool:
+        """Returns true if DAG Node at path end is visible."""
+        return True  # Mock assumes visible
+    
+    def length(self) -> int:
+        """Returns number of nodes on path, not including DAG root node."""
         return len(list(self._iter_ancestors()))
 
-    def node(self):
-        """
-        Returns the DAG node at the end of the path.
-        """
+    def node(self) -> 'MObject':
+        """Returns the DAG node at the end of the path."""
         return self._node
 
-    def numberOfShapesDirectlyBelow(*args, **kwargs):
-        """
-        Returns the number of shape nodes parented directly beneath the transform at the end of the path.
-        """
-        pass
+    def numberOfShapesDirectlyBelow(self) -> int:
+        """Return number of shapes parented under transform at path end."""
+        return len([x for x in self._node._children if x.hasFn(MFn.kShape)])
+    
+    def partialPathName(self) -> str:
+        """Returns minimum unique string identifier for the path."""
+        return self._node._name
 
-    def partialPathName(*args, **kwargs):
-        """
-        Returns the minimum string representation which will uniquely identify the path.
-        """
-        pass
+    def pathCount(self) -> int:
+        """Returns number of sub-paths making up this path."""
+        return 1  # Mock assumes single path
 
-    def pathCount(*args, **kwargs):
-        """
-        Returns the number of sub-paths which make up this path.
-        """
-        pass
+    def pop(self, levels: int = 1) -> 'MDagPath':
+        """Removes objects from path end.
+        
+        Args:
+            levels (int, optional): Levels to remove. Defaults to 1.
 
-    def pop(*args, **kwargs):
+        Returns:
+            MDagPath: Self
         """
-        Removes objects from the end of the path.
-        """
-        pass
+        for _ in range(levels):
+            if self._node._parent:
+                self._node = self._node._parent
+        return self
 
-    def push(*args, **kwargs):
-        """
-        Extends the path to the specified child object, which must be parented directly beneath the object currently at the end of the path.
-        """
-        pass
+    def push(self, child: 'MObject') -> 'MDagPath': 
+        """Extends path to specified child object.
+        
+        Args:
+            child (MObject): Child to add
 
-    def set(*args, **kwargs):
+        Returns:
+            MDagPath: Self
         """
-        Replaces the current path held by this object with another.
-        """
-        pass
+        if child in self._node._children:
+            self._node = child
+        return self
 
-    def transform(*args, **kwargs):
+    def set(self, other: 'MDagPath') -> 'MDagPath':
+        """Replace current path with another.
+        
+        Args:
+            other (MDagPath): Path to copy from
+
+        Returns:
+            MDagPath: Self
         """
-        Returns the last transform node on the path.
+        self._node = other._node
+        return self
+
+    def transform(self) -> 'MObject':
+        """Returns last transform node on the path.
+        
+        Returns:
+            MObject: Transform node
         """
-        pass
+        current = self._node
+        while current._parent and not current.hasFn(MFn.kTransform):
+            current = current._parent
+        return current if current.hasFn(MFn.kTransform) else None
 
     @staticmethod
-    def getAPathTo(*args, **kwargs):
+    def getAPathTo(node: 'MObject') -> 'MDagPath':
+        """Returns first path found to given node.
+        
+        Args:
+            node (MObject): Node to find path to
+
+        Returns:
+            MDagPath: Path to node
         """
-        Returns the first path found to the given node.
-        """
-        pass
+        return _initialize_dag_path_from_mobject(node)
 
     @staticmethod
-    def getAllPathsTo(*args, **kwargs):
+    def getAllPathsTo(node: 'MObject') -> List['MDagPath']:
+        """Returns all paths to given node.
+        
+        Args:
+            node (MObject): Node to find paths to
+
+        Returns:
+            List[MDagPath]: All paths to node
         """
-        Returns all paths to the given node.
-        """
-        pass
+        # Mock assumes single path
+        return [MDagPath(node)]
 
     def _iter_ancestors(self, break_at=None):
-        """NOT FROM API, UTILITY METHOD FROM MAYA MOCK COMPLETION"""
+        """NOT FROM API, UTILITY METHOD FROM MAYA MOCK COMPLETION
+        
+        Internal method to iterate through ancestors up to break_at node.
+        """
+        from maya.api.OpenMaya import WORLD  # Avoid circular import
 
         break_at = break_at or WORLD
         current = self._node
@@ -15746,9 +15882,14 @@ class MDagPath(object):
         if current._parent is break_at:
             return iter(())
 
-        while current._parent and current.parent is not break_at:
+        while current._parent and current._parent is not break_at:
             current = current._parent
             yield current
+
+    def _iter_descendants(self, node: 'MObject'):
+        for nd in node._children:
+            yield nd
+            yield from self._iter_descendants(nd)
 
 
 class MFloatVector(object):
@@ -17624,8 +17765,8 @@ class MPlug(object):
         self._children_plugs = []
 
         self._connections = {
-            'INPUTS': [],
-            'OUTPUTS': [],
+            'INPUTS': {},
+            'OUTPUTS': {},
         }
         self._parent = None
         self._parent_name = None
@@ -17798,14 +17939,15 @@ class MPlug(object):
         Returns an array of plugs which are connected to this one.
         """
         plug_array = MPlugArray()
+        plug_array._plugs = []
         if asDest and asSrc:
-            plug_array._plugs = self._connections['INPUTS'] + self._connections['OUTPUTS']
+            plug_array._plugs = list(self._connections['INPUTS'].values()) + list(self._connections['OUTPUTS'].values())
             return plug_array
         elif asDest:
-            plug_array._plugs = self._connections['INPUTS']
+            plug_array._plugs = list(self._connections['INPUTS'].values())
             return plug_array
         elif asSrc:
-            plug_array._plugs = self._connections['OUTPUTS']
+            plug_array._plugs = list(self._connections['OUTPUTS'].values())
             return plug_array
         return plug_array
     
@@ -17814,7 +17956,7 @@ class MPlug(object):
         Returns a plug for the index'th connected element of this plug.
         """
         try:
-            all_connections = self._connections['INPUTS'] + self._connections['OUTPUTS']
+            all_connections = list(self._connections['INPUTS'].values()) + list(self._connections['OUTPUTS'].values())
             return all_connections[index]
         except IndexError:
             raise TypeError(f'Plug <{self.name()}> is not an array plug.')
@@ -17838,7 +17980,7 @@ class MPlug(object):
         This method will produce the networked version of the connected plug.
         """
         if self.isSource:
-            return self._connections['OUTPUTS']
+            return list(self._connections['OUTPUTS'].values())
         return None
 
     def destinationsWithConversions(self) -> Optional[List['MPlug']]:
@@ -18155,7 +18297,7 @@ class MPlug(object):
         This method will produce the networked version of the connected plug.
         """
         if self.isDestination:
-            return self._connections['INPUTS'][0] if self._connections['INPUTS'] else None
+            return list(self._connections['INPUTS'].values())[0] if list(self._connections['INPUTS'].values()) else None
         return None
 
     def sourceWithConversion(self) -> Optional['MPlug']:
@@ -18188,12 +18330,12 @@ class MPlug(object):
     @property
     def isConnected(self) -> bool:
         """Returns True if the plug is connected, False otherwise."""
-        return len(self._connections['INPUTS'] + self._connections['OUTPUTS']) > 0
+        return len(list(self._connections['INPUTS'].values()) + list(self._connections['OUTPUTS'].values())) > 0
 
     @property
     def isDestination(self) -> bool:
         """Returns True if the plug is a destination of a connection, False otherwise."""
-        return len(self._connections['INPUTS']) > 0
+        return len(list(self._connections['INPUTS'].values())) > 0
 
     @property 
     def isDynamic(self) -> bool:
@@ -18243,7 +18385,7 @@ class MPlug(object):
     @property
     def isSource(self) -> bool:
         """Returns True if the plug is a source of a connection, False otherwise."""
-        return len(self._connections['OUTPUTS']) > 0
+        return len(list(self._connections['OUTPUTS'].values())) > 0
 
     kAll = 0
 
@@ -22240,24 +22382,7 @@ class MFnDependencyNode(MFnBase):
         """
         Creates a new node of the given type.
         """
-        mobject = MObject()
-        # If given a string as input, get the matching MTypeId
-        if isinstance(type_id, str):
-            # noinspection PyProtectedMember
-            mobject._typeId = _TYPE_STR_TO_ID[type_id]
-            name = name if name else f'{type_id}1'
-            type_str = type_id
-        else:
-            mobject._typeId = type_id
-            type_str = _TYPE_INT_TO_STR[type_id.id()]
-            name = name if name else f'{type_str}1'
-
-        # Add kDependencyNode in list of types and then the actual node type
-        mobject._api_type = [MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode]
-        mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
-
-        # Build name
-        mobject._name = hierarchy.find_first_available_name(name)
+        mobject = _create_node_from_type(type_id, name)
 
         # Set valid flag
         self._mobject = mobject
@@ -22718,14 +22843,12 @@ class MDagModifier(MDGModifier):
         modifier's doIt() method is called.
         """
         mobject = super().createNode(type_id)
-        self._queue.pop(-1)
 
         if not parent:
             parent = WORLD
         mobject._parent = parent
-        parent._children.add(mobject)
+        parent._children.append(mobject)
 
-        self._queue.append(('create', mobject))
         return mobject
 
     def reparentNode(self, node: 'MObject', new_parent: 'MObject' = None):

@@ -4,6 +4,24 @@ import maya.mmc_hierarchy as _hierarchy
 from maya.api import OpenMaya as om
 from maya.node_types_literals import NODE_TYPES
 
+def _register_node_from_name(node_name:str) -> om.MObject:
+    mobject = _hierarchy.NodePool.from_name(node_name)
+    if not mobject:
+        sl_ls = om.MSelectionList()
+        sl_ls.add(node_name)
+        mobject = sl_ls.getDependNode(0)
+        _hierarchy.NodePool.register(mobject)
+    return mobject
+
+
+def _attr_name_to_mobject_and_plug(attr_name:str) -> tuple["om.MObject", "om.MPlug"]:
+    node_name, attr_name = attr_name.split(".")
+    mobject = _register_node_from_name(node_name)
+    mfn_dep_node = om.MFnDependencyNode(mobject)
+    plug = mfn_dep_node.findPlug(attr_name, False)
+    return mobject, plug
+
+
 def aaf2fcp(deleteFile=bool(), df=bool(), dstPath=str(), dst=str(), getFileName=int(), gfn=int(), progress=int(),
             pr=int(), srcFile=str(), src=str(), terminate=int(), t=int(), waitCompletion=int(), wc=int(), *args,
             **kwargs):
@@ -1773,9 +1791,14 @@ def confirmDialog(annotation=str(), ann=str(), backgroundColor=list, bgc=list, b
     pass
 
 
-def connectAttr(force=bool(), f=bool(), lock=bool(), l=bool(), nextAvailable=bool(), na=bool(), referenceDest=str(),
-                rd=str(), *args, **kwargs):
-    pass
+def connectAttr(source_attr: str, destination_attr: str, force=bool(), f=bool(), lock=bool(), l=bool(), nextAvailable=bool(),
+                na=bool(), referenceDest=str(), rd=str(), *args, **kwargs):
+    mode = om.MDGModifier()
+    as_objects = [
+        _attr_name_to_mobject_and_plug(source_attr),
+        _attr_name_to_mobject_and_plug(destination_attr)
+    ]
+    mode.connect()
 
 
 def connectControl(fileName=bool(), fi=bool(), index=int(), preventContextualMenu=bool(), pcm=bool(),

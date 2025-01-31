@@ -47,7 +47,10 @@ class NodePoolMeta(type):
 
     @classmethod
     def object_exists(cls, node: 'om.MObject') -> bool:
-        return cls.__contains__(node)
+        nd = cls._node_instances.get(hash(node._name))
+        if nd is None:
+            return False
+        return nd._alive
 
     @classmethod
     def hash_exists(cls, hash_num: int) -> bool:
