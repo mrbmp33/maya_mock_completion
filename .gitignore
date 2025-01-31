@@ -6,3 +6,5 @@
 /maya_mock_completion.egg-info/SOURCES.txt
 /maya_mock_completion.egg-info/top_level.txt
 *.pyc
+.vscode/
+.env
