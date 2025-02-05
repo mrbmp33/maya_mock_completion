@@ -1,6 +1,5 @@
 from pkgutil import extend_path
 
-if False:
-    from typing import Dict, List, Tuple, Union, Optional
+ACTIVE_SELECTION = []
 
 stringTable = None

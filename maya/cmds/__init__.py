@@ -1,8 +1,11 @@
 from time import sleep
+import re
 
 import maya.mmc_hierarchy as _hierarchy
 from maya.api import OpenMaya as om
 from maya.node_types_literals import NODE_TYPES
+from maya import ACTIVE_SELECTION
+
 
 def _register_node_from_name(node_name:str) -> om.MObject:
     mobject = _hierarchy.NodePool.from_name(node_name)
@@ -59,7 +62,17 @@ def addAttr(attributeType=str(), at=str(), binaryTag=str(), bt=str(), cachedInte
             sn=str(), softMaxValue=float(), smx=float(), softMinValue=float(), smn=float(), storable=bool(), s=bool(),
             usedAsColor=bool(), uac=bool(), usedAsFilename=bool(), uaf=bool(), usedAsProxy=bool(), uap=bool(),
             worldSpace=bool(), ws=bool(), writable=bool(), w=bool(), *args, **kwargs):
-    pass
+    import cmdx
+    if args:
+        node_name = args[0]
+    else:
+        node_name = ls(selection=True)[0]
+    cmdx.add_attr(node_name,
+                  longName or ln,
+                  attributeType or at,
+                  shortName=sn or shortName,
+                  defaultValue=dv or defaultValue
+                  )
 
 
 def addDynamic(*args, **kwargs):
@@ -1793,12 +1806,13 @@ def confirmDialog(annotation=str(), ann=str(), backgroundColor=list, bgc=list, b
 
 def connectAttr(source_attr: str, destination_attr: str, force=bool(), f=bool(), lock=bool(), l=bool(), nextAvailable=bool(),
                 na=bool(), referenceDest=str(), rd=str(), *args, **kwargs):
-    mode = om.MDGModifier()
+    mod = om.MDGModifier()
     as_objects = [
         _attr_name_to_mobject_and_plug(source_attr),
         _attr_name_to_mobject_and_plug(destination_attr)
     ]
-    mode.connect()
+    mod.connect(*as_objects[0], *as_objects[1])
+    mod.doIt()
 
 
 def connectControl(fileName=bool(), fi=bool(), index=int(), preventContextualMenu=bool(), pcm=bool(),
@@ -2024,6 +2038,10 @@ def createNode(node_type: str | NODE_TYPES, name=str(), n=str(), parent=str(), p
         mobject = om.MFnDependencyNode(node_type, name or n)
 
     _hierarchy.register(mobject)
+
+    if not skipSelect and not ss:
+        global ACTIVE_SELECTION
+        ACTIVE_SELECTION = [mobject, ]
 
     return name or n
 
@@ -2422,8 +2440,17 @@ def disableIncorrectNameWarning(*args, **kwargs):
     pass
 
 
-def disconnectAttr(nextAvailable=bool(), na=bool(), *args, **kwargs):
-    pass
+def disconnectAttr(attr1: str, attr2: str, nextAvailable=bool(), na=bool(), *args, **kwargs):
+    mod = om.MDGModifier()
+
+    as_objects = [
+        _attr_name_to_mobject_and_plug(attr1),
+        _attr_name_to_mobject_and_plug(attr2)
+    ]
+    mod.connect(*as_objects[0], *as_objects[1])
+    mod.disconnect()
+    mod.doIt()
+    return f'{attr1} {attr2}'
 
 
 def disconnectJoint(attachHandleMode=bool(), ahm=bool(), deleteHandleMode=bool(), dhm=bool(), *args, **kwargs):
@@ -4676,9 +4703,78 @@ def ls(absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bo
        s=bool(), shortNames=bool(), sn=bool(), showNamespace=bool(), sns=bool(), showType=bool(), st=bool(), tail=int(),
        tl=int(), templated=bool(), tm=bool(), textures=bool(), tex=bool(), transforms=bool(), tr=bool(), type=str(),
        typ=str(), ufeObjects=bool(), ufe=bool(), undeletable=bool(), ud=bool(), untemplated=bool(), ut=bool(),
-       uuid=bool(), uid=bool(), visible=bool(), v=bool(), *args, **kwargs):
-    pass
+       uuid=bool(), uid=bool(), visible=bool(), v=bool(), *args):
+    
+    def match_pattern(pattern, string):
+        # Convert the pattern to a regex pattern
+        regex_pattern = pattern.replace('?', '.').replace('*', '.*')
+        return re.match(regex_pattern, string) is not None
+    def filter_nodes(pattern, nodes):
+        return [node for node in nodes if match_pattern(pattern, node._name)]
 
+    l: list[om.MObject] = []
+
+    if selection == True or sl == True:
+        selection = ACTIVE_SELECTION
+        if selection:
+            l = selection
+
+    if args:
+        if isinstance(args[0], str):
+            filtered_patter = filter_nodes(args[0], _hierarchy.NodePool.all_nodes())
+            l = set(filtered_patter).intersection_update(set(l))
+    else:
+        l = l or _hierarchy.NodePool.all_nodes()
+
+    
+    if transforms == True or tr == True:
+        l = [node for node in l if node.hasFn(om.MFn.kTransform)]
+    if shapes == True or s == True:
+        l = [node for node in l if node.hasFn(om.MFn.kShape)]
+    if cameras == True or ca == True:
+        l = [node for node in l if node.hasFn(om.MFn.kCamera)]
+    if lights == True or lt == True:
+        l = [node for node in l if node.hasFn(om.MFn.kLight)]
+    if materials == True or mat == True:
+        l = [node for node in l if node.hasFn(om.MFn.kLambert) or node.hasFn(om.MFn.kPhong)]
+    if geometry == True or g == True:
+        l = [node for node in l if node.hasFn(om.MFn.kMesh) or node.hasFn(om.MFn.kNurbsSurface)]
+    if containers == True or con == True:
+        l = [node for node in l if node.hasFn(om.MFn.kContainer)]
+    if assemblies == True:
+        l = [node for node in l if node.hasFn(om.MFn.kAssembly)]
+    if nodeTypes == True or nt == True:
+        l = [node for node in l if node.hasFn(om.MFn.kPluginDependNode)]
+    if dependencyNodes == True or dep == True:
+        l = [node for node in l if node.hasFn(om.MFn.kDependencyNode)]
+    if dagObjects == True or dag == True:
+        l = [node for node in l if node.hasFn(om.MFn.kDagNode)]
+    if defaultNodes == True or dn == True:
+        l = [node for node in l if node.hasFn(om.MFn.kDefaultLightList)]
+    
+    if type is not '' or typ is not '':
+        typ = type or typ
+        as_constant = getattr(om.MFn, f'k{typ[0].upper()}{typ[1:]}')
+        l = [node for node in l if node.hasFn(as_constant)]
+    if exactType:
+        typ = type or typ
+        as_constant = getattr(om.MFn, f'k{typ[0].upper()}{typ[1:]}')
+        l = [node for node in l if node.hasFn(as_constant) and node.apiType() == as_constant]
+    if excludeType:
+        typ = type or typ
+        as_constant = getattr(om.MFn, f'k{typ[0].upper()}{typ[1:]}')
+        l = [node for node in l if not node.hasFn(as_constant)]
+    
+    if long == True or l == True:
+        return [om.MDagPath.getAPathTo(node).fullPathName() for node in l]
+    elif shortNames == True or sn == True:
+        l = [node._name for node in l]
+    elif uuid == True or uid == True:
+        l = [node._uuid for node in l]
+    else:
+        l = [node._name for node in l]
+
+    return l
 
 def lsThroughFilter(item=str(), it=str(), nodeArray=bool(), na=bool(), reverse=bool(), rv=bool(), selection=bool(),
                     sl=bool(), sort=str(), so=str(), *args, **kwargs):
@@ -5402,8 +5498,8 @@ def objectTypeUI(isType=str(), i=str(), listAll=bool(), la=bool(), superClasses=
     pass
 
 
-def objExists(*args, **kwargs):
-    pass
+def objExists(node_name: str) -> bool:
+    return True if _hierarchy.NodePool.from_name(node_name) else False
 
 
 def offsetCurve(caching=bool(), cch=bool(), connectBreaks=int(), cb=int(), constructionHistory=bool(), ch=bool(),
@@ -8041,13 +8137,48 @@ def sculptTarget(after=bool(), af=bool(), afterReference=bool(), ar=bool(), befo
     pass
 
 
-def select(add=bool(), addFirst=bool(), af=bool(), all=bool(), allDagObjects=bool(), ado=bool(),
+def select(names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=None, allDagObjects=bool(), ado=bool(),
            allDependencyNodes=bool(), adn=bool(), clear=bool(), cl=bool(), containerCentric=bool(), cc=bool(),
-           deselect=bool(), d=bool(), hierarchy=bool(), hi=bool(), noExpand=bool(), ne=bool(), replace=bool(), r=bool(),
+           deselect=bool(), d=bool(), hierarchy=bool(), hi=bool(), noExpand=bool(), ne=bool(), replace=True, r=True,
            symmetry=bool(), sym=bool(), symmetrySide=int(), sys=int(), toggle=bool(), tgl=bool(), visible=bool(),
-           vis=bool(), *args, **kwargs):
-    pass
+           vis=bool(), *args):
 
+    global ACTIVE_SELECTION
+    from builtins import all as _all
+
+    if clear == True or cl == True:
+        ACTIVE_SELECTION.clear()
+        return
+    
+    if all is True or names is None or names is None and all is None:
+        items = list(_hierarchy.NodePool.all_nodes())
+
+    if names and isinstance(names, str):
+        names = [names]
+        items = [_hierarchy.NodePool.from_name(i) for i in names]
+    
+    if toggle == True or tgl == True:
+        for item in [x for x in items if x in ACTIVE_SELECTION]:
+            ACTIVE_SELECTION.remove(item)
+
+    if hierarchy == True or hi == True:
+        descendants = []
+        for item in items:
+            dag_path = om.MDagPath()
+            dag_path._node = item
+            descendants.extend(dag_path._iter_descendants())
+        items.extend(descendants)
+
+    elif add == True:
+        ACTIVE_SELECTION.extend(items)
+
+    elif addFirst == True or af == True:
+        sel = items.extend(ACTIVE_SELECTION)
+        ACTIVE_SELECTION = sel
+
+    elif _all((replace, r)):
+        ACTIVE_SELECTION = items
+        
 
 def selectContext(exists=bool(), ex=bool(), history=bool(), ch=bool(), image1=str(), i1=str(), image2=str(), i2=str(),
                   image3=str(), i3=str(), name=str(), n=str(), *args, **kwargs):

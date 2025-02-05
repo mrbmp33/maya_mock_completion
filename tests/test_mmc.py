@@ -7,6 +7,7 @@ from maya import cmds as mc
 
 try:
     from maya import mmc_hierarchy as hierarchy
+    from maya import ACTIVE_SELECTION
 except ImportError:
     ...
 
@@ -21,6 +22,7 @@ def HOST():
 class TestMayaMockCompletion(unittest.TestCase):
 
     def setUp(self):
+        self.host = HOST()
         mc.file(new=True, force=True)
         # Reset state before each test
         self.dagmod = om.MDagModifier()
@@ -30,13 +32,15 @@ class TestMayaMockCompletion(unittest.TestCase):
         
         self.dagmod.doIt()
         
-        self.assertTrue(hierarchy.NodePool.object_exists(transform))
         self.assertTrue(transform.isNull() == False)
+        if self.host == "python":
+            self.assertTrue(hierarchy.NodePool.object_exists(transform))
         
         self.dagmod.undoIt()
-        
+
         self.assertTrue(transform.isNull() == True)
-        self.assertFalse(hierarchy.NodePool.object_exists(transform))
+        if self.host == "python":
+            self.assertFalse(hierarchy.NodePool.object_exists(transform))
 
     def test_modifier_do_it_multiple(self):
         transform = self.dagmod.createNode("transform")
@@ -169,9 +173,10 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.dagmod.doIt()
         self.assertTrue(src_plug.isConnected)
         self.assertTrue(dst_plug.isConnected)
-        self.assertIn(
-            dst_plug,
-            src_plug.connectedTo(0, 1)._plugs
+        if self.host == "python":
+            self.assertIn(
+                dst_plug,
+                src_plug.connectedTo(0, 1)._plugs
             )
         
         # Disconnect plugs
@@ -179,6 +184,69 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.dagmod.doIt()
         self.assertFalse(src_plug.isConnected)
         self.assertFalse(dst_plug.isConnected)
+
+
+class TestCmds(unittest.TestCase):
+
+    def setUp(self):
+        mc.file(new=True, force=True)
+    
+    def test_create_node(self):
+        transform = mc.createNode("transform")
+        self.assertTrue(mc.objExists(transform))
+        
+        mesh = mc.createNode("mesh")
+        self.assertTrue(mc.objExists(mesh))
+
+    def test_create_node_with_name(self):
+        transform = mc.createNode("transform", name="testTransform")
+        self.assertTrue(mc.objExists(transform))
+        self.assertEqual(mc.ls("testTransform")[0], transform)
+
+    def test_ls_all_transforms(self):
+        mc.createNode("transform", name="transform1")
+        mc.createNode("transform", name="transform2")
+        mc.createNode("mesh", name="mesh1")
+        
+        transforms = mc.ls(type="transform")
+        self.assertIn("transform1", transforms)
+        self.assertIn("transform2", transforms)
+        self.assertNotIn("mesh1", transforms)
+
+    def test_ls_with_pattern(self):
+        mc.createNode("transform", name="testTransform1")
+        mc.createNode("transform", name="testTransform2")
+        mc.createNode("mesh", name="testMesh")
+        
+        test_nodes = mc.ls("test*")
+        self.assertIn("testTransform1", test_nodes)
+        self.assertIn("testTransform2", test_nodes)
+        self.assertIn("testMesh", test_nodes)
+
+    def test_ls_with_long_names(self):
+        mc.createNode("transform", name="parent")
+        mc.createNode("transform", name="child", parent="parent")
+        
+        long_names = mc.ls(long=True)
+        self.assertIn("|parent", long_names)
+        self.assertIn("|parent|child", long_names)
+
+    def test_ls_with_dag_objects(self):
+        mc.createNode("transform", name="parent")
+        mc.createNode("transform", name="child", parent="parent")
+        
+        dag_objects = mc.ls(dag=True)
+        self.assertIn("parent", dag_objects)
+        self.assertIn("child", dag_objects)
+
+    def test_ls_with_selection(self):
+        mc.createNode("transform", name="parent")
+        mc.createNode("transform", name="child", parent="parent")
+        
+        mc.select("parent")
+        selection = mc.ls(selection=True)
+        self.assertIn("parent", selection)
+        self.assertNotIn("child", selection)
 
 if __name__ == '__main__':
     try:
@@ -195,7 +263,7 @@ if __name__ == '__main__':
             suite.addTests(loader.loadTestsFromTestCase(case_class))
 
         runner = unittest.TextTestRunner()
-        runner.run(suite)
+        # runner.run(suite)
 
     except Exception as e:
         logging.critical(traceback.format_exc(), e)

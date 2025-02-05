@@ -18,6 +18,7 @@ from typing import Optional, Iterable, Union, Tuple, List
 import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
+from maya import ACTIVE_SELECTION
 
 
 def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 'MObject':
@@ -6642,7 +6643,7 @@ class MGlobal(object):
         pass
 
     @staticmethod
-    def getActiveSelectionList(*args, **kwargs):
+    def getActiveSelectionList(orderedSelectionIfAvailable=False):
         """
         getActiveSelectionList(orderedSelectionIfAvailable=False) -> MSelectionList
 
@@ -6651,7 +6652,9 @@ class MGlobal(object):
         is True, and tracking is enabled, will return the selected items
         in the order that they were selected.
         """
-        return MSelectionList
+        ls = MSelectionList()
+        ls._inner_ls = ACTIVE_SELECTION
+        return ls
 
     @staticmethod
     def getAssociatedSets(*args, **kwargs):
@@ -15725,9 +15728,8 @@ class MDagPath(object):
         """
         ancestors = [x._name for x in self._iter_ancestors() or ()]
         ancestors.reverse()
-        if not ancestors:
-            return self._node._name
-        return "|".join(ancestors) + f"|{self._node._name}"
+        ancestors.append(self._node._name)
+        return "|" + "|".join(ancestors)
 
     def getDisplayStatus(self) -> str:
         """Returns display status for this path."""
@@ -23690,7 +23692,7 @@ class MFnDagNode(MFnDependencyNode):
         mobject._api_type.insert(mobject._api_type.index(MFn.kDependencyNode) + 1, MFn.kDagNode)
         if parent:
             mobject._parent = parent
-            mobject._parent._children.add(mobject)
+            mobject._parent._children.append(mobject)
         else:
             mobject._parent = WORLD
 
