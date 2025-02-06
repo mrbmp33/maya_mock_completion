@@ -46,6 +46,38 @@ dep = om.MFnDependencyNode(mobject)  # Can initialize function sets
 dep.name()  # >>> mmc
 ```
 
+## Important! Node types and attribute caches
+
+To determine if a node type exists or if an attribute exists on a node (alongisde their specs e.g. *is_array*, *is_element*, *attribute_types*), MMC uses some cache files.
+
+Because of the sheer number of properties of nodes and attributes, a challenge this project faces is keeping the size of these files reasonable. However, that also means they might not cater your specific needs and so they might require updating based on your project's needs if one of these conditions apply:
+
+1. *You are using custom nodes or nodes from plugins*. These have IDs and names that mmc cannot recognize from the get go.
+
+2. *You are using a different maya version that contains node types not defined in the maps*.
+
+3. You are using attributes from nodes that where not picked for the default mapping of attribute info.
+
+### Attribute properties cache file
+
+You will find the attributes cache file in `maya/attribute_properties.py`. To update it you will have to modify the `maya/generate_attrs_json.py` by adding the desired node types to query all of their attributes.
+
+Then, you just simply have to define the desired output locations for the output cache files. Defaults:
+
+```
+{project_root}\maya\attribute_properties.py  # <-- contains attr info
+{project_root}\maya\attribute_literals.py    # <-- for completions
+```
+
+### Node types cache
+
+This one lives inside the `maya.api.OpenMaya` module (at the bottom of the file).
+There is no current implementation to load these on runtime so I'd advise you to add your personal node MTypeIds from plugin nodes there.
+
+Keep in mind that you will also have to add the matching string name and the type constant in MFnBase.
+
+This implementation is still in process (no E.T.A, sorry).
+
 # Disclaimers
 
 - PySide2's completion hasn't been added in case you might want to run UI code using the real library. If this is not what you want you can use the same principle to run the code in the same way.
