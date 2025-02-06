@@ -2,6 +2,7 @@ import logging
 import traceback
 import unittest
 import sys
+import pathlib
 from maya.api import OpenMaya as om
 from maya import cmds as mc
 
@@ -12,7 +13,7 @@ except ImportError:
     ...
 
 def HOST():
-    exe = sys.executable
+    exe = pathlib.Path(sys.executable).stem
     if exe.endswith("maya"):
         return "maya"
     else:
@@ -32,30 +33,34 @@ class TestMayaMockCompletion(unittest.TestCase):
         
         self.dagmod.doIt()
         
-        self.assertTrue(transform.isNull() == False)
+        self.assertTrue(transform.isNull() is False)
         if self.host == "python":
             self.assertTrue(hierarchy.NodePool.object_exists(transform))
         
         self.dagmod.undoIt()
 
-        self.assertTrue(transform.isNull() == True)
+        self.assertTrue(transform.isNull() is False)
         if self.host == "python":
             self.assertFalse(hierarchy.NodePool.object_exists(transform))
 
     def test_modifier_do_it_multiple(self):
         transform = self.dagmod.createNode("transform")
-        self.assertTrue(transform.isNull() == True)
+        self.assertTrue(transform.isNull() is False)
         self.dagmod.doIt()
-        self.assertEqual(len(self.dagmod._queue), 1)
-        self.assertTrue(transform.isNull() == False)
+        self.assertTrue(transform.isNull() is False)
+        if self.host == 'python':
+            self.assertEqual(len(self.dagmod._queue), 1)
 
         self.dagmod.createNode("joint")
         self.dagmod.createNode("transform")
         self.dagmod.doIt()
-        self.assertEqual(len(self.dagmod._queue), 2)
-        
+        if self.host == 'python':
+            self.assertEqual(len(self.dagmod._queue), 2)
+
         self.dagmod.doIt()
-        self.assertEqual(self.dagmod._executed, 0)
+
+        if self.host == 'python':
+            self.assertEqual(self.dagmod._executed, 0)
 
     def test_create_node_by_string(self):
         transform = self.dagmod.createNode("transform")
@@ -185,6 +190,20 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertFalse(src_plug.isConnected)
         self.assertFalse(dst_plug.isConnected)
 
+    def test_delete_node_and_undo(self):
+        transform = self.dagmod.createNode("transform")
+        self.dagmod.doIt()
+        self.assertTrue(transform.isNull() == False)
+        
+        self.dagmod.deleteNode(transform)
+        self.dagmod.doIt()
+        self.assertTrue(transform.isNull() == False)
+        
+        self.dagmod.undoIt()
+        self.assertTrue(transform.isNull() == False)
+        if self.host == "python":
+            self.assertTrue(hierarchy.NodePool.object_exists(transform))
+
 
 class TestCmds(unittest.TestCase):
 
@@ -270,11 +289,11 @@ if __name__ == '__main__':
         loader = unittest.TestLoader()
         suite = unittest.TestSuite()
 
-        for case_class in [TestMayaMockCompletion,]:
+        for case_class in [TestMayaMockCompletion, TestCmds]:
             suite.addTests(loader.loadTestsFromTestCase(case_class))
 
         runner = unittest.TextTestRunner()
-        # runner.run(suite)
+        runner.run(suite)
 
     except Exception as e:
         logging.critical(traceback.format_exc(), e)

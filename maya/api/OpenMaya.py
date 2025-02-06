@@ -41,6 +41,8 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
 
     mobject._name = hierarchy.find_first_available_name(name)
+    mobject._is_null = False
+
     return mobject
 
 
@@ -1800,6 +1802,7 @@ class MDGModifier(object):
         """
         
         mobject = _create_node_from_type(type_id)
+        mobject._alive = False
         
         # Register node for namespace
         hierarchy.register(mobject)
@@ -13282,6 +13285,7 @@ class MObject(object):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         self._uuid = uuid.uuid4()
+        self._is_null = True
         self._name = str(self._uuid)
         self._api_type: list[int] = [MFn.kInvalid]
         self._alive: bool = False
@@ -13393,7 +13397,7 @@ class MObject(object):
         """
         Tests whether there is an internal Maya object.
         """
-        return not self._alive
+        return self._is_null
 
     def __hash__(self):
         return hash(self._uuid)
