@@ -5,8 +5,8 @@ with open("./README.md") as f:
     
 setup(
     name="maya_mock_completion",
-    version="0.0.1",
-    description="A mock version of the Autodesk maya libraries to run code intended for maya using a regular Python "
+    version="0.1.0",
+    description="A mock version of the Autodesk maya libraries to run code intended for maya using a regular Python interpreter"
                 "from a virtual environment.",
     package_dir={
         "": ".",
@@ -20,11 +20,12 @@ setup(
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent"
     ],
+    install_requires=["cmdx >= 0.6.4"],
     extras_require={
-        "dev": "twine>=4.0.2"
+        "dev": "twine>=4.0.2",
     },
-    python_requires=">=3.7"
+    python_requires=">=3.10"
 )
