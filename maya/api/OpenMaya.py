@@ -16182,6 +16182,8 @@ class MFnBase(object):
 
     def _create(self):
         self._mobject = MObject()
+        self._mobject._alive = True
+        self._mobject._is_null = False
 
 
 class MUserData(object):
@@ -22499,13 +22501,14 @@ class MFnDependencyNode(MFnBase):
         self._mobject._cached_plugs[mplug._uuid] = mplug
         self._mobject._attributes[attribute._uuid] = attribute
 
-        # Flag the attribute as a valid MObject and set it as the attribute of the mplug
-        attribute._alive = True
-        mplug._attribute = attribute
-
         # If no properties are found, return the mplug as is. Else, fill-in the mplug's attrs
         if not properties:
             return mplug
+        
+        # Flag the attribute as a valid MObject and set it as the attribute of the mplug
+        attribute._alive = True
+        mplug._attribute = attribute
+        attribute._is_null = False
         
         # Fill-in maya native attributes based on dict info
         attribute._is_array = properties['is_array']
