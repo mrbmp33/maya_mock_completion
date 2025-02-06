@@ -242,11 +242,22 @@ class TestCmds(unittest.TestCase):
     def test_ls_with_selection(self):
         mc.createNode("transform", name="parent")
         mc.createNode("transform", name="child", parent="parent")
+        self.assertIn('child', mc.ls(selection=True))
         
         mc.select("parent")
         selection = mc.ls(selection=True)
         self.assertIn("parent", selection)
         self.assertNotIn("child", selection)
+
+    def test_mselectionlist_from_cmds_created(self):
+        mc.createNode("transform", name="mmc")
+        
+        sel = om.MGlobal.getActiveSelectionList()
+        self.assertEqual(sel.length(), 1)
+
+        dep = om.MFnDependencyNode(sel.getDependNode(0))
+        self.assertEqual(dep.name(), "mmc")
+
 
 if __name__ == '__main__':
     try:

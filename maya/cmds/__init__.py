@@ -2040,8 +2040,7 @@ def createNode(node_type: str | NODE_TYPES, name=str(), n=str(), parent=str(), p
     _hierarchy.register(mobject)
 
     if not skipSelect and not ss:
-        global ACTIVE_SELECTION
-        ACTIVE_SELECTION = [mobject, ]
+        ACTIVE_SELECTION.replace_all([mobject, ])
 
     return name or n
 
@@ -4715,7 +4714,7 @@ def ls(absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bo
     l: list[om.MObject] = []
 
     if selection == True or sl == True:
-        selection = ACTIVE_SELECTION
+        selection = ACTIVE_SELECTION.as_list
         if selection:
             l = selection
 
@@ -4752,7 +4751,7 @@ def ls(absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bo
     if defaultNodes == True or dn == True:
         l = [node for node in l if node.hasFn(om.MFn.kDefaultLightList)]
     
-    if type is not '' or typ is not '':
+    if type != '' or typ != '':
         typ = type or typ
         as_constant = getattr(om.MFn, f'k{typ[0].upper()}{typ[1:]}')
         l = [node for node in l if node.hasFn(as_constant)]
@@ -8143,7 +8142,6 @@ def select(names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=None, al
            symmetry=bool(), sym=bool(), symmetrySide=int(), sys=int(), toggle=bool(), tgl=bool(), visible=bool(),
            vis=bool(), *args):
 
-    global ACTIVE_SELECTION
     from builtins import all as _all
 
     if clear == True or cl == True:
@@ -8173,11 +8171,11 @@ def select(names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=None, al
         ACTIVE_SELECTION.extend(items)
 
     elif addFirst == True or af == True:
-        sel = items.extend(ACTIVE_SELECTION)
-        ACTIVE_SELECTION = sel
+        sel = items.extend(ACTIVE_SELECTION.as_list)
+        ACTIVE_SELECTION.replace_all(sel)
 
     elif _all((replace, r)):
-        ACTIVE_SELECTION = items
+        ACTIVE_SELECTION.replace_all(items)
         
 
 def selectContext(exists=bool(), ex=bool(), history=bool(), ch=bool(), image1=str(), i1=str(), image2=str(), i2=str(),

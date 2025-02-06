@@ -6653,7 +6653,7 @@ class MGlobal(object):
         in the order that they were selected.
         """
         ls = MSelectionList()
-        ls._inner_ls = ACTIVE_SELECTION
+        ls._inner_ls = ACTIVE_SELECTION.as_list
         return ls
 
     @staticmethod
