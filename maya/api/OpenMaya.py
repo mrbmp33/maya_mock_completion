@@ -14,7 +14,8 @@ import uuid
 import weakref
 import enum
 import math
-from typing import Optional, Iterable, Union, Tuple, List
+from typing import Optional, Iterable, Union, Tuple, List, Any, Generator
+from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
@@ -1480,7 +1481,7 @@ class MEulerRotation(object):
                 math.isclose(self.y, other.y, abs_tol=self.kTolerance) and
                 math.isclose(self.z, other.z, abs_tol=self.kTolerance))
 
-    def __iter__(self):
+    def __iter__(self) -> Generator[float, float, float]:
         """
         Iterates over x, y, z components.
         """
@@ -3472,6 +3473,8 @@ class MMatrix(object):
             # Copy input matrix
             self._matrix = [[matrix[i][j] for j in range(4)] for i in range(4)]
 
+    def __iter__(self):
+        return iter(self._matrix)
 
     def __add__(self, other):
         """Matrix addition"""
@@ -13352,7 +13355,7 @@ class MObject(object):
 
     def _init_matrix_fields(self):
         self._matrix_type: int = MFnMatrixData.kMatrix
-        self._matrix = None
+        self._matrix: MMatrix | None = None
 
     def __le__(*args, **kwargs):
         """
@@ -17926,7 +17929,7 @@ class MPlug(object):
             self._attribute._value = "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(4, 15)))
         return str(self._attribute._value)
 
-    def attribute(self):
+    def attribute(self) -> 'MObject':
         """
         Returns the attribute currently referenced by this plug.
         """
@@ -18049,7 +18052,9 @@ class MPlug(object):
         """
         Returns an array of all the plug's logical indices which are currently in use.
         """
-        return [i for i, plug in enumerate(self._children_plugs) if plug is not None]
+        int_array = MIntArray()
+        int_array._inner_ls = [i for i, plug in enumerate(self._children_plugs) if plug is not None]
+        return int_array
 
     def getSetAttrCmds(self, valueSelector=0, useLongNames=False) -> List[str]:
         """
@@ -18410,7 +18415,7 @@ class MPlug(object):
     kNotFreeToChange = 1
 
 
-class MIntArray(object):
+class MIntArray(Sequence):
     """
     Array of int values.
     """
@@ -18421,11 +18426,11 @@ class MIntArray(object):
         """
         pass
 
-    def __contains__(*args, **kwargs):
+    def __contains__(self, other: int) -> bool:
         """
         x.__contains__(y) <==> y in x
         """
-        pass
+        return other in self._inner_ls
 
     def __delitem__(*args, **kwargs):
         """
@@ -18441,11 +18446,8 @@ class MIntArray(object):
         """
         pass
 
-    def __getitem__(*args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
+    def __getitem__(self, index):
+        return self._inner_ls[index]
 
     def __getslice__(*args, **kwargs):
         """
@@ -18467,17 +18469,17 @@ class MIntArray(object):
         """
         pass
 
-    def __init__(*args, **kwargs):
+    def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._inner_ls = []
 
-    def __len__(*args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
+    def __len__(self):
+        return len(self._inner_ls)
+
+    def __iter__(self):
+        return iter(self._inner_ls)
 
     def __mul__(*args, **kwargs):
         """
@@ -18511,11 +18513,11 @@ class MIntArray(object):
         """
         pass
 
-    def __str__(*args, **kwargs):
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return f'MIntArray({self._inner_ls})'
 
     def append(*args, **kwargs):
         """
@@ -22386,7 +22388,7 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def create(self, type_id: Union["MTypeId", str], name: str = None) -> MObject:
+    def create(self, type_id: Union["MTypeId", str, Any], name: str = None) -> MObject:
         """
         Creates a new node of the given type.
         """
@@ -22811,7 +22813,7 @@ class MFnDependencyNode(MFnBase):
         return self._mobject._typeId
 
     @property
-    def typeName(self):
+    def typeName(self) -> str:
         try:
             return _TYPE_INT_TO_STR[self._mobject._typeId.id()]
         except AttributeError:

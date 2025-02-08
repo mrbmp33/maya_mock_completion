@@ -11560,7 +11560,7 @@ class MFnDependencyNode(MFnBase):
 
     def findAlias(self, *args): pass
 
-    def findPlug(self, *args): pass
+    def findPlug(self, *args) -> "MPlug": pass
 
     def getAffectedAttributes(self, *args): pass
 
