@@ -617,7 +617,7 @@ class MObjectHandle(object):
         """
         pass
 
-    def __init__(self, mobject: "MObject"):
+    def __init__(self, mobject: Optional['MObject'] = None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
