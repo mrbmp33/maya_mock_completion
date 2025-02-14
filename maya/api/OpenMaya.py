@@ -13317,6 +13317,7 @@ class MObject(object):
 
         self._numeric_type: int = MFnNumericData.kInvalid
 
+        self._locked = False
         self._affects_appearance = False
         self._affects_world_space = False
         self._channel_box = False
@@ -18378,7 +18379,12 @@ class MPlug(object):
     @property
     def isLocked(self) -> bool:
         """Returns True if the plug is locked or the owning node is locked, False otherwise."""
-        return False
+        return self._attribute._locked
+
+    @isLocked.setter
+    def isLocked(self, value: bool) -> None:
+        """Sets the lock state of the plug."""
+        self._attribute._locked = value
         
     @property
     def isNetworked(self) -> bool:
