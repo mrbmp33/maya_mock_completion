@@ -15036,647 +15036,2734 @@ ATTRIBUTES_PROPERTIES = {
 }
 
 ATTRIBUTES_SHORT_NAMES_MAP = {
-    "bnm": "binMembership",
-    "bbx": "blackBox",
-    "boc": "borderConnections",
-    "bb": "boundingBox",
-    "bcx": "boundingBoxCenterX",
-    "bcy": "boundingBoxCenterY",
-    "bcz": "boundingBoxCenterZ",
-    "bbmx": "boundingBoxMax",
-    "bbxx": "boundingBoxMaxX",
-    "bbxy": "boundingBoxMaxY",
-    "bbxz": "boundingBoxMaxZ",
-    "bbmn": "boundingBoxMin",
-    "bbnx": "boundingBoxMinX",
-    "bbny": "boundingBoxMinY",
-    "bbnz": "boundingBoxMinZ",
-    "bbsi": "boundingBoxSize",
-    "bbsx": "boundingBoxSizeX",
-    "bbsy": "boundingBoxSizeY",
-    "bbsz": "boundingBoxSizeZ",
-    "cch": "caching",
-    "c": "center",
-    "ctyp": "containerType",
-    "cdat": "creationDate",
-    "ctor": "creator",
-    "ctrt": "customTreatment",
-    "dlim": "dagLocalInverseMatrix",
-    "dlm": "dagLocalMatrix",
-    "dh": "dispHull",
-    "dla": "displayLocalAxis",
-    "drp": "displayRotatePivot",
-    "dsp": "displayScalePivot",
-    "do": "drawOverride",
-    "dyn": "dynamics",
-    "fzn": "frozen",
-    "g": "green",
-    "gac": "ghostColorPost",
-    "gab": "ghostColorPostB",
-    "gag": "ghostColorPostG",
-    "gar": "ghostColorPostR",
-    "gcp": "ghostColorPre",
-    "gpb": "ghostColorPreB",
-    "gpg": "ghostColorPreG",
-    "grr": "ghostColorPreR",
-    "gcs": "ghostCustomSteps",
-    "gdr": "ghostDriver",
-    "gfro": "ghostFarOpacity",
-    "gf": "ghostFrames",
-    "gnro": "ghostNearOpacity",
-    "golr": "ghostOpacityRange",
-    "gpof": "ghostPostFrames",
-    "gprf": "ghostPreFrames",
-    "gud": "ghostUseDriver",
-    "gh": "ghosting",
-    "gm": "ghostingMode",
-    "gstp": "ghostsStep",
-    "hio": "hiddenInOutliner",
-    "hpb": "hideOnPlayback",
-    "hl": "hyperLayout",
-    "icn": "iconName",
-    "rlid": "identification",
-    "it": "inheritsTransform",
-    "iog": "instObjGroups",
-    "io": "intermediateObject",
-    "im": "inverseMatrix",
-    "isc": "isCollapsed",
-    "ish": "isHierarchicalConnection",
-    "ihi": "isHistoricallyInteresting",
-    "lovc": "layerOverrideColor",
-    "rndr": "layerRenderable",
-    "lodv": "lodVisibility",
-    "m": "matrix",
-    "mxrl": "maxRotLimit",
-    "xrle": "maxRotLimitEnable",
-    "xrxl": "maxRotXLimit",
-    "xrxe": "maxRotXLimitEnable",
-    "xryl": "maxRotYLimit",
-    "xrye": "maxRotYLimitEnable",
-    "xrzl": "maxRotZLimit",
-    "xrze": "maxRotZLimitEnable",
-    "mxsl": "maxScaleLimit",
-    "xsle": "maxScaleLimitEnable",
-    "xsxl": "maxScaleXLimit",
-    "xsxe": "maxScaleXLimitEnable",
-    "xsyl": "maxScaleYLimit",
-    "xsye": "maxScaleYLimitEnable",
-    "xszl": "maxScaleZLimit",
-    "xsze": "maxScaleZLimitEnable",
-    "mxtl": "maxTransLimit",
-    "xtle": "maxTransLimitEnable",
-    "xtxl": "maxTransXLimit",
-    "xtxe": "maxTransXLimitEnable",
-    "xtyl": "maxTransYLimit",
-    "xtye": "maxTransYLimitEnable",
-    "xtzl": "maxTransZLimit",
-    "xtze": "maxTransZLimitEnable",
-    "msg": "message",
-    "mnrl": "minRotLimit",
-    "mrle": "minRotLimitEnable",
-    "mrxl": "minRotXLimit",
-    "mrxe": "minRotXLimitEnable",
-    "mryl": "minRotYLimit",
-    "mrye": "minRotYLimitEnable",
-    "mrzl": "minRotZLimit",
-    "mrze": "minRotZLimitEnable",
-    "mnsl": "minScaleLimit",
-    "msle": "minScaleLimitEnable",
-    "msxl": "minScaleXLimit",
-    "msxe": "minScaleXLimitEnable",
-    "msyl": "minScaleYLimit",
-    "msye": "minScaleYLimitEnable",
-    "mszl": "minScaleZLimit",
-    "msze": "minScaleZLimitEnable",
-    "mntl": "minTransLimit",
-    "mtle": "minTransLimitEnable",
-    "mtxl": "minTransXLimit",
-    "mtxe": "minTransXLimitEnable",
-    "mtyl": "minTransYLimit",
-    "mtye": "minTransYLimitEnable",
-    "mtzl": "minTransZLimit",
-    "mtze": "minTransZLimitEnable",
-    "nds": "nodeState",
-    "oc": "objectColor",
-    "obcb": "objectColorB",
-    "obcg": "objectColorG",
-    "obcr": "objectColorR",
-    "obcc": "objectColorRGB",
-    "opm": "offsetParentMatrix",
-    "oclr": "outlinerColor",
-    "oclrb": "outlinerColorB",
-    "oclrg": "outlinerColorG",
-    "oclrr": "outlinerColorR",
-    "ovc": "overrideColor",
-    "ovca": "overrideColorA",
-    "ovcb": "overrideColorB",
-    "ovcg": "overrideColorG",
-    "ovcr": "overrideColorR",
-    "ovrgb": "overrideColorRGB",
-    "ovdt": "overrideDisplayType",
-    "ove": "overrideEnabled",
-    "ovlod": "overrideLevelOfDetail",
-    "ovp": "overridePlayback",
-    "ovrgbf": "overrideRGBColors",
-    "ovs": "overrideShading",
-    "ovt": "overrideTexturing",
-    "ovv": "overrideVisibility",
-    "pim": "parentInverseMatrix",
-    "pm": "parentMatrix",
-    "pni": "publishedNodeInfo",
-    "ri": "renderInfo",
-    "rlio": "renderLayerInfo",
-    "rmc": "rmbCommand",
-    "r": "red",
-    "ra": "rotateAxis",
-    "rax": "rotateAxisX",
-    "ray": "rotateAxisY",
-    "raz": "rotateAxisZ",
-    "ro": "inputRotateOrder",
-    "rp": "rotatePivot",
-    "rpt": "rotatePivotTranslate",
-    "rptx": "rotatePivotTranslateX",
-    "rpty": "rotatePivotTranslateY",
-    "rptz": "rotatePivotTranslateZ",
-    "rpx": "rotatePivotX",
-    "rpy": "rotatePivotY",
-    "rpz": "rotatePivotZ",
-    "rq": "rotateQuaternion",
-    "rqw": "rotateQuaternionW",
-    "rqx": "rotateQuaternionX",
-    "rqy": "rotateQuaternionY",
-    "rqz": "rotateQuaternionZ",
-    "rx": "rotateX",
-    "ry": "rotateY",
-    "rz": "rotateZ",
-    "roi": "rotationInterpolation",
-    "s": "spans",
-    "sp": "spansUV",
-    "spt": "scalePivotTranslate",
-    "sptx": "scalePivotTranslateX",
-    "spty": "scalePivotTranslateY",
-    "sptz": "scalePivotTranslateZ",
-    "spx": "scalePivotX",
-    "spy": "scalePivotY",
-    "spz": "scalePivotZ",
-    "sx": "sofx",
-    "sy": "sofy",
-    "sz": "sofz",
-    "hdl": "selectHandle",
-    "hdlx": "selectHandleX",
-    "hdly": "selectHandleY",
-    "hdlz": "selectHandleZ",
-    "sech": "selectionChildHighlighting",
-    "sh": "shear",
-    "shxy": "shearXY",
-    "shxz": "shearXZ",
-    "shyz": "shearYZ",
-    "smd": "showManipDefault",
-    "sml": "specifiedManipLocation",
-    "tmp": "template",
-    "tna": "templateName",
-    "tpt": "templatePath",
-    "tpv": "templateVersion",
-    "tmrp": "transMinusRotatePivot",
-    "tmrx": "transMinusRotatePivotX",
-    "tmry": "transMinusRotatePivotY",
-    "tmrz": "transMinusRotatePivotZ",
-    "t": "translate",
-    "tx": "translateX",
-    "ty": "translateY",
-    "tz": "translateZ",
-    "uit": "uiTreatment",
-    "uoc": "useObjectColor",
-    "uocol": "useOutlinerColor",
-    "vwm": "viewMode",
-    "vwn": "viewName",
-    "v": "visibility",
-    "wfcb": "wireColorB",
-    "wfcg": "wireColorG",
-    "wfcr": "wireColorR",
-    "wfcc": "wireColorRGB",
-    "wim": "worldInverseMatrix",
-    "wm": "worldMatrix",
-    "xm": "xformMatrix",
-    "bis": "bindInverseScale",
-    "bix": "bindInverseScaleX",
-    "biy": "bindInverseScaleY",
-    "biz": "bindInverseScaleZ",
-    "bjo": "bindJointOrient",
-    "bjx": "bindJointOrientX",
-    "bjy": "bindJointOrientY",
-    "bjz": "bindJointOrientZ",
-    "bps": "bindPose",
-    "bra": "bindRotateAxis",
-    "brax": "bindRotateAxisX",
-    "bray": "bindRotateAxisY",
-    "braz": "bindRotateAxisZ",
-    "br": "bindRotation",
-    "brx": "bindRotationX",
-    "bry": "bindRotationY",
-    "brz": "bindRotationZ",
-    "bs": "bindScale",
-    "bsx": "bindScaleX",
-    "bsy": "bindScaleY",
-    "bsz": "bindScaleZ",
-    "bsc": "bindSegmentScaleCompensate",
-    "dm": "dofMask",
-    "dl": "drawLabel",
-    "ds": "doubleSided",
-    "fkr": "fkRotate",
-    "frx": "fkRotateX",
-    "fry": "fkRotateY",
-    "frz": "fkRotateZ",
-    "hfk": "hikFkJoint",
-    "hni": "hikNodeID",
-    "ikr": "ikRotate",
-    "irx": "ikRotateX",
-    "iry": "ikRotateY",
-    "irz": "ikRotateZ",
-    "isf": "inIKSolveFlag",
-    "is": "inverseScale",
-    "isx": "inverseScaleX",
-    "isy": "inverseScaleY",
-    "isz": "inverseScaleZ",
-    "idf": "isIKDirtyFlag",
-    "jo": "jointOrient",
-    "jot": "jointOrientType",
-    "jox": "jointOrientX",
-    "joy": "jointOrientY",
-    "joz": "jointOrientZ",
-    "jt": "jointType",
-    "jtx": "jointTypeX",
-    "jty": "jointTypeY",
-    "jtz": "jointTypeZ",
-    "xdr": "maxRotateDampRange",
-    "xdx": "maxRotateDampRangeX",
-    "xdy": "maxRotateDampRangeY",
-    "xdz": "maxRotateDampRangeZ",
-    "xst": "maxRotateDampStrength",
-    "xstx": "maxRotateDampStrengthX",
-    "xsty": "maxRotateDampStrengthY",
-    "xstz": "maxRotateDampStrengthZ",
-    "ndr": "minRotateDampRange",
-    "ndx": "minRotateDampRangeX",
-    "ndy": "minRotateDampRangeY",
-    "ndz": "minRotateDampRangeZ",
-    "nst": "minRotateDampStrength",
-    "nstx": "minRotateDampStrengthX",
-    "nsty": "minRotateDampStrengthY",
-    "nstz": "minRotateDampStrengthZ",
-    "otp": "otherType",
-    "pa": "preferredAngle",
-    "pax": "preferredAngleX",
-    "pay": "preferredAngleY",
-    "paz": "preferredAngleZ",
-    "radi": "radius",
-    "ssc": "segmentScaleCompensate",
-    "sd": "side",
-    "st": "secondTerm",
-    "stx": "stiffnessX",
-    "sty": "stiffnessY",
-    "stz": "stiffnessZ",
-    "typ": "type",
-    "i1": "input1D",
-    "i2": "input2D",
-    "o": "outMesh",
-    "cf": "colorIfFalse",
-    "cfb": "colorIfFalseB",
-    "cfg": "colorIfFalseG",
-    "cfr": "colorIfFalseR",
-    "ct": "colorIfTrue",
-    "ctb": "colorIfTrueB",
-    "ctg": "colorIfTrueG",
-    "ctr": "colorIfTrueR",
-    "ft": "firstTerm",
-    "op": "opposite",
-    "ocb": "outColorB",
-    "ocg": "outColorG",
-    "ocr": "osdCreaseMethod",
-    "ip": "input",
-    "ipb": "inputB",
-    "ipg": "inputG",
-    "ipr": "inputR",
-    "mx": "max",
-    "mxb": "maxB",
-    "mxg": "maxG",
-    "mxr": "maxR",
-    "mn": "min",
-    "mnb": "minB",
-    "mng": "minG",
-    "mnr": "minR",
-    "opb": "outputB",
-    "opg": "outputG",
-    "opr": "outputR",
-    "arp": "renderPassMode",
-    "cl": "color",
-    "imx": "inputMax",
-    "imn": "inputMin",
-    "i": "inMesh",
-    "ov": "outValue",
-    "omx": "outputMax",
-    "omn": "outputMin",
-    "vl": "value",
-    "b": "blender",
-    "cb": "colorB",
-    "cg": "colorG",
-    "cr": "create",
-    "csp": "cacheSetup",
-    "coord": "coordinate",
-    "curgeom": "deformedGeometry",
-    "nrm": "normalAxis",
-    "novr": "normalOverride",
-    "nrmip": "normalizedIsoParms",
-    "orggeom": "originalGeometry",
-    "omat": "outputMatrix",
-    "ot": "outputTranslate",
-    "rlcrv": "railCurve",
-    "rsmat": "relativeSpaceMatrix",
-    "rsmd": "relativeSpaceMode",
-    "tng": "tangentAxis",
-    "msn": "uvSetName",
-    "i3": "input3D",
-    "o1": "output1D",
-    "o2": "output2D",
-    "o2x": "output2Dx",
-    "o2y": "output2Dy",
-    "o3": "output3D",
-    "o3x": "output3Dx",
-    "o3y": "output3Dy",
-    "o3z": "output3Dz",
-    "ab": "attributesBlender",
-    "c1": "color1",
-    "c1b": "color1B",
-    "c1g": "color1G",
-    "c1r": "color1R",
-    "c2": "color2",
-    "c2b": "color2B",
-    "c2g": "color2G",
-    "c2r": "color2R",
-    "imat": "inputMatrix",
-    "oq": "outputQuat",
-    "oqw": "outputQuatW",
-    "oqx": "outputQuatX",
-    "oqy": "outputQuatY",
-    "oqz": "outputQuatZ",
-    "or": "outputRotate",
-    "orx": "outputRotateX",
-    "ory": "outputRotateY",
-    "orz": "outputRotateZ",
-    "os": "outSmoothMesh",
-    "osx": "outputScaleX",
-    "osy": "outputScaleY",
-    "osz": "outputScaleZ",
-    "osh": "outputShear",
-    "oshx": "outputShearX",
-    "oshy": "outputShearY",
-    "oshz": "outputShearZ",
-    "otx": "outputTranslateX",
-    "oty": "outputTranslateY",
-    "otz": "outputTranslateZ",
-    "enb": "enable",
-    "env": "envelope",
-    "pstmat": "postSpaceMatrix",
-    "premat": "preSpaceMatrix",
-    "tgt": "target",
-    "adot": "alwaysDrawOnTop",
-    "gal": "antialiasingLevel",
-    "asbg": "asBackground",
-    "bn": "blindDataNodes",
-    "cc": "cached",
-    "csh": "castsShadows",
-    "clst": "colorSet",
-    "ciog": "compInstObjGroups",
-    "gtag": "componentTags",
-    "cp": "controlPoints",
-    "ccls": "currentColorSet",
-    "cuvs": "currentUVSet",
-    "d": "degreeUV",
-    "dej": "depthJitter",
-    "dcv": "dispCV",
-    "dce": "dispCurveEndPoints",
-    "dep": "dispEP",
-    "dg": "dispGeometry",
-    "dcc": "displayColorChannel",
-    "dcol": "displayColors",
-    "di": "displayImmediate",
-    "eps": "editPoints",
-    "f": "form",
-    "gao": "geometryAntialiasingOverride",
-    "hfm": "hardwareFogMultiplier",
-    "hd": "header",
-    "iss": "ignoreSelfShadowing",
-    "ipo": "inPlace",
-    "imtla": "instMaterialAssign",
-    "ls": "lineWidth",
-    "l": "local",
-    "msa": "maxShadingSamples",
-    "max": "maxValue",
-    "mvs": "maxVisibilitySamples",
-    "vbo": "maxVisibilitySamplesOverride",
-    "mmv": "minMaxRangeV",
-    "min": "minValue",
-    "mb": "motionBlur",
-    "pte": "pickTexture",
-    "vis": "primaryVisibility",
-    "rcsh": "receiveShadows",
-    "rob": "referenceObject",
-    "rtw": "relativeTweak",
-    "rt": "renderType",
-    "rv": "renderVolume",
-    "ssa": "shadingSamples",
-    "sso": "shadingSamplesOverride",
-    "tw": "tweak",
-    "twl": "tweakLocation",
-    "ts": "tweakSize",
-    "pv": "uvPivot",
-    "pvx": "uvPivotX",
-    "pvy": "uvPivotY",
-    "uvst": "uvSet",
-    "vf": "visibleFraction",
-    "vir": "visibleInReflections",
-    "vif": "visibleInRefractions",
-    "vss": "volumeSamples",
-    "vso": "volumeSamplesOverride",
-    "wt": "weights",
-    "wn": "worldNormal",
-    "ws": "worldSpace",
-    "btt": "basicTessellationType",
-    "bbs": "boundingBoxScale",
-    "bscx": "boundingBoxScaleX",
-    "bscy": "boundingBoxScaleY",
-    "bscz": "boundingBoxScaleZ",
-    "ch": "chordHeight",
-    "chr": "chordHeightRatio",
-    "cdvi": "collisionDepthVelocityIncrement",
-    "cdvm": "collisionDepthVelocityMultiplier",
-    "covi": "collisionOffsetVelocityIncrement",
-    "covm": "collisionOffsetVelocityMultiplier",
-    "cvto": "curvatureTolerance",
-    "cpr": "curvePrecision",
-    "cps": "curvePrecisionShaded",
-    "du": "degreeU",
-    "dv": "displayVertices",
-    "dor": "dispOrigin",
-    "dsf": "dispSF",
-    "dhe": "displayHWEnvironment",
-    "drt": "displayRenderTessellation",
-    "dvu": "divisionsU",
-    "dvv": "divisionsV",
-    "es": "edgeSwap",
-    "eta": "explicitTessellationAttributes",
-    "xsr": "extraSampleRate",
-    "fbda": "featureDisplacement",
-    "ftwp": "fixTextureWarp",
-    "fu": "formU",
-    "fv": "formV",
-    "gdsu": "gridDivisionPerSpanU",
-    "gdsv": "gridDivisionPerSpanV",
-    "hot": "holdOut",
-    "ih": "ignoreHwShader",
-    "dsr": "initialSampleRate",
-    "mxu": "maxValueU",
-    "mxv": "maxValueV",
-    "mmu": "minMaxRangeU",
-    "mns": "minScreen",
-    "mnu": "minValueU",
-    "mnv": "minValueV",
-    "mu": "modeU",
-    "mv": "modeV",
-    "nat": "normalThreshold",
-    "ndf": "normalsDisplayScale",
-    "nu": "numberU",
-    "nv": "numberV",
-    "uco": "objSpaceChordHeight",
-    "pu": "patchUVIds",
-    "tcn": "renderTriangleCount",
-    "scvd": "selCVDisp",
-    "sm": "simplifyMode",
-    "smu": "simplifyU",
-    "smv": "simplifyV",
-    "ues": "smoothEdge",
-    "esr": "smoothEdgeRatio",
-    "smo": "smoothShading",
-    "su": "spansU",
-    "sv": "spansV",
-    "fth": "textureThreshold",
-    "tf": "trimFace",
-    "tsu": "tweakSizeU",
-    "tsv": "tweakSizeV",
-    "nufa": "uDivisionsFactor",
-    "uch": "useChordHeight",
-    "ucr": "useChordHeightRatio",
-    "uns": "useMinScreen",
-    "nvfa": "vDivisionsFactor",
-    "atm": "allowTopologyMod",
-    "bck": "backfaceCulling",
-    "bw": "borderWidth",
-    "bnr": "boundaryRule",
-    "ci": "cachedInMesh",
-    "cs": "cachedSmoothMesh",
-    "cpvx": "colorPerVertex",
-    "clr": "colors",
-    "cfsc": "computeFromSculptCache",
-    "co": "continuity",
-    "cd": "creaseData",
-    "cvd": "creaseVertexData",
-    "dr": "dispResolution",
-    "dist": "displacementType",
-    "dags": "displayAlphaAsGreyScale",
-    "dblu": "displayBlueColorChannel",
-    "db": "displayBorders",
-    "dc": "displayCenter",
-    "dcgs": "displayColorAsGreyScale",
-    "de": "displayEdges",
-    "dfgi": "displayFacesWithGroupId",
-    "dgrn": "displayGreenColorChannel",
-    "difs": "displayInvisibleFaces",
-    "din": "displayItemNumbers",
-    "dmb": "displayMapBorders",
-    "dnp": "displayNonPlanar",
-    "dn": "displayNormal",
-    "dred": "displayRedColorChannel",
-    "dsm": "displaySmoothMesh",
-    "dsc": "displaySubdComps",
-    "dtn": "displayTangent",
-    "dt": "displayTriangles",
-    "duv": "displayUVs",
-    "ed": "edge",
-    "emap": "edgeIdMap",
-    "eocl": "enableOpenCL",
-    "fc": "face",
-    "fcid": "faceColorIndices",
-    "fmap": "faceIdMap",
-    "frze": "freeze",
-    "hfd": "holeFaceData",
-    "ifuv": "inForceNodeUVUpdate",
-    "kb": "keepBorder",
-    "khe": "keepHardEdge",
-    "kmb": "keepMapBorders",
-    "ltt": "loadTiledTextures",
-    "matb": "materialBlend",
-    "mxe": "maxEdgeLength",
-    "mxs": "maxSubd",
-    "tsl": "maxTriangles",
-    "xuv": "maxUv",
-    "mttg": "mikktspaceTangentGen",
-    "mne": "minEdgeLength",
-    "mvcs": "motionVectorColorSet",
-    "npvx": "normalPerVertex",
-    "ns": "normalSize",
-    "ndt": "normalType",
-    "n": "normals",
-    "nt": "numTriangles",
-    "ofb": "osdFvarBoundary",
-    "ofc": "osdFvarPropagateCorners",
-    "iuv": "osdIndependentUVChannels",
-    "ost": "osdSmoothTriangles",
-    "ovb": "osdVertBoundary",
-    "ofuv": "outForceNodeUVUpdate",
-    "ogc": "outGeometryClean",
-    "osde": "outSmoothMeshSubdError",
-    "pii": "perInstanceIndex",
-    "pit": "perInstanceTag",
-    "pd": "pinData",
-    "pt": "pnts",
-    "peh": "propagateEdgeHardness",
-    "qsp": "quadSplit",
-    "rsl": "renderSmoothLevel",
-    "rtri": "reuseTriangles",
-    "sdis": "showDisplacements",
-    "sdt": "smoothDrawType",
-    "lev": "smoothLevel",
-    "ssm": "smoothMeshSelectionMode",
-    "so": "smoothOffset",
-    "socp": "smoothOsdColorizePatches",
-    "stlv": "smoothTessLevel",
-    "suv": "smoothUVs",
-    "sw": "smoothWarn",
-    "tnt": "tangentNormalThreshold",
-    "tsa": "tangentSmoothingAngle",
-    "tgsp": "tangentSpace",
-    "ugsdt": "useGlobalSmoothDrawType",
-    "uxe": "useMaxEdgeLength",
-    "uxs": "useMaxSubdivisions",
-    "uxu": "useMaxUV",
-    "umsc": "useMeshSculptCache",
-    "umtsc": "useMeshTexSculptCache",
-    "uie": "useMinEdgeLength",
-    "unp": "useNumTriangles",
-    "uob": "useOsdBoundaryMethods",
-    "uspr": "useSmoothPreviewForRender",
-    "utrg": "userTrg",
-    "usz": "uvSize",
-    "uvtl": "uvTweakLocation",
-    "uv": "uvpt",
-    "vbc": "vertexBackfaceCulling",
-    "vclr": "vertexColor",
-    "vcs": "vertexColorSource",
-    "vmap": "vertexIdMap",
-    "vn": "vertexNormal",
-    "vnm": "vertexNormalMethod",
-    "vs": "vertexSize",
-    "vt": "vrts",
-    "w": "worldMesh"
+    "bnm": {
+        "transform": "binMembership",
+        "joint": "binMembership",
+        "multDoubleLinear": "binMembership",
+        "condition": "binMembership",
+        "clamp": "binMembership",
+        "remapValue": "binMembership",
+        "remapColor": "binMembership",
+        "uvPin": "binMembership",
+        "plusMinusAverage": "binMembership",
+        "blendTwoAttr": "binMembership",
+        "blendColors": "binMembership",
+        "decomposeMatrix": "binMembership",
+        "inverseMatrix": "binMembership",
+        "multMatrix": "binMembership",
+        "blendMatrix": "binMembership",
+        "nurbsCurve": "binMembership",
+        "nurbsSurface": "binMembership",
+        "mesh": "binMembership"
+    },
+    "bbx": {
+        "transform": "blackBox",
+        "joint": "blackBox",
+        "nurbsCurve": "blackBox",
+        "nurbsSurface": "blackBox",
+        "mesh": "blackBox"
+    },
+    "boc": {
+        "transform": "borderConnections",
+        "joint": "borderConnections",
+        "nurbsCurve": "borderConnections",
+        "nurbsSurface": "borderConnections",
+        "mesh": "borderConnections"
+    },
+    "bb": {
+        "transform": "boundingBox",
+        "joint": "boundingBox",
+        "nurbsCurve": "boundingBox",
+        "nurbsSurface": "boundingBox",
+        "mesh": "boundingBox"
+    },
+    "bcx": {
+        "transform": "boundingBoxCenterX",
+        "joint": "boundingBoxCenterX",
+        "nurbsCurve": "boundingBoxCenterX",
+        "nurbsSurface": "boundingBoxCenterX",
+        "mesh": "boundingBoxCenterX"
+    },
+    "bcy": {
+        "transform": "boundingBoxCenterY",
+        "joint": "boundingBoxCenterY",
+        "nurbsCurve": "boundingBoxCenterY",
+        "nurbsSurface": "boundingBoxCenterY",
+        "mesh": "boundingBoxCenterY"
+    },
+    "bcz": {
+        "transform": "boundingBoxCenterZ",
+        "joint": "boundingBoxCenterZ",
+        "nurbsCurve": "boundingBoxCenterZ",
+        "nurbsSurface": "boundingBoxCenterZ",
+        "mesh": "boundingBoxCenterZ"
+    },
+    "bbmx": {
+        "transform": "boundingBoxMax",
+        "joint": "boundingBoxMax",
+        "nurbsCurve": "boundingBoxMax",
+        "nurbsSurface": "boundingBoxMax",
+        "mesh": "boundingBoxMax"
+    },
+    "bbxx": {
+        "transform": "boundingBoxMaxX",
+        "joint": "boundingBoxMaxX",
+        "nurbsCurve": "boundingBoxMaxX",
+        "nurbsSurface": "boundingBoxMaxX",
+        "mesh": "boundingBoxMaxX"
+    },
+    "bbxy": {
+        "transform": "boundingBoxMaxY",
+        "joint": "boundingBoxMaxY",
+        "nurbsCurve": "boundingBoxMaxY",
+        "nurbsSurface": "boundingBoxMaxY",
+        "mesh": "boundingBoxMaxY"
+    },
+    "bbxz": {
+        "transform": "boundingBoxMaxZ",
+        "joint": "boundingBoxMaxZ",
+        "nurbsCurve": "boundingBoxMaxZ",
+        "nurbsSurface": "boundingBoxMaxZ",
+        "mesh": "boundingBoxMaxZ"
+    },
+    "bbmn": {
+        "transform": "boundingBoxMin",
+        "joint": "boundingBoxMin",
+        "nurbsCurve": "boundingBoxMin",
+        "nurbsSurface": "boundingBoxMin",
+        "mesh": "boundingBoxMin"
+    },
+    "bbnx": {
+        "transform": "boundingBoxMinX",
+        "joint": "boundingBoxMinX",
+        "nurbsCurve": "boundingBoxMinX",
+        "nurbsSurface": "boundingBoxMinX",
+        "mesh": "boundingBoxMinX"
+    },
+    "bbny": {
+        "transform": "boundingBoxMinY",
+        "joint": "boundingBoxMinY",
+        "nurbsCurve": "boundingBoxMinY",
+        "nurbsSurface": "boundingBoxMinY",
+        "mesh": "boundingBoxMinY"
+    },
+    "bbnz": {
+        "transform": "boundingBoxMinZ",
+        "joint": "boundingBoxMinZ",
+        "nurbsCurve": "boundingBoxMinZ",
+        "nurbsSurface": "boundingBoxMinZ",
+        "mesh": "boundingBoxMinZ"
+    },
+    "bbsi": {
+        "transform": "boundingBoxSize",
+        "joint": "boundingBoxSize",
+        "nurbsCurve": "boundingBoxSize",
+        "nurbsSurface": "boundingBoxSize",
+        "mesh": "boundingBoxSize"
+    },
+    "bbsx": {
+        "transform": "boundingBoxSizeX",
+        "joint": "boundingBoxSizeX",
+        "nurbsCurve": "boundingBoxSizeX",
+        "nurbsSurface": "boundingBoxSizeX",
+        "mesh": "boundingBoxSizeX"
+    },
+    "bbsy": {
+        "transform": "boundingBoxSizeY",
+        "joint": "boundingBoxSizeY",
+        "nurbsCurve": "boundingBoxSizeY",
+        "nurbsSurface": "boundingBoxSizeY",
+        "mesh": "boundingBoxSizeY"
+    },
+    "bbsz": {
+        "transform": "boundingBoxSizeZ",
+        "joint": "boundingBoxSizeZ",
+        "nurbsCurve": "boundingBoxSizeZ",
+        "nurbsSurface": "boundingBoxSizeZ",
+        "mesh": "boundingBoxSizeZ"
+    },
+    "cch": {
+        "transform": "caching",
+        "joint": "caching",
+        "multDoubleLinear": "caching",
+        "condition": "caching",
+        "clamp": "caching",
+        "remapValue": "caching",
+        "remapColor": "caching",
+        "uvPin": "caching",
+        "plusMinusAverage": "caching",
+        "blendTwoAttr": "caching",
+        "blendColors": "caching",
+        "decomposeMatrix": "caching",
+        "inverseMatrix": "caching",
+        "multMatrix": "caching",
+        "blendMatrix": "caching",
+        "nurbsCurve": "caching",
+        "nurbsSurface": "caching",
+        "mesh": "caching"
+    },
+    "c": {
+        "transform": "center",
+        "joint": "center",
+        "blendTwoAttr": "current",
+        "nurbsCurve": "center",
+        "nurbsSurface": "center",
+        "mesh": "center"
+    },
+    "ctyp": {
+        "transform": "containerType",
+        "joint": "containerType",
+        "nurbsCurve": "containerType",
+        "nurbsSurface": "containerType",
+        "mesh": "containerType"
+    },
+    "cdat": {
+        "transform": "creationDate",
+        "joint": "creationDate",
+        "nurbsCurve": "creationDate",
+        "nurbsSurface": "creationDate",
+        "mesh": "creationDate"
+    },
+    "ctor": {
+        "transform": "creator",
+        "joint": "creator",
+        "nurbsCurve": "creator",
+        "nurbsSurface": "creator",
+        "mesh": "creator"
+    },
+    "ctrt": {
+        "transform": "customTreatment",
+        "joint": "customTreatment",
+        "nurbsCurve": "customTreatment",
+        "nurbsSurface": "customTreatment",
+        "mesh": "customTreatment"
+    },
+    "dlim": {
+        "transform": "dagLocalInverseMatrix",
+        "joint": "dagLocalInverseMatrix"
+    },
+    "dlm": {
+        "transform": "dagLocalMatrix",
+        "joint": "dagLocalMatrix"
+    },
+    "dh": {
+        "transform": "displayHandle",
+        "joint": "displayHandle",
+        "nurbsCurve": "dispHull",
+        "nurbsSurface": "dispHull"
+    },
+    "dla": {
+        "transform": "displayLocalAxis",
+        "joint": "displayLocalAxis"
+    },
+    "drp": {
+        "transform": "displayRotatePivot",
+        "joint": "displayRotatePivot"
+    },
+    "dsp": {
+        "transform": "displayScalePivot",
+        "joint": "displayScalePivot"
+    },
+    "do": {
+        "transform": "drawOverride",
+        "joint": "drawOverride",
+        "nurbsCurve": "drawOverride",
+        "nurbsSurface": "drawOverride",
+        "mesh": "drawOverride"
+    },
+    "dyn": {
+        "transform": "dynamics",
+        "joint": "dynamics"
+    },
+    "fzn": {
+        "transform": "frozen",
+        "joint": "frozen",
+        "multDoubleLinear": "frozen",
+        "condition": "frozen",
+        "clamp": "frozen",
+        "remapValue": "frozen",
+        "remapColor": "frozen",
+        "uvPin": "frozen",
+        "plusMinusAverage": "frozen",
+        "blendTwoAttr": "frozen",
+        "blendColors": "frozen",
+        "decomposeMatrix": "frozen",
+        "inverseMatrix": "frozen",
+        "multMatrix": "frozen",
+        "blendMatrix": "frozen",
+        "nurbsCurve": "frozen",
+        "nurbsSurface": "frozen",
+        "mesh": "frozen"
+    },
+    "g": {
+        "transform": "geometry",
+        "joint": "geometry",
+        "remapColor": "green"
+    },
+    "gac": {
+        "transform": "ghostColorPost",
+        "joint": "ghostColorPost",
+        "nurbsCurve": "ghostColorPost",
+        "nurbsSurface": "ghostColorPost",
+        "mesh": "ghostColorPost"
+    },
+    "gab": {
+        "transform": "ghostColorPostB",
+        "joint": "ghostColorPostB",
+        "nurbsCurve": "ghostColorPostB",
+        "nurbsSurface": "ghostColorPostB",
+        "mesh": "ghostColorPostB"
+    },
+    "gag": {
+        "transform": "ghostColorPostG",
+        "joint": "ghostColorPostG",
+        "nurbsCurve": "ghostColorPostG",
+        "nurbsSurface": "ghostColorPostG",
+        "mesh": "ghostColorPostG"
+    },
+    "gar": {
+        "transform": "ghostColorPostR",
+        "joint": "ghostColorPostR",
+        "nurbsCurve": "ghostColorPostR",
+        "nurbsSurface": "ghostColorPostR",
+        "mesh": "ghostColorPostR"
+    },
+    "gcp": {
+        "transform": "ghostColorPre",
+        "joint": "ghostColorPre",
+        "nurbsCurve": "ghostColorPre",
+        "nurbsSurface": "ghostColorPre",
+        "mesh": "ghostColorPre"
+    },
+    "gpb": {
+        "transform": "ghostColorPreB",
+        "joint": "ghostColorPreB",
+        "nurbsCurve": "ghostColorPreB",
+        "nurbsSurface": "ghostColorPreB",
+        "mesh": "ghostColorPreB"
+    },
+    "gpg": {
+        "transform": "ghostColorPreG",
+        "joint": "ghostColorPreG",
+        "nurbsCurve": "ghostColorPreG",
+        "nurbsSurface": "ghostColorPreG",
+        "mesh": "ghostColorPreG"
+    },
+    "grr": {
+        "transform": "ghostColorPreR",
+        "joint": "ghostColorPreR",
+        "nurbsCurve": "ghostColorPreR",
+        "nurbsSurface": "ghostColorPreR",
+        "mesh": "ghostColorPreR"
+    },
+    "gcs": {
+        "transform": "ghostCustomSteps",
+        "joint": "ghostCustomSteps",
+        "nurbsCurve": "ghostCustomSteps",
+        "nurbsSurface": "ghostCustomSteps",
+        "mesh": "ghostCustomSteps"
+    },
+    "gdr": {
+        "transform": "ghostDriver",
+        "joint": "ghostDriver",
+        "nurbsCurve": "ghostDriver",
+        "nurbsSurface": "ghostDriver",
+        "mesh": "ghostDriver"
+    },
+    "gfro": {
+        "transform": "ghostFarOpacity",
+        "joint": "ghostFarOpacity",
+        "nurbsCurve": "ghostFarOpacity",
+        "nurbsSurface": "ghostFarOpacity",
+        "mesh": "ghostFarOpacity"
+    },
+    "gf": {
+        "transform": "ghostFrames",
+        "joint": "ghostFrames",
+        "nurbsCurve": "ghostFrames",
+        "nurbsSurface": "ghostFrames",
+        "mesh": "ghostFrames"
+    },
+    "gnro": {
+        "transform": "ghostNearOpacity",
+        "joint": "ghostNearOpacity",
+        "nurbsCurve": "ghostNearOpacity",
+        "nurbsSurface": "ghostNearOpacity",
+        "mesh": "ghostNearOpacity"
+    },
+    "golr": {
+        "transform": "ghostOpacityRange",
+        "joint": "ghostOpacityRange",
+        "nurbsCurve": "ghostOpacityRange",
+        "nurbsSurface": "ghostOpacityRange",
+        "mesh": "ghostOpacityRange"
+    },
+    "gpof": {
+        "transform": "ghostPostFrames",
+        "joint": "ghostPostFrames",
+        "nurbsCurve": "ghostPostFrames",
+        "nurbsSurface": "ghostPostFrames",
+        "mesh": "ghostPostFrames"
+    },
+    "gprf": {
+        "transform": "ghostPreFrames",
+        "joint": "ghostPreFrames",
+        "nurbsCurve": "ghostPreFrames",
+        "nurbsSurface": "ghostPreFrames",
+        "mesh": "ghostPreFrames"
+    },
+    "gud": {
+        "transform": "ghostUseDriver",
+        "joint": "ghostUseDriver",
+        "nurbsCurve": "ghostUseDriver",
+        "nurbsSurface": "ghostUseDriver",
+        "mesh": "ghostUseDriver"
+    },
+    "gh": {
+        "transform": "ghosting",
+        "joint": "ghosting",
+        "nurbsCurve": "ghosting",
+        "nurbsSurface": "ghosting",
+        "mesh": "ghosting"
+    },
+    "gm": {
+        "transform": "ghostingMode",
+        "joint": "ghostingMode",
+        "nurbsCurve": "ghostingMode",
+        "nurbsSurface": "ghostingMode",
+        "mesh": "ghostingMode"
+    },
+    "gstp": {
+        "transform": "ghostsStep",
+        "joint": "ghostsStep",
+        "nurbsCurve": "ghostsStep",
+        "nurbsSurface": "ghostsStep",
+        "mesh": "ghostsStep"
+    },
+    "hio": {
+        "transform": "hiddenInOutliner",
+        "joint": "hiddenInOutliner",
+        "nurbsCurve": "hiddenInOutliner",
+        "nurbsSurface": "hiddenInOutliner",
+        "mesh": "hiddenInOutliner"
+    },
+    "hpb": {
+        "transform": "hideOnPlayback",
+        "joint": "hideOnPlayback",
+        "nurbsCurve": "hideOnPlayback",
+        "nurbsSurface": "hideOnPlayback",
+        "mesh": "hideOnPlayback"
+    },
+    "hl": {
+        "transform": "hyperLayout",
+        "joint": "hyperLayout",
+        "nurbsCurve": "hyperLayout",
+        "nurbsSurface": "hyperLayout",
+        "mesh": "hyperLayout"
+    },
+    "icn": {
+        "transform": "iconName",
+        "joint": "iconName",
+        "nurbsCurve": "iconName",
+        "nurbsSurface": "iconName",
+        "mesh": "iconName"
+    },
+    "rlid": {
+        "transform": "identification",
+        "joint": "identification",
+        "nurbsCurve": "identification",
+        "nurbsSurface": "identification",
+        "mesh": "identification"
+    },
+    "it": {
+        "transform": "inheritsTransform",
+        "joint": "inheritsTransform"
+    },
+    "iog": {
+        "transform": "instObjGroups",
+        "joint": "instObjGroups",
+        "nurbsCurve": "instObjGroups",
+        "nurbsSurface": "instObjGroups",
+        "mesh": "instObjGroups"
+    },
+    "io": {
+        "transform": "intermediateObject",
+        "joint": "intermediateObject",
+        "nurbsCurve": "intermediateObject",
+        "nurbsSurface": "intermediateObject",
+        "mesh": "intermediateObject"
+    },
+    "im": {
+        "transform": "inverseMatrix",
+        "joint": "inverseMatrix",
+        "nurbsCurve": "inverseMatrix",
+        "nurbsSurface": "inverseMatrix",
+        "mesh": "inverseMatrix"
+    },
+    "isc": {
+        "transform": "isCollapsed",
+        "joint": "isCollapsed",
+        "nurbsCurve": "isCollapsed",
+        "nurbsSurface": "isCollapsed",
+        "mesh": "isCollapsed"
+    },
+    "ish": {
+        "transform": "isHierarchicalConnection",
+        "joint": "isHierarchicalConnection",
+        "nurbsCurve": "isHierarchicalConnection",
+        "nurbsSurface": "isHierarchicalConnection",
+        "mesh": "isHierarchicalConnection"
+    },
+    "ihi": {
+        "transform": "isHistoricallyInteresting",
+        "joint": "isHistoricallyInteresting",
+        "multDoubleLinear": "isHistoricallyInteresting",
+        "condition": "isHistoricallyInteresting",
+        "clamp": "isHistoricallyInteresting",
+        "remapValue": "isHistoricallyInteresting",
+        "remapColor": "isHistoricallyInteresting",
+        "uvPin": "isHistoricallyInteresting",
+        "plusMinusAverage": "isHistoricallyInteresting",
+        "blendTwoAttr": "isHistoricallyInteresting",
+        "blendColors": "isHistoricallyInteresting",
+        "decomposeMatrix": "isHistoricallyInteresting",
+        "inverseMatrix": "isHistoricallyInteresting",
+        "multMatrix": "isHistoricallyInteresting",
+        "blendMatrix": "isHistoricallyInteresting",
+        "nurbsCurve": "isHistoricallyInteresting",
+        "nurbsSurface": "isHistoricallyInteresting",
+        "mesh": "isHistoricallyInteresting"
+    },
+    "lovc": {
+        "transform": "layerOverrideColor",
+        "joint": "layerOverrideColor",
+        "nurbsCurve": "layerOverrideColor",
+        "nurbsSurface": "layerOverrideColor",
+        "mesh": "layerOverrideColor"
+    },
+    "rndr": {
+        "transform": "layerRenderable",
+        "joint": "layerRenderable",
+        "nurbsCurve": "layerRenderable",
+        "nurbsSurface": "layerRenderable",
+        "mesh": "layerRenderable"
+    },
+    "lodv": {
+        "transform": "lodVisibility",
+        "joint": "lodVisibility",
+        "nurbsCurve": "lodVisibility",
+        "nurbsSurface": "lodVisibility",
+        "mesh": "lodVisibility"
+    },
+    "m": {
+        "transform": "matrix",
+        "joint": "matrix",
+        "nurbsCurve": "matrix",
+        "nurbsSurface": "matrix",
+        "mesh": "matrix"
+    },
+    "mxrl": {
+        "transform": "maxRotLimit",
+        "joint": "maxRotLimit"
+    },
+    "xrle": {
+        "transform": "maxRotLimitEnable",
+        "joint": "maxRotLimitEnable"
+    },
+    "xrxl": {
+        "transform": "maxRotXLimit",
+        "joint": "maxRotXLimit"
+    },
+    "xrxe": {
+        "transform": "maxRotXLimitEnable",
+        "joint": "maxRotXLimitEnable"
+    },
+    "xryl": {
+        "transform": "maxRotYLimit",
+        "joint": "maxRotYLimit"
+    },
+    "xrye": {
+        "transform": "maxRotYLimitEnable",
+        "joint": "maxRotYLimitEnable"
+    },
+    "xrzl": {
+        "transform": "maxRotZLimit",
+        "joint": "maxRotZLimit"
+    },
+    "xrze": {
+        "transform": "maxRotZLimitEnable",
+        "joint": "maxRotZLimitEnable"
+    },
+    "mxsl": {
+        "transform": "maxScaleLimit",
+        "joint": "maxScaleLimit"
+    },
+    "xsle": {
+        "transform": "maxScaleLimitEnable",
+        "joint": "maxScaleLimitEnable"
+    },
+    "xsxl": {
+        "transform": "maxScaleXLimit",
+        "joint": "maxScaleXLimit"
+    },
+    "xsxe": {
+        "transform": "maxScaleXLimitEnable",
+        "joint": "maxScaleXLimitEnable"
+    },
+    "xsyl": {
+        "transform": "maxScaleYLimit",
+        "joint": "maxScaleYLimit"
+    },
+    "xsye": {
+        "transform": "maxScaleYLimitEnable",
+        "joint": "maxScaleYLimitEnable"
+    },
+    "xszl": {
+        "transform": "maxScaleZLimit",
+        "joint": "maxScaleZLimit"
+    },
+    "xsze": {
+        "transform": "maxScaleZLimitEnable",
+        "joint": "maxScaleZLimitEnable"
+    },
+    "mxtl": {
+        "transform": "maxTransLimit",
+        "joint": "maxTransLimit"
+    },
+    "xtle": {
+        "transform": "maxTransLimitEnable",
+        "joint": "maxTransLimitEnable"
+    },
+    "xtxl": {
+        "transform": "maxTransXLimit",
+        "joint": "maxTransXLimit"
+    },
+    "xtxe": {
+        "transform": "maxTransXLimitEnable",
+        "joint": "maxTransXLimitEnable"
+    },
+    "xtyl": {
+        "transform": "maxTransYLimit",
+        "joint": "maxTransYLimit"
+    },
+    "xtye": {
+        "transform": "maxTransYLimitEnable",
+        "joint": "maxTransYLimitEnable"
+    },
+    "xtzl": {
+        "transform": "maxTransZLimit",
+        "joint": "maxTransZLimit"
+    },
+    "xtze": {
+        "transform": "maxTransZLimitEnable",
+        "joint": "maxTransZLimitEnable"
+    },
+    "msg": {
+        "transform": "message",
+        "joint": "message",
+        "multDoubleLinear": "message",
+        "condition": "message",
+        "clamp": "message",
+        "remapValue": "message",
+        "remapColor": "message",
+        "uvPin": "message",
+        "plusMinusAverage": "message",
+        "blendTwoAttr": "message",
+        "blendColors": "message",
+        "decomposeMatrix": "message",
+        "inverseMatrix": "message",
+        "multMatrix": "message",
+        "blendMatrix": "message",
+        "nurbsCurve": "message",
+        "nurbsSurface": "message",
+        "mesh": "message"
+    },
+    "mnrl": {
+        "transform": "minRotLimit",
+        "joint": "minRotLimit"
+    },
+    "mrle": {
+        "transform": "minRotLimitEnable",
+        "joint": "minRotLimitEnable"
+    },
+    "mrxl": {
+        "transform": "minRotXLimit",
+        "joint": "minRotXLimit"
+    },
+    "mrxe": {
+        "transform": "minRotXLimitEnable",
+        "joint": "minRotXLimitEnable"
+    },
+    "mryl": {
+        "transform": "minRotYLimit",
+        "joint": "minRotYLimit"
+    },
+    "mrye": {
+        "transform": "minRotYLimitEnable",
+        "joint": "minRotYLimitEnable"
+    },
+    "mrzl": {
+        "transform": "minRotZLimit",
+        "joint": "minRotZLimit"
+    },
+    "mrze": {
+        "transform": "minRotZLimitEnable",
+        "joint": "minRotZLimitEnable"
+    },
+    "mnsl": {
+        "transform": "minScaleLimit",
+        "joint": "minScaleLimit"
+    },
+    "msle": {
+        "transform": "minScaleLimitEnable",
+        "joint": "minScaleLimitEnable"
+    },
+    "msxl": {
+        "transform": "minScaleXLimit",
+        "joint": "minScaleXLimit"
+    },
+    "msxe": {
+        "transform": "minScaleXLimitEnable",
+        "joint": "minScaleXLimitEnable"
+    },
+    "msyl": {
+        "transform": "minScaleYLimit",
+        "joint": "minScaleYLimit"
+    },
+    "msye": {
+        "transform": "minScaleYLimitEnable",
+        "joint": "minScaleYLimitEnable"
+    },
+    "mszl": {
+        "transform": "minScaleZLimit",
+        "joint": "minScaleZLimit"
+    },
+    "msze": {
+        "transform": "minScaleZLimitEnable",
+        "joint": "minScaleZLimitEnable"
+    },
+    "mntl": {
+        "transform": "minTransLimit",
+        "joint": "minTransLimit"
+    },
+    "mtle": {
+        "transform": "minTransLimitEnable",
+        "joint": "minTransLimitEnable"
+    },
+    "mtxl": {
+        "transform": "minTransXLimit",
+        "joint": "minTransXLimit"
+    },
+    "mtxe": {
+        "transform": "minTransXLimitEnable",
+        "joint": "minTransXLimitEnable"
+    },
+    "mtyl": {
+        "transform": "minTransYLimit",
+        "joint": "minTransYLimit"
+    },
+    "mtye": {
+        "transform": "minTransYLimitEnable",
+        "joint": "minTransYLimitEnable"
+    },
+    "mtzl": {
+        "transform": "minTransZLimit",
+        "joint": "minTransZLimit"
+    },
+    "mtze": {
+        "transform": "minTransZLimitEnable",
+        "joint": "minTransZLimitEnable"
+    },
+    "nds": {
+        "transform": "nodeState",
+        "joint": "nodeState",
+        "multDoubleLinear": "nodeState",
+        "condition": "nodeState",
+        "clamp": "nodeState",
+        "remapValue": "nodeState",
+        "remapColor": "nodeState",
+        "uvPin": "nodeState",
+        "plusMinusAverage": "nodeState",
+        "blendTwoAttr": "nodeState",
+        "blendColors": "nodeState",
+        "decomposeMatrix": "nodeState",
+        "inverseMatrix": "nodeState",
+        "multMatrix": "nodeState",
+        "blendMatrix": "nodeState",
+        "nurbsCurve": "nodeState",
+        "nurbsSurface": "nodeState",
+        "mesh": "nodeState"
+    },
+    "oc": {
+        "transform": "objectColor",
+        "joint": "objectColor",
+        "condition": "outColor",
+        "remapValue": "outColor",
+        "remapColor": "outColor",
+        "nurbsCurve": "objectColor",
+        "nurbsSurface": "objectColor",
+        "mesh": "objectColor"
+    },
+    "obcb": {
+        "transform": "objectColorB",
+        "joint": "objectColorB",
+        "nurbsCurve": "objectColorB",
+        "nurbsSurface": "objectColorB",
+        "mesh": "objectColorB"
+    },
+    "obcg": {
+        "transform": "objectColorG",
+        "joint": "objectColorG",
+        "nurbsCurve": "objectColorG",
+        "nurbsSurface": "objectColorG",
+        "mesh": "objectColorG"
+    },
+    "obcr": {
+        "transform": "objectColorR",
+        "joint": "objectColorR",
+        "nurbsCurve": "objectColorR",
+        "nurbsSurface": "objectColorR",
+        "mesh": "objectColorR"
+    },
+    "obcc": {
+        "transform": "objectColorRGB",
+        "joint": "objectColorRGB",
+        "nurbsCurve": "objectColorRGB",
+        "nurbsSurface": "objectColorRGB",
+        "mesh": "objectColorRGB"
+    },
+    "opm": {
+        "transform": "offsetParentMatrix",
+        "joint": "offsetParentMatrix"
+    },
+    "oclr": {
+        "transform": "outlinerColor",
+        "joint": "outlinerColor",
+        "nurbsCurve": "outlinerColor",
+        "nurbsSurface": "outlinerColor",
+        "mesh": "outlinerColor"
+    },
+    "oclrb": {
+        "transform": "outlinerColorB",
+        "joint": "outlinerColorB",
+        "nurbsCurve": "outlinerColorB",
+        "nurbsSurface": "outlinerColorB",
+        "mesh": "outlinerColorB"
+    },
+    "oclrg": {
+        "transform": "outlinerColorG",
+        "joint": "outlinerColorG",
+        "nurbsCurve": "outlinerColorG",
+        "nurbsSurface": "outlinerColorG",
+        "mesh": "outlinerColorG"
+    },
+    "oclrr": {
+        "transform": "outlinerColorR",
+        "joint": "outlinerColorR",
+        "nurbsCurve": "outlinerColorR",
+        "nurbsSurface": "outlinerColorR",
+        "mesh": "outlinerColorR"
+    },
+    "ovc": {
+        "transform": "overrideColor",
+        "joint": "overrideColor",
+        "nurbsCurve": "overrideColor",
+        "nurbsSurface": "overrideColor",
+        "mesh": "overrideColor"
+    },
+    "ovca": {
+        "transform": "overrideColorA",
+        "joint": "overrideColorA",
+        "nurbsCurve": "overrideColorA",
+        "nurbsSurface": "overrideColorA",
+        "mesh": "overrideColorA"
+    },
+    "ovcb": {
+        "transform": "overrideColorB",
+        "joint": "overrideColorB",
+        "nurbsCurve": "overrideColorB",
+        "nurbsSurface": "overrideColorB",
+        "mesh": "overrideColorB"
+    },
+    "ovcg": {
+        "transform": "overrideColorG",
+        "joint": "overrideColorG",
+        "nurbsCurve": "overrideColorG",
+        "nurbsSurface": "overrideColorG",
+        "mesh": "overrideColorG"
+    },
+    "ovcr": {
+        "transform": "overrideColorR",
+        "joint": "overrideColorR",
+        "nurbsCurve": "overrideColorR",
+        "nurbsSurface": "overrideColorR",
+        "mesh": "overrideColorR"
+    },
+    "ovrgb": {
+        "transform": "overrideColorRGB",
+        "joint": "overrideColorRGB",
+        "nurbsCurve": "overrideColorRGB",
+        "nurbsSurface": "overrideColorRGB",
+        "mesh": "overrideColorRGB"
+    },
+    "ovdt": {
+        "transform": "overrideDisplayType",
+        "joint": "overrideDisplayType",
+        "nurbsCurve": "overrideDisplayType",
+        "nurbsSurface": "overrideDisplayType",
+        "mesh": "overrideDisplayType"
+    },
+    "ove": {
+        "transform": "overrideEnabled",
+        "joint": "overrideEnabled",
+        "nurbsCurve": "overrideEnabled",
+        "nurbsSurface": "overrideEnabled",
+        "mesh": "overrideEnabled"
+    },
+    "ovlod": {
+        "transform": "overrideLevelOfDetail",
+        "joint": "overrideLevelOfDetail",
+        "nurbsCurve": "overrideLevelOfDetail",
+        "nurbsSurface": "overrideLevelOfDetail",
+        "mesh": "overrideLevelOfDetail"
+    },
+    "ovp": {
+        "transform": "overridePlayback",
+        "joint": "overridePlayback",
+        "nurbsCurve": "overridePlayback",
+        "nurbsSurface": "overridePlayback",
+        "mesh": "overridePlayback"
+    },
+    "ovrgbf": {
+        "transform": "overrideRGBColors",
+        "joint": "overrideRGBColors",
+        "nurbsCurve": "overrideRGBColors",
+        "nurbsSurface": "overrideRGBColors",
+        "mesh": "overrideRGBColors"
+    },
+    "ovs": {
+        "transform": "overrideShading",
+        "joint": "overrideShading",
+        "nurbsCurve": "overrideShading",
+        "nurbsSurface": "overrideShading",
+        "mesh": "overrideShading"
+    },
+    "ovt": {
+        "transform": "overrideTexturing",
+        "joint": "overrideTexturing",
+        "nurbsCurve": "overrideTexturing",
+        "nurbsSurface": "overrideTexturing",
+        "mesh": "overrideTexturing"
+    },
+    "ovv": {
+        "transform": "overrideVisibility",
+        "joint": "overrideVisibility",
+        "nurbsCurve": "overrideVisibility",
+        "nurbsSurface": "overrideVisibility",
+        "mesh": "overrideVisibility"
+    },
+    "pim": {
+        "transform": "parentInverseMatrix",
+        "joint": "parentInverseMatrix",
+        "nurbsCurve": "parentInverseMatrix",
+        "nurbsSurface": "parentInverseMatrix",
+        "mesh": "parentInverseMatrix"
+    },
+    "pm": {
+        "transform": "parentMatrix",
+        "joint": "parentMatrix",
+        "nurbsCurve": "parentMatrix",
+        "nurbsSurface": "parentMatrix",
+        "mesh": "parentMatrix"
+    },
+    "pni": {
+        "transform": "publishedNodeInfo",
+        "joint": "publishedNodeInfo",
+        "nurbsCurve": "publishedNodeInfo",
+        "nurbsSurface": "publishedNodeInfo",
+        "mesh": "publishedNodeInfo"
+    },
+    "ri": {
+        "transform": "renderInfo",
+        "joint": "renderInfo",
+        "nurbsCurve": "renderInfo",
+        "nurbsSurface": "renderInfo",
+        "mesh": "renderInfo"
+    },
+    "rlio": {
+        "transform": "renderLayerInfo",
+        "joint": "renderLayerInfo",
+        "nurbsCurve": "renderLayerInfo",
+        "nurbsSurface": "renderLayerInfo",
+        "mesh": "renderLayerInfo"
+    },
+    "rmc": {
+        "transform": "rmbCommand",
+        "joint": "rmbCommand",
+        "nurbsCurve": "rmbCommand",
+        "nurbsSurface": "rmbCommand",
+        "mesh": "rmbCommand"
+    },
+    "r": {
+        "transform": "rotate",
+        "joint": "rotate",
+        "remapColor": "red"
+    },
+    "ra": {
+        "transform": "rotateAxis",
+        "joint": "rotateAxis"
+    },
+    "rax": {
+        "transform": "rotateAxisX",
+        "joint": "rotateAxisX"
+    },
+    "ray": {
+        "transform": "rotateAxisY",
+        "joint": "rotateAxisY"
+    },
+    "raz": {
+        "transform": "rotateAxisZ",
+        "joint": "rotateAxisZ"
+    },
+    "ro": {
+        "transform": "rotateOrder",
+        "joint": "rotateOrder",
+        "decomposeMatrix": "inputRotateOrder"
+    },
+    "rp": {
+        "transform": "rotatePivot",
+        "joint": "rotatePivot"
+    },
+    "rpt": {
+        "transform": "rotatePivotTranslate",
+        "joint": "rotatePivotTranslate"
+    },
+    "rptx": {
+        "transform": "rotatePivotTranslateX",
+        "joint": "rotatePivotTranslateX"
+    },
+    "rpty": {
+        "transform": "rotatePivotTranslateY",
+        "joint": "rotatePivotTranslateY"
+    },
+    "rptz": {
+        "transform": "rotatePivotTranslateZ",
+        "joint": "rotatePivotTranslateZ"
+    },
+    "rpx": {
+        "transform": "rotatePivotX",
+        "joint": "rotatePivotX"
+    },
+    "rpy": {
+        "transform": "rotatePivotY",
+        "joint": "rotatePivotY"
+    },
+    "rpz": {
+        "transform": "rotatePivotZ",
+        "joint": "rotatePivotZ"
+    },
+    "rq": {
+        "transform": "rotateQuaternion",
+        "joint": "rotateQuaternion"
+    },
+    "rqw": {
+        "transform": "rotateQuaternionW",
+        "joint": "rotateQuaternionW"
+    },
+    "rqx": {
+        "transform": "rotateQuaternionX",
+        "joint": "rotateQuaternionX"
+    },
+    "rqy": {
+        "transform": "rotateQuaternionY",
+        "joint": "rotateQuaternionY"
+    },
+    "rqz": {
+        "transform": "rotateQuaternionZ",
+        "joint": "rotateQuaternionZ"
+    },
+    "rx": {
+        "transform": "rotateX",
+        "joint": "rotateX"
+    },
+    "ry": {
+        "transform": "rotateY",
+        "joint": "rotateY"
+    },
+    "rz": {
+        "transform": "rotateZ",
+        "joint": "rotateZ"
+    },
+    "roi": {
+        "transform": "rotationInterpolation",
+        "joint": "rotationInterpolation"
+    },
+    "s": {
+        "transform": "scale",
+        "joint": "scale",
+        "nurbsCurve": "spans"
+    },
+    "sp": {
+        "transform": "scalePivot",
+        "joint": "scalePivot",
+        "nurbsSurface": "spansUV"
+    },
+    "spt": {
+        "transform": "scalePivotTranslate",
+        "joint": "scalePivotTranslate"
+    },
+    "sptx": {
+        "transform": "scalePivotTranslateX",
+        "joint": "scalePivotTranslateX"
+    },
+    "spty": {
+        "transform": "scalePivotTranslateY",
+        "joint": "scalePivotTranslateY"
+    },
+    "sptz": {
+        "transform": "scalePivotTranslateZ",
+        "joint": "scalePivotTranslateZ"
+    },
+    "spx": {
+        "transform": "scalePivotX",
+        "joint": "scalePivotX"
+    },
+    "spy": {
+        "transform": "scalePivotY",
+        "joint": "scalePivotY"
+    },
+    "spz": {
+        "transform": "scalePivotZ",
+        "joint": "scalePivotZ"
+    },
+    "sx": {
+        "transform": "scaleX",
+        "joint": "scaleX",
+        "mesh": "sofx"
+    },
+    "sy": {
+        "transform": "scaleY",
+        "joint": "scaleY",
+        "mesh": "sofy"
+    },
+    "sz": {
+        "transform": "scaleZ",
+        "joint": "scaleZ",
+        "mesh": "sofz"
+    },
+    "hdl": {
+        "transform": "selectHandle",
+        "joint": "selectHandle"
+    },
+    "hdlx": {
+        "transform": "selectHandleX",
+        "joint": "selectHandleX"
+    },
+    "hdly": {
+        "transform": "selectHandleY",
+        "joint": "selectHandleY"
+    },
+    "hdlz": {
+        "transform": "selectHandleZ",
+        "joint": "selectHandleZ"
+    },
+    "sech": {
+        "transform": "selectionChildHighlighting",
+        "joint": "selectionChildHighlighting",
+        "nurbsCurve": "selectionChildHighlighting",
+        "nurbsSurface": "selectionChildHighlighting",
+        "mesh": "selectionChildHighlighting"
+    },
+    "sh": {
+        "transform": "shear",
+        "joint": "shear"
+    },
+    "shxy": {
+        "transform": "shearXY",
+        "joint": "shearXY"
+    },
+    "shxz": {
+        "transform": "shearXZ",
+        "joint": "shearXZ"
+    },
+    "shyz": {
+        "transform": "shearYZ",
+        "joint": "shearYZ"
+    },
+    "smd": {
+        "transform": "showManipDefault",
+        "joint": "showManipDefault"
+    },
+    "sml": {
+        "transform": "specifiedManipLocation",
+        "joint": "specifiedManipLocation"
+    },
+    "tmp": {
+        "transform": "template",
+        "joint": "template",
+        "nurbsCurve": "template",
+        "nurbsSurface": "template",
+        "mesh": "template"
+    },
+    "tna": {
+        "transform": "templateName",
+        "joint": "templateName",
+        "nurbsCurve": "templateName",
+        "nurbsSurface": "templateName",
+        "mesh": "templateName"
+    },
+    "tpt": {
+        "transform": "templatePath",
+        "joint": "templatePath",
+        "nurbsCurve": "templatePath",
+        "nurbsSurface": "templatePath",
+        "mesh": "templatePath"
+    },
+    "tpv": {
+        "transform": "templateVersion",
+        "joint": "templateVersion",
+        "nurbsCurve": "templateVersion",
+        "nurbsSurface": "templateVersion",
+        "mesh": "templateVersion"
+    },
+    "tmrp": {
+        "transform": "transMinusRotatePivot",
+        "joint": "transMinusRotatePivot"
+    },
+    "tmrx": {
+        "transform": "transMinusRotatePivotX",
+        "joint": "transMinusRotatePivotX"
+    },
+    "tmry": {
+        "transform": "transMinusRotatePivotY",
+        "joint": "transMinusRotatePivotY"
+    },
+    "tmrz": {
+        "transform": "transMinusRotatePivotZ",
+        "joint": "transMinusRotatePivotZ"
+    },
+    "t": {
+        "transform": "translate",
+        "joint": "translate"
+    },
+    "tx": {
+        "transform": "translateX",
+        "joint": "translateX"
+    },
+    "ty": {
+        "transform": "translateY",
+        "joint": "translateY"
+    },
+    "tz": {
+        "transform": "translateZ",
+        "joint": "translateZ"
+    },
+    "uit": {
+        "transform": "uiTreatment",
+        "joint": "uiTreatment",
+        "nurbsCurve": "uiTreatment",
+        "nurbsSurface": "uiTreatment",
+        "mesh": "uiTreatment"
+    },
+    "uoc": {
+        "transform": "useObjectColor",
+        "joint": "useObjectColor",
+        "nurbsCurve": "useObjectColor",
+        "nurbsSurface": "useObjectColor",
+        "mesh": "useObjectColor"
+    },
+    "uocol": {
+        "transform": "useOutlinerColor",
+        "joint": "useOutlinerColor",
+        "nurbsCurve": "useOutlinerColor",
+        "nurbsSurface": "useOutlinerColor",
+        "mesh": "useOutlinerColor"
+    },
+    "vwm": {
+        "transform": "viewMode",
+        "joint": "viewMode",
+        "nurbsCurve": "viewMode",
+        "nurbsSurface": "viewMode",
+        "mesh": "viewMode"
+    },
+    "vwn": {
+        "transform": "viewName",
+        "joint": "viewName",
+        "nurbsCurve": "viewName",
+        "nurbsSurface": "viewName",
+        "mesh": "viewName"
+    },
+    "v": {
+        "transform": "visibility",
+        "joint": "visibility",
+        "nurbsCurve": "visibility",
+        "nurbsSurface": "visibility",
+        "mesh": "visibility"
+    },
+    "wfcb": {
+        "transform": "wireColorB",
+        "joint": "wireColorB",
+        "nurbsCurve": "wireColorB",
+        "nurbsSurface": "wireColorB",
+        "mesh": "wireColorB"
+    },
+    "wfcg": {
+        "transform": "wireColorG",
+        "joint": "wireColorG",
+        "nurbsCurve": "wireColorG",
+        "nurbsSurface": "wireColorG",
+        "mesh": "wireColorG"
+    },
+    "wfcr": {
+        "transform": "wireColorR",
+        "joint": "wireColorR",
+        "nurbsCurve": "wireColorR",
+        "nurbsSurface": "wireColorR",
+        "mesh": "wireColorR"
+    },
+    "wfcc": {
+        "transform": "wireColorRGB",
+        "joint": "wireColorRGB",
+        "nurbsCurve": "wireColorRGB",
+        "nurbsSurface": "wireColorRGB",
+        "mesh": "wireColorRGB"
+    },
+    "wim": {
+        "transform": "worldInverseMatrix",
+        "joint": "worldInverseMatrix",
+        "nurbsCurve": "worldInverseMatrix",
+        "nurbsSurface": "worldInverseMatrix",
+        "mesh": "worldInverseMatrix"
+    },
+    "wm": {
+        "transform": "worldMatrix",
+        "joint": "worldMatrix",
+        "nurbsCurve": "worldMatrix",
+        "nurbsSurface": "worldMatrix",
+        "mesh": "worldMatrix"
+    },
+    "xm": {
+        "transform": "xformMatrix",
+        "joint": "xformMatrix"
+    },
+    "bis": {
+        "joint": "bindInverseScale"
+    },
+    "bix": {
+        "joint": "bindInverseScaleX"
+    },
+    "biy": {
+        "joint": "bindInverseScaleY"
+    },
+    "biz": {
+        "joint": "bindInverseScaleZ"
+    },
+    "bjo": {
+        "joint": "bindJointOrient"
+    },
+    "bjx": {
+        "joint": "bindJointOrientX"
+    },
+    "bjy": {
+        "joint": "bindJointOrientY"
+    },
+    "bjz": {
+        "joint": "bindJointOrientZ"
+    },
+    "bps": {
+        "joint": "bindPose"
+    },
+    "bra": {
+        "joint": "bindRotateAxis"
+    },
+    "brax": {
+        "joint": "bindRotateAxisX"
+    },
+    "bray": {
+        "joint": "bindRotateAxisY"
+    },
+    "braz": {
+        "joint": "bindRotateAxisZ"
+    },
+    "br": {
+        "joint": "bindRotation"
+    },
+    "brx": {
+        "joint": "bindRotationX"
+    },
+    "bry": {
+        "joint": "bindRotationY"
+    },
+    "brz": {
+        "joint": "bindRotationZ"
+    },
+    "bs": {
+        "joint": "bindScale"
+    },
+    "bsx": {
+        "joint": "bindScaleX"
+    },
+    "bsy": {
+        "joint": "bindScaleY"
+    },
+    "bsz": {
+        "joint": "bindScaleZ"
+    },
+    "bsc": {
+        "joint": "bindSegmentScaleCompensate"
+    },
+    "dm": {
+        "joint": "dofMask"
+    },
+    "dl": {
+        "joint": "drawLabel"
+    },
+    "ds": {
+        "joint": "drawStyle",
+        "nurbsSurface": "doubleSided",
+        "mesh": "doubleSided"
+    },
+    "fkr": {
+        "joint": "fkRotate"
+    },
+    "frx": {
+        "joint": "fkRotateX"
+    },
+    "fry": {
+        "joint": "fkRotateY"
+    },
+    "frz": {
+        "joint": "fkRotateZ"
+    },
+    "hfk": {
+        "joint": "hikFkJoint"
+    },
+    "hni": {
+        "joint": "hikNodeID"
+    },
+    "ikr": {
+        "joint": "ikRotate"
+    },
+    "irx": {
+        "joint": "ikRotateX"
+    },
+    "iry": {
+        "joint": "ikRotateY"
+    },
+    "irz": {
+        "joint": "ikRotateZ"
+    },
+    "isf": {
+        "joint": "inIKSolveFlag"
+    },
+    "is": {
+        "joint": "inverseScale"
+    },
+    "isx": {
+        "joint": "inverseScaleX"
+    },
+    "isy": {
+        "joint": "inverseScaleY"
+    },
+    "isz": {
+        "joint": "inverseScaleZ"
+    },
+    "idf": {
+        "joint": "isIKDirtyFlag"
+    },
+    "jo": {
+        "joint": "jointOrient"
+    },
+    "jot": {
+        "joint": "jointOrientType"
+    },
+    "jox": {
+        "joint": "jointOrientX"
+    },
+    "joy": {
+        "joint": "jointOrientY"
+    },
+    "joz": {
+        "joint": "jointOrientZ"
+    },
+    "jt": {
+        "joint": "jointType"
+    },
+    "jtx": {
+        "joint": "jointTypeX"
+    },
+    "jty": {
+        "joint": "jointTypeY"
+    },
+    "jtz": {
+        "joint": "jointTypeZ"
+    },
+    "xdr": {
+        "joint": "maxRotateDampRange"
+    },
+    "xdx": {
+        "joint": "maxRotateDampRangeX"
+    },
+    "xdy": {
+        "joint": "maxRotateDampRangeY"
+    },
+    "xdz": {
+        "joint": "maxRotateDampRangeZ"
+    },
+    "xst": {
+        "joint": "maxRotateDampStrength"
+    },
+    "xstx": {
+        "joint": "maxRotateDampStrengthX"
+    },
+    "xsty": {
+        "joint": "maxRotateDampStrengthY"
+    },
+    "xstz": {
+        "joint": "maxRotateDampStrengthZ"
+    },
+    "ndr": {
+        "joint": "minRotateDampRange"
+    },
+    "ndx": {
+        "joint": "minRotateDampRangeX"
+    },
+    "ndy": {
+        "joint": "minRotateDampRangeY"
+    },
+    "ndz": {
+        "joint": "minRotateDampRangeZ"
+    },
+    "nst": {
+        "joint": "minRotateDampStrength"
+    },
+    "nstx": {
+        "joint": "minRotateDampStrengthX"
+    },
+    "nsty": {
+        "joint": "minRotateDampStrengthY"
+    },
+    "nstz": {
+        "joint": "minRotateDampStrengthZ"
+    },
+    "otp": {
+        "joint": "otherType"
+    },
+    "pa": {
+        "joint": "preferredAngle"
+    },
+    "pax": {
+        "joint": "preferredAngleX"
+    },
+    "pay": {
+        "joint": "preferredAngleY"
+    },
+    "paz": {
+        "joint": "preferredAngleZ"
+    },
+    "radi": {
+        "joint": "radius"
+    },
+    "ssc": {
+        "joint": "segmentScaleCompensate"
+    },
+    "sd": {
+        "joint": "side"
+    },
+    "st": {
+        "joint": "stiffness",
+        "condition": "secondTerm"
+    },
+    "stx": {
+        "joint": "stiffnessX"
+    },
+    "sty": {
+        "joint": "stiffnessY"
+    },
+    "stz": {
+        "joint": "stiffnessZ"
+    },
+    "typ": {
+        "joint": "type"
+    },
+    "i1": {
+        "multDoubleLinear": "input1",
+        "plusMinusAverage": "input1D"
+    },
+    "i2": {
+        "multDoubleLinear": "input2",
+        "plusMinusAverage": "input2D"
+    },
+    "o": {
+        "multDoubleLinear": "output",
+        "blendTwoAttr": "output",
+        "multMatrix": "matrixSum",
+        "mesh": "outMesh"
+    },
+    "cf": {
+        "condition": "colorIfFalse"
+    },
+    "cfb": {
+        "condition": "colorIfFalseB"
+    },
+    "cfg": {
+        "condition": "colorIfFalseG"
+    },
+    "cfr": {
+        "condition": "colorIfFalseR"
+    },
+    "ct": {
+        "condition": "colorIfTrue"
+    },
+    "ctb": {
+        "condition": "colorIfTrueB"
+    },
+    "ctg": {
+        "condition": "colorIfTrueG"
+    },
+    "ctr": {
+        "condition": "colorIfTrueR"
+    },
+    "ft": {
+        "condition": "firstTerm"
+    },
+    "op": {
+        "condition": "operation",
+        "clamp": "output",
+        "plusMinusAverage": "operation",
+        "blendColors": "output",
+        "nurbsSurface": "opposite",
+        "mesh": "opposite"
+    },
+    "ocb": {
+        "condition": "outColorB",
+        "remapValue": "outColorB",
+        "remapColor": "outColorB"
+    },
+    "ocg": {
+        "condition": "outColorG",
+        "remapValue": "outColorG",
+        "remapColor": "outColorG"
+    },
+    "ocr": {
+        "condition": "outColorR",
+        "remapValue": "outColorR",
+        "remapColor": "outColorR",
+        "mesh": "osdCreaseMethod"
+    },
+    "ip": {
+        "clamp": "input"
+    },
+    "ipb": {
+        "clamp": "inputB"
+    },
+    "ipg": {
+        "clamp": "inputG"
+    },
+    "ipr": {
+        "clamp": "inputR"
+    },
+    "mx": {
+        "clamp": "max"
+    },
+    "mxb": {
+        "clamp": "maxB"
+    },
+    "mxg": {
+        "clamp": "maxG"
+    },
+    "mxr": {
+        "clamp": "maxR"
+    },
+    "mn": {
+        "clamp": "min"
+    },
+    "mnb": {
+        "clamp": "minB"
+    },
+    "mng": {
+        "clamp": "minG"
+    },
+    "mnr": {
+        "clamp": "minR"
+    },
+    "opb": {
+        "clamp": "outputB",
+        "blendColors": "outputB"
+    },
+    "opg": {
+        "clamp": "outputG",
+        "blendColors": "outputG"
+    },
+    "opr": {
+        "clamp": "outputR",
+        "blendColors": "outputR"
+    },
+    "arp": {
+        "clamp": "renderPassMode",
+        "remapColor": "renderPassMode",
+        "blendColors": "renderPassMode"
+    },
+    "cl": {
+        "remapValue": "color",
+        "remapColor": "color"
+    },
+    "imx": {
+        "remapValue": "inputMax",
+        "remapColor": "inputMax"
+    },
+    "imn": {
+        "remapValue": "inputMin",
+        "remapColor": "inputMin"
+    },
+    "i": {
+        "remapValue": "inputValue",
+        "blendTwoAttr": "input",
+        "multMatrix": "matrixIn",
+        "mesh": "inMesh"
+    },
+    "ov": {
+        "remapValue": "outValue"
+    },
+    "omx": {
+        "remapValue": "outputMax",
+        "remapColor": "outputMax"
+    },
+    "omn": {
+        "remapValue": "outputMin",
+        "remapColor": "outputMin"
+    },
+    "vl": {
+        "remapValue": "value"
+    },
+    "b": {
+        "remapColor": "blue",
+        "blendColors": "blender"
+    },
+    "cb": {
+        "remapColor": "colorB"
+    },
+    "cg": {
+        "remapColor": "colorG"
+    },
+    "cr": {
+        "remapColor": "colorR",
+        "nurbsCurve": "create",
+        "nurbsSurface": "create"
+    },
+    "csp": {
+        "uvPin": "cacheSetup"
+    },
+    "coord": {
+        "uvPin": "coordinate"
+    },
+    "curgeom": {
+        "uvPin": "deformedGeometry"
+    },
+    "nrm": {
+        "uvPin": "normalAxis"
+    },
+    "novr": {
+        "uvPin": "normalOverride"
+    },
+    "nrmip": {
+        "uvPin": "normalizedIsoParms"
+    },
+    "orggeom": {
+        "uvPin": "originalGeometry"
+    },
+    "omat": {
+        "uvPin": "outputMatrix",
+        "inverseMatrix": "outputMatrix",
+        "blendMatrix": "outputMatrix"
+    },
+    "ot": {
+        "uvPin": "outputTranslate",
+        "decomposeMatrix": "outputTranslate"
+    },
+    "rlcrv": {
+        "uvPin": "railCurve"
+    },
+    "rsmat": {
+        "uvPin": "relativeSpaceMatrix"
+    },
+    "rsmd": {
+        "uvPin": "relativeSpaceMode"
+    },
+    "tng": {
+        "uvPin": "tangentAxis"
+    },
+    "msn": {
+        "uvPin": "uvSetName"
+    },
+    "i3": {
+        "plusMinusAverage": "input3D"
+    },
+    "o1": {
+        "plusMinusAverage": "output1D"
+    },
+    "o2": {
+        "plusMinusAverage": "output2D"
+    },
+    "o2x": {
+        "plusMinusAverage": "output2Dx"
+    },
+    "o2y": {
+        "plusMinusAverage": "output2Dy"
+    },
+    "o3": {
+        "plusMinusAverage": "output3D"
+    },
+    "o3x": {
+        "plusMinusAverage": "output3Dx"
+    },
+    "o3y": {
+        "plusMinusAverage": "output3Dy"
+    },
+    "o3z": {
+        "plusMinusAverage": "output3Dz"
+    },
+    "ab": {
+        "blendTwoAttr": "attributesBlender"
+    },
+    "c1": {
+        "blendColors": "color1"
+    },
+    "c1b": {
+        "blendColors": "color1B"
+    },
+    "c1g": {
+        "blendColors": "color1G"
+    },
+    "c1r": {
+        "blendColors": "color1R"
+    },
+    "c2": {
+        "blendColors": "color2"
+    },
+    "c2b": {
+        "blendColors": "color2B"
+    },
+    "c2g": {
+        "blendColors": "color2G"
+    },
+    "c2r": {
+        "blendColors": "color2R"
+    },
+    "imat": {
+        "decomposeMatrix": "inputMatrix",
+        "inverseMatrix": "inputMatrix",
+        "blendMatrix": "inputMatrix"
+    },
+    "oq": {
+        "decomposeMatrix": "outputQuat"
+    },
+    "oqw": {
+        "decomposeMatrix": "outputQuatW"
+    },
+    "oqx": {
+        "decomposeMatrix": "outputQuatX"
+    },
+    "oqy": {
+        "decomposeMatrix": "outputQuatY"
+    },
+    "oqz": {
+        "decomposeMatrix": "outputQuatZ"
+    },
+    "or": {
+        "decomposeMatrix": "outputRotate"
+    },
+    "orx": {
+        "decomposeMatrix": "outputRotateX"
+    },
+    "ory": {
+        "decomposeMatrix": "outputRotateY"
+    },
+    "orz": {
+        "decomposeMatrix": "outputRotateZ"
+    },
+    "os": {
+        "decomposeMatrix": "outputScale",
+        "mesh": "outSmoothMesh"
+    },
+    "osx": {
+        "decomposeMatrix": "outputScaleX"
+    },
+    "osy": {
+        "decomposeMatrix": "outputScaleY"
+    },
+    "osz": {
+        "decomposeMatrix": "outputScaleZ"
+    },
+    "osh": {
+        "decomposeMatrix": "outputShear"
+    },
+    "oshx": {
+        "decomposeMatrix": "outputShearX"
+    },
+    "oshy": {
+        "decomposeMatrix": "outputShearY"
+    },
+    "oshz": {
+        "decomposeMatrix": "outputShearZ"
+    },
+    "otx": {
+        "decomposeMatrix": "outputTranslateX"
+    },
+    "oty": {
+        "decomposeMatrix": "outputTranslateY"
+    },
+    "otz": {
+        "decomposeMatrix": "outputTranslateZ"
+    },
+    "enb": {
+        "blendMatrix": "enable"
+    },
+    "env": {
+        "blendMatrix": "envelope"
+    },
+    "pstmat": {
+        "blendMatrix": "postSpaceMatrix"
+    },
+    "premat": {
+        "blendMatrix": "preSpaceMatrix"
+    },
+    "tgt": {
+        "blendMatrix": "target"
+    },
+    "adot": {
+        "nurbsCurve": "alwaysDrawOnTop",
+        "mesh": "alwaysDrawOnTop"
+    },
+    "gal": {
+        "nurbsCurve": "antialiasingLevel",
+        "nurbsSurface": "antialiasingLevel",
+        "mesh": "antialiasingLevel"
+    },
+    "asbg": {
+        "nurbsCurve": "asBackground",
+        "nurbsSurface": "asBackground",
+        "mesh": "asBackground"
+    },
+    "bn": {
+        "nurbsCurve": "blindDataNodes",
+        "nurbsSurface": "blindDataNodes",
+        "mesh": "blindDataNodes"
+    },
+    "cc": {
+        "nurbsCurve": "cached",
+        "nurbsSurface": "cached"
+    },
+    "csh": {
+        "nurbsCurve": "castsShadows",
+        "nurbsSurface": "castsShadows",
+        "mesh": "castsShadows"
+    },
+    "clst": {
+        "nurbsCurve": "colorSet",
+        "nurbsSurface": "colorSet",
+        "mesh": "colorSet"
+    },
+    "ciog": {
+        "nurbsCurve": "compInstObjGroups",
+        "nurbsSurface": "compInstObjGroups",
+        "mesh": "compInstObjGroups"
+    },
+    "gtag": {
+        "nurbsCurve": "componentTags",
+        "nurbsSurface": "componentTags",
+        "mesh": "componentTags"
+    },
+    "cp": {
+        "nurbsCurve": "controlPoints",
+        "nurbsSurface": "controlPoints",
+        "mesh": "controlPoints"
+    },
+    "ccls": {
+        "nurbsCurve": "currentColorSet",
+        "nurbsSurface": "currentColorSet",
+        "mesh": "currentColorSet"
+    },
+    "cuvs": {
+        "nurbsCurve": "currentUVSet",
+        "nurbsSurface": "currentUVSet",
+        "mesh": "currentUVSet"
+    },
+    "d": {
+        "nurbsCurve": "degree",
+        "nurbsSurface": "degreeUV"
+    },
+    "dej": {
+        "nurbsCurve": "depthJitter",
+        "nurbsSurface": "depthJitter",
+        "mesh": "depthJitter"
+    },
+    "dcv": {
+        "nurbsCurve": "dispCV",
+        "nurbsSurface": "dispCV"
+    },
+    "dce": {
+        "nurbsCurve": "dispCurveEndPoints"
+    },
+    "dep": {
+        "nurbsCurve": "dispEP",
+        "nurbsSurface": "dispEP"
+    },
+    "dg": {
+        "nurbsCurve": "dispGeometry",
+        "nurbsSurface": "dispGeometry"
+    },
+    "dcc": {
+        "nurbsCurve": "displayColorChannel",
+        "nurbsSurface": "displayColorChannel",
+        "mesh": "displayColorChannel"
+    },
+    "dcol": {
+        "nurbsCurve": "displayColors",
+        "nurbsSurface": "displayColors",
+        "mesh": "displayColors"
+    },
+    "di": {
+        "nurbsCurve": "displayImmediate",
+        "nurbsSurface": "displayImmediate",
+        "mesh": "displayImmediate"
+    },
+    "eps": {
+        "nurbsCurve": "editPoints"
+    },
+    "f": {
+        "nurbsCurve": "form"
+    },
+    "gao": {
+        "nurbsCurve": "geometryAntialiasingOverride",
+        "nurbsSurface": "geometryAntialiasingOverride",
+        "mesh": "geometryAntialiasingOverride"
+    },
+    "hfm": {
+        "nurbsCurve": "hardwareFogMultiplier",
+        "nurbsSurface": "hardwareFogMultiplier",
+        "mesh": "hardwareFogMultiplier"
+    },
+    "hd": {
+        "nurbsCurve": "header",
+        "nurbsSurface": "header"
+    },
+    "iss": {
+        "nurbsCurve": "ignoreSelfShadowing",
+        "nurbsSurface": "ignoreSelfShadowing",
+        "mesh": "ignoreSelfShadowing"
+    },
+    "ipo": {
+        "nurbsCurve": "inPlace",
+        "nurbsSurface": "inPlace"
+    },
+    "imtla": {
+        "nurbsCurve": "instMaterialAssign",
+        "nurbsSurface": "instMaterialAssign",
+        "mesh": "instMaterialAssign"
+    },
+    "ls": {
+        "nurbsCurve": "lineWidth"
+    },
+    "l": {
+        "nurbsCurve": "local",
+        "nurbsSurface": "local"
+    },
+    "msa": {
+        "nurbsCurve": "maxShadingSamples",
+        "nurbsSurface": "maxShadingSamples",
+        "mesh": "maxShadingSamples"
+    },
+    "max": {
+        "nurbsCurve": "maxValue"
+    },
+    "mvs": {
+        "nurbsCurve": "maxVisibilitySamples",
+        "nurbsSurface": "maxVisibilitySamples",
+        "mesh": "maxVisibilitySamples"
+    },
+    "vbo": {
+        "nurbsCurve": "maxVisibilitySamplesOverride",
+        "nurbsSurface": "maxVisibilitySamplesOverride",
+        "mesh": "maxVisibilitySamplesOverride"
+    },
+    "mmv": {
+        "nurbsCurve": "minMaxValue",
+        "nurbsSurface": "minMaxRangeV"
+    },
+    "min": {
+        "nurbsCurve": "minValue"
+    },
+    "mb": {
+        "nurbsCurve": "motionBlur",
+        "nurbsSurface": "motionBlur",
+        "mesh": "motionBlur"
+    },
+    "pte": {
+        "nurbsCurve": "pickTexture",
+        "nurbsSurface": "pickTexture",
+        "mesh": "pickTexture"
+    },
+    "vis": {
+        "nurbsCurve": "primaryVisibility",
+        "nurbsSurface": "primaryVisibility",
+        "mesh": "primaryVisibility"
+    },
+    "rcsh": {
+        "nurbsCurve": "receiveShadows",
+        "nurbsSurface": "receiveShadows",
+        "mesh": "receiveShadows"
+    },
+    "rob": {
+        "nurbsCurve": "referenceObject",
+        "nurbsSurface": "referenceObject",
+        "mesh": "referenceObject"
+    },
+    "rtw": {
+        "nurbsCurve": "relativeTweak",
+        "nurbsSurface": "relativeTweak",
+        "mesh": "relativeTweak"
+    },
+    "rt": {
+        "nurbsCurve": "renderType",
+        "nurbsSurface": "renderType",
+        "mesh": "renderType"
+    },
+    "rv": {
+        "nurbsCurve": "renderVolume",
+        "nurbsSurface": "renderVolume",
+        "mesh": "renderVolume"
+    },
+    "ssa": {
+        "nurbsCurve": "shadingSamples",
+        "nurbsSurface": "shadingSamples",
+        "mesh": "shadingSamples"
+    },
+    "sso": {
+        "nurbsCurve": "shadingSamplesOverride",
+        "nurbsSurface": "shadingSamplesOverride",
+        "mesh": "shadingSamplesOverride"
+    },
+    "tw": {
+        "nurbsCurve": "tweak",
+        "nurbsSurface": "tweak",
+        "mesh": "tweak"
+    },
+    "twl": {
+        "nurbsCurve": "tweakLocation",
+        "nurbsSurface": "tweakLocation",
+        "mesh": "tweakLocation"
+    },
+    "ts": {
+        "nurbsCurve": "tweakSize"
+    },
+    "pv": {
+        "nurbsCurve": "uvPivot",
+        "nurbsSurface": "uvPivot",
+        "mesh": "uvPivot"
+    },
+    "pvx": {
+        "nurbsCurve": "uvPivotX",
+        "nurbsSurface": "uvPivotX",
+        "mesh": "uvPivotX"
+    },
+    "pvy": {
+        "nurbsCurve": "uvPivotY",
+        "nurbsSurface": "uvPivotY",
+        "mesh": "uvPivotY"
+    },
+    "uvst": {
+        "nurbsCurve": "uvSet",
+        "nurbsSurface": "uvSet",
+        "mesh": "uvSet"
+    },
+    "vf": {
+        "nurbsCurve": "visibleFraction",
+        "nurbsSurface": "visibleFraction",
+        "mesh": "visibleFraction"
+    },
+    "vir": {
+        "nurbsCurve": "visibleInReflections",
+        "nurbsSurface": "visibleInReflections",
+        "mesh": "visibleInReflections"
+    },
+    "vif": {
+        "nurbsCurve": "visibleInRefractions",
+        "nurbsSurface": "visibleInRefractions",
+        "mesh": "visibleInRefractions"
+    },
+    "vss": {
+        "nurbsCurve": "volumeSamples",
+        "nurbsSurface": "volumeSamples",
+        "mesh": "volumeSamples"
+    },
+    "vso": {
+        "nurbsCurve": "volumeSamplesOverride",
+        "nurbsSurface": "volumeSamplesOverride",
+        "mesh": "volumeSamplesOverride"
+    },
+    "wt": {
+        "nurbsCurve": "weights",
+        "nurbsSurface": "weights",
+        "mesh": "weights"
+    },
+    "wn": {
+        "nurbsCurve": "worldNormal"
+    },
+    "ws": {
+        "nurbsCurve": "worldSpace",
+        "nurbsSurface": "worldSpace"
+    },
+    "btt": {
+        "nurbsSurface": "basicTessellationType"
+    },
+    "bbs": {
+        "nurbsSurface": "boundingBoxScale",
+        "mesh": "boundingBoxScale"
+    },
+    "bscx": {
+        "nurbsSurface": "boundingBoxScaleX",
+        "mesh": "boundingBoxScaleX"
+    },
+    "bscy": {
+        "nurbsSurface": "boundingBoxScaleY",
+        "mesh": "boundingBoxScaleY"
+    },
+    "bscz": {
+        "nurbsSurface": "boundingBoxScaleZ",
+        "mesh": "boundingBoxScaleZ"
+    },
+    "ch": {
+        "nurbsSurface": "chordHeight"
+    },
+    "chr": {
+        "nurbsSurface": "chordHeightRatio"
+    },
+    "cdvi": {
+        "nurbsSurface": "collisionDepthVelocityIncrement",
+        "mesh": "collisionDepthVelocityIncrement"
+    },
+    "cdvm": {
+        "nurbsSurface": "collisionDepthVelocityMultiplier",
+        "mesh": "collisionDepthVelocityMultiplier"
+    },
+    "covi": {
+        "nurbsSurface": "collisionOffsetVelocityIncrement",
+        "mesh": "collisionOffsetVelocityIncrement"
+    },
+    "covm": {
+        "nurbsSurface": "collisionOffsetVelocityMultiplier",
+        "mesh": "collisionOffsetVelocityMultiplier"
+    },
+    "cvto": {
+        "nurbsSurface": "curvatureTolerance"
+    },
+    "cpr": {
+        "nurbsSurface": "curvePrecision"
+    },
+    "cps": {
+        "nurbsSurface": "curvePrecisionShaded"
+    },
+    "du": {
+        "nurbsSurface": "degreeU"
+    },
+    "dv": {
+        "nurbsSurface": "degreeV",
+        "mesh": "displayVertices"
+    },
+    "dor": {
+        "nurbsSurface": "dispOrigin"
+    },
+    "dsf": {
+        "nurbsSurface": "dispSF"
+    },
+    "dhe": {
+        "nurbsSurface": "displayHWEnvironment",
+        "mesh": "displayHWEnvironment"
+    },
+    "drt": {
+        "nurbsSurface": "displayRenderTessellation"
+    },
+    "dvu": {
+        "nurbsSurface": "divisionsU"
+    },
+    "dvv": {
+        "nurbsSurface": "divisionsV"
+    },
+    "es": {
+        "nurbsSurface": "edgeSwap"
+    },
+    "eta": {
+        "nurbsSurface": "explicitTessellationAttributes"
+    },
+    "xsr": {
+        "nurbsSurface": "extraSampleRate",
+        "mesh": "extraSampleRate"
+    },
+    "fbda": {
+        "nurbsSurface": "featureDisplacement",
+        "mesh": "featureDisplacement"
+    },
+    "ftwp": {
+        "nurbsSurface": "fixTextureWarp"
+    },
+    "fu": {
+        "nurbsSurface": "formU"
+    },
+    "fv": {
+        "nurbsSurface": "formV"
+    },
+    "gdsu": {
+        "nurbsSurface": "gridDivisionPerSpanU"
+    },
+    "gdsv": {
+        "nurbsSurface": "gridDivisionPerSpanV"
+    },
+    "hot": {
+        "nurbsSurface": "holdOut",
+        "mesh": "holdOut"
+    },
+    "ih": {
+        "nurbsSurface": "ignoreHwShader",
+        "mesh": "ignoreHwShader"
+    },
+    "dsr": {
+        "nurbsSurface": "initialSampleRate",
+        "mesh": "initialSampleRate"
+    },
+    "mxu": {
+        "nurbsSurface": "maxValueU"
+    },
+    "mxv": {
+        "nurbsSurface": "maxValueV"
+    },
+    "mmu": {
+        "nurbsSurface": "minMaxRangeU"
+    },
+    "mns": {
+        "nurbsSurface": "minScreen",
+        "mesh": "minScreen"
+    },
+    "mnu": {
+        "nurbsSurface": "minValueU"
+    },
+    "mnv": {
+        "nurbsSurface": "minValueV"
+    },
+    "mu": {
+        "nurbsSurface": "modeU"
+    },
+    "mv": {
+        "nurbsSurface": "modeV"
+    },
+    "nat": {
+        "nurbsSurface": "normalThreshold",
+        "mesh": "normalThreshold"
+    },
+    "ndf": {
+        "nurbsSurface": "normalsDisplayScale"
+    },
+    "nu": {
+        "nurbsSurface": "numberU"
+    },
+    "nv": {
+        "nurbsSurface": "numberV"
+    },
+    "uco": {
+        "nurbsSurface": "objSpaceChordHeight"
+    },
+    "pu": {
+        "nurbsSurface": "patchUVIds"
+    },
+    "tcn": {
+        "nurbsSurface": "renderTriangleCount"
+    },
+    "scvd": {
+        "nurbsSurface": "selCVDisp"
+    },
+    "sm": {
+        "nurbsSurface": "simplifyMode"
+    },
+    "smu": {
+        "nurbsSurface": "simplifyU"
+    },
+    "smv": {
+        "nurbsSurface": "simplifyV"
+    },
+    "ues": {
+        "nurbsSurface": "smoothEdge"
+    },
+    "esr": {
+        "nurbsSurface": "smoothEdgeRatio"
+    },
+    "smo": {
+        "nurbsSurface": "smoothShading",
+        "mesh": "smoothShading"
+    },
+    "su": {
+        "nurbsSurface": "spansU"
+    },
+    "sv": {
+        "nurbsSurface": "spansV"
+    },
+    "fth": {
+        "nurbsSurface": "textureThreshold",
+        "mesh": "textureThreshold"
+    },
+    "tf": {
+        "nurbsSurface": "trimFace"
+    },
+    "tsu": {
+        "nurbsSurface": "tweakSizeU"
+    },
+    "tsv": {
+        "nurbsSurface": "tweakSizeV"
+    },
+    "nufa": {
+        "nurbsSurface": "uDivisionsFactor"
+    },
+    "uch": {
+        "nurbsSurface": "useChordHeight"
+    },
+    "ucr": {
+        "nurbsSurface": "useChordHeightRatio"
+    },
+    "uns": {
+        "nurbsSurface": "useMinScreen",
+        "mesh": "useMinScreen"
+    },
+    "nvfa": {
+        "nurbsSurface": "vDivisionsFactor"
+    },
+    "atm": {
+        "mesh": "allowTopologyMod"
+    },
+    "bck": {
+        "mesh": "backfaceCulling"
+    },
+    "bw": {
+        "mesh": "borderWidth"
+    },
+    "bnr": {
+        "mesh": "boundaryRule"
+    },
+    "ci": {
+        "mesh": "cachedInMesh"
+    },
+    "cs": {
+        "mesh": "cachedSmoothMesh"
+    },
+    "cpvx": {
+        "mesh": "colorPerVertex"
+    },
+    "clr": {
+        "mesh": "colors"
+    },
+    "cfsc": {
+        "mesh": "computeFromSculptCache"
+    },
+    "co": {
+        "mesh": "continuity"
+    },
+    "cd": {
+        "mesh": "creaseData"
+    },
+    "cvd": {
+        "mesh": "creaseVertexData"
+    },
+    "dr": {
+        "mesh": "dispResolution"
+    },
+    "dist": {
+        "mesh": "displacementType"
+    },
+    "dags": {
+        "mesh": "displayAlphaAsGreyScale"
+    },
+    "dblu": {
+        "mesh": "displayBlueColorChannel"
+    },
+    "db": {
+        "mesh": "displayBorders"
+    },
+    "dc": {
+        "mesh": "displayCenter"
+    },
+    "dcgs": {
+        "mesh": "displayColorAsGreyScale"
+    },
+    "de": {
+        "mesh": "displayEdges"
+    },
+    "dfgi": {
+        "mesh": "displayFacesWithGroupId"
+    },
+    "dgrn": {
+        "mesh": "displayGreenColorChannel"
+    },
+    "difs": {
+        "mesh": "displayInvisibleFaces"
+    },
+    "din": {
+        "mesh": "displayItemNumbers"
+    },
+    "dmb": {
+        "mesh": "displayMapBorders"
+    },
+    "dnp": {
+        "mesh": "displayNonPlanar"
+    },
+    "dn": {
+        "mesh": "displayNormal"
+    },
+    "dred": {
+        "mesh": "displayRedColorChannel"
+    },
+    "dsm": {
+        "mesh": "displaySmoothMesh"
+    },
+    "dsc": {
+        "mesh": "displaySubdComps"
+    },
+    "dtn": {
+        "mesh": "displayTangent"
+    },
+    "dt": {
+        "mesh": "displayTriangles"
+    },
+    "duv": {
+        "mesh": "displayUVs"
+    },
+    "ed": {
+        "mesh": "edge"
+    },
+    "emap": {
+        "mesh": "edgeIdMap"
+    },
+    "eocl": {
+        "mesh": "enableOpenCL"
+    },
+    "fc": {
+        "mesh": "face"
+    },
+    "fcid": {
+        "mesh": "faceColorIndices"
+    },
+    "fmap": {
+        "mesh": "faceIdMap"
+    },
+    "frze": {
+        "mesh": "freeze"
+    },
+    "hfd": {
+        "mesh": "holeFaceData"
+    },
+    "ifuv": {
+        "mesh": "inForceNodeUVUpdate"
+    },
+    "kb": {
+        "mesh": "keepBorder"
+    },
+    "khe": {
+        "mesh": "keepHardEdge"
+    },
+    "kmb": {
+        "mesh": "keepMapBorders"
+    },
+    "ltt": {
+        "mesh": "loadTiledTextures"
+    },
+    "matb": {
+        "mesh": "materialBlend"
+    },
+    "mxe": {
+        "mesh": "maxEdgeLength"
+    },
+    "mxs": {
+        "mesh": "maxSubd"
+    },
+    "tsl": {
+        "mesh": "maxTriangles"
+    },
+    "xuv": {
+        "mesh": "maxUv"
+    },
+    "mttg": {
+        "mesh": "mikktspaceTangentGen"
+    },
+    "mne": {
+        "mesh": "minEdgeLength"
+    },
+    "mvcs": {
+        "mesh": "motionVectorColorSet"
+    },
+    "npvx": {
+        "mesh": "normalPerVertex"
+    },
+    "ns": {
+        "mesh": "normalSize"
+    },
+    "ndt": {
+        "mesh": "normalType"
+    },
+    "n": {
+        "mesh": "normals"
+    },
+    "nt": {
+        "mesh": "numTriangles"
+    },
+    "ofb": {
+        "mesh": "osdFvarBoundary"
+    },
+    "ofc": {
+        "mesh": "osdFvarPropagateCorners"
+    },
+    "iuv": {
+        "mesh": "osdIndependentUVChannels"
+    },
+    "ost": {
+        "mesh": "osdSmoothTriangles"
+    },
+    "ovb": {
+        "mesh": "osdVertBoundary"
+    },
+    "ofuv": {
+        "mesh": "outForceNodeUVUpdate"
+    },
+    "ogc": {
+        "mesh": "outGeometryClean"
+    },
+    "osde": {
+        "mesh": "outSmoothMeshSubdError"
+    },
+    "pii": {
+        "mesh": "perInstanceIndex"
+    },
+    "pit": {
+        "mesh": "perInstanceTag"
+    },
+    "pd": {
+        "mesh": "pinData"
+    },
+    "pt": {
+        "mesh": "pnts"
+    },
+    "peh": {
+        "mesh": "propagateEdgeHardness"
+    },
+    "qsp": {
+        "mesh": "quadSplit"
+    },
+    "rsl": {
+        "mesh": "renderSmoothLevel"
+    },
+    "rtri": {
+        "mesh": "reuseTriangles"
+    },
+    "sdis": {
+        "mesh": "showDisplacements"
+    },
+    "sdt": {
+        "mesh": "smoothDrawType"
+    },
+    "lev": {
+        "mesh": "smoothLevel"
+    },
+    "ssm": {
+        "mesh": "smoothMeshSelectionMode"
+    },
+    "so": {
+        "mesh": "smoothOffset"
+    },
+    "socp": {
+        "mesh": "smoothOsdColorizePatches"
+    },
+    "stlv": {
+        "mesh": "smoothTessLevel"
+    },
+    "suv": {
+        "mesh": "smoothUVs"
+    },
+    "sw": {
+        "mesh": "smoothWarn"
+    },
+    "tnt": {
+        "mesh": "tangentNormalThreshold"
+    },
+    "tsa": {
+        "mesh": "tangentSmoothingAngle"
+    },
+    "tgsp": {
+        "mesh": "tangentSpace"
+    },
+    "ugsdt": {
+        "mesh": "useGlobalSmoothDrawType"
+    },
+    "uxe": {
+        "mesh": "useMaxEdgeLength"
+    },
+    "uxs": {
+        "mesh": "useMaxSubdivisions"
+    },
+    "uxu": {
+        "mesh": "useMaxUV"
+    },
+    "umsc": {
+        "mesh": "useMeshSculptCache"
+    },
+    "umtsc": {
+        "mesh": "useMeshTexSculptCache"
+    },
+    "uie": {
+        "mesh": "useMinEdgeLength"
+    },
+    "unp": {
+        "mesh": "useNumTriangles"
+    },
+    "uob": {
+        "mesh": "useOsdBoundaryMethods"
+    },
+    "uspr": {
+        "mesh": "useSmoothPreviewForRender"
+    },
+    "utrg": {
+        "mesh": "userTrg"
+    },
+    "usz": {
+        "mesh": "uvSize"
+    },
+    "uvtl": {
+        "mesh": "uvTweakLocation"
+    },
+    "uv": {
+        "mesh": "uvpt"
+    },
+    "vbc": {
+        "mesh": "vertexBackfaceCulling"
+    },
+    "vclr": {
+        "mesh": "vertexColor"
+    },
+    "vcs": {
+        "mesh": "vertexColorSource"
+    },
+    "vmap": {
+        "mesh": "vertexIdMap"
+    },
+    "vn": {
+        "mesh": "vertexNormal"
+    },
+    "vnm": {
+        "mesh": "vertexNormalMethod"
+    },
+    "vs": {
+        "mesh": "vertexSize"
+    },
+    "vt": {
+        "mesh": "vrts"
+    },
+    "w": {
+        "mesh": "worldMesh"
+    }
 }
 

@@ -810,9 +810,21 @@ def attributeMenu(beginMenu=bool(), beg=bool(), editor=str(), edt=str(), finishM
     pass
 
 
-def attributeName(leaf=bool(), lf=bool(), long=bool(), l=bool(), nice=bool(), n=bool(), short=bool(), s=bool(), *args,
+def attributeName(attr_name, leaf=bool(), lf=bool(), long=bool(), l=bool(), nice=bool(), n=bool(), short=bool(), s=bool(), *args,
                   **kwargs):
-    pass
+    if not attr_name:
+        raise RuntimeError("attr_name is required")
+    
+    _, plug = _attr_name_to_mobject_and_plug(attr_name)
+    plug_name = plug.partialName(
+        useLongNames=long,
+        includeNodeName=False,
+        useNiceNames=nice
+    )
+    return re.sub(
+        r"((?<=[a-z])[A-Z]|(?<!\A)[A-Z](?=[a-z]))",
+        r" \1", plug_name
+    ).title().replace("  ", " ")
 
 
 def attributeQuery(affectsAppearance=bool(), aa=bool(), affectsWorldspace=bool(), aws=bool(), attributeType=bool(),

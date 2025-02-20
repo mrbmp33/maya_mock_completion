@@ -44,19 +44,22 @@ def get_attr_properties(nd):
         try:
             plug = dg.findPlug(attr_name, 0)
             attr = plug.attribute()
+            short_name = plug.partialName()
+            long_name = plug.partialName(useLongNames=1)
 
             attr_properties = {
-                "short_name": plug.partialName(),
-                "long_name": plug.partialName(useLongNames=1),
+                "short_name": short_name,
+                "long_name": long_name,
                 "is_element": plug.isElement,
                 "is_array": plug.isArray,
                 "is_compound": plug.isCompound,
                 "type_str": attr.apiTypeStr,
             }
 
-            all_short_name_to_long_name[attr_properties["short_name"]] = (
-                attr_properties["long_name"]
-            )
+            # Add the short name to long name mapping
+            name_key_d = all_short_name_to_long_name.get(short_name, {}).get(dg.typeName, {})
+            name_key_d[dg.typeName] = long_name
+            all_short_name_to_long_name[short_name] = name_key_d
 
             # See if it has a parent plug. Better ask forgiveness than permission
             try:
@@ -133,7 +136,9 @@ def create_attrs_dict(output_properties_file, output_literals_file: str = None):
 
         attrs_dict, short_name_to_long_name = get_attr_properties(node_name)
         attributes_properties[node_type] = attrs_dict
-        attributes_short_names_map.update(short_name_to_long_name)
+        for key, nested_dict in short_name_to_long_name.items():
+            short_name_dict = attributes_short_names_map.setdefault(key, nested_dict)
+            short_name_dict.update(nested_dict)
 
     # Prepare the data to be written
     data = {

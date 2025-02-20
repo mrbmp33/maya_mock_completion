@@ -109,7 +109,7 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
 
         elif attr_name in attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP:
             short_name = attr_name
-            long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name]
+            long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name][node_type]
             properties = properties[long_name]
         
         else:
@@ -1857,7 +1857,7 @@ class MDGModifier(object):
             
         # Invalid arguments
         else:
-            raise TypeError('Invalid arguments for connect()')
+            raise TypeError('Invalid arguments for connect(): {}'.format(args))
 
         self._queue.append(('disconnect', source_plug, dest_plug))
         return self
@@ -4037,145 +4037,162 @@ class MPlugArray(object):
     Array of MPlug values.
     """
 
-    def __add__(*args, **kwargs):
+    def __init__(self, *args):
+        """
+        Initializes the MPlugArray.
+        """
+        self._plugs = []
+
+    def __add__(self, other):
         """
         x.__add__(y) <==> x+y
         """
-        pass
+        if isinstance(other, MPlugArray):
+            return MPlugArray(*(self._plugs + other._plugs))
+        return NotImplemented
 
-    def __contains__(*args, **kwargs):
+    def __iter__(self):
+        """
+        x.__iter__() <==> iter(x)
+        """
+        return iter(self._plugs)
+    
+    def __contains__(self, item):
         """
         x.__contains__(y) <==> y in x
         """
-        pass
-
-    def __delitem__(*args, **kwargs):
+        return item in self._plugs
+    
+    def __delitem__(self, index):
         """
         x.__delitem__(y) <==> del x[y]
         """
-        pass
+        del self._plugs[index]
 
-    def __delslice__(*args, **kwargs):
-        """
-        x.__delslice__(i, j) <==> del x[i:j]
-
-        Use of negative indices is not supported.
-        """
-        pass
-
-    def __getitem__(*args, **kwargs):
+    def __getitem__(self, index):
         """
         x.__getitem__(y) <==> x[y]
         """
-        pass
+        return self._plugs[index]
 
-    def __getslice__(*args, **kwargs):
-        """
-        x.__getslice__(i, j) <==> x[i:j]
-
-        Use of negative indices is not supported.
-        """
-        pass
-
-    def __iadd__(*args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
-
-    def __imul__(*args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
-
-    def __init__(*args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
-
-    def __len__(*args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
-
-    def __mul__(*args, **kwargs):
-        """
-        x.__mul__(n) <==> x*n
-        """
-        pass
-
-    def __repr__(*args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
-
-    def __rmul__(*args, **kwargs):
-        """
-        x.__rmul__(n) <==> n*x
-        """
-        pass
-
-    def __setitem__(*args, **kwargs):
+    def __setitem__(self, index, value):
         """
         x.__setitem__(i, y) <==> x[i]=y
         """
-        pass
+        self._plugs[index] = value
 
-    def __setslice__(*args, **kwargs):
+    def __len__(self):
         """
-        x.__setslice__(i, j, y) <==> x[i:j]=y
-
-        Use  of negative indices is not supported.
+        x.__len__() <==> len(x)
         """
-        pass
+        return len(self._plugs)
 
-    def __str__(*args, **kwargs):
+    def __repr__(self):
+        """
+        x.__repr__() <==> repr(x)
+        """
+        return f"MPlugArray({self._plugs})"
+
+    def __str__(self):
         """
         x.__str__() <==> str(x)
         """
-        pass
+        return str(self._plugs)
 
-    def append(*args, **kwargs):
+    def append(self, item):
         """
         Add a value to the end of the array.
         """
-        pass
+        self._plugs.append(item)
 
-    def clear(*args, **kwargs):
+    def clear(self):
         """
         Remove all elements from the array.
         """
-        pass
+        self._plugs.clear()
 
-    def copy(*args, **kwargs):
+    def copy(self):
         """
         Replace the array contents with that of another or of a compatible Python sequence.
         """
-        pass
+        return MPlugArray(*self._plugs)
 
-    def insert(*args, **kwargs):
+    def insert(self, index, item):
         """
         Insert a new value into the array at the given index.
         """
-        pass
+        self._plugs.insert(index, item)
 
-    def remove(*args, **kwargs):
+    def remove(self, item):
         """
         Remove an element from the array.
         """
-        pass
+        self._plugs.remove(item)
 
-    def setLength(*args, **kwargs):
+    def setLength(self, length):
         """
         Grow or shrink the array to contain a specific number of elements.
         """
-        pass
+        if length < len(self._plugs):
+            self._plugs = self._plugs[:length]
+        else:
+            self._plugs.extend([None] * (length - len(self._plugs)))
 
-    sizeIncrement = None
+    def __iadd__(self, other):
+        """
+        x.__iadd__(y) <==> x+=y
+        """
+        if isinstance(other, MPlugArray):
+            self._plugs += other._plugs
+            return self
+        return NotImplemented
+    
+    def __imul__(self, other):
+        """
+        x.__imul__(y) <==> x*=y
+        """
+        if isinstance(other, int):
+            self._plugs *= other
+            return self
+        return NotImplemented
+
+    def __mul__(self, other):
+        """
+        x.__mul__(n) <==> x*n
+        """
+        if isinstance(other, int):
+            return MPlugArray(*(self._plugs * other))
+        return NotImplemented
+
+    def __rmul__(self, other):
+        """
+        x.__rmul__(n) <==> n*x
+        """
+        return self.__mul__(other)
+
+    def __delslice__(self, i, j):
+        """
+        x.__delslice__(i, j) <==> del x[i:j]
+        """
+        del self._plugs[i:j]
+
+    def __getslice__(self, i, j):
+        """
+        x.__getslice__(i, j) <==> x[i:j]
+        """
+        return MPlugArray(*self._plugs[i:j])
+
+    def __setslice__(self, i, j, y):
+        """
+        x.__setslice__(i, j, y) <==> x[i:j]=y
+        """
+        self._plugs[i:j] = y
+
+    def sizeIncrement(self):
+        """
+        Placeholder for size increment attribute.
+        """
+        pass
 
 
 class MEvaluationNodeIterator(object):
@@ -17946,7 +17963,7 @@ class MPlug(object):
         child_plug._parent = weakref.proxy(self)
         return child_plug
 
-    def connectedTo(self, asDest: bool = False, asSrc: bool = False) -> List['MPlug']:
+    def connectedTo(self, asDest: bool = False, asSrc: bool = False) -> MPlugArray:
         """
         Returns an array of plugs which are connected to this one.
         """
@@ -18312,7 +18329,10 @@ class MPlug(object):
         """
         if self.isDestination:
             return list(self._connections['INPUTS'].values())[0] if list(self._connections['INPUTS'].values()) else None
-        return None
+        null_plug = MPlug()
+        null_plug._owner = None
+        null_plug._attribute = MObject()
+        return null_plug
 
     def sourceWithConversion(self) -> Optional['MPlug']:
         """
@@ -18394,7 +18414,7 @@ class MPlug(object):
     @property
     def isNull(self) -> bool:
         """Returns True if the plug is null (uninitialized), False otherwise."""
-        return self._owner is None
+        return any((self._owner is None, self._attribute._is_null))
 
     @property
     def isProcedural(self) -> bool:
