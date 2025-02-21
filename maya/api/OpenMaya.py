@@ -14,7 +14,7 @@ import uuid
 import weakref
 import enum
 import math
-from typing import Optional, Iterable, Union, Tuple, List, Any, Generator
+from typing import Optional, Iterable, Union, Tuple, List, Any, Generator, Type
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
@@ -13337,6 +13337,7 @@ class MObject(object):
         self._locked = False
         self._affects_appearance = False
         self._affects_world_space = False
+        self._is_cached = False
         self._channel_box = False
         self._connectable = True
         self._disconnect_behavior = MFnAttribute.kNothing
@@ -13346,6 +13347,7 @@ class MObject(object):
         self._indeterminant = None
         self._index_matters = False
         self._internal = False
+        self._keyable = False
         self._readable = True
         self._render_source = False
         self._storable = False
@@ -13353,7 +13355,7 @@ class MObject(object):
         self._used_as_filename = False
         self._uses_array_data_builder = False
         self._world_space = False
-        self._writeable = True
+        self._writable = True
 
     def _init_unit_fields(self):
         self._unit: int = None
@@ -22548,12 +22550,24 @@ class MFnDependencyNode(MFnBase):
         if attr_type not in attribute._api_type:
             attribute._api_type.append(attr_type)
 
-        if attr_type == MFn.kNumericAttribute:
-            attribute._init_numeric_fields()
-        elif attr_type == MFn.kUnitAttribute:
-            attribute._init_unit_fields()
-        elif attr_type == MFn.kTypedAttribute:
-            attribute._init_typed_fields()
+        # Initialize the attribute based on its type
+        _MAYA_ATTRIBUTE_TYPES_TO_FN_MAP: dict[int, Type["MFnAttribute"]] = {
+            MFn.kNumericAttribute: MObject._init_numeric_fields,
+            MFn.kUnitAttribute: MObject._init_unit_fields,
+            MFn.kDoubleLinearAttribute: MObject._init_unit_fields,
+            MFn.kFloatLinearAttribute: MObject._init_unit_fields,
+            MFn.kDoubleAngleAttribute: MObject._init_unit_fields,
+            MFn.kFloatAngleAttribute: MObject._init_unit_fields,
+            MFn.kTypedAttribute: MObject._init_typed_fields,
+            MFn.kMatrixAttribute: MObject._init_matrix_fields,
+            MFn.kFloatMatrixAttribute: MObject._init_matrix_fields,
+            MFn.kMessageAttribute: None,
+            MFn.kEnumAttribute: None,
+        }
+        
+        intializer = _MAYA_ATTRIBUTE_TYPES_TO_FN_MAP.get(attr_type)
+        if intializer:
+            intializer(attribute)
         
         # Only for numeric attributes
         if properties.get('numeric_type') is not None:
@@ -22982,6 +22996,12 @@ class MFnNumericAttribute(MFnAttribute):
         """
         super().__init__(*args, **kwargs)
 
+        if args:
+            if not isinstance(args[0], MObject):
+                ...
+            elif not hasattr(args[0], '_numeric_type'):
+                self._mobject._init_numeric_fields()
+
     def child(self, index: int) -> 'MObject':
         """
         Returns the specified child attribute of the parent attribute currently attached to the function set.
@@ -23357,6 +23377,12 @@ class MFnTypedAttribute(MFnAttribute):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
+
+        if args:
+            if not isinstance(args[0], MObject):
+                ...
+            elif not hasattr(args[0], '_typed_attr_type'):
+                self._mobject._init_typed_fields()
 
     def attrType(self):
         """
@@ -24140,6 +24166,12 @@ class MFnUnitAttribute(MFnAttribute):
     def __init__(self, *args, **kwargs):
         """Initialize the function set."""
         super().__init__(*args, **kwargs)
+    
+        if args:
+            if not isinstance(args[0], MObject):
+                ...
+            elif not hasattr(args[0], '_unit_type'):
+                self._mobject._init_unit_fields()
 
     def create(self, long_name: str, short_name: str, 
                unit_type: Union[int, 'MAngle', 'MDistance', 'MTime'],
@@ -24197,29 +24229,29 @@ class MFnUnitAttribute(MFnAttribute):
         self._mobject._unit_type = type_constant
         return self._mobject
 
-    def getMax(self) -> float:
+    def getMax(self) -> Union["MAngle", "MDistance", "MTime"]:
         """Get hard maximum value."""
         if self._mobject._max is None:
-            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a maximum value.')
-        return self._mobject._max
+            value = 0
+        return self._to_maya_unit(self._mobject._max or value)
 
-    def getMin(self) -> float:
+    def getMin(self) -> Union["MAngle", "MDistance", "MTime"]:
         """Get hard minimum value."""
         if self._mobject._min is None:
-            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a minimum value.')
-        return self._mobject._min
+            value = 0
+        return self._to_maya_unit(self._mobject._min or value)
         
-    def getSoftMax(self) -> float:
+    def getSoftMax(self) -> Union["MAngle", "MDistance", "MTime"]:
         """Get soft maximum value."""
         if self._mobject._soft_max is None:
-            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft maximum value.')
-        return self._mobject._soft_max
+            value = 0
+        return self._to_maya_unit(self._mobject._soft_max or value)
 
-    def getSoftMin(self) -> float:
+    def getSoftMin(self) -> Union["MAngle", "MDistance", "MTime"]:
         """Get soft minimum value."""
         if self._mobject._soft_min is None:
-            raise RuntimeError(f'Attribute: {self._mobject._name} does not have a soft minimum value.')
-        return self._mobject._soft_min
+            value = 0
+        return self._to_maya_unit(self._mobject._soft_min or value)
 
     def hasMax(self) -> bool:
         """Check if attribute has hard maximum."""
@@ -24237,29 +24269,39 @@ class MFnUnitAttribute(MFnAttribute):
         """Check if attribute has soft minimum."""
         return self._mobject._soft_min is not None
 
-    def setMax(self, value: float) -> 'MFnUnitAttribute':
+    def setMax(self, value: Union[float, "MAngle", "MDistance", "MTime"]) -> 'MFnUnitAttribute':
         """Set hard maximum value."""
         self._mobject._max = value
         return self
 
-    def setMin(self, value: float) -> 'MFnUnitAttribute':
+    def setMin(self, value: Union[float, "MAngle", "MDistance", "MTime"]) -> 'MFnUnitAttribute':
         """Set hard minimum value."""
         self._mobject._min = value 
         return self
 
-    def setSoftMax(self, value: float) -> 'MFnUnitAttribute':
+    def setSoftMax(self, value: Union[float, "MAngle", "MDistance", "MTime"]) -> 'MFnUnitAttribute':
         """Set soft maximum value."""
         self._mobject._soft_max = value
         return self
 
-    def setSoftMin(self, value: float) -> 'MFnUnitAttribute':
+    def setSoftMin(self, value: Union[float, "MAngle", "MDistance", "MTime"]) -> 'MFnUnitAttribute':
         """Set soft minimum value."""
         self._mobject._soft_min = value
         return self
 
-    def unitType(self) -> int:
         """Get the unit type."""
+    
+    def unitType(self) -> int:
         return self._mobject._unit_type
+
+    def _to_maya_unit(self, value) -> Union["MAngle", "MDistance", "MTime"]:
+        """Convert the attribute value to the appropriate unit type."""
+        unit_map = {
+            self.kAngle: MAngle,
+            self.kDistance: MDistance,
+            self.kTime: MTime
+        }
+        return unit_map[self.unitType()](value)
 
     @property
     def default(self):
