@@ -5837,6 +5837,11496 @@ ATTRIBUTES_PROPERTIES = {
             "default_value": 0.0
         }
     },
+    "camera": {
+        "autoSetPivot": {
+            "short_name": "asp",
+            "long_name": "autoSetPivot",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "backgroundColor": {
+            "short_name": "col",
+            "long_name": "backgroundColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "backgroundColorR",
+                "backgroundColorG",
+                "backgroundColorB"
+            ]
+        },
+        "backgroundColorB": {
+            "short_name": "colb",
+            "long_name": "backgroundColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "backgroundColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "backgroundColorG": {
+            "short_name": "colg",
+            "long_name": "backgroundColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "backgroundColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "backgroundColorR": {
+            "short_name": "colr",
+            "long_name": "backgroundColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "backgroundColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "bestFitClippingPlanes": {
+            "short_name": "bfc",
+            "long_name": "bestFitClippingPlanes",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "blackBox": {
+            "short_name": "bbx",
+            "long_name": "blackBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "bookmarks": {
+            "short_name": "b",
+            "long_name": "bookmarks",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "num_elements": 0
+        },
+        "bookmarksEnabled": {
+            "short_name": "ben",
+            "long_name": "bookmarksEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "borderConnections": {
+            "short_name": "boc",
+            "long_name": "borderConnections",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "num_elements": 0
+        },
+        "boundingBox": {
+            "short_name": "bb",
+            "long_name": "boundingBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMin",
+                "boundingBoxMax",
+                "boundingBoxSize"
+            ]
+        },
+        "boundingBoxCenterX": {
+            "short_name": "bcx",
+            "long_name": "boundingBoxCenterX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterY": {
+            "short_name": "bcy",
+            "long_name": "boundingBoxCenterY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterZ": {
+            "short_name": "bcz",
+            "long_name": "boundingBoxCenterZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMax": {
+            "short_name": "bbmx",
+            "long_name": "boundingBoxMax",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMaxX",
+                "boundingBoxMaxY",
+                "boundingBoxMaxZ"
+            ]
+        },
+        "boundingBoxMaxX": {
+            "short_name": "bbxx",
+            "long_name": "boundingBoxMaxX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxY": {
+            "short_name": "bbxy",
+            "long_name": "boundingBoxMaxY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxZ": {
+            "short_name": "bbxz",
+            "long_name": "boundingBoxMaxZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMin": {
+            "short_name": "bbmn",
+            "long_name": "boundingBoxMin",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMinX",
+                "boundingBoxMinY",
+                "boundingBoxMinZ"
+            ]
+        },
+        "boundingBoxMinX": {
+            "short_name": "bbnx",
+            "long_name": "boundingBoxMinX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinY": {
+            "short_name": "bbny",
+            "long_name": "boundingBoxMinY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinZ": {
+            "short_name": "bbnz",
+            "long_name": "boundingBoxMinZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSize": {
+            "short_name": "bbsi",
+            "long_name": "boundingBoxSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxSizeX",
+                "boundingBoxSizeY",
+                "boundingBoxSizeZ"
+            ]
+        },
+        "boundingBoxSizeX": {
+            "short_name": "bbsx",
+            "long_name": "boundingBoxSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeY": {
+            "short_name": "bbsy",
+            "long_name": "boundingBoxSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeZ": {
+            "short_name": "bbsz",
+            "long_name": "boundingBoxSizeZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "cameraAperture": {
+            "short_name": "cap",
+            "long_name": "cameraAperture",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "num_children": 2,
+            "children": [
+                "horizontalFilmAperture",
+                "verticalFilmAperture"
+            ]
+        },
+        "cameraPrecompTemplate": {
+            "short_name": "cpt",
+            "long_name": "cameraPrecompTemplate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "cameraScale": {
+            "short_name": "cs",
+            "long_name": "cameraScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "center": {
+            "short_name": "c",
+            "long_name": "center",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "num_children": 3,
+            "children": [
+                "boundingBoxCenterX",
+                "boundingBoxCenterY",
+                "boundingBoxCenterZ"
+            ]
+        },
+        "centerOfInterest": {
+            "short_name": "coi",
+            "long_name": "centerOfInterest",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 5.0
+        },
+        "clippingPlanes": {
+            "short_name": "cp",
+            "long_name": "clippingPlanes",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "containerType": {
+            "short_name": "ctyp",
+            "long_name": "containerType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creationDate": {
+            "short_name": "cdat",
+            "long_name": "creationDate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creator": {
+            "short_name": "ctor",
+            "long_name": "creator",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "customTreatment": {
+            "short_name": "ctrt",
+            "long_name": "customTreatment",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "depth": {
+            "short_name": "dep",
+            "long_name": "depth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "depthName": {
+            "short_name": "den",
+            "long_name": "depthName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "depthOfField": {
+            "short_name": "dof",
+            "long_name": "depthOfField",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "depthType": {
+            "short_name": "dptp",
+            "long_name": "depthType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "displayCameraFarClip": {
+            "short_name": "cfp",
+            "long_name": "displayCameraFarClip",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayCameraFrustum": {
+            "short_name": "dcf",
+            "long_name": "displayCameraFrustum",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayCameraNearClip": {
+            "short_name": "cnc",
+            "long_name": "displayCameraNearClip",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayFieldChart": {
+            "short_name": "dfc",
+            "long_name": "displayFieldChart",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayFilmGate": {
+            "short_name": "dfg",
+            "long_name": "displayFilmGate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayFilmOrigin": {
+            "short_name": "dfo",
+            "long_name": "displayFilmOrigin",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayFilmPivot": {
+            "short_name": "dfp",
+            "long_name": "displayFilmPivot",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displayGateMask": {
+            "short_name": "dgm",
+            "long_name": "displayGateMask",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "displayGateMaskColor": {
+            "short_name": "dgc",
+            "long_name": "displayGateMaskColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "displayGateMaskColorR",
+                "displayGateMaskColorG",
+                "displayGateMaskColorB"
+            ]
+        },
+        "displayGateMaskColorB": {
+            "short_name": "dgcb",
+            "long_name": "displayGateMaskColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "displayGateMaskColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "displayGateMaskColorG": {
+            "short_name": "dgcg",
+            "long_name": "displayGateMaskColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "displayGateMaskColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "displayGateMaskColorR": {
+            "short_name": "dgcr",
+            "long_name": "displayGateMaskColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "displayGateMaskColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "displayGateMaskOpacity": {
+            "short_name": "dgo",
+            "long_name": "displayGateMaskOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.699999988079071
+        },
+        "displayResolution": {
+            "short_name": "dr",
+            "long_name": "displayResolution",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displaySafeAction": {
+            "short_name": "dsa",
+            "long_name": "displaySafeAction",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "displaySafeTitle": {
+            "short_name": "dst",
+            "long_name": "displaySafeTitle",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "drawOverride": {
+            "short_name": "do",
+            "long_name": "drawOverride",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 12,
+            "children": [
+                "overrideDisplayType",
+                "overrideLevelOfDetail",
+                "overrideShading",
+                "overrideTexturing",
+                "overridePlayback",
+                "overrideEnabled",
+                "overrideVisibility",
+                "hideOnPlayback",
+                "overrideRGBColors",
+                "overrideColor",
+                "overrideColorRGB",
+                "overrideColorA"
+            ]
+        },
+        "fStop": {
+            "short_name": "fs",
+            "long_name": "fStop",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 5.6
+        },
+        "farClipPlane": {
+            "short_name": "fcp",
+            "long_name": "farClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 10000.0
+        },
+        "filmFit": {
+            "short_name": "ff",
+            "long_name": "filmFit",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "filmFitOffset": {
+            "short_name": "ffo",
+            "long_name": "filmFitOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "filmOffset": {
+            "short_name": "fio",
+            "long_name": "filmOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "num_children": 2,
+            "children": [
+                "horizontalFilmOffset",
+                "verticalFilmOffset"
+            ]
+        },
+        "filmRollControl": {
+            "short_name": "frc",
+            "long_name": "filmRollControl",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "postProjection",
+            "num_children": 3,
+            "children": [
+                "filmRollPivot",
+                "filmRollValue",
+                "filmRollOrder"
+            ]
+        },
+        "filmRollOrder": {
+            "short_name": "fro",
+            "long_name": "filmRollOrder",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "filmRollControl"
+        },
+        "filmRollPivot": {
+            "short_name": "frp",
+            "long_name": "filmRollPivot",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "parent_plug": "filmRollControl",
+            "num_children": 2,
+            "children": [
+                "horizontalRollPivot",
+                "verticalRollPivot"
+            ]
+        },
+        "filmRollValue": {
+            "short_name": "frv",
+            "long_name": "filmRollValue",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "filmRollControl",
+            "unit_type": 1,
+            "default_value": 0.0
+        },
+        "filmTranslate": {
+            "short_name": "ct",
+            "long_name": "filmTranslate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "parent_plug": "postProjection",
+            "num_children": 2,
+            "children": [
+                "filmTranslateH",
+                "filmTranslateV"
+            ]
+        },
+        "filmTranslateH": {
+            "short_name": "fth",
+            "long_name": "filmTranslateH",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "filmTranslate",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "filmTranslateV": {
+            "short_name": "ftv",
+            "long_name": "filmTranslateV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "filmTranslate",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "focalLength": {
+            "short_name": "fl",
+            "long_name": "focalLength",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 35.0
+        },
+        "focusDistance": {
+            "short_name": "fd",
+            "long_name": "focusDistance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 5.0
+        },
+        "focusRegionScale": {
+            "short_name": "frs",
+            "long_name": "focusRegionScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostColorPost": {
+            "short_name": "gac",
+            "long_name": "ghostColorPost",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPostR",
+                "ghostColorPostG",
+                "ghostColorPostB"
+            ]
+        },
+        "ghostColorPostB": {
+            "short_name": "gab",
+            "long_name": "ghostColorPostB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6629999876022339
+        },
+        "ghostColorPostG": {
+            "short_name": "gag",
+            "long_name": "ghostColorPostG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6779999732971191
+        },
+        "ghostColorPostR": {
+            "short_name": "gar",
+            "long_name": "ghostColorPostR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.878000020980835
+        },
+        "ghostColorPre": {
+            "short_name": "gcp",
+            "long_name": "ghostColorPre",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPreR",
+                "ghostColorPreG",
+                "ghostColorPreB"
+            ]
+        },
+        "ghostColorPreB": {
+            "short_name": "gpb",
+            "long_name": "ghostColorPreB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreG": {
+            "short_name": "gpg",
+            "long_name": "ghostColorPreG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreR": {
+            "short_name": "grr",
+            "long_name": "ghostColorPreR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 0.44699999690055847
+        },
+        "ghostCustomSteps": {
+            "short_name": "gcs",
+            "long_name": "ghostCustomSteps",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "ghostPreFrames",
+                "ghostPostFrames",
+                "ghostsStep"
+            ]
+        },
+        "ghostDriver": {
+            "short_name": "gdr",
+            "long_name": "ghostDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "ghostFarOpacity": {
+            "short_name": "gfro",
+            "long_name": "ghostFarOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.15000000596046448
+        },
+        "ghostFrames": {
+            "short_name": "gf",
+            "long_name": "ghostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
+        },
+        "ghostNearOpacity": {
+            "short_name": "gnro",
+            "long_name": "ghostNearOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "ghostOpacityRange": {
+            "short_name": "golr",
+            "long_name": "ghostOpacityRange",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "ghostFarOpacity",
+                "ghostNearOpacity"
+            ]
+        },
+        "ghostPostFrames": {
+            "short_name": "gpof",
+            "long_name": "ghostPostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostPreFrames": {
+            "short_name": "gprf",
+            "long_name": "ghostPreFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostUseDriver": {
+            "short_name": "gud",
+            "long_name": "ghostUseDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghosting": {
+            "short_name": "gh",
+            "long_name": "ghosting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostingMode": {
+            "short_name": "gm",
+            "long_name": "ghostingMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "ghostsStep": {
+            "short_name": "gstp",
+            "long_name": "ghostsStep",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "hiddenInOutliner": {
+            "short_name": "hio",
+            "long_name": "hiddenInOutliner",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hideOnPlayback": {
+            "short_name": "hpb",
+            "long_name": "hideOnPlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "homeCommand": {
+            "short_name": "hc",
+            "long_name": "homeCommand",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "horizontalFilmAperture": {
+            "short_name": "hfa",
+            "long_name": "horizontalFilmAperture",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "cameraAperture",
+            "numeric_type": 14,
+            "default_value": 1.4173200000000001
+        },
+        "horizontalFilmOffset": {
+            "short_name": "hfo",
+            "long_name": "horizontalFilmOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "filmOffset",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "horizontalPan": {
+            "short_name": "hpn",
+            "long_name": "horizontalPan",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pan",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "horizontalRollPivot": {
+            "short_name": "hrp",
+            "long_name": "horizontalRollPivot",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "filmRollPivot",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "horizontalShake": {
+            "short_name": "hs",
+            "long_name": "horizontalShake",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shake",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "hyperLayout": {
+            "short_name": "hl",
+            "long_name": "hyperLayout",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "iconName": {
+            "short_name": "icn",
+            "long_name": "iconName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "identification": {
+            "short_name": "rlid",
+            "long_name": "identification",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "image": {
+            "short_name": "img",
+            "long_name": "image",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "imageName": {
+            "short_name": "imn",
+            "long_name": "imageName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "imagePlane": {
+            "short_name": "ip",
+            "long_name": "imagePlane",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "num_elements": 0
+        },
+        "instObjGroups": {
+            "short_name": "iog",
+            "long_name": "instObjGroups",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "intermediateObject": {
+            "short_name": "io",
+            "long_name": "intermediateObject",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "inverseMatrix": {
+            "short_name": "im",
+            "long_name": "inverseMatrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "isCollapsed": {
+            "short_name": "isc",
+            "long_name": "isCollapsed",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHierarchicalConnection": {
+            "short_name": "ish",
+            "long_name": "isHierarchicalConnection",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
+        },
+        "journalCommand": {
+            "short_name": "jc",
+            "long_name": "journalCommand",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "layerOverrideColor": {
+            "short_name": "lovc",
+            "long_name": "layerOverrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "layerRenderable": {
+            "short_name": "rndr",
+            "long_name": "layerRenderable",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "lensSqueezeRatio": {
+            "short_name": "lsr",
+            "long_name": "lensSqueezeRatio",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "locatorScale": {
+            "short_name": "lls",
+            "long_name": "locatorScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "lodVisibility": {
+            "short_name": "lodv",
+            "long_name": "lodVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "mask": {
+            "short_name": "ma",
+            "long_name": "mask",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "maskName": {
+            "short_name": "man",
+            "long_name": "maskName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "matrix": {
+            "short_name": "m",
+            "long_name": "matrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "motionBlur": {
+            "short_name": "mb",
+            "long_name": "motionBlur",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "nearClipPlane": {
+            "short_name": "ncp",
+            "long_name": "nearClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 0.1
+        },
+        "objectColor": {
+            "short_name": "oc",
+            "long_name": "objectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "objectColorB": {
+            "short_name": "obcb",
+            "long_name": "objectColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorG": {
+            "short_name": "obcg",
+            "long_name": "objectColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorR": {
+            "short_name": "obcr",
+            "long_name": "objectColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorRGB": {
+            "short_name": "obcc",
+            "long_name": "objectColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "objectColorR",
+                "objectColorG",
+                "objectColorB"
+            ]
+        },
+        "orthographic": {
+            "short_name": "o",
+            "long_name": "orthographic",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "orthographicWidth": {
+            "short_name": "ow",
+            "long_name": "orthographicWidth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 10.0
+        },
+        "outlinerColor": {
+            "short_name": "oclr",
+            "long_name": "outlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outlinerColorR",
+                "outlinerColorG",
+                "outlinerColorB"
+            ]
+        },
+        "outlinerColorB": {
+            "short_name": "oclrb",
+            "long_name": "outlinerColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorG": {
+            "short_name": "oclrg",
+            "long_name": "outlinerColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorR": {
+            "short_name": "oclrr",
+            "long_name": "outlinerColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColor": {
+            "short_name": "ovc",
+            "long_name": "overrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "overrideColorA": {
+            "short_name": "ovca",
+            "long_name": "overrideColorA",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "overrideColorB": {
+            "short_name": "ovcb",
+            "long_name": "overrideColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorG": {
+            "short_name": "ovcg",
+            "long_name": "overrideColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorR": {
+            "short_name": "ovcr",
+            "long_name": "overrideColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorRGB": {
+            "short_name": "ovrgb",
+            "long_name": "overrideColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
+            "num_children": 3,
+            "children": [
+                "overrideColorR",
+                "overrideColorG",
+                "overrideColorB"
+            ]
+        },
+        "overrideDisplayType": {
+            "short_name": "ovdt",
+            "long_name": "overrideDisplayType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overrideEnabled": {
+            "short_name": "ove",
+            "long_name": "overrideEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideLevelOfDetail": {
+            "short_name": "ovlod",
+            "long_name": "overrideLevelOfDetail",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overridePlayback": {
+            "short_name": "ovp",
+            "long_name": "overridePlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideRGBColors": {
+            "short_name": "ovrgbf",
+            "long_name": "overrideRGBColors",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideShading": {
+            "short_name": "ovs",
+            "long_name": "overrideShading",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideTexturing": {
+            "short_name": "ovt",
+            "long_name": "overrideTexturing",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideVisibility": {
+            "short_name": "ovv",
+            "long_name": "overrideVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overscan": {
+            "short_name": "ovr",
+            "long_name": "overscan",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "pan": {
+            "short_name": "pn",
+            "long_name": "pan",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "num_children": 2,
+            "children": [
+                "horizontalPan",
+                "verticalPan"
+            ]
+        },
+        "panZoomEnabled": {
+            "short_name": "pze",
+            "long_name": "panZoomEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "parentInverseMatrix": {
+            "short_name": "pim",
+            "long_name": "parentInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix": {
+            "short_name": "pm",
+            "long_name": "parentMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "postProjection": {
+            "short_name": "ppj",
+            "long_name": "postProjection",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 4,
+            "children": [
+                "preScale",
+                "filmTranslate",
+                "filmRollControl",
+                "postScale"
+            ]
+        },
+        "postScale": {
+            "short_name": "ptsc",
+            "long_name": "postScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "postProjection",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "preScale": {
+            "short_name": "psc",
+            "long_name": "preScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "postProjection",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "publishedNodeInfo": {
+            "short_name": "pni",
+            "long_name": "publishedNodeInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "renderInfo": {
+            "short_name": "ri",
+            "long_name": "renderInfo",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "identification",
+                "layerRenderable",
+                "layerOverrideColor"
+            ]
+        },
+        "renderLayerInfo": {
+            "short_name": "rlio",
+            "long_name": "renderLayerInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "renderPanZoom": {
+            "short_name": "rpz",
+            "long_name": "renderPanZoom",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "renderable": {
+            "short_name": "rnd",
+            "long_name": "renderable",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "rmbCommand": {
+            "short_name": "rmc",
+            "long_name": "rmbCommand",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "selectionChildHighlighting": {
+            "short_name": "sech",
+            "long_name": "selectionChildHighlighting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "shake": {
+            "short_name": "shk",
+            "long_name": "shake",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "num_children": 2,
+            "children": [
+                "horizontalShake",
+                "verticalShake"
+            ]
+        },
+        "shakeEnabled": {
+            "short_name": "se",
+            "long_name": "shakeEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "shakeOverscan": {
+            "short_name": "sos",
+            "long_name": "shakeOverscan",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "shakeOverscanEnabled": {
+            "short_name": "soe",
+            "long_name": "shakeOverscanEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "shutterAngle": {
+            "short_name": "sa",
+            "long_name": "shutterAngle",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 2.5132741228718345
+        },
+        "stereoHorizontalImageTranslate": {
+            "short_name": "hit",
+            "long_name": "stereoHorizontalImageTranslate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "stereoHorizontalImageTranslateEnabled": {
+            "short_name": "hte",
+            "long_name": "stereoHorizontalImageTranslateEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "template": {
+            "short_name": "tmp",
+            "long_name": "template",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "templateName": {
+            "short_name": "tna",
+            "long_name": "templateName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templatePath": {
+            "short_name": "tpt",
+            "long_name": "templatePath",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templateVersion": {
+            "short_name": "tpv",
+            "long_name": "templateVersion",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "threshold": {
+            "short_name": "tthd",
+            "long_name": "threshold",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.9
+        },
+        "transparencyBasedDepth": {
+            "short_name": "tdth",
+            "long_name": "transparencyBasedDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "triggerUpdate": {
+            "short_name": "tu",
+            "long_name": "triggerUpdate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "tumblePivot": {
+            "short_name": "tp",
+            "long_name": "tumblePivot",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "num_children": 3,
+            "children": [
+                "tumblePivotX",
+                "tumblePivotY",
+                "tumblePivotZ"
+            ]
+        },
+        "tumblePivotX": {
+            "short_name": "tpx",
+            "long_name": "tumblePivotX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "tumblePivot",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "tumblePivotY": {
+            "short_name": "tpy",
+            "long_name": "tumblePivotY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "tumblePivot",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "tumblePivotZ": {
+            "short_name": "tpz",
+            "long_name": "tumblePivotZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "tumblePivot",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "useExploreDepthFormat": {
+            "short_name": "uexd",
+            "long_name": "useExploreDepthFormat",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useObjectColor": {
+            "short_name": "uoc",
+            "long_name": "useObjectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "useOutlinerColor": {
+            "short_name": "uocol",
+            "long_name": "useOutlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "usePivotAsLocalSpace": {
+            "short_name": "uls",
+            "long_name": "usePivotAsLocalSpace",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "verticalFilmAperture": {
+            "short_name": "vfa",
+            "long_name": "verticalFilmAperture",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "cameraAperture",
+            "numeric_type": 14,
+            "default_value": 0.94488
+        },
+        "verticalFilmOffset": {
+            "short_name": "vfo",
+            "long_name": "verticalFilmOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "filmOffset",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "verticalPan": {
+            "short_name": "vpn",
+            "long_name": "verticalPan",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pan",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "verticalRollPivot": {
+            "short_name": "vrp",
+            "long_name": "verticalRollPivot",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "filmRollPivot",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "verticalShake": {
+            "short_name": "vs",
+            "long_name": "verticalShake",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shake",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "viewMode": {
+            "short_name": "vwm",
+            "long_name": "viewMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "viewName": {
+            "short_name": "vwn",
+            "long_name": "viewName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "visibility": {
+            "short_name": "v",
+            "long_name": "visibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "wireColorB": {
+            "short_name": "wfcb",
+            "long_name": "wireColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorG": {
+            "short_name": "wfcg",
+            "long_name": "wireColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorR": {
+            "short_name": "wfcr",
+            "long_name": "wireColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorRGB": {
+            "short_name": "wfcc",
+            "long_name": "wireColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "wireColorR",
+                "wireColorG",
+                "wireColorB"
+            ]
+        },
+        "worldInverseMatrix": {
+            "short_name": "wim",
+            "long_name": "worldInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix": {
+            "short_name": "wm",
+            "long_name": "worldMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "zoom": {
+            "short_name": "zom",
+            "long_name": "zoom",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        }
+    },
+    "pointLight": {
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "blackBox": {
+            "short_name": "bbx",
+            "long_name": "blackBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "borderConnections": {
+            "short_name": "boc",
+            "long_name": "borderConnections",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "num_elements": 0
+        },
+        "boundingBox": {
+            "short_name": "bb",
+            "long_name": "boundingBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMin",
+                "boundingBoxMax",
+                "boundingBoxSize"
+            ]
+        },
+        "boundingBoxCenterX": {
+            "short_name": "bcx",
+            "long_name": "boundingBoxCenterX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterY": {
+            "short_name": "bcy",
+            "long_name": "boundingBoxCenterY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterZ": {
+            "short_name": "bcz",
+            "long_name": "boundingBoxCenterZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMax": {
+            "short_name": "bbmx",
+            "long_name": "boundingBoxMax",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMaxX",
+                "boundingBoxMaxY",
+                "boundingBoxMaxZ"
+            ]
+        },
+        "boundingBoxMaxX": {
+            "short_name": "bbxx",
+            "long_name": "boundingBoxMaxX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxY": {
+            "short_name": "bbxy",
+            "long_name": "boundingBoxMaxY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxZ": {
+            "short_name": "bbxz",
+            "long_name": "boundingBoxMaxZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMin": {
+            "short_name": "bbmn",
+            "long_name": "boundingBoxMin",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMinX",
+                "boundingBoxMinY",
+                "boundingBoxMinZ"
+            ]
+        },
+        "boundingBoxMinX": {
+            "short_name": "bbnx",
+            "long_name": "boundingBoxMinX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinY": {
+            "short_name": "bbny",
+            "long_name": "boundingBoxMinY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinZ": {
+            "short_name": "bbnz",
+            "long_name": "boundingBoxMinZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSize": {
+            "short_name": "bbsi",
+            "long_name": "boundingBoxSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxSizeX",
+                "boundingBoxSizeY",
+                "boundingBoxSizeZ"
+            ]
+        },
+        "boundingBoxSizeX": {
+            "short_name": "bbsx",
+            "long_name": "boundingBoxSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeY": {
+            "short_name": "bbsy",
+            "long_name": "boundingBoxSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeZ": {
+            "short_name": "bbsz",
+            "long_name": "boundingBoxSizeZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "castSoftShadows": {
+            "short_name": "cw",
+            "long_name": "castSoftShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "center": {
+            "short_name": "c",
+            "long_name": "center",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "num_children": 3,
+            "children": [
+                "boundingBoxCenterX",
+                "boundingBoxCenterY",
+                "boundingBoxCenterZ"
+            ]
+        },
+        "centerOfIllumination": {
+            "short_name": "col",
+            "long_name": "centerOfIllumination",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 5.0
+        },
+        "color": {
+            "short_name": "cl",
+            "long_name": "color",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "colorR",
+                "colorG",
+                "colorB"
+            ]
+        },
+        "colorB": {
+            "short_name": "cb",
+            "long_name": "colorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorG": {
+            "short_name": "cg",
+            "long_name": "colorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorR": {
+            "short_name": "cr",
+            "long_name": "colorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "containerType": {
+            "short_name": "ctyp",
+            "long_name": "containerType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creationDate": {
+            "short_name": "cdat",
+            "long_name": "creationDate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creator": {
+            "short_name": "ctor",
+            "long_name": "creator",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "customTreatment": {
+            "short_name": "ctrt",
+            "long_name": "customTreatment",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "decayRate": {
+            "short_name": "de",
+            "long_name": "decayRate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "dmapBias": {
+            "short_name": "db",
+            "long_name": "dmapBias",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0010000000474974513
+        },
+        "dmapFarClipPlane": {
+            "short_name": "fcp",
+            "long_name": "dmapFarClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 10000.0
+        },
+        "dmapFilterSize": {
+            "short_name": "fs",
+            "long_name": "dmapFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "dmapFocus": {
+            "short_name": "df",
+            "long_name": "dmapFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 90.0
+        },
+        "dmapFrameExt": {
+            "short_name": "uf",
+            "long_name": "dmapFrameExt",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "dmapLightName": {
+            "short_name": "ul",
+            "long_name": "dmapLightName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "dmapName": {
+            "short_name": "smn",
+            "long_name": "dmapName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "dmapNearClipPlane": {
+            "short_name": "nc",
+            "long_name": "dmapNearClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0010000000474974513
+        },
+        "dmapResolution": {
+            "short_name": "dr",
+            "long_name": "dmapResolution",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 512
+        },
+        "dmapSceneName": {
+            "short_name": "um",
+            "long_name": "dmapSceneName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "dmapUseMacro": {
+            "short_name": "dc",
+            "long_name": "dmapUseMacro",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "dmapWidthFocus": {
+            "short_name": "dw",
+            "long_name": "dmapWidthFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 100.0
+        },
+        "drawOverride": {
+            "short_name": "do",
+            "long_name": "drawOverride",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 12,
+            "children": [
+                "overrideDisplayType",
+                "overrideLevelOfDetail",
+                "overrideShading",
+                "overrideTexturing",
+                "overridePlayback",
+                "overrideEnabled",
+                "overrideVisibility",
+                "hideOnPlayback",
+                "overrideRGBColors",
+                "overrideColor",
+                "overrideColorRGB",
+                "overrideColorA"
+            ]
+        },
+        "emitDiffuse": {
+            "short_name": "edi",
+            "long_name": "emitDiffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "emitSpecular": {
+            "short_name": "esp",
+            "long_name": "emitSpecular",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "farPointWorld": {
+            "short_name": "fw",
+            "long_name": "farPointWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "farPointWorldX",
+                "farPointWorldY",
+                "farPointWorldZ"
+            ]
+        },
+        "farPointWorldX": {
+            "short_name": "fwx",
+            "long_name": "farPointWorldX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "farPointWorldY": {
+            "short_name": "fwy",
+            "long_name": "farPointWorldY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "farPointWorldZ": {
+            "short_name": "fwz",
+            "long_name": "farPointWorldZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "fogGeometry": {
+            "short_name": "fg",
+            "long_name": "fogGeometry",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "fogIntensity": {
+            "short_name": "fin",
+            "long_name": "fogIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "fogRadius": {
+            "short_name": "fr",
+            "long_name": "fogRadius",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "fogShadowIntensity": {
+            "short_name": "fsi",
+            "long_name": "fogShadowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "fogType": {
+            "short_name": "ft",
+            "long_name": "fogType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostColorPost": {
+            "short_name": "gac",
+            "long_name": "ghostColorPost",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPostR",
+                "ghostColorPostG",
+                "ghostColorPostB"
+            ]
+        },
+        "ghostColorPostB": {
+            "short_name": "gab",
+            "long_name": "ghostColorPostB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6629999876022339
+        },
+        "ghostColorPostG": {
+            "short_name": "gag",
+            "long_name": "ghostColorPostG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6779999732971191
+        },
+        "ghostColorPostR": {
+            "short_name": "gar",
+            "long_name": "ghostColorPostR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.878000020980835
+        },
+        "ghostColorPre": {
+            "short_name": "gcp",
+            "long_name": "ghostColorPre",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPreR",
+                "ghostColorPreG",
+                "ghostColorPreB"
+            ]
+        },
+        "ghostColorPreB": {
+            "short_name": "gpb",
+            "long_name": "ghostColorPreB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreG": {
+            "short_name": "gpg",
+            "long_name": "ghostColorPreG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreR": {
+            "short_name": "grr",
+            "long_name": "ghostColorPreR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 0.44699999690055847
+        },
+        "ghostCustomSteps": {
+            "short_name": "gcs",
+            "long_name": "ghostCustomSteps",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "ghostPreFrames",
+                "ghostPostFrames",
+                "ghostsStep"
+            ]
+        },
+        "ghostDriver": {
+            "short_name": "gdr",
+            "long_name": "ghostDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "ghostFarOpacity": {
+            "short_name": "gfro",
+            "long_name": "ghostFarOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.15000000596046448
+        },
+        "ghostFrames": {
+            "short_name": "gf",
+            "long_name": "ghostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
+        },
+        "ghostNearOpacity": {
+            "short_name": "gnro",
+            "long_name": "ghostNearOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "ghostOpacityRange": {
+            "short_name": "golr",
+            "long_name": "ghostOpacityRange",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "ghostFarOpacity",
+                "ghostNearOpacity"
+            ]
+        },
+        "ghostPostFrames": {
+            "short_name": "gpof",
+            "long_name": "ghostPostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostPreFrames": {
+            "short_name": "gprf",
+            "long_name": "ghostPreFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostUseDriver": {
+            "short_name": "gud",
+            "long_name": "ghostUseDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghosting": {
+            "short_name": "gh",
+            "long_name": "ghosting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostingMode": {
+            "short_name": "gm",
+            "long_name": "ghostingMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "ghostsStep": {
+            "short_name": "gstp",
+            "long_name": "ghostsStep",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "hiddenInOutliner": {
+            "short_name": "hio",
+            "long_name": "hiddenInOutliner",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hideOnPlayback": {
+            "short_name": "hpb",
+            "long_name": "hideOnPlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hyperLayout": {
+            "short_name": "hl",
+            "long_name": "hyperLayout",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "iconName": {
+            "short_name": "icn",
+            "long_name": "iconName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "identification": {
+            "short_name": "rlid",
+            "long_name": "identification",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "infoBits": {
+            "short_name": "ib",
+            "long_name": "infoBits",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "instObjGroups": {
+            "short_name": "iog",
+            "long_name": "instObjGroups",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "intensity": {
+            "short_name": "in",
+            "long_name": "intensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "intermediateObject": {
+            "short_name": "io",
+            "long_name": "intermediateObject",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "inverseMatrix": {
+            "short_name": "im",
+            "long_name": "inverseMatrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "isCollapsed": {
+            "short_name": "isc",
+            "long_name": "isCollapsed",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHierarchicalConnection": {
+            "short_name": "ish",
+            "long_name": "isHierarchicalConnection",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
+        },
+        "lastWrittenDmapAnimExtName": {
+            "short_name": "lw",
+            "long_name": "lastWrittenDmapAnimExtName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "layerOverrideColor": {
+            "short_name": "lovc",
+            "long_name": "layerOverrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "layerRenderable": {
+            "short_name": "rndr",
+            "long_name": "layerRenderable",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "lightAmbient": {
+            "short_name": "la",
+            "long_name": "lightAmbient",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightBlindData": {
+            "short_name": "lbl",
+            "long_name": "lightBlindData",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "lightData": {
+            "short_name": "ltd",
+            "long_name": "lightData",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kLightDataAttribute",
+            "num_children": 8,
+            "children": [
+                "lightDirection",
+                "lightIntensity",
+                "lightAmbient",
+                "lightDiffuse",
+                "lightSpecular",
+                "lightShadowFraction",
+                "preShadowIntensity",
+                "lightBlindData"
+            ]
+        },
+        "lightDiffuse": {
+            "short_name": "ldf",
+            "long_name": "lightDiffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightDirection": {
+            "short_name": "ld",
+            "long_name": "lightDirection",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
+            "num_children": 3,
+            "children": [
+                "lightDirectionX",
+                "lightDirectionY",
+                "lightDirectionZ"
+            ]
+        },
+        "lightDirectionX": {
+            "short_name": "ldx",
+            "long_name": "lightDirectionX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDirectionY": {
+            "short_name": "ldy",
+            "long_name": "lightDirectionY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDirectionZ": {
+            "short_name": "ldz",
+            "long_name": "lightDirectionZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightGlow": {
+            "short_name": "lg",
+            "long_name": "lightGlow",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "lightIntensity": {
+            "short_name": "li",
+            "long_name": "lightIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
+            "num_children": 3,
+            "children": [
+                "lightIntensityR",
+                "lightIntensityG",
+                "lightIntensityB"
+            ]
+        },
+        "lightIntensityB": {
+            "short_name": "lib",
+            "long_name": "lightIntensityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightIntensityG": {
+            "short_name": "lig",
+            "long_name": "lightIntensityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightIntensityR": {
+            "short_name": "lir",
+            "long_name": "lightIntensityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightRadius": {
+            "short_name": "lr",
+            "long_name": "lightRadius",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightShadowFraction": {
+            "short_name": "lsf",
+            "long_name": "lightShadowFraction",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightSpecular": {
+            "short_name": "ls",
+            "long_name": "lightSpecular",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "locatorScale": {
+            "short_name": "lls",
+            "long_name": "locatorScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "lodVisibility": {
+            "short_name": "lodv",
+            "long_name": "lodVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "matrix": {
+            "short_name": "m",
+            "long_name": "matrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "matrixEyeToWorld": {
+            "short_name": "etw",
+            "long_name": "matrixEyeToWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kFloatMatrixAttribute"
+        },
+        "matrixWorldToEye": {
+            "short_name": "wte",
+            "long_name": "matrixWorldToEye",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kFloatMatrixAttribute"
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "objectColor": {
+            "short_name": "oc",
+            "long_name": "objectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "objectColorB": {
+            "short_name": "obcb",
+            "long_name": "objectColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorG": {
+            "short_name": "obcg",
+            "long_name": "objectColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorR": {
+            "short_name": "obcr",
+            "long_name": "objectColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorRGB": {
+            "short_name": "obcc",
+            "long_name": "objectColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "objectColorR",
+                "objectColorG",
+                "objectColorB"
+            ]
+        },
+        "objectId": {
+            "short_name": "oi",
+            "long_name": "objectId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "objectType": {
+            "short_name": "ot",
+            "long_name": "objectType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 3,
+            "default_value": 1
+        },
+        "opticalFXvisibility": {
+            "short_name": "ov",
+            "long_name": "opticalFXvisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "opticalFXvisibilityR",
+                "opticalFXvisibilityG",
+                "opticalFXvisibilityB"
+            ]
+        },
+        "opticalFXvisibilityB": {
+            "short_name": "ovb",
+            "long_name": "opticalFXvisibilityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "opticalFXvisibilityG": {
+            "short_name": "ovg",
+            "long_name": "opticalFXvisibilityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "opticalFXvisibilityR": {
+            "short_name": "ovr",
+            "long_name": "opticalFXvisibilityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "outlinerColor": {
+            "short_name": "oclr",
+            "long_name": "outlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outlinerColorR",
+                "outlinerColorG",
+                "outlinerColorB"
+            ]
+        },
+        "outlinerColorB": {
+            "short_name": "oclrb",
+            "long_name": "outlinerColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorG": {
+            "short_name": "oclrg",
+            "long_name": "outlinerColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorR": {
+            "short_name": "oclrr",
+            "long_name": "outlinerColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColor": {
+            "short_name": "ovc",
+            "long_name": "overrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "overrideColorA": {
+            "short_name": "ovca",
+            "long_name": "overrideColorA",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "overrideColorB": {
+            "short_name": "ovcb",
+            "long_name": "overrideColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorG": {
+            "short_name": "ovcg",
+            "long_name": "overrideColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorR": {
+            "short_name": "ovcr",
+            "long_name": "overrideColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorRGB": {
+            "short_name": "ovrgb",
+            "long_name": "overrideColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
+            "num_children": 3,
+            "children": [
+                "overrideColorR",
+                "overrideColorG",
+                "overrideColorB"
+            ]
+        },
+        "overrideDisplayType": {
+            "short_name": "ovdt",
+            "long_name": "overrideDisplayType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overrideEnabled": {
+            "short_name": "ove",
+            "long_name": "overrideEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideLevelOfDetail": {
+            "short_name": "ovlod",
+            "long_name": "overrideLevelOfDetail",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overridePlayback": {
+            "short_name": "ovp",
+            "long_name": "overridePlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideRGBColors": {
+            "short_name": "ovrgbf",
+            "long_name": "overrideRGBColors",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideShading": {
+            "short_name": "ovs",
+            "long_name": "overrideShading",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideTexturing": {
+            "short_name": "ovt",
+            "long_name": "overrideTexturing",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideVisibility": {
+            "short_name": "ovv",
+            "long_name": "overrideVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "parentInverseMatrix": {
+            "short_name": "pim",
+            "long_name": "parentInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix": {
+            "short_name": "pm",
+            "long_name": "parentMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "pointCamera": {
+            "short_name": "p",
+            "long_name": "pointCamera",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointCameraX",
+                "pointCameraY",
+                "pointCameraZ"
+            ]
+        },
+        "pointCameraX": {
+            "short_name": "px",
+            "long_name": "pointCameraX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraY": {
+            "short_name": "py",
+            "long_name": "pointCameraY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraZ": {
+            "short_name": "pz",
+            "long_name": "pointCameraZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorld": {
+            "short_name": "pw",
+            "long_name": "pointWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointWorldX",
+                "pointWorldY",
+                "pointWorldZ"
+            ]
+        },
+        "pointWorldX": {
+            "short_name": "tx",
+            "long_name": "pointWorldX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorldY": {
+            "short_name": "ty",
+            "long_name": "pointWorldY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorldZ": {
+            "short_name": "tz",
+            "long_name": "pointWorldZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "preShadowIntensity": {
+            "short_name": "psi",
+            "long_name": "preShadowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "primitiveId": {
+            "short_name": "pi",
+            "long_name": "primitiveId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "publishedNodeInfo": {
+            "short_name": "pni",
+            "long_name": "publishedNodeInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "rayDepth": {
+            "short_name": "rd",
+            "long_name": "rayDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "rayDepthLimit": {
+            "short_name": "rdl",
+            "long_name": "rayDepthLimit",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 3
+        },
+        "rayInstance": {
+            "short_name": "ryi",
+            "long_name": "rayInstance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "raySampler": {
+            "short_name": "rts",
+            "long_name": "raySampler",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "receiveShadows": {
+            "short_name": "gs",
+            "long_name": "receiveShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "renderInfo": {
+            "short_name": "ri",
+            "long_name": "renderInfo",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "identification",
+                "layerRenderable",
+                "layerOverrideColor"
+            ]
+        },
+        "renderLayerInfo": {
+            "short_name": "rlio",
+            "long_name": "renderLayerInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "renderState": {
+            "short_name": "rdst",
+            "long_name": "renderState",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "reuseDmap": {
+            "short_name": "du",
+            "long_name": "reuseDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "rmbCommand": {
+            "short_name": "rmc",
+            "long_name": "rmbCommand",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "selectionChildHighlighting": {
+            "short_name": "sech",
+            "long_name": "selectionChildHighlighting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "shadColorB": {
+            "short_name": "scb",
+            "long_name": "shadColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadColorG": {
+            "short_name": "scg",
+            "long_name": "shadColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadColorR": {
+            "short_name": "scr",
+            "long_name": "shadColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadowColor": {
+            "short_name": "sc",
+            "long_name": "shadowColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "shadColorR",
+                "shadColorG",
+                "shadColorB"
+            ]
+        },
+        "shadowRays": {
+            "short_name": "shr",
+            "long_name": "shadowRays",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "template": {
+            "short_name": "tmp",
+            "long_name": "template",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "templateName": {
+            "short_name": "tna",
+            "long_name": "templateName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templatePath": {
+            "short_name": "tpt",
+            "long_name": "templatePath",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templateVersion": {
+            "short_name": "tpv",
+            "long_name": "templateVersion",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "uCoord": {
+            "short_name": "uu",
+            "long_name": "uCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "useDepthMapShadows": {
+            "short_name": "dms",
+            "long_name": "useDepthMapShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useDmapAutoClipping": {
+            "short_name": "uc",
+            "long_name": "useDmapAutoClipping",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useDmapAutoFocus": {
+            "short_name": "af",
+            "long_name": "useDmapAutoFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useMidDistDmap": {
+            "short_name": "md",
+            "long_name": "useMidDistDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useObjectColor": {
+            "short_name": "uoc",
+            "long_name": "useObjectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "useOnlySingleDmap": {
+            "short_name": "us",
+            "long_name": "useOnlySingleDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useOutlinerColor": {
+            "short_name": "uocol",
+            "long_name": "useOutlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useRayTraceShadows": {
+            "short_name": "urs",
+            "long_name": "useRayTraceShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useXMinusDmap": {
+            "short_name": "xn",
+            "long_name": "useXMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useXPlusDmap": {
+            "short_name": "xp",
+            "long_name": "useXPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useYMinusDmap": {
+            "short_name": "yn",
+            "long_name": "useYMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useYPlusDmap": {
+            "short_name": "yp",
+            "long_name": "useYPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useZMinusDmap": {
+            "short_name": "zn",
+            "long_name": "useZMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useZPlusDmap": {
+            "short_name": "zp",
+            "long_name": "useZPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "uvCoord": {
+            "short_name": "uv",
+            "long_name": "uvCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uCoord",
+                "vCoord"
+            ]
+        },
+        "uvFilterSize": {
+            "short_name": "fq",
+            "long_name": "uvFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uvFilterSizeX",
+                "uvFilterSizeY"
+            ]
+        },
+        "uvFilterSizeX": {
+            "short_name": "fsx",
+            "long_name": "uvFilterSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "uvFilterSizeY": {
+            "short_name": "fsy",
+            "long_name": "uvFilterSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vCoord": {
+            "short_name": "vv",
+            "long_name": "vCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "viewMode": {
+            "short_name": "vwm",
+            "long_name": "viewMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "viewName": {
+            "short_name": "vwn",
+            "long_name": "viewName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "visibility": {
+            "short_name": "v",
+            "long_name": "visibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "volumeShadowSamples": {
+            "short_name": "nv",
+            "long_name": "volumeShadowSamples",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 20
+        },
+        "wireColorB": {
+            "short_name": "wfcb",
+            "long_name": "wireColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorG": {
+            "short_name": "wfcg",
+            "long_name": "wireColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorR": {
+            "short_name": "wfcr",
+            "long_name": "wireColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorRGB": {
+            "short_name": "wfcc",
+            "long_name": "wireColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "wireColorR",
+                "wireColorG",
+                "wireColorB"
+            ]
+        },
+        "worldInverseMatrix": {
+            "short_name": "wim",
+            "long_name": "worldInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix": {
+            "short_name": "wm",
+            "long_name": "worldMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "writeDmap": {
+            "short_name": "ws",
+            "long_name": "writeDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        }
+    },
+    "spotLight": {
+        "barnDoors": {
+            "short_name": "bd",
+            "long_name": "barnDoors",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "blackBox": {
+            "short_name": "bbx",
+            "long_name": "blackBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "borderConnections": {
+            "short_name": "boc",
+            "long_name": "borderConnections",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "num_elements": 0
+        },
+        "bottomBarnDoor": {
+            "short_name": "bbd",
+            "long_name": "bottomBarnDoor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.3490658503988659
+        },
+        "boundingBox": {
+            "short_name": "bb",
+            "long_name": "boundingBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMin",
+                "boundingBoxMax",
+                "boundingBoxSize"
+            ]
+        },
+        "boundingBoxCenterX": {
+            "short_name": "bcx",
+            "long_name": "boundingBoxCenterX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterY": {
+            "short_name": "bcy",
+            "long_name": "boundingBoxCenterY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterZ": {
+            "short_name": "bcz",
+            "long_name": "boundingBoxCenterZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMax": {
+            "short_name": "bbmx",
+            "long_name": "boundingBoxMax",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMaxX",
+                "boundingBoxMaxY",
+                "boundingBoxMaxZ"
+            ]
+        },
+        "boundingBoxMaxX": {
+            "short_name": "bbxx",
+            "long_name": "boundingBoxMaxX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxY": {
+            "short_name": "bbxy",
+            "long_name": "boundingBoxMaxY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxZ": {
+            "short_name": "bbxz",
+            "long_name": "boundingBoxMaxZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMin": {
+            "short_name": "bbmn",
+            "long_name": "boundingBoxMin",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMinX",
+                "boundingBoxMinY",
+                "boundingBoxMinZ"
+            ]
+        },
+        "boundingBoxMinX": {
+            "short_name": "bbnx",
+            "long_name": "boundingBoxMinX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinY": {
+            "short_name": "bbny",
+            "long_name": "boundingBoxMinY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinZ": {
+            "short_name": "bbnz",
+            "long_name": "boundingBoxMinZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSize": {
+            "short_name": "bbsi",
+            "long_name": "boundingBoxSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxSizeX",
+                "boundingBoxSizeY",
+                "boundingBoxSizeZ"
+            ]
+        },
+        "boundingBoxSizeX": {
+            "short_name": "bbsx",
+            "long_name": "boundingBoxSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeY": {
+            "short_name": "bbsy",
+            "long_name": "boundingBoxSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeZ": {
+            "short_name": "bbsz",
+            "long_name": "boundingBoxSizeZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "castSoftShadows": {
+            "short_name": "cw",
+            "long_name": "castSoftShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "center": {
+            "short_name": "c",
+            "long_name": "center",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "num_children": 3,
+            "children": [
+                "boundingBoxCenterX",
+                "boundingBoxCenterY",
+                "boundingBoxCenterZ"
+            ]
+        },
+        "centerOfIllumination": {
+            "short_name": "col",
+            "long_name": "centerOfIllumination",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 5.0
+        },
+        "color": {
+            "short_name": "cl",
+            "long_name": "color",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "colorR",
+                "colorG",
+                "colorB"
+            ]
+        },
+        "colorB": {
+            "short_name": "cb",
+            "long_name": "colorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorG": {
+            "short_name": "cg",
+            "long_name": "colorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorR": {
+            "short_name": "cr",
+            "long_name": "colorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "coneAngle": {
+            "short_name": "ca",
+            "long_name": "coneAngle",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.6981317007977318
+        },
+        "containerType": {
+            "short_name": "ctyp",
+            "long_name": "containerType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creationDate": {
+            "short_name": "cdat",
+            "long_name": "creationDate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creator": {
+            "short_name": "ctor",
+            "long_name": "creator",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "customTreatment": {
+            "short_name": "ctrt",
+            "long_name": "customTreatment",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "decayRate": {
+            "short_name": "de",
+            "long_name": "decayRate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "dmapBias": {
+            "short_name": "db",
+            "long_name": "dmapBias",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0010000000474974513
+        },
+        "dmapFarClipPlane": {
+            "short_name": "fcp",
+            "long_name": "dmapFarClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 10000.0
+        },
+        "dmapFilterSize": {
+            "short_name": "fs",
+            "long_name": "dmapFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "dmapFocus": {
+            "short_name": "df",
+            "long_name": "dmapFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 90.0
+        },
+        "dmapFrameExt": {
+            "short_name": "uf",
+            "long_name": "dmapFrameExt",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "dmapLightName": {
+            "short_name": "ul",
+            "long_name": "dmapLightName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "dmapName": {
+            "short_name": "smn",
+            "long_name": "dmapName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "dmapNearClipPlane": {
+            "short_name": "nc",
+            "long_name": "dmapNearClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0010000000474974513
+        },
+        "dmapResolution": {
+            "short_name": "dr",
+            "long_name": "dmapResolution",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 512
+        },
+        "dmapSceneName": {
+            "short_name": "um",
+            "long_name": "dmapSceneName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "dmapUseMacro": {
+            "short_name": "dc",
+            "long_name": "dmapUseMacro",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "dmapWidthFocus": {
+            "short_name": "dw",
+            "long_name": "dmapWidthFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 100.0
+        },
+        "drawOverride": {
+            "short_name": "do",
+            "long_name": "drawOverride",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 12,
+            "children": [
+                "overrideDisplayType",
+                "overrideLevelOfDetail",
+                "overrideShading",
+                "overrideTexturing",
+                "overridePlayback",
+                "overrideEnabled",
+                "overrideVisibility",
+                "hideOnPlayback",
+                "overrideRGBColors",
+                "overrideColor",
+                "overrideColorRGB",
+                "overrideColorA"
+            ]
+        },
+        "dropoff": {
+            "short_name": "dro",
+            "long_name": "dropoff",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "emitDiffuse": {
+            "short_name": "edi",
+            "long_name": "emitDiffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "emitSpecular": {
+            "short_name": "esp",
+            "long_name": "emitSpecular",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "farPointWorld": {
+            "short_name": "fw",
+            "long_name": "farPointWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "farPointWorldX",
+                "farPointWorldY",
+                "farPointWorldZ"
+            ]
+        },
+        "farPointWorldX": {
+            "short_name": "fx",
+            "long_name": "farPointWorldX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "farPointWorldY": {
+            "short_name": "fy",
+            "long_name": "farPointWorldY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "farPointWorldZ": {
+            "short_name": "fz",
+            "long_name": "farPointWorldZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "fogGeometry": {
+            "short_name": "fg",
+            "long_name": "fogGeometry",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "fogIntensity": {
+            "short_name": "fin",
+            "long_name": "fogIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "fogShadowIntensity": {
+            "short_name": "fsi",
+            "long_name": "fogShadowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "fogSpread": {
+            "short_name": "fsp",
+            "long_name": "fogSpread",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostColorPost": {
+            "short_name": "gac",
+            "long_name": "ghostColorPost",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPostR",
+                "ghostColorPostG",
+                "ghostColorPostB"
+            ]
+        },
+        "ghostColorPostB": {
+            "short_name": "gab",
+            "long_name": "ghostColorPostB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6629999876022339
+        },
+        "ghostColorPostG": {
+            "short_name": "gag",
+            "long_name": "ghostColorPostG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6779999732971191
+        },
+        "ghostColorPostR": {
+            "short_name": "gar",
+            "long_name": "ghostColorPostR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.878000020980835
+        },
+        "ghostColorPre": {
+            "short_name": "gcp",
+            "long_name": "ghostColorPre",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPreR",
+                "ghostColorPreG",
+                "ghostColorPreB"
+            ]
+        },
+        "ghostColorPreB": {
+            "short_name": "gpb",
+            "long_name": "ghostColorPreB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreG": {
+            "short_name": "gpg",
+            "long_name": "ghostColorPreG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreR": {
+            "short_name": "grr",
+            "long_name": "ghostColorPreR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 0.44699999690055847
+        },
+        "ghostCustomSteps": {
+            "short_name": "gcs",
+            "long_name": "ghostCustomSteps",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "ghostPreFrames",
+                "ghostPostFrames",
+                "ghostsStep"
+            ]
+        },
+        "ghostDriver": {
+            "short_name": "gdr",
+            "long_name": "ghostDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "ghostFarOpacity": {
+            "short_name": "gfro",
+            "long_name": "ghostFarOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.15000000596046448
+        },
+        "ghostFrames": {
+            "short_name": "gf",
+            "long_name": "ghostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
+        },
+        "ghostNearOpacity": {
+            "short_name": "gnro",
+            "long_name": "ghostNearOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "ghostOpacityRange": {
+            "short_name": "golr",
+            "long_name": "ghostOpacityRange",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "ghostFarOpacity",
+                "ghostNearOpacity"
+            ]
+        },
+        "ghostPostFrames": {
+            "short_name": "gpof",
+            "long_name": "ghostPostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostPreFrames": {
+            "short_name": "gprf",
+            "long_name": "ghostPreFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostUseDriver": {
+            "short_name": "gud",
+            "long_name": "ghostUseDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghosting": {
+            "short_name": "gh",
+            "long_name": "ghosting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostingMode": {
+            "short_name": "gm",
+            "long_name": "ghostingMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "ghostsStep": {
+            "short_name": "gstp",
+            "long_name": "ghostsStep",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "hiddenInOutliner": {
+            "short_name": "hio",
+            "long_name": "hiddenInOutliner",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hideOnPlayback": {
+            "short_name": "hpb",
+            "long_name": "hideOnPlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hyperLayout": {
+            "short_name": "hl",
+            "long_name": "hyperLayout",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "iconName": {
+            "short_name": "icn",
+            "long_name": "iconName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "identification": {
+            "short_name": "rlid",
+            "long_name": "identification",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "infoBits": {
+            "short_name": "ib",
+            "long_name": "infoBits",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "instObjGroups": {
+            "short_name": "iog",
+            "long_name": "instObjGroups",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "intensity": {
+            "short_name": "in",
+            "long_name": "intensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "intermediateObject": {
+            "short_name": "io",
+            "long_name": "intermediateObject",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "inverseMatrix": {
+            "short_name": "im",
+            "long_name": "inverseMatrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "isCollapsed": {
+            "short_name": "isc",
+            "long_name": "isCollapsed",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHierarchicalConnection": {
+            "short_name": "ish",
+            "long_name": "isHierarchicalConnection",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
+        },
+        "lastWrittenDmapAnimExtName": {
+            "short_name": "lw",
+            "long_name": "lastWrittenDmapAnimExtName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "layerOverrideColor": {
+            "short_name": "lovc",
+            "long_name": "layerOverrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "layerRenderable": {
+            "short_name": "rndr",
+            "long_name": "layerRenderable",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "leftBarnDoor": {
+            "short_name": "lbd",
+            "long_name": "leftBarnDoor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.3490658503988659
+        },
+        "lightAmbient": {
+            "short_name": "la",
+            "long_name": "lightAmbient",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightBlindData": {
+            "short_name": "lbl",
+            "long_name": "lightBlindData",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "lightData": {
+            "short_name": "ltd",
+            "long_name": "lightData",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kLightDataAttribute",
+            "num_children": 8,
+            "children": [
+                "lightDirection",
+                "lightIntensity",
+                "lightAmbient",
+                "lightDiffuse",
+                "lightSpecular",
+                "lightShadowFraction",
+                "preShadowIntensity",
+                "lightBlindData"
+            ]
+        },
+        "lightDiffuse": {
+            "short_name": "ldf",
+            "long_name": "lightDiffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightDirection": {
+            "short_name": "ld",
+            "long_name": "lightDirection",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
+            "num_children": 3,
+            "children": [
+                "lightDirectionX",
+                "lightDirectionY",
+                "lightDirectionZ"
+            ]
+        },
+        "lightDirectionX": {
+            "short_name": "ldx",
+            "long_name": "lightDirectionX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDirectionY": {
+            "short_name": "ldy",
+            "long_name": "lightDirectionY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDirectionZ": {
+            "short_name": "ldz",
+            "long_name": "lightDirectionZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightGlow": {
+            "short_name": "lg",
+            "long_name": "lightGlow",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "lightIntensity": {
+            "short_name": "li",
+            "long_name": "lightIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
+            "num_children": 3,
+            "children": [
+                "lightIntensityR",
+                "lightIntensityG",
+                "lightIntensityB"
+            ]
+        },
+        "lightIntensityB": {
+            "short_name": "lib",
+            "long_name": "lightIntensityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightIntensityG": {
+            "short_name": "lig",
+            "long_name": "lightIntensityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightIntensityR": {
+            "short_name": "lir",
+            "long_name": "lightIntensityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightRadius": {
+            "short_name": "lr",
+            "long_name": "lightRadius",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightShadowFraction": {
+            "short_name": "lsf",
+            "long_name": "lightShadowFraction",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightSpecular": {
+            "short_name": "ls",
+            "long_name": "lightSpecular",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "locatorScale": {
+            "short_name": "lls",
+            "long_name": "locatorScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "lodVisibility": {
+            "short_name": "lodv",
+            "long_name": "lodVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "matrix": {
+            "short_name": "m",
+            "long_name": "matrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "matrixEyeToWorld": {
+            "short_name": "etw",
+            "long_name": "matrixEyeToWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kFloatMatrixAttribute"
+        },
+        "matrixWorldToEye": {
+            "short_name": "wte",
+            "long_name": "matrixWorldToEye",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kFloatMatrixAttribute"
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "objectColor": {
+            "short_name": "oc",
+            "long_name": "objectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "objectColorB": {
+            "short_name": "obcb",
+            "long_name": "objectColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorG": {
+            "short_name": "obcg",
+            "long_name": "objectColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorR": {
+            "short_name": "obcr",
+            "long_name": "objectColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorRGB": {
+            "short_name": "obcc",
+            "long_name": "objectColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "objectColorR",
+                "objectColorG",
+                "objectColorB"
+            ]
+        },
+        "objectId": {
+            "short_name": "oi",
+            "long_name": "objectId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "objectType": {
+            "short_name": "ot",
+            "long_name": "objectType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 3,
+            "default_value": 1
+        },
+        "opticalFXvisibility": {
+            "short_name": "ov",
+            "long_name": "opticalFXvisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "opticalFXvisibilityR",
+                "opticalFXvisibilityG",
+                "opticalFXvisibilityB"
+            ]
+        },
+        "opticalFXvisibilityB": {
+            "short_name": "ovb",
+            "long_name": "opticalFXvisibilityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "opticalFXvisibilityG": {
+            "short_name": "ovg",
+            "long_name": "opticalFXvisibilityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "opticalFXvisibilityR": {
+            "short_name": "ovr",
+            "long_name": "opticalFXvisibilityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "outlinerColor": {
+            "short_name": "oclr",
+            "long_name": "outlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outlinerColorR",
+                "outlinerColorG",
+                "outlinerColorB"
+            ]
+        },
+        "outlinerColorB": {
+            "short_name": "oclrb",
+            "long_name": "outlinerColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorG": {
+            "short_name": "oclrg",
+            "long_name": "outlinerColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorR": {
+            "short_name": "oclrr",
+            "long_name": "outlinerColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColor": {
+            "short_name": "ovc",
+            "long_name": "overrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "overrideColorA": {
+            "short_name": "ovca",
+            "long_name": "overrideColorA",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "overrideColorB": {
+            "short_name": "ovcb",
+            "long_name": "overrideColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorG": {
+            "short_name": "ovcg",
+            "long_name": "overrideColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorR": {
+            "short_name": "ovcr",
+            "long_name": "overrideColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorRGB": {
+            "short_name": "ovrgb",
+            "long_name": "overrideColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
+            "num_children": 3,
+            "children": [
+                "overrideColorR",
+                "overrideColorG",
+                "overrideColorB"
+            ]
+        },
+        "overrideDisplayType": {
+            "short_name": "ovdt",
+            "long_name": "overrideDisplayType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overrideEnabled": {
+            "short_name": "ove",
+            "long_name": "overrideEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideLevelOfDetail": {
+            "short_name": "ovlod",
+            "long_name": "overrideLevelOfDetail",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overridePlayback": {
+            "short_name": "ovp",
+            "long_name": "overridePlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideRGBColors": {
+            "short_name": "ovrgbf",
+            "long_name": "overrideRGBColors",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideShading": {
+            "short_name": "ovs",
+            "long_name": "overrideShading",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideTexturing": {
+            "short_name": "ovt",
+            "long_name": "overrideTexturing",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideVisibility": {
+            "short_name": "ovv",
+            "long_name": "overrideVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "parentInverseMatrix": {
+            "short_name": "pim",
+            "long_name": "parentInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix": {
+            "short_name": "pm",
+            "long_name": "parentMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "penumbraAngle": {
+            "short_name": "pa",
+            "long_name": "penumbraAngle",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.0
+        },
+        "pointCamera": {
+            "short_name": "p",
+            "long_name": "pointCamera",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointCameraX",
+                "pointCameraY",
+                "pointCameraZ"
+            ]
+        },
+        "pointCameraX": {
+            "short_name": "px",
+            "long_name": "pointCameraX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraY": {
+            "short_name": "py",
+            "long_name": "pointCameraY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraZ": {
+            "short_name": "pz",
+            "long_name": "pointCameraZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorld": {
+            "short_name": "pw",
+            "long_name": "pointWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointWorldX",
+                "pointWorldY",
+                "pointWorldZ"
+            ]
+        },
+        "pointWorldX": {
+            "short_name": "tx",
+            "long_name": "pointWorldX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorldY": {
+            "short_name": "ty",
+            "long_name": "pointWorldY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorldZ": {
+            "short_name": "tz",
+            "long_name": "pointWorldZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "preShadowIntensity": {
+            "short_name": "psi",
+            "long_name": "preShadowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "primitiveId": {
+            "short_name": "pi",
+            "long_name": "primitiveId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "psIllumSamples": {
+            "short_name": "pis",
+            "long_name": "psIllumSamples",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "publishedNodeInfo": {
+            "short_name": "pni",
+            "long_name": "publishedNodeInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "rayDepth": {
+            "short_name": "rd",
+            "long_name": "rayDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "rayDepthLimit": {
+            "short_name": "rdl",
+            "long_name": "rayDepthLimit",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 3
+        },
+        "rayDirection": {
+            "short_name": "rad",
+            "long_name": "rayDirection",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "rayDirectionX",
+                "rayDirectionY",
+                "rayDirectionZ"
+            ]
+        },
+        "rayDirectionX": {
+            "short_name": "rdx",
+            "long_name": "rayDirectionX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "rayDirectionY": {
+            "short_name": "rdy",
+            "long_name": "rayDirectionY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "rayDirectionZ": {
+            "short_name": "rdz",
+            "long_name": "rayDirectionZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "rayInstance": {
+            "short_name": "ryi",
+            "long_name": "rayInstance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "raySampler": {
+            "short_name": "rts",
+            "long_name": "raySampler",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "receiveShadows": {
+            "short_name": "gs",
+            "long_name": "receiveShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "renderInfo": {
+            "short_name": "ri",
+            "long_name": "renderInfo",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "identification",
+                "layerRenderable",
+                "layerOverrideColor"
+            ]
+        },
+        "renderLayerInfo": {
+            "short_name": "rlio",
+            "long_name": "renderLayerInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "renderState": {
+            "short_name": "rdst",
+            "long_name": "renderState",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "reuseDmap": {
+            "short_name": "du",
+            "long_name": "reuseDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "rightBarnDoor": {
+            "short_name": "rbd",
+            "long_name": "rightBarnDoor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.3490658503988659
+        },
+        "rmbCommand": {
+            "short_name": "rmc",
+            "long_name": "rmbCommand",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "selectionChildHighlighting": {
+            "short_name": "sech",
+            "long_name": "selectionChildHighlighting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "shadColorB": {
+            "short_name": "scb",
+            "long_name": "shadColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadColorG": {
+            "short_name": "scg",
+            "long_name": "shadColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadColorR": {
+            "short_name": "scr",
+            "long_name": "shadColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadowColor": {
+            "short_name": "sc",
+            "long_name": "shadowColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "shadColorR",
+                "shadColorG",
+                "shadColorB"
+            ]
+        },
+        "shadowRays": {
+            "short_name": "shr",
+            "long_name": "shadowRays",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "template": {
+            "short_name": "tmp",
+            "long_name": "template",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "templateName": {
+            "short_name": "tna",
+            "long_name": "templateName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templatePath": {
+            "short_name": "tpt",
+            "long_name": "templatePath",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templateVersion": {
+            "short_name": "tpv",
+            "long_name": "templateVersion",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "topBarnDoor": {
+            "short_name": "tbd",
+            "long_name": "topBarnDoor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.3490658503988659
+        },
+        "uCoord": {
+            "short_name": "uu",
+            "long_name": "uCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "useDecayRegions": {
+            "short_name": "udr",
+            "long_name": "useDecayRegions",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useDepthMapShadows": {
+            "short_name": "dms",
+            "long_name": "useDepthMapShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useDmapAutoClipping": {
+            "short_name": "uc",
+            "long_name": "useDmapAutoClipping",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useDmapAutoFocus": {
+            "short_name": "af",
+            "long_name": "useDmapAutoFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useMidDistDmap": {
+            "short_name": "md",
+            "long_name": "useMidDistDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useObjectColor": {
+            "short_name": "uoc",
+            "long_name": "useObjectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "useOnlySingleDmap": {
+            "short_name": "us",
+            "long_name": "useOnlySingleDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useOutlinerColor": {
+            "short_name": "uocol",
+            "long_name": "useOutlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useRayTraceShadows": {
+            "short_name": "urs",
+            "long_name": "useRayTraceShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useXMinusDmap": {
+            "short_name": "xn",
+            "long_name": "useXMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useXPlusDmap": {
+            "short_name": "xp",
+            "long_name": "useXPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useYMinusDmap": {
+            "short_name": "yn",
+            "long_name": "useYMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useYPlusDmap": {
+            "short_name": "yp",
+            "long_name": "useYPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useZMinusDmap": {
+            "short_name": "zn",
+            "long_name": "useZMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useZPlusDmap": {
+            "short_name": "zp",
+            "long_name": "useZPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "uvCoord": {
+            "short_name": "uv",
+            "long_name": "uvCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uCoord",
+                "vCoord"
+            ]
+        },
+        "uvFilterSize": {
+            "short_name": "fq",
+            "long_name": "uvFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uvFilterSizeX",
+                "uvFilterSizeY"
+            ]
+        },
+        "uvFilterSizeX": {
+            "short_name": "fsx",
+            "long_name": "uvFilterSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "uvFilterSizeY": {
+            "short_name": "fsy",
+            "long_name": "uvFilterSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vCoord": {
+            "short_name": "vv",
+            "long_name": "vCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "viewMode": {
+            "short_name": "vwm",
+            "long_name": "viewMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "viewName": {
+            "short_name": "vwn",
+            "long_name": "viewName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "visibility": {
+            "short_name": "v",
+            "long_name": "visibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "volumeShadowSamples": {
+            "short_name": "nv",
+            "long_name": "volumeShadowSamples",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 20
+        },
+        "wireColorB": {
+            "short_name": "wfcb",
+            "long_name": "wireColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorG": {
+            "short_name": "wfcg",
+            "long_name": "wireColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorR": {
+            "short_name": "wfcr",
+            "long_name": "wireColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorRGB": {
+            "short_name": "wfcc",
+            "long_name": "wireColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "wireColorR",
+                "wireColorG",
+                "wireColorB"
+            ]
+        },
+        "worldInverseMatrix": {
+            "short_name": "wim",
+            "long_name": "worldInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix": {
+            "short_name": "wm",
+            "long_name": "worldMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "writeDmap": {
+            "short_name": "ws",
+            "long_name": "writeDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        }
+    },
+    "areaLight": {
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "blackBox": {
+            "short_name": "bbx",
+            "long_name": "blackBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "borderConnections": {
+            "short_name": "boc",
+            "long_name": "borderConnections",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "num_elements": 0
+        },
+        "boundingBox": {
+            "short_name": "bb",
+            "long_name": "boundingBox",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMin",
+                "boundingBoxMax",
+                "boundingBoxSize"
+            ]
+        },
+        "boundingBoxCenterX": {
+            "short_name": "bcx",
+            "long_name": "boundingBoxCenterX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterY": {
+            "short_name": "bcy",
+            "long_name": "boundingBoxCenterY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxCenterZ": {
+            "short_name": "bcz",
+            "long_name": "boundingBoxCenterZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMax": {
+            "short_name": "bbmx",
+            "long_name": "boundingBoxMax",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMaxX",
+                "boundingBoxMaxY",
+                "boundingBoxMaxZ"
+            ]
+        },
+        "boundingBoxMaxX": {
+            "short_name": "bbxx",
+            "long_name": "boundingBoxMaxX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxY": {
+            "short_name": "bbxy",
+            "long_name": "boundingBoxMaxY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMaxZ": {
+            "short_name": "bbxz",
+            "long_name": "boundingBoxMaxZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMin": {
+            "short_name": "bbmn",
+            "long_name": "boundingBoxMin",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxMinX",
+                "boundingBoxMinY",
+                "boundingBoxMinZ"
+            ]
+        },
+        "boundingBoxMinX": {
+            "short_name": "bbnx",
+            "long_name": "boundingBoxMinX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinY": {
+            "short_name": "bbny",
+            "long_name": "boundingBoxMinY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxMinZ": {
+            "short_name": "bbnz",
+            "long_name": "boundingBoxMinZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSize": {
+            "short_name": "bbsi",
+            "long_name": "boundingBoxSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
+            "num_children": 3,
+            "children": [
+                "boundingBoxSizeX",
+                "boundingBoxSizeY",
+                "boundingBoxSizeZ"
+            ]
+        },
+        "boundingBoxSizeX": {
+            "short_name": "bbsx",
+            "long_name": "boundingBoxSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeY": {
+            "short_name": "bbsy",
+            "long_name": "boundingBoxSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "boundingBoxSizeZ": {
+            "short_name": "bbsz",
+            "long_name": "boundingBoxSizeZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "castSoftShadows": {
+            "short_name": "cw",
+            "long_name": "castSoftShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "center": {
+            "short_name": "c",
+            "long_name": "center",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "num_children": 3,
+            "children": [
+                "boundingBoxCenterX",
+                "boundingBoxCenterY",
+                "boundingBoxCenterZ"
+            ]
+        },
+        "centerOfIllumination": {
+            "short_name": "col",
+            "long_name": "centerOfIllumination",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 5.0
+        },
+        "color": {
+            "short_name": "cl",
+            "long_name": "color",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "colorR",
+                "colorG",
+                "colorB"
+            ]
+        },
+        "colorB": {
+            "short_name": "cb",
+            "long_name": "colorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorG": {
+            "short_name": "cg",
+            "long_name": "colorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorR": {
+            "short_name": "cr",
+            "long_name": "colorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "containerType": {
+            "short_name": "ctyp",
+            "long_name": "containerType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creationDate": {
+            "short_name": "cdat",
+            "long_name": "creationDate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "creator": {
+            "short_name": "ctor",
+            "long_name": "creator",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "customTreatment": {
+            "short_name": "ctrt",
+            "long_name": "customTreatment",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "decayRate": {
+            "short_name": "de",
+            "long_name": "decayRate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "dmapBias": {
+            "short_name": "db",
+            "long_name": "dmapBias",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0010000000474974513
+        },
+        "dmapFarClipPlane": {
+            "short_name": "fcp",
+            "long_name": "dmapFarClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 10000.0
+        },
+        "dmapFilterSize": {
+            "short_name": "fs",
+            "long_name": "dmapFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "dmapFocus": {
+            "short_name": "df",
+            "long_name": "dmapFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 90.0
+        },
+        "dmapFrameExt": {
+            "short_name": "uf",
+            "long_name": "dmapFrameExt",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "dmapLightName": {
+            "short_name": "ul",
+            "long_name": "dmapLightName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "dmapName": {
+            "short_name": "smn",
+            "long_name": "dmapName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "dmapNearClipPlane": {
+            "short_name": "nc",
+            "long_name": "dmapNearClipPlane",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0010000000474974513
+        },
+        "dmapResolution": {
+            "short_name": "dr",
+            "long_name": "dmapResolution",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 512
+        },
+        "dmapSceneName": {
+            "short_name": "um",
+            "long_name": "dmapSceneName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "dmapUseMacro": {
+            "short_name": "dc",
+            "long_name": "dmapUseMacro",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "dmapWidthFocus": {
+            "short_name": "dw",
+            "long_name": "dmapWidthFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 100.0
+        },
+        "drawOverride": {
+            "short_name": "do",
+            "long_name": "drawOverride",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 12,
+            "children": [
+                "overrideDisplayType",
+                "overrideLevelOfDetail",
+                "overrideShading",
+                "overrideTexturing",
+                "overridePlayback",
+                "overrideEnabled",
+                "overrideVisibility",
+                "hideOnPlayback",
+                "overrideRGBColors",
+                "overrideColor",
+                "overrideColorRGB",
+                "overrideColorA"
+            ]
+        },
+        "emitDiffuse": {
+            "short_name": "edi",
+            "long_name": "emitDiffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "emitSpecular": {
+            "short_name": "esp",
+            "long_name": "emitSpecular",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "fogShadowIntensity": {
+            "short_name": "fsi",
+            "long_name": "fogShadowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostColorPost": {
+            "short_name": "gac",
+            "long_name": "ghostColorPost",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPostR",
+                "ghostColorPostG",
+                "ghostColorPostB"
+            ]
+        },
+        "ghostColorPostB": {
+            "short_name": "gab",
+            "long_name": "ghostColorPostB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6629999876022339
+        },
+        "ghostColorPostG": {
+            "short_name": "gag",
+            "long_name": "ghostColorPostG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.6779999732971191
+        },
+        "ghostColorPostR": {
+            "short_name": "gar",
+            "long_name": "ghostColorPostR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
+            "numeric_type": 11,
+            "default_value": 0.878000020980835
+        },
+        "ghostColorPre": {
+            "short_name": "gcp",
+            "long_name": "ghostColorPre",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ghostColorPreR",
+                "ghostColorPreG",
+                "ghostColorPreB"
+            ]
+        },
+        "ghostColorPreB": {
+            "short_name": "gpb",
+            "long_name": "ghostColorPreB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreG": {
+            "short_name": "gpg",
+            "long_name": "ghostColorPreG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "ghostColorPreR": {
+            "short_name": "grr",
+            "long_name": "ghostColorPreR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
+            "numeric_type": 11,
+            "default_value": 0.44699999690055847
+        },
+        "ghostCustomSteps": {
+            "short_name": "gcs",
+            "long_name": "ghostCustomSteps",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "ghostPreFrames",
+                "ghostPostFrames",
+                "ghostsStep"
+            ]
+        },
+        "ghostDriver": {
+            "short_name": "gdr",
+            "long_name": "ghostDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "ghostFarOpacity": {
+            "short_name": "gfro",
+            "long_name": "ghostFarOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.15000000596046448
+        },
+        "ghostFrames": {
+            "short_name": "gf",
+            "long_name": "ghostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 9
+        },
+        "ghostNearOpacity": {
+            "short_name": "gnro",
+            "long_name": "ghostNearOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "ghostOpacityRange": {
+            "short_name": "golr",
+            "long_name": "ghostOpacityRange",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "ghostFarOpacity",
+                "ghostNearOpacity"
+            ]
+        },
+        "ghostPostFrames": {
+            "short_name": "gpof",
+            "long_name": "ghostPostFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostPreFrames": {
+            "short_name": "gprf",
+            "long_name": "ghostPreFrames",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 3
+        },
+        "ghostUseDriver": {
+            "short_name": "gud",
+            "long_name": "ghostUseDriver",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghosting": {
+            "short_name": "gh",
+            "long_name": "ghosting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ghostingMode": {
+            "short_name": "gm",
+            "long_name": "ghostingMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "ghostsStep": {
+            "short_name": "gstp",
+            "long_name": "ghostsStep",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "hiddenInOutliner": {
+            "short_name": "hio",
+            "long_name": "hiddenInOutliner",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hideOnPlayback": {
+            "short_name": "hpb",
+            "long_name": "hideOnPlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hyperLayout": {
+            "short_name": "hl",
+            "long_name": "hyperLayout",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "iconName": {
+            "short_name": "icn",
+            "long_name": "iconName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "identification": {
+            "short_name": "rlid",
+            "long_name": "identification",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "infoBits": {
+            "short_name": "ib",
+            "long_name": "infoBits",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "instObjGroups": {
+            "short_name": "iog",
+            "long_name": "instObjGroups",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "intensity": {
+            "short_name": "in",
+            "long_name": "intensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "intermediateObject": {
+            "short_name": "io",
+            "long_name": "intermediateObject",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "inverseMatrix": {
+            "short_name": "im",
+            "long_name": "inverseMatrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "isCollapsed": {
+            "short_name": "isc",
+            "long_name": "isCollapsed",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHierarchicalConnection": {
+            "short_name": "ish",
+            "long_name": "isHierarchicalConnection",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
+        },
+        "lastWrittenDmapAnimExtName": {
+            "short_name": "lw",
+            "long_name": "lastWrittenDmapAnimExtName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "layerOverrideColor": {
+            "short_name": "lovc",
+            "long_name": "layerOverrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "layerRenderable": {
+            "short_name": "rndr",
+            "long_name": "layerRenderable",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "legacyIntensity": {
+            "short_name": "lgi",
+            "long_name": "legacyIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightAmbient": {
+            "short_name": "la",
+            "long_name": "lightAmbient",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightBlindData": {
+            "short_name": "lbl",
+            "long_name": "lightBlindData",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "lightData": {
+            "short_name": "ltd",
+            "long_name": "lightData",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kLightDataAttribute",
+            "num_children": 8,
+            "children": [
+                "lightDirection",
+                "lightIntensity",
+                "lightAmbient",
+                "lightDiffuse",
+                "lightSpecular",
+                "lightShadowFraction",
+                "preShadowIntensity",
+                "lightBlindData"
+            ]
+        },
+        "lightDiffuse": {
+            "short_name": "ldf",
+            "long_name": "lightDiffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "lightDirection": {
+            "short_name": "ld",
+            "long_name": "lightDirection",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
+            "num_children": 3,
+            "children": [
+                "lightDirectionX",
+                "lightDirectionY",
+                "lightDirectionZ"
+            ]
+        },
+        "lightDirectionX": {
+            "short_name": "ldx",
+            "long_name": "lightDirectionX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDirectionY": {
+            "short_name": "ldy",
+            "long_name": "lightDirectionY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDirectionZ": {
+            "short_name": "ldz",
+            "long_name": "lightDirectionZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightGlow": {
+            "short_name": "lg",
+            "long_name": "lightGlow",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "lightIntensity": {
+            "short_name": "li",
+            "long_name": "lightIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
+            "num_children": 3,
+            "children": [
+                "lightIntensityR",
+                "lightIntensityG",
+                "lightIntensityB"
+            ]
+        },
+        "lightIntensityB": {
+            "short_name": "lib",
+            "long_name": "lightIntensityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightIntensityG": {
+            "short_name": "lig",
+            "long_name": "lightIntensityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightIntensityR": {
+            "short_name": "lir",
+            "long_name": "lightIntensityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightRadius": {
+            "short_name": "lr",
+            "long_name": "lightRadius",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightShadowFraction": {
+            "short_name": "lsf",
+            "long_name": "lightShadowFraction",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightSpecular": {
+            "short_name": "ls",
+            "long_name": "lightSpecular",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "locatorScale": {
+            "short_name": "lls",
+            "long_name": "locatorScale",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "lodVisibility": {
+            "short_name": "lodv",
+            "long_name": "lodVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "matrix": {
+            "short_name": "m",
+            "long_name": "matrix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 5
+        },
+        "matrixEyeToWorld": {
+            "short_name": "etw",
+            "long_name": "matrixEyeToWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kFloatMatrixAttribute"
+        },
+        "matrixWorldToEye": {
+            "short_name": "wte",
+            "long_name": "matrixWorldToEye",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kFloatMatrixAttribute"
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "normalCamera": {
+            "short_name": "n",
+            "long_name": "normalCamera",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "normalCameraX",
+                "normalCameraY",
+                "normalCameraZ"
+            ]
+        },
+        "normalCameraX": {
+            "short_name": "nx",
+            "long_name": "normalCameraX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "normalCameraY": {
+            "short_name": "ny",
+            "long_name": "normalCameraY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "normalCameraZ": {
+            "short_name": "nz",
+            "long_name": "normalCameraZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "normalize": {
+            "short_name": "nrm",
+            "long_name": "normalize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "objectColor": {
+            "short_name": "oc",
+            "long_name": "objectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "objectColorB": {
+            "short_name": "obcb",
+            "long_name": "objectColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorG": {
+            "short_name": "obcg",
+            "long_name": "objectColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorR": {
+            "short_name": "obcr",
+            "long_name": "objectColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectColorRGB": {
+            "short_name": "obcc",
+            "long_name": "objectColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "objectColorR",
+                "objectColorG",
+                "objectColorB"
+            ]
+        },
+        "objectId": {
+            "short_name": "oi",
+            "long_name": "objectId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "objectType": {
+            "short_name": "ot",
+            "long_name": "objectType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 3,
+            "default_value": 1
+        },
+        "opticalFXvisibility": {
+            "short_name": "ov",
+            "long_name": "opticalFXvisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "opticalFXvisibilityR",
+                "opticalFXvisibilityG",
+                "opticalFXvisibilityB"
+            ]
+        },
+        "opticalFXvisibilityB": {
+            "short_name": "ovb",
+            "long_name": "opticalFXvisibilityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "opticalFXvisibilityG": {
+            "short_name": "ovg",
+            "long_name": "opticalFXvisibilityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "opticalFXvisibilityR": {
+            "short_name": "ovr",
+            "long_name": "opticalFXvisibilityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "outlinerColor": {
+            "short_name": "oclr",
+            "long_name": "outlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outlinerColorR",
+                "outlinerColorG",
+                "outlinerColorB"
+            ]
+        },
+        "outlinerColorB": {
+            "short_name": "oclrb",
+            "long_name": "outlinerColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorG": {
+            "short_name": "oclrg",
+            "long_name": "outlinerColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outlinerColorR": {
+            "short_name": "oclrr",
+            "long_name": "outlinerColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColor": {
+            "short_name": "ovc",
+            "long_name": "overrideColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 2,
+            "default_value": 0
+        },
+        "overrideColorA": {
+            "short_name": "ovca",
+            "long_name": "overrideColorA",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "overrideColorB": {
+            "short_name": "ovcb",
+            "long_name": "overrideColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorG": {
+            "short_name": "ovcg",
+            "long_name": "overrideColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorR": {
+            "short_name": "ovcr",
+            "long_name": "overrideColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "overrideColorRGB": {
+            "short_name": "ovrgb",
+            "long_name": "overrideColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
+            "num_children": 3,
+            "children": [
+                "overrideColorR",
+                "overrideColorG",
+                "overrideColorB"
+            ]
+        },
+        "overrideDisplayType": {
+            "short_name": "ovdt",
+            "long_name": "overrideDisplayType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overrideEnabled": {
+            "short_name": "ove",
+            "long_name": "overrideEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideLevelOfDetail": {
+            "short_name": "ovlod",
+            "long_name": "overrideLevelOfDetail",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride"
+        },
+        "overridePlayback": {
+            "short_name": "ovp",
+            "long_name": "overridePlayback",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideRGBColors": {
+            "short_name": "ovrgbf",
+            "long_name": "overrideRGBColors",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "overrideShading": {
+            "short_name": "ovs",
+            "long_name": "overrideShading",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideTexturing": {
+            "short_name": "ovt",
+            "long_name": "overrideTexturing",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "overrideVisibility": {
+            "short_name": "ovv",
+            "long_name": "overrideVisibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "parentInverseMatrix": {
+            "short_name": "pim",
+            "long_name": "parentInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix": {
+            "short_name": "pm",
+            "long_name": "parentMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "pointCamera": {
+            "short_name": "p",
+            "long_name": "pointCamera",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointCameraX",
+                "pointCameraY",
+                "pointCameraZ"
+            ]
+        },
+        "pointCameraX": {
+            "short_name": "px",
+            "long_name": "pointCameraX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraY": {
+            "short_name": "py",
+            "long_name": "pointCameraY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraZ": {
+            "short_name": "pz",
+            "long_name": "pointCameraZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorld": {
+            "short_name": "pw",
+            "long_name": "pointWorld",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointWorldX",
+                "pointWorldY",
+                "pointWorldZ"
+            ]
+        },
+        "pointWorldX": {
+            "short_name": "tx",
+            "long_name": "pointWorldX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorldY": {
+            "short_name": "ty",
+            "long_name": "pointWorldY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointWorldZ": {
+            "short_name": "tz",
+            "long_name": "pointWorldZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "preShadowIntensity": {
+            "short_name": "psi",
+            "long_name": "preShadowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "primitiveId": {
+            "short_name": "pi",
+            "long_name": "primitiveId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "publishedNodeInfo": {
+            "short_name": "pni",
+            "long_name": "publishedNodeInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "rayDepth": {
+            "short_name": "rd",
+            "long_name": "rayDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "rayDepthLimit": {
+            "short_name": "rdl",
+            "long_name": "rayDepthLimit",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 3
+        },
+        "rayInstance": {
+            "short_name": "ryi",
+            "long_name": "rayInstance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "raySampler": {
+            "short_name": "rts",
+            "long_name": "raySampler",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "receiveShadows": {
+            "short_name": "gs",
+            "long_name": "receiveShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "renderInfo": {
+            "short_name": "ri",
+            "long_name": "renderInfo",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_children": 3,
+            "children": [
+                "identification",
+                "layerRenderable",
+                "layerOverrideColor"
+            ]
+        },
+        "renderLayerInfo": {
+            "short_name": "rlio",
+            "long_name": "renderLayerInfo",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "renderState": {
+            "short_name": "rdst",
+            "long_name": "renderState",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "reuseDmap": {
+            "short_name": "du",
+            "long_name": "reuseDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "rmbCommand": {
+            "short_name": "rmc",
+            "long_name": "rmbCommand",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "selectionChildHighlighting": {
+            "short_name": "sech",
+            "long_name": "selectionChildHighlighting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "shadColorB": {
+            "short_name": "scb",
+            "long_name": "shadColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadColorG": {
+            "short_name": "scg",
+            "long_name": "shadColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadColorR": {
+            "short_name": "scr",
+            "long_name": "shadColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "shadowColor": {
+            "short_name": "sc",
+            "long_name": "shadowColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "shadColorR",
+                "shadColorG",
+                "shadColorB"
+            ]
+        },
+        "shadowRays": {
+            "short_name": "shr",
+            "long_name": "shadowRays",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 1
+        },
+        "template": {
+            "short_name": "tmp",
+            "long_name": "template",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "templateName": {
+            "short_name": "tna",
+            "long_name": "templateName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templatePath": {
+            "short_name": "tpt",
+            "long_name": "templatePath",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "templateVersion": {
+            "short_name": "tpv",
+            "long_name": "templateVersion",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "uCoord": {
+            "short_name": "uu",
+            "long_name": "uCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "useDepthMapShadows": {
+            "short_name": "dms",
+            "long_name": "useDepthMapShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useDmapAutoClipping": {
+            "short_name": "uc",
+            "long_name": "useDmapAutoClipping",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useDmapAutoFocus": {
+            "short_name": "af",
+            "long_name": "useDmapAutoFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useMidDistDmap": {
+            "short_name": "md",
+            "long_name": "useMidDistDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useObjectColor": {
+            "short_name": "uoc",
+            "long_name": "useObjectColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "useOnlySingleDmap": {
+            "short_name": "us",
+            "long_name": "useOnlySingleDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useOutlinerColor": {
+            "short_name": "uocol",
+            "long_name": "useOutlinerColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useRayTraceShadows": {
+            "short_name": "urs",
+            "long_name": "useRayTraceShadows",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useXMinusDmap": {
+            "short_name": "xn",
+            "long_name": "useXMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useXPlusDmap": {
+            "short_name": "xp",
+            "long_name": "useXPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useYMinusDmap": {
+            "short_name": "yn",
+            "long_name": "useYMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useYPlusDmap": {
+            "short_name": "yp",
+            "long_name": "useYPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useZMinusDmap": {
+            "short_name": "zn",
+            "long_name": "useZMinusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "useZPlusDmap": {
+            "short_name": "zp",
+            "long_name": "useZPlusDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "uvCoord": {
+            "short_name": "uv",
+            "long_name": "uvCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uCoord",
+                "vCoord"
+            ]
+        },
+        "uvFilterSize": {
+            "short_name": "fq",
+            "long_name": "uvFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uvFilterSizeX",
+                "uvFilterSizeY"
+            ]
+        },
+        "uvFilterSizeX": {
+            "short_name": "fsx",
+            "long_name": "uvFilterSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "uvFilterSizeY": {
+            "short_name": "fsy",
+            "long_name": "uvFilterSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vCoord": {
+            "short_name": "vv",
+            "long_name": "vCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "viewMode": {
+            "short_name": "vwm",
+            "long_name": "viewMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "viewName": {
+            "short_name": "vwn",
+            "long_name": "viewName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "visibility": {
+            "short_name": "v",
+            "long_name": "visibility",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "volumeShadowSamples": {
+            "short_name": "nv",
+            "long_name": "volumeShadowSamples",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 20
+        },
+        "wireColorB": {
+            "short_name": "wfcb",
+            "long_name": "wireColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorG": {
+            "short_name": "wfcg",
+            "long_name": "wireColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorR": {
+            "short_name": "wfcr",
+            "long_name": "wireColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "wireColorRGB": {
+            "short_name": "wfcc",
+            "long_name": "wireColorRGB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "wireColorR",
+                "wireColorG",
+                "wireColorB"
+            ]
+        },
+        "worldInverseMatrix": {
+            "short_name": "wim",
+            "long_name": "worldInverseMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix": {
+            "short_name": "wm",
+            "long_name": "worldMatrix",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "num_elements": 0,
+            "typed_type": 5
+        },
+        "writeDmap": {
+            "short_name": "ws",
+            "long_name": "writeDmap",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        }
+    },
+    "lambert": {
+        "ambientColor": {
+            "short_name": "ambc",
+            "long_name": "ambientColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "ambientColorR",
+                "ambientColorG",
+                "ambientColorB"
+            ]
+        },
+        "ambientColorB": {
+            "short_name": "acb",
+            "long_name": "ambientColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ambientColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "ambientColorG": {
+            "short_name": "acg",
+            "long_name": "ambientColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ambientColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "ambientColorR": {
+            "short_name": "acr",
+            "long_name": "ambientColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "ambientColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "chromaticAberration": {
+            "short_name": "crab",
+            "long_name": "chromaticAberration",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "color": {
+            "short_name": "c",
+            "long_name": "color",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "colorR",
+                "colorG",
+                "colorB"
+            ]
+        },
+        "colorB": {
+            "short_name": "cb",
+            "long_name": "colorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "colorG": {
+            "short_name": "cg",
+            "long_name": "colorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "colorR": {
+            "short_name": "cr",
+            "long_name": "colorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "color",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "diffuse": {
+            "short_name": "dc",
+            "long_name": "diffuse",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.800000011920929
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "glowIntensity": {
+            "short_name": "gi",
+            "long_name": "glowIntensity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "hardwareShader": {
+            "short_name": "hws",
+            "long_name": "hardwareShader",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "hardwareShaderR",
+                "hardwareShaderG",
+                "hardwareShaderB"
+            ]
+        },
+        "hardwareShaderB": {
+            "short_name": "hwb",
+            "long_name": "hardwareShaderB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "hardwareShader",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "hardwareShaderG": {
+            "short_name": "hwg",
+            "long_name": "hardwareShaderG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "hardwareShader",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "hardwareShaderR": {
+            "short_name": "hwr",
+            "long_name": "hardwareShaderR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "hardwareShader",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "hideSource": {
+            "short_name": "hs",
+            "long_name": "hideSource",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "incandescence": {
+            "short_name": "ic",
+            "long_name": "incandescence",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "incandescenceR",
+                "incandescenceG",
+                "incandescenceB"
+            ]
+        },
+        "incandescenceB": {
+            "short_name": "ib",
+            "long_name": "incandescenceB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "incandescence",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "incandescenceG": {
+            "short_name": "ig",
+            "long_name": "incandescenceG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "incandescence",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "incandescenceR": {
+            "short_name": "ir",
+            "long_name": "incandescenceR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "incandescence",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
+        },
+        "lightAbsorbance": {
+            "short_name": "absb",
+            "long_name": "lightAbsorbance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "lightDataArray": {
+            "short_name": "ltd",
+            "long_name": "lightDataArray",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kLightDataAttribute",
+            "num_elements": 0
+        },
+        "materialAlphaGain": {
+            "short_name": "maga",
+            "long_name": "materialAlphaGain",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "matteOpacity": {
+            "short_name": "mog",
+            "long_name": "matteOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "matteOpacityMode": {
+            "short_name": "mom",
+            "long_name": "matteOpacityMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "mediumRefractiveIndex": {
+            "short_name": "mrfi",
+            "long_name": "mediumRefractiveIndex",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "normalCamera": {
+            "short_name": "n",
+            "long_name": "normalCamera",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "normalCameraX",
+                "normalCameraY",
+                "normalCameraZ"
+            ]
+        },
+        "normalCameraX": {
+            "short_name": "nx",
+            "long_name": "normalCameraX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "normalCameraY": {
+            "short_name": "ny",
+            "long_name": "normalCameraY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "normalCameraZ": {
+            "short_name": "nz",
+            "long_name": "normalCameraZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "objectId": {
+            "short_name": "oi",
+            "long_name": "objectId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "opacityDepth": {
+            "short_name": "opad",
+            "long_name": "opacityDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outColor": {
+            "short_name": "oc",
+            "long_name": "outColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outColorR",
+                "outColorG",
+                "outColorB"
+            ]
+        },
+        "outColorB": {
+            "short_name": "ocb",
+            "long_name": "outColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outColorG": {
+            "short_name": "ocg",
+            "long_name": "outColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outColorR": {
+            "short_name": "ocr",
+            "long_name": "outColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outGlowColor": {
+            "short_name": "ogc",
+            "long_name": "outGlowColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outGlowColorR",
+                "outGlowColorG",
+                "outGlowColorB"
+            ]
+        },
+        "outGlowColorB": {
+            "short_name": "ogb",
+            "long_name": "outGlowColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outGlowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outGlowColorG": {
+            "short_name": "ogg",
+            "long_name": "outGlowColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outGlowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outGlowColorR": {
+            "short_name": "ogr",
+            "long_name": "outGlowColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outGlowColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outMatteOpacity": {
+            "short_name": "omo",
+            "long_name": "outMatteOpacity",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outMatteOpacityR",
+                "outMatteOpacityG",
+                "outMatteOpacityB"
+            ]
+        },
+        "outMatteOpacityB": {
+            "short_name": "omob",
+            "long_name": "outMatteOpacityB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outMatteOpacity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outMatteOpacityG": {
+            "short_name": "omog",
+            "long_name": "outMatteOpacityG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outMatteOpacity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outMatteOpacityR": {
+            "short_name": "omor",
+            "long_name": "outMatteOpacityR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outMatteOpacity",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outTransparency": {
+            "short_name": "ot",
+            "long_name": "outTransparency",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outTransparencyR",
+                "outTransparencyG",
+                "outTransparencyB"
+            ]
+        },
+        "outTransparencyB": {
+            "short_name": "otb",
+            "long_name": "outTransparencyB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outTransparencyG": {
+            "short_name": "otg",
+            "long_name": "outTransparencyG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outTransparencyR": {
+            "short_name": "otr",
+            "long_name": "outTransparencyR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "pointCamera": {
+            "short_name": "pc",
+            "long_name": "pointCamera",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "pointCameraX",
+                "pointCameraY",
+                "pointCameraZ"
+            ]
+        },
+        "pointCameraX": {
+            "short_name": "px",
+            "long_name": "pointCameraX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraY": {
+            "short_name": "py",
+            "long_name": "pointCameraY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "pointCameraZ": {
+            "short_name": "pz",
+            "long_name": "pointCameraZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "primitiveId": {
+            "short_name": "pi",
+            "long_name": "primitiveId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "rayDepth": {
+            "short_name": "rd",
+            "long_name": "rayDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 0
+        },
+        "rayDirection": {
+            "short_name": "rad",
+            "long_name": "rayDirection",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "rayDirectionX",
+                "rayDirectionY",
+                "rayDirectionZ"
+            ]
+        },
+        "rayDirectionX": {
+            "short_name": "rdx",
+            "long_name": "rayDirectionX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "rayDirectionY": {
+            "short_name": "rdy",
+            "long_name": "rayDirectionY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "rayDirectionZ": {
+            "short_name": "rdz",
+            "long_name": "rayDirectionZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "rayInstance": {
+            "short_name": "ryi",
+            "long_name": "rayInstance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "raySampler": {
+            "short_name": "rtr",
+            "long_name": "raySampler",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 18,
+            "default_value": 0
+        },
+        "refractionLimit": {
+            "short_name": "rdl",
+            "long_name": "refractionLimit",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 4,
+            "default_value": 6
+        },
+        "refractions": {
+            "short_name": "rfc",
+            "long_name": "refractions",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "refractiveIndex": {
+            "short_name": "rfi",
+            "long_name": "refractiveIndex",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "shadowAttenuation": {
+            "short_name": "fakc",
+            "long_name": "shadowAttenuation",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "surfaceThickness": {
+            "short_name": "thik",
+            "long_name": "surfaceThickness",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "translucence": {
+            "short_name": "tc",
+            "long_name": "translucence",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "translucenceDepth": {
+            "short_name": "trsd",
+            "long_name": "translucenceDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "translucenceFocus": {
+            "short_name": "tcf",
+            "long_name": "translucenceFocus",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "transparency": {
+            "short_name": "it",
+            "long_name": "transparency",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "transparencyR",
+                "transparencyG",
+                "transparencyB"
+            ]
+        },
+        "transparencyB": {
+            "short_name": "itb",
+            "long_name": "transparencyB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "transparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "transparencyDepth": {
+            "short_name": "trdp",
+            "long_name": "transparencyDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "transparencyG": {
+            "short_name": "itg",
+            "long_name": "transparencyG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "transparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "transparencyR": {
+            "short_name": "itr",
+            "long_name": "transparencyR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "transparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vrEdgeColor": {
+            "short_name": "vrec",
+            "long_name": "vrEdgeColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "vrEdgeColorR",
+                "vrEdgeColorG",
+                "vrEdgeColorB"
+            ]
+        },
+        "vrEdgeColorB": {
+            "short_name": "vecb",
+            "long_name": "vrEdgeColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vrEdgeColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "vrEdgeColorG": {
+            "short_name": "vecg",
+            "long_name": "vrEdgeColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vrEdgeColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "vrEdgeColorR": {
+            "short_name": "vecr",
+            "long_name": "vrEdgeColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vrEdgeColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "vrEdgePriority": {
+            "short_name": "vrep",
+            "long_name": "vrEdgePriority",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "vrEdgeStyle": {
+            "short_name": "vres",
+            "long_name": "vrEdgeStyle",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "vrEdgeWeight": {
+            "short_name": "vrew",
+            "long_name": "vrEdgeWeight",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "vrFillObject": {
+            "short_name": "vrfo",
+            "long_name": "vrFillObject",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "vrHiddenEdges": {
+            "short_name": "vrhe",
+            "long_name": "vrHiddenEdges",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "vrHiddenEdgesOnTransparent": {
+            "short_name": "vrht",
+            "long_name": "vrHiddenEdgesOnTransparent",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "vrOutlinesAtIntersections": {
+            "short_name": "vroi",
+            "long_name": "vrOutlinesAtIntersections",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "vrOverwriteDefaults": {
+            "short_name": "vrod",
+            "long_name": "vrOverwriteDefaults",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        }
+    },
+    "file": {
+        "alphaGain": {
+            "short_name": "ag",
+            "long_name": "alphaGain",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "alphaIsLuminance": {
+            "short_name": "ail",
+            "long_name": "alphaIsLuminance",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "alphaOffset": {
+            "short_name": "ao",
+            "long_name": "alphaOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "baseExplicitUvTilePosition": {
+            "short_name": "butp",
+            "long_name": "baseExplicitUvTilePosition",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "baseExplicitUvTilePositionU",
+                "baseExplicitUvTilePositionV"
+            ]
+        },
+        "baseExplicitUvTilePositionU": {
+            "short_name": "bupu",
+            "long_name": "baseExplicitUvTilePositionU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "baseExplicitUvTilePosition",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "baseExplicitUvTilePositionV": {
+            "short_name": "bupv",
+            "long_name": "baseExplicitUvTilePositionV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "baseExplicitUvTilePosition",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "blurPixelation": {
+            "short_name": "blp",
+            "long_name": "blurPixelation",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "byCycleIncrement": {
+            "short_name": "bci",
+            "long_name": "byCycleIncrement",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "colorGain": {
+            "short_name": "cg",
+            "long_name": "colorGain",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "colorGainR",
+                "colorGainG",
+                "colorGainB"
+            ]
+        },
+        "colorGainB": {
+            "short_name": "cgb",
+            "long_name": "colorGainB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorGainG": {
+            "short_name": "cgg",
+            "long_name": "colorGainG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorGainR": {
+            "short_name": "cgr",
+            "long_name": "colorGainR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "colorManagementConfigFileEnabled": {
+            "short_name": "cmcf",
+            "long_name": "colorManagementConfigFileEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "colorManagementConfigFilePath": {
+            "short_name": "cmcp",
+            "long_name": "colorManagementConfigFilePath",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "colorManagementEnabled": {
+            "short_name": "cme",
+            "long_name": "colorManagementEnabled",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "colorOffset": {
+            "short_name": "co",
+            "long_name": "colorOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "colorOffsetR",
+                "colorOffsetG",
+                "colorOffsetB"
+            ]
+        },
+        "colorOffsetB": {
+            "short_name": "cob",
+            "long_name": "colorOffsetB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "colorOffsetG": {
+            "short_name": "cog",
+            "long_name": "colorOffsetG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "colorOffsetR": {
+            "short_name": "cor",
+            "long_name": "colorOffsetR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "colorProfile": {
+            "short_name": "cp",
+            "long_name": "colorProfile",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "colorSpace": {
+            "short_name": "cs",
+            "long_name": "colorSpace",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "computedFileTextureNamePattern": {
+            "short_name": "cfnp",
+            "long_name": "computedFileTextureNamePattern",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "coverage": {
+            "short_name": "c",
+            "long_name": "coverage",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "coverageU",
+                "coverageV"
+            ]
+        },
+        "coverageU": {
+            "short_name": "cu",
+            "long_name": "coverageU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "coverage",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "coverageV": {
+            "short_name": "cv",
+            "long_name": "coverageV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "coverage",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "defaultColor": {
+            "short_name": "dc",
+            "long_name": "defaultColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "defaultColorR",
+                "defaultColorG",
+                "defaultColorB"
+            ]
+        },
+        "defaultColorB": {
+            "short_name": "dcb",
+            "long_name": "defaultColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "defaultColorG": {
+            "short_name": "dcg",
+            "long_name": "defaultColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "defaultColorR": {
+            "short_name": "dcr",
+            "long_name": "defaultColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
+            "numeric_type": 11,
+            "default_value": 0.5
+        },
+        "dirtyPixelRegion": {
+            "short_name": "dp",
+            "long_name": "dirtyPixelRegion",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "disableFileLoad": {
+            "short_name": "dfl",
+            "long_name": "disableFileLoad",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "doTransform": {
+            "short_name": "dtf",
+            "long_name": "doTransform",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "endCycleExtension": {
+            "short_name": "ece",
+            "long_name": "endCycleExtension",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "explicitUvTiles": {
+            "short_name": "euvt",
+            "long_name": "explicitUvTiles",
+            "is_element": False,
+            "is_array": True,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "num_elements": 0
+        },
+        "exposure": {
+            "short_name": "exp",
+            "long_name": "exposure",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "fileHasAlpha": {
+            "short_name": "fha",
+            "long_name": "fileHasAlpha",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "fileTextureName": {
+            "short_name": "ftn",
+            "long_name": "fileTextureName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "fileTextureNamePattern": {
+            "short_name": "ftnp",
+            "long_name": "fileTextureNamePattern",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "filter": {
+            "short_name": "f",
+            "long_name": "filter",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "filterOffset": {
+            "short_name": "fo",
+            "long_name": "filterOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "filterType": {
+            "short_name": "ft",
+            "long_name": "filterType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "filterWidth": {
+            "short_name": "fw",
+            "long_name": "filterWidth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.7070000171661377
+        },
+        "forceSwatchGen": {
+            "short_name": "fsg",
+            "long_name": "forceSwatchGen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "frameExtension": {
+            "short_name": "fe",
+            "long_name": "frameExtension",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "frameOffset": {
+            "short_name": "io",
+            "long_name": "frameOffset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "hdrExposure": {
+            "short_name": "he",
+            "long_name": "hdrExposure",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "hdrMapping": {
+            "short_name": "hm",
+            "long_name": "hdrMapping",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "ignoreColorSpaceFileRules": {
+            "short_name": "ifr",
+            "long_name": "ignoreColorSpaceFileRules",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "infoBits": {
+            "short_name": "ib",
+            "long_name": "infoBits",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "invert": {
+            "short_name": "i",
+            "long_name": "invert",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "mirrorU": {
+            "short_name": "mu",
+            "long_name": "mirrorU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "mirrorV": {
+            "short_name": "mv",
+            "long_name": "mirrorV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "noiseU": {
+            "short_name": "nu",
+            "long_name": "noiseU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "noiseUV",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "noiseUV": {
+            "short_name": "n",
+            "long_name": "noiseUV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "noiseU",
+                "noiseV"
+            ]
+        },
+        "noiseV": {
+            "short_name": "nv",
+            "long_name": "noiseV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "noiseUV",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "objectType": {
+            "short_name": "otp",
+            "long_name": "objectType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 3,
+            "default_value": 0
+        },
+        "offset": {
+            "short_name": "of",
+            "long_name": "offset",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "offsetU",
+                "offsetV"
+            ]
+        },
+        "offsetU": {
+            "short_name": "ofu",
+            "long_name": "offsetU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "offset",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "offsetV": {
+            "short_name": "ofv",
+            "long_name": "offsetV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "offset",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outAlpha": {
+            "short_name": "oa",
+            "long_name": "outAlpha",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outColor": {
+            "short_name": "oc",
+            "long_name": "outColor",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outColorR",
+                "outColorG",
+                "outColorB"
+            ]
+        },
+        "outColorB": {
+            "short_name": "ocb",
+            "long_name": "outColorB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outColorG": {
+            "short_name": "ocg",
+            "long_name": "outColorG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outColorR": {
+            "short_name": "ocr",
+            "long_name": "outColorR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outSize": {
+            "short_name": "os",
+            "long_name": "outSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "outSizeX",
+                "outSizeY"
+            ]
+        },
+        "outSizeX": {
+            "short_name": "osx",
+            "long_name": "outSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outSizeY": {
+            "short_name": "osy",
+            "long_name": "outSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outTransparency": {
+            "short_name": "ot",
+            "long_name": "outTransparency",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "outTransparencyR",
+                "outTransparencyG",
+                "outTransparencyB"
+            ]
+        },
+        "outTransparencyB": {
+            "short_name": "otb",
+            "long_name": "outTransparencyB",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outTransparencyG": {
+            "short_name": "otg",
+            "long_name": "outTransparencyG",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "outTransparencyR": {
+            "short_name": "otr",
+            "long_name": "outTransparencyR",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "pixelCenter": {
+            "short_name": "pct",
+            "long_name": "pixelCenter",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "pixelCenterX",
+                "pixelCenterY"
+            ]
+        },
+        "pixelCenterX": {
+            "short_name": "pcx",
+            "long_name": "pixelCenterX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pixelCenter",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "pixelCenterY": {
+            "short_name": "pcy",
+            "long_name": "pixelCenterY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "pixelCenter",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "preFilter": {
+            "short_name": "pf",
+            "long_name": "preFilter",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "preFilterRadius": {
+            "short_name": "pfr",
+            "long_name": "preFilterRadius",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 2.0
+        },
+        "primitiveId": {
+            "short_name": "pi",
+            "long_name": "primitiveId",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "ptexFilterBlur": {
+            "short_name": "pfb",
+            "long_name": "ptexFilterBlur",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "ptexFilterInterpolateLevels": {
+            "short_name": "pfil",
+            "long_name": "ptexFilterInterpolateLevels",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "ptexFilterSharpness": {
+            "short_name": "pfs",
+            "long_name": "ptexFilterSharpness",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "ptexFilterType": {
+            "short_name": "pft",
+            "long_name": "ptexFilterType",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "ptexFilterWidth": {
+            "short_name": "pfw",
+            "long_name": "ptexFilterWidth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "rayDepth": {
+            "short_name": "rdp",
+            "long_name": "rayDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 0
+        },
+        "repeatU": {
+            "short_name": "reu",
+            "long_name": "repeatU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "repeatUV",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "repeatUV": {
+            "short_name": "re",
+            "long_name": "repeatUV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "repeatU",
+                "repeatV"
+            ]
+        },
+        "repeatV": {
+            "short_name": "rev",
+            "long_name": "repeatV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "repeatUV",
+            "numeric_type": 11,
+            "default_value": 1.0
+        },
+        "rotateFrame": {
+            "short_name": "rf",
+            "long_name": "rotateFrame",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.0
+        },
+        "rotateUV": {
+            "short_name": "ro",
+            "long_name": "rotateUV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleAngleAttribute",
+            "unit_type": 1,
+            "default_value": 0.0
+        },
+        "stagger": {
+            "short_name": "s",
+            "long_name": "stagger",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "startCycleExtension": {
+            "short_name": "sce",
+            "long_name": "startCycleExtension",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1
+        },
+        "translateFrame": {
+            "short_name": "tf",
+            "long_name": "translateFrame",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "translateFrameU",
+                "translateFrameV"
+            ]
+        },
+        "translateFrameU": {
+            "short_name": "tfu",
+            "long_name": "translateFrameU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "translateFrame",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "translateFrameV": {
+            "short_name": "tfv",
+            "long_name": "translateFrameV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "translateFrame",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "uCoord": {
+            "short_name": "u",
+            "long_name": "uCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "useCache": {
+            "short_name": "uca",
+            "long_name": "useCache",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useFrameExtension": {
+            "short_name": "ufe",
+            "long_name": "useFrameExtension",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useHardwareTextureCycling": {
+            "short_name": "uhc",
+            "long_name": "useHardwareTextureCycling",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "useMaximumRes": {
+            "short_name": "umr",
+            "long_name": "useMaximumRes",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "uvCoord": {
+            "short_name": "uv",
+            "long_name": "uvCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uCoord",
+                "vCoord"
+            ]
+        },
+        "uvFilterSize": {
+            "short_name": "fs",
+            "long_name": "uvFilterSize",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "uvFilterSizeX",
+                "uvFilterSizeY"
+            ]
+        },
+        "uvFilterSizeX": {
+            "short_name": "fsx",
+            "long_name": "uvFilterSizeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "uvFilterSizeY": {
+            "short_name": "fsy",
+            "long_name": "uvFilterSizeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "uvTileProxyDirty": {
+            "short_name": "utpd",
+            "long_name": "uvTileProxyDirty",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "uvTileProxyGenerate": {
+            "short_name": "utpg",
+            "long_name": "uvTileProxyGenerate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "uvTileProxyQuality": {
+            "short_name": "utpq",
+            "long_name": "uvTileProxyQuality",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "uvTilingMode": {
+            "short_name": "uvt",
+            "long_name": "uvTilingMode",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute"
+        },
+        "vCoord": {
+            "short_name": "v",
+            "long_name": "vCoord",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraOne": {
+            "short_name": "vc1",
+            "long_name": "vertexCameraOne",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "vertexCameraOneX",
+                "vertexCameraOneY",
+                "vertexCameraOneZ"
+            ]
+        },
+        "vertexCameraOneX": {
+            "short_name": "c1x",
+            "long_name": "vertexCameraOneX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraOne",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraOneY": {
+            "short_name": "c1y",
+            "long_name": "vertexCameraOneY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraOne",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraOneZ": {
+            "short_name": "c1z",
+            "long_name": "vertexCameraOneZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraOne",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraThree": {
+            "short_name": "vc3",
+            "long_name": "vertexCameraThree",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "vertexCameraThreeX",
+                "vertexCameraThreeY",
+                "vertexCameraThreeZ"
+            ]
+        },
+        "vertexCameraThreeX": {
+            "short_name": "c3x",
+            "long_name": "vertexCameraThreeX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraThree",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraThreeY": {
+            "short_name": "c3y",
+            "long_name": "vertexCameraThreeY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraThree",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraThreeZ": {
+            "short_name": "c3z",
+            "long_name": "vertexCameraThreeZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraThree",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraTwo": {
+            "short_name": "vc2",
+            "long_name": "vertexCameraTwo",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "num_children": 3,
+            "children": [
+                "vertexCameraTwoX",
+                "vertexCameraTwoY",
+                "vertexCameraTwoZ"
+            ]
+        },
+        "vertexCameraTwoX": {
+            "short_name": "c2x",
+            "long_name": "vertexCameraTwoX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraTwo",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraTwoY": {
+            "short_name": "c2y",
+            "long_name": "vertexCameraTwoY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraTwo",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexCameraTwoZ": {
+            "short_name": "c2z",
+            "long_name": "vertexCameraTwoZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraTwo",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexUvOne": {
+            "short_name": "vt1",
+            "long_name": "vertexUvOne",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "vertexUvOneU",
+                "vertexUvOneV"
+            ]
+        },
+        "vertexUvOneU": {
+            "short_name": "t1u",
+            "long_name": "vertexUvOneU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvOne",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexUvOneV": {
+            "short_name": "t1v",
+            "long_name": "vertexUvOneV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvOne",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexUvThree": {
+            "short_name": "vt3",
+            "long_name": "vertexUvThree",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "vertexUvThreeU",
+                "vertexUvThreeV"
+            ]
+        },
+        "vertexUvThreeU": {
+            "short_name": "t3u",
+            "long_name": "vertexUvThreeU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvThree",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexUvThreeV": {
+            "short_name": "t3v",
+            "long_name": "vertexUvThreeV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvThree",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexUvTwo": {
+            "short_name": "vt2",
+            "long_name": "vertexUvTwo",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "num_children": 2,
+            "children": [
+                "vertexUvTwoU",
+                "vertexUvTwoV"
+            ]
+        },
+        "vertexUvTwoU": {
+            "short_name": "t2u",
+            "long_name": "vertexUvTwoU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvTwo",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "vertexUvTwoV": {
+            "short_name": "t2v",
+            "long_name": "vertexUvTwoV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvTwo",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "viewNameStr": {
+            "short_name": "vin",
+            "long_name": "viewNameStr",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "viewNameUsed": {
+            "short_name": "vinu",
+            "long_name": "viewNameUsed",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False
+        },
+        "workingSpace": {
+            "short_name": "ws",
+            "long_name": "workingSpace",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "wrapU": {
+            "short_name": "wu",
+            "long_name": "wrapU",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        },
+        "wrapV": {
+            "short_name": "wv",
+            "long_name": "wrapV",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True
+        }
+    },
     "condition": {
         "binMembership": {
             "short_name": "bnm",
@@ -15037,1313 +26527,669 @@ ATTRIBUTES_PROPERTIES = {
 
 ATTRIBUTES_SHORT_NAMES_MAP = {
     "bnm": {
-        "transform": "binMembership",
-        "joint": "binMembership",
-        "multDoubleLinear": "binMembership",
-        "condition": "binMembership",
-        "clamp": "binMembership",
-        "remapValue": "binMembership",
-        "remapColor": "binMembership",
-        "uvPin": "binMembership",
-        "plusMinusAverage": "binMembership",
-        "blendTwoAttr": "binMembership",
-        "blendColors": "binMembership",
-        "decomposeMatrix": "binMembership",
-        "inverseMatrix": "binMembership",
-        "multMatrix": "binMembership",
-        "blendMatrix": "binMembership",
-        "nurbsCurve": "binMembership",
-        "nurbsSurface": "binMembership",
         "mesh": "binMembership"
     },
     "bbx": {
-        "transform": "blackBox",
-        "joint": "blackBox",
-        "nurbsCurve": "blackBox",
-        "nurbsSurface": "blackBox",
         "mesh": "blackBox"
     },
     "boc": {
-        "transform": "borderConnections",
-        "joint": "borderConnections",
-        "nurbsCurve": "borderConnections",
-        "nurbsSurface": "borderConnections",
         "mesh": "borderConnections"
     },
     "bb": {
-        "transform": "boundingBox",
-        "joint": "boundingBox",
-        "nurbsCurve": "boundingBox",
-        "nurbsSurface": "boundingBox",
         "mesh": "boundingBox"
     },
     "bcx": {
-        "transform": "boundingBoxCenterX",
-        "joint": "boundingBoxCenterX",
-        "nurbsCurve": "boundingBoxCenterX",
-        "nurbsSurface": "boundingBoxCenterX",
         "mesh": "boundingBoxCenterX"
     },
     "bcy": {
-        "transform": "boundingBoxCenterY",
-        "joint": "boundingBoxCenterY",
-        "nurbsCurve": "boundingBoxCenterY",
-        "nurbsSurface": "boundingBoxCenterY",
         "mesh": "boundingBoxCenterY"
     },
     "bcz": {
-        "transform": "boundingBoxCenterZ",
-        "joint": "boundingBoxCenterZ",
-        "nurbsCurve": "boundingBoxCenterZ",
-        "nurbsSurface": "boundingBoxCenterZ",
         "mesh": "boundingBoxCenterZ"
     },
     "bbmx": {
-        "transform": "boundingBoxMax",
-        "joint": "boundingBoxMax",
-        "nurbsCurve": "boundingBoxMax",
-        "nurbsSurface": "boundingBoxMax",
         "mesh": "boundingBoxMax"
     },
     "bbxx": {
-        "transform": "boundingBoxMaxX",
-        "joint": "boundingBoxMaxX",
-        "nurbsCurve": "boundingBoxMaxX",
-        "nurbsSurface": "boundingBoxMaxX",
         "mesh": "boundingBoxMaxX"
     },
     "bbxy": {
-        "transform": "boundingBoxMaxY",
-        "joint": "boundingBoxMaxY",
-        "nurbsCurve": "boundingBoxMaxY",
-        "nurbsSurface": "boundingBoxMaxY",
         "mesh": "boundingBoxMaxY"
     },
     "bbxz": {
-        "transform": "boundingBoxMaxZ",
-        "joint": "boundingBoxMaxZ",
-        "nurbsCurve": "boundingBoxMaxZ",
-        "nurbsSurface": "boundingBoxMaxZ",
         "mesh": "boundingBoxMaxZ"
     },
     "bbmn": {
-        "transform": "boundingBoxMin",
-        "joint": "boundingBoxMin",
-        "nurbsCurve": "boundingBoxMin",
-        "nurbsSurface": "boundingBoxMin",
         "mesh": "boundingBoxMin"
     },
     "bbnx": {
-        "transform": "boundingBoxMinX",
-        "joint": "boundingBoxMinX",
-        "nurbsCurve": "boundingBoxMinX",
-        "nurbsSurface": "boundingBoxMinX",
         "mesh": "boundingBoxMinX"
     },
     "bbny": {
-        "transform": "boundingBoxMinY",
-        "joint": "boundingBoxMinY",
-        "nurbsCurve": "boundingBoxMinY",
-        "nurbsSurface": "boundingBoxMinY",
         "mesh": "boundingBoxMinY"
     },
     "bbnz": {
-        "transform": "boundingBoxMinZ",
-        "joint": "boundingBoxMinZ",
-        "nurbsCurve": "boundingBoxMinZ",
-        "nurbsSurface": "boundingBoxMinZ",
         "mesh": "boundingBoxMinZ"
     },
     "bbsi": {
-        "transform": "boundingBoxSize",
-        "joint": "boundingBoxSize",
-        "nurbsCurve": "boundingBoxSize",
-        "nurbsSurface": "boundingBoxSize",
         "mesh": "boundingBoxSize"
     },
     "bbsx": {
-        "transform": "boundingBoxSizeX",
-        "joint": "boundingBoxSizeX",
-        "nurbsCurve": "boundingBoxSizeX",
-        "nurbsSurface": "boundingBoxSizeX",
         "mesh": "boundingBoxSizeX"
     },
     "bbsy": {
-        "transform": "boundingBoxSizeY",
-        "joint": "boundingBoxSizeY",
-        "nurbsCurve": "boundingBoxSizeY",
-        "nurbsSurface": "boundingBoxSizeY",
         "mesh": "boundingBoxSizeY"
     },
     "bbsz": {
-        "transform": "boundingBoxSizeZ",
-        "joint": "boundingBoxSizeZ",
-        "nurbsCurve": "boundingBoxSizeZ",
-        "nurbsSurface": "boundingBoxSizeZ",
         "mesh": "boundingBoxSizeZ"
     },
     "cch": {
-        "transform": "caching",
-        "joint": "caching",
-        "multDoubleLinear": "caching",
-        "condition": "caching",
-        "clamp": "caching",
-        "remapValue": "caching",
-        "remapColor": "caching",
-        "uvPin": "caching",
-        "plusMinusAverage": "caching",
-        "blendTwoAttr": "caching",
-        "blendColors": "caching",
-        "decomposeMatrix": "caching",
-        "inverseMatrix": "caching",
-        "multMatrix": "caching",
-        "blendMatrix": "caching",
-        "nurbsCurve": "caching",
-        "nurbsSurface": "caching",
         "mesh": "caching"
     },
     "c": {
-        "transform": "center",
-        "joint": "center",
-        "blendTwoAttr": "current",
-        "nurbsCurve": "center",
-        "nurbsSurface": "center",
         "mesh": "center"
     },
     "ctyp": {
-        "transform": "containerType",
-        "joint": "containerType",
-        "nurbsCurve": "containerType",
-        "nurbsSurface": "containerType",
         "mesh": "containerType"
     },
     "cdat": {
-        "transform": "creationDate",
-        "joint": "creationDate",
-        "nurbsCurve": "creationDate",
-        "nurbsSurface": "creationDate",
         "mesh": "creationDate"
     },
     "ctor": {
-        "transform": "creator",
-        "joint": "creator",
-        "nurbsCurve": "creator",
-        "nurbsSurface": "creator",
         "mesh": "creator"
     },
     "ctrt": {
-        "transform": "customTreatment",
-        "joint": "customTreatment",
-        "nurbsCurve": "customTreatment",
-        "nurbsSurface": "customTreatment",
         "mesh": "customTreatment"
     },
     "dlim": {
-        "transform": "dagLocalInverseMatrix",
         "joint": "dagLocalInverseMatrix"
     },
     "dlm": {
-        "transform": "dagLocalMatrix",
         "joint": "dagLocalMatrix"
     },
     "dh": {
-        "transform": "displayHandle",
-        "joint": "displayHandle",
-        "nurbsCurve": "dispHull",
         "nurbsSurface": "dispHull"
     },
     "dla": {
-        "transform": "displayLocalAxis",
         "joint": "displayLocalAxis"
     },
     "drp": {
-        "transform": "displayRotatePivot",
         "joint": "displayRotatePivot"
     },
     "dsp": {
-        "transform": "displayScalePivot",
         "joint": "displayScalePivot"
     },
     "do": {
-        "transform": "drawOverride",
-        "joint": "drawOverride",
-        "nurbsCurve": "drawOverride",
-        "nurbsSurface": "drawOverride",
         "mesh": "drawOverride"
     },
     "dyn": {
-        "transform": "dynamics",
         "joint": "dynamics"
     },
     "fzn": {
-        "transform": "frozen",
-        "joint": "frozen",
-        "multDoubleLinear": "frozen",
-        "condition": "frozen",
-        "clamp": "frozen",
-        "remapValue": "frozen",
-        "remapColor": "frozen",
-        "uvPin": "frozen",
-        "plusMinusAverage": "frozen",
-        "blendTwoAttr": "frozen",
-        "blendColors": "frozen",
-        "decomposeMatrix": "frozen",
-        "inverseMatrix": "frozen",
-        "multMatrix": "frozen",
-        "blendMatrix": "frozen",
-        "nurbsCurve": "frozen",
-        "nurbsSurface": "frozen",
         "mesh": "frozen"
     },
     "g": {
-        "transform": "geometry",
-        "joint": "geometry",
         "remapColor": "green"
     },
     "gac": {
-        "transform": "ghostColorPost",
-        "joint": "ghostColorPost",
-        "nurbsCurve": "ghostColorPost",
-        "nurbsSurface": "ghostColorPost",
         "mesh": "ghostColorPost"
     },
     "gab": {
-        "transform": "ghostColorPostB",
-        "joint": "ghostColorPostB",
-        "nurbsCurve": "ghostColorPostB",
-        "nurbsSurface": "ghostColorPostB",
         "mesh": "ghostColorPostB"
     },
     "gag": {
-        "transform": "ghostColorPostG",
-        "joint": "ghostColorPostG",
-        "nurbsCurve": "ghostColorPostG",
-        "nurbsSurface": "ghostColorPostG",
         "mesh": "ghostColorPostG"
     },
     "gar": {
-        "transform": "ghostColorPostR",
-        "joint": "ghostColorPostR",
-        "nurbsCurve": "ghostColorPostR",
-        "nurbsSurface": "ghostColorPostR",
         "mesh": "ghostColorPostR"
     },
     "gcp": {
-        "transform": "ghostColorPre",
-        "joint": "ghostColorPre",
-        "nurbsCurve": "ghostColorPre",
-        "nurbsSurface": "ghostColorPre",
         "mesh": "ghostColorPre"
     },
     "gpb": {
-        "transform": "ghostColorPreB",
-        "joint": "ghostColorPreB",
-        "nurbsCurve": "ghostColorPreB",
-        "nurbsSurface": "ghostColorPreB",
         "mesh": "ghostColorPreB"
     },
     "gpg": {
-        "transform": "ghostColorPreG",
-        "joint": "ghostColorPreG",
-        "nurbsCurve": "ghostColorPreG",
-        "nurbsSurface": "ghostColorPreG",
         "mesh": "ghostColorPreG"
     },
     "grr": {
-        "transform": "ghostColorPreR",
-        "joint": "ghostColorPreR",
-        "nurbsCurve": "ghostColorPreR",
-        "nurbsSurface": "ghostColorPreR",
         "mesh": "ghostColorPreR"
     },
     "gcs": {
-        "transform": "ghostCustomSteps",
-        "joint": "ghostCustomSteps",
-        "nurbsCurve": "ghostCustomSteps",
-        "nurbsSurface": "ghostCustomSteps",
         "mesh": "ghostCustomSteps"
     },
     "gdr": {
-        "transform": "ghostDriver",
-        "joint": "ghostDriver",
-        "nurbsCurve": "ghostDriver",
-        "nurbsSurface": "ghostDriver",
         "mesh": "ghostDriver"
     },
     "gfro": {
-        "transform": "ghostFarOpacity",
-        "joint": "ghostFarOpacity",
-        "nurbsCurve": "ghostFarOpacity",
-        "nurbsSurface": "ghostFarOpacity",
         "mesh": "ghostFarOpacity"
     },
     "gf": {
-        "transform": "ghostFrames",
-        "joint": "ghostFrames",
-        "nurbsCurve": "ghostFrames",
-        "nurbsSurface": "ghostFrames",
         "mesh": "ghostFrames"
     },
     "gnro": {
-        "transform": "ghostNearOpacity",
-        "joint": "ghostNearOpacity",
-        "nurbsCurve": "ghostNearOpacity",
-        "nurbsSurface": "ghostNearOpacity",
         "mesh": "ghostNearOpacity"
     },
     "golr": {
-        "transform": "ghostOpacityRange",
-        "joint": "ghostOpacityRange",
-        "nurbsCurve": "ghostOpacityRange",
-        "nurbsSurface": "ghostOpacityRange",
         "mesh": "ghostOpacityRange"
     },
     "gpof": {
-        "transform": "ghostPostFrames",
-        "joint": "ghostPostFrames",
-        "nurbsCurve": "ghostPostFrames",
-        "nurbsSurface": "ghostPostFrames",
         "mesh": "ghostPostFrames"
     },
     "gprf": {
-        "transform": "ghostPreFrames",
-        "joint": "ghostPreFrames",
-        "nurbsCurve": "ghostPreFrames",
-        "nurbsSurface": "ghostPreFrames",
         "mesh": "ghostPreFrames"
     },
     "gud": {
-        "transform": "ghostUseDriver",
-        "joint": "ghostUseDriver",
-        "nurbsCurve": "ghostUseDriver",
-        "nurbsSurface": "ghostUseDriver",
         "mesh": "ghostUseDriver"
     },
     "gh": {
-        "transform": "ghosting",
-        "joint": "ghosting",
-        "nurbsCurve": "ghosting",
-        "nurbsSurface": "ghosting",
         "mesh": "ghosting"
     },
     "gm": {
-        "transform": "ghostingMode",
-        "joint": "ghostingMode",
-        "nurbsCurve": "ghostingMode",
-        "nurbsSurface": "ghostingMode",
         "mesh": "ghostingMode"
     },
     "gstp": {
-        "transform": "ghostsStep",
-        "joint": "ghostsStep",
-        "nurbsCurve": "ghostsStep",
-        "nurbsSurface": "ghostsStep",
         "mesh": "ghostsStep"
     },
     "hio": {
-        "transform": "hiddenInOutliner",
-        "joint": "hiddenInOutliner",
-        "nurbsCurve": "hiddenInOutliner",
-        "nurbsSurface": "hiddenInOutliner",
         "mesh": "hiddenInOutliner"
     },
     "hpb": {
-        "transform": "hideOnPlayback",
-        "joint": "hideOnPlayback",
-        "nurbsCurve": "hideOnPlayback",
-        "nurbsSurface": "hideOnPlayback",
         "mesh": "hideOnPlayback"
     },
     "hl": {
-        "transform": "hyperLayout",
-        "joint": "hyperLayout",
-        "nurbsCurve": "hyperLayout",
-        "nurbsSurface": "hyperLayout",
         "mesh": "hyperLayout"
     },
     "icn": {
-        "transform": "iconName",
-        "joint": "iconName",
-        "nurbsCurve": "iconName",
-        "nurbsSurface": "iconName",
         "mesh": "iconName"
     },
     "rlid": {
-        "transform": "identification",
-        "joint": "identification",
-        "nurbsCurve": "identification",
-        "nurbsSurface": "identification",
         "mesh": "identification"
     },
     "it": {
-        "transform": "inheritsTransform",
-        "joint": "inheritsTransform"
+        "lambert": "transparency"
     },
     "iog": {
-        "transform": "instObjGroups",
-        "joint": "instObjGroups",
-        "nurbsCurve": "instObjGroups",
-        "nurbsSurface": "instObjGroups",
         "mesh": "instObjGroups"
     },
     "io": {
-        "transform": "intermediateObject",
-        "joint": "intermediateObject",
-        "nurbsCurve": "intermediateObject",
-        "nurbsSurface": "intermediateObject",
         "mesh": "intermediateObject"
     },
     "im": {
-        "transform": "inverseMatrix",
-        "joint": "inverseMatrix",
-        "nurbsCurve": "inverseMatrix",
-        "nurbsSurface": "inverseMatrix",
         "mesh": "inverseMatrix"
     },
     "isc": {
-        "transform": "isCollapsed",
-        "joint": "isCollapsed",
-        "nurbsCurve": "isCollapsed",
-        "nurbsSurface": "isCollapsed",
         "mesh": "isCollapsed"
     },
     "ish": {
-        "transform": "isHierarchicalConnection",
-        "joint": "isHierarchicalConnection",
-        "nurbsCurve": "isHierarchicalConnection",
-        "nurbsSurface": "isHierarchicalConnection",
         "mesh": "isHierarchicalConnection"
     },
     "ihi": {
-        "transform": "isHistoricallyInteresting",
-        "joint": "isHistoricallyInteresting",
-        "multDoubleLinear": "isHistoricallyInteresting",
-        "condition": "isHistoricallyInteresting",
-        "clamp": "isHistoricallyInteresting",
-        "remapValue": "isHistoricallyInteresting",
-        "remapColor": "isHistoricallyInteresting",
-        "uvPin": "isHistoricallyInteresting",
-        "plusMinusAverage": "isHistoricallyInteresting",
-        "blendTwoAttr": "isHistoricallyInteresting",
-        "blendColors": "isHistoricallyInteresting",
-        "decomposeMatrix": "isHistoricallyInteresting",
-        "inverseMatrix": "isHistoricallyInteresting",
-        "multMatrix": "isHistoricallyInteresting",
-        "blendMatrix": "isHistoricallyInteresting",
-        "nurbsCurve": "isHistoricallyInteresting",
-        "nurbsSurface": "isHistoricallyInteresting",
         "mesh": "isHistoricallyInteresting"
     },
     "lovc": {
-        "transform": "layerOverrideColor",
-        "joint": "layerOverrideColor",
-        "nurbsCurve": "layerOverrideColor",
-        "nurbsSurface": "layerOverrideColor",
         "mesh": "layerOverrideColor"
     },
     "rndr": {
-        "transform": "layerRenderable",
-        "joint": "layerRenderable",
-        "nurbsCurve": "layerRenderable",
-        "nurbsSurface": "layerRenderable",
         "mesh": "layerRenderable"
     },
     "lodv": {
-        "transform": "lodVisibility",
-        "joint": "lodVisibility",
-        "nurbsCurve": "lodVisibility",
-        "nurbsSurface": "lodVisibility",
         "mesh": "lodVisibility"
     },
     "m": {
-        "transform": "matrix",
-        "joint": "matrix",
-        "nurbsCurve": "matrix",
-        "nurbsSurface": "matrix",
         "mesh": "matrix"
     },
     "mxrl": {
-        "transform": "maxRotLimit",
         "joint": "maxRotLimit"
     },
     "xrle": {
-        "transform": "maxRotLimitEnable",
         "joint": "maxRotLimitEnable"
     },
     "xrxl": {
-        "transform": "maxRotXLimit",
         "joint": "maxRotXLimit"
     },
     "xrxe": {
-        "transform": "maxRotXLimitEnable",
         "joint": "maxRotXLimitEnable"
     },
     "xryl": {
-        "transform": "maxRotYLimit",
         "joint": "maxRotYLimit"
     },
     "xrye": {
-        "transform": "maxRotYLimitEnable",
         "joint": "maxRotYLimitEnable"
     },
     "xrzl": {
-        "transform": "maxRotZLimit",
         "joint": "maxRotZLimit"
     },
     "xrze": {
-        "transform": "maxRotZLimitEnable",
         "joint": "maxRotZLimitEnable"
     },
     "mxsl": {
-        "transform": "maxScaleLimit",
         "joint": "maxScaleLimit"
     },
     "xsle": {
-        "transform": "maxScaleLimitEnable",
         "joint": "maxScaleLimitEnable"
     },
     "xsxl": {
-        "transform": "maxScaleXLimit",
         "joint": "maxScaleXLimit"
     },
     "xsxe": {
-        "transform": "maxScaleXLimitEnable",
         "joint": "maxScaleXLimitEnable"
     },
     "xsyl": {
-        "transform": "maxScaleYLimit",
         "joint": "maxScaleYLimit"
     },
     "xsye": {
-        "transform": "maxScaleYLimitEnable",
         "joint": "maxScaleYLimitEnable"
     },
     "xszl": {
-        "transform": "maxScaleZLimit",
         "joint": "maxScaleZLimit"
     },
     "xsze": {
-        "transform": "maxScaleZLimitEnable",
         "joint": "maxScaleZLimitEnable"
     },
     "mxtl": {
-        "transform": "maxTransLimit",
         "joint": "maxTransLimit"
     },
     "xtle": {
-        "transform": "maxTransLimitEnable",
         "joint": "maxTransLimitEnable"
     },
     "xtxl": {
-        "transform": "maxTransXLimit",
         "joint": "maxTransXLimit"
     },
     "xtxe": {
-        "transform": "maxTransXLimitEnable",
         "joint": "maxTransXLimitEnable"
     },
     "xtyl": {
-        "transform": "maxTransYLimit",
         "joint": "maxTransYLimit"
     },
     "xtye": {
-        "transform": "maxTransYLimitEnable",
         "joint": "maxTransYLimitEnable"
     },
     "xtzl": {
-        "transform": "maxTransZLimit",
         "joint": "maxTransZLimit"
     },
     "xtze": {
-        "transform": "maxTransZLimitEnable",
         "joint": "maxTransZLimitEnable"
     },
     "msg": {
-        "transform": "message",
-        "joint": "message",
-        "multDoubleLinear": "message",
-        "condition": "message",
-        "clamp": "message",
-        "remapValue": "message",
-        "remapColor": "message",
-        "uvPin": "message",
-        "plusMinusAverage": "message",
-        "blendTwoAttr": "message",
-        "blendColors": "message",
-        "decomposeMatrix": "message",
-        "inverseMatrix": "message",
-        "multMatrix": "message",
-        "blendMatrix": "message",
-        "nurbsCurve": "message",
-        "nurbsSurface": "message",
         "mesh": "message"
     },
     "mnrl": {
-        "transform": "minRotLimit",
         "joint": "minRotLimit"
     },
     "mrle": {
-        "transform": "minRotLimitEnable",
         "joint": "minRotLimitEnable"
     },
     "mrxl": {
-        "transform": "minRotXLimit",
         "joint": "minRotXLimit"
     },
     "mrxe": {
-        "transform": "minRotXLimitEnable",
         "joint": "minRotXLimitEnable"
     },
     "mryl": {
-        "transform": "minRotYLimit",
         "joint": "minRotYLimit"
     },
     "mrye": {
-        "transform": "minRotYLimitEnable",
         "joint": "minRotYLimitEnable"
     },
     "mrzl": {
-        "transform": "minRotZLimit",
         "joint": "minRotZLimit"
     },
     "mrze": {
-        "transform": "minRotZLimitEnable",
         "joint": "minRotZLimitEnable"
     },
     "mnsl": {
-        "transform": "minScaleLimit",
         "joint": "minScaleLimit"
     },
     "msle": {
-        "transform": "minScaleLimitEnable",
         "joint": "minScaleLimitEnable"
     },
     "msxl": {
-        "transform": "minScaleXLimit",
         "joint": "minScaleXLimit"
     },
     "msxe": {
-        "transform": "minScaleXLimitEnable",
         "joint": "minScaleXLimitEnable"
     },
     "msyl": {
-        "transform": "minScaleYLimit",
         "joint": "minScaleYLimit"
     },
     "msye": {
-        "transform": "minScaleYLimitEnable",
         "joint": "minScaleYLimitEnable"
     },
     "mszl": {
-        "transform": "minScaleZLimit",
         "joint": "minScaleZLimit"
     },
     "msze": {
-        "transform": "minScaleZLimitEnable",
         "joint": "minScaleZLimitEnable"
     },
     "mntl": {
-        "transform": "minTransLimit",
         "joint": "minTransLimit"
     },
     "mtle": {
-        "transform": "minTransLimitEnable",
         "joint": "minTransLimitEnable"
     },
     "mtxl": {
-        "transform": "minTransXLimit",
         "joint": "minTransXLimit"
     },
     "mtxe": {
-        "transform": "minTransXLimitEnable",
         "joint": "minTransXLimitEnable"
     },
     "mtyl": {
-        "transform": "minTransYLimit",
         "joint": "minTransYLimit"
     },
     "mtye": {
-        "transform": "minTransYLimitEnable",
         "joint": "minTransYLimitEnable"
     },
     "mtzl": {
-        "transform": "minTransZLimit",
         "joint": "minTransZLimit"
     },
     "mtze": {
-        "transform": "minTransZLimitEnable",
         "joint": "minTransZLimitEnable"
     },
     "nds": {
-        "transform": "nodeState",
-        "joint": "nodeState",
-        "multDoubleLinear": "nodeState",
-        "condition": "nodeState",
-        "clamp": "nodeState",
-        "remapValue": "nodeState",
-        "remapColor": "nodeState",
-        "uvPin": "nodeState",
-        "plusMinusAverage": "nodeState",
-        "blendTwoAttr": "nodeState",
-        "blendColors": "nodeState",
-        "decomposeMatrix": "nodeState",
-        "inverseMatrix": "nodeState",
-        "multMatrix": "nodeState",
-        "blendMatrix": "nodeState",
-        "nurbsCurve": "nodeState",
-        "nurbsSurface": "nodeState",
         "mesh": "nodeState"
     },
     "oc": {
-        "transform": "objectColor",
-        "joint": "objectColor",
-        "condition": "outColor",
-        "remapValue": "outColor",
-        "remapColor": "outColor",
-        "nurbsCurve": "objectColor",
-        "nurbsSurface": "objectColor",
         "mesh": "objectColor"
     },
     "obcb": {
-        "transform": "objectColorB",
-        "joint": "objectColorB",
-        "nurbsCurve": "objectColorB",
-        "nurbsSurface": "objectColorB",
         "mesh": "objectColorB"
     },
     "obcg": {
-        "transform": "objectColorG",
-        "joint": "objectColorG",
-        "nurbsCurve": "objectColorG",
-        "nurbsSurface": "objectColorG",
         "mesh": "objectColorG"
     },
     "obcr": {
-        "transform": "objectColorR",
-        "joint": "objectColorR",
-        "nurbsCurve": "objectColorR",
-        "nurbsSurface": "objectColorR",
         "mesh": "objectColorR"
     },
     "obcc": {
-        "transform": "objectColorRGB",
-        "joint": "objectColorRGB",
-        "nurbsCurve": "objectColorRGB",
-        "nurbsSurface": "objectColorRGB",
         "mesh": "objectColorRGB"
     },
     "opm": {
-        "transform": "offsetParentMatrix",
         "joint": "offsetParentMatrix"
     },
     "oclr": {
-        "transform": "outlinerColor",
-        "joint": "outlinerColor",
-        "nurbsCurve": "outlinerColor",
-        "nurbsSurface": "outlinerColor",
         "mesh": "outlinerColor"
     },
     "oclrb": {
-        "transform": "outlinerColorB",
-        "joint": "outlinerColorB",
-        "nurbsCurve": "outlinerColorB",
-        "nurbsSurface": "outlinerColorB",
         "mesh": "outlinerColorB"
     },
     "oclrg": {
-        "transform": "outlinerColorG",
-        "joint": "outlinerColorG",
-        "nurbsCurve": "outlinerColorG",
-        "nurbsSurface": "outlinerColorG",
         "mesh": "outlinerColorG"
     },
     "oclrr": {
-        "transform": "outlinerColorR",
-        "joint": "outlinerColorR",
-        "nurbsCurve": "outlinerColorR",
-        "nurbsSurface": "outlinerColorR",
         "mesh": "outlinerColorR"
     },
     "ovc": {
-        "transform": "overrideColor",
-        "joint": "overrideColor",
-        "nurbsCurve": "overrideColor",
-        "nurbsSurface": "overrideColor",
         "mesh": "overrideColor"
     },
     "ovca": {
-        "transform": "overrideColorA",
-        "joint": "overrideColorA",
-        "nurbsCurve": "overrideColorA",
-        "nurbsSurface": "overrideColorA",
         "mesh": "overrideColorA"
     },
     "ovcb": {
-        "transform": "overrideColorB",
-        "joint": "overrideColorB",
-        "nurbsCurve": "overrideColorB",
-        "nurbsSurface": "overrideColorB",
         "mesh": "overrideColorB"
     },
     "ovcg": {
-        "transform": "overrideColorG",
-        "joint": "overrideColorG",
-        "nurbsCurve": "overrideColorG",
-        "nurbsSurface": "overrideColorG",
         "mesh": "overrideColorG"
     },
     "ovcr": {
-        "transform": "overrideColorR",
-        "joint": "overrideColorR",
-        "nurbsCurve": "overrideColorR",
-        "nurbsSurface": "overrideColorR",
         "mesh": "overrideColorR"
     },
     "ovrgb": {
-        "transform": "overrideColorRGB",
-        "joint": "overrideColorRGB",
-        "nurbsCurve": "overrideColorRGB",
-        "nurbsSurface": "overrideColorRGB",
         "mesh": "overrideColorRGB"
     },
     "ovdt": {
-        "transform": "overrideDisplayType",
-        "joint": "overrideDisplayType",
-        "nurbsCurve": "overrideDisplayType",
-        "nurbsSurface": "overrideDisplayType",
         "mesh": "overrideDisplayType"
     },
     "ove": {
-        "transform": "overrideEnabled",
-        "joint": "overrideEnabled",
-        "nurbsCurve": "overrideEnabled",
-        "nurbsSurface": "overrideEnabled",
         "mesh": "overrideEnabled"
     },
     "ovlod": {
-        "transform": "overrideLevelOfDetail",
-        "joint": "overrideLevelOfDetail",
-        "nurbsCurve": "overrideLevelOfDetail",
-        "nurbsSurface": "overrideLevelOfDetail",
         "mesh": "overrideLevelOfDetail"
     },
     "ovp": {
-        "transform": "overridePlayback",
-        "joint": "overridePlayback",
-        "nurbsCurve": "overridePlayback",
-        "nurbsSurface": "overridePlayback",
         "mesh": "overridePlayback"
     },
     "ovrgbf": {
-        "transform": "overrideRGBColors",
-        "joint": "overrideRGBColors",
-        "nurbsCurve": "overrideRGBColors",
-        "nurbsSurface": "overrideRGBColors",
         "mesh": "overrideRGBColors"
     },
     "ovs": {
-        "transform": "overrideShading",
-        "joint": "overrideShading",
-        "nurbsCurve": "overrideShading",
-        "nurbsSurface": "overrideShading",
         "mesh": "overrideShading"
     },
     "ovt": {
-        "transform": "overrideTexturing",
-        "joint": "overrideTexturing",
-        "nurbsCurve": "overrideTexturing",
-        "nurbsSurface": "overrideTexturing",
         "mesh": "overrideTexturing"
     },
     "ovv": {
-        "transform": "overrideVisibility",
-        "joint": "overrideVisibility",
-        "nurbsCurve": "overrideVisibility",
-        "nurbsSurface": "overrideVisibility",
         "mesh": "overrideVisibility"
     },
     "pim": {
-        "transform": "parentInverseMatrix",
-        "joint": "parentInverseMatrix",
-        "nurbsCurve": "parentInverseMatrix",
-        "nurbsSurface": "parentInverseMatrix",
         "mesh": "parentInverseMatrix"
     },
     "pm": {
-        "transform": "parentMatrix",
-        "joint": "parentMatrix",
-        "nurbsCurve": "parentMatrix",
-        "nurbsSurface": "parentMatrix",
         "mesh": "parentMatrix"
     },
     "pni": {
-        "transform": "publishedNodeInfo",
-        "joint": "publishedNodeInfo",
-        "nurbsCurve": "publishedNodeInfo",
-        "nurbsSurface": "publishedNodeInfo",
         "mesh": "publishedNodeInfo"
     },
     "ri": {
-        "transform": "renderInfo",
-        "joint": "renderInfo",
-        "nurbsCurve": "renderInfo",
-        "nurbsSurface": "renderInfo",
         "mesh": "renderInfo"
     },
     "rlio": {
-        "transform": "renderLayerInfo",
-        "joint": "renderLayerInfo",
-        "nurbsCurve": "renderLayerInfo",
-        "nurbsSurface": "renderLayerInfo",
         "mesh": "renderLayerInfo"
     },
     "rmc": {
-        "transform": "rmbCommand",
-        "joint": "rmbCommand",
-        "nurbsCurve": "rmbCommand",
-        "nurbsSurface": "rmbCommand",
         "mesh": "rmbCommand"
     },
     "r": {
-        "transform": "rotate",
-        "joint": "rotate",
         "remapColor": "red"
     },
     "ra": {
-        "transform": "rotateAxis",
         "joint": "rotateAxis"
     },
     "rax": {
-        "transform": "rotateAxisX",
         "joint": "rotateAxisX"
     },
     "ray": {
-        "transform": "rotateAxisY",
         "joint": "rotateAxisY"
     },
     "raz": {
-        "transform": "rotateAxisZ",
         "joint": "rotateAxisZ"
     },
     "ro": {
-        "transform": "rotateOrder",
-        "joint": "rotateOrder",
         "decomposeMatrix": "inputRotateOrder"
     },
     "rp": {
-        "transform": "rotatePivot",
         "joint": "rotatePivot"
     },
     "rpt": {
-        "transform": "rotatePivotTranslate",
         "joint": "rotatePivotTranslate"
     },
     "rptx": {
-        "transform": "rotatePivotTranslateX",
         "joint": "rotatePivotTranslateX"
     },
     "rpty": {
-        "transform": "rotatePivotTranslateY",
         "joint": "rotatePivotTranslateY"
     },
     "rptz": {
-        "transform": "rotatePivotTranslateZ",
         "joint": "rotatePivotTranslateZ"
     },
     "rpx": {
-        "transform": "rotatePivotX",
         "joint": "rotatePivotX"
     },
     "rpy": {
-        "transform": "rotatePivotY",
         "joint": "rotatePivotY"
     },
     "rpz": {
-        "transform": "rotatePivotZ",
-        "joint": "rotatePivotZ"
+        "camera": "renderPanZoom"
     },
     "rq": {
-        "transform": "rotateQuaternion",
         "joint": "rotateQuaternion"
     },
     "rqw": {
-        "transform": "rotateQuaternionW",
         "joint": "rotateQuaternionW"
     },
     "rqx": {
-        "transform": "rotateQuaternionX",
         "joint": "rotateQuaternionX"
     },
     "rqy": {
-        "transform": "rotateQuaternionY",
         "joint": "rotateQuaternionY"
     },
     "rqz": {
-        "transform": "rotateQuaternionZ",
         "joint": "rotateQuaternionZ"
     },
     "rx": {
-        "transform": "rotateX",
         "joint": "rotateX"
     },
     "ry": {
-        "transform": "rotateY",
         "joint": "rotateY"
     },
     "rz": {
-        "transform": "rotateZ",
         "joint": "rotateZ"
     },
     "roi": {
-        "transform": "rotationInterpolation",
         "joint": "rotationInterpolation"
     },
     "s": {
-        "transform": "scale",
-        "joint": "scale",
         "nurbsCurve": "spans"
     },
     "sp": {
-        "transform": "scalePivot",
-        "joint": "scalePivot",
         "nurbsSurface": "spansUV"
     },
     "spt": {
-        "transform": "scalePivotTranslate",
         "joint": "scalePivotTranslate"
     },
     "sptx": {
-        "transform": "scalePivotTranslateX",
         "joint": "scalePivotTranslateX"
     },
     "spty": {
-        "transform": "scalePivotTranslateY",
         "joint": "scalePivotTranslateY"
     },
     "sptz": {
-        "transform": "scalePivotTranslateZ",
         "joint": "scalePivotTranslateZ"
     },
     "spx": {
-        "transform": "scalePivotX",
         "joint": "scalePivotX"
     },
     "spy": {
-        "transform": "scalePivotY",
         "joint": "scalePivotY"
     },
     "spz": {
-        "transform": "scalePivotZ",
         "joint": "scalePivotZ"
     },
     "sx": {
-        "transform": "scaleX",
-        "joint": "scaleX",
         "mesh": "sofx"
     },
     "sy": {
-        "transform": "scaleY",
-        "joint": "scaleY",
         "mesh": "sofy"
     },
     "sz": {
-        "transform": "scaleZ",
-        "joint": "scaleZ",
         "mesh": "sofz"
     },
     "hdl": {
-        "transform": "selectHandle",
         "joint": "selectHandle"
     },
     "hdlx": {
-        "transform": "selectHandleX",
         "joint": "selectHandleX"
     },
     "hdly": {
-        "transform": "selectHandleY",
         "joint": "selectHandleY"
     },
     "hdlz": {
-        "transform": "selectHandleZ",
         "joint": "selectHandleZ"
     },
     "sech": {
-        "transform": "selectionChildHighlighting",
-        "joint": "selectionChildHighlighting",
-        "nurbsCurve": "selectionChildHighlighting",
-        "nurbsSurface": "selectionChildHighlighting",
         "mesh": "selectionChildHighlighting"
     },
     "sh": {
-        "transform": "shear",
         "joint": "shear"
     },
     "shxy": {
-        "transform": "shearXY",
         "joint": "shearXY"
     },
     "shxz": {
-        "transform": "shearXZ",
         "joint": "shearXZ"
     },
     "shyz": {
-        "transform": "shearYZ",
         "joint": "shearYZ"
     },
     "smd": {
-        "transform": "showManipDefault",
         "joint": "showManipDefault"
     },
     "sml": {
-        "transform": "specifiedManipLocation",
         "joint": "specifiedManipLocation"
     },
     "tmp": {
-        "transform": "template",
-        "joint": "template",
-        "nurbsCurve": "template",
-        "nurbsSurface": "template",
         "mesh": "template"
     },
     "tna": {
-        "transform": "templateName",
-        "joint": "templateName",
-        "nurbsCurve": "templateName",
-        "nurbsSurface": "templateName",
         "mesh": "templateName"
     },
     "tpt": {
-        "transform": "templatePath",
-        "joint": "templatePath",
-        "nurbsCurve": "templatePath",
-        "nurbsSurface": "templatePath",
         "mesh": "templatePath"
     },
     "tpv": {
-        "transform": "templateVersion",
-        "joint": "templateVersion",
-        "nurbsCurve": "templateVersion",
-        "nurbsSurface": "templateVersion",
         "mesh": "templateVersion"
     },
     "tmrp": {
-        "transform": "transMinusRotatePivot",
         "joint": "transMinusRotatePivot"
     },
     "tmrx": {
-        "transform": "transMinusRotatePivotX",
         "joint": "transMinusRotatePivotX"
     },
     "tmry": {
-        "transform": "transMinusRotatePivotY",
         "joint": "transMinusRotatePivotY"
     },
     "tmrz": {
-        "transform": "transMinusRotatePivotZ",
         "joint": "transMinusRotatePivotZ"
     },
     "t": {
-        "transform": "translate",
         "joint": "translate"
     },
     "tx": {
-        "transform": "translateX",
-        "joint": "translateX"
+        "areaLight": "pointWorldX"
     },
     "ty": {
-        "transform": "translateY",
-        "joint": "translateY"
+        "areaLight": "pointWorldY"
     },
     "tz": {
-        "transform": "translateZ",
-        "joint": "translateZ"
+        "areaLight": "pointWorldZ"
     },
     "uit": {
-        "transform": "uiTreatment",
-        "joint": "uiTreatment",
-        "nurbsCurve": "uiTreatment",
-        "nurbsSurface": "uiTreatment",
         "mesh": "uiTreatment"
     },
     "uoc": {
-        "transform": "useObjectColor",
-        "joint": "useObjectColor",
-        "nurbsCurve": "useObjectColor",
-        "nurbsSurface": "useObjectColor",
         "mesh": "useObjectColor"
     },
     "uocol": {
-        "transform": "useOutlinerColor",
-        "joint": "useOutlinerColor",
-        "nurbsCurve": "useOutlinerColor",
-        "nurbsSurface": "useOutlinerColor",
         "mesh": "useOutlinerColor"
     },
     "vwm": {
-        "transform": "viewMode",
-        "joint": "viewMode",
-        "nurbsCurve": "viewMode",
-        "nurbsSurface": "viewMode",
         "mesh": "viewMode"
     },
     "vwn": {
-        "transform": "viewName",
-        "joint": "viewName",
-        "nurbsCurve": "viewName",
-        "nurbsSurface": "viewName",
         "mesh": "viewName"
     },
     "v": {
-        "transform": "visibility",
-        "joint": "visibility",
-        "nurbsCurve": "visibility",
-        "nurbsSurface": "visibility",
         "mesh": "visibility"
     },
     "wfcb": {
-        "transform": "wireColorB",
-        "joint": "wireColorB",
-        "nurbsCurve": "wireColorB",
-        "nurbsSurface": "wireColorB",
         "mesh": "wireColorB"
     },
     "wfcg": {
-        "transform": "wireColorG",
-        "joint": "wireColorG",
-        "nurbsCurve": "wireColorG",
-        "nurbsSurface": "wireColorG",
         "mesh": "wireColorG"
     },
     "wfcr": {
-        "transform": "wireColorR",
-        "joint": "wireColorR",
-        "nurbsCurve": "wireColorR",
-        "nurbsSurface": "wireColorR",
         "mesh": "wireColorR"
     },
     "wfcc": {
-        "transform": "wireColorRGB",
-        "joint": "wireColorRGB",
-        "nurbsCurve": "wireColorRGB",
-        "nurbsSurface": "wireColorRGB",
         "mesh": "wireColorRGB"
     },
     "wim": {
-        "transform": "worldInverseMatrix",
-        "joint": "worldInverseMatrix",
-        "nurbsCurve": "worldInverseMatrix",
-        "nurbsSurface": "worldInverseMatrix",
         "mesh": "worldInverseMatrix"
     },
     "wm": {
-        "transform": "worldMatrix",
-        "joint": "worldMatrix",
-        "nurbsCurve": "worldMatrix",
-        "nurbsSurface": "worldMatrix",
         "mesh": "worldMatrix"
     },
     "xm": {
-        "transform": "xformMatrix",
         "joint": "xformMatrix"
     },
     "bis": {
@@ -16419,8 +27265,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "drawLabel"
     },
     "ds": {
-        "joint": "drawStyle",
-        "nurbsSurface": "doubleSided",
         "mesh": "doubleSided"
     },
     "fkr": {
@@ -16547,10 +27391,10 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "minRotateDampStrengthZ"
     },
     "otp": {
-        "joint": "otherType"
+        "file": "objectType"
     },
     "pa": {
-        "joint": "preferredAngle"
+        "spotLight": "penumbraAngle"
     },
     "pax": {
         "joint": "preferredAngleX"
@@ -16571,7 +27415,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "side"
     },
     "st": {
-        "joint": "stiffness",
         "condition": "secondTerm"
     },
     "stx": {
@@ -16587,18 +27430,1141 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "type"
     },
     "i1": {
-        "multDoubleLinear": "input1",
         "plusMinusAverage": "input1D"
     },
     "i2": {
-        "multDoubleLinear": "input2",
         "plusMinusAverage": "input2D"
     },
     "o": {
-        "multDoubleLinear": "output",
-        "blendTwoAttr": "output",
-        "multMatrix": "matrixSum",
         "mesh": "outMesh"
+    },
+    "asp": {
+        "camera": "autoSetPivot"
+    },
+    "col": {
+        "areaLight": "centerOfIllumination"
+    },
+    "colb": {
+        "camera": "backgroundColorB"
+    },
+    "colg": {
+        "camera": "backgroundColorG"
+    },
+    "colr": {
+        "camera": "backgroundColorR"
+    },
+    "bfc": {
+        "camera": "bestFitClippingPlanes"
+    },
+    "b": {
+        "blendColors": "blender"
+    },
+    "ben": {
+        "camera": "bookmarksEnabled"
+    },
+    "cap": {
+        "camera": "cameraAperture"
+    },
+    "cpt": {
+        "camera": "cameraPrecompTemplate"
+    },
+    "cs": {
+        "mesh": "cachedSmoothMesh"
+    },
+    "coi": {
+        "camera": "centerOfInterest"
+    },
+    "cp": {
+        "mesh": "controlPoints"
+    },
+    "dep": {
+        "nurbsSurface": "dispEP"
+    },
+    "den": {
+        "camera": "depthName"
+    },
+    "dof": {
+        "camera": "depthOfField"
+    },
+    "dptp": {
+        "camera": "depthType"
+    },
+    "cfp": {
+        "camera": "displayCameraFarClip"
+    },
+    "dcf": {
+        "camera": "displayCameraFrustum"
+    },
+    "cnc": {
+        "camera": "displayCameraNearClip"
+    },
+    "dfc": {
+        "camera": "displayFieldChart"
+    },
+    "dfg": {
+        "camera": "displayFilmGate"
+    },
+    "dfo": {
+        "camera": "displayFilmOrigin"
+    },
+    "dfp": {
+        "camera": "displayFilmPivot"
+    },
+    "dgm": {
+        "camera": "displayGateMask"
+    },
+    "dgc": {
+        "camera": "displayGateMaskColor"
+    },
+    "dgcb": {
+        "camera": "displayGateMaskColorB"
+    },
+    "dgcg": {
+        "camera": "displayGateMaskColorG"
+    },
+    "dgcr": {
+        "camera": "displayGateMaskColorR"
+    },
+    "dgo": {
+        "camera": "displayGateMaskOpacity"
+    },
+    "dr": {
+        "mesh": "dispResolution"
+    },
+    "dsa": {
+        "camera": "displaySafeAction"
+    },
+    "dst": {
+        "camera": "displaySafeTitle"
+    },
+    "fs": {
+        "file": "uvFilterSize"
+    },
+    "fcp": {
+        "areaLight": "dmapFarClipPlane"
+    },
+    "ff": {
+        "camera": "filmFit"
+    },
+    "ffo": {
+        "camera": "filmFitOffset"
+    },
+    "fio": {
+        "camera": "filmOffset"
+    },
+    "frc": {
+        "camera": "filmRollControl"
+    },
+    "fro": {
+        "camera": "filmRollOrder"
+    },
+    "frp": {
+        "camera": "filmRollPivot"
+    },
+    "frv": {
+        "camera": "filmRollValue"
+    },
+    "ct": {
+        "condition": "colorIfTrue"
+    },
+    "fth": {
+        "mesh": "textureThreshold"
+    },
+    "ftv": {
+        "camera": "filmTranslateV"
+    },
+    "fl": {
+        "camera": "focalLength"
+    },
+    "fd": {
+        "camera": "focusDistance"
+    },
+    "frs": {
+        "camera": "focusRegionScale"
+    },
+    "hc": {
+        "camera": "homeCommand"
+    },
+    "hfa": {
+        "camera": "horizontalFilmAperture"
+    },
+    "hfo": {
+        "camera": "horizontalFilmOffset"
+    },
+    "hpn": {
+        "camera": "horizontalPan"
+    },
+    "hrp": {
+        "camera": "horizontalRollPivot"
+    },
+    "hs": {
+        "lambert": "hideSource"
+    },
+    "img": {
+        "camera": "image"
+    },
+    "imn": {
+        "remapColor": "inputMin"
+    },
+    "ip": {
+        "clamp": "input"
+    },
+    "jc": {
+        "camera": "journalCommand"
+    },
+    "lsr": {
+        "camera": "lensSqueezeRatio"
+    },
+    "lls": {
+        "areaLight": "locatorScale"
+    },
+    "ma": {
+        "camera": "mask"
+    },
+    "man": {
+        "camera": "maskName"
+    },
+    "mb": {
+        "mesh": "motionBlur"
+    },
+    "ncp": {
+        "camera": "nearClipPlane"
+    },
+    "ow": {
+        "camera": "orthographicWidth"
+    },
+    "ovr": {
+        "areaLight": "opticalFXvisibilityR"
+    },
+    "pn": {
+        "camera": "pan"
+    },
+    "pze": {
+        "camera": "panZoomEnabled"
+    },
+    "ppj": {
+        "camera": "postProjection"
+    },
+    "ptsc": {
+        "camera": "postScale"
+    },
+    "psc": {
+        "camera": "preScale"
+    },
+    "rnd": {
+        "camera": "renderable"
+    },
+    "shk": {
+        "camera": "shake"
+    },
+    "se": {
+        "camera": "shakeEnabled"
+    },
+    "sos": {
+        "camera": "shakeOverscan"
+    },
+    "soe": {
+        "camera": "shakeOverscanEnabled"
+    },
+    "sa": {
+        "camera": "shutterAngle"
+    },
+    "hit": {
+        "camera": "stereoHorizontalImageTranslate"
+    },
+    "hte": {
+        "camera": "stereoHorizontalImageTranslateEnabled"
+    },
+    "tthd": {
+        "camera": "threshold"
+    },
+    "tdth": {
+        "camera": "transparencyBasedDepth"
+    },
+    "tu": {
+        "camera": "triggerUpdate"
+    },
+    "tp": {
+        "camera": "tumblePivot"
+    },
+    "tpx": {
+        "camera": "tumblePivotX"
+    },
+    "tpy": {
+        "camera": "tumblePivotY"
+    },
+    "tpz": {
+        "camera": "tumblePivotZ"
+    },
+    "uexd": {
+        "camera": "useExploreDepthFormat"
+    },
+    "uls": {
+        "camera": "usePivotAsLocalSpace"
+    },
+    "vfa": {
+        "camera": "verticalFilmAperture"
+    },
+    "vfo": {
+        "camera": "verticalFilmOffset"
+    },
+    "vpn": {
+        "camera": "verticalPan"
+    },
+    "vrp": {
+        "camera": "verticalRollPivot"
+    },
+    "vs": {
+        "mesh": "vertexSize"
+    },
+    "zom": {
+        "camera": "zoom"
+    },
+    "cw": {
+        "areaLight": "castSoftShadows"
+    },
+    "cl": {
+        "remapColor": "color"
+    },
+    "cb": {
+        "remapColor": "colorB"
+    },
+    "cg": {
+        "remapColor": "colorG"
+    },
+    "cr": {
+        "nurbsSurface": "create"
+    },
+    "de": {
+        "mesh": "displayEdges"
+    },
+    "db": {
+        "mesh": "displayBorders"
+    },
+    "df": {
+        "areaLight": "dmapFocus"
+    },
+    "uf": {
+        "areaLight": "dmapFrameExt"
+    },
+    "ul": {
+        "areaLight": "dmapLightName"
+    },
+    "smn": {
+        "areaLight": "dmapName"
+    },
+    "nc": {
+        "areaLight": "dmapNearClipPlane"
+    },
+    "um": {
+        "areaLight": "dmapSceneName"
+    },
+    "dc": {
+        "mesh": "displayCenter"
+    },
+    "dw": {
+        "areaLight": "dmapWidthFocus"
+    },
+    "edi": {
+        "areaLight": "emitDiffuse"
+    },
+    "esp": {
+        "areaLight": "emitSpecular"
+    },
+    "fw": {
+        "file": "filterWidth"
+    },
+    "fwx": {
+        "pointLight": "farPointWorldX"
+    },
+    "fwy": {
+        "pointLight": "farPointWorldY"
+    },
+    "fwz": {
+        "pointLight": "farPointWorldZ"
+    },
+    "fg": {
+        "spotLight": "fogGeometry"
+    },
+    "fin": {
+        "spotLight": "fogIntensity"
+    },
+    "fr": {
+        "pointLight": "fogRadius"
+    },
+    "fsi": {
+        "areaLight": "fogShadowIntensity"
+    },
+    "ft": {
+        "condition": "firstTerm"
+    },
+    "ib": {
+        "file": "infoBits"
+    },
+    "in": {
+        "areaLight": "intensity"
+    },
+    "lw": {
+        "areaLight": "lastWrittenDmapAnimExtName"
+    },
+    "la": {
+        "areaLight": "lightAmbient"
+    },
+    "lbl": {
+        "areaLight": "lightBlindData"
+    },
+    "ltd": {
+        "lambert": "lightDataArray"
+    },
+    "ldf": {
+        "areaLight": "lightDiffuse"
+    },
+    "ld": {
+        "areaLight": "lightDirection"
+    },
+    "ldx": {
+        "areaLight": "lightDirectionX"
+    },
+    "ldy": {
+        "areaLight": "lightDirectionY"
+    },
+    "ldz": {
+        "areaLight": "lightDirectionZ"
+    },
+    "lg": {
+        "areaLight": "lightGlow"
+    },
+    "li": {
+        "areaLight": "lightIntensity"
+    },
+    "lib": {
+        "areaLight": "lightIntensityB"
+    },
+    "lig": {
+        "areaLight": "lightIntensityG"
+    },
+    "lir": {
+        "areaLight": "lightIntensityR"
+    },
+    "lr": {
+        "areaLight": "lightRadius"
+    },
+    "lsf": {
+        "areaLight": "lightShadowFraction"
+    },
+    "ls": {
+        "nurbsCurve": "lineWidth"
+    },
+    "etw": {
+        "areaLight": "matrixEyeToWorld"
+    },
+    "wte": {
+        "areaLight": "matrixWorldToEye"
+    },
+    "oi": {
+        "lambert": "objectId"
+    },
+    "ot": {
+        "decomposeMatrix": "outputTranslate"
+    },
+    "ov": {
+        "remapValue": "outValue"
+    },
+    "ovb": {
+        "mesh": "osdVertBoundary"
+    },
+    "ovg": {
+        "areaLight": "opticalFXvisibilityG"
+    },
+    "p": {
+        "areaLight": "pointCamera"
+    },
+    "px": {
+        "lambert": "pointCameraX"
+    },
+    "py": {
+        "lambert": "pointCameraY"
+    },
+    "pz": {
+        "lambert": "pointCameraZ"
+    },
+    "pw": {
+        "areaLight": "pointWorld"
+    },
+    "psi": {
+        "areaLight": "preShadowIntensity"
+    },
+    "pi": {
+        "file": "primitiveId"
+    },
+    "rd": {
+        "lambert": "rayDepth"
+    },
+    "rdl": {
+        "lambert": "refractionLimit"
+    },
+    "ryi": {
+        "lambert": "rayInstance"
+    },
+    "rts": {
+        "areaLight": "raySampler"
+    },
+    "gs": {
+        "areaLight": "receiveShadows"
+    },
+    "rdst": {
+        "areaLight": "renderState"
+    },
+    "du": {
+        "nurbsSurface": "degreeU"
+    },
+    "scb": {
+        "areaLight": "shadColorB"
+    },
+    "scg": {
+        "areaLight": "shadColorG"
+    },
+    "scr": {
+        "areaLight": "shadColorR"
+    },
+    "sc": {
+        "areaLight": "shadowColor"
+    },
+    "shr": {
+        "areaLight": "shadowRays"
+    },
+    "uu": {
+        "areaLight": "uCoord"
+    },
+    "dms": {
+        "areaLight": "useDepthMapShadows"
+    },
+    "uc": {
+        "areaLight": "useDmapAutoClipping"
+    },
+    "af": {
+        "areaLight": "useDmapAutoFocus"
+    },
+    "md": {
+        "areaLight": "useMidDistDmap"
+    },
+    "us": {
+        "areaLight": "useOnlySingleDmap"
+    },
+    "urs": {
+        "areaLight": "useRayTraceShadows"
+    },
+    "xn": {
+        "areaLight": "useXMinusDmap"
+    },
+    "xp": {
+        "areaLight": "useXPlusDmap"
+    },
+    "yn": {
+        "areaLight": "useYMinusDmap"
+    },
+    "yp": {
+        "areaLight": "useYPlusDmap"
+    },
+    "zn": {
+        "areaLight": "useZMinusDmap"
+    },
+    "zp": {
+        "areaLight": "useZPlusDmap"
+    },
+    "uv": {
+        "mesh": "uvpt"
+    },
+    "fq": {
+        "areaLight": "uvFilterSize"
+    },
+    "fsx": {
+        "file": "uvFilterSizeX"
+    },
+    "fsy": {
+        "file": "uvFilterSizeY"
+    },
+    "vv": {
+        "areaLight": "vCoord"
+    },
+    "nv": {
+        "nurbsSurface": "numberV"
+    },
+    "ws": {
+        "nurbsSurface": "worldSpace"
+    },
+    "bd": {
+        "spotLight": "barnDoors"
+    },
+    "bbd": {
+        "spotLight": "bottomBarnDoor"
+    },
+    "ca": {
+        "spotLight": "coneAngle"
+    },
+    "dro": {
+        "spotLight": "dropoff"
+    },
+    "ed1": {
+        "spotLight": "endDistance1"
+    },
+    "ed2": {
+        "spotLight": "endDistance2"
+    },
+    "ed3": {
+        "spotLight": "endDistance3"
+    },
+    "fx": {
+        "spotLight": "farPointWorldX"
+    },
+    "fy": {
+        "spotLight": "farPointWorldY"
+    },
+    "fz": {
+        "spotLight": "farPointWorldZ"
+    },
+    "fsp": {
+        "spotLight": "fogSpread"
+    },
+    "lbd": {
+        "spotLight": "leftBarnDoor"
+    },
+    "pis": {
+        "spotLight": "psIllumSamples"
+    },
+    "rad": {
+        "lambert": "rayDirection"
+    },
+    "rdx": {
+        "lambert": "rayDirectionX"
+    },
+    "rdy": {
+        "lambert": "rayDirectionY"
+    },
+    "rdz": {
+        "lambert": "rayDirectionZ"
+    },
+    "rbd": {
+        "spotLight": "rightBarnDoor"
+    },
+    "sd1": {
+        "spotLight": "startDistance1"
+    },
+    "sd2": {
+        "spotLight": "startDistance2"
+    },
+    "sd3": {
+        "spotLight": "startDistance3"
+    },
+    "tbd": {
+        "spotLight": "topBarnDoor"
+    },
+    "udr": {
+        "spotLight": "useDecayRegions"
+    },
+    "lgi": {
+        "areaLight": "legacyIntensity"
+    },
+    "n": {
+        "mesh": "normals"
+    },
+    "nx": {
+        "lambert": "normalCameraX"
+    },
+    "ny": {
+        "lambert": "normalCameraY"
+    },
+    "nz": {
+        "lambert": "normalCameraZ"
+    },
+    "nrm": {
+        "uvPin": "normalAxis"
+    },
+    "ambc": {
+        "lambert": "ambientColor"
+    },
+    "acb": {
+        "lambert": "ambientColorB"
+    },
+    "acg": {
+        "lambert": "ambientColorG"
+    },
+    "acr": {
+        "lambert": "ambientColorR"
+    },
+    "crab": {
+        "lambert": "chromaticAberration"
+    },
+    "gi": {
+        "lambert": "glowIntensity"
+    },
+    "hws": {
+        "lambert": "hardwareShader"
+    },
+    "hwb": {
+        "lambert": "hardwareShaderB"
+    },
+    "hwg": {
+        "lambert": "hardwareShaderG"
+    },
+    "hwr": {
+        "lambert": "hardwareShaderR"
+    },
+    "ic": {
+        "lambert": "incandescence"
+    },
+    "ig": {
+        "lambert": "incandescenceG"
+    },
+    "ir": {
+        "lambert": "incandescenceR"
+    },
+    "absb": {
+        "lambert": "lightAbsorbance"
+    },
+    "maga": {
+        "lambert": "materialAlphaGain"
+    },
+    "mog": {
+        "lambert": "matteOpacity"
+    },
+    "mom": {
+        "lambert": "matteOpacityMode"
+    },
+    "mrfi": {
+        "lambert": "mediumRefractiveIndex"
+    },
+    "opad": {
+        "lambert": "opacityDepth"
+    },
+    "ocb": {
+        "remapColor": "outColorB"
+    },
+    "ocg": {
+        "remapColor": "outColorG"
+    },
+    "ocr": {
+        "mesh": "osdCreaseMethod"
+    },
+    "ogc": {
+        "mesh": "outGeometryClean"
+    },
+    "ogb": {
+        "lambert": "outGlowColorB"
+    },
+    "ogg": {
+        "lambert": "outGlowColorG"
+    },
+    "ogr": {
+        "lambert": "outGlowColorR"
+    },
+    "omo": {
+        "lambert": "outMatteOpacity"
+    },
+    "omob": {
+        "lambert": "outMatteOpacityB"
+    },
+    "omog": {
+        "lambert": "outMatteOpacityG"
+    },
+    "omor": {
+        "lambert": "outMatteOpacityR"
+    },
+    "otb": {
+        "file": "outTransparencyB"
+    },
+    "otg": {
+        "file": "outTransparencyG"
+    },
+    "otr": {
+        "file": "outTransparencyR"
+    },
+    "pc": {
+        "lambert": "pointCamera"
+    },
+    "rtr": {
+        "lambert": "raySampler"
+    },
+    "rfc": {
+        "lambert": "refractions"
+    },
+    "rfi": {
+        "lambert": "refractiveIndex"
+    },
+    "fakc": {
+        "lambert": "shadowAttenuation"
+    },
+    "thik": {
+        "lambert": "surfaceThickness"
+    },
+    "tc": {
+        "lambert": "translucence"
+    },
+    "trsd": {
+        "lambert": "translucenceDepth"
+    },
+    "tcf": {
+        "lambert": "translucenceFocus"
+    },
+    "itb": {
+        "lambert": "transparencyB"
+    },
+    "trdp": {
+        "lambert": "transparencyDepth"
+    },
+    "itg": {
+        "lambert": "transparencyG"
+    },
+    "itr": {
+        "lambert": "transparencyR"
+    },
+    "vrec": {
+        "lambert": "vrEdgeColor"
+    },
+    "vecb": {
+        "lambert": "vrEdgeColorB"
+    },
+    "vecg": {
+        "lambert": "vrEdgeColorG"
+    },
+    "vecr": {
+        "lambert": "vrEdgeColorR"
+    },
+    "vrep": {
+        "lambert": "vrEdgePriority"
+    },
+    "vres": {
+        "lambert": "vrEdgeStyle"
+    },
+    "vrew": {
+        "lambert": "vrEdgeWeight"
+    },
+    "vrfo": {
+        "lambert": "vrFillObject"
+    },
+    "vrhe": {
+        "lambert": "vrHiddenEdges"
+    },
+    "vrht": {
+        "lambert": "vrHiddenEdgesOnTransparent"
+    },
+    "vroi": {
+        "lambert": "vrOutlinesAtIntersections"
+    },
+    "vrod": {
+        "lambert": "vrOverwriteDefaults"
+    },
+    "ag": {
+        "file": "alphaGain"
+    },
+    "ail": {
+        "file": "alphaIsLuminance"
+    },
+    "ao": {
+        "file": "alphaOffset"
+    },
+    "butp": {
+        "file": "baseExplicitUvTilePosition"
+    },
+    "bupu": {
+        "file": "baseExplicitUvTilePositionU"
+    },
+    "bupv": {
+        "file": "baseExplicitUvTilePositionV"
+    },
+    "blp": {
+        "file": "blurPixelation"
+    },
+    "bci": {
+        "file": "byCycleIncrement"
+    },
+    "cgb": {
+        "file": "colorGainB"
+    },
+    "cgg": {
+        "file": "colorGainG"
+    },
+    "cgr": {
+        "file": "colorGainR"
+    },
+    "cmcf": {
+        "file": "colorManagementConfigFileEnabled"
+    },
+    "cmcp": {
+        "file": "colorManagementConfigFilePath"
+    },
+    "cme": {
+        "file": "colorManagementEnabled"
+    },
+    "co": {
+        "mesh": "continuity"
+    },
+    "cob": {
+        "file": "colorOffsetB"
+    },
+    "cog": {
+        "file": "colorOffsetG"
+    },
+    "cor": {
+        "file": "colorOffsetR"
+    },
+    "cfnp": {
+        "file": "computedFileTextureNamePattern"
+    },
+    "cu": {
+        "file": "coverageU"
+    },
+    "cv": {
+        "file": "coverageV"
+    },
+    "dcb": {
+        "file": "defaultColorB"
+    },
+    "dcg": {
+        "file": "defaultColorG"
+    },
+    "dcr": {
+        "file": "defaultColorR"
+    },
+    "dp": {
+        "file": "dirtyPixelRegion"
+    },
+    "dfl": {
+        "file": "disableFileLoad"
+    },
+    "dtf": {
+        "file": "doTransform"
+    },
+    "ece": {
+        "file": "endCycleExtension"
+    },
+    "euvt": {
+        "file": "explicitUvTiles"
+    },
+    "exp": {
+        "file": "exposure"
+    },
+    "fha": {
+        "file": "fileHasAlpha"
+    },
+    "ftn": {
+        "file": "fileTextureName"
+    },
+    "ftnp": {
+        "file": "fileTextureNamePattern"
+    },
+    "f": {
+        "nurbsCurve": "form"
+    },
+    "fo": {
+        "file": "filterOffset"
+    },
+    "fsg": {
+        "file": "forceSwatchGen"
+    },
+    "fe": {
+        "file": "frameExtension"
+    },
+    "he": {
+        "file": "hdrExposure"
+    },
+    "hm": {
+        "file": "hdrMapping"
+    },
+    "ifr": {
+        "file": "ignoreColorSpaceFileRules"
+    },
+    "i": {
+        "mesh": "inMesh"
+    },
+    "mu": {
+        "nurbsSurface": "modeU"
+    },
+    "mv": {
+        "nurbsSurface": "modeV"
+    },
+    "nu": {
+        "nurbsSurface": "numberU"
+    },
+    "of": {
+        "file": "offset"
+    },
+    "ofu": {
+        "file": "offsetU"
+    },
+    "ofv": {
+        "file": "offsetV"
+    },
+    "oa": {
+        "file": "outAlpha"
+    },
+    "os": {
+        "mesh": "outSmoothMesh"
+    },
+    "osx": {
+        "decomposeMatrix": "outputScaleX"
+    },
+    "osy": {
+        "decomposeMatrix": "outputScaleY"
+    },
+    "pct": {
+        "file": "pixelCenter"
+    },
+    "pcx": {
+        "file": "pixelCenterX"
+    },
+    "pcy": {
+        "file": "pixelCenterY"
+    },
+    "pf": {
+        "file": "preFilter"
+    },
+    "pfr": {
+        "file": "preFilterRadius"
+    },
+    "pfb": {
+        "file": "ptexFilterBlur"
+    },
+    "pfil": {
+        "file": "ptexFilterInterpolateLevels"
+    },
+    "pfs": {
+        "file": "ptexFilterSharpness"
+    },
+    "pft": {
+        "file": "ptexFilterType"
+    },
+    "pfw": {
+        "file": "ptexFilterWidth"
+    },
+    "rdp": {
+        "file": "rayDepth"
+    },
+    "reu": {
+        "file": "repeatU"
+    },
+    "re": {
+        "file": "repeatUV"
+    },
+    "rev": {
+        "file": "repeatV"
+    },
+    "rf": {
+        "file": "rotateFrame"
+    },
+    "sce": {
+        "file": "startCycleExtension"
+    },
+    "tf": {
+        "nurbsSurface": "trimFace"
+    },
+    "tfu": {
+        "file": "translateFrameU"
+    },
+    "tfv": {
+        "file": "translateFrameV"
+    },
+    "u": {
+        "file": "uCoord"
+    },
+    "uca": {
+        "file": "useCache"
+    },
+    "ufe": {
+        "file": "useFrameExtension"
+    },
+    "uhc": {
+        "file": "useHardwareTextureCycling"
+    },
+    "umr": {
+        "file": "useMaximumRes"
+    },
+    "utpd": {
+        "file": "uvTileProxyDirty"
+    },
+    "utpg": {
+        "file": "uvTileProxyGenerate"
+    },
+    "utpq": {
+        "file": "uvTileProxyQuality"
+    },
+    "uvt": {
+        "file": "uvTilingMode"
+    },
+    "vc1": {
+        "file": "vertexCameraOne"
+    },
+    "c1x": {
+        "file": "vertexCameraOneX"
+    },
+    "c1y": {
+        "file": "vertexCameraOneY"
+    },
+    "c1z": {
+        "file": "vertexCameraOneZ"
+    },
+    "vc3": {
+        "file": "vertexCameraThree"
+    },
+    "c3x": {
+        "file": "vertexCameraThreeX"
+    },
+    "c3y": {
+        "file": "vertexCameraThreeY"
+    },
+    "c3z": {
+        "file": "vertexCameraThreeZ"
+    },
+    "vc2": {
+        "file": "vertexCameraTwo"
+    },
+    "c2x": {
+        "file": "vertexCameraTwoX"
+    },
+    "c2y": {
+        "file": "vertexCameraTwoY"
+    },
+    "c2z": {
+        "file": "vertexCameraTwoZ"
+    },
+    "vt1": {
+        "file": "vertexUvOne"
+    },
+    "t1u": {
+        "file": "vertexUvOneU"
+    },
+    "t1v": {
+        "file": "vertexUvOneV"
+    },
+    "vt3": {
+        "file": "vertexUvThree"
+    },
+    "t3u": {
+        "file": "vertexUvThreeU"
+    },
+    "t3v": {
+        "file": "vertexUvThreeV"
+    },
+    "vt2": {
+        "file": "vertexUvTwo"
+    },
+    "t2u": {
+        "file": "vertexUvTwoU"
+    },
+    "t2v": {
+        "file": "vertexUvTwoV"
+    },
+    "vin": {
+        "file": "viewNameStr"
+    },
+    "vinu": {
+        "file": "viewNameUsed"
+    },
+    "wu": {
+        "file": "wrapU"
+    },
+    "wv": {
+        "file": "wrapV"
     },
     "cf": {
         "condition": "colorIfFalse"
@@ -16612,9 +28578,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "cfr": {
         "condition": "colorIfFalseR"
     },
-    "ct": {
-        "condition": "colorIfTrue"
-    },
     "ctb": {
         "condition": "colorIfTrueB"
     },
@@ -16624,35 +28587,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ctr": {
         "condition": "colorIfTrueR"
     },
-    "ft": {
-        "condition": "firstTerm"
-    },
     "op": {
-        "condition": "operation",
-        "clamp": "output",
-        "plusMinusAverage": "operation",
-        "blendColors": "output",
-        "nurbsSurface": "opposite",
         "mesh": "opposite"
-    },
-    "ocb": {
-        "condition": "outColorB",
-        "remapValue": "outColorB",
-        "remapColor": "outColorB"
-    },
-    "ocg": {
-        "condition": "outColorG",
-        "remapValue": "outColorG",
-        "remapColor": "outColorG"
-    },
-    "ocr": {
-        "condition": "outColorR",
-        "remapValue": "outColorR",
-        "remapColor": "outColorR",
-        "mesh": "osdCreaseMethod"
-    },
-    "ip": {
-        "clamp": "input"
     },
     "ipb": {
         "clamp": "inputB"
@@ -16688,68 +28624,28 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "clamp": "minR"
     },
     "opb": {
-        "clamp": "outputB",
         "blendColors": "outputB"
     },
     "opg": {
-        "clamp": "outputG",
         "blendColors": "outputG"
     },
     "opr": {
-        "clamp": "outputR",
         "blendColors": "outputR"
     },
     "arp": {
-        "clamp": "renderPassMode",
-        "remapColor": "renderPassMode",
         "blendColors": "renderPassMode"
     },
-    "cl": {
-        "remapValue": "color",
-        "remapColor": "color"
-    },
     "imx": {
-        "remapValue": "inputMax",
         "remapColor": "inputMax"
     },
-    "imn": {
-        "remapValue": "inputMin",
-        "remapColor": "inputMin"
-    },
-    "i": {
-        "remapValue": "inputValue",
-        "blendTwoAttr": "input",
-        "multMatrix": "matrixIn",
-        "mesh": "inMesh"
-    },
-    "ov": {
-        "remapValue": "outValue"
-    },
     "omx": {
-        "remapValue": "outputMax",
         "remapColor": "outputMax"
     },
     "omn": {
-        "remapValue": "outputMin",
         "remapColor": "outputMin"
     },
     "vl": {
         "remapValue": "value"
-    },
-    "b": {
-        "remapColor": "blue",
-        "blendColors": "blender"
-    },
-    "cb": {
-        "remapColor": "colorB"
-    },
-    "cg": {
-        "remapColor": "colorG"
-    },
-    "cr": {
-        "remapColor": "colorR",
-        "nurbsCurve": "create",
-        "nurbsSurface": "create"
     },
     "csp": {
         "uvPin": "cacheSetup"
@@ -16759,9 +28655,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "curgeom": {
         "uvPin": "deformedGeometry"
-    },
-    "nrm": {
-        "uvPin": "normalAxis"
     },
     "novr": {
         "uvPin": "normalOverride"
@@ -16773,13 +28666,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "uvPin": "originalGeometry"
     },
     "omat": {
-        "uvPin": "outputMatrix",
-        "inverseMatrix": "outputMatrix",
         "blendMatrix": "outputMatrix"
-    },
-    "ot": {
-        "uvPin": "outputTranslate",
-        "decomposeMatrix": "outputTranslate"
     },
     "rlcrv": {
         "uvPin": "railCurve"
@@ -16851,8 +28738,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendColors": "color2R"
     },
     "imat": {
-        "decomposeMatrix": "inputMatrix",
-        "inverseMatrix": "inputMatrix",
         "blendMatrix": "inputMatrix"
     },
     "oq": {
@@ -16881,16 +28766,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "orz": {
         "decomposeMatrix": "outputRotateZ"
-    },
-    "os": {
-        "decomposeMatrix": "outputScale",
-        "mesh": "outSmoothMesh"
-    },
-    "osx": {
-        "decomposeMatrix": "outputScaleX"
-    },
-    "osy": {
-        "decomposeMatrix": "outputScaleY"
     },
     "osz": {
         "decomposeMatrix": "outputScaleZ"
@@ -16932,305 +28807,186 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "target"
     },
     "adot": {
-        "nurbsCurve": "alwaysDrawOnTop",
         "mesh": "alwaysDrawOnTop"
     },
     "gal": {
-        "nurbsCurve": "antialiasingLevel",
-        "nurbsSurface": "antialiasingLevel",
         "mesh": "antialiasingLevel"
     },
     "asbg": {
-        "nurbsCurve": "asBackground",
-        "nurbsSurface": "asBackground",
         "mesh": "asBackground"
     },
     "bn": {
-        "nurbsCurve": "blindDataNodes",
-        "nurbsSurface": "blindDataNodes",
         "mesh": "blindDataNodes"
     },
     "cc": {
-        "nurbsCurve": "cached",
         "nurbsSurface": "cached"
     },
     "csh": {
-        "nurbsCurve": "castsShadows",
-        "nurbsSurface": "castsShadows",
         "mesh": "castsShadows"
     },
     "clst": {
-        "nurbsCurve": "colorSet",
-        "nurbsSurface": "colorSet",
         "mesh": "colorSet"
     },
     "ciog": {
-        "nurbsCurve": "compInstObjGroups",
-        "nurbsSurface": "compInstObjGroups",
         "mesh": "compInstObjGroups"
     },
     "gtag": {
-        "nurbsCurve": "componentTags",
-        "nurbsSurface": "componentTags",
         "mesh": "componentTags"
     },
-    "cp": {
-        "nurbsCurve": "controlPoints",
-        "nurbsSurface": "controlPoints",
-        "mesh": "controlPoints"
-    },
     "ccls": {
-        "nurbsCurve": "currentColorSet",
-        "nurbsSurface": "currentColorSet",
         "mesh": "currentColorSet"
     },
     "cuvs": {
-        "nurbsCurve": "currentUVSet",
-        "nurbsSurface": "currentUVSet",
         "mesh": "currentUVSet"
     },
     "d": {
-        "nurbsCurve": "degree",
         "nurbsSurface": "degreeUV"
     },
     "dej": {
-        "nurbsCurve": "depthJitter",
-        "nurbsSurface": "depthJitter",
         "mesh": "depthJitter"
     },
     "dcv": {
-        "nurbsCurve": "dispCV",
         "nurbsSurface": "dispCV"
     },
     "dce": {
         "nurbsCurve": "dispCurveEndPoints"
     },
-    "dep": {
-        "nurbsCurve": "dispEP",
-        "nurbsSurface": "dispEP"
-    },
     "dg": {
-        "nurbsCurve": "dispGeometry",
         "nurbsSurface": "dispGeometry"
     },
     "dcc": {
-        "nurbsCurve": "displayColorChannel",
-        "nurbsSurface": "displayColorChannel",
         "mesh": "displayColorChannel"
     },
     "dcol": {
-        "nurbsCurve": "displayColors",
-        "nurbsSurface": "displayColors",
         "mesh": "displayColors"
     },
     "di": {
-        "nurbsCurve": "displayImmediate",
-        "nurbsSurface": "displayImmediate",
         "mesh": "displayImmediate"
     },
     "eps": {
         "nurbsCurve": "editPoints"
     },
-    "f": {
-        "nurbsCurve": "form"
-    },
     "gao": {
-        "nurbsCurve": "geometryAntialiasingOverride",
-        "nurbsSurface": "geometryAntialiasingOverride",
         "mesh": "geometryAntialiasingOverride"
     },
     "hfm": {
-        "nurbsCurve": "hardwareFogMultiplier",
-        "nurbsSurface": "hardwareFogMultiplier",
         "mesh": "hardwareFogMultiplier"
     },
     "hd": {
-        "nurbsCurve": "header",
         "nurbsSurface": "header"
     },
     "iss": {
-        "nurbsCurve": "ignoreSelfShadowing",
-        "nurbsSurface": "ignoreSelfShadowing",
         "mesh": "ignoreSelfShadowing"
     },
     "ipo": {
-        "nurbsCurve": "inPlace",
         "nurbsSurface": "inPlace"
     },
     "imtla": {
-        "nurbsCurve": "instMaterialAssign",
-        "nurbsSurface": "instMaterialAssign",
         "mesh": "instMaterialAssign"
     },
-    "ls": {
-        "nurbsCurve": "lineWidth"
-    },
     "l": {
-        "nurbsCurve": "local",
         "nurbsSurface": "local"
     },
     "msa": {
-        "nurbsCurve": "maxShadingSamples",
-        "nurbsSurface": "maxShadingSamples",
         "mesh": "maxShadingSamples"
     },
     "max": {
         "nurbsCurve": "maxValue"
     },
     "mvs": {
-        "nurbsCurve": "maxVisibilitySamples",
-        "nurbsSurface": "maxVisibilitySamples",
         "mesh": "maxVisibilitySamples"
     },
     "vbo": {
-        "nurbsCurve": "maxVisibilitySamplesOverride",
-        "nurbsSurface": "maxVisibilitySamplesOverride",
         "mesh": "maxVisibilitySamplesOverride"
     },
     "mmv": {
-        "nurbsCurve": "minMaxValue",
         "nurbsSurface": "minMaxRangeV"
     },
     "min": {
         "nurbsCurve": "minValue"
     },
-    "mb": {
-        "nurbsCurve": "motionBlur",
-        "nurbsSurface": "motionBlur",
-        "mesh": "motionBlur"
-    },
     "pte": {
-        "nurbsCurve": "pickTexture",
-        "nurbsSurface": "pickTexture",
         "mesh": "pickTexture"
     },
     "vis": {
-        "nurbsCurve": "primaryVisibility",
-        "nurbsSurface": "primaryVisibility",
         "mesh": "primaryVisibility"
     },
     "rcsh": {
-        "nurbsCurve": "receiveShadows",
-        "nurbsSurface": "receiveShadows",
         "mesh": "receiveShadows"
     },
     "rob": {
-        "nurbsCurve": "referenceObject",
-        "nurbsSurface": "referenceObject",
         "mesh": "referenceObject"
     },
     "rtw": {
-        "nurbsCurve": "relativeTweak",
-        "nurbsSurface": "relativeTweak",
         "mesh": "relativeTweak"
     },
     "rt": {
-        "nurbsCurve": "renderType",
-        "nurbsSurface": "renderType",
         "mesh": "renderType"
     },
     "rv": {
-        "nurbsCurve": "renderVolume",
-        "nurbsSurface": "renderVolume",
         "mesh": "renderVolume"
     },
     "ssa": {
-        "nurbsCurve": "shadingSamples",
-        "nurbsSurface": "shadingSamples",
         "mesh": "shadingSamples"
     },
     "sso": {
-        "nurbsCurve": "shadingSamplesOverride",
-        "nurbsSurface": "shadingSamplesOverride",
         "mesh": "shadingSamplesOverride"
     },
     "tw": {
-        "nurbsCurve": "tweak",
-        "nurbsSurface": "tweak",
         "mesh": "tweak"
     },
     "twl": {
-        "nurbsCurve": "tweakLocation",
-        "nurbsSurface": "tweakLocation",
         "mesh": "tweakLocation"
     },
     "ts": {
         "nurbsCurve": "tweakSize"
     },
     "pv": {
-        "nurbsCurve": "uvPivot",
-        "nurbsSurface": "uvPivot",
         "mesh": "uvPivot"
     },
     "pvx": {
-        "nurbsCurve": "uvPivotX",
-        "nurbsSurface": "uvPivotX",
         "mesh": "uvPivotX"
     },
     "pvy": {
-        "nurbsCurve": "uvPivotY",
-        "nurbsSurface": "uvPivotY",
         "mesh": "uvPivotY"
     },
     "uvst": {
-        "nurbsCurve": "uvSet",
-        "nurbsSurface": "uvSet",
         "mesh": "uvSet"
     },
     "vf": {
-        "nurbsCurve": "visibleFraction",
-        "nurbsSurface": "visibleFraction",
         "mesh": "visibleFraction"
     },
     "vir": {
-        "nurbsCurve": "visibleInReflections",
-        "nurbsSurface": "visibleInReflections",
         "mesh": "visibleInReflections"
     },
     "vif": {
-        "nurbsCurve": "visibleInRefractions",
-        "nurbsSurface": "visibleInRefractions",
         "mesh": "visibleInRefractions"
     },
     "vss": {
-        "nurbsCurve": "volumeSamples",
-        "nurbsSurface": "volumeSamples",
         "mesh": "volumeSamples"
     },
     "vso": {
-        "nurbsCurve": "volumeSamplesOverride",
-        "nurbsSurface": "volumeSamplesOverride",
         "mesh": "volumeSamplesOverride"
     },
     "wt": {
-        "nurbsCurve": "weights",
-        "nurbsSurface": "weights",
         "mesh": "weights"
     },
     "wn": {
         "nurbsCurve": "worldNormal"
     },
-    "ws": {
-        "nurbsCurve": "worldSpace",
-        "nurbsSurface": "worldSpace"
-    },
     "btt": {
         "nurbsSurface": "basicTessellationType"
     },
     "bbs": {
-        "nurbsSurface": "boundingBoxScale",
         "mesh": "boundingBoxScale"
     },
     "bscx": {
-        "nurbsSurface": "boundingBoxScaleX",
         "mesh": "boundingBoxScaleX"
     },
     "bscy": {
-        "nurbsSurface": "boundingBoxScaleY",
         "mesh": "boundingBoxScaleY"
     },
     "bscz": {
-        "nurbsSurface": "boundingBoxScaleZ",
         "mesh": "boundingBoxScaleZ"
     },
     "ch": {
@@ -17240,19 +28996,15 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "chordHeightRatio"
     },
     "cdvi": {
-        "nurbsSurface": "collisionDepthVelocityIncrement",
         "mesh": "collisionDepthVelocityIncrement"
     },
     "cdvm": {
-        "nurbsSurface": "collisionDepthVelocityMultiplier",
         "mesh": "collisionDepthVelocityMultiplier"
     },
     "covi": {
-        "nurbsSurface": "collisionOffsetVelocityIncrement",
         "mesh": "collisionOffsetVelocityIncrement"
     },
     "covm": {
-        "nurbsSurface": "collisionOffsetVelocityMultiplier",
         "mesh": "collisionOffsetVelocityMultiplier"
     },
     "cvto": {
@@ -17264,11 +29016,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "cps": {
         "nurbsSurface": "curvePrecisionShaded"
     },
-    "du": {
-        "nurbsSurface": "degreeU"
-    },
     "dv": {
-        "nurbsSurface": "degreeV",
         "mesh": "displayVertices"
     },
     "dor": {
@@ -17278,7 +29026,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "dispSF"
     },
     "dhe": {
-        "nurbsSurface": "displayHWEnvironment",
         "mesh": "displayHWEnvironment"
     },
     "drt": {
@@ -17297,11 +29044,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "explicitTessellationAttributes"
     },
     "xsr": {
-        "nurbsSurface": "extraSampleRate",
         "mesh": "extraSampleRate"
     },
     "fbda": {
-        "nurbsSurface": "featureDisplacement",
         "mesh": "featureDisplacement"
     },
     "ftwp": {
@@ -17320,15 +29065,12 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "gridDivisionPerSpanV"
     },
     "hot": {
-        "nurbsSurface": "holdOut",
         "mesh": "holdOut"
     },
     "ih": {
-        "nurbsSurface": "ignoreHwShader",
         "mesh": "ignoreHwShader"
     },
     "dsr": {
-        "nurbsSurface": "initialSampleRate",
         "mesh": "initialSampleRate"
     },
     "mxu": {
@@ -17341,7 +29083,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "minMaxRangeU"
     },
     "mns": {
-        "nurbsSurface": "minScreen",
         "mesh": "minScreen"
     },
     "mnu": {
@@ -17350,24 +29091,11 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "mnv": {
         "nurbsSurface": "minValueV"
     },
-    "mu": {
-        "nurbsSurface": "modeU"
-    },
-    "mv": {
-        "nurbsSurface": "modeV"
-    },
     "nat": {
-        "nurbsSurface": "normalThreshold",
         "mesh": "normalThreshold"
     },
     "ndf": {
         "nurbsSurface": "normalsDisplayScale"
-    },
-    "nu": {
-        "nurbsSurface": "numberU"
-    },
-    "nv": {
-        "nurbsSurface": "numberV"
     },
     "uco": {
         "nurbsSurface": "objSpaceChordHeight"
@@ -17397,7 +29125,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "smoothEdgeRatio"
     },
     "smo": {
-        "nurbsSurface": "smoothShading",
         "mesh": "smoothShading"
     },
     "su": {
@@ -17405,13 +29132,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "sv": {
         "nurbsSurface": "spansV"
-    },
-    "fth": {
-        "nurbsSurface": "textureThreshold",
-        "mesh": "textureThreshold"
-    },
-    "tf": {
-        "nurbsSurface": "trimFace"
     },
     "tsu": {
         "nurbsSurface": "tweakSizeU"
@@ -17429,7 +29149,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "useChordHeightRatio"
     },
     "uns": {
-        "nurbsSurface": "useMinScreen",
         "mesh": "useMinScreen"
     },
     "nvfa": {
@@ -17450,9 +29169,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ci": {
         "mesh": "cachedInMesh"
     },
-    "cs": {
-        "mesh": "cachedSmoothMesh"
-    },
     "cpvx": {
         "mesh": "colorPerVertex"
     },
@@ -17462,17 +29178,11 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "cfsc": {
         "mesh": "computeFromSculptCache"
     },
-    "co": {
-        "mesh": "continuity"
-    },
     "cd": {
         "mesh": "creaseData"
     },
     "cvd": {
         "mesh": "creaseVertexData"
-    },
-    "dr": {
-        "mesh": "dispResolution"
     },
     "dist": {
         "mesh": "displacementType"
@@ -17483,17 +29193,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "dblu": {
         "mesh": "displayBlueColorChannel"
     },
-    "db": {
-        "mesh": "displayBorders"
-    },
-    "dc": {
-        "mesh": "displayCenter"
-    },
     "dcgs": {
         "mesh": "displayColorAsGreyScale"
-    },
-    "de": {
-        "mesh": "displayEdges"
     },
     "dfgi": {
         "mesh": "displayFacesWithGroupId"
@@ -17606,9 +29307,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ndt": {
         "mesh": "normalType"
     },
-    "n": {
-        "mesh": "normals"
-    },
     "nt": {
         "mesh": "numTriangles"
     },
@@ -17624,14 +29322,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ost": {
         "mesh": "osdSmoothTriangles"
     },
-    "ovb": {
-        "mesh": "osdVertBoundary"
-    },
     "ofuv": {
         "mesh": "outForceNodeUVUpdate"
-    },
-    "ogc": {
-        "mesh": "outGeometryClean"
     },
     "osde": {
         "mesh": "outSmoothMeshSubdError"
@@ -17735,9 +29427,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "uvtl": {
         "mesh": "uvTweakLocation"
     },
-    "uv": {
-        "mesh": "uvpt"
-    },
     "vbc": {
         "mesh": "vertexBackfaceCulling"
     },
@@ -17755,9 +29444,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "vnm": {
         "mesh": "vertexNormalMethod"
-    },
-    "vs": {
-        "mesh": "vertexSize"
     },
     "vt": {
         "mesh": "vrts"
