@@ -26527,669 +26527,1784 @@ ATTRIBUTES_PROPERTIES = {
 
 ATTRIBUTES_SHORT_NAMES_MAP = {
     "bnm": {
+        "transform": "binMembership",
+        "joint": "binMembership",
+        "multDoubleLinear": "binMembership",
+        "camera": "binMembership",
+        "pointLight": "binMembership",
+        "spotLight": "binMembership",
+        "areaLight": "binMembership",
+        "lambert": "binMembership",
+        "file": "binMembership",
+        "condition": "binMembership",
+        "clamp": "binMembership",
+        "remapValue": "binMembership",
+        "remapColor": "binMembership",
+        "uvPin": "binMembership",
+        "plusMinusAverage": "binMembership",
+        "blendTwoAttr": "binMembership",
+        "blendColors": "binMembership",
+        "decomposeMatrix": "binMembership",
+        "inverseMatrix": "binMembership",
+        "multMatrix": "binMembership",
+        "blendMatrix": "binMembership",
+        "nurbsCurve": "binMembership",
+        "nurbsSurface": "binMembership",
         "mesh": "binMembership"
     },
     "bbx": {
+        "transform": "blackBox",
+        "joint": "blackBox",
+        "camera": "blackBox",
+        "pointLight": "blackBox",
+        "spotLight": "blackBox",
+        "areaLight": "blackBox",
+        "nurbsCurve": "blackBox",
+        "nurbsSurface": "blackBox",
         "mesh": "blackBox"
     },
     "boc": {
+        "transform": "borderConnections",
+        "joint": "borderConnections",
+        "camera": "borderConnections",
+        "pointLight": "borderConnections",
+        "spotLight": "borderConnections",
+        "areaLight": "borderConnections",
+        "nurbsCurve": "borderConnections",
+        "nurbsSurface": "borderConnections",
         "mesh": "borderConnections"
     },
     "bb": {
+        "transform": "boundingBox",
+        "joint": "boundingBox",
+        "camera": "boundingBox",
+        "pointLight": "boundingBox",
+        "spotLight": "boundingBox",
+        "areaLight": "boundingBox",
+        "nurbsCurve": "boundingBox",
+        "nurbsSurface": "boundingBox",
         "mesh": "boundingBox"
     },
     "bcx": {
+        "transform": "boundingBoxCenterX",
+        "joint": "boundingBoxCenterX",
+        "camera": "boundingBoxCenterX",
+        "pointLight": "boundingBoxCenterX",
+        "spotLight": "boundingBoxCenterX",
+        "areaLight": "boundingBoxCenterX",
+        "nurbsCurve": "boundingBoxCenterX",
+        "nurbsSurface": "boundingBoxCenterX",
         "mesh": "boundingBoxCenterX"
     },
     "bcy": {
+        "transform": "boundingBoxCenterY",
+        "joint": "boundingBoxCenterY",
+        "camera": "boundingBoxCenterY",
+        "pointLight": "boundingBoxCenterY",
+        "spotLight": "boundingBoxCenterY",
+        "areaLight": "boundingBoxCenterY",
+        "nurbsCurve": "boundingBoxCenterY",
+        "nurbsSurface": "boundingBoxCenterY",
         "mesh": "boundingBoxCenterY"
     },
     "bcz": {
+        "transform": "boundingBoxCenterZ",
+        "joint": "boundingBoxCenterZ",
+        "camera": "boundingBoxCenterZ",
+        "pointLight": "boundingBoxCenterZ",
+        "spotLight": "boundingBoxCenterZ",
+        "areaLight": "boundingBoxCenterZ",
+        "nurbsCurve": "boundingBoxCenterZ",
+        "nurbsSurface": "boundingBoxCenterZ",
         "mesh": "boundingBoxCenterZ"
     },
     "bbmx": {
+        "transform": "boundingBoxMax",
+        "joint": "boundingBoxMax",
+        "camera": "boundingBoxMax",
+        "pointLight": "boundingBoxMax",
+        "spotLight": "boundingBoxMax",
+        "areaLight": "boundingBoxMax",
+        "nurbsCurve": "boundingBoxMax",
+        "nurbsSurface": "boundingBoxMax",
         "mesh": "boundingBoxMax"
     },
     "bbxx": {
+        "transform": "boundingBoxMaxX",
+        "joint": "boundingBoxMaxX",
+        "camera": "boundingBoxMaxX",
+        "pointLight": "boundingBoxMaxX",
+        "spotLight": "boundingBoxMaxX",
+        "areaLight": "boundingBoxMaxX",
+        "nurbsCurve": "boundingBoxMaxX",
+        "nurbsSurface": "boundingBoxMaxX",
         "mesh": "boundingBoxMaxX"
     },
     "bbxy": {
+        "transform": "boundingBoxMaxY",
+        "joint": "boundingBoxMaxY",
+        "camera": "boundingBoxMaxY",
+        "pointLight": "boundingBoxMaxY",
+        "spotLight": "boundingBoxMaxY",
+        "areaLight": "boundingBoxMaxY",
+        "nurbsCurve": "boundingBoxMaxY",
+        "nurbsSurface": "boundingBoxMaxY",
         "mesh": "boundingBoxMaxY"
     },
     "bbxz": {
+        "transform": "boundingBoxMaxZ",
+        "joint": "boundingBoxMaxZ",
+        "camera": "boundingBoxMaxZ",
+        "pointLight": "boundingBoxMaxZ",
+        "spotLight": "boundingBoxMaxZ",
+        "areaLight": "boundingBoxMaxZ",
+        "nurbsCurve": "boundingBoxMaxZ",
+        "nurbsSurface": "boundingBoxMaxZ",
         "mesh": "boundingBoxMaxZ"
     },
     "bbmn": {
+        "transform": "boundingBoxMin",
+        "joint": "boundingBoxMin",
+        "camera": "boundingBoxMin",
+        "pointLight": "boundingBoxMin",
+        "spotLight": "boundingBoxMin",
+        "areaLight": "boundingBoxMin",
+        "nurbsCurve": "boundingBoxMin",
+        "nurbsSurface": "boundingBoxMin",
         "mesh": "boundingBoxMin"
     },
     "bbnx": {
+        "transform": "boundingBoxMinX",
+        "joint": "boundingBoxMinX",
+        "camera": "boundingBoxMinX",
+        "pointLight": "boundingBoxMinX",
+        "spotLight": "boundingBoxMinX",
+        "areaLight": "boundingBoxMinX",
+        "nurbsCurve": "boundingBoxMinX",
+        "nurbsSurface": "boundingBoxMinX",
         "mesh": "boundingBoxMinX"
     },
     "bbny": {
+        "transform": "boundingBoxMinY",
+        "joint": "boundingBoxMinY",
+        "camera": "boundingBoxMinY",
+        "pointLight": "boundingBoxMinY",
+        "spotLight": "boundingBoxMinY",
+        "areaLight": "boundingBoxMinY",
+        "nurbsCurve": "boundingBoxMinY",
+        "nurbsSurface": "boundingBoxMinY",
         "mesh": "boundingBoxMinY"
     },
     "bbnz": {
+        "transform": "boundingBoxMinZ",
+        "joint": "boundingBoxMinZ",
+        "camera": "boundingBoxMinZ",
+        "pointLight": "boundingBoxMinZ",
+        "spotLight": "boundingBoxMinZ",
+        "areaLight": "boundingBoxMinZ",
+        "nurbsCurve": "boundingBoxMinZ",
+        "nurbsSurface": "boundingBoxMinZ",
         "mesh": "boundingBoxMinZ"
     },
     "bbsi": {
+        "transform": "boundingBoxSize",
+        "joint": "boundingBoxSize",
+        "camera": "boundingBoxSize",
+        "pointLight": "boundingBoxSize",
+        "spotLight": "boundingBoxSize",
+        "areaLight": "boundingBoxSize",
+        "nurbsCurve": "boundingBoxSize",
+        "nurbsSurface": "boundingBoxSize",
         "mesh": "boundingBoxSize"
     },
     "bbsx": {
+        "transform": "boundingBoxSizeX",
+        "joint": "boundingBoxSizeX",
+        "camera": "boundingBoxSizeX",
+        "pointLight": "boundingBoxSizeX",
+        "spotLight": "boundingBoxSizeX",
+        "areaLight": "boundingBoxSizeX",
+        "nurbsCurve": "boundingBoxSizeX",
+        "nurbsSurface": "boundingBoxSizeX",
         "mesh": "boundingBoxSizeX"
     },
     "bbsy": {
+        "transform": "boundingBoxSizeY",
+        "joint": "boundingBoxSizeY",
+        "camera": "boundingBoxSizeY",
+        "pointLight": "boundingBoxSizeY",
+        "spotLight": "boundingBoxSizeY",
+        "areaLight": "boundingBoxSizeY",
+        "nurbsCurve": "boundingBoxSizeY",
+        "nurbsSurface": "boundingBoxSizeY",
         "mesh": "boundingBoxSizeY"
     },
     "bbsz": {
+        "transform": "boundingBoxSizeZ",
+        "joint": "boundingBoxSizeZ",
+        "camera": "boundingBoxSizeZ",
+        "pointLight": "boundingBoxSizeZ",
+        "spotLight": "boundingBoxSizeZ",
+        "areaLight": "boundingBoxSizeZ",
+        "nurbsCurve": "boundingBoxSizeZ",
+        "nurbsSurface": "boundingBoxSizeZ",
         "mesh": "boundingBoxSizeZ"
     },
     "cch": {
+        "transform": "caching",
+        "joint": "caching",
+        "multDoubleLinear": "caching",
+        "camera": "caching",
+        "pointLight": "caching",
+        "spotLight": "caching",
+        "areaLight": "caching",
+        "lambert": "caching",
+        "file": "caching",
+        "condition": "caching",
+        "clamp": "caching",
+        "remapValue": "caching",
+        "remapColor": "caching",
+        "uvPin": "caching",
+        "plusMinusAverage": "caching",
+        "blendTwoAttr": "caching",
+        "blendColors": "caching",
+        "decomposeMatrix": "caching",
+        "inverseMatrix": "caching",
+        "multMatrix": "caching",
+        "blendMatrix": "caching",
+        "nurbsCurve": "caching",
+        "nurbsSurface": "caching",
         "mesh": "caching"
     },
     "c": {
+        "transform": "center",
+        "joint": "center",
+        "camera": "center",
+        "pointLight": "center",
+        "spotLight": "center",
+        "areaLight": "center",
+        "lambert": "color",
+        "file": "coverage",
+        "blendTwoAttr": "current",
+        "nurbsCurve": "center",
+        "nurbsSurface": "center",
         "mesh": "center"
     },
     "ctyp": {
+        "transform": "containerType",
+        "joint": "containerType",
+        "camera": "containerType",
+        "pointLight": "containerType",
+        "spotLight": "containerType",
+        "areaLight": "containerType",
+        "nurbsCurve": "containerType",
+        "nurbsSurface": "containerType",
         "mesh": "containerType"
     },
     "cdat": {
+        "transform": "creationDate",
+        "joint": "creationDate",
+        "camera": "creationDate",
+        "pointLight": "creationDate",
+        "spotLight": "creationDate",
+        "areaLight": "creationDate",
+        "nurbsCurve": "creationDate",
+        "nurbsSurface": "creationDate",
         "mesh": "creationDate"
     },
     "ctor": {
+        "transform": "creator",
+        "joint": "creator",
+        "camera": "creator",
+        "pointLight": "creator",
+        "spotLight": "creator",
+        "areaLight": "creator",
+        "nurbsCurve": "creator",
+        "nurbsSurface": "creator",
         "mesh": "creator"
     },
     "ctrt": {
+        "transform": "customTreatment",
+        "joint": "customTreatment",
+        "camera": "customTreatment",
+        "pointLight": "customTreatment",
+        "spotLight": "customTreatment",
+        "areaLight": "customTreatment",
+        "nurbsCurve": "customTreatment",
+        "nurbsSurface": "customTreatment",
         "mesh": "customTreatment"
     },
     "dlim": {
+        "transform": "dagLocalInverseMatrix",
         "joint": "dagLocalInverseMatrix"
     },
     "dlm": {
+        "transform": "dagLocalMatrix",
         "joint": "dagLocalMatrix"
     },
     "dh": {
+        "transform": "displayHandle",
+        "joint": "displayHandle",
+        "nurbsCurve": "dispHull",
         "nurbsSurface": "dispHull"
     },
     "dla": {
+        "transform": "displayLocalAxis",
         "joint": "displayLocalAxis"
     },
     "drp": {
+        "transform": "displayRotatePivot",
         "joint": "displayRotatePivot"
     },
     "dsp": {
+        "transform": "displayScalePivot",
         "joint": "displayScalePivot"
     },
     "do": {
+        "transform": "drawOverride",
+        "joint": "drawOverride",
+        "camera": "drawOverride",
+        "pointLight": "drawOverride",
+        "spotLight": "drawOverride",
+        "areaLight": "drawOverride",
+        "nurbsCurve": "drawOverride",
+        "nurbsSurface": "drawOverride",
         "mesh": "drawOverride"
     },
     "dyn": {
+        "transform": "dynamics",
         "joint": "dynamics"
     },
     "fzn": {
+        "transform": "frozen",
+        "joint": "frozen",
+        "multDoubleLinear": "frozen",
+        "camera": "frozen",
+        "pointLight": "frozen",
+        "spotLight": "frozen",
+        "areaLight": "frozen",
+        "lambert": "frozen",
+        "file": "frozen",
+        "condition": "frozen",
+        "clamp": "frozen",
+        "remapValue": "frozen",
+        "remapColor": "frozen",
+        "uvPin": "frozen",
+        "plusMinusAverage": "frozen",
+        "blendTwoAttr": "frozen",
+        "blendColors": "frozen",
+        "decomposeMatrix": "frozen",
+        "inverseMatrix": "frozen",
+        "multMatrix": "frozen",
+        "blendMatrix": "frozen",
+        "nurbsCurve": "frozen",
+        "nurbsSurface": "frozen",
         "mesh": "frozen"
     },
     "g": {
+        "transform": "geometry",
+        "joint": "geometry",
         "remapColor": "green"
     },
     "gac": {
+        "transform": "ghostColorPost",
+        "joint": "ghostColorPost",
+        "camera": "ghostColorPost",
+        "pointLight": "ghostColorPost",
+        "spotLight": "ghostColorPost",
+        "areaLight": "ghostColorPost",
+        "nurbsCurve": "ghostColorPost",
+        "nurbsSurface": "ghostColorPost",
         "mesh": "ghostColorPost"
     },
     "gab": {
+        "transform": "ghostColorPostB",
+        "joint": "ghostColorPostB",
+        "camera": "ghostColorPostB",
+        "pointLight": "ghostColorPostB",
+        "spotLight": "ghostColorPostB",
+        "areaLight": "ghostColorPostB",
+        "nurbsCurve": "ghostColorPostB",
+        "nurbsSurface": "ghostColorPostB",
         "mesh": "ghostColorPostB"
     },
     "gag": {
+        "transform": "ghostColorPostG",
+        "joint": "ghostColorPostG",
+        "camera": "ghostColorPostG",
+        "pointLight": "ghostColorPostG",
+        "spotLight": "ghostColorPostG",
+        "areaLight": "ghostColorPostG",
+        "nurbsCurve": "ghostColorPostG",
+        "nurbsSurface": "ghostColorPostG",
         "mesh": "ghostColorPostG"
     },
     "gar": {
+        "transform": "ghostColorPostR",
+        "joint": "ghostColorPostR",
+        "camera": "ghostColorPostR",
+        "pointLight": "ghostColorPostR",
+        "spotLight": "ghostColorPostR",
+        "areaLight": "ghostColorPostR",
+        "nurbsCurve": "ghostColorPostR",
+        "nurbsSurface": "ghostColorPostR",
         "mesh": "ghostColorPostR"
     },
     "gcp": {
+        "transform": "ghostColorPre",
+        "joint": "ghostColorPre",
+        "camera": "ghostColorPre",
+        "pointLight": "ghostColorPre",
+        "spotLight": "ghostColorPre",
+        "areaLight": "ghostColorPre",
+        "nurbsCurve": "ghostColorPre",
+        "nurbsSurface": "ghostColorPre",
         "mesh": "ghostColorPre"
     },
     "gpb": {
+        "transform": "ghostColorPreB",
+        "joint": "ghostColorPreB",
+        "camera": "ghostColorPreB",
+        "pointLight": "ghostColorPreB",
+        "spotLight": "ghostColorPreB",
+        "areaLight": "ghostColorPreB",
+        "nurbsCurve": "ghostColorPreB",
+        "nurbsSurface": "ghostColorPreB",
         "mesh": "ghostColorPreB"
     },
     "gpg": {
+        "transform": "ghostColorPreG",
+        "joint": "ghostColorPreG",
+        "camera": "ghostColorPreG",
+        "pointLight": "ghostColorPreG",
+        "spotLight": "ghostColorPreG",
+        "areaLight": "ghostColorPreG",
+        "nurbsCurve": "ghostColorPreG",
+        "nurbsSurface": "ghostColorPreG",
         "mesh": "ghostColorPreG"
     },
     "grr": {
+        "transform": "ghostColorPreR",
+        "joint": "ghostColorPreR",
+        "camera": "ghostColorPreR",
+        "pointLight": "ghostColorPreR",
+        "spotLight": "ghostColorPreR",
+        "areaLight": "ghostColorPreR",
+        "nurbsCurve": "ghostColorPreR",
+        "nurbsSurface": "ghostColorPreR",
         "mesh": "ghostColorPreR"
     },
     "gcs": {
+        "transform": "ghostCustomSteps",
+        "joint": "ghostCustomSteps",
+        "camera": "ghostCustomSteps",
+        "pointLight": "ghostCustomSteps",
+        "spotLight": "ghostCustomSteps",
+        "areaLight": "ghostCustomSteps",
+        "nurbsCurve": "ghostCustomSteps",
+        "nurbsSurface": "ghostCustomSteps",
         "mesh": "ghostCustomSteps"
     },
     "gdr": {
+        "transform": "ghostDriver",
+        "joint": "ghostDriver",
+        "camera": "ghostDriver",
+        "pointLight": "ghostDriver",
+        "spotLight": "ghostDriver",
+        "areaLight": "ghostDriver",
+        "nurbsCurve": "ghostDriver",
+        "nurbsSurface": "ghostDriver",
         "mesh": "ghostDriver"
     },
     "gfro": {
+        "transform": "ghostFarOpacity",
+        "joint": "ghostFarOpacity",
+        "camera": "ghostFarOpacity",
+        "pointLight": "ghostFarOpacity",
+        "spotLight": "ghostFarOpacity",
+        "areaLight": "ghostFarOpacity",
+        "nurbsCurve": "ghostFarOpacity",
+        "nurbsSurface": "ghostFarOpacity",
         "mesh": "ghostFarOpacity"
     },
     "gf": {
+        "transform": "ghostFrames",
+        "joint": "ghostFrames",
+        "camera": "ghostFrames",
+        "pointLight": "ghostFrames",
+        "spotLight": "ghostFrames",
+        "areaLight": "ghostFrames",
+        "nurbsCurve": "ghostFrames",
+        "nurbsSurface": "ghostFrames",
         "mesh": "ghostFrames"
     },
     "gnro": {
+        "transform": "ghostNearOpacity",
+        "joint": "ghostNearOpacity",
+        "camera": "ghostNearOpacity",
+        "pointLight": "ghostNearOpacity",
+        "spotLight": "ghostNearOpacity",
+        "areaLight": "ghostNearOpacity",
+        "nurbsCurve": "ghostNearOpacity",
+        "nurbsSurface": "ghostNearOpacity",
         "mesh": "ghostNearOpacity"
     },
     "golr": {
+        "transform": "ghostOpacityRange",
+        "joint": "ghostOpacityRange",
+        "camera": "ghostOpacityRange",
+        "pointLight": "ghostOpacityRange",
+        "spotLight": "ghostOpacityRange",
+        "areaLight": "ghostOpacityRange",
+        "nurbsCurve": "ghostOpacityRange",
+        "nurbsSurface": "ghostOpacityRange",
         "mesh": "ghostOpacityRange"
     },
     "gpof": {
+        "transform": "ghostPostFrames",
+        "joint": "ghostPostFrames",
+        "camera": "ghostPostFrames",
+        "pointLight": "ghostPostFrames",
+        "spotLight": "ghostPostFrames",
+        "areaLight": "ghostPostFrames",
+        "nurbsCurve": "ghostPostFrames",
+        "nurbsSurface": "ghostPostFrames",
         "mesh": "ghostPostFrames"
     },
     "gprf": {
+        "transform": "ghostPreFrames",
+        "joint": "ghostPreFrames",
+        "camera": "ghostPreFrames",
+        "pointLight": "ghostPreFrames",
+        "spotLight": "ghostPreFrames",
+        "areaLight": "ghostPreFrames",
+        "nurbsCurve": "ghostPreFrames",
+        "nurbsSurface": "ghostPreFrames",
         "mesh": "ghostPreFrames"
     },
     "gud": {
+        "transform": "ghostUseDriver",
+        "joint": "ghostUseDriver",
+        "camera": "ghostUseDriver",
+        "pointLight": "ghostUseDriver",
+        "spotLight": "ghostUseDriver",
+        "areaLight": "ghostUseDriver",
+        "nurbsCurve": "ghostUseDriver",
+        "nurbsSurface": "ghostUseDriver",
         "mesh": "ghostUseDriver"
     },
     "gh": {
+        "transform": "ghosting",
+        "joint": "ghosting",
+        "camera": "ghosting",
+        "pointLight": "ghosting",
+        "spotLight": "ghosting",
+        "areaLight": "ghosting",
+        "nurbsCurve": "ghosting",
+        "nurbsSurface": "ghosting",
         "mesh": "ghosting"
     },
     "gm": {
+        "transform": "ghostingMode",
+        "joint": "ghostingMode",
+        "camera": "ghostingMode",
+        "pointLight": "ghostingMode",
+        "spotLight": "ghostingMode",
+        "areaLight": "ghostingMode",
+        "nurbsCurve": "ghostingMode",
+        "nurbsSurface": "ghostingMode",
         "mesh": "ghostingMode"
     },
     "gstp": {
+        "transform": "ghostsStep",
+        "joint": "ghostsStep",
+        "camera": "ghostsStep",
+        "pointLight": "ghostsStep",
+        "spotLight": "ghostsStep",
+        "areaLight": "ghostsStep",
+        "nurbsCurve": "ghostsStep",
+        "nurbsSurface": "ghostsStep",
         "mesh": "ghostsStep"
     },
     "hio": {
+        "transform": "hiddenInOutliner",
+        "joint": "hiddenInOutliner",
+        "camera": "hiddenInOutliner",
+        "pointLight": "hiddenInOutliner",
+        "spotLight": "hiddenInOutliner",
+        "areaLight": "hiddenInOutliner",
+        "nurbsCurve": "hiddenInOutliner",
+        "nurbsSurface": "hiddenInOutliner",
         "mesh": "hiddenInOutliner"
     },
     "hpb": {
+        "transform": "hideOnPlayback",
+        "joint": "hideOnPlayback",
+        "camera": "hideOnPlayback",
+        "pointLight": "hideOnPlayback",
+        "spotLight": "hideOnPlayback",
+        "areaLight": "hideOnPlayback",
+        "nurbsCurve": "hideOnPlayback",
+        "nurbsSurface": "hideOnPlayback",
         "mesh": "hideOnPlayback"
     },
     "hl": {
+        "transform": "hyperLayout",
+        "joint": "hyperLayout",
+        "camera": "hyperLayout",
+        "pointLight": "hyperLayout",
+        "spotLight": "hyperLayout",
+        "areaLight": "hyperLayout",
+        "nurbsCurve": "hyperLayout",
+        "nurbsSurface": "hyperLayout",
         "mesh": "hyperLayout"
     },
     "icn": {
+        "transform": "iconName",
+        "joint": "iconName",
+        "camera": "iconName",
+        "pointLight": "iconName",
+        "spotLight": "iconName",
+        "areaLight": "iconName",
+        "nurbsCurve": "iconName",
+        "nurbsSurface": "iconName",
         "mesh": "iconName"
     },
     "rlid": {
+        "transform": "identification",
+        "joint": "identification",
+        "camera": "identification",
+        "pointLight": "identification",
+        "spotLight": "identification",
+        "areaLight": "identification",
+        "nurbsCurve": "identification",
+        "nurbsSurface": "identification",
         "mesh": "identification"
     },
     "it": {
+        "transform": "inheritsTransform",
+        "joint": "inheritsTransform",
         "lambert": "transparency"
     },
     "iog": {
+        "transform": "instObjGroups",
+        "joint": "instObjGroups",
+        "camera": "instObjGroups",
+        "pointLight": "instObjGroups",
+        "spotLight": "instObjGroups",
+        "areaLight": "instObjGroups",
+        "nurbsCurve": "instObjGroups",
+        "nurbsSurface": "instObjGroups",
         "mesh": "instObjGroups"
     },
     "io": {
+        "transform": "intermediateObject",
+        "joint": "intermediateObject",
+        "camera": "intermediateObject",
+        "pointLight": "intermediateObject",
+        "spotLight": "intermediateObject",
+        "areaLight": "intermediateObject",
+        "file": "frameOffset",
+        "nurbsCurve": "intermediateObject",
+        "nurbsSurface": "intermediateObject",
         "mesh": "intermediateObject"
     },
     "im": {
+        "transform": "inverseMatrix",
+        "joint": "inverseMatrix",
+        "camera": "inverseMatrix",
+        "pointLight": "inverseMatrix",
+        "spotLight": "inverseMatrix",
+        "areaLight": "inverseMatrix",
+        "nurbsCurve": "inverseMatrix",
+        "nurbsSurface": "inverseMatrix",
         "mesh": "inverseMatrix"
     },
     "isc": {
+        "transform": "isCollapsed",
+        "joint": "isCollapsed",
+        "camera": "isCollapsed",
+        "pointLight": "isCollapsed",
+        "spotLight": "isCollapsed",
+        "areaLight": "isCollapsed",
+        "nurbsCurve": "isCollapsed",
+        "nurbsSurface": "isCollapsed",
         "mesh": "isCollapsed"
     },
     "ish": {
+        "transform": "isHierarchicalConnection",
+        "joint": "isHierarchicalConnection",
+        "camera": "isHierarchicalConnection",
+        "pointLight": "isHierarchicalConnection",
+        "spotLight": "isHierarchicalConnection",
+        "areaLight": "isHierarchicalConnection",
+        "nurbsCurve": "isHierarchicalConnection",
+        "nurbsSurface": "isHierarchicalConnection",
         "mesh": "isHierarchicalConnection"
     },
     "ihi": {
+        "transform": "isHistoricallyInteresting",
+        "joint": "isHistoricallyInteresting",
+        "multDoubleLinear": "isHistoricallyInteresting",
+        "camera": "isHistoricallyInteresting",
+        "pointLight": "isHistoricallyInteresting",
+        "spotLight": "isHistoricallyInteresting",
+        "areaLight": "isHistoricallyInteresting",
+        "lambert": "isHistoricallyInteresting",
+        "file": "isHistoricallyInteresting",
+        "condition": "isHistoricallyInteresting",
+        "clamp": "isHistoricallyInteresting",
+        "remapValue": "isHistoricallyInteresting",
+        "remapColor": "isHistoricallyInteresting",
+        "uvPin": "isHistoricallyInteresting",
+        "plusMinusAverage": "isHistoricallyInteresting",
+        "blendTwoAttr": "isHistoricallyInteresting",
+        "blendColors": "isHistoricallyInteresting",
+        "decomposeMatrix": "isHistoricallyInteresting",
+        "inverseMatrix": "isHistoricallyInteresting",
+        "multMatrix": "isHistoricallyInteresting",
+        "blendMatrix": "isHistoricallyInteresting",
+        "nurbsCurve": "isHistoricallyInteresting",
+        "nurbsSurface": "isHistoricallyInteresting",
         "mesh": "isHistoricallyInteresting"
     },
     "lovc": {
+        "transform": "layerOverrideColor",
+        "joint": "layerOverrideColor",
+        "camera": "layerOverrideColor",
+        "pointLight": "layerOverrideColor",
+        "spotLight": "layerOverrideColor",
+        "areaLight": "layerOverrideColor",
+        "nurbsCurve": "layerOverrideColor",
+        "nurbsSurface": "layerOverrideColor",
         "mesh": "layerOverrideColor"
     },
     "rndr": {
+        "transform": "layerRenderable",
+        "joint": "layerRenderable",
+        "camera": "layerRenderable",
+        "pointLight": "layerRenderable",
+        "spotLight": "layerRenderable",
+        "areaLight": "layerRenderable",
+        "nurbsCurve": "layerRenderable",
+        "nurbsSurface": "layerRenderable",
         "mesh": "layerRenderable"
     },
     "lodv": {
+        "transform": "lodVisibility",
+        "joint": "lodVisibility",
+        "camera": "lodVisibility",
+        "pointLight": "lodVisibility",
+        "spotLight": "lodVisibility",
+        "areaLight": "lodVisibility",
+        "nurbsCurve": "lodVisibility",
+        "nurbsSurface": "lodVisibility",
         "mesh": "lodVisibility"
     },
     "m": {
+        "transform": "matrix",
+        "joint": "matrix",
+        "camera": "matrix",
+        "pointLight": "matrix",
+        "spotLight": "matrix",
+        "areaLight": "matrix",
+        "nurbsCurve": "matrix",
+        "nurbsSurface": "matrix",
         "mesh": "matrix"
     },
     "mxrl": {
+        "transform": "maxRotLimit",
         "joint": "maxRotLimit"
     },
     "xrle": {
+        "transform": "maxRotLimitEnable",
         "joint": "maxRotLimitEnable"
     },
     "xrxl": {
+        "transform": "maxRotXLimit",
         "joint": "maxRotXLimit"
     },
     "xrxe": {
+        "transform": "maxRotXLimitEnable",
         "joint": "maxRotXLimitEnable"
     },
     "xryl": {
+        "transform": "maxRotYLimit",
         "joint": "maxRotYLimit"
     },
     "xrye": {
+        "transform": "maxRotYLimitEnable",
         "joint": "maxRotYLimitEnable"
     },
     "xrzl": {
+        "transform": "maxRotZLimit",
         "joint": "maxRotZLimit"
     },
     "xrze": {
+        "transform": "maxRotZLimitEnable",
         "joint": "maxRotZLimitEnable"
     },
     "mxsl": {
+        "transform": "maxScaleLimit",
         "joint": "maxScaleLimit"
     },
     "xsle": {
+        "transform": "maxScaleLimitEnable",
         "joint": "maxScaleLimitEnable"
     },
     "xsxl": {
+        "transform": "maxScaleXLimit",
         "joint": "maxScaleXLimit"
     },
     "xsxe": {
+        "transform": "maxScaleXLimitEnable",
         "joint": "maxScaleXLimitEnable"
     },
     "xsyl": {
+        "transform": "maxScaleYLimit",
         "joint": "maxScaleYLimit"
     },
     "xsye": {
+        "transform": "maxScaleYLimitEnable",
         "joint": "maxScaleYLimitEnable"
     },
     "xszl": {
+        "transform": "maxScaleZLimit",
         "joint": "maxScaleZLimit"
     },
     "xsze": {
+        "transform": "maxScaleZLimitEnable",
         "joint": "maxScaleZLimitEnable"
     },
     "mxtl": {
+        "transform": "maxTransLimit",
         "joint": "maxTransLimit"
     },
     "xtle": {
+        "transform": "maxTransLimitEnable",
         "joint": "maxTransLimitEnable"
     },
     "xtxl": {
+        "transform": "maxTransXLimit",
         "joint": "maxTransXLimit"
     },
     "xtxe": {
+        "transform": "maxTransXLimitEnable",
         "joint": "maxTransXLimitEnable"
     },
     "xtyl": {
+        "transform": "maxTransYLimit",
         "joint": "maxTransYLimit"
     },
     "xtye": {
+        "transform": "maxTransYLimitEnable",
         "joint": "maxTransYLimitEnable"
     },
     "xtzl": {
+        "transform": "maxTransZLimit",
         "joint": "maxTransZLimit"
     },
     "xtze": {
+        "transform": "maxTransZLimitEnable",
         "joint": "maxTransZLimitEnable"
     },
     "msg": {
+        "transform": "message",
+        "joint": "message",
+        "multDoubleLinear": "message",
+        "camera": "message",
+        "pointLight": "message",
+        "spotLight": "message",
+        "areaLight": "message",
+        "lambert": "message",
+        "file": "message",
+        "condition": "message",
+        "clamp": "message",
+        "remapValue": "message",
+        "remapColor": "message",
+        "uvPin": "message",
+        "plusMinusAverage": "message",
+        "blendTwoAttr": "message",
+        "blendColors": "message",
+        "decomposeMatrix": "message",
+        "inverseMatrix": "message",
+        "multMatrix": "message",
+        "blendMatrix": "message",
+        "nurbsCurve": "message",
+        "nurbsSurface": "message",
         "mesh": "message"
     },
     "mnrl": {
+        "transform": "minRotLimit",
         "joint": "minRotLimit"
     },
     "mrle": {
+        "transform": "minRotLimitEnable",
         "joint": "minRotLimitEnable"
     },
     "mrxl": {
+        "transform": "minRotXLimit",
         "joint": "minRotXLimit"
     },
     "mrxe": {
+        "transform": "minRotXLimitEnable",
         "joint": "minRotXLimitEnable"
     },
     "mryl": {
+        "transform": "minRotYLimit",
         "joint": "minRotYLimit"
     },
     "mrye": {
+        "transform": "minRotYLimitEnable",
         "joint": "minRotYLimitEnable"
     },
     "mrzl": {
+        "transform": "minRotZLimit",
         "joint": "minRotZLimit"
     },
     "mrze": {
+        "transform": "minRotZLimitEnable",
         "joint": "minRotZLimitEnable"
     },
     "mnsl": {
+        "transform": "minScaleLimit",
         "joint": "minScaleLimit"
     },
     "msle": {
+        "transform": "minScaleLimitEnable",
         "joint": "minScaleLimitEnable"
     },
     "msxl": {
+        "transform": "minScaleXLimit",
         "joint": "minScaleXLimit"
     },
     "msxe": {
+        "transform": "minScaleXLimitEnable",
         "joint": "minScaleXLimitEnable"
     },
     "msyl": {
+        "transform": "minScaleYLimit",
         "joint": "minScaleYLimit"
     },
     "msye": {
+        "transform": "minScaleYLimitEnable",
         "joint": "minScaleYLimitEnable"
     },
     "mszl": {
+        "transform": "minScaleZLimit",
         "joint": "minScaleZLimit"
     },
     "msze": {
+        "transform": "minScaleZLimitEnable",
         "joint": "minScaleZLimitEnable"
     },
     "mntl": {
+        "transform": "minTransLimit",
         "joint": "minTransLimit"
     },
     "mtle": {
+        "transform": "minTransLimitEnable",
         "joint": "minTransLimitEnable"
     },
     "mtxl": {
+        "transform": "minTransXLimit",
         "joint": "minTransXLimit"
     },
     "mtxe": {
+        "transform": "minTransXLimitEnable",
         "joint": "minTransXLimitEnable"
     },
     "mtyl": {
+        "transform": "minTransYLimit",
         "joint": "minTransYLimit"
     },
     "mtye": {
+        "transform": "minTransYLimitEnable",
         "joint": "minTransYLimitEnable"
     },
     "mtzl": {
+        "transform": "minTransZLimit",
         "joint": "minTransZLimit"
     },
     "mtze": {
+        "transform": "minTransZLimitEnable",
         "joint": "minTransZLimitEnable"
     },
     "nds": {
+        "transform": "nodeState",
+        "joint": "nodeState",
+        "multDoubleLinear": "nodeState",
+        "camera": "nodeState",
+        "pointLight": "nodeState",
+        "spotLight": "nodeState",
+        "areaLight": "nodeState",
+        "lambert": "nodeState",
+        "file": "nodeState",
+        "condition": "nodeState",
+        "clamp": "nodeState",
+        "remapValue": "nodeState",
+        "remapColor": "nodeState",
+        "uvPin": "nodeState",
+        "plusMinusAverage": "nodeState",
+        "blendTwoAttr": "nodeState",
+        "blendColors": "nodeState",
+        "decomposeMatrix": "nodeState",
+        "inverseMatrix": "nodeState",
+        "multMatrix": "nodeState",
+        "blendMatrix": "nodeState",
+        "nurbsCurve": "nodeState",
+        "nurbsSurface": "nodeState",
         "mesh": "nodeState"
     },
     "oc": {
+        "transform": "objectColor",
+        "joint": "objectColor",
+        "camera": "objectColor",
+        "pointLight": "objectColor",
+        "spotLight": "objectColor",
+        "areaLight": "objectColor",
+        "lambert": "outColor",
+        "file": "outColor",
+        "condition": "outColor",
+        "remapValue": "outColor",
+        "remapColor": "outColor",
+        "nurbsCurve": "objectColor",
+        "nurbsSurface": "objectColor",
         "mesh": "objectColor"
     },
     "obcb": {
+        "transform": "objectColorB",
+        "joint": "objectColorB",
+        "camera": "objectColorB",
+        "pointLight": "objectColorB",
+        "spotLight": "objectColorB",
+        "areaLight": "objectColorB",
+        "nurbsCurve": "objectColorB",
+        "nurbsSurface": "objectColorB",
         "mesh": "objectColorB"
     },
     "obcg": {
+        "transform": "objectColorG",
+        "joint": "objectColorG",
+        "camera": "objectColorG",
+        "pointLight": "objectColorG",
+        "spotLight": "objectColorG",
+        "areaLight": "objectColorG",
+        "nurbsCurve": "objectColorG",
+        "nurbsSurface": "objectColorG",
         "mesh": "objectColorG"
     },
     "obcr": {
+        "transform": "objectColorR",
+        "joint": "objectColorR",
+        "camera": "objectColorR",
+        "pointLight": "objectColorR",
+        "spotLight": "objectColorR",
+        "areaLight": "objectColorR",
+        "nurbsCurve": "objectColorR",
+        "nurbsSurface": "objectColorR",
         "mesh": "objectColorR"
     },
     "obcc": {
+        "transform": "objectColorRGB",
+        "joint": "objectColorRGB",
+        "camera": "objectColorRGB",
+        "pointLight": "objectColorRGB",
+        "spotLight": "objectColorRGB",
+        "areaLight": "objectColorRGB",
+        "nurbsCurve": "objectColorRGB",
+        "nurbsSurface": "objectColorRGB",
         "mesh": "objectColorRGB"
     },
     "opm": {
+        "transform": "offsetParentMatrix",
         "joint": "offsetParentMatrix"
     },
     "oclr": {
+        "transform": "outlinerColor",
+        "joint": "outlinerColor",
+        "camera": "outlinerColor",
+        "pointLight": "outlinerColor",
+        "spotLight": "outlinerColor",
+        "areaLight": "outlinerColor",
+        "nurbsCurve": "outlinerColor",
+        "nurbsSurface": "outlinerColor",
         "mesh": "outlinerColor"
     },
     "oclrb": {
+        "transform": "outlinerColorB",
+        "joint": "outlinerColorB",
+        "camera": "outlinerColorB",
+        "pointLight": "outlinerColorB",
+        "spotLight": "outlinerColorB",
+        "areaLight": "outlinerColorB",
+        "nurbsCurve": "outlinerColorB",
+        "nurbsSurface": "outlinerColorB",
         "mesh": "outlinerColorB"
     },
     "oclrg": {
+        "transform": "outlinerColorG",
+        "joint": "outlinerColorG",
+        "camera": "outlinerColorG",
+        "pointLight": "outlinerColorG",
+        "spotLight": "outlinerColorG",
+        "areaLight": "outlinerColorG",
+        "nurbsCurve": "outlinerColorG",
+        "nurbsSurface": "outlinerColorG",
         "mesh": "outlinerColorG"
     },
     "oclrr": {
+        "transform": "outlinerColorR",
+        "joint": "outlinerColorR",
+        "camera": "outlinerColorR",
+        "pointLight": "outlinerColorR",
+        "spotLight": "outlinerColorR",
+        "areaLight": "outlinerColorR",
+        "nurbsCurve": "outlinerColorR",
+        "nurbsSurface": "outlinerColorR",
         "mesh": "outlinerColorR"
     },
     "ovc": {
+        "transform": "overrideColor",
+        "joint": "overrideColor",
+        "camera": "overrideColor",
+        "pointLight": "overrideColor",
+        "spotLight": "overrideColor",
+        "areaLight": "overrideColor",
+        "nurbsCurve": "overrideColor",
+        "nurbsSurface": "overrideColor",
         "mesh": "overrideColor"
     },
     "ovca": {
+        "transform": "overrideColorA",
+        "joint": "overrideColorA",
+        "camera": "overrideColorA",
+        "pointLight": "overrideColorA",
+        "spotLight": "overrideColorA",
+        "areaLight": "overrideColorA",
+        "nurbsCurve": "overrideColorA",
+        "nurbsSurface": "overrideColorA",
         "mesh": "overrideColorA"
     },
     "ovcb": {
+        "transform": "overrideColorB",
+        "joint": "overrideColorB",
+        "camera": "overrideColorB",
+        "pointLight": "overrideColorB",
+        "spotLight": "overrideColorB",
+        "areaLight": "overrideColorB",
+        "nurbsCurve": "overrideColorB",
+        "nurbsSurface": "overrideColorB",
         "mesh": "overrideColorB"
     },
     "ovcg": {
+        "transform": "overrideColorG",
+        "joint": "overrideColorG",
+        "camera": "overrideColorG",
+        "pointLight": "overrideColorG",
+        "spotLight": "overrideColorG",
+        "areaLight": "overrideColorG",
+        "nurbsCurve": "overrideColorG",
+        "nurbsSurface": "overrideColorG",
         "mesh": "overrideColorG"
     },
     "ovcr": {
+        "transform": "overrideColorR",
+        "joint": "overrideColorR",
+        "camera": "overrideColorR",
+        "pointLight": "overrideColorR",
+        "spotLight": "overrideColorR",
+        "areaLight": "overrideColorR",
+        "nurbsCurve": "overrideColorR",
+        "nurbsSurface": "overrideColorR",
         "mesh": "overrideColorR"
     },
     "ovrgb": {
+        "transform": "overrideColorRGB",
+        "joint": "overrideColorRGB",
+        "camera": "overrideColorRGB",
+        "pointLight": "overrideColorRGB",
+        "spotLight": "overrideColorRGB",
+        "areaLight": "overrideColorRGB",
+        "nurbsCurve": "overrideColorRGB",
+        "nurbsSurface": "overrideColorRGB",
         "mesh": "overrideColorRGB"
     },
     "ovdt": {
+        "transform": "overrideDisplayType",
+        "joint": "overrideDisplayType",
+        "camera": "overrideDisplayType",
+        "pointLight": "overrideDisplayType",
+        "spotLight": "overrideDisplayType",
+        "areaLight": "overrideDisplayType",
+        "nurbsCurve": "overrideDisplayType",
+        "nurbsSurface": "overrideDisplayType",
         "mesh": "overrideDisplayType"
     },
     "ove": {
+        "transform": "overrideEnabled",
+        "joint": "overrideEnabled",
+        "camera": "overrideEnabled",
+        "pointLight": "overrideEnabled",
+        "spotLight": "overrideEnabled",
+        "areaLight": "overrideEnabled",
+        "nurbsCurve": "overrideEnabled",
+        "nurbsSurface": "overrideEnabled",
         "mesh": "overrideEnabled"
     },
     "ovlod": {
+        "transform": "overrideLevelOfDetail",
+        "joint": "overrideLevelOfDetail",
+        "camera": "overrideLevelOfDetail",
+        "pointLight": "overrideLevelOfDetail",
+        "spotLight": "overrideLevelOfDetail",
+        "areaLight": "overrideLevelOfDetail",
+        "nurbsCurve": "overrideLevelOfDetail",
+        "nurbsSurface": "overrideLevelOfDetail",
         "mesh": "overrideLevelOfDetail"
     },
     "ovp": {
+        "transform": "overridePlayback",
+        "joint": "overridePlayback",
+        "camera": "overridePlayback",
+        "pointLight": "overridePlayback",
+        "spotLight": "overridePlayback",
+        "areaLight": "overridePlayback",
+        "nurbsCurve": "overridePlayback",
+        "nurbsSurface": "overridePlayback",
         "mesh": "overridePlayback"
     },
     "ovrgbf": {
+        "transform": "overrideRGBColors",
+        "joint": "overrideRGBColors",
+        "camera": "overrideRGBColors",
+        "pointLight": "overrideRGBColors",
+        "spotLight": "overrideRGBColors",
+        "areaLight": "overrideRGBColors",
+        "nurbsCurve": "overrideRGBColors",
+        "nurbsSurface": "overrideRGBColors",
         "mesh": "overrideRGBColors"
     },
     "ovs": {
+        "transform": "overrideShading",
+        "joint": "overrideShading",
+        "camera": "overrideShading",
+        "pointLight": "overrideShading",
+        "spotLight": "overrideShading",
+        "areaLight": "overrideShading",
+        "nurbsCurve": "overrideShading",
+        "nurbsSurface": "overrideShading",
         "mesh": "overrideShading"
     },
     "ovt": {
+        "transform": "overrideTexturing",
+        "joint": "overrideTexturing",
+        "camera": "overrideTexturing",
+        "pointLight": "overrideTexturing",
+        "spotLight": "overrideTexturing",
+        "areaLight": "overrideTexturing",
+        "nurbsCurve": "overrideTexturing",
+        "nurbsSurface": "overrideTexturing",
         "mesh": "overrideTexturing"
     },
     "ovv": {
+        "transform": "overrideVisibility",
+        "joint": "overrideVisibility",
+        "camera": "overrideVisibility",
+        "pointLight": "overrideVisibility",
+        "spotLight": "overrideVisibility",
+        "areaLight": "overrideVisibility",
+        "nurbsCurve": "overrideVisibility",
+        "nurbsSurface": "overrideVisibility",
         "mesh": "overrideVisibility"
     },
     "pim": {
+        "transform": "parentInverseMatrix",
+        "joint": "parentInverseMatrix",
+        "camera": "parentInverseMatrix",
+        "pointLight": "parentInverseMatrix",
+        "spotLight": "parentInverseMatrix",
+        "areaLight": "parentInverseMatrix",
+        "nurbsCurve": "parentInverseMatrix",
+        "nurbsSurface": "parentInverseMatrix",
         "mesh": "parentInverseMatrix"
     },
     "pm": {
+        "transform": "parentMatrix",
+        "joint": "parentMatrix",
+        "camera": "parentMatrix",
+        "pointLight": "parentMatrix",
+        "spotLight": "parentMatrix",
+        "areaLight": "parentMatrix",
+        "nurbsCurve": "parentMatrix",
+        "nurbsSurface": "parentMatrix",
         "mesh": "parentMatrix"
     },
     "pni": {
+        "transform": "publishedNodeInfo",
+        "joint": "publishedNodeInfo",
+        "camera": "publishedNodeInfo",
+        "pointLight": "publishedNodeInfo",
+        "spotLight": "publishedNodeInfo",
+        "areaLight": "publishedNodeInfo",
+        "nurbsCurve": "publishedNodeInfo",
+        "nurbsSurface": "publishedNodeInfo",
         "mesh": "publishedNodeInfo"
     },
     "ri": {
+        "transform": "renderInfo",
+        "joint": "renderInfo",
+        "camera": "renderInfo",
+        "pointLight": "renderInfo",
+        "spotLight": "renderInfo",
+        "areaLight": "renderInfo",
+        "nurbsCurve": "renderInfo",
+        "nurbsSurface": "renderInfo",
         "mesh": "renderInfo"
     },
     "rlio": {
+        "transform": "renderLayerInfo",
+        "joint": "renderLayerInfo",
+        "camera": "renderLayerInfo",
+        "pointLight": "renderLayerInfo",
+        "spotLight": "renderLayerInfo",
+        "areaLight": "renderLayerInfo",
+        "nurbsCurve": "renderLayerInfo",
+        "nurbsSurface": "renderLayerInfo",
         "mesh": "renderLayerInfo"
     },
     "rmc": {
+        "transform": "rmbCommand",
+        "joint": "rmbCommand",
+        "camera": "rmbCommand",
+        "pointLight": "rmbCommand",
+        "spotLight": "rmbCommand",
+        "areaLight": "rmbCommand",
+        "nurbsCurve": "rmbCommand",
+        "nurbsSurface": "rmbCommand",
         "mesh": "rmbCommand"
     },
     "r": {
+        "transform": "rotate",
+        "joint": "rotate",
         "remapColor": "red"
     },
     "ra": {
+        "transform": "rotateAxis",
         "joint": "rotateAxis"
     },
     "rax": {
+        "transform": "rotateAxisX",
         "joint": "rotateAxisX"
     },
     "ray": {
+        "transform": "rotateAxisY",
         "joint": "rotateAxisY"
     },
     "raz": {
+        "transform": "rotateAxisZ",
         "joint": "rotateAxisZ"
     },
     "ro": {
+        "transform": "rotateOrder",
+        "joint": "rotateOrder",
+        "file": "rotateUV",
         "decomposeMatrix": "inputRotateOrder"
     },
     "rp": {
+        "transform": "rotatePivot",
         "joint": "rotatePivot"
     },
     "rpt": {
+        "transform": "rotatePivotTranslate",
         "joint": "rotatePivotTranslate"
     },
     "rptx": {
+        "transform": "rotatePivotTranslateX",
         "joint": "rotatePivotTranslateX"
     },
     "rpty": {
+        "transform": "rotatePivotTranslateY",
         "joint": "rotatePivotTranslateY"
     },
     "rptz": {
+        "transform": "rotatePivotTranslateZ",
         "joint": "rotatePivotTranslateZ"
     },
     "rpx": {
+        "transform": "rotatePivotX",
         "joint": "rotatePivotX"
     },
     "rpy": {
+        "transform": "rotatePivotY",
         "joint": "rotatePivotY"
     },
     "rpz": {
+        "transform": "rotatePivotZ",
+        "joint": "rotatePivotZ",
         "camera": "renderPanZoom"
     },
     "rq": {
+        "transform": "rotateQuaternion",
         "joint": "rotateQuaternion"
     },
     "rqw": {
+        "transform": "rotateQuaternionW",
         "joint": "rotateQuaternionW"
     },
     "rqx": {
+        "transform": "rotateQuaternionX",
         "joint": "rotateQuaternionX"
     },
     "rqy": {
+        "transform": "rotateQuaternionY",
         "joint": "rotateQuaternionY"
     },
     "rqz": {
+        "transform": "rotateQuaternionZ",
         "joint": "rotateQuaternionZ"
     },
     "rx": {
+        "transform": "rotateX",
         "joint": "rotateX"
     },
     "ry": {
+        "transform": "rotateY",
         "joint": "rotateY"
     },
     "rz": {
+        "transform": "rotateZ",
         "joint": "rotateZ"
     },
     "roi": {
+        "transform": "rotationInterpolation",
         "joint": "rotationInterpolation"
     },
     "s": {
+        "transform": "scale",
+        "joint": "scale",
+        "file": "stagger",
         "nurbsCurve": "spans"
     },
     "sp": {
+        "transform": "scalePivot",
+        "joint": "scalePivot",
         "nurbsSurface": "spansUV"
     },
     "spt": {
+        "transform": "scalePivotTranslate",
         "joint": "scalePivotTranslate"
     },
     "sptx": {
+        "transform": "scalePivotTranslateX",
         "joint": "scalePivotTranslateX"
     },
     "spty": {
+        "transform": "scalePivotTranslateY",
         "joint": "scalePivotTranslateY"
     },
     "sptz": {
+        "transform": "scalePivotTranslateZ",
         "joint": "scalePivotTranslateZ"
     },
     "spx": {
+        "transform": "scalePivotX",
         "joint": "scalePivotX"
     },
     "spy": {
+        "transform": "scalePivotY",
         "joint": "scalePivotY"
     },
     "spz": {
+        "transform": "scalePivotZ",
         "joint": "scalePivotZ"
     },
     "sx": {
+        "transform": "scaleX",
+        "joint": "scaleX",
         "mesh": "sofx"
     },
     "sy": {
+        "transform": "scaleY",
+        "joint": "scaleY",
         "mesh": "sofy"
     },
     "sz": {
+        "transform": "scaleZ",
+        "joint": "scaleZ",
         "mesh": "sofz"
     },
     "hdl": {
+        "transform": "selectHandle",
         "joint": "selectHandle"
     },
     "hdlx": {
+        "transform": "selectHandleX",
         "joint": "selectHandleX"
     },
     "hdly": {
+        "transform": "selectHandleY",
         "joint": "selectHandleY"
     },
     "hdlz": {
+        "transform": "selectHandleZ",
         "joint": "selectHandleZ"
     },
     "sech": {
+        "transform": "selectionChildHighlighting",
+        "joint": "selectionChildHighlighting",
+        "camera": "selectionChildHighlighting",
+        "pointLight": "selectionChildHighlighting",
+        "spotLight": "selectionChildHighlighting",
+        "areaLight": "selectionChildHighlighting",
+        "nurbsCurve": "selectionChildHighlighting",
+        "nurbsSurface": "selectionChildHighlighting",
         "mesh": "selectionChildHighlighting"
     },
     "sh": {
+        "transform": "shear",
         "joint": "shear"
     },
     "shxy": {
+        "transform": "shearXY",
         "joint": "shearXY"
     },
     "shxz": {
+        "transform": "shearXZ",
         "joint": "shearXZ"
     },
     "shyz": {
+        "transform": "shearYZ",
         "joint": "shearYZ"
     },
     "smd": {
+        "transform": "showManipDefault",
         "joint": "showManipDefault"
     },
     "sml": {
+        "transform": "specifiedManipLocation",
         "joint": "specifiedManipLocation"
     },
     "tmp": {
+        "transform": "template",
+        "joint": "template",
+        "camera": "template",
+        "pointLight": "template",
+        "spotLight": "template",
+        "areaLight": "template",
+        "nurbsCurve": "template",
+        "nurbsSurface": "template",
         "mesh": "template"
     },
     "tna": {
+        "transform": "templateName",
+        "joint": "templateName",
+        "camera": "templateName",
+        "pointLight": "templateName",
+        "spotLight": "templateName",
+        "areaLight": "templateName",
+        "nurbsCurve": "templateName",
+        "nurbsSurface": "templateName",
         "mesh": "templateName"
     },
     "tpt": {
+        "transform": "templatePath",
+        "joint": "templatePath",
+        "camera": "templatePath",
+        "pointLight": "templatePath",
+        "spotLight": "templatePath",
+        "areaLight": "templatePath",
+        "nurbsCurve": "templatePath",
+        "nurbsSurface": "templatePath",
         "mesh": "templatePath"
     },
     "tpv": {
+        "transform": "templateVersion",
+        "joint": "templateVersion",
+        "camera": "templateVersion",
+        "pointLight": "templateVersion",
+        "spotLight": "templateVersion",
+        "areaLight": "templateVersion",
+        "nurbsCurve": "templateVersion",
+        "nurbsSurface": "templateVersion",
         "mesh": "templateVersion"
     },
     "tmrp": {
+        "transform": "transMinusRotatePivot",
         "joint": "transMinusRotatePivot"
     },
     "tmrx": {
+        "transform": "transMinusRotatePivotX",
         "joint": "transMinusRotatePivotX"
     },
     "tmry": {
+        "transform": "transMinusRotatePivotY",
         "joint": "transMinusRotatePivotY"
     },
     "tmrz": {
+        "transform": "transMinusRotatePivotZ",
         "joint": "transMinusRotatePivotZ"
     },
     "t": {
+        "transform": "translate",
         "joint": "translate"
     },
     "tx": {
+        "transform": "translateX",
+        "joint": "translateX",
+        "pointLight": "pointWorldX",
+        "spotLight": "pointWorldX",
         "areaLight": "pointWorldX"
     },
     "ty": {
+        "transform": "translateY",
+        "joint": "translateY",
+        "pointLight": "pointWorldY",
+        "spotLight": "pointWorldY",
         "areaLight": "pointWorldY"
     },
     "tz": {
+        "transform": "translateZ",
+        "joint": "translateZ",
+        "pointLight": "pointWorldZ",
+        "spotLight": "pointWorldZ",
         "areaLight": "pointWorldZ"
     },
     "uit": {
+        "transform": "uiTreatment",
+        "joint": "uiTreatment",
+        "camera": "uiTreatment",
+        "pointLight": "uiTreatment",
+        "spotLight": "uiTreatment",
+        "areaLight": "uiTreatment",
+        "nurbsCurve": "uiTreatment",
+        "nurbsSurface": "uiTreatment",
         "mesh": "uiTreatment"
     },
     "uoc": {
+        "transform": "useObjectColor",
+        "joint": "useObjectColor",
+        "camera": "useObjectColor",
+        "pointLight": "useObjectColor",
+        "spotLight": "useObjectColor",
+        "areaLight": "useObjectColor",
+        "nurbsCurve": "useObjectColor",
+        "nurbsSurface": "useObjectColor",
         "mesh": "useObjectColor"
     },
     "uocol": {
+        "transform": "useOutlinerColor",
+        "joint": "useOutlinerColor",
+        "camera": "useOutlinerColor",
+        "pointLight": "useOutlinerColor",
+        "spotLight": "useOutlinerColor",
+        "areaLight": "useOutlinerColor",
+        "nurbsCurve": "useOutlinerColor",
+        "nurbsSurface": "useOutlinerColor",
         "mesh": "useOutlinerColor"
     },
     "vwm": {
+        "transform": "viewMode",
+        "joint": "viewMode",
+        "camera": "viewMode",
+        "pointLight": "viewMode",
+        "spotLight": "viewMode",
+        "areaLight": "viewMode",
+        "nurbsCurve": "viewMode",
+        "nurbsSurface": "viewMode",
         "mesh": "viewMode"
     },
     "vwn": {
+        "transform": "viewName",
+        "joint": "viewName",
+        "camera": "viewName",
+        "pointLight": "viewName",
+        "spotLight": "viewName",
+        "areaLight": "viewName",
+        "nurbsCurve": "viewName",
+        "nurbsSurface": "viewName",
         "mesh": "viewName"
     },
     "v": {
+        "transform": "visibility",
+        "joint": "visibility",
+        "camera": "visibility",
+        "pointLight": "visibility",
+        "spotLight": "visibility",
+        "areaLight": "visibility",
+        "file": "vCoord",
+        "nurbsCurve": "visibility",
+        "nurbsSurface": "visibility",
         "mesh": "visibility"
     },
     "wfcb": {
+        "transform": "wireColorB",
+        "joint": "wireColorB",
+        "camera": "wireColorB",
+        "pointLight": "wireColorB",
+        "spotLight": "wireColorB",
+        "areaLight": "wireColorB",
+        "nurbsCurve": "wireColorB",
+        "nurbsSurface": "wireColorB",
         "mesh": "wireColorB"
     },
     "wfcg": {
+        "transform": "wireColorG",
+        "joint": "wireColorG",
+        "camera": "wireColorG",
+        "pointLight": "wireColorG",
+        "spotLight": "wireColorG",
+        "areaLight": "wireColorG",
+        "nurbsCurve": "wireColorG",
+        "nurbsSurface": "wireColorG",
         "mesh": "wireColorG"
     },
     "wfcr": {
+        "transform": "wireColorR",
+        "joint": "wireColorR",
+        "camera": "wireColorR",
+        "pointLight": "wireColorR",
+        "spotLight": "wireColorR",
+        "areaLight": "wireColorR",
+        "nurbsCurve": "wireColorR",
+        "nurbsSurface": "wireColorR",
         "mesh": "wireColorR"
     },
     "wfcc": {
+        "transform": "wireColorRGB",
+        "joint": "wireColorRGB",
+        "camera": "wireColorRGB",
+        "pointLight": "wireColorRGB",
+        "spotLight": "wireColorRGB",
+        "areaLight": "wireColorRGB",
+        "nurbsCurve": "wireColorRGB",
+        "nurbsSurface": "wireColorRGB",
         "mesh": "wireColorRGB"
     },
     "wim": {
+        "transform": "worldInverseMatrix",
+        "joint": "worldInverseMatrix",
+        "camera": "worldInverseMatrix",
+        "pointLight": "worldInverseMatrix",
+        "spotLight": "worldInverseMatrix",
+        "areaLight": "worldInverseMatrix",
+        "nurbsCurve": "worldInverseMatrix",
+        "nurbsSurface": "worldInverseMatrix",
         "mesh": "worldInverseMatrix"
     },
     "wm": {
+        "transform": "worldMatrix",
+        "joint": "worldMatrix",
+        "camera": "worldMatrix",
+        "pointLight": "worldMatrix",
+        "spotLight": "worldMatrix",
+        "areaLight": "worldMatrix",
+        "nurbsCurve": "worldMatrix",
+        "nurbsSurface": "worldMatrix",
         "mesh": "worldMatrix"
     },
     "xm": {
+        "transform": "xformMatrix",
         "joint": "xformMatrix"
     },
     "bis": {
@@ -27265,6 +28380,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "drawLabel"
     },
     "ds": {
+        "joint": "drawStyle",
+        "nurbsSurface": "doubleSided",
         "mesh": "doubleSided"
     },
     "fkr": {
@@ -27391,9 +28508,11 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "minRotateDampStrengthZ"
     },
     "otp": {
+        "joint": "otherType",
         "file": "objectType"
     },
     "pa": {
+        "joint": "preferredAngle",
         "spotLight": "penumbraAngle"
     },
     "pax": {
@@ -27415,6 +28534,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "side"
     },
     "st": {
+        "joint": "stiffness",
         "condition": "secondTerm"
     },
     "stx": {
@@ -27430,18 +28550,27 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "type"
     },
     "i1": {
+        "multDoubleLinear": "input1",
         "plusMinusAverage": "input1D"
     },
     "i2": {
+        "multDoubleLinear": "input2",
         "plusMinusAverage": "input2D"
     },
     "o": {
+        "multDoubleLinear": "output",
+        "camera": "orthographic",
+        "blendTwoAttr": "output",
+        "multMatrix": "matrixSum",
         "mesh": "outMesh"
     },
     "asp": {
         "camera": "autoSetPivot"
     },
     "col": {
+        "camera": "backgroundColor",
+        "pointLight": "centerOfIllumination",
+        "spotLight": "centerOfIllumination",
         "areaLight": "centerOfIllumination"
     },
     "colb": {
@@ -27457,6 +28586,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "bestFitClippingPlanes"
     },
     "b": {
+        "camera": "bookmarks",
+        "remapColor": "blue",
         "blendColors": "blender"
     },
     "ben": {
@@ -27469,15 +28600,23 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "cameraPrecompTemplate"
     },
     "cs": {
+        "camera": "cameraScale",
+        "file": "colorSpace",
         "mesh": "cachedSmoothMesh"
     },
     "coi": {
         "camera": "centerOfInterest"
     },
     "cp": {
+        "camera": "clippingPlanes",
+        "file": "colorProfile",
+        "nurbsCurve": "controlPoints",
+        "nurbsSurface": "controlPoints",
         "mesh": "controlPoints"
     },
     "dep": {
+        "camera": "depth",
+        "nurbsCurve": "dispEP",
         "nurbsSurface": "dispEP"
     },
     "den": {
@@ -27529,6 +28668,10 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "displayGateMaskOpacity"
     },
     "dr": {
+        "camera": "displayResolution",
+        "pointLight": "dmapResolution",
+        "spotLight": "dmapResolution",
+        "areaLight": "dmapResolution",
         "mesh": "dispResolution"
     },
     "dsa": {
@@ -27538,9 +28681,16 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "displaySafeTitle"
     },
     "fs": {
+        "camera": "fStop",
+        "pointLight": "dmapFilterSize",
+        "spotLight": "dmapFilterSize",
+        "areaLight": "dmapFilterSize",
         "file": "uvFilterSize"
     },
     "fcp": {
+        "camera": "farClipPlane",
+        "pointLight": "dmapFarClipPlane",
+        "spotLight": "dmapFarClipPlane",
         "areaLight": "dmapFarClipPlane"
     },
     "ff": {
@@ -27565,9 +28715,12 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "filmRollValue"
     },
     "ct": {
+        "camera": "filmTranslate",
         "condition": "colorIfTrue"
     },
     "fth": {
+        "camera": "filmTranslateH",
+        "nurbsSurface": "textureThreshold",
         "mesh": "textureThreshold"
     },
     "ftv": {
@@ -27598,15 +28751,19 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "horizontalRollPivot"
     },
     "hs": {
+        "camera": "horizontalShake",
         "lambert": "hideSource"
     },
     "img": {
         "camera": "image"
     },
     "imn": {
+        "camera": "imageName",
+        "remapValue": "inputMin",
         "remapColor": "inputMin"
     },
     "ip": {
+        "camera": "imagePlane",
         "clamp": "input"
     },
     "jc": {
@@ -27616,6 +28773,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "lensSqueezeRatio"
     },
     "lls": {
+        "camera": "locatorScale",
+        "pointLight": "locatorScale",
+        "spotLight": "locatorScale",
         "areaLight": "locatorScale"
     },
     "ma": {
@@ -27625,6 +28785,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "maskName"
     },
     "mb": {
+        "camera": "motionBlur",
+        "nurbsCurve": "motionBlur",
+        "nurbsSurface": "motionBlur",
         "mesh": "motionBlur"
     },
     "ncp": {
@@ -27634,6 +28797,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "orthographicWidth"
     },
     "ovr": {
+        "camera": "overscan",
+        "pointLight": "opticalFXvisibilityR",
+        "spotLight": "opticalFXvisibilityR",
         "areaLight": "opticalFXvisibilityR"
     },
     "pn": {
@@ -27715,63 +28881,116 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "camera": "verticalRollPivot"
     },
     "vs": {
+        "camera": "verticalShake",
         "mesh": "vertexSize"
     },
     "zom": {
         "camera": "zoom"
     },
     "cw": {
+        "pointLight": "castSoftShadows",
+        "spotLight": "castSoftShadows",
         "areaLight": "castSoftShadows"
     },
     "cl": {
+        "pointLight": "color",
+        "spotLight": "color",
+        "areaLight": "color",
+        "remapValue": "color",
         "remapColor": "color"
     },
     "cb": {
+        "pointLight": "colorB",
+        "spotLight": "colorB",
+        "areaLight": "colorB",
+        "lambert": "colorB",
         "remapColor": "colorB"
     },
     "cg": {
+        "pointLight": "colorG",
+        "spotLight": "colorG",
+        "areaLight": "colorG",
+        "lambert": "colorG",
+        "file": "colorGain",
         "remapColor": "colorG"
     },
     "cr": {
+        "pointLight": "colorR",
+        "spotLight": "colorR",
+        "areaLight": "colorR",
+        "lambert": "colorR",
+        "remapColor": "colorR",
+        "nurbsCurve": "create",
         "nurbsSurface": "create"
     },
     "de": {
+        "pointLight": "decayRate",
+        "spotLight": "decayRate",
+        "areaLight": "decayRate",
         "mesh": "displayEdges"
     },
     "db": {
+        "pointLight": "dmapBias",
+        "spotLight": "dmapBias",
+        "areaLight": "dmapBias",
         "mesh": "displayBorders"
     },
     "df": {
+        "pointLight": "dmapFocus",
+        "spotLight": "dmapFocus",
         "areaLight": "dmapFocus"
     },
     "uf": {
+        "pointLight": "dmapFrameExt",
+        "spotLight": "dmapFrameExt",
         "areaLight": "dmapFrameExt"
     },
     "ul": {
+        "pointLight": "dmapLightName",
+        "spotLight": "dmapLightName",
         "areaLight": "dmapLightName"
     },
     "smn": {
+        "pointLight": "dmapName",
+        "spotLight": "dmapName",
         "areaLight": "dmapName"
     },
     "nc": {
+        "pointLight": "dmapNearClipPlane",
+        "spotLight": "dmapNearClipPlane",
         "areaLight": "dmapNearClipPlane"
     },
     "um": {
+        "pointLight": "dmapSceneName",
+        "spotLight": "dmapSceneName",
         "areaLight": "dmapSceneName"
     },
     "dc": {
+        "pointLight": "dmapUseMacro",
+        "spotLight": "dmapUseMacro",
+        "areaLight": "dmapUseMacro",
+        "lambert": "diffuse",
+        "file": "defaultColor",
         "mesh": "displayCenter"
     },
     "dw": {
+        "pointLight": "dmapWidthFocus",
+        "spotLight": "dmapWidthFocus",
         "areaLight": "dmapWidthFocus"
     },
     "edi": {
+        "pointLight": "emitDiffuse",
+        "spotLight": "emitDiffuse",
         "areaLight": "emitDiffuse"
     },
     "esp": {
+        "pointLight": "emitSpecular",
+        "spotLight": "emitSpecular",
         "areaLight": "emitSpecular"
     },
     "fw": {
+        "pointLight": "farPointWorld",
+        "spotLight": "farPointWorld",
         "file": "filterWidth"
     },
     "fwx": {
@@ -27784,213 +29003,378 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "pointLight": "farPointWorldZ"
     },
     "fg": {
+        "pointLight": "fogGeometry",
         "spotLight": "fogGeometry"
     },
     "fin": {
+        "pointLight": "fogIntensity",
         "spotLight": "fogIntensity"
     },
     "fr": {
         "pointLight": "fogRadius"
     },
     "fsi": {
+        "pointLight": "fogShadowIntensity",
+        "spotLight": "fogShadowIntensity",
         "areaLight": "fogShadowIntensity"
     },
     "ft": {
+        "pointLight": "fogType",
+        "file": "filterType",
         "condition": "firstTerm"
     },
     "ib": {
+        "pointLight": "infoBits",
+        "spotLight": "infoBits",
+        "areaLight": "infoBits",
+        "lambert": "incandescenceB",
         "file": "infoBits"
     },
     "in": {
+        "pointLight": "intensity",
+        "spotLight": "intensity",
         "areaLight": "intensity"
     },
     "lw": {
+        "pointLight": "lastWrittenDmapAnimExtName",
+        "spotLight": "lastWrittenDmapAnimExtName",
         "areaLight": "lastWrittenDmapAnimExtName"
     },
     "la": {
+        "pointLight": "lightAmbient",
+        "spotLight": "lightAmbient",
         "areaLight": "lightAmbient"
     },
     "lbl": {
+        "pointLight": "lightBlindData",
+        "spotLight": "lightBlindData",
         "areaLight": "lightBlindData"
     },
     "ltd": {
+        "pointLight": "lightData",
+        "spotLight": "lightData",
+        "areaLight": "lightData",
         "lambert": "lightDataArray"
     },
     "ldf": {
+        "pointLight": "lightDiffuse",
+        "spotLight": "lightDiffuse",
         "areaLight": "lightDiffuse"
     },
     "ld": {
+        "pointLight": "lightDirection",
+        "spotLight": "lightDirection",
         "areaLight": "lightDirection"
     },
     "ldx": {
+        "pointLight": "lightDirectionX",
+        "spotLight": "lightDirectionX",
         "areaLight": "lightDirectionX"
     },
     "ldy": {
+        "pointLight": "lightDirectionY",
+        "spotLight": "lightDirectionY",
         "areaLight": "lightDirectionY"
     },
     "ldz": {
+        "pointLight": "lightDirectionZ",
+        "spotLight": "lightDirectionZ",
         "areaLight": "lightDirectionZ"
     },
     "lg": {
+        "pointLight": "lightGlow",
+        "spotLight": "lightGlow",
         "areaLight": "lightGlow"
     },
     "li": {
+        "pointLight": "lightIntensity",
+        "spotLight": "lightIntensity",
         "areaLight": "lightIntensity"
     },
     "lib": {
+        "pointLight": "lightIntensityB",
+        "spotLight": "lightIntensityB",
         "areaLight": "lightIntensityB"
     },
     "lig": {
+        "pointLight": "lightIntensityG",
+        "spotLight": "lightIntensityG",
         "areaLight": "lightIntensityG"
     },
     "lir": {
+        "pointLight": "lightIntensityR",
+        "spotLight": "lightIntensityR",
         "areaLight": "lightIntensityR"
     },
     "lr": {
+        "pointLight": "lightRadius",
+        "spotLight": "lightRadius",
         "areaLight": "lightRadius"
     },
     "lsf": {
+        "pointLight": "lightShadowFraction",
+        "spotLight": "lightShadowFraction",
         "areaLight": "lightShadowFraction"
     },
     "ls": {
+        "pointLight": "lightSpecular",
+        "spotLight": "lightSpecular",
+        "areaLight": "lightSpecular",
         "nurbsCurve": "lineWidth"
     },
     "etw": {
+        "pointLight": "matrixEyeToWorld",
+        "spotLight": "matrixEyeToWorld",
         "areaLight": "matrixEyeToWorld"
     },
     "wte": {
+        "pointLight": "matrixWorldToEye",
+        "spotLight": "matrixWorldToEye",
         "areaLight": "matrixWorldToEye"
     },
     "oi": {
+        "pointLight": "objectId",
+        "spotLight": "objectId",
+        "areaLight": "objectId",
         "lambert": "objectId"
     },
     "ot": {
+        "pointLight": "objectType",
+        "spotLight": "objectType",
+        "areaLight": "objectType",
+        "lambert": "outTransparency",
+        "file": "outTransparency",
+        "uvPin": "outputTranslate",
         "decomposeMatrix": "outputTranslate"
     },
     "ov": {
+        "pointLight": "opticalFXvisibility",
+        "spotLight": "opticalFXvisibility",
+        "areaLight": "opticalFXvisibility",
         "remapValue": "outValue"
     },
     "ovb": {
+        "pointLight": "opticalFXvisibilityB",
+        "spotLight": "opticalFXvisibilityB",
+        "areaLight": "opticalFXvisibilityB",
         "mesh": "osdVertBoundary"
     },
     "ovg": {
+        "pointLight": "opticalFXvisibilityG",
+        "spotLight": "opticalFXvisibilityG",
         "areaLight": "opticalFXvisibilityG"
     },
     "p": {
+        "pointLight": "pointCamera",
+        "spotLight": "pointCamera",
         "areaLight": "pointCamera"
     },
     "px": {
+        "pointLight": "pointCameraX",
+        "spotLight": "pointCameraX",
+        "areaLight": "pointCameraX",
         "lambert": "pointCameraX"
     },
     "py": {
+        "pointLight": "pointCameraY",
+        "spotLight": "pointCameraY",
+        "areaLight": "pointCameraY",
         "lambert": "pointCameraY"
     },
     "pz": {
+        "pointLight": "pointCameraZ",
+        "spotLight": "pointCameraZ",
+        "areaLight": "pointCameraZ",
         "lambert": "pointCameraZ"
     },
     "pw": {
+        "pointLight": "pointWorld",
+        "spotLight": "pointWorld",
         "areaLight": "pointWorld"
     },
     "psi": {
+        "pointLight": "preShadowIntensity",
+        "spotLight": "preShadowIntensity",
         "areaLight": "preShadowIntensity"
     },
     "pi": {
+        "pointLight": "primitiveId",
+        "spotLight": "primitiveId",
+        "areaLight": "primitiveId",
+        "lambert": "primitiveId",
         "file": "primitiveId"
     },
     "rd": {
+        "pointLight": "rayDepth",
+        "spotLight": "rayDepth",
+        "areaLight": "rayDepth",
         "lambert": "rayDepth"
     },
     "rdl": {
+        "pointLight": "rayDepthLimit",
+        "spotLight": "rayDepthLimit",
+        "areaLight": "rayDepthLimit",
         "lambert": "refractionLimit"
     },
     "ryi": {
+        "pointLight": "rayInstance",
+        "spotLight": "rayInstance",
+        "areaLight": "rayInstance",
         "lambert": "rayInstance"
     },
     "rts": {
+        "pointLight": "raySampler",
+        "spotLight": "raySampler",
         "areaLight": "raySampler"
     },
     "gs": {
+        "pointLight": "receiveShadows",
+        "spotLight": "receiveShadows",
         "areaLight": "receiveShadows"
     },
     "rdst": {
+        "pointLight": "renderState",
+        "spotLight": "renderState",
         "areaLight": "renderState"
     },
     "du": {
+        "pointLight": "reuseDmap",
+        "spotLight": "reuseDmap",
+        "areaLight": "reuseDmap",
         "nurbsSurface": "degreeU"
     },
     "scb": {
+        "pointLight": "shadColorB",
+        "spotLight": "shadColorB",
         "areaLight": "shadColorB"
     },
     "scg": {
+        "pointLight": "shadColorG",
+        "spotLight": "shadColorG",
         "areaLight": "shadColorG"
     },
     "scr": {
+        "pointLight": "shadColorR",
+        "spotLight": "shadColorR",
         "areaLight": "shadColorR"
     },
     "sc": {
+        "pointLight": "shadowColor",
+        "spotLight": "shadowColor",
         "areaLight": "shadowColor"
     },
     "shr": {
+        "pointLight": "shadowRays",
+        "spotLight": "shadowRays",
         "areaLight": "shadowRays"
     },
     "uu": {
+        "pointLight": "uCoord",
+        "spotLight": "uCoord",
         "areaLight": "uCoord"
     },
     "dms": {
+        "pointLight": "useDepthMapShadows",
+        "spotLight": "useDepthMapShadows",
         "areaLight": "useDepthMapShadows"
     },
     "uc": {
+        "pointLight": "useDmapAutoClipping",
+        "spotLight": "useDmapAutoClipping",
         "areaLight": "useDmapAutoClipping"
     },
     "af": {
+        "pointLight": "useDmapAutoFocus",
+        "spotLight": "useDmapAutoFocus",
         "areaLight": "useDmapAutoFocus"
     },
     "md": {
+        "pointLight": "useMidDistDmap",
+        "spotLight": "useMidDistDmap",
         "areaLight": "useMidDistDmap"
     },
     "us": {
+        "pointLight": "useOnlySingleDmap",
+        "spotLight": "useOnlySingleDmap",
         "areaLight": "useOnlySingleDmap"
     },
     "urs": {
+        "pointLight": "useRayTraceShadows",
+        "spotLight": "useRayTraceShadows",
         "areaLight": "useRayTraceShadows"
     },
     "xn": {
+        "pointLight": "useXMinusDmap",
+        "spotLight": "useXMinusDmap",
         "areaLight": "useXMinusDmap"
     },
     "xp": {
+        "pointLight": "useXPlusDmap",
+        "spotLight": "useXPlusDmap",
         "areaLight": "useXPlusDmap"
     },
     "yn": {
+        "pointLight": "useYMinusDmap",
+        "spotLight": "useYMinusDmap",
         "areaLight": "useYMinusDmap"
     },
     "yp": {
+        "pointLight": "useYPlusDmap",
+        "spotLight": "useYPlusDmap",
         "areaLight": "useYPlusDmap"
     },
     "zn": {
+        "pointLight": "useZMinusDmap",
+        "spotLight": "useZMinusDmap",
         "areaLight": "useZMinusDmap"
     },
     "zp": {
+        "pointLight": "useZPlusDmap",
+        "spotLight": "useZPlusDmap",
         "areaLight": "useZPlusDmap"
     },
     "uv": {
+        "pointLight": "uvCoord",
+        "spotLight": "uvCoord",
+        "areaLight": "uvCoord",
+        "file": "uvCoord",
         "mesh": "uvpt"
     },
     "fq": {
+        "pointLight": "uvFilterSize",
+        "spotLight": "uvFilterSize",
         "areaLight": "uvFilterSize"
     },
     "fsx": {
+        "pointLight": "uvFilterSizeX",
+        "spotLight": "uvFilterSizeX",
+        "areaLight": "uvFilterSizeX",
         "file": "uvFilterSizeX"
     },
     "fsy": {
+        "pointLight": "uvFilterSizeY",
+        "spotLight": "uvFilterSizeY",
+        "areaLight": "uvFilterSizeY",
         "file": "uvFilterSizeY"
     },
     "vv": {
+        "pointLight": "vCoord",
+        "spotLight": "vCoord",
         "areaLight": "vCoord"
     },
     "nv": {
+        "pointLight": "volumeShadowSamples",
+        "spotLight": "volumeShadowSamples",
+        "areaLight": "volumeShadowSamples",
+        "file": "noiseV",
         "nurbsSurface": "numberV"
     },
     "ws": {
+        "pointLight": "writeDmap",
+        "spotLight": "writeDmap",
+        "areaLight": "writeDmap",
+        "file": "workingSpace",
+        "nurbsCurve": "worldSpace",
         "nurbsSurface": "worldSpace"
     },
     "bd": {
@@ -28033,15 +29417,19 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "spotLight": "psIllumSamples"
     },
     "rad": {
+        "spotLight": "rayDirection",
         "lambert": "rayDirection"
     },
     "rdx": {
+        "spotLight": "rayDirectionX",
         "lambert": "rayDirectionX"
     },
     "rdy": {
+        "spotLight": "rayDirectionY",
         "lambert": "rayDirectionY"
     },
     "rdz": {
+        "spotLight": "rayDirectionZ",
         "lambert": "rayDirectionZ"
     },
     "rbd": {
@@ -28066,18 +29454,25 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "areaLight": "legacyIntensity"
     },
     "n": {
+        "areaLight": "normalCamera",
+        "lambert": "normalCamera",
+        "file": "noiseUV",
         "mesh": "normals"
     },
     "nx": {
+        "areaLight": "normalCameraX",
         "lambert": "normalCameraX"
     },
     "ny": {
+        "areaLight": "normalCameraY",
         "lambert": "normalCameraY"
     },
     "nz": {
+        "areaLight": "normalCameraZ",
         "lambert": "normalCameraZ"
     },
     "nrm": {
+        "areaLight": "normalize",
         "uvPin": "normalAxis"
     },
     "ambc": {
@@ -28138,15 +29533,29 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "lambert": "opacityDepth"
     },
     "ocb": {
+        "lambert": "outColorB",
+        "file": "outColorB",
+        "condition": "outColorB",
+        "remapValue": "outColorB",
         "remapColor": "outColorB"
     },
     "ocg": {
+        "lambert": "outColorG",
+        "file": "outColorG",
+        "condition": "outColorG",
+        "remapValue": "outColorG",
         "remapColor": "outColorG"
     },
     "ocr": {
+        "lambert": "outColorR",
+        "file": "outColorR",
+        "condition": "outColorR",
+        "remapValue": "outColorR",
+        "remapColor": "outColorR",
         "mesh": "osdCreaseMethod"
     },
     "ogc": {
+        "lambert": "outGlowColor",
         "mesh": "outGeometryClean"
     },
     "ogb": {
@@ -28171,12 +29580,15 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "lambert": "outMatteOpacityR"
     },
     "otb": {
+        "lambert": "outTransparencyB",
         "file": "outTransparencyB"
     },
     "otg": {
+        "lambert": "outTransparencyG",
         "file": "outTransparencyG"
     },
     "otr": {
+        "lambert": "outTransparencyR",
         "file": "outTransparencyR"
     },
     "pc": {
@@ -28297,6 +29709,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "file": "colorManagementEnabled"
     },
     "co": {
+        "file": "colorOffset",
         "mesh": "continuity"
     },
     "cob": {
@@ -28354,6 +29767,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "file": "fileTextureNamePattern"
     },
     "f": {
+        "file": "filter",
         "nurbsCurve": "form"
     },
     "fo": {
@@ -28375,15 +29789,22 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "file": "ignoreColorSpaceFileRules"
     },
     "i": {
+        "file": "invert",
+        "remapValue": "inputValue",
+        "blendTwoAttr": "input",
+        "multMatrix": "matrixIn",
         "mesh": "inMesh"
     },
     "mu": {
+        "file": "mirrorU",
         "nurbsSurface": "modeU"
     },
     "mv": {
+        "file": "mirrorV",
         "nurbsSurface": "modeV"
     },
     "nu": {
+        "file": "noiseU",
         "nurbsSurface": "numberU"
     },
     "of": {
@@ -28399,12 +29820,16 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "file": "outAlpha"
     },
     "os": {
+        "file": "outSize",
+        "decomposeMatrix": "outputScale",
         "mesh": "outSmoothMesh"
     },
     "osx": {
+        "file": "outSizeX",
         "decomposeMatrix": "outputScaleX"
     },
     "osy": {
+        "file": "outSizeY",
         "decomposeMatrix": "outputScaleY"
     },
     "pct": {
@@ -28456,6 +29881,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "file": "startCycleExtension"
     },
     "tf": {
+        "file": "translateFrame",
         "nurbsSurface": "trimFace"
     },
     "tfu": {
@@ -28588,6 +30014,11 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "condition": "colorIfTrueR"
     },
     "op": {
+        "condition": "operation",
+        "clamp": "output",
+        "plusMinusAverage": "operation",
+        "blendColors": "output",
+        "nurbsSurface": "opposite",
         "mesh": "opposite"
     },
     "ipb": {
@@ -28624,24 +30055,32 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "clamp": "minR"
     },
     "opb": {
+        "clamp": "outputB",
         "blendColors": "outputB"
     },
     "opg": {
+        "clamp": "outputG",
         "blendColors": "outputG"
     },
     "opr": {
+        "clamp": "outputR",
         "blendColors": "outputR"
     },
     "arp": {
+        "clamp": "renderPassMode",
+        "remapColor": "renderPassMode",
         "blendColors": "renderPassMode"
     },
     "imx": {
+        "remapValue": "inputMax",
         "remapColor": "inputMax"
     },
     "omx": {
+        "remapValue": "outputMax",
         "remapColor": "outputMax"
     },
     "omn": {
+        "remapValue": "outputMin",
         "remapColor": "outputMin"
     },
     "vl": {
@@ -28666,6 +30105,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "uvPin": "originalGeometry"
     },
     "omat": {
+        "uvPin": "outputMatrix",
+        "inverseMatrix": "outputMatrix",
         "blendMatrix": "outputMatrix"
     },
     "rlcrv": {
@@ -28738,6 +30179,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendColors": "color2R"
     },
     "imat": {
+        "decomposeMatrix": "inputMatrix",
+        "inverseMatrix": "inputMatrix",
         "blendMatrix": "inputMatrix"
     },
     "oq": {
@@ -28807,168 +30250,259 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "target"
     },
     "adot": {
+        "nurbsCurve": "alwaysDrawOnTop",
         "mesh": "alwaysDrawOnTop"
     },
     "gal": {
+        "nurbsCurve": "antialiasingLevel",
+        "nurbsSurface": "antialiasingLevel",
         "mesh": "antialiasingLevel"
     },
     "asbg": {
+        "nurbsCurve": "asBackground",
+        "nurbsSurface": "asBackground",
         "mesh": "asBackground"
     },
     "bn": {
+        "nurbsCurve": "blindDataNodes",
+        "nurbsSurface": "blindDataNodes",
         "mesh": "blindDataNodes"
     },
     "cc": {
+        "nurbsCurve": "cached",
         "nurbsSurface": "cached"
     },
     "csh": {
+        "nurbsCurve": "castsShadows",
+        "nurbsSurface": "castsShadows",
         "mesh": "castsShadows"
     },
     "clst": {
+        "nurbsCurve": "colorSet",
+        "nurbsSurface": "colorSet",
         "mesh": "colorSet"
     },
     "ciog": {
+        "nurbsCurve": "compInstObjGroups",
+        "nurbsSurface": "compInstObjGroups",
         "mesh": "compInstObjGroups"
     },
     "gtag": {
+        "nurbsCurve": "componentTags",
+        "nurbsSurface": "componentTags",
         "mesh": "componentTags"
     },
     "ccls": {
+        "nurbsCurve": "currentColorSet",
+        "nurbsSurface": "currentColorSet",
         "mesh": "currentColorSet"
     },
     "cuvs": {
+        "nurbsCurve": "currentUVSet",
+        "nurbsSurface": "currentUVSet",
         "mesh": "currentUVSet"
     },
     "d": {
+        "nurbsCurve": "degree",
         "nurbsSurface": "degreeUV"
     },
     "dej": {
+        "nurbsCurve": "depthJitter",
+        "nurbsSurface": "depthJitter",
         "mesh": "depthJitter"
     },
     "dcv": {
+        "nurbsCurve": "dispCV",
         "nurbsSurface": "dispCV"
     },
     "dce": {
         "nurbsCurve": "dispCurveEndPoints"
     },
     "dg": {
+        "nurbsCurve": "dispGeometry",
         "nurbsSurface": "dispGeometry"
     },
     "dcc": {
+        "nurbsCurve": "displayColorChannel",
+        "nurbsSurface": "displayColorChannel",
         "mesh": "displayColorChannel"
     },
     "dcol": {
+        "nurbsCurve": "displayColors",
+        "nurbsSurface": "displayColors",
         "mesh": "displayColors"
     },
     "di": {
+        "nurbsCurve": "displayImmediate",
+        "nurbsSurface": "displayImmediate",
         "mesh": "displayImmediate"
     },
     "eps": {
         "nurbsCurve": "editPoints"
     },
     "gao": {
+        "nurbsCurve": "geometryAntialiasingOverride",
+        "nurbsSurface": "geometryAntialiasingOverride",
         "mesh": "geometryAntialiasingOverride"
     },
     "hfm": {
+        "nurbsCurve": "hardwareFogMultiplier",
+        "nurbsSurface": "hardwareFogMultiplier",
         "mesh": "hardwareFogMultiplier"
     },
     "hd": {
+        "nurbsCurve": "header",
         "nurbsSurface": "header"
     },
     "iss": {
+        "nurbsCurve": "ignoreSelfShadowing",
+        "nurbsSurface": "ignoreSelfShadowing",
         "mesh": "ignoreSelfShadowing"
     },
     "ipo": {
+        "nurbsCurve": "inPlace",
         "nurbsSurface": "inPlace"
     },
     "imtla": {
+        "nurbsCurve": "instMaterialAssign",
+        "nurbsSurface": "instMaterialAssign",
         "mesh": "instMaterialAssign"
     },
     "l": {
+        "nurbsCurve": "local",
         "nurbsSurface": "local"
     },
     "msa": {
+        "nurbsCurve": "maxShadingSamples",
+        "nurbsSurface": "maxShadingSamples",
         "mesh": "maxShadingSamples"
     },
     "max": {
         "nurbsCurve": "maxValue"
     },
     "mvs": {
+        "nurbsCurve": "maxVisibilitySamples",
+        "nurbsSurface": "maxVisibilitySamples",
         "mesh": "maxVisibilitySamples"
     },
     "vbo": {
+        "nurbsCurve": "maxVisibilitySamplesOverride",
+        "nurbsSurface": "maxVisibilitySamplesOverride",
         "mesh": "maxVisibilitySamplesOverride"
     },
     "mmv": {
+        "nurbsCurve": "minMaxValue",
         "nurbsSurface": "minMaxRangeV"
     },
     "min": {
         "nurbsCurve": "minValue"
     },
     "pte": {
+        "nurbsCurve": "pickTexture",
+        "nurbsSurface": "pickTexture",
         "mesh": "pickTexture"
     },
     "vis": {
+        "nurbsCurve": "primaryVisibility",
+        "nurbsSurface": "primaryVisibility",
         "mesh": "primaryVisibility"
     },
     "rcsh": {
+        "nurbsCurve": "receiveShadows",
+        "nurbsSurface": "receiveShadows",
         "mesh": "receiveShadows"
     },
     "rob": {
+        "nurbsCurve": "referenceObject",
+        "nurbsSurface": "referenceObject",
         "mesh": "referenceObject"
     },
     "rtw": {
+        "nurbsCurve": "relativeTweak",
+        "nurbsSurface": "relativeTweak",
         "mesh": "relativeTweak"
     },
     "rt": {
+        "nurbsCurve": "renderType",
+        "nurbsSurface": "renderType",
         "mesh": "renderType"
     },
     "rv": {
+        "nurbsCurve": "renderVolume",
+        "nurbsSurface": "renderVolume",
         "mesh": "renderVolume"
     },
     "ssa": {
+        "nurbsCurve": "shadingSamples",
+        "nurbsSurface": "shadingSamples",
         "mesh": "shadingSamples"
     },
     "sso": {
+        "nurbsCurve": "shadingSamplesOverride",
+        "nurbsSurface": "shadingSamplesOverride",
         "mesh": "shadingSamplesOverride"
     },
     "tw": {
+        "nurbsCurve": "tweak",
+        "nurbsSurface": "tweak",
         "mesh": "tweak"
     },
     "twl": {
+        "nurbsCurve": "tweakLocation",
+        "nurbsSurface": "tweakLocation",
         "mesh": "tweakLocation"
     },
     "ts": {
         "nurbsCurve": "tweakSize"
     },
     "pv": {
+        "nurbsCurve": "uvPivot",
+        "nurbsSurface": "uvPivot",
         "mesh": "uvPivot"
     },
     "pvx": {
+        "nurbsCurve": "uvPivotX",
+        "nurbsSurface": "uvPivotX",
         "mesh": "uvPivotX"
     },
     "pvy": {
+        "nurbsCurve": "uvPivotY",
+        "nurbsSurface": "uvPivotY",
         "mesh": "uvPivotY"
     },
     "uvst": {
+        "nurbsCurve": "uvSet",
+        "nurbsSurface": "uvSet",
         "mesh": "uvSet"
     },
     "vf": {
+        "nurbsCurve": "visibleFraction",
+        "nurbsSurface": "visibleFraction",
         "mesh": "visibleFraction"
     },
     "vir": {
+        "nurbsCurve": "visibleInReflections",
+        "nurbsSurface": "visibleInReflections",
         "mesh": "visibleInReflections"
     },
     "vif": {
+        "nurbsCurve": "visibleInRefractions",
+        "nurbsSurface": "visibleInRefractions",
         "mesh": "visibleInRefractions"
     },
     "vss": {
+        "nurbsCurve": "volumeSamples",
+        "nurbsSurface": "volumeSamples",
         "mesh": "volumeSamples"
     },
     "vso": {
+        "nurbsCurve": "volumeSamplesOverride",
+        "nurbsSurface": "volumeSamplesOverride",
         "mesh": "volumeSamplesOverride"
     },
     "wt": {
+        "nurbsCurve": "weights",
+        "nurbsSurface": "weights",
         "mesh": "weights"
     },
     "wn": {
@@ -28978,15 +30512,19 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "basicTessellationType"
     },
     "bbs": {
+        "nurbsSurface": "boundingBoxScale",
         "mesh": "boundingBoxScale"
     },
     "bscx": {
+        "nurbsSurface": "boundingBoxScaleX",
         "mesh": "boundingBoxScaleX"
     },
     "bscy": {
+        "nurbsSurface": "boundingBoxScaleY",
         "mesh": "boundingBoxScaleY"
     },
     "bscz": {
+        "nurbsSurface": "boundingBoxScaleZ",
         "mesh": "boundingBoxScaleZ"
     },
     "ch": {
@@ -28996,15 +30534,19 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "chordHeightRatio"
     },
     "cdvi": {
+        "nurbsSurface": "collisionDepthVelocityIncrement",
         "mesh": "collisionDepthVelocityIncrement"
     },
     "cdvm": {
+        "nurbsSurface": "collisionDepthVelocityMultiplier",
         "mesh": "collisionDepthVelocityMultiplier"
     },
     "covi": {
+        "nurbsSurface": "collisionOffsetVelocityIncrement",
         "mesh": "collisionOffsetVelocityIncrement"
     },
     "covm": {
+        "nurbsSurface": "collisionOffsetVelocityMultiplier",
         "mesh": "collisionOffsetVelocityMultiplier"
     },
     "cvto": {
@@ -29017,6 +30559,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "curvePrecisionShaded"
     },
     "dv": {
+        "nurbsSurface": "degreeV",
         "mesh": "displayVertices"
     },
     "dor": {
@@ -29026,6 +30569,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "dispSF"
     },
     "dhe": {
+        "nurbsSurface": "displayHWEnvironment",
         "mesh": "displayHWEnvironment"
     },
     "drt": {
@@ -29044,9 +30588,11 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "explicitTessellationAttributes"
     },
     "xsr": {
+        "nurbsSurface": "extraSampleRate",
         "mesh": "extraSampleRate"
     },
     "fbda": {
+        "nurbsSurface": "featureDisplacement",
         "mesh": "featureDisplacement"
     },
     "ftwp": {
@@ -29065,12 +30611,15 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "gridDivisionPerSpanV"
     },
     "hot": {
+        "nurbsSurface": "holdOut",
         "mesh": "holdOut"
     },
     "ih": {
+        "nurbsSurface": "ignoreHwShader",
         "mesh": "ignoreHwShader"
     },
     "dsr": {
+        "nurbsSurface": "initialSampleRate",
         "mesh": "initialSampleRate"
     },
     "mxu": {
@@ -29083,6 +30632,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "minMaxRangeU"
     },
     "mns": {
+        "nurbsSurface": "minScreen",
         "mesh": "minScreen"
     },
     "mnu": {
@@ -29092,6 +30642,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "minValueV"
     },
     "nat": {
+        "nurbsSurface": "normalThreshold",
         "mesh": "normalThreshold"
     },
     "ndf": {
@@ -29125,6 +30676,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "smoothEdgeRatio"
     },
     "smo": {
+        "nurbsSurface": "smoothShading",
         "mesh": "smoothShading"
     },
     "su": {
@@ -29149,6 +30701,7 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "nurbsSurface": "useChordHeightRatio"
     },
     "uns": {
+        "nurbsSurface": "useMinScreen",
         "mesh": "useMinScreen"
     },
     "nvfa": {

@@ -126,7 +126,9 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.dagmod.doIt()
         
         fn_dep = om.MFnDependencyNode(transform)
-        tx_plug = fn_dep.findPlug("translateX", False)
+        translatex_plug = fn_dep.findPlug("translateX", False)
+        tx_plug = fn_dep.findPlug("tx", False)
+        self.assertIsInstance(translatex_plug, om.MPlug)
         self.assertIsInstance(tx_plug, om.MPlug)
 
     def test_plug_values(self):

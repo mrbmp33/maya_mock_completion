@@ -13,7 +13,7 @@ def _register_node_from_name(node_name:str) -> om.MObject:
         sl_ls = om.MSelectionList()
         sl_ls.add(node_name)
         mobject = sl_ls.getDependNode(0)
-        _hierarchy.NodePool.register(mobject)
+        _hierarchy.register(mobject)
     return mobject
 
 
