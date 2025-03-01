@@ -14,20 +14,27 @@ class NodePoolMeta(type):
     _node_instances: typing.MutableMapping[int, 'om.MObject'] = {}
 
     @classmethod
-    def __setitem__(cls, node: 'om.MObject'):
+    def __setitem__(cls, node: 'om.MObject', use_path: bool = False):
+        if use_path:
+            cls._node_instances[hash(node._path_str())] = node
         cls._node_instances[hash(node._name)] = node
 
     @classmethod
-    def __add__(cls, node: 'om.MObject'):
+    def __add__(cls, node: 'om.MObject', use_path: bool = False):
+        if use_path:
+            cls._node_instances[hash(node._path_str())] = node
         cls._node_instances[hash(node._name)] = node
 
     @classmethod
-    def add_object(cls, node: 'om.MObject'):
-        cls.__add__(node)
+    def add_object(cls, node: 'om.MObject', use_path: bool = False):
+        cls.__add__(node, use_path=use_path)
 
     @classmethod
     def __getitem__(cls, node: 'om.MObject') -> 'om.MObject':
-        return cls._node_instances[hash(node._name)]
+        return cls._node_instances.get(
+            hash(node._name),
+            cls._node_instances.get(hash(node._path_str()))
+        )
 
     @classmethod
     def get_node(cls, node: 'om.MObject') -> 'om.MObject':
@@ -47,10 +54,13 @@ class NodePoolMeta(type):
 
     @classmethod
     def object_exists(cls, node: 'om.MObject') -> bool:
-        nd = cls._node_instances.get(hash(node._name))
+        nd = cls._node_instances.get(
+            hash(node._name),
+            cls._node_instances.get(hash(node._path_str()))
+        )
         if nd is None:
             return False
-        return nd._alive
+        return True
 
     @classmethod
     def hash_exists(cls, hash_num: int) -> bool:
@@ -76,15 +86,44 @@ class NodePool(metaclass=NodePoolMeta):
 
 # noinspection PyProtectedMember
 def register(node: 'om.MObject'):
-    """Registers a node from its MObject into the node pool and builds the hierarchy"""
+    """Registers a node from its MObject into the node pool and builds the hierarchy.
+    
+    Looks first for possible matches in the pool. If a match is found, it will compare the paths
+    of the nodes. If paths are different, it will use full path as key.
+    """
 
-    # Put inside pool
-    NodePool.add_object(node)
+    # If not in the pool, add it normally. Fast return
+    if not NodePool.object_exists(node):
+        NodePool.add_object(node)
+        return
+
+    old_node = NodePool.get_node(node)
+    old_path = old_node._path_str()
+    new_path = node._path_str()
+
+    # Check if the paths are the same
+    if old_path == new_path:
+        if old_node._uuid == node._uuid:  # same node
+            return
+        else:  # same path, different node
+            raise ValueError(f"Node with same path already exists in the pool: {old_node._name}")
+
+    # If the paths are different, use the full path as key
+    else:
+        # Remove the old node from the pool and add both using the full path as key
+        NodePool.remove_object(old_node)
+        NodePool.add_object(node, use_path=True)
+        NodePool.add_object(old_node, use_path=True)
 
 
 def deregister(node: 'om.MObject'):
     """Removes a node from the registry and hierarchy"""
-    NodePool.remove_object(node)
+    if NodePool.object_exists(node):
+        NodePool.remove_object(node)
+    else:
+        # Try to get the node by its path
+        if NodePool.hash_exists(hash(node._path_str())):
+            NodePool.remove_object(node)
 
 
 def find_first_available_name(name: str, parent_name: str = None) -> str:
@@ -103,7 +142,9 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
 
         as_node = NodePool.from_name(name)
 
-        if not as_node._parent:
+        if as_node._parent is None:
+            ...
+        elif as_node._parent.apiTypeStr == 'kWorld':
             ...
         elif NodePool.from_name(name)._parent._name != parent_name:
             base_name = f'{parent_name or ""}|{base_name}'

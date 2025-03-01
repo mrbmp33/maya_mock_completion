@@ -121,6 +121,41 @@ class TestMayaMockCompletion(unittest.TestCase):
         dag_path = om.MDagPath.getAPathTo(parent)
         self.assertEqual(dag_path.childCount(), 2)
  
+    def test_node_registration_unique_path(self):
+        parent1 = self.dagmod.createNode("transform")
+        self.dagmod.renameNode(parent1, "parent1")
+        child1 = self.dagmod.createNode("transform", parent=parent1)
+        self.dagmod.renameNode(child1, "child")
+
+        parent2 = self.dagmod.createNode("transform")
+        self.dagmod.renameNode(parent2, "parent2")
+        child2_1 = self.dagmod.createNode("transform", parent=parent2)
+        self.dagmod.renameNode(child2_1, "child")
+        child2_2 = self.dagmod.createNode("transform", parent=parent2)
+        self.dagmod.renameNode(child2_2, "child")
+
+        transform1 = self.dagmod.createNode("transform")
+        child3 = self.dagmod.createNode("transform", parent=transform1)
+        self.dagmod.renameNode(child3, "child")
+
+        self.dagmod.doIt()
+        
+        self.assertEqual(om.MFnDependencyNode(transform1).name(), "transform1")
+        self.assertEqual(om.MFnDependencyNode(parent1).name(), "parent1")
+        self.assertEqual(om.MFnDependencyNode(child1).name(), "child")
+        self.assertEqual(om.MFnDependencyNode(parent2).name(), "parent2")
+        self.assertEqual(om.MFnDependencyNode(child2_1).name(), "child")
+        self.assertEqual(om.MFnDependencyNode(child2_2).name(), "child1")
+        self.assertEqual(om.MFnDependencyNode(child3).name(), "child")
+
+        if HOST() == "python":
+            from maya import mmc_hierarchy as hierarchy
+            self.assertTrue(hierarchy.NodePool.object_exists(child1))
+            self.assertTrue(hierarchy.NodePool.object_exists(child2_1))
+
+            self.assertTrue(hierarchy.NodePool.hash_exists(hash(child1._path_str())))
+            self.assertTrue(hierarchy.NodePool.hash_exists(hash(child2_1._path_str())))
+
     def test_find_plug(self):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
@@ -205,6 +240,19 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertTrue(transform.isNull() == False)
         if self.host == "python":
             self.assertTrue(hierarchy.NodePool.object_exists(transform))
+
+    def test_create_node_with_shape(self):
+        transform = self.dagmod.createNode("transform")
+        self.dagmod.doIt()
+        cam = self.dagmod.createNode("camera", parent=transform)
+        self.dagmod.doIt()
+
+        self.assertTrue(cam.isNull() == False)
+
+        cam_fn = om.MFnDagNode(cam)
+        transform_fn = om.MFnDagNode(transform)
+        self.assertEqual(transform_fn.childCount(), 1)
+        self.assertEqual(om.MFnDagNode(cam_fn.parent(0)).fullPathName(), transform_fn.fullPathName())
 
 
 class TestCmds(unittest.TestCase):

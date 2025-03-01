@@ -1892,20 +1892,27 @@ class MDGModifier(object):
                 mobject: 'MObject' = action[1]
                 mobject._alive = True
                 hierarchy.register(mobject)
+            
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
                 mobject._alive = False
                 if mobject._parent:
                     mobject._parent._children.remove(mobject)
                 hierarchy.deregister(mobject)
+            
             elif action[0] == 'rename':
                 mobject: 'MObject' = action[1]
+                hierarchy.deregister(mobject)  # deregister old name
                 mobject._name = action[2]
+                hierarchy.register(mobject)
+            
             elif action[0] == 'reparent':
                 mobject: 'MObject' = action[1]
                 mobject._parent._children.remove(mobject)
                 mobject._parent = action[2]
                 mobject._parent._children.append(mobject)
+                hierarchy.register(mobject)  # ensure path is updated
+            
             elif action[0] == 'connect':
                 if len(action) == 3:
                     source_plug: MPlug = action[1]
@@ -1923,6 +1930,7 @@ class MDGModifier(object):
                     # Add connection to cached connections
                     dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
                     source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
+            
             elif action[0] == 'disconnect':
                 if len(action) == 3:
                     source_plug: MPlug = action[1]
@@ -1940,16 +1948,19 @@ class MDGModifier(object):
                     # Remove connection from cached connections
                     del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
                     del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
+            
             elif action[0] == 'addAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
                 attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
                 node._attributes[attr_id] = attribute
+            
             elif action[0] == 'removeAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
                 attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
                 del node._attributes[attr_id]
+            
             elif action[0] == 'renameAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
@@ -2164,7 +2175,23 @@ class MDGModifier(object):
 
         Adds an operation to the modifer to rename a node.
         """
-        self._queue.append(('rename', node, newName, node._name))
+        parent_path = None
+        if node._parent:
+            parent_path = node._parent._path_str()
+
+        new_name = hierarchy.find_first_available_name(
+            newName,
+            parent_name=parent_path
+            )
+        new_name = new_name.split('|')[-1]
+
+        self._queue.append(('rename', node, new_name, node._name))  # command, node, new name, old name
+        
+        # Update name already to generate new names with updated namespace
+        hierarchy.deregister(node)
+        node._name = new_name
+        hierarchy.register(node)
+        
         return self
 
     def setNodeLockState(*args, **kwargs):
@@ -2192,22 +2219,33 @@ class MDGModifier(object):
                 mobject._alive = False
                 mobject._parent._children.remove(mobject)
                 hierarchy.deregister(mobject)
+            
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
                 mobject._alive = True
                 hierarchy.register(mobject)
+            
             elif action[0] == 'rename':
                 mobject: 'MObject' = action[1]
+                hierarchy.deregister(mobject)  # deregister new name
                 mobject._name = action[3]
+                hierarchy.register(mobject)  # register old name
+            
             elif action[0] == 'reparent':
                 mobject: 'MObject' = action[1]
+                mobject._parent._children.remove(mobject)
+                hierarchy.deregister(mobject)  # deregister new path
                 mobject._parent = action[3]
+                mobject._parent._children.append(mobject)
+                hierarchy.register(mobject)  # register old path. Ensure path is updated
+            
             elif action[0] == 'connect':
                 source_plug: MPlug = action[1]
                 dest_plug: MPlug = action[2]
                 # Remove connection from cached connections
                 del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
                 del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
+            
             elif action[0] == 'disconnect':
                 if len(action) == 3:
                     source_plug: MPlug = action[1]
@@ -2225,15 +2263,18 @@ class MDGModifier(object):
                     # Add connection to cached connections
                     dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
                     source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
+            
             elif action[0] == 'addAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
                 del node._attributes[_get_attribute_id(f'{node._name}.{attribute._long_name}')]
+            
             elif action[0] == 'removeAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
                 attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
                 node._attributes[attr_id] = attribute
+            
             elif action[0] == 'renameAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
@@ -13396,7 +13437,11 @@ class MObject(object):
         pass
 
     def __repr__(self):
-        return f'MObject <{self.apiTypeStr}>; name = {self._name}'
+        if hierarchy.NodePool.hash_exists(hash(self._path_str())):
+            key = self._path_str()
+        else:
+            key = self._name
+        return f'MObject <{self.apiTypeStr}>; name = {key}'
 
     def apiType(self) -> int:
         """
@@ -13439,6 +13484,13 @@ class MObject(object):
     @classmethod
     def kNullObj(cls) -> 'MObject':
         return MObject()
+
+    def _path_str(self) -> str:
+        dag_path = MDagPath.getAPathTo(self)
+        ancestors = [x._name for x in dag_path._iter_ancestors() or ()]
+        ancestors.reverse()
+        ancestors.append(self._name)
+        return "|" + "|".join(ancestors)
 
 
 class MFloatPointArray(object):
@@ -23700,30 +23752,36 @@ class MFnDagNode(MFnDependencyNode):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(mobject)
+    
+        if self._mobject:
+            self._dag_path = _initialize_dag_path_from_mobject(self._mobject)
+        else:
+            self._dag_path = None
 
-    def addChild(*args, **kwargs):
+
+    def addChild(self, node: 'MObject', index: int = -1, keepExistingParents=False) -> 'MObject':
         """
         addChild(node, index=kNextPos, keepExistingParents=False) -> self
 
         Makes a node a child of this one.
         """
-        pass
+        self._mobject._children.insert(index, node)
 
-    def child(*args, **kwargs):
+    def child(self, index: int) -> 'MObject':
         """
         child(index) -> MObject
 
         Returns the specified child of this node.
         """
-        pass
+        return self._mobject._children[index]
 
-    def childCount(*args, **kwargs):
+    def childCount(self) -> int:
         """
         childCount() -> int
 
         Returns the number of nodes which are children of this one.
         """
-        pass
+        return len(self._mobject._children)
 
     def create(self, node_type: Union[str, MTypeId], name: Optional[str] = None,
                parent: Optional[MObject] = None) -> MObject:
@@ -23757,15 +23815,17 @@ class MFnDagNode(MFnDependencyNode):
         else:
             mobject._parent = WORLD
 
+        self._dag_path = _initialize_dag_path_from_mobject(mobject)
+
         return mobject
 
-    def dagPath(*args, **kwargs):
+    def dagPath(self, *args, **kwargs) -> 'MDagPath':
         """
         dagPath() -> MDagPath
 
         Returns the DAG path to which this function set is attached. Raises a TypeError if the function set is attached to an MObject rather than a path.
         """
-        pass
+        return self._dag_path
 
     def dagRoot(self):
         """
@@ -23773,7 +23833,7 @@ class MFnDagNode(MFnDependencyNode):
 
         Returns the root node of the first path leading to this node.
         """
-        pass
+        return next(self._dag_path._iter_ancestors())
 
     def duplicate(*args, **kwargs):
         """
@@ -23783,13 +23843,13 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def fullPathName(*args, **kwargs):
+    def fullPathName(self) -> str:
         """
         fullPathName() -> string
 
         Returns the full path of the attached object, from the root of the DAG on down.
         """
-        pass
+        return self._dag_path.fullPathName()
 
     def getAllPaths(*args, **kwargs):
         """
@@ -23817,7 +23877,6 @@ class MFnDagNode(MFnDependencyNode):
         dag_path = MDagPath()
         dag_path._node = self._mobject
         return dag_path
-
 
     def hasChild(*args, **kwargs):
         """
