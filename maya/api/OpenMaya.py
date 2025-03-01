@@ -13418,6 +13418,12 @@ class MObject(object):
         self._matrix_type: int = MFnMatrixData.kMatrix
         self._matrix: MMatrix | None = None
 
+    def _init_enum_fields(self):
+        self._enum_items = {}
+        self._default = 0
+        self._min = 0
+        self._max = 0
+
     def __le__(*args, **kwargs):
         """
         x.__le__(y) <==> x<=y
@@ -22614,21 +22620,27 @@ class MFnDependencyNode(MFnBase):
             MFn.kMatrixAttribute: MObject._init_matrix_fields,
             MFn.kFloatMatrixAttribute: MObject._init_matrix_fields,
             MFn.kMessageAttribute: None,
-            MFn.kEnumAttribute: None,
+            MFn.kEnumAttribute: MObject._init_enum_fields,
         }
         
         intializer = _MAYA_ATTRIBUTE_TYPES_TO_FN_MAP.get(attr_type)
         if intializer:
             intializer(attribute)
         
-        # Only for numeric attributes
+        # Only for numeric attributes  ( and Enum )
         if properties.get('numeric_type') is not None:
             attribute._numeric_type = properties['numeric_type']
         
         if properties.get('default_value') is not None:
             attribute._default = properties['default_value']
             attribute._value = properties['default_value']
-        
+
+        if properties.get('min_value') is not None:
+            attribute._min = properties['min_value']
+
+        if properties.get('max_value') is not None:
+            attribute._max = properties['max_value']
+            
         # For Unit Attributes like distance, angle, time...
         if properties.get('unit_type') is not None:
             attribute._unit_type = properties['unit_type']
@@ -23351,13 +23363,12 @@ class MFnEnumAttribute(MFnAttribute):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super().__init__(*args, **kwargs)
-        self._enum_items = {}
 
     def addField(self, name: str, value: int) -> 'MFnEnumAttribute':
         """
         Add an item to the enumeration with a specified UI name and corresponding attribute value.
         """
-        self._enum_items[name] = value
+        self._mobject._enum_items[name] = value
         return self
 
     def create(self, long_name: str, short_name: str, default: int = 0) -> 'MObject':
@@ -23366,15 +23377,18 @@ class MFnEnumAttribute(MFnAttribute):
         """
         super()._create(long_name=long_name, short_name=short_name)
         self._mobject._api_type.append(MFn.kEnumAttribute)
+        
+        self._mobject._init_enum_fields()
         self._mobject._default = default
         self._mobject._value = default
+        
         return self._mobject
 
     def fieldName(self, value: int) -> str:
         """
         Returns the name of the enumeration item which has a given value.
         """
-        for name, val in self._enum_items.items():
+        for name, val in self._mobject._enum_items.items():
             if val == value:
                 return name
         raise ValueError(f"No field with value {value}")
@@ -23383,25 +23397,25 @@ class MFnEnumAttribute(MFnAttribute):
         """
         Returns the value of the enumeration item which has a given name.
         """
-        if name in self._enum_items:
-            return self._enum_items[name]
+        if name in self._mobject._enum_items:
+            return self._mobject._enum_items[name]
         raise ValueError(f"No field with name {name}")
 
     def getMax(self) -> int:
         """
         Returns the maximum value of all the enumeration items.
         """
-        if not self._enum_items:
+        if not self._mobject._enum_items:
             raise ValueError("No fields in the enumeration")
-        return max(self._enum_items.values())
+        return max(self._mobject._enum_items.values())
 
     def getMin(self) -> int:
         """
         Returns the minimum value of all the enumeration items.
         """
-        if not self._enum_items:
+        if not self._mobject._enum_items:
             raise ValueError("No fields in the enumeration")
-        return min(self._enum_items.values())
+        return min(self._mobject._enum_items.values())
 
     def setDefaultByName(self, name: str) -> 'MFnEnumAttribute':
         """
@@ -23412,11 +23426,11 @@ class MFnEnumAttribute(MFnAttribute):
 
     @property
     def default(self) -> int:
-        return self._default
+        return self._mobject._default
 
     @default.setter
     def default(self, value: int):
-        self._default = value
+        self._mobject._default = value
 
 
 class MFnTypedAttribute(MFnAttribute):

@@ -19,7 +19,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "borderConnections": {
             "short_name": "boc",
@@ -229,7 +231,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -305,7 +309,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayLocalAxis": {
             "short_name": "dla",
@@ -315,7 +321,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayRotatePivot": {
             "short_name": "drp",
@@ -325,7 +333,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayScalePivot": {
             "short_name": "dsp",
@@ -335,7 +345,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "drawOverride": {
             "short_name": "do",
@@ -368,7 +380,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -378,7 +392,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "geometry": {
             "short_name": "g",
@@ -411,7 +427,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -422,7 +440,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -433,7 +453,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -458,7 +480,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -469,7 +493,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -480,7 +506,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -513,7 +541,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -533,7 +563,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -578,7 +610,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -588,7 +622,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -607,7 +643,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -617,7 +654,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -628,7 +667,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -666,7 +707,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "instObjGroups": {
             "short_name": "iog",
@@ -685,7 +728,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -704,7 +749,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -715,7 +762,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -725,7 +774,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -736,7 +787,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -747,7 +800,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -757,7 +812,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -816,7 +873,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxRotYLimit": {
             "short_name": "xryl",
@@ -838,7 +897,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxRotZLimit": {
             "short_name": "xrzl",
@@ -860,7 +921,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxScaleLimit": {
             "short_name": "mxsl",
@@ -910,7 +973,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxScaleYLimit": {
             "short_name": "xsyl",
@@ -932,7 +997,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxScaleZLimit": {
             "short_name": "xszl",
@@ -954,7 +1021,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxTransLimit": {
             "short_name": "mxtl",
@@ -1004,7 +1073,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxTransYLimit": {
             "short_name": "xtyl",
@@ -1026,7 +1097,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxTransZLimit": {
             "short_name": "xtzl",
@@ -1048,7 +1121,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "message": {
             "short_name": "msg",
@@ -1106,7 +1181,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minRotYLimit": {
             "short_name": "mryl",
@@ -1128,7 +1205,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minRotZLimit": {
             "short_name": "mrzl",
@@ -1150,7 +1229,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minScaleLimit": {
             "short_name": "mnsl",
@@ -1200,7 +1281,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minScaleYLimit": {
             "short_name": "msyl",
@@ -1222,7 +1305,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minScaleZLimit": {
             "short_name": "mszl",
@@ -1244,7 +1329,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minTransLimit": {
             "short_name": "mntl",
@@ -1294,7 +1381,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minTransYLimit": {
             "short_name": "mtyl",
@@ -1316,7 +1405,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minTransZLimit": {
             "short_name": "mtzl",
@@ -1338,7 +1429,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "objectColor": {
             "short_name": "oc",
@@ -1348,7 +1441,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -1461,7 +1556,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -1472,7 +1569,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -1540,7 +1639,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -1560,7 +1661,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -1571,7 +1674,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -1582,7 +1687,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -1593,7 +1700,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -1604,7 +1713,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -2118,7 +2229,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shear": {
             "short_name": "sh",
@@ -2192,7 +2305,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -2332,7 +2447,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "viewMode": {
             "short_name": "vwm",
@@ -2359,7 +2476,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -2700,7 +2819,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "blackBox": {
             "short_name": "bbx",
@@ -2710,7 +2831,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "borderConnections": {
             "short_name": "boc",
@@ -2920,7 +3043,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -2996,7 +3121,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayLocalAxis": {
             "short_name": "dla",
@@ -3006,7 +3133,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayRotatePivot": {
             "short_name": "drp",
@@ -3016,7 +3145,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayScalePivot": {
             "short_name": "dsp",
@@ -3026,7 +3157,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dofMask": {
             "short_name": "dm",
@@ -3046,7 +3179,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "drawOverride": {
             "short_name": "do",
@@ -3087,7 +3222,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "fkRotate": {
             "short_name": "fkr",
@@ -3144,7 +3281,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "geometry": {
             "short_name": "g",
@@ -3177,7 +3316,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -3188,7 +3329,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -3199,7 +3342,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -3224,7 +3369,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -3235,7 +3382,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -3246,7 +3395,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -3279,7 +3430,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -3299,7 +3452,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -3344,7 +3499,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -3354,7 +3511,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -3373,7 +3532,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -3383,7 +3543,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -3394,7 +3556,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hikFkJoint": {
             "short_name": "hfk",
@@ -3497,7 +3661,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inheritsTransform": {
             "short_name": "it",
@@ -3507,7 +3673,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "instObjGroups": {
             "short_name": "iog",
@@ -3526,7 +3694,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -3592,7 +3762,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -3603,7 +3775,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -3613,7 +3787,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "isIKDirtyFlag": {
             "short_name": "idf",
@@ -3623,7 +3799,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "jointOrient": {
             "short_name": "jo",
@@ -3698,7 +3876,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "jointTypeY": {
             "short_name": "jty",
@@ -3708,7 +3888,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "jointTypeZ": {
             "short_name": "jtz",
@@ -3718,7 +3900,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -3729,7 +3913,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -3740,7 +3926,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -3750,7 +3938,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -3809,7 +3999,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxRotYLimit": {
             "short_name": "xryl",
@@ -3831,7 +4023,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxRotZLimit": {
             "short_name": "xrzl",
@@ -3853,7 +4047,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxRotateDampRange": {
             "short_name": "xdr",
@@ -3997,7 +4193,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxScaleYLimit": {
             "short_name": "xsyl",
@@ -4019,7 +4217,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxScaleZLimit": {
             "short_name": "xszl",
@@ -4041,7 +4241,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxTransLimit": {
             "short_name": "mxtl",
@@ -4091,7 +4293,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxTransYLimit": {
             "short_name": "xtyl",
@@ -4113,7 +4317,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maxTransZLimit": {
             "short_name": "xtzl",
@@ -4135,7 +4341,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "message": {
             "short_name": "msg",
@@ -4193,7 +4401,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minRotYLimit": {
             "short_name": "mryl",
@@ -4215,7 +4425,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minRotZLimit": {
             "short_name": "mrzl",
@@ -4237,7 +4449,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minRotateDampRange": {
             "short_name": "ndr",
@@ -4381,7 +4595,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minScaleYLimit": {
             "short_name": "msyl",
@@ -4403,7 +4619,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minScaleZLimit": {
             "short_name": "mszl",
@@ -4425,7 +4643,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minTransLimit": {
             "short_name": "mntl",
@@ -4475,7 +4695,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minTransYLimit": {
             "short_name": "mtyl",
@@ -4497,7 +4719,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minTransZLimit": {
             "short_name": "mtzl",
@@ -4519,7 +4743,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "objectColor": {
             "short_name": "oc",
@@ -4529,7 +4755,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -4651,7 +4879,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -4662,7 +4892,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -4730,7 +4962,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -4750,7 +4984,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -4761,7 +4997,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -4772,7 +5010,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -4783,7 +5023,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -4794,7 +5036,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -5318,7 +5562,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "selectHandle": {
             "short_name": "hdl",
@@ -5375,7 +5621,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shear": {
             "short_name": "sh",
@@ -5504,7 +5752,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -5652,7 +5902,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "viewMode": {
             "short_name": "vwm",
@@ -5679,7 +5931,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -5776,7 +6030,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -5786,7 +6042,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "input1": {
             "short_name": "i1",
@@ -5816,7 +6074,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -5846,7 +6106,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "backgroundColor": {
             "short_name": "col",
@@ -5903,7 +6165,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "binMembership": {
             "short_name": "bnm",
@@ -5922,7 +6186,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "bookmarks": {
             "short_name": "b",
@@ -5941,7 +6207,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "borderConnections": {
             "short_name": "boc",
@@ -6151,7 +6419,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "cameraAperture": {
             "short_name": "cap",
@@ -6183,7 +6453,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "center": {
             "short_name": "c",
@@ -6217,7 +6488,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "containerType": {
             "short_name": "ctyp",
@@ -6263,7 +6536,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "depthName": {
             "short_name": "den",
@@ -6282,7 +6557,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "depthType": {
             "short_name": "dptp",
@@ -6300,7 +6577,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayCameraFrustum": {
             "short_name": "dcf",
@@ -6310,7 +6589,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayCameraNearClip": {
             "short_name": "cnc",
@@ -6320,7 +6601,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayFieldChart": {
             "short_name": "dfc",
@@ -6330,7 +6613,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayFilmGate": {
             "short_name": "dfg",
@@ -6340,7 +6625,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayFilmOrigin": {
             "short_name": "dfo",
@@ -6350,7 +6637,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayFilmPivot": {
             "short_name": "dfp",
@@ -6360,7 +6649,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayGateMask": {
             "short_name": "dgm",
@@ -6370,7 +6661,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayGateMaskColor": {
             "short_name": "dgc",
@@ -6427,7 +6720,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.699999988079071
+            "default_value": 0.699999988079071,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayResolution": {
             "short_name": "dr",
@@ -6437,7 +6732,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displaySafeAction": {
             "short_name": "dsa",
@@ -6447,7 +6744,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displaySafeTitle": {
             "short_name": "dst",
@@ -6457,7 +6756,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "drawOverride": {
             "short_name": "do",
@@ -6490,7 +6791,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 5.6
+            "default_value": 5.6,
+            "min_value": 1.0,
+            "max_value": 64.0
         },
         "farClipPlane": {
             "short_name": "fcp",
@@ -6626,7 +6929,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 35.0
+            "default_value": 35.0,
+            "min_value": 0.5,
+            "max_value": 100000.0
         },
         "focusDistance": {
             "short_name": "fd",
@@ -6646,7 +6951,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "frozen": {
             "short_name": "fzn",
@@ -6656,7 +6962,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -6681,7 +6989,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -6692,7 +7002,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -6703,7 +7015,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -6728,7 +7042,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -6739,7 +7055,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -6750,7 +7068,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -6783,7 +7103,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -6803,7 +7125,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -6848,7 +7172,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -6858,7 +7184,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -6877,7 +7205,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -6887,7 +7216,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -6898,7 +7229,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "homeCommand": {
             "short_name": "hc",
@@ -6918,7 +7251,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "cameraAperture",
             "numeric_type": 14,
-            "default_value": 1.4173200000000001
+            "default_value": 1.4173200000000001,
+            "min_value": 3.9370000000000004e-05,
+            "max_value": 1200.0
         },
         "horizontalFilmOffset": {
             "short_name": "hfo",
@@ -7000,7 +7335,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "imageName": {
             "short_name": "imn",
@@ -7037,7 +7374,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -7056,7 +7395,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -7067,7 +7408,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -7077,7 +7420,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "journalCommand": {
             "short_name": "jc",
@@ -7087,7 +7432,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -7098,7 +7445,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -7109,7 +7458,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lensSqueezeRatio": {
             "short_name": "lsr",
@@ -7119,7 +7470,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "locatorScale": {
             "short_name": "lls",
@@ -7129,7 +7481,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -7139,7 +7492,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "mask": {
             "short_name": "ma",
@@ -7149,7 +7504,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "maskName": {
             "short_name": "man",
@@ -7185,7 +7542,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "nearClipPlane": {
             "short_name": "ncp",
@@ -7205,7 +7564,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -7262,7 +7623,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "orthographicWidth": {
             "short_name": "ow",
@@ -7330,7 +7693,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -7341,7 +7706,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -7409,7 +7776,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -7429,7 +7798,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -7440,7 +7811,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -7451,7 +7824,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -7462,7 +7837,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -7473,7 +7850,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overscan": {
             "short_name": "ovr",
@@ -7483,7 +7862,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "pan": {
             "short_name": "pn",
@@ -7506,7 +7886,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -7552,7 +7934,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "postProjection",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "preScale": {
             "short_name": "psc",
@@ -7563,7 +7946,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "postProjection",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -7605,7 +7989,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderable": {
             "short_name": "rnd",
@@ -7615,7 +8001,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rmbCommand": {
             "short_name": "rmc",
@@ -7634,7 +8022,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shake": {
             "short_name": "shk",
@@ -7657,7 +8047,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shakeOverscan": {
             "short_name": "sos",
@@ -7667,7 +8059,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "shakeOverscanEnabled": {
             "short_name": "soe",
@@ -7677,7 +8070,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shutterAngle": {
             "short_name": "sa",
@@ -7707,7 +8102,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "template": {
             "short_name": "tmp",
@@ -7717,7 +8114,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -7755,7 +8154,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 0.9
+            "default_value": 0.9,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "transparencyBasedDepth": {
             "short_name": "tdth",
@@ -7765,7 +8166,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "triggerUpdate": {
             "short_name": "tu",
@@ -7832,7 +8235,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -7850,7 +8255,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "usePivotAsLocalSpace": {
             "short_name": "uls",
@@ -7860,7 +8267,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "verticalFilmAperture": {
             "short_name": "vfa",
@@ -7871,7 +8280,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "cameraAperture",
             "numeric_type": 14,
-            "default_value": 0.94488
+            "default_value": 0.94488,
+            "min_value": 3.9370000000000004e-05,
+            "max_value": 1200.0
         },
         "verticalFilmOffset": {
             "short_name": "vfo",
@@ -7942,7 +8353,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -8019,7 +8432,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         }
     },
     "pointLight": {
@@ -8040,7 +8454,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "borderConnections": {
             "short_name": "boc",
@@ -8250,7 +8666,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "castSoftShadows": {
             "short_name": "cw",
@@ -8260,7 +8678,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -8284,7 +8704,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 5.0
+            "default_value": 5.0,
+            "min_value": 1e-10
         },
         "color": {
             "short_name": "cl",
@@ -8405,7 +8826,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "dmapFocus": {
             "short_name": "df",
@@ -8415,7 +8837,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 90.0
+            "default_value": 90.0,
+            "min_value": 0.0,
+            "max_value": 360.0
         },
         "dmapFrameExt": {
             "short_name": "uf",
@@ -8425,7 +8849,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapLightName": {
             "short_name": "ul",
@@ -8435,7 +8861,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapName": {
             "short_name": "smn",
@@ -8454,7 +8882,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0010000000474974513
+            "default_value": 0.0010000000474974513,
+            "min_value": 1e-05
         },
         "dmapResolution": {
             "short_name": "dr",
@@ -8464,7 +8893,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 512
+            "default_value": 512,
+            "min_value": 16.0,
+            "max_value": 16384.0
         },
         "dmapSceneName": {
             "short_name": "um",
@@ -8474,7 +8905,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapUseMacro": {
             "short_name": "dc",
@@ -8526,7 +8959,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "emitSpecular": {
             "short_name": "esp",
@@ -8536,7 +8971,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "farPointWorld": {
             "short_name": "fw",
@@ -8621,7 +9058,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 10.0
         },
         "fogType": {
             "short_name": "ft",
@@ -8639,7 +9078,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -8664,7 +9105,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -8675,7 +9118,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -8686,7 +9131,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -8711,7 +9158,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -8722,7 +9171,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -8733,7 +9184,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -8766,7 +9219,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -8786,7 +9241,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -8831,7 +9288,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -8841,7 +9300,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -8860,7 +9321,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -8870,7 +9332,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -8881,7 +9345,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -8948,7 +9414,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -8967,7 +9435,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -8978,7 +9448,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -8988,7 +9460,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "lastWrittenDmapAnimExtName": {
             "short_name": "lw",
@@ -9008,7 +9482,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -9019,7 +9495,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightAmbient": {
             "short_name": "la",
@@ -9030,7 +9508,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightBlindData": {
             "short_name": "lbl",
@@ -9071,7 +9551,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightDirection": {
             "short_name": "ld",
@@ -9185,7 +9667,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "lightShadowFraction": {
             "short_name": "lsf",
@@ -9207,7 +9690,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "locatorScale": {
             "short_name": "lls",
@@ -9217,7 +9702,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -9227,7 +9713,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -9270,7 +9758,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -9337,7 +9827,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 3,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "opticalFXvisibility": {
             "short_name": "ov",
@@ -9442,7 +9934,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -9453,7 +9947,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -9521,7 +10017,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -9541,7 +10039,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -9552,7 +10052,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -9563,7 +10065,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -9574,7 +10078,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -9585,7 +10091,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -9749,7 +10257,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 3
+            "default_value": 3,
+            "min_value": 0.0
         },
         "rayInstance": {
             "short_name": "ryi",
@@ -9779,7 +10288,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderInfo": {
             "short_name": "ri",
@@ -9822,7 +10333,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rmbCommand": {
             "short_name": "rmc",
@@ -9841,7 +10354,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shadColorB": {
             "short_name": "scb",
@@ -9898,7 +10413,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "template": {
             "short_name": "tmp",
@@ -9908,7 +10424,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -9957,7 +10475,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDmapAutoClipping": {
             "short_name": "uc",
@@ -9967,7 +10487,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDmapAutoFocus": {
             "short_name": "af",
@@ -9977,7 +10499,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMidDistDmap": {
             "short_name": "md",
@@ -9987,7 +10511,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -10005,7 +10531,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -10015,7 +10543,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useRayTraceShadows": {
             "short_name": "urs",
@@ -10025,7 +10555,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useXMinusDmap": {
             "short_name": "xn",
@@ -10035,7 +10567,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useXPlusDmap": {
             "short_name": "xp",
@@ -10045,7 +10579,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useYMinusDmap": {
             "short_name": "yn",
@@ -10055,7 +10591,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useYPlusDmap": {
             "short_name": "yp",
@@ -10065,7 +10603,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useZMinusDmap": {
             "short_name": "zn",
@@ -10075,7 +10615,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useZPlusDmap": {
             "short_name": "zp",
@@ -10085,7 +10627,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvCoord": {
             "short_name": "uv",
@@ -10171,7 +10715,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "volumeShadowSamples": {
             "short_name": "nv",
@@ -10181,7 +10727,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 20
+            "default_value": 20,
+            "min_value": 1.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -10258,7 +10805,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         }
     },
     "spotLight": {
@@ -10270,7 +10819,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "binMembership": {
             "short_name": "bnm",
@@ -10289,7 +10840,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "borderConnections": {
             "short_name": "boc",
@@ -10509,7 +11062,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "castSoftShadows": {
             "short_name": "cw",
@@ -10519,7 +11074,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -10543,7 +11100,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 5.0
+            "default_value": 5.0,
+            "min_value": 1e-10
         },
         "color": {
             "short_name": "cl",
@@ -10674,7 +11232,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "dmapFocus": {
             "short_name": "df",
@@ -10684,7 +11243,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 90.0
+            "default_value": 90.0,
+            "min_value": 0.0,
+            "max_value": 360.0
         },
         "dmapFrameExt": {
             "short_name": "uf",
@@ -10694,7 +11255,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapLightName": {
             "short_name": "ul",
@@ -10704,7 +11267,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapName": {
             "short_name": "smn",
@@ -10723,7 +11288,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0010000000474974513
+            "default_value": 0.0010000000474974513,
+            "min_value": 1e-05
         },
         "dmapResolution": {
             "short_name": "dr",
@@ -10733,7 +11299,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 512
+            "default_value": 512,
+            "min_value": 16.0,
+            "max_value": 16384.0
         },
         "dmapSceneName": {
             "short_name": "um",
@@ -10743,7 +11311,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapUseMacro": {
             "short_name": "dc",
@@ -10795,7 +11365,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "emitDiffuse": {
             "short_name": "edi",
@@ -10805,7 +11376,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "emitSpecular": {
             "short_name": "esp",
@@ -10815,7 +11388,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "farPointWorld": {
             "short_name": "fw",
@@ -10890,7 +11465,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 10.0
         },
         "fogSpread": {
             "short_name": "fsp",
@@ -10910,7 +11487,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -10935,7 +11514,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -10946,7 +11527,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -10957,7 +11540,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -10982,7 +11567,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -10993,7 +11580,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -11004,7 +11593,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -11037,7 +11628,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -11057,7 +11650,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -11102,7 +11697,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -11112,7 +11709,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -11131,7 +11730,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -11141,7 +11741,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -11152,7 +11754,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -11219,7 +11823,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -11238,7 +11844,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -11249,7 +11857,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -11259,7 +11869,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "lastWrittenDmapAnimExtName": {
             "short_name": "lw",
@@ -11279,7 +11891,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -11290,7 +11904,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "leftBarnDoor": {
             "short_name": "lbd",
@@ -11311,7 +11927,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightBlindData": {
             "short_name": "lbl",
@@ -11352,7 +11970,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightDirection": {
             "short_name": "ld",
@@ -11466,7 +12086,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "lightShadowFraction": {
             "short_name": "lsf",
@@ -11488,7 +12109,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "locatorScale": {
             "short_name": "lls",
@@ -11498,7 +12121,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -11508,7 +12132,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -11551,7 +12177,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -11618,7 +12246,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 3,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "opticalFXvisibility": {
             "short_name": "ov",
@@ -11723,7 +12353,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -11734,7 +12366,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -11802,7 +12436,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -11822,7 +12458,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -11833,7 +12471,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -11844,7 +12484,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -11855,7 +12497,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -11866,7 +12510,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -12050,7 +12696,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 3
+            "default_value": 3,
+            "min_value": 0.0
         },
         "rayDirection": {
             "short_name": "rad",
@@ -12127,7 +12774,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderInfo": {
             "short_name": "ri",
@@ -12170,7 +12819,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rightBarnDoor": {
             "short_name": "rbd",
@@ -12199,7 +12850,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shadColorB": {
             "short_name": "scb",
@@ -12256,7 +12909,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "template": {
             "short_name": "tmp",
@@ -12266,7 +12920,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -12325,7 +12981,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDepthMapShadows": {
             "short_name": "dms",
@@ -12335,7 +12993,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDmapAutoClipping": {
             "short_name": "uc",
@@ -12345,7 +13005,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDmapAutoFocus": {
             "short_name": "af",
@@ -12355,7 +13017,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMidDistDmap": {
             "short_name": "md",
@@ -12365,7 +13029,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -12383,7 +13049,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -12393,7 +13061,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useRayTraceShadows": {
             "short_name": "urs",
@@ -12403,7 +13073,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useXMinusDmap": {
             "short_name": "xn",
@@ -12413,7 +13085,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useXPlusDmap": {
             "short_name": "xp",
@@ -12423,7 +13097,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useYMinusDmap": {
             "short_name": "yn",
@@ -12433,7 +13109,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useYPlusDmap": {
             "short_name": "yp",
@@ -12443,7 +13121,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useZMinusDmap": {
             "short_name": "zn",
@@ -12453,7 +13133,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useZPlusDmap": {
             "short_name": "zp",
@@ -12463,7 +13145,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvCoord": {
             "short_name": "uv",
@@ -12549,7 +13233,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "volumeShadowSamples": {
             "short_name": "nv",
@@ -12559,7 +13245,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 20
+            "default_value": 20,
+            "min_value": 1.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -12636,7 +13323,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         }
     },
     "areaLight": {
@@ -12657,7 +13346,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "borderConnections": {
             "short_name": "boc",
@@ -12867,7 +13558,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "castSoftShadows": {
             "short_name": "cw",
@@ -12877,7 +13570,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -12901,7 +13596,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 5.0
+            "default_value": 5.0,
+            "min_value": 1e-10
         },
         "color": {
             "short_name": "cl",
@@ -13022,7 +13718,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "dmapFocus": {
             "short_name": "df",
@@ -13032,7 +13729,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 90.0
+            "default_value": 90.0,
+            "min_value": 0.0,
+            "max_value": 360.0
         },
         "dmapFrameExt": {
             "short_name": "uf",
@@ -13042,7 +13741,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapLightName": {
             "short_name": "ul",
@@ -13052,7 +13753,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapName": {
             "short_name": "smn",
@@ -13071,7 +13774,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0010000000474974513
+            "default_value": 0.0010000000474974513,
+            "min_value": 1e-05
         },
         "dmapResolution": {
             "short_name": "dr",
@@ -13081,7 +13785,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 512
+            "default_value": 512,
+            "min_value": 16.0,
+            "max_value": 16384.0
         },
         "dmapSceneName": {
             "short_name": "um",
@@ -13091,7 +13797,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dmapUseMacro": {
             "short_name": "dc",
@@ -13143,7 +13851,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "emitSpecular": {
             "short_name": "esp",
@@ -13153,7 +13863,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "fogShadowIntensity": {
             "short_name": "fsi",
@@ -13163,7 +13875,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 10.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -13173,7 +13887,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -13198,7 +13914,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -13209,7 +13927,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -13220,7 +13940,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -13245,7 +13967,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -13256,7 +13980,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -13267,7 +13993,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -13300,7 +14028,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -13320,7 +14050,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -13365,7 +14097,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -13375,7 +14109,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -13394,7 +14130,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -13404,7 +14141,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -13415,7 +14154,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -13482,7 +14223,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -13501,7 +14244,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -13512,7 +14257,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -13522,7 +14269,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "lastWrittenDmapAnimExtName": {
             "short_name": "lw",
@@ -13542,7 +14291,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -13553,7 +14304,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "legacyIntensity": {
             "short_name": "lgi",
@@ -13563,7 +14316,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightAmbient": {
             "short_name": "la",
@@ -13574,7 +14329,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightBlindData": {
             "short_name": "lbl",
@@ -13615,7 +14372,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lightDirection": {
             "short_name": "ld",
@@ -13729,7 +14488,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "lightShadowFraction": {
             "short_name": "lsf",
@@ -13751,7 +14511,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "lightData",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "locatorScale": {
             "short_name": "lls",
@@ -13761,7 +14523,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 1e-10
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -13771,7 +14534,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -13861,7 +14626,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "objectColor": {
             "short_name": "oc",
@@ -13871,7 +14638,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -13938,7 +14707,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 3,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "opticalFXvisibility": {
             "short_name": "ov",
@@ -14043,7 +14814,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -14054,7 +14827,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -14122,7 +14897,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -14142,7 +14919,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -14153,7 +14932,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -14164,7 +14945,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -14175,7 +14958,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -14186,7 +14971,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -14350,7 +15137,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 3
+            "default_value": 3,
+            "min_value": 0.0
         },
         "rayInstance": {
             "short_name": "ryi",
@@ -14380,7 +15168,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderInfo": {
             "short_name": "ri",
@@ -14423,7 +15213,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rmbCommand": {
             "short_name": "rmc",
@@ -14442,7 +15234,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shadColorB": {
             "short_name": "scb",
@@ -14499,7 +15293,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "template": {
             "short_name": "tmp",
@@ -14509,7 +15304,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -14558,7 +15355,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDmapAutoClipping": {
             "short_name": "uc",
@@ -14568,7 +15367,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useDmapAutoFocus": {
             "short_name": "af",
@@ -14578,7 +15379,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMidDistDmap": {
             "short_name": "md",
@@ -14588,7 +15391,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -14606,7 +15411,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -14616,7 +15423,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useRayTraceShadows": {
             "short_name": "urs",
@@ -14626,7 +15435,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useXMinusDmap": {
             "short_name": "xn",
@@ -14636,7 +15447,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useXPlusDmap": {
             "short_name": "xp",
@@ -14646,7 +15459,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useYMinusDmap": {
             "short_name": "yn",
@@ -14656,7 +15471,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useYPlusDmap": {
             "short_name": "yp",
@@ -14666,7 +15483,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useZMinusDmap": {
             "short_name": "zn",
@@ -14676,7 +15495,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useZPlusDmap": {
             "short_name": "zp",
@@ -14686,7 +15507,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvCoord": {
             "short_name": "uv",
@@ -14772,7 +15595,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "volumeShadowSamples": {
             "short_name": "nv",
@@ -14782,7 +15607,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 20
+            "default_value": 20,
+            "min_value": 1.0
         },
         "wireColorB": {
             "short_name": "wfcb",
@@ -14859,7 +15685,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         }
     },
     "lambert": {
@@ -14927,7 +15755,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "chromaticAberration": {
             "short_name": "crab",
@@ -14937,7 +15767,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "color": {
             "short_name": "c",
@@ -14994,7 +15826,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.800000011920929
+            "default_value": 0.800000011920929,
+            "min_value": 0.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -15004,7 +15837,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "glowIntensity": {
             "short_name": "gi",
@@ -15071,7 +15906,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "incandescence": {
             "short_name": "ic",
@@ -15128,7 +15965,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "lightAbsorbance": {
             "short_name": "absb",
@@ -15138,7 +15977,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "lightDataArray": {
             "short_name": "ltd",
@@ -15592,7 +16432,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 6
+            "default_value": 6,
+            "min_value": 0.0
         },
         "refractions": {
             "short_name": "rfc",
@@ -15602,7 +16443,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "refractiveIndex": {
             "short_name": "rfi",
@@ -15612,7 +16455,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.01
         },
         "shadowAttenuation": {
             "short_name": "fakc",
@@ -15622,7 +16466,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "surfaceThickness": {
             "short_name": "thik",
@@ -15632,7 +16478,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "translucence": {
             "short_name": "tc",
@@ -15662,7 +16509,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "transparency": {
             "short_name": "it",
@@ -15697,7 +16546,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "transparencyG": {
             "short_name": "itg",
@@ -15776,7 +16626,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0
         },
         "vrEdgeStyle": {
             "short_name": "vres",
@@ -15812,7 +16663,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "vrHiddenEdgesOnTransparent": {
             "short_name": "vrht",
@@ -15822,7 +16675,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "vrOutlinesAtIntersections": {
             "short_name": "vroi",
@@ -15832,7 +16687,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "vrOverwriteDefaults": {
             "short_name": "vrod",
@@ -15842,7 +16699,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         }
     },
     "file": {
@@ -15864,7 +16723,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "alphaOffset": {
             "short_name": "ao",
@@ -15928,7 +16789,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "byCycleIncrement": {
             "short_name": "bci",
@@ -15938,7 +16801,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "caching": {
             "short_name": "cch",
@@ -15948,7 +16812,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "colorGain": {
             "short_name": "cg",
@@ -15973,7 +16839,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "colorGain",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 2.0
         },
         "colorGainG": {
             "short_name": "cgg",
@@ -15984,7 +16852,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "colorGain",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 2.0
         },
         "colorGainR": {
             "short_name": "cgr",
@@ -15995,7 +16865,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "colorGain",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 2.0
         },
         "colorManagementConfigFileEnabled": {
             "short_name": "cmcf",
@@ -16005,7 +16877,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "colorManagementConfigFilePath": {
             "short_name": "cmcp",
@@ -16024,7 +16898,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "colorOffset": {
             "short_name": "co",
@@ -16049,7 +16925,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "colorOffset",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 2.0
         },
         "colorOffsetG": {
             "short_name": "cog",
@@ -16060,7 +16938,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "colorOffset",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 2.0
         },
         "colorOffsetR": {
             "short_name": "cor",
@@ -16071,7 +16951,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "colorOffset",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 2.0
         },
         "colorProfile": {
             "short_name": "cp",
@@ -16123,7 +17005,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "coverage",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "coverageV": {
             "short_name": "cv",
@@ -16134,7 +17018,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "coverage",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "defaultColor": {
             "short_name": "dc",
@@ -16159,7 +17045,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "defaultColor",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "defaultColorG": {
             "short_name": "dcg",
@@ -16170,7 +17058,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "defaultColor",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "defaultColorR": {
             "short_name": "dcr",
@@ -16181,7 +17071,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "defaultColor",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dirtyPixelRegion": {
             "short_name": "dp",
@@ -16191,7 +17083,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "disableFileLoad": {
             "short_name": "dfl",
@@ -16201,7 +17095,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "doTransform": {
             "short_name": "dtf",
@@ -16211,7 +17107,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "endCycleExtension": {
             "short_name": "ece",
@@ -16250,7 +17148,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "fileTextureName": {
             "short_name": "ftn",
@@ -16278,7 +17178,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0
         },
         "filterOffset": {
             "short_name": "fo",
@@ -16306,7 +17207,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.7070000171661377
+            "default_value": 0.7070000171661377,
+            "min_value": 0.35,
+            "max_value": 1.05
         },
         "forceSwatchGen": {
             "short_name": "fsg",
@@ -16316,7 +17219,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frameExtension": {
             "short_name": "fe",
@@ -16346,7 +17251,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hdrExposure": {
             "short_name": "he",
@@ -16356,7 +17263,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": -10.0,
+            "max_value": 10.0
         },
         "hdrMapping": {
             "short_name": "hm",
@@ -16374,7 +17283,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "infoBits": {
             "short_name": "ib",
@@ -16394,7 +17305,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -16404,7 +17317,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -16422,7 +17337,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "mirrorV": {
             "short_name": "mv",
@@ -16432,7 +17349,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "noiseU": {
             "short_name": "nu",
@@ -16443,7 +17362,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "noiseUV",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "noiseUV": {
             "short_name": "n",
@@ -16467,7 +17387,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "noiseUV",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0
         },
         "objectType": {
             "short_name": "otp",
@@ -16477,7 +17398,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 3,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "offset": {
             "short_name": "of",
@@ -16501,7 +17424,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "offset",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "offsetV": {
             "short_name": "ofv",
@@ -16512,7 +17437,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "offset",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "outAlpha": {
             "short_name": "oa",
@@ -16696,7 +17623,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "preFilterRadius": {
             "short_name": "pfr",
@@ -16706,7 +17635,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 2.0
+            "default_value": 2.0,
+            "min_value": 1.0,
+            "max_value": 10.0
         },
         "primitiveId": {
             "short_name": "pi",
@@ -16726,7 +17657,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ptexFilterInterpolateLevels": {
             "short_name": "pfil",
@@ -16736,7 +17669,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ptexFilterSharpness": {
             "short_name": "pfs",
@@ -16746,7 +17681,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ptexFilterType": {
             "short_name": "pft",
@@ -16785,7 +17722,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "repeatUV",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0
         },
         "repeatUV": {
             "short_name": "re",
@@ -16809,7 +17747,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "repeatUV",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0
         },
         "rotateFrame": {
             "short_name": "rf",
@@ -16839,7 +17778,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "startCycleExtension": {
             "short_name": "sce",
@@ -16873,7 +17814,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "translateFrame",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "translateFrameV": {
             "short_name": "tfv",
@@ -16884,7 +17827,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "translateFrame",
             "numeric_type": 11,
-            "default_value": 0.0
+            "default_value": 0.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uCoord": {
             "short_name": "u",
@@ -16905,7 +17850,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useFrameExtension": {
             "short_name": "ufe",
@@ -16915,7 +17862,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useHardwareTextureCycling": {
             "short_name": "uhc",
@@ -16925,7 +17874,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMaximumRes": {
             "short_name": "umr",
@@ -16935,7 +17886,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvCoord": {
             "short_name": "uv",
@@ -16993,7 +17946,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvTileProxyGenerate": {
             "short_name": "utpg",
@@ -17003,7 +17958,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvTileProxyQuality": {
             "short_name": "utpq",
@@ -17295,7 +18252,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "workingSpace": {
             "short_name": "ws",
@@ -17314,7 +18273,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "wrapV": {
             "short_name": "wv",
@@ -17324,7 +18285,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         }
     },
     "condition": {
@@ -17345,7 +18308,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "colorIfFalse": {
             "short_name": "cf",
@@ -17459,7 +18424,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -17469,7 +18436,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -17563,7 +18532,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -17573,7 +18544,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "input": {
             "short_name": "ip",
@@ -17630,7 +18603,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "max": {
             "short_name": "mx",
@@ -17808,7 +18783,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "color": {
             "short_name": "cl",
@@ -17827,7 +18804,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inputMax": {
             "short_name": "imx",
@@ -17867,7 +18846,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -17991,7 +18972,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "color": {
             "short_name": "cl",
@@ -18048,7 +19031,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "green": {
             "short_name": "g",
@@ -18087,7 +19072,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -18208,7 +19195,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "coordinate": {
             "short_name": "coord",
@@ -18236,7 +19225,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -18246,7 +19237,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -18280,7 +19273,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "originalGeometry": {
             "short_name": "orggeom",
@@ -18370,7 +19365,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -18380,7 +19377,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "input1D": {
             "short_name": "i1",
@@ -18419,7 +19418,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -18558,7 +19559,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "current": {
             "short_name": "c",
@@ -18578,7 +19581,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "input": {
             "short_name": "i",
@@ -18599,7 +19604,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -18638,7 +19645,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "caching": {
             "short_name": "cch",
@@ -18648,7 +19657,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "color1": {
             "short_name": "c1",
@@ -18752,7 +19763,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -18762,7 +19775,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -18846,7 +19861,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -18856,7 +19873,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inputMatrix": {
             "short_name": "imat",
@@ -18882,7 +19901,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -19158,7 +20179,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -19168,7 +20191,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inputMatrix": {
             "short_name": "imat",
@@ -19186,7 +20211,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -19223,7 +20250,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -19233,7 +20262,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -19243,7 +20274,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "matrixIn": {
             "short_name": "i",
@@ -19289,7 +20322,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "enable": {
             "short_name": "enb",
@@ -19299,7 +20334,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "envelope": {
             "short_name": "env",
@@ -19309,7 +20346,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "frozen": {
             "short_name": "fzn",
@@ -19319,7 +20358,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inputMatrix": {
             "short_name": "imat",
@@ -19337,7 +20378,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "message": {
             "short_name": "msg",
@@ -19390,7 +20433,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "antialiasingLevel": {
             "short_name": "gal",
@@ -19400,7 +20445,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 5.0
         },
         "asBackground": {
             "short_name": "asbg",
@@ -19410,7 +20457,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "binMembership": {
             "short_name": "bnm",
@@ -19429,7 +20478,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "blindDataNodes": {
             "short_name": "bn",
@@ -19657,7 +20708,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "castsShadows": {
             "short_name": "csh",
@@ -19667,7 +20720,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -19800,7 +20855,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispCV": {
             "short_name": "dcv",
@@ -19810,7 +20867,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispCurveEndPoints": {
             "short_name": "dce",
@@ -19820,7 +20879,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispEP": {
             "short_name": "dep",
@@ -19830,7 +20891,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispGeometry": {
             "short_name": "dg",
@@ -19840,7 +20903,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispHull": {
             "short_name": "dh",
@@ -19850,7 +20915,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayColorChannel": {
             "short_name": "dcc",
@@ -19869,7 +20936,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayImmediate": {
             "short_name": "di",
@@ -19879,7 +20948,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "drawOverride": {
             "short_name": "do",
@@ -19929,7 +21000,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "geometryAntialiasingOverride": {
             "short_name": "gao",
@@ -19939,7 +21012,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -19964,7 +21039,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -19975,7 +21052,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -19986,7 +21065,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -20011,7 +21092,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -20022,7 +21105,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -20033,7 +21118,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -20066,7 +21153,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -20086,7 +21175,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -20131,7 +21222,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -20141,7 +21234,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -20160,7 +21255,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hardwareFogMultiplier": {
             "short_name": "hfm",
@@ -20170,7 +21266,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "header": {
             "short_name": "hd",
@@ -20189,7 +21287,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -20200,7 +21300,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -20238,7 +21340,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inPlace": {
             "short_name": "ipo",
@@ -20248,7 +21352,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "instMaterialAssign": {
             "short_name": "imtla",
@@ -20276,7 +21382,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -20295,7 +21403,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -20306,7 +21416,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -20316,7 +21428,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -20327,7 +21441,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -20338,7 +21454,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lineWidth": {
             "short_name": "ls",
@@ -20367,7 +21485,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -20386,7 +21506,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "maxValue": {
             "short_name": "max",
@@ -20407,7 +21529,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "maxVisibilitySamplesOverride": {
             "short_name": "vbo",
@@ -20417,7 +21541,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "message": {
             "short_name": "msg",
@@ -20459,7 +21585,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "objectColor": {
             "short_name": "oc",
@@ -20469,7 +21597,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -20574,7 +21704,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -20585,7 +21717,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -20653,7 +21787,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -20673,7 +21809,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -20684,7 +21822,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -20695,7 +21835,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -20706,7 +21848,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -20717,7 +21861,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -20755,7 +21901,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -20774,7 +21922,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "referenceObject": {
             "short_name": "rob",
@@ -20792,7 +21942,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderInfo": {
             "short_name": "ri",
@@ -20835,7 +21987,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rmbCommand": {
             "short_name": "rmc",
@@ -20854,7 +22008,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shadingSamples": {
             "short_name": "ssa",
@@ -20864,7 +22020,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "shadingSamplesOverride": {
             "short_name": "sso",
@@ -20874,7 +22032,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "spans": {
             "short_name": "s",
@@ -20894,7 +22054,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -20932,7 +22094,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "tweakLocation": {
             "short_name": "twl",
@@ -20969,7 +22133,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvPivot": {
             "short_name": "pv",
@@ -21040,7 +22206,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "visibleFraction": {
             "short_name": "vf",
@@ -21060,7 +22228,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "visibleInRefractions": {
             "short_name": "vif",
@@ -21070,7 +22240,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "volumeSamples": {
             "short_name": "vss",
@@ -21090,7 +22262,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "weights": {
             "short_name": "wt",
@@ -21199,7 +22373,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 5.0
         },
         "asBackground": {
             "short_name": "asbg",
@@ -21209,7 +22385,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "basicTessellationType": {
             "short_name": "btt",
@@ -21236,7 +22414,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "blindDataNodes": {
             "short_name": "bn",
@@ -21422,7 +22602,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 1.0
         },
         "boundingBoxScaleY": {
             "short_name": "bscy",
@@ -21433,7 +22614,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 1.0
         },
         "boundingBoxScaleZ": {
             "short_name": "bscz",
@@ -21444,7 +22626,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 1.0
         },
         "boundingBoxSize": {
             "short_name": "bbsi",
@@ -21511,7 +22694,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "castsShadows": {
             "short_name": "csh",
@@ -21521,7 +22706,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -21545,7 +22732,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 0.1
+            "default_value": 0.1,
+            "min_value": 0.001
         },
         "chordHeightRatio": {
             "short_name": "chr",
@@ -21555,7 +22743,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 0.983
+            "default_value": 0.983,
+            "min_value": 0.1,
+            "max_value": 0.999
         },
         "collisionDepthVelocityIncrement": {
             "short_name": "cdvi",
@@ -21699,7 +22889,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 4
+            "default_value": 4,
+            "min_value": 0.0,
+            "max_value": 127.0
         },
         "curvePrecisionShaded": {
             "short_name": "cps",
@@ -21709,7 +22901,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 0.0,
+            "max_value": 63.0
         },
         "customTreatment": {
             "short_name": "ctrt",
@@ -21763,7 +22957,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispCV": {
             "short_name": "dcv",
@@ -21773,7 +22969,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispEP": {
             "short_name": "dep",
@@ -21783,7 +22981,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispGeometry": {
             "short_name": "dg",
@@ -21793,7 +22993,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispHull": {
             "short_name": "dh",
@@ -21803,7 +23005,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispOrigin": {
             "short_name": "dor",
@@ -21813,7 +23017,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispSF": {
             "short_name": "dsf",
@@ -21823,7 +23029,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayColorChannel": {
             "short_name": "dcc",
@@ -21842,7 +23050,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayHWEnvironment": {
             "short_name": "dhe",
@@ -21852,7 +23062,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayImmediate": {
             "short_name": "di",
@@ -21862,7 +23074,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayRenderTessellation": {
             "short_name": "drt",
@@ -21872,7 +23086,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "divisionsU": {
             "short_name": "dvu",
@@ -21882,7 +23098,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 64.0
         },
         "divisionsV": {
             "short_name": "dvv",
@@ -21892,7 +23110,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 64.0
         },
         "doubleSided": {
             "short_name": "ds",
@@ -21902,7 +23122,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "drawOverride": {
             "short_name": "do",
@@ -21935,7 +23157,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "explicitTessellationAttributes": {
             "short_name": "eta",
@@ -21945,7 +23169,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "extraSampleRate": {
             "short_name": "xsr",
@@ -21955,7 +23181,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 5
+            "default_value": 5,
+            "min_value": 0.0
         },
         "featureDisplacement": {
             "short_name": "fbda",
@@ -21965,7 +23192,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "fixTextureWarp": {
             "short_name": "ftwp",
@@ -21975,7 +23204,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "formU": {
             "short_name": "fu",
@@ -22001,7 +23232,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "geometryAntialiasingOverride": {
             "short_name": "gao",
@@ -22011,7 +23244,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -22036,7 +23271,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -22047,7 +23284,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -22058,7 +23297,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -22083,7 +23324,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -22094,7 +23337,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -22105,7 +23350,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -22138,7 +23385,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -22158,7 +23407,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -22203,7 +23454,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -22213,7 +23466,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -22232,7 +23487,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "gridDivisionPerSpanU": {
             "short_name": "gdsu",
@@ -22242,7 +23498,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 4
+            "default_value": 4,
+            "min_value": 1.0,
+            "max_value": 15.0
         },
         "gridDivisionPerSpanV": {
             "short_name": "gdsv",
@@ -22252,7 +23510,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 4
+            "default_value": 4,
+            "min_value": 1.0,
+            "max_value": 15.0
         },
         "hardwareFogMultiplier": {
             "short_name": "hfm",
@@ -22262,7 +23522,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "header": {
             "short_name": "hd",
@@ -22281,7 +23543,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -22292,7 +23556,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "holdOut": {
             "short_name": "hot",
@@ -22302,7 +23568,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hyperLayout": {
             "short_name": "hl",
@@ -22340,7 +23608,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ignoreSelfShadowing": {
             "short_name": "iss",
@@ -22350,7 +23620,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inPlace": {
             "short_name": "ipo",
@@ -22360,7 +23632,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "initialSampleRate": {
             "short_name": "dsr",
@@ -22370,7 +23644,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 6
+            "default_value": 6,
+            "min_value": 0.0
         },
         "instMaterialAssign": {
             "short_name": "imtla",
@@ -22398,7 +23673,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -22417,7 +23694,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -22428,7 +23707,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -22438,7 +23719,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -22449,7 +23732,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -22460,7 +23745,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "local": {
             "short_name": "l",
@@ -22479,7 +23766,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "matrix": {
             "short_name": "m",
@@ -22498,7 +23787,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "maxValueU": {
             "short_name": "mxu",
@@ -22530,7 +23821,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "maxVisibilitySamplesOverride": {
             "short_name": "vbo",
@@ -22540,7 +23833,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "message": {
             "short_name": "msg",
@@ -22616,7 +23911,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "normalThreshold": {
             "short_name": "nat",
@@ -22626,7 +23923,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 30.0
+            "default_value": 30.0,
+            "min_value": 0.0,
+            "max_value": 180.0
         },
         "normalsDisplayScale": {
             "short_name": "ndf",
@@ -22646,7 +23945,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 3
+            "default_value": 3,
+            "min_value": 1.0
         },
         "numberV": {
             "short_name": "nv",
@@ -22656,7 +23956,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 3
+            "default_value": 3,
+            "min_value": 1.0
         },
         "objSpaceChordHeight": {
             "short_name": "uco",
@@ -22666,7 +23967,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "objectColor": {
             "short_name": "oc",
@@ -22676,7 +23979,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -22733,7 +24038,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "outlinerColor": {
             "short_name": "oclr",
@@ -22791,7 +24098,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -22802,7 +24111,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -22870,7 +24181,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -22890,7 +24203,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -22901,7 +24216,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -22912,7 +24229,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -22923,7 +24242,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -22934,7 +24255,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -22982,7 +24305,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -23001,7 +24326,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "referenceObject": {
             "short_name": "rob",
@@ -23019,7 +24346,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderInfo": {
             "short_name": "ri",
@@ -23072,7 +24401,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rmbCommand": {
             "short_name": "rmc",
@@ -23091,7 +24422,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "selectionChildHighlighting": {
             "short_name": "sech",
@@ -23101,7 +24434,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shadingSamples": {
             "short_name": "ssa",
@@ -23111,7 +24446,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "shadingSamplesOverride": {
             "short_name": "sso",
@@ -23121,7 +24458,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "simplifyMode": {
             "short_name": "sm",
@@ -23131,7 +24470,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "simplifyU": {
             "short_name": "smu",
@@ -23141,7 +24482,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 24.0
         },
         "simplifyV": {
             "short_name": "smv",
@@ -23151,7 +24494,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 24.0
         },
         "smoothEdge": {
             "short_name": "ues",
@@ -23161,7 +24506,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "smoothEdgeRatio": {
             "short_name": "esr",
@@ -23171,7 +24518,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 0.99
+            "default_value": 0.99,
+            "min_value": 0.1,
+            "max_value": 0.999
         },
         "smoothShading": {
             "short_name": "smo",
@@ -23181,7 +24530,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "spansU": {
             "short_name": "su",
@@ -23226,7 +24577,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -23264,7 +24617,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 100.0
         },
         "trimFace": {
             "short_name": "tf",
@@ -23284,7 +24639,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "tweakLocation": {
             "short_name": "twl",
@@ -23323,7 +24680,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 0.1
         },
         "useChordHeight": {
             "short_name": "uch",
@@ -23333,7 +24691,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useChordHeightRatio": {
             "short_name": "ucr",
@@ -23343,7 +24703,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMinScreen": {
             "short_name": "uns",
@@ -23353,7 +24715,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -23371,7 +24735,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "uvPivot": {
             "short_name": "pv",
@@ -23425,7 +24791,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 14,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 0.1
         },
         "viewMode": {
             "short_name": "vwm",
@@ -23452,7 +24819,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "visibleFraction": {
             "short_name": "vf",
@@ -23472,7 +24841,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "visibleInRefractions": {
             "short_name": "vif",
@@ -23482,7 +24853,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "volumeSamples": {
             "short_name": "vss",
@@ -23502,7 +24875,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "weights": {
             "short_name": "wt",
@@ -23602,7 +24977,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "alwaysDrawOnTop": {
             "short_name": "adot",
@@ -23612,7 +24989,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "antialiasingLevel": {
             "short_name": "gal",
@@ -23622,7 +25001,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 5.0
         },
         "asBackground": {
             "short_name": "asbg",
@@ -23632,7 +25013,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "backfaceCulling": {
             "short_name": "bck",
@@ -23659,7 +25042,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "blindDataNodes": {
             "short_name": "bn",
@@ -23863,7 +25248,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 1.0
         },
         "boundingBoxScaleY": {
             "short_name": "bscy",
@@ -23874,7 +25260,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 1.0
         },
         "boundingBoxScaleZ": {
             "short_name": "bscz",
@@ -23885,7 +25272,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
-            "default_value": 1.5
+            "default_value": 1.5,
+            "min_value": 1.0
         },
         "boundingBoxSize": {
             "short_name": "bbsi",
@@ -23961,7 +25349,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "castsShadows": {
             "short_name": "csh",
@@ -23971,7 +25361,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "center": {
             "short_name": "c",
@@ -24079,7 +25471,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "containerType": {
             "short_name": "ctyp",
@@ -24098,7 +25492,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "controlPoints": {
             "short_name": "cp",
@@ -24180,7 +25576,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "dispResolution": {
             "short_name": "dr",
@@ -24206,7 +25604,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayBlueColorChannel": {
             "short_name": "dblu",
@@ -24216,7 +25616,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayBorders": {
             "short_name": "db",
@@ -24226,7 +25628,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayCenter": {
             "short_name": "dc",
@@ -24236,7 +25640,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayColorAsGreyScale": {
             "short_name": "dcgs",
@@ -24246,7 +25652,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayColorChannel": {
             "short_name": "dcc",
@@ -24265,7 +25673,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayEdges": {
             "short_name": "de",
@@ -24293,7 +25703,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayHWEnvironment": {
             "short_name": "dhe",
@@ -24303,7 +25715,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayImmediate": {
             "short_name": "di",
@@ -24313,7 +25727,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayInvisibleFaces": {
             "short_name": "difs",
@@ -24323,7 +25739,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayItemNumbers": {
             "short_name": "din",
@@ -24343,7 +25761,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayNonPlanar": {
             "short_name": "dnp",
@@ -24353,7 +25773,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayNormal": {
             "short_name": "dn",
@@ -24363,7 +25785,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayRedColorChannel": {
             "short_name": "dred",
@@ -24373,7 +25797,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displaySmoothMesh": {
             "short_name": "dsm",
@@ -24391,7 +25817,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayTangent": {
             "short_name": "dtn",
@@ -24401,7 +25829,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayTriangles": {
             "short_name": "dt",
@@ -24411,7 +25841,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayUVs": {
             "short_name": "duv",
@@ -24421,7 +25853,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "displayVertices": {
             "short_name": "dv",
@@ -24431,7 +25865,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "doubleSided": {
             "short_name": "ds",
@@ -24441,7 +25877,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "drawOverride": {
             "short_name": "do",
@@ -24483,7 +25921,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "enableOpenCL": {
             "short_name": "eocl",
@@ -24493,7 +25933,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "extraSampleRate": {
             "short_name": "xsr",
@@ -24503,7 +25945,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 5
+            "default_value": 5,
+            "min_value": 0.0
         },
         "face": {
             "short_name": "fc",
@@ -24533,7 +25976,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "featureDisplacement": {
             "short_name": "fbda",
@@ -24543,7 +25988,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "freeze": {
             "short_name": "frze",
@@ -24564,7 +26011,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "geometryAntialiasingOverride": {
             "short_name": "gao",
@@ -24574,7 +26023,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPost": {
             "short_name": "gac",
@@ -24599,7 +26050,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6629999876022339
+            "default_value": 0.6629999876022339,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostG": {
             "short_name": "gag",
@@ -24610,7 +26063,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.6779999732971191
+            "default_value": 0.6779999732971191,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPostR": {
             "short_name": "gar",
@@ -24621,7 +26076,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPost",
             "numeric_type": 11,
-            "default_value": 0.878000020980835
+            "default_value": 0.878000020980835,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPre": {
             "short_name": "gcp",
@@ -24646,7 +26103,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreG": {
             "short_name": "gpg",
@@ -24657,7 +26116,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostColorPreR": {
             "short_name": "grr",
@@ -24668,7 +26129,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostColorPre",
             "numeric_type": 11,
-            "default_value": 0.44699999690055847
+            "default_value": 0.44699999690055847,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostCustomSteps": {
             "short_name": "gcs",
@@ -24701,7 +26164,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.15000000596046448
+            "default_value": 0.15000000596046448,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostFrames": {
             "short_name": "gf",
@@ -24721,7 +26186,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
-            "default_value": 0.5
+            "default_value": 0.5,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostOpacityRange": {
             "short_name": "golr",
@@ -24766,7 +26233,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghosting": {
             "short_name": "gh",
@@ -24776,7 +26245,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ghostingMode": {
             "short_name": "gm",
@@ -24795,7 +26266,8 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0
         },
         "hardwareFogMultiplier": {
             "short_name": "hfm",
@@ -24805,7 +26277,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -24815,7 +26289,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "hideOnPlayback": {
             "short_name": "hpb",
@@ -24826,7 +26302,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "holdOut": {
             "short_name": "hot",
@@ -24836,7 +26314,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "holeFaceData": {
             "short_name": "hfd",
@@ -24883,7 +26363,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "ignoreSelfShadowing": {
             "short_name": "iss",
@@ -24893,7 +26375,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inForceNodeUVUpdate": {
             "short_name": "ifuv",
@@ -24903,7 +26387,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inMesh": {
             "short_name": "i",
@@ -24922,7 +26408,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 6
+            "default_value": 6,
+            "min_value": 0.0
         },
         "instMaterialAssign": {
             "short_name": "imtla",
@@ -24950,7 +26437,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "inverseMatrix": {
             "short_name": "im",
@@ -24969,7 +26458,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHierarchicalConnection": {
             "short_name": "ish",
@@ -24980,7 +26471,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "num_elements": 0,
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -24990,7 +26483,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 2,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
         },
         "keepBorder": {
             "short_name": "kb",
@@ -25000,7 +26495,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "keepHardEdge": {
             "short_name": "khe",
@@ -25010,7 +26507,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "keepMapBorders": {
             "short_name": "kmb",
@@ -25029,7 +26528,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "layerRenderable": {
             "short_name": "rndr",
@@ -25040,7 +26541,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "renderInfo",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "loadTiledTextures": {
             "short_name": "ltt",
@@ -25050,7 +26553,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "lodVisibility": {
             "short_name": "lodv",
@@ -25060,7 +26565,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "materialBlend": {
             "short_name": "matb",
@@ -25097,7 +26604,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "maxSubd": {
             "short_name": "mxs",
@@ -25117,7 +26626,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 60000
+            "default_value": 60000,
+            "min_value": 1.0
         },
         "maxUv": {
             "short_name": "xuv",
@@ -25137,7 +26647,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "maxVisibilitySamplesOverride": {
             "short_name": "vbo",
@@ -25147,7 +26659,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "message": {
             "short_name": "msg",
@@ -25165,7 +26679,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "minEdgeLength": {
             "short_name": "mne",
@@ -25195,7 +26711,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "motionVectorColorSet": {
             "short_name": "mvcs",
@@ -25236,7 +26754,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 11,
-            "default_value": 30.0
+            "default_value": 30.0,
+            "min_value": 0.0,
+            "max_value": 180.0
         },
         "normals": {
             "short_name": "n",
@@ -25265,7 +26785,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "objectColorB": {
             "short_name": "obcb",
@@ -25322,7 +26844,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "osdCreaseMethod": {
             "short_name": "ocr",
@@ -25348,7 +26872,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "osdIndependentUVChannels": {
             "short_name": "iuv",
@@ -25358,7 +26884,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "osdSmoothTriangles": {
             "short_name": "ost",
@@ -25368,7 +26896,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "outForceNodeUVUpdate": {
             "short_name": "ofuv",
@@ -25378,7 +26908,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "outGeometryClean": {
             "short_name": "ogc",
@@ -25472,7 +27004,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 2,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 31.0
         },
         "overrideColorA": {
             "short_name": "ovca",
@@ -25483,7 +27017,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 11,
-            "default_value": 1.0
+            "default_value": 1.0,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideColorB": {
             "short_name": "ovcb",
@@ -25551,7 +27087,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideLevelOfDetail": {
             "short_name": "ovlod",
@@ -25571,7 +27109,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideRGBColors": {
             "short_name": "ovrgbf",
@@ -25582,7 +27122,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideShading": {
             "short_name": "ovs",
@@ -25593,7 +27135,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideTexturing": {
             "short_name": "ovt",
@@ -25604,7 +27148,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "overrideVisibility": {
             "short_name": "ovv",
@@ -25615,7 +27161,9 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kNumericAttribute",
             "parent_plug": "drawOverride",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "parentInverseMatrix": {
             "short_name": "pim",
@@ -25694,7 +27242,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "propagateEdgeHardness": {
             "short_name": "peh",
@@ -25704,7 +27254,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "publishedNodeInfo": {
             "short_name": "pni",
@@ -25731,7 +27283,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "referenceObject": {
             "short_name": "rob",
@@ -25749,7 +27303,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "renderInfo": {
             "short_name": "ri",
@@ -25782,7 +27338,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 7.0
         },
         "renderType": {
             "short_name": "rt",
@@ -25802,7 +27360,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "reuseTriangles": {
             "short_name": "rtri",
@@ -25812,7 +27372,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "rmbCommand": {
             "short_name": "rmc",
@@ -25831,7 +27393,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "shadingSamples": {
             "short_name": "ssa",
@@ -25841,7 +27405,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 1
+            "default_value": 1,
+            "min_value": 1.0,
+            "max_value": 32.0
         },
         "shadingSamplesOverride": {
             "short_name": "sso",
@@ -25851,7 +27417,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "showDisplacements": {
             "short_name": "sdis",
@@ -25861,7 +27429,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "smoothLevel": {
             "short_name": "lev",
@@ -25871,7 +27441,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 2
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 15.0
         },
         "smoothMeshSelectionMode": {
             "short_name": "ssm",
@@ -25903,7 +27475,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "smoothShading": {
             "short_name": "smo",
@@ -25913,7 +27487,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "smoothTessLevel": {
             "short_name": "stlv",
@@ -25923,7 +27499,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 4,
-            "default_value": 7
+            "default_value": 7,
+            "min_value": 1.0,
+            "max_value": 10.0
         },
         "smoothUVs": {
             "short_name": "suv",
@@ -25933,7 +27511,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "smoothWarn": {
             "short_name": "sw",
@@ -25943,7 +27523,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "sofx": {
             "short_name": "sx",
@@ -26014,7 +27596,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "templateName": {
             "short_name": "tna",
@@ -26052,7 +27636,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 0
+            "default_value": 0,
+            "min_value": 0.0,
+            "max_value": 100.0
         },
         "tweak": {
             "short_name": "tw",
@@ -26062,7 +27648,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "tweakLocation": {
             "short_name": "twl",
@@ -26081,7 +27669,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMaxEdgeLength": {
             "short_name": "uxe",
@@ -26091,7 +27681,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMaxSubdivisions": {
             "short_name": "uxs",
@@ -26101,7 +27693,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMaxUV": {
             "short_name": "uxu",
@@ -26111,7 +27705,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMeshSculptCache": {
             "short_name": "umsc",
@@ -26121,7 +27717,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMeshTexSculptCache": {
             "short_name": "umtsc",
@@ -26131,7 +27729,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMinEdgeLength": {
             "short_name": "uie",
@@ -26141,7 +27741,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useMinScreen": {
             "short_name": "uns",
@@ -26151,7 +27753,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useNumTriangles": {
             "short_name": "unp",
@@ -26161,7 +27765,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -26179,7 +27785,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -26189,7 +27797,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "useSmoothPreviewForRender": {
             "short_name": "uspr",
@@ -26199,7 +27809,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "userTrg": {
             "short_name": "utrg",
@@ -26290,7 +27902,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "vertexColor": {
             "short_name": "vclr",
@@ -26318,7 +27932,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "vertexNormal": {
             "short_name": "vn",
@@ -26373,7 +27989,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": True
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "visibleFraction": {
             "short_name": "vf",
@@ -26393,7 +28011,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "visibleInRefractions": {
             "short_name": "vif",
@@ -26403,7 +28023,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "volumeSamples": {
             "short_name": "vss",
@@ -26423,7 +28045,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 1,
-            "default_value": False
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
         },
         "vrts": {
             "short_name": "vt",

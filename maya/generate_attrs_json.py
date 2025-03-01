@@ -101,6 +101,10 @@ def get_attr_properties(nd):
                 numeric = om.MFnNumericAttribute(attr)
                 attr_properties["numeric_type"] = numeric.numericType()
                 attr_properties["default_value"] = numeric.default
+                if numeric.hasMin():
+                    attr_properties["min_value"] = numeric.getMin()
+                if numeric.hasMax():
+                    attr_properties["max_value"] = numeric.getMax()
 
             elif attr.apiType() == om.MFn.kEnumAttribute:
                 enum = om.MFnEnumAttribute(attr)
