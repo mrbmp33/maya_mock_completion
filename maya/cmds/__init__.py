@@ -9,11 +9,21 @@ from maya import ACTIVE_SELECTION
 
 def _register_node_from_name(node_name:str) -> om.MObject:
     mobject = _hierarchy.NodePool.from_name(node_name)
-    if not mobject:
-        sl_ls = om.MSelectionList()
-        sl_ls.add(node_name)
-        mobject = sl_ls.getDependNode(0)
-        _hierarchy.register(mobject)
+
+    if mobject:
+        return mobject
+
+    # Object could have been given with path and not have this one registered. Try with just name
+    if "|" in node_name:
+        mobject = _hierarchy.NodePool.from_name(node_name.split("|")[-1])
+        if mobject:
+            return mobject
+
+    # Else, assume in scene. Not created through this api
+    sl_ls = om.MSelectionList()
+    sl_ls.add(node_name)
+    mobject = sl_ls.getDependNode(0)
+    _hierarchy.register(mobject)
     return mobject
 
 
@@ -810,21 +820,27 @@ def attributeMenu(beginMenu=bool(), beg=bool(), editor=str(), edt=str(), finishM
     pass
 
 
-def attributeName(attr_name, leaf=bool(), lf=bool(), long=bool(), l=bool(), nice=bool(), n=bool(), short=bool(), s=bool(), *args,
-                  **kwargs):
+def attributeName(attr_name, leaf=bool(), lf=bool(), long: bool=None, l: bool=None, nice: bool=None, n: bool=None,
+                  short: bool=None, s: bool=None):
     if not attr_name:
         raise RuntimeError("attr_name is required")
     
+    if sum([long or 0, l or 0, nice or 0, n or 0, short or 0, s or 0]) > 1:
+        raise ValueError("Only one of long, nice, or short can be True")
+    
+    use_long = any((long or l, not (short or s)))
+    
     _, plug = _attr_name_to_mobject_and_plug(attr_name)
     plug_name = plug.partialName(
-        useLongNames=long,
+        useLongNames=use_long,
         includeNodeName=False,
-        useNiceNames=nice
     )
-    return re.sub(
-        r"((?<=[a-z])[A-Z]|(?<!\A)[A-Z](?=[a-z]))",
-        r" \1", plug_name
-    ).title().replace("  ", " ")
+    if nice:
+        return re.sub(
+            r"((?<=[a-z])[A-Z]|(?<!\A)[A-Z](?=[a-z]))",
+            r" \1", plug_name
+        ).title().replace("  ", " ")
+    return plug_name
 
 
 def attributeQuery(affectsAppearance=bool(), aa=bool(), affectsWorldspace=bool(), aws=bool(), attributeType=bool(),
