@@ -839,7 +839,7 @@ def attributeName(attr_name, leaf=bool(), lf=bool(), long: bool=None, l: bool=No
         return re.sub(
             r"((?<=[a-z])[A-Z]|(?<!\A)[A-Z](?=[a-z]))",
             r" \1", plug_name
-        ).title().replace("  ", " ")
+        ).title().replace("  ", " ").replace("_", " ")
     return plug_name
 
 

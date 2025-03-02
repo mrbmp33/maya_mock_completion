@@ -13398,6 +13398,8 @@ class MObject(object):
         self._world_space = False
         self._writable = True
 
+        self._is_proxy_attribute = False
+
     def _init_unit_fields(self):
         self._unit: int = None
         self._unit_type: int = None
@@ -20513,8 +20515,12 @@ class MFnAttribute(MFnBase):
         self._mobject._internal = value
 
     @property
-    def isProxyAttribute(self):
-        return self._mobject._isProxyAttribute
+    def isProxyAttribute(self) -> bool:
+        return self._mobject._is_proxy_attribute
+    
+    @isProxyAttribute.setter
+    def isProxyAttribute(self, value: bool):
+        return self._mobject._is_proxy_attribute
 
     @property
     def keyable(self):
