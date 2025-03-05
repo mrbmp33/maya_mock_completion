@@ -2,6 +2,7 @@ from time import sleep
 import re
 
 import maya.mmc_hierarchy as _hierarchy
+from .custom_cmds import *
 from maya.api import OpenMaya as om
 from maya.node_types_literals import NODE_TYPES
 from maya import ACTIVE_SELECTION

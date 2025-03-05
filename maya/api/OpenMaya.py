@@ -8210,7 +8210,8 @@ class MPxCommand(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__()
+        self._syntax = MSyntax()
 
     def doIt(*args, **kwargs):
         """
@@ -8240,7 +8241,7 @@ class MPxCommand(object):
         """
         Returns the command's MSyntax object, if it has one.
         """
-        pass
+        return self._syntax
 
     def undoIt(*args, **kwargs):
         """
@@ -19589,11 +19590,11 @@ class MArgDatabase(MArgParser):
     ability to return arguments and objects as MSelectionLists
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, syntax: 'MSyntax', arg_list: 'MArgList'):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(syntax, arg_list)
 
     def commandArgumentMSelectionList(*args, **kwargs):
         """
