@@ -1,5 +1,6 @@
 from time import sleep
 import re
+from typing import Union
 
 import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
@@ -2042,7 +2043,7 @@ def createLayeredPsdFile(imageFileName=list, ifn=list, psdFileName=str(), psf=st
     pass
 
 
-def createNode(node_type: str | NODE_TYPES, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(),
+def createNode(node_type: Union[str, NODE_TYPES], name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(),
                skipSelect=bool(), ss=bool(),
                *args, **kwargs):
     if not any((name, n)):
