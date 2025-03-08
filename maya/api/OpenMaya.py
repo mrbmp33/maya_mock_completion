@@ -1157,11 +1157,11 @@ class MTypeId(object):
     Stores a Maya object type identifier.
     """
 
-    def __eq__(*args, **kwargs):
+    def __eq__(self, other: 'MTypeId') -> bool:
         """
         x.__eq__(y) <==> x==y
         """
-        pass
+        return self.id() == other.id()
 
     def __ge__(*args, **kwargs):
         """
@@ -1193,11 +1193,11 @@ class MTypeId(object):
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, other: 'MTypeId') -> bool:
         """
         x.__ne__(y) <==> x!=y
         """
-        pass
+        return self.id() != other.id()
 
     def __repr__(self):
         """
@@ -8206,7 +8206,7 @@ class MPxCommand(object):
     Base class for custom commands.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
@@ -13355,7 +13355,7 @@ class MObject(object):
         self._parent: Optional['MObject'] = None
         self._children = []
         self._is_world = False
-        self._cached_plugs = {}
+        self._cached_plugs: dict[str, MPlug] = {}
         self._attributes = {}
 
         # plug-specific properties
@@ -22703,11 +22703,15 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def getConnections(*args, **kwargs):
+    def getConnections(self) -> 'MPlugArray':
         """
         Returns all the plugs which are connected to attributes of this node.
         """
-        pass
+        plug_array = MPlugArray()
+        for mplug in self._mobject._cached_plugs.values():
+            if mplug.isConnected:
+                plug_array.append(mplug)
+        return plug_array
 
     def getExternalContent(*args, **kwargs):
         """
