@@ -20,6 +20,7 @@ import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
 from maya.node_types_literals import NODE_TYPES
 from maya import ACTIVE_SELECTION
+from maya import mmc_node_types_alias_map
 
 
 def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 'MObject':
@@ -39,7 +40,11 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
 
     # Add kDependencyNode in list of types and then the actual node type
     mobject._api_type = [MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode]
-    mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
+    
+    if mfn_key := mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP.get(type_str):
+        mobject._api_type.append(mfn_key)
+    else:
+        mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
 
     mobject._name = hierarchy.find_first_available_name(name)
     mobject._is_null = False
@@ -1203,17 +1208,17 @@ class MTypeId(object):
         """
         x.__repr__() <==> repr(x)
         """
+        return str(self)
+
+    def __str__(self):
+        """
+        x.__str__() <==> str(x)
+        """
         return "{class_name}({value}) <{as_str}>".format(
             class_name=self.__class__.__name__,
             value=self._value,
             as_str=_TYPE_INT_TO_STR.get(self._value, 'kInvalid')
         )
-
-    def __str__(*args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
 
     def id(self) -> int:
         """
@@ -9602,2421 +9607,1212 @@ class MPxNode(object):
 
 
 class MFn(object):
-    """
-    Static class providing constants for all API types.
-    """
-
-    kInvalid = 0
-
-    kBase = 1
-
-    kNamedObject = 2
-
-    kModel = 3
-
-    kDependencyNode = 4
-
-    kAddDoubleLinear = 5
-
-    kAffect = 6
-
-    kAnimCurve = 7
-
-    kAnimCurveTimeToAngular = 8
-
-    kAnimCurveTimeToDistance = 9
-
-    kAnimCurveTimeToTime = 10
-
-    kAnimCurveTimeToUnitless = 11
-
-    kAnimCurveUnitlessToAngular = 12
-
-    kAnimCurveUnitlessToDistance = 13
-
-    kAnimCurveUnitlessToTime = 14
-
-    kAnimCurveUnitlessToUnitless = 15
-
-    kResultCurve = 16
-
-    kResultCurveTimeToAngular = 17
-
-    kResultCurveTimeToDistance = 18
-
-    kResultCurveTimeToTime = 19
-
-    kResultCurveTimeToUnitless = 20
-
-    kAngleBetween = 21
-
-    kAudio = 22
-
-    kBackground = 23
-
-    kColorBackground = 24
-
-    kFileBackground = 25
-
-    kRampBackground = 26
-
-    kBlend = 27
-
-    kBlendTwoAttr = 28
-
-    kBlendWeighted = 29
-
-    kBlendDevice = 30
-
-    kBlendColors = 31
-
-    kBump = 32
-
-    kBump3d = 33
-
-    kCameraView = 34
-
-    kChainToSpline = 35
-
-    kChoice = 36
-
-    kCondition = 37
-
-    kContrast = 38
-
-    kClampColor = 39
-
-    kCreate = 40
-
-    kAlignCurve = 41
-
-    kAlignSurface = 42
-
-    kAttachCurve = 43
-
-    kAttachSurface = 44
-
-    kAvgCurves = 45
-
-    kAvgSurfacePoints = 46
-
-    kAvgNurbsSurfacePoints = 47
-
-    kBevel = 48
-
-    kBirailSrf = 49
-
-    kDPbirailSrf = 50
-
-    kMPbirailSrf = 51
-
-    kSPbirailSrf = 52
-
-    kBoundary = 53
-
-    kCircle = 54
-
-    kCloseCurve = 55
-
-    kClosestPointOnSurface = 56
-
-    kCloseSurface = 57
-
-    kCurveFromSurface = 58
-
-    kCurveFromSurfaceBnd = 59
-
-    kCurveFromSurfaceCoS = 60
-
-    kCurveFromSurfaceIso = 61
-
-    kCurveInfo = 62
-
-    kDetachCurve = 63
-
-    kDetachSurface = 64
-
-    kExtendCurve = 65
-
-    kExtendSurface = 66
-
-    kExtrude = 67
-
-    kFFblendSrf = 68
-
-    kFFfilletSrf = 69
-
-    kFilletCurve = 70
-
-    kFitBspline = 71
-
-    kFlow = 72
-
-    kHardenPointCurve = 73
-
-    kIllustratorCurve = 74
-
-    kInsertKnotCrv = 75
-
-    kInsertKnotSrf = 76
-
-    kIntersectSurface = 77
-
-    kNurbsTesselate = 78
-
-    kNurbsPlane = 79
-
-    kNurbsCube = 80
-
-    kOffsetCos = 81
-
-    kOffsetCurve = 82
-
-    kPlanarTrimSrf = 83
-
-    kPointOnCurveInfo = 84
-
-    kPointOnSurfaceInfo = 85
-
-    kPrimitive = 86
-
-    kProjectCurve = 87
-
-    kProjectTangent = 88
-
-    kRBFsurface = 89
-
-    kRebuildCurve = 90
-
-    kRebuildSurface = 91
-
-    kReverseCurve = 92
-
-    kReverseSurface = 93
-
-    kRevolve = 94
-
-    kRevolvedPrimitive = 95
-
-    kCone = 96
-
-    kRenderCone = 97
-
-    kCylinder = 98
-
-    kSphere = 99
-
-    kSkin = 100
-
-    kStitchSrf = 101
-
-    kSubCurve = 102
-
-    kSurfaceInfo = 103
-
-    kTextCurves = 104
-
-    kTrim = 105
-
-    kUntrim = 106
-
-    kDagNode = 107
-
-    kProxy = 108
-
-    kUnderWorld = 109
-
-    kTransform = 110
-
-    kAimConstraint = 111
-
-    kLookAt = 112
-
-    kGeometryConstraint = 113
-
-    kGeometryVarGroup = 114
-
-    kAnyGeometryVarGroup = 115
-
-    kCurveVarGroup = 116
-
-    kMeshVarGroup = 117
-
-    kSurfaceVarGroup = 118
-
-    kIkEffector = 119
-
-    kIkHandle = 120
-
-    kJoint = 121
-
-    kManipulator3D = 122
-
-    kArrowManip = 123
-
-    kAxesActionManip = 124
-
-    kBallProjectionManip = 125
-
-    kCircleManip = 126
-
-    kScreenAlignedCircleManip = 127
-
-    kCircleSweepManip = 128
-
-    kConcentricProjectionManip = 129
-
-    kCubicProjectionManip = 130
-
-    kCylindricalProjectionManip = 131
-
-    kDiscManip = 132
-
-    kFreePointManip = 133
-
-    kCenterManip = 134
-
-    kLimitManip = 135
-
-    kEnableManip = 136
-
-    kFreePointTriadManip = 137
-
-    kPropMoveTriadManip = 138
-
-    kTowPointManip = 139
-
-    kPolyCreateToolManip = 140
-
-    kPolySplitToolManip = 141
-
-    kGeometryOnLineManip = 142
-
-    kCameraPlaneManip = 143
-
-    kToggleOnLineManip = 144
-
-    kStateManip = 145
-
-    kIsoparmManip = 146
-
-    kLineManip = 147
-
-    kManipContainer = 148
-
-    kAverageCurveManip = 149
-
-    kBarnDoorManip = 150
-
-    kBevelManip = 151
-
-    kBlendManip = 152
-
-    kButtonManip = 153
-
-    kCameraManip = 154
-
-    kCoiManip = 155
-
-    kCpManip = 156
-
-    kCreateCVManip = 157
-
-    kCreateEPManip = 158
-
-    kCurveEdManip = 159
-
-    kCurveSegmentManip = 160
-
-    kDirectionManip = 161
-
-    kDofManip = 162
-
-    kDropoffManip = 163
-
-    kExtendCurveDistanceManip = 164
-
-    kExtrudeManip = 165
-
-    kIkSplineManip = 166
-
-    kIkRPManip = 167
-
-    kJointClusterManip = 168
-
-    kLightManip = 169
-
-    kMotionPathManip = 170
-
-    kOffsetCosManip = 171
-
-    kOffsetCurveManip = 172
-
-    kProjectionManip = 173
-
-    kPolyProjectionManip = 174
-
-    kProjectionUVManip = 175
-
-    kProjectionMultiManip = 176
-
-    kProjectTangentManip = 177
-
-    kPropModManip = 178
-
-    kQuadPtOnLineManip = 179
-
-    kRbfSrfManip = 180
-
-    kReverseCurveManip = 181
-
-    kReverseCrvManip = 182
-
-    kReverseSurfaceManip = 183
-
-    kRevolveManip = 184
-
-    kRevolvedPrimitiveManip = 185
-
-    kSpotManip = 186
-
-    kSpotCylinderManip = 187
-
-    kTriplanarProjectionManip = 188
-
-    kTrsManip = 189
-
-    kDblTrsManip = 190
-
-    kPivotManip2D = 191
-
-    kManip2DContainer = 192
-
-    kPolyMoveUVManip = 193
-
-    kPolyMappingManip = 194
-
-    kPolyModifierManip = 195
-
-    kPolyMoveVertexManip = 196
-
-    kPolyVertexNormalManip = 197
-
-    kTexSmudgeUVManip = 198
-
-    kTexLatticeDeformManip = 199
-
-    kTexLattice = 200
-
-    kTexSmoothManip = 201
-
-    kTrsTransManip = 202
-
-    kTrsInsertManip = 203
-
-    kTrsXformManip = 204
-
-    kManipulator2D = 205
-
-    kTranslateManip2D = 206
-
-    kPlanarProjectionManip = 207
-
-    kPointOnCurveManip = 208
-
-    kTowPointOnCurveManip = 209
-
-    kMarkerManip = 210
-
-    kPointOnLineManip = 211
-
-    kPointOnSurfaceManip = 212
-
-    kTranslateUVManip = 213
-
-    kRotateBoxManip = 214
-
-    kRotateManip = 215
-
-    kHandleRotateManip = 216
-
-    kRotateLimitsManip = 217
-
-    kScaleLimitsManip = 218
-
-    kScaleManip = 219
-
-    kScalingBoxManip = 220
-
-    kScriptManip = 221
-
-    kSphericalProjectionManip = 222
-
-    kTextureManip3D = 223
-
-    kToggleManip = 224
-
-    kTranslateBoxManip = 225
-
-    kTranslateLimitsManip = 226
-
-    kTranslateManip = 227
-
-    kTrimManip = 228
-
-    kJointTranslateManip = 229
-
-    kManipulator = 230
-
-    kCirclePointManip = 231
-
-    kDimensionManip = 232
-
-    kFixedLineManip = 233
-
-    kLightProjectionGeometry = 234
-
-    kLineArrowManip = 235
-
-    kPointManip = 236
-
-    kTriadManip = 237
-
-    kNormalConstraint = 238
-
-    kOrientConstraint = 239
-
-    kPointConstraint = 240
-
-    kSymmetryConstraint = 241
-
-    kParentConstraint = 242
-
-    kPoleVectorConstraint = 243
-
-    kScaleConstraint = 244
-
-    kTangentConstraint = 245
-
-    kUnknownTransform = 246
-
-    kWorld = 247
-
-    kShape = 248
-
-    kBaseLattice = 249
-
-    kCamera = 250
-
-    kCluster = 251
-
-    kSoftMod = 252
-
-    kCollision = 253
-
-    kDummy = 254
-
-    kEmitter = 255
-
-    kField = 256
-
-    kAir = 257
-
-    kDrag = 258
-
-    kGravity = 259
-
-    kNewton = 260
-
-    kRadial = 261
-
-    kTurbulence = 262
-
-    kUniform = 263
-
-    kVortex = 264
-
-    kGeometric = 265
-
-    kCurve = 266
-
-    kNurbsCurve = 267
-
-    kNurbsCurveGeom = 268
-
-    kDimension = 269
-
-    kAngle = 270
-
-    kAnnotation = 271
-
-    kDistance = 272
-
-    kArcLength = 273
-
-    kRadius = 274
-
-    kParamDimension = 275
-
-    kDirectedDisc = 276
-
-    kRenderRect = 277
-
-    kEnvFogShape = 278
-
-    kLattice = 279
-
-    kLatticeGeom = 280
-
-    kLocator = 281
-
-    kDropoffLocator = 282
-
-    kMarker = 283
-
-    kOrientationMarker = 284
-
-    kPositionMarker = 285
-
-    kOrientationLocator = 286
-
-    kTrimLocator = 287
-
-    kPlane = 288
-
-    kSketchPlane = 289
-
-    kGroundPlane = 290
-
-    kOrthoGrid = 291
-
-    kSprite = 292
-
-    kSurface = 293
-
-    kNurbsSurface = 294
-
-    kNurbsSurfaceGeom = 295
-
-    kMesh = 296
-
-    kMeshGeom = 297
-
-    kRenderSphere = 298
-
-    kFlexor = 299
-
-    kClusterFlexor = 300
-
-    kGuideLine = 301
-
-    kLight = 302
-
-    kAmbientLight = 303
-
-    kNonAmbientLight = 304
-
-    kAreaLight = 305
-
-    kLinearLight = 306
-
-    kNonExtendedLight = 307
-
-    kDirectionalLight = 308
-
-    kPointLight = 309
-
-    kSpotLight = 310
-
-    kParticle = 311
-
-    kPolyToolFeedbackShape = 312
-
-    kRigidConstraint = 313
-
-    kRigid = 314
-
-    kSpring = 315
-
-    kUnknownDag = 316
-
-    kDefaultLightList = 317
-
-    kDeleteComponent = 318
-
-    kDispatchCompute = 319
-
-    kShadingEngine = 320
-
-    kDisplacementShader = 321
-
-    kDistanceBetween = 322
-
-    kDOF = 323
-
-    kDummyConnectable = 324
-
-    kDynamicsController = 325
-
-    kGeoConnectable = 326
-
-    kExpression = 327
-
-    kExtract = 328
-
-    kFilter = 329
-
-    kFilterClosestSample = 330
-
-    kFilterEuler = 331
-
-    kFilterSimplify = 332
-
-    kGammaCorrect = 333
-
-    kGeometryFilt = 334
-
-    kBendLattice = 335
-
-    kBlendShape = 336
-
-    kCombinationShape = 337
-
-    kBulgeLattice = 338
-
-    kFFD = 339
-
-    kFfdDualBase = 340
-
-    kRigidDeform = 341
-
-    kSculpt = 342
-
-    kTextureDeformer = 343
-
-    kTextureDeformerHandle = 344
-
-    kTweak = 345
-
-    kWeightGeometryFilt = 346
-
-    kClusterFilter = 347
-
-    kSoftModFilter = 348
-
-    kJointCluster = 349
-
-    kDeltaMush = 350
-
-    kTension = 351
-
-    kMorph = 352
-
-    kSolidify = 353
-
-    kProximityWrap = 354
-
-    kWire = 355
-
-    kGroupId = 356
-
-    kGroupParts = 357
-
-    kGuide = 358
-
-    kHsvToRgb = 359
-
-    kHyperGraphInfo = 360
-
-    kHyperLayout = 361
-
-    kHyperView = 362
-
-    kIkSolver = 363
-
-    kMCsolver = 364
-
-    kPASolver = 365
-
-    kSCsolver = 366
-
-    kRPsolver = 367
-
-    kSplineSolver = 368
-
-    kIkSystem = 369
-
-    kImagePlane = 370
-
-    kLambert = 371
-
-    kReflect = 372
-
-    kBlinn = 373
-
-    kPhong = 374
-
-    kPhongExplorer = 375
-
-    kLayeredShader = 376
-
-    kStandardSurface = 377
-
-    kLightInfo = 378
-
-    kLeastSquares = 379
-
-    kLightFogMaterial = 380
-
-    kEnvFogMaterial = 381
-
-    kLightList = 382
-
-    kLightSource = 383
-
-    kLuminance = 384
-
-    kMakeGroup = 385
-
-    kMaterial = 386
-
-    kDiffuseMaterial = 387
-
-    kLambertMaterial = 388
-
-    kBlinnMaterial = 389
-
-    kPhongMaterial = 390
-
-    kLightSourceMaterial = 391
-
-    kMaterialInfo = 392
-
-    kMaterialTemplate = 393
-
-    kMatrixAdd = 394
-
-    kMatrixHold = 395
-
-    kMatrixMult = 396
-
-    kMatrixPass = 397
-
-    kMatrixWtAdd = 398
-
-    kMidModifier = 399
-
-    kMidModifierWithMatrix = 400
-
-    kPolyBevel = 401
-
-    kPolyTweak = 402
-
-    kPolyAppend = 403
-
-    kPolyChipOff = 404
-
-    kPolyCloseBorder = 405
-
-    kPolyCollapseEdge = 406
-
-    kPolyCollapseF = 407
-
-    kPolyCylProj = 408
-
-    kPolyDelEdge = 409
-
-    kPolyDelFacet = 410
-
-    kPolyDelVertex = 411
-
-    kPolyExtrudeFacet = 412
-
-    kPolyMapCut = 413
-
-    kPolyMapDel = 414
-
-    kPolyMapSew = 415
-
-    kPolyMergeEdge = 416
-
-    kPolyMergeFacet = 417
-
-    kPolyMoveEdge = 418
-
-    kPolyMoveFacet = 419
-
-    kPolyMoveFacetUV = 420
-
-    kPolyMoveUV = 421
-
-    kPolyMoveVertex = 422
-
-    kPolyMoveVertexUV = 423
-
-    kPolyNormal = 424
-
-    kPolyPlanProj = 425
-
-    kPolyProj = 426
-
-    kPolyQuad = 427
-
-    kPolySmooth = 428
-
-    kPolySoftEdge = 429
-
-    kPolySphProj = 430
-
-    kPolySplit = 431
-
-    kPolySubdEdge = 432
-
-    kPolySubdFacet = 433
-
-    kPolyTriangulate = 434
-
-    kPolyCreator = 435
-
-    kPolyPrimitive = 436
-
-    kPolyCone = 437
-
-    kPolyCube = 438
-
-    kPolyCylinder = 439
-
-    kPolyMesh = 440
-
-    kPolySphere = 441
-
-    kPolyTorus = 442
-
-    kPolyCreateFacet = 443
-
-    kPolyUnite = 444
-
-    kMotionPath = 445
-
-    kPluginMotionPathNode = 446
-
-    kMultilisterLight = 447
-
-    kMultiplyDivide = 448
-
-    kOldGeometryConstraint = 449
-
-    kOpticalFX = 450
-
-    kParticleAgeMapper = 451
-
-    kParticleCloud = 452
-
-    kParticleColorMapper = 453
-
-    kParticleIncandecenceMapper = 454
-
-    kParticleTransparencyMapper = 455
-
-    kPartition = 456
-
-    kPlace2dTexture = 457
-
-    kPlace3dTexture = 458
-
-    kPluginDependNode = 459
-
-    kPluginLocatorNode = 460
-
-    kPlusMinusAverage = 461
-
-    kPointMatrixMult = 462
-
-    kPolySeparate = 463
-
-    kPostProcessList = 464
-
-    kProjection = 465
-
-    kRecord = 466
-
-    kRenderUtilityList = 467
-
-    kReverse = 468
-
-    kRgbToHsv = 469
-
-    kRigidSolver = 470
-
-    kSet = 471
-
-    kTextureBakeSet = 472
-
-    kVertexBakeSet = 473
-
-    kSetRange = 474
-
-    kShaderGlow = 475
-
-    kShaderList = 476
-
-    kShadingMap = 477
-
-    kSamplerInfo = 478
-
-    kShapeFragment = 479
-
-    kSimpleVolumeShader = 480
-
-    kSl60 = 481
-
-    kSnapshot = 482
-
-    kStoryBoard = 483
-
-    kSummaryObject = 484
-
-    kSuper = 485
-
-    kControl = 486
-
-    kSurfaceLuminance = 487
-
-    kSurfaceShader = 488
-
-    kTextureList = 489
-
-    kTextureEnv = 490
-
-    kEnvBall = 491
-
-    kEnvCube = 492
-
-    kEnvChrome = 493
-
-    kEnvSky = 494
-
-    kEnvSphere = 495
-
-    kTexture2d = 496
-
-    kBulge = 497
-
-    kChecker = 498
-
-    kCloth = 499
-
-    kFileTexture = 500
-
-    kFractal = 501
-
-    kGrid = 502
-
-    kMountain = 503
-
-    kRamp = 504
-
-    kStencil = 505
-
-    kWater = 506
-
-    kTexture3d = 507
-
-    kBrownian = 508
-
-    kCloud = 509
-
-    kCrater = 510
-
-    kGranite = 511
-
-    kLeather = 512
-
-    kMarble = 513
-
-    kRock = 514
-
-    kSnow = 515
-
-    kSolidFractal = 516
-
-    kStucco = 517
-
-    kTxSl = 518
-
-    kWood = 519
-
-    kTime = 520
-
-    kTimeToUnitConversion = 521
-
-    kRenderSetup = 522
-
-    kRenderGlobals = 523
-
-    kRenderGlobalsList = 524
-
-    kRenderQuality = 525
-
-    kResolution = 526
-
-    kHardwareRenderGlobals = 527
-
-    kArrayMapper = 528
-
-    kUnitConversion = 529
-
-    kUnitToTimeConversion = 530
-
-    kUseBackground = 531
-
-    kUnknown = 532
-
-    kVectorProduct = 533
-
-    kVolumeShader = 534
-
-    kComponent = 535
-
-    kCurveCVComponent = 536
-
-    kCurveEPComponent = 537
-
-    kCurveKnotComponent = 538
-
-    kCurveParamComponent = 539
-
-    kIsoparmComponent = 540
-
-    kPivotComponent = 541
-
-    kSurfaceCVComponent = 542
-
-    kSurfaceEPComponent = 543
-
-    kSurfaceKnotComponent = 544
-
-    kEdgeComponent = 545
-
-    kLatticeComponent = 546
-
-    kSurfaceRangeComponent = 547
-
-    kDecayRegionCapComponent = 548
-
-    kDecayRegionComponent = 549
-
-    kMeshComponent = 550
-
-    kMeshEdgeComponent = 551
-
-    kMeshPolygonComponent = 552
-
-    kMeshFrEdgeComponent = 553
-
-    kMeshVertComponent = 554
-
-    kMeshFaceVertComponent = 555
-
-    kOrientationComponent = 556
-
-    kSubVertexComponent = 557
-
-    kMultiSubVertexComponent = 558
-
-    kSetGroupComponent = 559
-
-    kDynParticleSetComponent = 560
-
-    kSelectionItem = 561
-
-    kDagSelectionItem = 562
-
-    kNonDagSelectionItem = 563
-
-    kItemList = 564
-
-    kAttribute = 565
-
-    kNumericAttribute = 566
-
-    kDoubleAngleAttribute = 567
-
-    kFloatAngleAttribute = 568
-
-    kDoubleLinearAttribute = 569
-
-    kFloatLinearAttribute = 570
-
-    kTimeAttribute = 571
-
-    kEnumAttribute = 572
-
-    kUnitAttribute = 573
-
-    kTypedAttribute = 574
-
-    kCompoundAttribute = 575
-
-    kGenericAttribute = 576
-
-    kLightDataAttribute = 577
-
-    kMatrixAttribute = 578
-
-    kFloatMatrixAttribute = 579
-
-    kMessageAttribute = 580
-
-    kOpaqueAttribute = 581
-
-    kPlugin = 582
-
-    kData = 583
-
-    kComponentListData = 584
-
-    kDoubleArrayData = 585
-
-    kIntArrayData = 586
-
-    kUintArrayData = 587
-
-    kLatticeData = 588
-
-    kMatrixData = 589
-
-    kMeshData = 590
-
-    kNurbsSurfaceData = 591
-
-    kNurbsCurveData = 592
-
-    kNumericData = 593
-
-    kData2Double = 594
-
-    kData2Float = 595
-
-    kData2Int = 596
-
-    kData2Short = 597
-
-    kData3Double = 598
-
-    kData3Float = 599
-
-    kData3Int = 600
-
-    kData3Short = 601
-
-    kPluginData = 602
-
-    kPointArrayData = 603
-
-    kMatrixArrayData = 604
-
-    kSphereData = 605
-
-    kStringData = 606
-
-    kStringArrayData = 607
-
-    kVectorArrayData = 608
-
-    kSelectionList = 609
-
-    kTransformGeometry = 610
-
-    kCommEdgePtManip = 611
-
-    kCommEdgeOperManip = 612
-
-    kCommEdgeSegmentManip = 613
-
-    kCommCornerManip = 614
-
-    kCommCornerOperManip = 615
-
-    kPluginDeformerNode = 616
-
-    kTorus = 617
-
-    kPolyBoolOp = 618
-
-    kSingleShadingSwitch = 619
-
-    kDoubleShadingSwitch = 620
-
-    kTripleShadingSwitch = 621
-
-    kNurbsSquare = 622
-
-    kAnisotropy = 623
-
-    kNonLinear = 624
-
-    kDeformFunc = 625
-
-    kDeformBend = 626
-
-    kDeformTwist = 627
-
-    kDeformSquash = 628
-
-    kDeformFlare = 629
-
-    kDeformSine = 630
-
-    kDeformWave = 631
-
-    kDeformBendManip = 632
-
-    kDeformTwistManip = 633
-
-    kDeformSquashManip = 634
-
-    kDeformFlareManip = 635
-
-    kDeformSineManip = 636
-
-    kDeformWaveManip = 637
-
-    kSoftModManip = 638
-
-    kDistanceManip = 639
-
-    kScript = 640
-
-    kCurveFromMeshEdge = 641
-
-    kCurveCurveIntersect = 642
-
-    kNurbsCircular3PtArc = 643
-
-    kNurbsCircular2PtArc = 644
-
-    kOffsetSurface = 645
-
-    kRoundConstantRadius = 646
-
-    kRoundRadiusManip = 647
-
-    kRoundRadiusCrvManip = 648
-
-    kRoundConstantRadiusManip = 649
-
-    kThreePointArcManip = 650
-
-    kTwoPointArcManip = 651
-
-    kTextButtonManip = 652
-
-    kOffsetSurfaceManip = 653
-
-    kImageData = 654
-
-    kImageLoad = 655
-
-    kImageSave = 656
-
-    kImageNetSrc = 657
-
-    kImageNetDest = 658
-
-    kImageRender = 659
-
-    kImageAdd = 660
-
-    kImageDiff = 661
-
-    kImageMultiply = 662
-
-    kImageOver = 663
-
-    kImageUnder = 664
-
-    kImageColorCorrect = 665
-
-    kImageBlur = 666
-
-    kImageFilter = 667
-
-    kImageDepth = 668
-
-    kImageDisplay = 669
-
-    kImageView = 670
-
-    kImageMotionBlur = 671
-
-    kViewColorManager = 672
-
-    kMatrixFloatData = 673
-
-    kSkinShader = 674
-
-    kComponentManip = 675
-
-    kSelectionListData = 676
-
-    kObjectFilter = 677
-
-    kObjectMultiFilter = 678
-
-    kObjectNameFilter = 679
-
-    kObjectTypeFilter = 680
-
-    kObjectAttrFilter = 681
-
-    kObjectRenderFilter = 682
-
-    kObjectScriptFilter = 683
-
-    kSelectionListOperator = 684
-
-    kSubdiv = 685
-
-    kPolyToSubdiv = 686
-
-    kSkinClusterFilter = 687
-
-    kKeyingGroup = 688
-
-    kCharacter = 689
-
-    kCharacterOffset = 690
-
-    kDagPose = 691
-
-    kStitchAsNurbsShell = 692
-
-    kExplodeNurbsShell = 693
-
-    kNurbsBoolean = 694
-
-    kStitchSrfManip = 695
-
-    kForceUpdateManip = 696
-
-    kPluginManipContainer = 697
-
-    kPolySewEdge = 698
-
-    kPolyMergeVert = 699
-
-    kPolySmoothFacet = 700
-
-    kSmoothCurve = 701
-
-    kGlobalStitch = 702
-
-    kSubdivCVComponent = 703
-
-    kSubdivEdgeComponent = 704
-
-    kSubdivFaceComponent = 705
-
-    kUVManip2D = 706
-
-    kTranslateUVManip2D = 707
-
-    kRotateUVManip2D = 708
-
-    kScaleUVManip2D = 709
-
-    kPolyTweakUV = 710
-
-    kMoveUVShellManip2D = 711
-
-    kPluginShape = 712
-
-    kGeometryData = 713
-
-    kSingleIndexedComponent = 714
-
-    kDoubleIndexedComponent = 715
-
-    kTripleIndexedComponent = 716
-
-    kExtendSurfaceDistanceManip = 717
-
-    kSquareSrf = 718
-
-    kSquareSrfManip = 719
-
-    kSubdivToPoly = 720
-
-    kDynBase = 721
-
-    kDynEmitterManip = 722
-
-    kDynFieldsManip = 723
-
-    kDynBaseFieldManip = 724
-
-    kDynAirManip = 725
-
-    kDynNewtonManip = 726
-
-    kDynTurbulenceManip = 727
-
-    kDynSpreadManip = 728
-
-    kDynAttenuationManip = 729
-
-    kDynArrayAttrsData = 730
-
-    kPluginFieldNode = 731
-
-    kPluginEmitterNode = 732
-
-    kPluginSpringNode = 733
-
-    kDisplayLayer = 734
-
-    kDisplayLayerManager = 735
-
-    kPolyColorPerVertex = 736
-
-    kCreateColorSet = 737
-
-    kDeleteColorSet = 738
-
-    kCopyColorSet = 739
-
-    kBlendColorSet = 740
-
-    kPolyColorMod = 741
-
-    kPolyColorDel = 742
-
-    kCharacterMappingData = 743
-
-    kDynSweptGeometryData = 744
-
-    kWrapFilter = 745
-
-    kMeshVtxFaceComponent = 746
-
-    kBinaryData = 747
-
-    kAttribute2Double = 748
-
-    kAttribute2Float = 749
-
-    kAttribute2Short = 750
-
-    kAttribute2Int = 751
-
-    kAttribute3Double = 752
-
-    kAttribute3Float = 753
-
-    kAttribute3Short = 754
-
-    kAttribute3Int = 755
-
-    kReference = 756
-
-    kBlindData = 757
-
-    kBlindDataTemplate = 758
-
-    kPolyBlindData = 759
-
-    kPolyNormalPerVertex = 760
-
-    kNurbsToSubdiv = 761
-
-    kPluginIkSolver = 762
-
-    kInstancer = 763
-
-    kMoveVertexManip = 764
-
-    kStroke = 765
-
-    kBrush = 766
-
-    kStrokeGlobals = 767
-
-    kPluginGeometryData = 768
-
-    kLightLink = 769
-
-    kDynGlobals = 770
-
-    kPolyReduce = 771
-
-    kLodThresholds = 772
-
-    kChooser = 773
-
-    kLodGroup = 774
-
-    kMultDoubleLinear = 775
-
-    kFourByFourMatrix = 776
-
-    kTowPointOnSurfaceManip = 777
-
-    kSurfaceEdManip = 778
-
-    kSurfaceFaceComponent = 779
-
-    kClipScheduler = 780
-
-    kClipLibrary = 781
-
-    kSubSurface = 782
-
-    kSmoothTangentSrf = 783
-
-    kRenderPass = 784
-
-    kRenderPassSet = 785
-
-    kRenderLayer = 786
-
-    kRenderLayerManager = 787
-
-    kPassContributionMap = 788
-
-    kPrecompExport = 789
-
-    kRenderTarget = 790
-
-    kRenderedImageSource = 791
-
-    kImageSource = 792
-
-    kPolyFlipEdge = 793
-
-    kPolyExtrudeEdge = 794
-
-    kAnimBlend = 795
-
-    kAnimBlendInOut = 796
-
-    kPolyAppendVertex = 797
-
-    kUvChooser = 798
-
-    kSubdivCompId = 799
-
-    kVolumeAxis = 800
-
-    kDeleteUVSet = 801
-
-    kSubdHierBlind = 802
-
-    kSubdBlindData = 803
-
-    kCharacterMap = 804
-
-    kLayeredTexture = 805
-
-    kSubdivCollapse = 806
-
-    kParticleSamplerInfo = 807
-
-    kCopyUVSet = 808
-
-    kCreateUVSet = 809
-
-    kClip = 810
-
-    kPolySplitVert = 811
-
-    kSubdivData = 812
-
-    kSubdivGeom = 813
-
-    kUInt64ArrayData = 814
-
-    kInt64ArrayData = 815
-
-    kPolySplitEdge = 816
-
-    kSubdivReverseFaces = 817
-
-    kMeshMapComponent = 818
-
-    kSectionManip = 819
-
-    kXsectionSubdivEdit = 820
-
-    kSubdivToNurbs = 821
-
-    kEditCurve = 822
-
-    kEditCurveManip = 823
-
-    kCrossSectionManager = 824
-
-    kCreateSectionManip = 825
-
-    kCrossSectionEditManip = 826
-
-    kDropOffFunction = 827
-
-    kSubdBoolean = 828
-
-    kSubdModifyEdge = 829
-
-    kModifyEdgeCrvManip = 830
-
-    kModifyEdgeManip = 831
-
-    kScalePointManip = 832
-
-    kTransformBoxManip = 833
-
-    kSymmetryLocator = 834
-
-    kSymmetryMapVector = 835
-
-    kSymmetryMapCurve = 836
-
-    kCurveFromSubdivEdge = 837
-
-    kCreateBPManip = 838
-
-    kModifyEdgeBaseManip = 839
-
-    kSubdExtrudeFace = 840
-
-    kSubdivSurfaceVarGroup = 841
-
-    kSfRevolveManip = 842
-
-    kCurveFromSubdivFace = 843
-
-    kUnused1 = 844
-
-    kUnused2 = 845
-
-    kUnused3 = 846
-
-    kUnused4 = 847
-
-    kUnused5 = 848
-
-    kUnused6 = 849
-
-    kPolyTransfer = 850
-
-    kPolyAverageVertex = 851
-
-    kPolyAutoProj = 852
-
-    kPolyLayoutUV = 853
-
-    kPolyMapSewMove = 854
-
-    kSubdModifier = 855
-
-    kSubdMoveVertex = 856
-
-    kSubdMoveEdge = 857
-
-    kSubdMoveFace = 858
-
-    kSubdDelFace = 859
-
-    kSnapshotShape = 860
-
-    kSubdivMapComponent = 861
-
-    kJiggleDeformer = 862
-
-    kGlobalCacheControls = 863
-
-    kDiskCache = 864
-
-    kSubdCloseBorder = 865
-
-    kSubdMergeVert = 866
-
-    kBoxData = 867
-
-    kBox = 868
-
-    kRenderBox = 869
-
-    kSubdSplitFace = 870
-
-    kVolumeFog = 871
-
-    kSubdTweakUV = 872
-
-    kSubdMapCut = 873
-
-    kSubdLayoutUV = 874
-
-    kSubdMapSewMove = 875
-
-    kOcean = 876
-
-    kVolumeNoise = 877
-
-    kSubdAutoProj = 878
-
-    kSubdSubdivideFace = 879
-
-    kNoise = 880
-
-    kAttribute4Double = 881
-
-    kData4Double = 882
-
-    kSubdPlanProj = 883
-
-    kSubdTweak = 884
-
-    kSubdProjectionManip = 885
-
-    kSubdMappingManip = 886
-
-    kHardwareReflectionMap = 887
-
-    kPolyNormalizeUV = 888
-
-    kPolyFlipUV = 889
-
-    kHwShaderNode = 890
-
-    kPluginHardwareShader = 891
-
-    kPluginHwShaderNode = 892
-
-    kSubdAddTopology = 893
-
-    kSubdCleanTopology = 894
-
-    kImplicitCone = 895
-
-    kImplicitSphere = 896
-
-    kRampShader = 897
-
-    kVolumeLight = 898
-
-    kOceanShader = 899
-
-    kBevelPlus = 900
-
-    kStyleCurve = 901
-
-    kPolyCut = 902
-
-    kPolyPoke = 903
-
-    kPolyWedgeFace = 904
-
-    kPolyCutManipContainer = 905
-
-    kPolyCutManip = 906
-
-    kPolyMirrorManipContainer = 907
-
-    kPolyPokeManip = 908
-
-    kFluidTexture3D = 909
-
-    kFluidTexture2D = 910
-
-    kPolyMergeUV = 911
-
-    kPolyStraightenUVBorder = 912
-
-    kAlignManip = 913
-
-    kPluginTransformNode = 914
-
-    kFluid = 915
-
-    kFluidGeom = 916
-
-    kFluidData = 917
-
-    kSmear = 918
-
-    kStringShadingSwitch = 919
-
-    kStudioClearCoat = 920
-
-    kFluidEmitter = 921
-
-    kHeightField = 922
-
-    kGeoConnector = 923
-
-    kSnapshotPath = 924
-
-    kPluginObjectSet = 925
-
-    kQuadShadingSwitch = 926
-
-    kPolyExtrudeVertex = 927
-
-    kPairBlend = 928
-
-    kTextManip = 929
-
-    kViewManip = 930
-
-    kXformManip = 931
-
-    kMute = 932
-
-    kConstraint = 933
-
-    kTrimWithBoundaries = 934
-
-    kCurveFromMeshCoM = 935
-
-    kFollicle = 936
-
-    kHairSystem = 937
-
-    kRemapValue = 938
-
-    kRemapColor = 939
-
-    kRemapHsv = 940
-
-    kHairConstraint = 941
-
-    kTimeFunction = 942
-
-    kMentalRayTexture = 943
-
-    kObjectBinFilter = 944
-
-    kPolySmoothProxy = 945
-
-    kPfxGeometry = 946
-
-    kPfxHair = 947
-
-    kHairTubeShader = 948
-
-    kPsdFileTexture = 949
-
-    kKeyframeDelta = 950
-
-    kKeyframeDeltaMove = 951
-
-    kKeyframeDeltaScale = 952
-
-    kKeyframeDeltaAddRemove = 953
-
-    kKeyframeDeltaBlockAddRemove = 954
-
-    kKeyframeDeltaInfType = 955
-
-    kKeyframeDeltaTangent = 956
-
-    kKeyframeDeltaWeighted = 957
-
-    kKeyframeDeltaBreakdown = 958
-
-    kPolyMirror = 959
-
-    kPolyCreaseEdge = 960
-
-    kPolyPinUV = 961
-
-    kHikEffector = 962
-
-    kHikIKEffector = 963
-
-    kHikFKJoint = 964
-
-    kHikSolver = 965
-
-    kHikHandle = 966
-
-    kProxyManager = 967
-
-    kPolyAutoProjManip = 968
-
-    kPolyPrism = 969
-
-    kPolyPyramid = 970
-
-    kPolySplitRing = 971
-
-    kPfxToon = 972
-
-    kToonLineAttributes = 973
-
-    kPolyDuplicateEdge = 974
-
-    kFacade = 975
-
-    kMaterialFacade = 976
-
-    kEnvFacade = 977
-
-    kAISEnvFacade = 978
-
-    kLineModifier = 979
-
-    kPolyArrow = 980
-
-    kPolyPrimitiveMisc = 981
-
-    kPolyPlatonicSolid = 982
-
-    kPolyPipe = 983
-
-    kHikFloorContactMarker = 984
-
-    kHikGroundPlane = 985
-
-    kPolyComponentData = 986
-
-    kPolyHelix = 987
-
-    kCacheFile = 988
-
-    kHistorySwitch = 989
-
-    kClosestPointOnMesh = 990
-
-    kUVPin = 991
-
-    kProximityPin = 992
-
-    kTransferAttributes = 993
-
-    kDynamicConstraint = 994
-
-    kNComponent = 995
-
-    kPolyBridgeEdge = 996
-
-    kCacheableNode = 997
-
-    kNucleus = 998
-
-    kNBase = 999
-
-    kCacheBase = 1000
-
-    kCacheBlend = 1001
-
-    kCacheTrack = 1002
-
-    kKeyframeRegionManip = 1003
-
-    kCurveNormalizerAngle = 1004
-
-    kCurveNormalizerLinear = 1005
-
-    kHyperLayoutDG = 1006
-
-    kPluginImagePlaneNode = 1007
-
-    kNCloth = 1008
-
-    kNParticle = 1009
-
-    kNRigid = 1010
-
-    kPluginParticleAttributeMapperNode = 1011
-
-    kCameraSet = 1012
-
-    kPluginCameraSet = 1013
-
-    kContainer = 1014
-
-    kFloatVectorArrayData = 1015
-
-    kNObjectData = 1016
-
-    kNObject = 1017
-
-    kPluginConstraintNode = 1018
-
-    kAsset = 1019
-
-    kPolyEdgeToCurve = 1020
-
-    kAnimLayer = 1021
-
-    kBlendNodeBase = 1022
-
-    kBlendNodeBoolean = 1023
-
-    kBlendNodeDouble = 1024
-
-    kBlendNodeDoubleAngle = 1025
-
-    kBlendNodeDoubleLinear = 1026
-
-    kBlendNodeEnum = 1027
-
-    kBlendNodeFloat = 1028
-
-    kBlendNodeFloatAngle = 1029
-
-    kBlendNodeFloatLinear = 1030
-
-    kBlendNodeInt16 = 1031
-
-    kBlendNodeInt32 = 1032
-
-    kBlendNodeAdditiveScale = 1033
-
-    kBlendNodeAdditiveRotation = 1034
-
-    kPluginManipulatorNode = 1035
-
-    kNIdData = 1036
-
-    kNId = 1037
-
-    kFloatArrayData = 1038
-
-    kMembrane = 1039
-
-    kMergeVertsToolManip = 1040
-
-    kUint64SingleIndexedComponent = 1041
-
-    kPolyToolFeedbackManip = 1042
-
-    kPolySelectEditFeedbackManip = 1043
-
-    kWriteToFrameBuffer = 1044
-
-    kWriteToColorBuffer = 1045
-
-    kWriteToVectorBuffer = 1046
-
-    kWriteToDepthBuffer = 1047
-
-    kWriteToLabelBuffer = 1048
-
-    kStereoCameraMaster = 1049
-
-    kSequenceManager = 1050
-
-    kSequencer = 1051
-
-    kShot = 1052
-
-    kBlendNodeTime = 1053
-
-    kCreateBezierManip = 1054
-
-    kBezierCurve = 1055
-
-    kBezierCurveData = 1056
-
-    kNurbsCurveToBezier = 1057
-
-    kBezierCurveToNurbs = 1058
-
-    kPolySpinEdge = 1059
-
-    kPolyHoleFace = 1060
-
-    kPointOnPolyConstraint = 1061
-
-    kPolyConnectComponents = 1062
-
-    kSkinBinding = 1063
-
-    kVolumeBindManip = 1064
-
-    kVertexWeightSet = 1065
-
-    kNearestPointOnCurve = 1066
-
-    kColorProfile = 1067
-
-    kAdskMaterial = 1068
-
-    kContainerBase = 1069
-
-    kDagContainer = 1070
-
-    kPolyUVRectangle = 1071
-
-    kHardwareRenderingGlobals = 1072
-
-    kPolyProjectCurve = 1073
-
-    kRenderingList = 1074
-
-    kPolyExtrudeManip = 1075
-
-    kPolyExtrudeManipContainer = 1076
-
-    kThreadedDevice = 1077
-
-    kClientDevice = 1078
-
-    kPluginClientDevice = 1079
-
-    kPluginThreadedDevice = 1080
-
-    kTimeWarp = 1081
-
-    kAssembly = 1082
-
-    kClipGhostShape = 1083
-
-    kClipToGhostData = 1084
-
-    kMandelbrot = 1085
-
-    kMandelbrot3D = 1086
-
-    kGreasePlane = 1087
-
-    kGreasePlaneRenderShape = 1088
-
-    kGreasePencilSequence = 1089
-
-    kEditMetadata = 1090
-
-    kCreaseSet = 1091
-
-    kPolyEditEdgeFlow = 1092
-
-    kFosterParent = 1093
-
-    kSnapUVManip2D = 1094
-
-    kToolContext = 1095
-
-    kNLE = 1096
-
-    kShrinkWrapFilter = 1097
-
-    kEditsManager = 1098
-
-    kPolyBevel2 = 1099
-
-    kPolyCBoolOp = 1100
-
-    kGeomBind = 1101
-
-    kColorMgtGlobals = 1102
-
-    kPolyBevel3 = 1103
-
-    kTimeEditorClipBase = 1104
-
-    kTimeEditorClipEvaluator = 1105
-
-    kTimeEditorClip = 1106
-
-    kTimeEditor = 1107
-
-    kTimeEditorTracks = 1108
-
-    kTimeEditorInterpolator = 1109
-
-    kTimeEditorAnimSource = 1110
-
-    kCaddyManipBase = 1111
-
-    kPolyCaddyManip = 1112
-
-    kPolyModifierManipContainer = 1113
-
-    kPolyRemesh = 1114
-
-    kPolyContourProj = 1115
-
-    kContourProjectionManip = 1116
-
-    kNodeGraphEditorInfo = 1117
-
-    kNodeGraphEditorBookmarks = 1118
-
-    kNodeGraphEditorBookmarkInfo = 1119
-
-    kPluginSkinCluster = 1120
-
-    kPluginGeometryFilter = 1121
-
-    kPluginBlendShape = 1122
-
-    kPolyPassThru = 1123
-
-    kTrackInfoManager = 1124
-
-    kPolyClean = 1125
-
-    kShapeEditorManager = 1126
-
-    kOceanDeformer = 1127
-
-    kPoseInterpolatorManager = 1128
-
-    kControllerTag = 1129
-
-    kReForm = 1130
-
-    kCustomEvaluatorClusterNode = 1131
-
-    kPolyCircularize = 1132
-
-    kArubaTesselate = 1133
-
-    kReorderUVSet = 1134
-
-    kUfeProxyTransform = 1135
-
-    kDecomposeMatrix = 1136
-
-    kComposeMatrix = 1137
-
-    kBlendMatrix = 1138
-
-    kPickMatrix = 1139
-
-    kAimMatrix = 1140
-
-    kPrimitiveFalloff = 1141
-
-    kBlendFalloff = 1142
-
-    kUniformFalloff = 1143
-
-    kTransferFalloff = 1144
-
-    kComponentFalloff = 1145
-
-    kProximityFalloff = 1146
-
-    kSubsetFalloff = 1147
-
-    kWeightFunctionData = 1148
-
-    kFalloffEval = 1149
-
-    kComponentMatch = 1150
-
-    kPolyUnsmooth = 1151
-
-    kPolyReFormManipContainer = 1152
-
-    kPolyReFormManip = 1153
-
-    kPolyAxis = 1154
-
-    kAngleToDoubleNode = 1155
-
-    kDoubleToAngleNode = 1156
-
-    kAbsolute = 1157
-
     kACos = 1158
-
-    kAnd = 1159
-
+    kAISEnvFacade = 978
     kASin = 1160
-
     kATan = 1161
-
     kATan2 = 1162
-
+    kAbsolute = 1157
+    kAddDoubleLinear = 5
+    kAdskMaterial = 1068
+    kAffect = 6
+    kAimConstraint = 111
+    kAimMatrix = 1140
+    kAir = 257
+    kAlignCurve = 41
+    kAlignManip = 913
+    kAlignSurface = 42
+    kAmbientLight = 303
+    kAnd = 1159
+    kAngle = 270
+    kAngleBetween = 21
+    kAngleToDoubleNode = 1155
+    kAnimBlend = 795
+    kAnimBlendInOut = 796
+    kAnimCurve = 7
+    kAnimCurveTimeToAngular = 8
+    kAnimCurveTimeToDistance = 9
+    kAnimCurveTimeToTime = 10
+    kAnimCurveTimeToUnitless = 11
+    kAnimCurveUnitlessToAngular = 12
+    kAnimCurveUnitlessToDistance = 13
+    kAnimCurveUnitlessToTime = 14
+    kAnimCurveUnitlessToUnitless = 15
+    kAnimLayer = 1021
+    kAnisotropy = 623
+    kAnnotation = 271
+    kAnyGeometryVarGroup = 115
+    kArcLength = 273
+    kAreaLight = 305
+    kArrayMapper = 528
+    kArrowManip = 123
+    kArubaTesselate = 1133
+    kAssembly = 1082
+    kAsset = 1019
+    kAttachCurve = 43
+    kAttachSurface = 44
+    kAttribute = 565
+    kAttribute2Double = 748
+    kAttribute2Float = 749
+    kAttribute2Int = 751
+    kAttribute2Short = 750
+    kAttribute3Double = 752
+    kAttribute3Float = 753
+    kAttribute3Int = 755
+    kAttribute3Short = 754
+    kAttribute4Double = 881
+    kAudio = 22
     kAverage = 1163
-
-    kCeil = 1164
-
-    kClampRange = 1165
-
-    kCos = 1166
-
-    kDeterminant = 1167
-
-    kEqual = 1168
-
-    kFloor = 1169
-
-    kGreaterThan = 1170
-
-    kInverseLinearInterpolation = 1171
-
-    kLength = 1172
-
-    kLessThan = 1173
-
-    kLinearInterpolation = 1174
-
-    kLog = 1175
-
-    kMax = 1176
-
-    kMin = 1177
-
-    kModulo = 1178
-
-    kMultiply = 1179
-
-    kNegate = 1180
-
-    kNormalize = 1181
-
-    kNot = 1182
-
-    kOr = 1183
-
-    kPIConstant = 1184
-
-    kPower = 1185
-
-    kRotateVector = 1186
-
-    kRound = 1187
-
-    kSin = 1188
-
-    kSmoothStep = 1189
-
-    kSum = 1190
-
-    kTan = 1191
-
-    kTruncate = 1192
-
-    kDotProduct = 1193
-
-    kCrossProduct = 1194
-
-    kMultiplyPointByMatrix = 1195
-
-    kMultiplyVectorByMatrix = 1196
-
+    kAverageCurveManip = 149
+    kAvgCurves = 45
+    kAvgNurbsSurfacePoints = 47
+    kAvgSurfacePoints = 46
+    kAxesActionManip = 124
     kAxisFromMatrix = 1197
-
-    kDivide = 1198
-
-    kSubtract = 1199
-
-    kTranslationFromMatrix = 1200
-
-    kRowFromMatrix = 1201
-
+    kBackground = 23
+    kBallProjectionManip = 125
+    kBarnDoorManip = 150
+    kBase = 1
+    kBaseLattice = 249
+    kBendLattice = 335
+    kBevel = 48
+    kBevelManip = 151
+    kBevelPlus = 900
+    kBezierCurve = 1055
+    kBezierCurveData = 1056
+    kBezierCurveToNurbs = 1058
+    kBinaryData = 747
+    kBirailSrf = 49
+    kBlend = 27
+    kBlendColorSet = 740
+    kBlendColors = 31
+    kBlendDevice = 30
+    kBlendFalloff = 1142
+    kBlendManip = 152
+    kBlendMatrix = 1138
+    kBlendNodeAdditiveRotation = 1034
+    kBlendNodeAdditiveScale = 1033
+    kBlendNodeBase = 1022
+    kBlendNodeBoolean = 1023
+    kBlendNodeDouble = 1024
+    kBlendNodeDoubleAngle = 1025
+    kBlendNodeDoubleLinear = 1026
+    kBlendNodeEnum = 1027
+    kBlendNodeFloat = 1028
+    kBlendNodeFloatAngle = 1029
+    kBlendNodeFloatLinear = 1030
+    kBlendNodeInt16 = 1031
+    kBlendNodeInt32 = 1032
+    kBlendNodeTime = 1053
+    kBlendShape = 336
+    kBlendTwoAttr = 28
+    kBlendWeighted = 29
+    kBlindData = 757
+    kBlindDataTemplate = 758
+    kBlinn = 373
+    kBlinnMaterial = 389
+    kBoundary = 53
+    kBox = 868
+    kBoxData = 867
+    kBrownian = 508
+    kBrush = 766
+    kBulge = 497
+    kBulgeLattice = 338
+    kBump = 32
+    kBump3d = 33
+    kButtonManip = 153
+    kCacheBase = 1000
+    kCacheBlend = 1001
+    kCacheFile = 988
+    kCacheTrack = 1002
+    kCacheableNode = 997
+    kCaddyManipBase = 1111
+    kCamera = 250
+    kCameraManip = 154
+    kCameraPlaneManip = 143
+    kCameraSet = 1012
+    kCameraView = 34
+    kCeil = 1164
+    kCenterManip = 134
+    kChainToSpline = 35
+    kCharacter = 689
+    kCharacterMap = 804
+    kCharacterMappingData = 743
+    kCharacterOffset = 690
+    kChecker = 498
+    kChoice = 36
+    kChooser = 773
+    kCircle = 54
+    kCircleManip = 126
+    kCirclePointManip = 231
+    kCircleSweepManip = 128
+    kClampColor = 39
+    kClampRange = 1165
+    kClientDevice = 1078
+    kClip = 810
+    kClipGhostShape = 1083
+    kClipLibrary = 781
+    kClipScheduler = 780
+    kClipToGhostData = 1084
+    kCloseCurve = 55
+    kCloseSurface = 57
+    kClosestPointOnMesh = 990
+    kClosestPointOnSurface = 56
+    kCloth = 499
+    kCloud = 509
+    kCluster = 251
+    kClusterFilter = 347
+    kClusterFlexor = 300
+    kCoiManip = 155
+    kCollision = 253
+    kColorBackground = 24
+    kColorMgtGlobals = 1102
+    kColorProfile = 1067
     kColumnFromMatrix = 1202
-
-    kScaleFromMatrix = 1203
-
-    kRotationFromMatrix = 1204
-
+    kCombinationShape = 337
+    kCommCornerManip = 614
+    kCommCornerOperManip = 615
+    kCommEdgeOperManip = 612
+    kCommEdgePtManip = 611
+    kCommEdgeSegmentManip = 613
+    kComponent = 535
+    kComponentFalloff = 1145
+    kComponentListData = 584
+    kComponentManip = 675
+    kComponentMatch = 1150
+    kComposeMatrix = 1137
+    kCompoundAttribute = 575
+    kConcentricProjectionManip = 129
+    kCondition = 37
+    kCone = 96
+    kConstraint = 933
+    kContainer = 1014
+    kContainerBase = 1069
+    kContourProjectionManip = 1116
+    kContrast = 38
+    kControl = 486
+    kControllerTag = 1129
+    kCopyColorSet = 739
+    kCopyUVSet = 808
+    kCos = 1166
+    kCpManip = 156
+    kCrater = 510
+    kCreaseSet = 1091
+    kCreate = 40
+    kCreateBPManip = 838
+    kCreateBezierManip = 1054
+    kCreateCVManip = 157
+    kCreateColorSet = 737
+    kCreateEPManip = 158
+    kCreateSectionManip = 825
+    kCreateUVSet = 809
+    kCrossProduct = 1194
+    kCrossSectionEditManip = 826
+    kCrossSectionManager = 824
+    kCubicProjectionManip = 130
+    kCurve = 266
+    kCurveCVComponent = 536
+    kCurveCurveIntersect = 642
+    kCurveEPComponent = 537
+    kCurveEdManip = 159
+    kCurveFromMeshCoM = 935
+    kCurveFromMeshEdge = 641
+    kCurveFromSubdivEdge = 837
+    kCurveFromSubdivFace = 843
+    kCurveFromSurface = 58
+    kCurveFromSurfaceBnd = 59
+    kCurveFromSurfaceCoS = 60
+    kCurveFromSurfaceIso = 61
+    kCurveInfo = 62
+    kCurveKnotComponent = 538
+    kCurveNormalizerAngle = 1004
+    kCurveNormalizerLinear = 1005
+    kCurveParamComponent = 539
+    kCurveSegmentManip = 160
+    kCurveVarGroup = 116
+    kCustomEvaluatorClusterNode = 1131
+    kCylinder = 98
+    kCylindricalProjectionManip = 131
+    kDOF = 323
+    kDPbirailSrf = 50
+    kDagContainer = 1070
+    kDagNode = 107
+    kDagPose = 691
+    kDagSelectionItem = 562
+    kData = 583
+    kData2Double = 594
+    kData2Float = 595
+    kData2Int = 596
+    kData2Short = 597
+    kData3Double = 598
+    kData3Float = 599
+    kData3Int = 600
+    kData3Short = 601
+    kData4Double = 882
+    kDblTrsManip = 190
+    kDecayRegionCapComponent = 548
+    kDecayRegionComponent = 549
+    kDecomposeMatrix = 1136
+    kDefaultLightList = 317
+    kDeformBend = 626
+    kDeformBendManip = 632
+    kDeformFlare = 629
+    kDeformFlareManip = 635
+    kDeformFunc = 625
+    kDeformSine = 630
+    kDeformSineManip = 636
+    kDeformSquash = 628
+    kDeformSquashManip = 634
+    kDeformTwist = 627
+    kDeformTwistManip = 633
+    kDeformWave = 631
+    kDeformWaveManip = 637
+    kDeleteColorSet = 738
+    kDeleteComponent = 318
+    kDeleteUVSet = 801
+    kDeltaMush = 350
+    kDependencyNode = 4
+    kDetachCurve = 63
+    kDetachSurface = 64
+    kDeterminant = 1167
+    kDiffuseMaterial = 387
+    kDimension = 269
+    kDimensionManip = 232
+    kDirectedDisc = 276
+    kDirectionManip = 161
+    kDirectionalLight = 308
+    kDiscManip = 132
+    kDiskCache = 864
+    kDispatchCompute = 319
+    kDisplacementShader = 321
+    kDisplayLayer = 734
+    kDisplayLayerManager = 735
+    kDistance = 272
+    kDistanceBetween = 322
+    kDistanceManip = 639
+    kDivide = 1198
+    kDofManip = 162
+    kDotProduct = 1193
+    kDoubleAngleAttribute = 567
+    kDoubleArrayData = 585
+    kDoubleIndexedComponent = 715
+    kDoubleLinearAttribute = 569
+    kDoubleShadingSwitch = 620
+    kDoubleToAngleNode = 1156
+    kDrag = 258
+    kDropOffFunction = 827
+    kDropoffLocator = 282
+    kDropoffManip = 163
+    kDummy = 254
+    kDummyConnectable = 324
+    kDynAirManip = 725
+    kDynArrayAttrsData = 730
+    kDynAttenuationManip = 729
+    kDynBase = 721
+    kDynBaseFieldManip = 724
+    kDynEmitterManip = 722
+    kDynFieldsManip = 723
+    kDynGlobals = 770
+    kDynNewtonManip = 726
+    kDynParticleSetComponent = 560
+    kDynSpreadManip = 728
+    kDynSweptGeometryData = 744
+    kDynTurbulenceManip = 727
+    kDynamicConstraint = 994
+    kDynamicsController = 325
+    kEdgeComponent = 545
+    kEditCurve = 822
+    kEditCurveManip = 823
+    kEditMetadata = 1090
+    kEditsManager = 1098
+    kEmitter = 255
+    kEnableManip = 136
+    kEnumAttribute = 572
+    kEnvBall = 491
+    kEnvChrome = 493
+    kEnvCube = 492
+    kEnvFacade = 977
+    kEnvFogMaterial = 381
+    kEnvFogShape = 278
+    kEnvSky = 494
+    kEnvSphere = 495
+    kEqual = 1168
+    kExplodeNurbsShell = 693
+    kExpression = 327
+    kExtendCurve = 65
+    kExtendCurveDistanceManip = 164
+    kExtendSurface = 66
+    kExtendSurfaceDistanceManip = 717
+    kExtract = 328
+    kExtrude = 67
+    kExtrudeManip = 165
+    kFFD = 339
+    kFFblendSrf = 68
+    kFFfilletSrf = 69
+    kFacade = 975
+    kFalloffEval = 1149
+    kFfdDualBase = 340
+    kField = 256
+    kFileBackground = 25
+    kFileTexture = 500
+    kFilletCurve = 70
+    kFilter = 329
+    kFilterClosestSample = 330
+    kFilterEuler = 331
+    kFilterSimplify = 332
+    kFitBspline = 71
+    kFixedLineManip = 233
+    kFlexor = 299
+    kFloatAngleAttribute = 568
+    kFloatArrayData = 1038
+    kFloatLinearAttribute = 570
+    kFloatMatrixAttribute = 579
+    kFloatVectorArrayData = 1015
+    kFloor = 1169
+    kFlow = 72
+    kFluid = 915
+    kFluidData = 917
+    kFluidEmitter = 921
+    kFluidGeom = 916
+    kFluidTexture2D = 910
+    kFluidTexture3D = 909
+    kFollicle = 936
+    kForceUpdateManip = 696
+    kFosterParent = 1093
+    kFourByFourMatrix = 776
+    kFractal = 501
+    kFreePointManip = 133
+    kFreePointTriadManip = 137
+    kGammaCorrect = 333
+    kGenericAttribute = 576
+    kGeoConnectable = 326
+    kGeoConnector = 923
+    kGeomBind = 1101
+    kGeometric = 265
+    kGeometryConstraint = 113
+    kGeometryData = 713
+    kGeometryFilt = 334
+    kGeometryOnLineManip = 142
+    kGeometryVarGroup = 114
+    kGlobalCacheControls = 863
+    kGlobalStitch = 702
+    kGranite = 511
+    kGravity = 259
+    kGreasePencilSequence = 1089
+    kGreasePlane = 1087
+    kGreasePlaneRenderShape = 1088
+    kGreaterThan = 1170
+    kGrid = 502
+    kGroundPlane = 290
+    kGroupId = 356
+    kGroupParts = 357
+    kGuide = 358
+    kGuideLine = 301
+    kHairConstraint = 941
+    kHairSystem = 937
+    kHairTubeShader = 948
+    kHandleRotateManip = 216
+    kHardenPointCurve = 73
+    kHardwareReflectionMap = 887
+    kHardwareRenderGlobals = 527
+    kHardwareRenderingGlobals = 1072
+    kHeightField = 922
+    kHikEffector = 962
+    kHikFKJoint = 964
+    kHikFloorContactMarker = 984
+    kHikGroundPlane = 985
+    kHikHandle = 966
+    kHikIKEffector = 963
+    kHikSolver = 965
+    kHistorySwitch = 989
+    kHsvToRgb = 359
+    kHwShaderNode = 890
+    kHyperGraphInfo = 360
+    kHyperLayout = 361
+    kHyperLayoutDG = 1006
+    kHyperView = 362
+    kIkEffector = 119
+    kIkHandle = 120
+    kIkRPManip = 167
+    kIkSolver = 363
+    kIkSplineManip = 166
+    kIkSystem = 369
+    kIllustratorCurve = 74
+    kImageAdd = 660
+    kImageBlur = 666
+    kImageColorCorrect = 665
+    kImageData = 654
+    kImageDepth = 668
+    kImageDiff = 661
+    kImageDisplay = 669
+    kImageFilter = 667
+    kImageLoad = 655
+    kImageMotionBlur = 671
+    kImageMultiply = 662
+    kImageNetDest = 658
+    kImageNetSrc = 657
+    kImageOver = 663
+    kImagePlane = 370
+    kImageRender = 659
+    kImageSave = 656
+    kImageSource = 792
+    kImageUnder = 664
+    kImageView = 670
+    kImplicitCone = 895
+    kImplicitSphere = 896
+    kInsertKnotCrv = 75
+    kInsertKnotSrf = 76
+    kInstancer = 763
+    kInt64ArrayData = 815
+    kIntArrayData = 586
+    kIntersectSurface = 77
+    kInvalid = 0
+    kInverseLinearInterpolation = 1171
+    kIsoparmComponent = 540
+    kIsoparmManip = 146
+    kItemList = 564
+    kJiggleDeformer = 862
+    kJoint = 121
+    kJointCluster = 349
+    kJointClusterManip = 168
+    kJointTranslateManip = 229
+    kKeyframeDelta = 950
+    kKeyframeDeltaAddRemove = 953
+    kKeyframeDeltaBlockAddRemove = 954
+    kKeyframeDeltaBreakdown = 958
+    kKeyframeDeltaInfType = 955
+    kKeyframeDeltaMove = 951
+    kKeyframeDeltaScale = 952
+    kKeyframeDeltaTangent = 956
+    kKeyframeDeltaWeighted = 957
+    kKeyframeRegionManip = 1003
+    kKeyingGroup = 688
+    kLambert = 371
+    kLambertMaterial = 388
+    kLattice = 279
+    kLatticeComponent = 546
+    kLatticeData = 588
+    kLatticeGeom = 280
+    kLayeredShader = 376
+    kLayeredTexture = 805
+    kLeastSquares = 379
+    kLeather = 512
+    kLength = 1172
+    kLessThan = 1173
+    kLight = 302
+    kLightDataAttribute = 577
+    kLightFogMaterial = 380
+    kLightInfo = 378
+    kLightLink = 769
+    kLightList = 382
+    kLightManip = 169
+    kLightProjectionGeometry = 234
+    kLightSource = 383
+    kLightSourceMaterial = 391
+    kLimitManip = 135
+    kLineArrowManip = 235
+    kLineManip = 147
+    kLineModifier = 979
+    kLinearInterpolation = 1174
+    kLinearLight = 306
+    kLocator = 281
+    kLodGroup = 774
+    kLodThresholds = 772
+    kLog = 1175
+    kLookAt = 112
+    kLuminance = 384
+    kMCsolver = 364
+    kMPbirailSrf = 51
+    kMakeGroup = 385
+    kMandelbrot = 1085
+    kMandelbrot3D = 1086
+    kManip2DContainer = 192
+    kManipContainer = 148
+    kManipulator = 230
+    kManipulator2D = 205
+    kManipulator3D = 122
+    kMarble = 513
+    kMarker = 283
+    kMarkerManip = 210
+    kMaterial = 386
+    kMaterialFacade = 976
+    kMaterialInfo = 392
+    kMaterialTemplate = 393
+    kMatrixAdd = 394
+    kMatrixArrayData = 604
+    kMatrixAttribute = 578
+    kMatrixData = 589
+    kMatrixFloatData = 673
+    kMatrixHold = 395
+    kMatrixMult = 396
+    kMatrixPass = 397
+    kMatrixWtAdd = 398
+    kMax = 1176
+    kMembrane = 1039
+    kMentalRayTexture = 943
+    kMergeVertsToolManip = 1040
+    kMesh = 296
+    kMeshComponent = 550
+    kMeshData = 590
+    kMeshEdgeComponent = 551
+    kMeshFaceVertComponent = 555
+    kMeshFrEdgeComponent = 553
+    kMeshGeom = 297
+    kMeshMapComponent = 818
+    kMeshPolygonComponent = 552
+    kMeshVarGroup = 117
+    kMeshVertComponent = 554
+    kMeshVtxFaceComponent = 746
+    kMessageAttribute = 580
+    kMidModifier = 399
+    kMidModifierWithMatrix = 400
+    kMin = 1177
+    kModel = 3
+    kModifyEdgeBaseManip = 839
+    kModifyEdgeCrvManip = 830
+    kModifyEdgeManip = 831
+    kModulo = 1178
+    kMorph = 352
+    kMotionPath = 445
+    kMotionPathManip = 170
+    kMountain = 503
+    kMoveUVShellManip2D = 711
+    kMoveVertexManip = 764
+    kMultDoubleLinear = 775
+    kMultiSubVertexComponent = 558
+    kMultilisterLight = 447
+    kMultiply = 1179
+    kMultiplyDivide = 448
+    kMultiplyPointByMatrix = 1195
+    kMultiplyVectorByMatrix = 1196
+    kMute = 932
+    kNBase = 999
+    kNCloth = 1008
+    kNComponent = 995
+    kNId = 1037
+    kNIdData = 1036
+    kNLE = 1096
+    kNObject = 1017
+    kNObjectData = 1016
+    kNParticle = 1009
+    kNRigid = 1010
+    kNamedObject = 2
+    kNearestPointOnCurve = 1066
+    kNegate = 1180
+    kNewton = 260
+    kNodeGraphEditorBookmarkInfo = 1119
+    kNodeGraphEditorBookmarks = 1118
+    kNodeGraphEditorInfo = 1117
+    kNoise = 880
+    kNonAmbientLight = 304
+    kNonDagSelectionItem = 563
+    kNonExtendedLight = 307
+    kNonLinear = 624
+    kNormalConstraint = 238
+    kNormalize = 1181
+    kNot = 1182
+    kNucleus = 998
+    kNumericAttribute = 566
+    kNumericData = 593
+    kNurbsBoolean = 694
+    kNurbsCircular2PtArc = 644
+    kNurbsCircular3PtArc = 643
+    kNurbsCube = 80
+    kNurbsCurve = 267
+    kNurbsCurveData = 592
+    kNurbsCurveGeom = 268
+    kNurbsCurveToBezier = 1057
+    kNurbsPlane = 79
+    kNurbsSquare = 622
+    kNurbsSurface = 294
+    kNurbsSurfaceData = 591
+    kNurbsSurfaceGeom = 295
+    kNurbsTesselate = 78
+    kNurbsToSubdiv = 761
+    kObjectAttrFilter = 681
+    kObjectBinFilter = 944
+    kObjectFilter = 677
+    kObjectMultiFilter = 678
+    kObjectNameFilter = 679
+    kObjectRenderFilter = 682
+    kObjectScriptFilter = 683
+    kObjectTypeFilter = 680
+    kOcean = 876
+    kOceanDeformer = 1127
+    kOceanShader = 899
+    kOffsetCos = 81
+    kOffsetCosManip = 171
+    kOffsetCurve = 82
+    kOffsetCurveManip = 172
+    kOffsetSurface = 645
+    kOffsetSurfaceManip = 653
+    kOldGeometryConstraint = 449
+    kOpaqueAttribute = 581
+    kOpticalFX = 450
+    kOr = 1183
+    kOrientConstraint = 239
+    kOrientationComponent = 556
+    kOrientationLocator = 286
+    kOrientationMarker = 284
+    kOrthoGrid = 291
+    kPASolver = 365
+    kPIConstant = 1184
+    kPairBlend = 928
+    kParamDimension = 275
+    kParentConstraint = 242
     kParentMatrix = 1205
+    kParticle = 311
+    kParticleAgeMapper = 451
+    kParticleCloud = 452
+    kParticleColorMapper = 453
+    kParticleIncandecenceMapper = 454
+    kParticleSamplerInfo = 807
+    kParticleTransparencyMapper = 455
+    kPartition = 456
+    kPassContributionMap = 788
+    kPfxGeometry = 946
+    kPfxHair = 947
+    kPfxToon = 972
+    kPhong = 374
+    kPhongExplorer = 375
+    kPhongMaterial = 390
+    kPickMatrix = 1139
+    kPivotComponent = 541
+    kPivotManip2D = 191
+    kPlace2dTexture = 457
+    kPlace3dTexture = 458
+    kPlanarProjectionManip = 207
+    kPlanarTrimSrf = 83
+    kPlane = 288
+    kPlugin = 582
+    kPluginBlendShape = 1122
+    kPluginCameraSet = 1013
+    kPluginClientDevice = 1079
+    kPluginConstraintNode = 1018
+    kPluginData = 602
+    kPluginDeformerNode = 616
+    kPluginDependNode = 459
+    kPluginEmitterNode = 732
+    kPluginFieldNode = 731
+    kPluginGeometryData = 768
+    kPluginGeometryFilter = 1121
+    kPluginHardwareShader = 891
+    kPluginHwShaderNode = 892
+    kPluginIkSolver = 762
+    kPluginImagePlaneNode = 1007
+    kPluginLocatorNode = 460
+    kPluginManipContainer = 697
+    kPluginManipulatorNode = 1035
+    kPluginMotionPathNode = 446
+    kPluginObjectSet = 925
+    kPluginParticleAttributeMapperNode = 1011
+    kPluginShape = 712
+    kPluginSkinCluster = 1120
+    kPluginSpringNode = 733
+    kPluginThreadedDevice = 1080
+    kPluginTransformNode = 914
+    kPlusMinusAverage = 461
+    kPointArrayData = 603
+    kPointConstraint = 240
+    kPointLight = 309
+    kPointManip = 236
+    kPointMatrixMult = 462
+    kPointOnCurveInfo = 84
+    kPointOnCurveManip = 208
+    kPointOnLineManip = 211
+    kPointOnPolyConstraint = 1061
+    kPointOnSurfaceInfo = 85
+    kPointOnSurfaceManip = 212
+    kPoleVectorConstraint = 243
+    kPolyAppend = 403
+    kPolyAppendVertex = 797
+    kPolyArrow = 980
+    kPolyAutoProj = 852
+    kPolyAutoProjManip = 968
+    kPolyAverageVertex = 851
+    kPolyAxis = 1154
+    kPolyBevel = 401
+    kPolyBevel2 = 1099
+    kPolyBevel3 = 1103
+    kPolyBlindData = 759
+    kPolyBoolOp = 618
+    kPolyBridgeEdge = 996
+    kPolyCBoolOp = 1100
+    kPolyCaddyManip = 1112
+    kPolyChipOff = 404
+    kPolyCircularize = 1132
+    kPolyClean = 1125
+    kPolyCloseBorder = 405
+    kPolyCollapseEdge = 406
+    kPolyCollapseF = 407
+    kPolyColorDel = 742
+    kPolyColorMod = 741
+    kPolyColorPerVertex = 736
+    kPolyComponentData = 986
+    kPolyCone = 437
+    kPolyConnectComponents = 1062
+    kPolyContourProj = 1115
+    kPolyCreaseEdge = 960
+    kPolyCreateFacet = 443
+    kPolyCreateToolManip = 140
+    kPolyCreator = 435
+    kPolyCube = 438
+    kPolyCut = 902
+    kPolyCutManip = 906
+    kPolyCutManipContainer = 905
+    kPolyCylProj = 408
+    kPolyCylinder = 439
+    kPolyDelEdge = 409
+    kPolyDelFacet = 410
+    kPolyDelVertex = 411
+    kPolyDuplicateEdge = 974
+    kPolyEdgeToCurve = 1020
+    kPolyEditEdgeFlow = 1092
+    kPolyExtrudeEdge = 794
+    kPolyExtrudeFacet = 412
+    kPolyExtrudeManip = 1075
+    kPolyExtrudeManipContainer = 1076
+    kPolyExtrudeVertex = 927
+    kPolyFlipEdge = 793
+    kPolyFlipUV = 889
+    kPolyHelix = 987
+    kPolyHoleFace = 1060
+    kPolyLayoutUV = 853
+    kPolyMapCut = 413
+    kPolyMapDel = 414
+    kPolyMapSew = 415
+    kPolyMapSewMove = 854
+    kPolyMappingManip = 194
+    kPolyMergeEdge = 416
+    kPolyMergeFacet = 417
+    kPolyMergeUV = 911
+    kPolyMergeVert = 699
+    kPolyMesh = 440
+    kPolyMirror = 959
+    kPolyMirrorManipContainer = 907
+    kPolyModifierManip = 195
+    kPolyModifierManipContainer = 1113
+    kPolyMoveEdge = 418
+    kPolyMoveFacet = 419
+    kPolyMoveFacetUV = 420
+    kPolyMoveUV = 421
+    kPolyMoveUVManip = 193
+    kPolyMoveVertex = 422
+    kPolyMoveVertexManip = 196
+    kPolyMoveVertexUV = 423
+    kPolyNormal = 424
+    kPolyNormalPerVertex = 760
+    kPolyNormalizeUV = 888
+    kPolyPassThru = 1123
+    kPolyPinUV = 961
+    kPolyPipe = 983
+    kPolyPlanProj = 425
+    kPolyPlatonicSolid = 982
+    kPolyPoke = 903
+    kPolyPokeManip = 908
+    kPolyPrimitive = 436
+    kPolyPrimitiveMisc = 981
+    kPolyPrism = 969
+    kPolyProj = 426
+    kPolyProjectCurve = 1073
+    kPolyProjectionManip = 174
+    kPolyPyramid = 970
+    kPolyQuad = 427
+    kPolyReFormManip = 1153
+    kPolyReFormManipContainer = 1152
+    kPolyReduce = 771
+    kPolyRemesh = 1114
+    kPolySelectEditFeedbackManip = 1043
+    kPolySeparate = 463
+    kPolySewEdge = 698
+    kPolySmooth = 428
+    kPolySmoothFacet = 700
+    kPolySmoothProxy = 945
+    kPolySoftEdge = 429
+    kPolySphProj = 430
+    kPolySphere = 441
+    kPolySpinEdge = 1059
+    kPolySplit = 431
+    kPolySplitEdge = 816
+    kPolySplitRing = 971
+    kPolySplitToolManip = 141
+    kPolySplitVert = 811
+    kPolyStraightenUVBorder = 912
+    kPolySubdEdge = 432
+    kPolySubdFacet = 433
+    kPolyToSubdiv = 686
+    kPolyToolFeedbackManip = 1042
+    kPolyToolFeedbackShape = 312
+    kPolyTorus = 442
+    kPolyTransfer = 850
+    kPolyTriangulate = 434
+    kPolyTweak = 402
+    kPolyTweakUV = 710
+    kPolyUVRectangle = 1071
+    kPolyUnite = 444
+    kPolyUnsmooth = 1151
+    kPolyVertexNormalManip = 197
+    kPolyWedgeFace = 904
+    kPoseInterpolatorManager = 1128
+    kPositionMarker = 285
+    kPostProcessList = 464
+    kPower = 1185
+    kPrecompExport = 789
+    kPrimitive = 86
+    kPrimitiveFalloff = 1141
+    kProjectCurve = 87
+    kProjectTangent = 88
+    kProjectTangentManip = 177
+    kProjection = 465
+    kProjectionManip = 173
+    kProjectionMultiManip = 176
+    kProjectionUVManip = 175
+    kPropModManip = 178
+    kPropMoveTriadManip = 138
+    kProximityFalloff = 1146
+    kProximityPin = 992
+    kProximityWrap = 354
+    kProxy = 108
+    kProxyManager = 967
+    kPsdFileTexture = 949
+    kQuadPtOnLineManip = 179
+    kQuadShadingSwitch = 926
+    kRBFsurface = 89
+    kRPsolver = 367
+    kRadial = 261
+    kRadius = 274
+    kRamp = 504
+    kRampBackground = 26
+    kRampShader = 897
+    kRbfSrfManip = 180
+    kReForm = 1130
+    kRebuildCurve = 90
+    kRebuildSurface = 91
+    kRecord = 466
+    kReference = 756
+    kReflect = 372
+    kRemapColor = 939
+    kRemapHsv = 940
+    kRemapValue = 938
+    kRenderBox = 869
+    kRenderCone = 97
+    kRenderGlobals = 523
+    kRenderGlobalsList = 524
+    kRenderLayer = 786
+    kRenderLayerManager = 787
+    kRenderPass = 784
+    kRenderPassSet = 785
+    kRenderQuality = 525
+    kRenderRect = 277
+    kRenderSetup = 522
+    kRenderSphere = 298
+    kRenderTarget = 790
+    kRenderUtilityList = 467
+    kRenderedImageSource = 791
+    kRenderingList = 1074
+    kReorderUVSet = 1134
+    kResolution = 526
+    kResultCurve = 16
+    kResultCurveTimeToAngular = 17
+    kResultCurveTimeToDistance = 18
+    kResultCurveTimeToTime = 19
+    kResultCurveTimeToUnitless = 20
+    kReverse = 468
+    kReverseCrvManip = 182
+    kReverseCurve = 92
+    kReverseCurveManip = 181
+    kReverseSurface = 93
+    kReverseSurfaceManip = 183
+    kRevolve = 94
+    kRevolveManip = 184
+    kRevolvedPrimitive = 95
+    kRevolvedPrimitiveManip = 185
+    kRgbToHsv = 469
+    kRigid = 314
+    kRigidConstraint = 313
+    kRigidDeform = 341
+    kRigidSolver = 470
+    kRock = 514
+    kRotateBoxManip = 214
+    kRotateLimitsManip = 217
+    kRotateManip = 215
+    kRotateUVManip2D = 708
+    kRotateVector = 1186
+    kRotationFromMatrix = 1204
+    kRound = 1187
+    kRoundConstantRadius = 646
+    kRoundConstantRadiusManip = 649
+    kRoundRadiusCrvManip = 648
+    kRoundRadiusManip = 647
+    kRowFromMatrix = 1201
+    kSCsolver = 366
+    kSPbirailSrf = 52
+    kSamplerInfo = 478
+    kScaleConstraint = 244
+    kScaleFromMatrix = 1203
+    kScaleLimitsManip = 218
+    kScaleManip = 219
+    kScalePointManip = 832
+    kScaleUVManip2D = 709
+    kScalingBoxManip = 220
+    kScreenAlignedCircleManip = 127
+    kScript = 640
+    kScriptManip = 221
+    kSculpt = 342
+    kSectionManip = 819
+    kSelectionItem = 561
+    kSelectionList = 609
+    kSelectionListData = 676
+    kSelectionListOperator = 684
+    kSequenceManager = 1050
+    kSequencer = 1051
+    kSet = 471
+    kSetGroupComponent = 559
+    kSetRange = 474
+    kSfRevolveManip = 842
+    kShaderGlow = 475
+    kShaderList = 476
+    kShadingEngine = 320
+    kShadingMap = 477
+    kShape = 248
+    kShapeEditorManager = 1126
+    kShapeFragment = 479
+    kShot = 1052
+    kShrinkWrapFilter = 1097
+    kSimpleVolumeShader = 480
+    kSin = 1188
+    kSingleIndexedComponent = 714
+    kSingleShadingSwitch = 619
+    kSketchPlane = 289
+    kSkin = 100
+    kSkinBinding = 1063
+    kSkinClusterFilter = 687
+    kSkinShader = 674
+    kSl60 = 481
+    kSmear = 918
+    kSmoothCurve = 701
+    kSmoothStep = 1189
+    kSmoothTangentSrf = 783
+    kSnapUVManip2D = 1094
+    kSnapshot = 482
+    kSnapshotPath = 924
+    kSnapshotShape = 860
+    kSnow = 515
+    kSoftMod = 252
+    kSoftModFilter = 348
+    kSoftModManip = 638
+    kSolidFractal = 516
+    kSolidify = 353
+    kSphere = 99
+    kSphereData = 605
+    kSphericalProjectionManip = 222
+    kSplineSolver = 368
+    kSpotCylinderManip = 187
+    kSpotLight = 310
+    kSpotManip = 186
+    kSpring = 315
+    kSprite = 292
+    kSquareSrf = 718
+    kSquareSrfManip = 719
+    kStandardSurface = 377
+    kStateManip = 145
+    kStencil = 505
+    kStereoCameraMaster = 1049
+    kStitchAsNurbsShell = 692
+    kStitchSrf = 101
+    kStitchSrfManip = 695
+    kStoryBoard = 483
+    kStringArrayData = 607
+    kStringData = 606
+    kStringShadingSwitch = 919
+    kStroke = 765
+    kStrokeGlobals = 767
+    kStucco = 517
+    kStudioClearCoat = 920
+    kStyleCurve = 901
+    kSubCurve = 102
+    kSubSurface = 782
+    kSubVertexComponent = 557
+    kSubdAddTopology = 893
+    kSubdAutoProj = 878
+    kSubdBlindData = 803
+    kSubdBoolean = 828
+    kSubdCleanTopology = 894
+    kSubdCloseBorder = 865
+    kSubdDelFace = 859
+    kSubdExtrudeFace = 840
+    kSubdHierBlind = 802
+    kSubdLayoutUV = 874
+    kSubdMapCut = 873
+    kSubdMapSewMove = 875
+    kSubdMappingManip = 886
+    kSubdMergeVert = 866
+    kSubdModifier = 855
+    kSubdModifyEdge = 829
+    kSubdMoveEdge = 857
+    kSubdMoveFace = 858
+    kSubdMoveVertex = 856
+    kSubdPlanProj = 883
+    kSubdProjectionManip = 885
+    kSubdSplitFace = 870
+    kSubdSubdivideFace = 879
+    kSubdTweak = 884
+    kSubdTweakUV = 872
+    kSubdiv = 685
+    kSubdivCVComponent = 703
+    kSubdivCollapse = 806
+    kSubdivCompId = 799
+    kSubdivData = 812
+    kSubdivEdgeComponent = 704
+    kSubdivFaceComponent = 705
+    kSubdivGeom = 813
+    kSubdivMapComponent = 861
+    kSubdivReverseFaces = 817
+    kSubdivSurfaceVarGroup = 841
+    kSubdivToNurbs = 821
+    kSubdivToPoly = 720
+    kSubsetFalloff = 1147
+    kSubtract = 1199
+    kSum = 1190
+    kSummaryObject = 484
+    kSuper = 485
+    kSurface = 293
+    kSurfaceCVComponent = 542
+    kSurfaceEPComponent = 543
+    kSurfaceEdManip = 778
+    kSurfaceFaceComponent = 779
+    kSurfaceInfo = 103
+    kSurfaceKnotComponent = 544
+    kSurfaceLuminance = 487
+    kSurfaceRangeComponent = 547
+    kSurfaceShader = 488
+    kSurfaceVarGroup = 118
+    kSymmetryConstraint = 241
+    kSymmetryLocator = 834
+    kSymmetryMapCurve = 836
+    kSymmetryMapVector = 835
+    kTan = 1191
+    kTangentConstraint = 245
+    kTension = 351
+    kTexLattice = 200
+    kTexLatticeDeformManip = 199
+    kTexSmoothManip = 201
+    kTexSmudgeUVManip = 198
+    kTextButtonManip = 652
+    kTextCurves = 104
+    kTextManip = 929
+    kTexture2d = 496
+    kTexture3d = 507
+    kTextureBakeSet = 472
+    kTextureDeformer = 343
+    kTextureDeformerHandle = 344
+    kTextureEnv = 490
+    kTextureList = 489
+    kTextureManip3D = 223
+    kThreadedDevice = 1077
+    kThreePointArcManip = 650
+    kTime = 520
+    kTimeAttribute = 571
+    kTimeEditor = 1107
+    kTimeEditorAnimSource = 1110
+    kTimeEditorClip = 1106
+    kTimeEditorClipBase = 1104
+    kTimeEditorClipEvaluator = 1105
+    kTimeEditorInterpolator = 1109
+    kTimeEditorTracks = 1108
+    kTimeFunction = 942
+    kTimeToUnitConversion = 521
+    kTimeWarp = 1081
+    kToggleManip = 224
+    kToggleOnLineManip = 144
+    kToolContext = 1095
+    kToonLineAttributes = 973
+    kTorus = 617
+    kTowPointManip = 139
+    kTowPointOnCurveManip = 209
+    kTowPointOnSurfaceManip = 777
+    kTrackInfoManager = 1124
+    kTransferAttributes = 993
+    kTransferFalloff = 1144
+    kTransform = 110
+    kTransformBoxManip = 833
+    kTransformGeometry = 610
+    kTranslateBoxManip = 225
+    kTranslateLimitsManip = 226
+    kTranslateManip = 227
+    kTranslateManip2D = 206
+    kTranslateUVManip = 213
+    kTranslateUVManip2D = 707
+    kTranslationFromMatrix = 1200
+    kTriadManip = 237
+    kTrim = 105
+    kTrimLocator = 287
+    kTrimManip = 228
+    kTrimWithBoundaries = 934
+    kTriplanarProjectionManip = 188
+    kTripleIndexedComponent = 716
+    kTripleShadingSwitch = 621
+    kTrsInsertManip = 203
+    kTrsManip = 189
+    kTrsTransManip = 202
+    kTrsXformManip = 204
+    kTruncate = 1192
+    kTurbulence = 262
+    kTweak = 345
+    kTwoPointArcManip = 651
+    kTxSl = 518
+    kTypedAttribute = 574
+    kUInt64ArrayData = 814
+    kUVManip2D = 706
+    kUVPin = 991
+    kUfeProxyTransform = 1135
+    kUint64SingleIndexedComponent = 1041
+    kUintArrayData = 587
+    kUnderWorld = 109
+    kUniform = 263
+    kUniformFalloff = 1143
+    kUnitAttribute = 573
+    kUnitConversion = 529
+    kUnitToTimeConversion = 530
+    kUnknown = 532
+    kUnknownDag = 316
+    kUnknownTransform = 246
+    kUntrim = 106
+    kUnused1 = 844
+    kUnused2 = 845
+    kUnused3 = 846
+    kUnused4 = 847
+    kUnused5 = 848
+    kUnused6 = 849
+    kUseBackground = 531
+    kUvChooser = 798
+    kVectorArrayData = 608
+    kVectorProduct = 533
+    kVertexBakeSet = 473
+    kVertexWeightSet = 1065
+    kViewColorManager = 672
+    kViewManip = 930
+    kVolumeAxis = 800
+    kVolumeBindManip = 1064
+    kVolumeFog = 871
+    kVolumeLight = 898
+    kVolumeNoise = 877
+    kVolumeShader = 534
+    kVortex = 264
+    kWater = 506
+    kWeightFunctionData = 1148
+    kWeightGeometryFilt = 346
+    kWire = 355
+    kWood = 519
+    kWorld = 247
+    kWrapFilter = 745
+    kWriteToColorBuffer = 1045
+    kWriteToDepthBuffer = 1047
+    kWriteToFrameBuffer = 1044
+    kWriteToLabelBuffer = 1048
+    kWriteToVectorBuffer = 1046
+    kXformManip = 931
+    kXsectionSubdivEdit = 820
 
 
 class MDataHandle(object):
