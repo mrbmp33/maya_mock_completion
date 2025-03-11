@@ -141,7 +141,7 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
 # ==== Signals ====
 
 def _new_scene(args):
-    print('New scene :)')
+    # print('New scene :)')
     hierarchy.NodePool.reset()
 
 def _add_node_to_pool(node: 'MObject') -> None:
