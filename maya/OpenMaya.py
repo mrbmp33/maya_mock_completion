@@ -1,5 +1,4 @@
-
-from typing import Dict, List, Tuple, Union, Optional
+from maya.api import OpenMaya as _om2
 
 
 class MEvaluationNode(object):
@@ -3928,7 +3927,8 @@ class MFileIO(object):
     def mustRenameToSaveMsg(*args, **kwargs): pass
 
     @staticmethod
-    def newFile(*args, **kwargs): pass
+    def newFile():
+        _om2._NEW_SCENE_SIGNAL.send()
 
     @staticmethod
     def open(*args, **kwargs): pass

@@ -7,14 +7,17 @@
 # or hard copy form.
 """
 import copy
+from functools import partial
 import re
 import random
 import string
+import sys
 import uuid
 import weakref
 import enum
 import math
-from typing import Optional, Iterable, Union, Tuple, List, Any, Generator, Type
+import blinker
+from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 import maya.attribute_properties as attribute_properties
@@ -22,6 +25,8 @@ from maya.node_types_literals import NODE_TYPES
 from maya import ACTIVE_SELECTION
 from maya import mmc_node_types_alias_map
 
+
+# ==== Utilities ====
 
 def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 'MObject':
     
@@ -41,7 +46,11 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     # Add kDependencyNode in list of types and then the actual node type
     mobject._api_type = [MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode]
     
-    if mfn_key := mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP.get(type_str):
+    if mfn_key := getattr(
+        MFn,
+        mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP.get(type_str, ''),
+        None
+    ):
         mobject._api_type.append(mfn_key)
     else:
         mobject._api_type.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
@@ -126,6 +135,35 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
         )
 
     return properties, long_name, short_name
+
+
+
+# ==== Signals ====
+
+def _new_scene(args):
+    print(args)
+    hierarchy.NodePool.reset()
+
+def _add_node_to_pool(node: 'MObject') -> None:
+    hierarchy.register(node)
+
+def _remove_node_from_pool(node: 'MObject') -> None:
+    hierarchy.deregister(node)
+
+_NODE_ADDED_SIGNAL = blinker.Signal()
+_NODE_REMOVED_SIGNAL = blinker.Signal()
+_NODE_DESTROYED_SIGNAL = blinker.Signal()
+_NEW_SCENE_SIGNAL = blinker.Signal()
+
+_NODE_ADDED_SIGNAL.connect(_add_node_to_pool)
+_NODE_REMOVED_SIGNAL.connect(_remove_node_from_pool)
+_NODE_DESTROYED_SIGNAL.connect(_remove_node_from_pool)
+_NEW_SCENE_SIGNAL.connect(_new_scene)
+
+
+# ==== Callbacks ====
+
+_CALLBACKS_REGISTRY: dict[int, tuple[callable, blinker.Signal]] = {}
 
 
 class MColor(object):
@@ -1896,14 +1934,16 @@ class MDGModifier(object):
             if action[0] == 'create':
                 mobject: 'MObject' = action[1]
                 mobject._alive = True
-                hierarchy.register(mobject)
+                _NODE_ADDED_SIGNAL.send(mobject)
+                # hierarchy.register(mobject)
             
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
                 mobject._alive = False
                 if mobject._parent:
                     mobject._parent._children.remove(mobject)
-                hierarchy.deregister(mobject)
+                # hierarchy.deregister(mobject)
+                _NODE_REMOVED_SIGNAL.send(mobject)
             
             elif action[0] == 'rename':
                 mobject: 'MObject' = action[1]
@@ -5144,7 +5184,6 @@ class MSelectionList(object):
             if not mobject:
                 # For nodes that already exist in the scene but are not inside the pool, initialize them as DependNodes
                 mobject = MFnDependencyNode().create('transform', item)  # this very rarely will be the case as it should already be created before adding it to the MSelectionList
-                hierarchy.register(mobject)
             # Return converted str to mobject
             return mobject
 
@@ -6595,13 +6634,13 @@ class MGlobal(object):
         pass
 
     @staticmethod
-    def deleteNode(*args, **kwargs):
+    def deleteNode(mobject: 'MObject') -> None:
         """
         deleteNode(MObject) -> None
 
         Delete the given dag node or dependency graph node.
         """
-        pass
+        _NODE_REMOVED_SIGNAL.send(mobject)
 
     @staticmethod
     def disableStow(*args, **kwargs):
@@ -12153,6 +12192,7 @@ class MObject(object):
         self._is_world = False
         self._cached_plugs: dict[str, MPlug] = {}
         self._attributes = {}
+        self._callbacks: list[int] = []
 
         # plug-specific properties
         if MFn.kAttribute in self._api_type:
@@ -12274,6 +12314,10 @@ class MObject(object):
 
     def __hash__(self):
         return hash(self._uuid)
+
+    def __del__(self):
+        if self.hasFn(MFn.kDependencyNode):
+            _NODE_DESTROYED_SIGNAL.send(self)
 
     @property
     def apiTypeStr(self):
@@ -12873,7 +12917,7 @@ class MMessage(object):
         pass
 
     @staticmethod
-    def nodeCallbacks(*args, **kwargs):
+    def nodeCallbacks(node: 'MObject') -> 'MCallbackIdArray':
         """
         nodeCallbacks(node) -> ids
 
@@ -12882,10 +12926,15 @@ class MMessage(object):
          * node (MObject) - Node to query for callbacks.
          * ids (MCallbackIdArray) - Array to store the list of callback IDs.
         """
-        pass
+        if not isinstance(node, MObject):
+            raise TypeError(f"Expected MObject, got {type(node)}")
+        callbacks = [cb for cb in node._callbacks]
+        cb_array = MCallbackIdArray()
+        cb_array.extend(callbacks)
+        return cb_array
 
     @staticmethod
-    def removeCallback(*args, **kwargs):
+    def removeCallback(callback_id: int) -> None:
         """
         removeCallback(id) -> None
 
@@ -12895,10 +12944,14 @@ class MMessage(object):
 
          * id (MCallbackId) - identifier of callback to be removed
         """
-        pass
+        if not callback_id in _CALLBACKS_REGISTRY:
+            raise ValueError(f"Callback ID {callback_id} not found in registry")
+
+        func, bound_signal = _CALLBACKS_REGISTRY.pop(callback_id)
+        bound_signal.disconnect(func)
 
     @staticmethod
-    def removeCallbacks(*args, **kwargs):
+    def removeCallbacks(ids: Union[tuple[int], 'MCallbackIdArray']) -> None:
         """
         removeCallbacks(ids) -> None
 
@@ -12908,7 +12961,8 @@ class MMessage(object):
 
          * idList (MCallbackIdArray) - list of callbacks to be removed.
         """
-        pass
+        for callback_id in ids:
+            MMessage.removeCallback(callback_id)
 
     kDefaultAction = 0
 
@@ -14084,144 +14138,12 @@ class MMeshIsectAccelParams(object):
         pass
 
 
-class MCallbackIdArray(object):
+class MCallbackIdArray(list):
     """
     Array of MCallbackId values.
     """
 
-    def __add__(*args, **kwargs):
-        """
-        x.__add__(y) <==> x+y
-        """
-        pass
-
-    def __contains__(*args, **kwargs):
-        """
-        x.__contains__(y) <==> y in x
-        """
-        pass
-
-    def __delitem__(*args, **kwargs):
-        """
-        x.__delitem__(y) <==> del x[y]
-        """
-        pass
-
-    def __delslice__(*args, **kwargs):
-        """
-        x.__delslice__(i, j) <==> del x[i:j]
-
-        Use of negative indices is not supported.
-        """
-        pass
-
-    def __getitem__(*args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
-
-    def __getslice__(*args, **kwargs):
-        """
-        x.__getslice__(i, j) <==> x[i:j]
-
-        Use of negative indices is not supported.
-        """
-        pass
-
-    def __iadd__(*args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
-
-    def __imul__(*args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
-
-    def __init__(*args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
-
-    def __len__(*args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
-
-    def __mul__(*args, **kwargs):
-        """
-        x.__mul__(n) <==> x*n
-        """
-        pass
-
-    def __repr__(*args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
-
-    def __rmul__(*args, **kwargs):
-        """
-        x.__rmul__(n) <==> n*x
-        """
-        pass
-
-    def __setitem__(*args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
-
-    def __setslice__(*args, **kwargs):
-        """
-        x.__setslice__(i, j, y) <==> x[i:j]=y
-
-        Use  of negative indices is not supported.
-        """
-        pass
-
-    def __str__(*args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
-
-    def append(*args, **kwargs):
-        """
-        Add a value to the end of the array.
-        """
-        pass
-
-    def clear(*args, **kwargs):
-        """
-        Remove all elements from the array.
-        """
-        pass
-
-    def copy(*args, **kwargs):
-        """
-        Replace the array contents with that of another or of a compatible Python sequence.
-        """
-        pass
-
-    def insert(*args, **kwargs):
-        """
-        Insert a new value into the array at the given index.
-        """
-        pass
-
-    def remove(*args, **kwargs):
-        """
-        Remove an element from the array.
-        """
-        pass
-
-    def setLength(*args, **kwargs):
+    def setLength(self, *args, **kwargs):
         """
         Grow or shrink the array to contain a specific number of elements.
         """
@@ -15065,6 +14987,8 @@ class MFnBase(object):
         self._mobject._alive = True
         self._mobject._is_null = False
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self._mobject})"
 
 class MUserData(object):
     """
@@ -18497,7 +18421,7 @@ class MDGMessage(MMessage):
         pass
 
     @staticmethod
-    def addNodeAddedCallback(*args, **kwargs):
+    def addNodeAddedCallback(function: Callable, nodeType: str, clientData=None) -> int:
         """
         addNodeAddedCallback(function, nodeType, clientData=None) -> id
 
@@ -18514,7 +18438,25 @@ class MDGMessage(MMessage):
 
          * return: Identifier used for removing the callback.
         """
-        pass
+                # Convert into partial
+        if clientData is None:
+            clientData = ()
+        try:
+            as_partial_fn = partial(function, *clientData)
+            cb_id = id(as_partial_fn)
+        except Exception:
+            raise ValueError(
+                f"Invalid function signature. \
+                Getting function: {function}, nodeType: {nodeType}, clientData: {clientData}"
+                )
+
+        # Setup event trigger
+        _NODE_ADDED_SIGNAL.connect(as_partial_fn)
+
+        # Register the callback
+        _CALLBACKS_REGISTRY[cb_id] = (as_partial_fn, _NODE_ADDED_SIGNAL)
+        
+        return cb_id
 
     @staticmethod
     def addNodeChangeUuidCheckCallback(*args, **kwargs):
@@ -18555,7 +18497,7 @@ class MDGMessage(MMessage):
         pass
 
     @staticmethod
-    def addNodeRemovedCallback(*args, **kwargs):
+    def addNodeRemovedCallback(function: Callable, nodeType:str, clientData=None) -> int:
         """
         addNodeRemovedCallback(function, nodeType, clientData=None) -> id
 
@@ -18572,7 +18514,24 @@ class MDGMessage(MMessage):
 
          * return: Identifier used for removing the callback.
         """
-        pass
+        if clientData is None:
+            clientData = ()
+        try:
+            as_partial_fn = partial(function, *clientData)
+            cb_id = id(as_partial_fn)
+        except Exception:
+            raise ValueError(
+                f"Invalid function signature. \
+                Getting function: {function}, nodeType: {nodeType}, clientData: {clientData}"
+                )
+
+        # Setup event trigger
+        _NODE_REMOVED_SIGNAL.connect(as_partial_fn)
+
+        # Register the callback
+        _CALLBACKS_REGISTRY[cb_id] = (as_partial_fn, _NODE_REMOVED_SIGNAL)
+        
+        return cb_id
 
     @staticmethod
     def addPreConnectionCallback(*args, **kwargs):
@@ -19604,7 +19563,7 @@ class MNodeMessage(MMessage):
         pass
 
     @staticmethod
-    def addNodeDestroyedCallback(*args, **kwargs):
+    def addNodeDestroyedCallback(node, function, clientData=None) -> int:
         """
         addNodeDestroyedCallback(node, function, clientData=None) -> id
 
@@ -19618,7 +19577,26 @@ class MNodeMessage(MMessage):
 
          * return: Identifier used for removing the callback.
         """
-        pass
+
+        # Convert into partial
+        if clientData is None:
+            clientData = ()
+        try:
+            as_partial_fn = partial(function, *clientData)
+            cb_id = id(as_partial_fn)
+        except Exception:
+            raise ValueError(
+                f"Invalid function signature. \
+                Getting node: {node}, function: {function}, clientData: {clientData}"
+                )
+
+        # Setup event trigger
+        _NODE_DESTROYED_SIGNAL.connect(as_partial_fn)
+
+        # Register the callback
+        sys.modules[__name__]._CALLBACKS_REGISTRY[cb_id] = (as_partial_fn, _NODE_DESTROYED_SIGNAL)
+        
+        return cb_id
 
     @staticmethod
     def addNodeDirtyCallback(*args, **kwargs):
@@ -21287,7 +21265,7 @@ class MFnDependencyNode(MFnBase):
         self._mobject = mobject
         mobject._alive = True
 
-        hierarchy.register(mobject)
+        _NODE_ADDED_SIGNAL.send(mobject)
 
         return self._mobject
 
@@ -22568,16 +22546,21 @@ class MFnDagNode(MFnDependencyNode):
 
     _fn_type = MFn.kDagNode
 
-    def __init__(self, mobject : Optional['MObject']=None):
+    def __init__(self, arg=None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        super().__init__(mobject)
-    
-        if self._mobject:
-            self._dag_path = _initialize_dag_path_from_mobject(self._mobject)
+        if isinstance(arg, MDagPath):
+            self._dag_path = arg
+            mobject = arg.node()
+        elif isinstance(arg, MObject):
+            mobject = arg
+            self._dag_path = _initialize_dag_path_from_mobject(mobject)
         else:
-            self._dag_path = None
+             self._dag_path: Optional['MDagPath'] = None
+             mobject = arg
+        
+        super().__init__(mobject)
 
 
     def addChild(self, node: 'MObject', index: int = -1, keepExistingParents=False) -> 'MObject':
@@ -24355,11 +24338,11 @@ class MFnTransform(MFnDagNode):
 
     _fn_type = MFn.kTransform
 
-    def __init__(*args, **kwargs):
+    def __init__(self, mobject:'MObject' = None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(mobject)
 
     def clearRestPosition(*args, **kwargs):
         """
@@ -24367,11 +24350,11 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def create(*args, **kwargs):
+    def create(self, parent=None):
         """
         Creates a new transform node and attaches it to the function set.
         """
-        pass
+        return super().create(MTypeId(0x5846524d), parent=parent)
 
     def enableLimit(*args, **kwargs):
         """
@@ -30222,6 +30205,7 @@ _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME = {
 }
 
 _COMMON_ATTR_FULL_NAMES_TO_SHORT_NAME = {ln: sn for sn, ln in _COMMON_ATTR_SHORT_NAMES_TO_FULL_NAME.items()}
+
 
 _TYPE_STR_TO_ID = {
 

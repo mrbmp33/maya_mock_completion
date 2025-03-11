@@ -1,3 +1,4 @@
+from functools import partial
 import logging
 import traceback
 import unittest
@@ -11,6 +12,7 @@ try:
     from maya import ACTIVE_SELECTION
 except ImportError:
     ...
+
 
 def HOST():
     exe = pathlib.Path(sys.executable).stem
@@ -30,13 +32,13 @@ class TestMayaMockCompletion(unittest.TestCase):
 
     def test_modifier_undo(self):
         transform = self.dagmod.createNode("transform")
-        
+
         self.dagmod.doIt()
-        
+
         self.assertTrue(transform.isNull() is False)
         if self.host == "python":
             self.assertTrue(hierarchy.NodePool.object_exists(transform))
-        
+
         self.dagmod.undoIt()
 
         self.assertTrue(transform.isNull() is False)
@@ -48,35 +50,35 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertTrue(transform.isNull() is False)
         self.dagmod.doIt()
         self.assertTrue(transform.isNull() is False)
-        if self.host == 'python':
+        if self.host == "python":
             self.assertEqual(len(self.dagmod._queue), 1)
 
         self.dagmod.createNode("joint")
         self.dagmod.createNode("transform")
         self.dagmod.doIt()
-        if self.host == 'python':
+        if self.host == "python":
             self.assertEqual(len(self.dagmod._queue), 2)
 
         self.dagmod.doIt()
 
-        if self.host == 'python':
+        if self.host == "python":
             self.assertEqual(self.dagmod._executed, 0)
 
     def test_create_node_by_string(self):
         transform = self.dagmod.createNode("transform")
-        
+
         self.dagmod.doIt()
-        
+
         self.assertTrue(transform.isNull() == False)
-        
+
         mesh = self.dagmod.createNode("mesh")
-        
+
         self.dagmod.doIt()
-        
+
         self.assertTrue(mesh.isNull() == False)
 
     def test_create_node_by_typeid(self):
-        transform_id = om.MTypeId(0x5846524d)
+        transform_id = om.MTypeId(0x5846524D)
         transform = self.dagmod.createNode(transform_id)
         self.dagmod.doIt()
         self.assertTrue(transform.isNull() == False)
@@ -86,9 +88,10 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.dagmod.doIt()
         fn_dep = om.MFnDependencyNode(transform)
 
-        if HOST() == "python": 
+        if HOST() == "python":
             print(HOST())
             from maya import mmc_hierarchy as hierarchy
+
             self.assertTrue(hierarchy.NodePool.object_exists(transform))
 
     def test_hierarchy_parent_child(self):
@@ -96,11 +99,11 @@ class TestMayaMockCompletion(unittest.TestCase):
         parent = dag_mod.createNode("transform")
         child = dag_mod.createNode("transform")
         dag_mod.doIt()
-        
+
         dag_mod = om.MDagModifier()
         dag_mod.reparentNode(child, parent)
         dag_mod.doIt()
-        
+
         sel = om.MSelectionList().add(om.MFnDependencyNode(parent).name())
         dag_path = sel.getDagPath(0)
 
@@ -113,14 +116,14 @@ class TestMayaMockCompletion(unittest.TestCase):
         child1 = dag_mod.createNode("transform")
         child2 = dag_mod.createNode("transform")
         dag_mod.doIt()
-        
+
         dag_mod.reparentNode(child1, parent)
         dag_mod.reparentNode(child2, parent)
         dag_mod.doIt()
-        
+
         dag_path = om.MDagPath.getAPathTo(parent)
         self.assertEqual(dag_path.childCount(), 2)
- 
+
     def test_node_registration_unique_path(self):
         parent1 = self.dagmod.createNode("transform")
         self.dagmod.renameNode(parent1, "parent1")
@@ -139,7 +142,7 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.dagmod.renameNode(child3, "child")
 
         self.dagmod.doIt()
-        
+
         self.assertEqual(om.MFnDependencyNode(transform1).name(), "transform1")
         self.assertEqual(om.MFnDependencyNode(parent1).name(), "parent1")
         self.assertEqual(om.MFnDependencyNode(child1).name(), "child")
@@ -150,6 +153,7 @@ class TestMayaMockCompletion(unittest.TestCase):
 
         if HOST() == "python":
             from maya import mmc_hierarchy as hierarchy
+
             self.assertTrue(hierarchy.NodePool.object_exists(child1))
             self.assertTrue(hierarchy.NodePool.object_exists(child2_1))
 
@@ -159,7 +163,7 @@ class TestMayaMockCompletion(unittest.TestCase):
     def test_find_plug(self):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
-        
+
         fn_dep = om.MFnDependencyNode(transform)
         translatex_plug = fn_dep.findPlug("translateX", False)
         tx_plug = fn_dep.findPlug("tx", False)
@@ -170,12 +174,12 @@ class TestMayaMockCompletion(unittest.TestCase):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
         fn_dep = om.MFnDependencyNode(transform)
-        
+
         # Test float value
         tx_plug = fn_dep.findPlug("translateX", False)
         tx_plug.setFloat(5.0)
         self.assertEqual(tx_plug.asFloat(), 5.0)
-        
+
         # Test bool value
         vis_plug = fn_dep.findPlug("visibility", False)
         vis_plug.setBool(False)
@@ -184,13 +188,13 @@ class TestMayaMockCompletion(unittest.TestCase):
     def test_create_attributes(self):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
-        
+
         # Create numeric attribute
         nAttr = om.MFnNumericAttribute()
         testAttr = nAttr.create("testFloat", "tf", om.MFnNumericData.kFloat, 0.0)
         self.dagmod.addAttribute(transform, testAttr)
         self.dagmod.doIt()
-        
+
         # Create enum attribute
         eAttr = om.MFnEnumAttribute()
         enumAttr = eAttr.create("testEnum", "te")
@@ -203,24 +207,21 @@ class TestMayaMockCompletion(unittest.TestCase):
         src_node = self.dagmod.createNode("transform")
         dst_node = self.dagmod.createNode("transform")
         self.dagmod.doIt()
-        
+
         fn_src = om.MFnDependencyNode(src_node)
         fn_dst = om.MFnDependencyNode(dst_node)
-        
+
         src_plug = fn_src.findPlug("translateX", False)
         dst_plug = fn_dst.findPlug("translateX", False)
-        
+
         # Connect plugs
         self.dagmod.connect(src_plug, dst_plug)
         self.dagmod.doIt()
         self.assertTrue(src_plug.isConnected)
         self.assertTrue(dst_plug.isConnected)
         if self.host == "python":
-            self.assertIn(
-                dst_plug,
-                src_plug.connectedTo(0, 1)._plugs
-            )
-        
+            self.assertIn(dst_plug, src_plug.connectedTo(0, 1)._plugs)
+
         # Disconnect plugs
         self.dagmod.disconnect(src_plug, dst_plug)
         self.dagmod.doIt()
@@ -231,11 +232,11 @@ class TestMayaMockCompletion(unittest.TestCase):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
         self.assertTrue(transform.isNull() == False)
-        
+
         self.dagmod.deleteNode(transform)
         self.dagmod.doIt()
         self.assertTrue(transform.isNull() == False)
-        
+
         self.dagmod.undoIt()
         self.assertTrue(transform.isNull() == False)
         if self.host == "python":
@@ -252,18 +253,35 @@ class TestMayaMockCompletion(unittest.TestCase):
         cam_fn = om.MFnDagNode(cam)
         transform_fn = om.MFnDagNode(transform)
         self.assertEqual(transform_fn.childCount(), 1)
-        self.assertEqual(om.MFnDagNode(cam_fn.parent(0)).fullPathName(), transform_fn.fullPathName())
+        self.assertEqual(
+            om.MFnDagNode(cam_fn.parent(0)).fullPathName(), transform_fn.fullPathName()
+        )
 
 
 class TestCmds(unittest.TestCase):
 
     def setUp(self):
         mc.file(new=True, force=True)
-    
+
+    def test_new_scene_cleaning(self):
+        mc.createNode("transform", name="transform")
+        mc.createNode("transform", name="transform1")
+        mc.createNode("transform", name="transform2")
+        mc.createNode("mesh", name="mesh")
+
+        if HOST() == "python":
+            from maya import mmc_hierarchy as hierarchy
+            self.assertEqual(len(hierarchy.NodePool._node_instances), 4)
+
+        mc.file(new=True, force=True)
+
+        self.assertEqual(mc.ls(type="transform"), [])
+        self.assertEqual(mc.ls(type="mesh"), [])
+
     def test_create_node(self):
         transform = mc.createNode("transform")
         self.assertTrue(mc.objExists(transform))
-        
+
         mesh = mc.createNode("mesh")
         self.assertTrue(mc.objExists(mesh))
 
@@ -276,7 +294,7 @@ class TestCmds(unittest.TestCase):
         mc.createNode("transform", name="transform1")
         mc.createNode("transform", name="transform2")
         mc.createNode("mesh", name="mesh1")
-        
+
         transforms = mc.ls(type="transform")
         self.assertIn("transform1", transforms)
         self.assertIn("transform2", transforms)
@@ -286,7 +304,7 @@ class TestCmds(unittest.TestCase):
         mc.createNode("transform", name="testTransform1")
         mc.createNode("transform", name="testTransform2")
         mc.createNode("mesh", name="testMesh")
-        
+
         test_nodes = mc.ls("test*")
         self.assertIn("testTransform1", test_nodes)
         self.assertIn("testTransform2", test_nodes)
@@ -295,7 +313,7 @@ class TestCmds(unittest.TestCase):
     def test_ls_with_long_names(self):
         mc.createNode("transform", name="parent")
         mc.createNode("transform", name="child", parent="parent")
-        
+
         long_names = mc.ls(long=True)
         self.assertIn("|parent", long_names)
         self.assertIn("|parent|child", long_names)
@@ -303,7 +321,7 @@ class TestCmds(unittest.TestCase):
     def test_ls_with_dag_objects(self):
         mc.createNode("transform", name="parent")
         mc.createNode("transform", name="child", parent="parent")
-        
+
         dag_objects = mc.ls(dag=True)
         self.assertIn("parent", dag_objects)
         self.assertIn("child", dag_objects)
@@ -311,8 +329,8 @@ class TestCmds(unittest.TestCase):
     def test_ls_with_selection(self):
         mc.createNode("transform", name="parent")
         mc.createNode("transform", name="child", parent="parent")
-        self.assertIn('child', mc.ls(selection=True))
-        
+        self.assertIn("child", mc.ls(selection=True))
+
         mc.select("parent")
         selection = mc.ls(selection=True)
         self.assertIn("parent", selection)
@@ -320,7 +338,7 @@ class TestCmds(unittest.TestCase):
 
     def test_mselectionlist_from_cmds_created(self):
         mc.createNode("transform", name="mmc")
-        
+
         sel = om.MGlobal.getActiveSelectionList()
         self.assertEqual(sel.length(), 1)
 
@@ -328,18 +346,95 @@ class TestCmds(unittest.TestCase):
         self.assertEqual(dep.name(), "mmc")
 
 
-if __name__ == '__main__':
+class TestCallbacks(unittest.TestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.callback_ids = []
+
+    def tearDown(self):
+        
+        if len(self.callback_ids) == 0:
+            return
+        
+        if HOST() == "python":
+            self.assertEqual(
+                len(self.callback_ids),
+                len(list(om._CALLBACKS_REGISTRY.keys())),
+            )
+            
+        for callback_id in self.callback_ids:
+            om.MMessage.removeCallback(callback_id)
+        
+        if HOST():
+            self.assertEqual(
+                len(list(om._CALLBACKS_REGISTRY.keys())),
+                0,
+                'Callbacks were not removed properly',
+            )
+
+    def test_node_deleted_cb(self):
+        mc.file(new=True, force=True)
+
+        transform = om.MFnTransform(om.MFnTransform().create())
+        self.assertTrue(mc.objExists(transform.name()))
+
+        def do_smth_noticeble(*args, **kwargs):
+            jnt = mc.createNode("joint", name="created_in_cb")
+            print("Node deleted. Creating a different one: {}".format(jnt))
+            print(f"Receiving args: {args}, kwargs: {kwargs}")
+
+        self.callback_ids.append(
+            om.MNodeMessage.addNodeDestroyedCallback(
+                transform.object(),
+                partial(do_smth_noticeble, "arg1", "arg2", kwarg1="kwarg1"),
+            )
+        )
+        mc.delete(transform.name())
+        self.assertFalse(mc.objExists(transform))
+
+        self.assertNotIn(transform.object(), hierarchy.NodePool)
+
+    def test_node_created_cb(self):
+        mc.file(new=True, force=True)
+
+        # Create a node without any callback
+        pma = mc.createNode("plusMinusAverage", name="pma")
+        self.assertTrue(mc.objExists(pma))
+
+        if HOST() == "python":
+            from maya import mmc_hierarchy as hierarchy
+            self.assertTrue(hierarchy.NodePool.from_name(pma))
+
+        def do_smth_noticeble(*args, **kwargs):
+            mc.createNode("transform", name="created_in_cb")
+            print(f"Node created. Receiving args: {args}, kwargs: {kwargs}")
+
+        self.callback_ids.append(
+            om.MDGMessage.addNodeAddedCallback(
+                partial(do_smth_noticeble, "arg1", "arg2", kwarg1="kwarg1"),
+                "dependNode",  # Filter for dependency nodes, which is to say all nodes
+            )
+        )
+
+        # Create a node with the callback
+        mc.createNode("transform", name="transform")
+        self.assertTrue(mc.objExists("transform"))
+        self.assertTrue(mc.objExists("created_in_cb"))
+
+
+if __name__ == "__main__":
     try:
         from maya import cmds as mc
         from maya import mel
 
-        reporter = mel.eval('string $tmp = $gCommandReporter;')
+        reporter = mel.eval("string $tmp = $gCommandReporter;")
         mc.cmdScrollFieldReporter(reporter, e=True, clear=True)
-        
+
         loader = unittest.TestLoader()
         suite = unittest.TestSuite()
 
-        for case_class in [TestMayaMockCompletion, TestCmds]:
+        for case_class in [TestMayaMockCompletion, TestCmds, TestCallbacks]:
             suite.addTests(loader.loadTestsFromTestCase(case_class))
 
         runner = unittest.TextTestRunner()

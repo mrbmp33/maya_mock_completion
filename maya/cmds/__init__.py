@@ -5,7 +5,6 @@ from typing import Union
 import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
 from maya.api import OpenMaya as om
-from maya.node_types_literals import NODE_TYPES
 from maya import ACTIVE_SELECTION
 
 
@@ -2043,7 +2042,7 @@ def createLayeredPsdFile(imageFileName=list, ifn=list, psdFileName=str(), psf=st
     pass
 
 
-def createNode(node_type: Union[str, NODE_TYPES], name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(),
+def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), shared=bool(), s=bool(),
                skipSelect=bool(), ss=bool(),
                *args, **kwargs):
     if not any((name, n)):
@@ -2059,15 +2058,12 @@ def createNode(node_type: Union[str, NODE_TYPES], name=str(), n=str(), parent=st
                 sl_ls = om.MSelectionList()
                 sl_ls.add(parent)
                 parent_mobject = om.MFnDagNode().create(node_type, name or n, sl_ls.getDependNode(0))
-                _hierarchy.register(parent_mobject)
             mobject = om.MFnDagNode().create(node_type, name or n, parent_mobject)
         else:
-            mobject = om.MFnDagNode().create(node_type, name or n)
+            mobject = om.MFnDependencyNode().create(node_type, name or n)
 
     except RuntimeError:
         mobject = om.MFnDependencyNode(node_type, name or n)
-
-    _hierarchy.register(mobject)
 
     if not skipSelect and not ss:
         ACTIVE_SELECTION.replace_all([mobject, ])
@@ -2316,12 +2312,24 @@ def deformerWeights(attribute=str(), at=str(), defaultValue=float(), dv=float(),
     pass
 
 
-def delete(all=bool(), attribute=str(), at=str(), channels=bool(), c=bool(), constraints=bool(), cn=bool(),
+def delete(objects, all=bool(), attribute=str(), at=str(), channels=bool(), c=bool(), constraints=bool(), cn=bool(),
            constructionHistory=bool(), ch=bool(), controlPoints=bool(), cp=bool(), expressions=bool(), e=bool(),
            hierarchy=str(), hi=str(), inputConnectionsAndNodes=bool(), icn=bool(), motionPaths=bool(), mp=bool(),
            shape=bool(), s=bool(), staticChannels=bool(), sc=bool(), timeAnimationCurves=bool(), tac=bool(),
-           unitlessAnimationCurves=bool(), uac=bool(), *args, **kwargs):
-    pass
+           unitlessAnimationCurves=bool(), uac=bool()):
+
+    if not isinstance(objects, (list, tuple, str)):
+        raise ValueError(f'Expected objects to be a list, tuple, or string. Got: {type(objects)}')
+    
+    if isinstance(objects, str):
+        objects = [objects,]
+    
+    for obj in objects:
+        mobject = _hierarchy.NodePool.from_name(obj)
+        if not mobject:
+            raise ValueError(f'No object matches name: {obj}.')
+        om._NODE_DESTROYED_SIGNAL.send(mobject)
+
 
 
 def deleteAttr(attribute=str(), at=str(), *args, **kwargs):
@@ -2991,8 +2999,9 @@ def file(absoluteName=bool(), an=bool(), activate=bool(), a=bool(), activeProxy=
          uc=bool(), uiLoadConfiguration=bool(), ulc=bool(), unloadReference=str(), ur=str(), unresolvedName=bool(),
          un=bool(), usingNamespaces=bool(), uns=bool(), withoutCopyNumber=bool(), wcn=bool(), writable=bool(), w=bool(),
          *args, **kwargs):
+    
     if new or newFile and force or f:
-        _hierarchy.NodePool.reset()
+        om._NEW_SCENE_SIGNAL.send()
 
 
 def fileBrowserDialog(actionName=str(), an=str(), dialogStyle=int(), ds=int(), fileCommand=str(), fc=str(),
