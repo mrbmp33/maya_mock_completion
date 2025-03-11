@@ -351,6 +351,7 @@ class TestCallbacks(unittest.TestCase):
     def setUp(self):
         super().setUp()
         self.callback_ids = []
+        self.logger = logging.getLogger(__name__)
 
     def tearDown(self):
         
@@ -363,6 +364,7 @@ class TestCallbacks(unittest.TestCase):
                 len(list(om._CALLBACKS_REGISTRY.keys())),
             )
             
+        print(self.callback_ids)
         for callback_id in self.callback_ids:
             om.MMessage.removeCallback(callback_id)
         
@@ -381,8 +383,8 @@ class TestCallbacks(unittest.TestCase):
 
         def do_smth_noticeble(*args, **kwargs):
             jnt = mc.createNode("joint", name="created_in_cb")
-            print("Node deleted. Creating a different one: {}".format(jnt))
-            print(f"Receiving args: {args}, kwargs: {kwargs}")
+            self.logger.debug("Node deleted. Creating a different one: {}".format(jnt))
+            self.logger.debug(f"Receiving args: {args}, kwargs: {kwargs}")
 
         self.callback_ids.append(
             om.MNodeMessage.addNodeDestroyedCallback(
@@ -408,7 +410,7 @@ class TestCallbacks(unittest.TestCase):
 
         def do_smth_noticeble(*args, **kwargs):
             mc.createNode("transform", name="created_in_cb")
-            print(f"Node created. Receiving args: {args}, kwargs: {kwargs}")
+            self.logger.debug(f"Node created. Receiving args: {args}, kwargs: {kwargs}")
 
         self.callback_ids.append(
             om.MDGMessage.addNodeAddedCallback(
@@ -421,6 +423,19 @@ class TestCallbacks(unittest.TestCase):
         mc.createNode("transform", name="transform")
         self.assertTrue(mc.objExists("transform"))
         self.assertTrue(mc.objExists("created_in_cb"))
+
+
+class TestScene(unittest.TestCase):
+    
+    def setUp(self):
+        mc.file(new=True, force=True)
+
+    def test_scene_save(self):
+        x = mc.createNode("transform", name="transform")
+        print(x)
+
+    def test_scene_open(self):
+        mc.createNode("transform", name="transform")
 
 
 if __name__ == "__main__":

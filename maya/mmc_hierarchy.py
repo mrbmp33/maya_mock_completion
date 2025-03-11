@@ -54,6 +54,12 @@ class NodePoolMeta(type):
 
     @classmethod
     def object_exists(cls, node: 'om.MObject') -> bool:
+        # if not hasattr(node, '_name'):
+        #     print(f"Node {node} has no attribute '_name'")
+        #     print(cls.all_nodes())
+        #     print(node)
+        #     raise AttributeError
+
         nd = cls._node_instances.get(
             hash(node._name),
             cls._node_instances.get(hash(node._path_str()))

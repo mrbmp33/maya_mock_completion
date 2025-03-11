@@ -141,7 +141,7 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
 # ==== Signals ====
 
 def _new_scene(args):
-    print(args)
+    print('New scene :)')
     hierarchy.NodePool.reset()
 
 def _add_node_to_pool(node: 'MObject') -> None:
@@ -12194,6 +12194,9 @@ class MObject(object):
         self._attributes = {}
         self._callbacks: list[int] = []
 
+        # Add finalizer object to trigger node deletion signal
+        self._finalizer = weakref.finalize(self, self._finalize_obj)
+
         # plug-specific properties
         if MFn.kAttribute in self._api_type:
             self._init_attribute_fields()
@@ -12315,7 +12318,7 @@ class MObject(object):
     def __hash__(self):
         return hash(self._uuid)
 
-    def __del__(self):
+    def _finalize_obj(self):
         if self.hasFn(MFn.kDependencyNode):
             _NODE_DESTROYED_SIGNAL.send(self)
 

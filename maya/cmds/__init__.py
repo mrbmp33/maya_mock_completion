@@ -2060,7 +2060,8 @@ def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), share
                 parent_mobject = om.MFnDagNode().create(node_type, name or n, sl_ls.getDependNode(0))
             mobject = om.MFnDagNode().create(node_type, name or n, parent_mobject)
         else:
-            mobject = om.MFnDependencyNode().create(node_type, name or n)
+            # Assume all nodes are dag nodes. No way to know this unless we create a type map for all nodes...
+            mobject = om.MFnDagNode().create(node_type, name or n)
 
     except RuntimeError:
         mobject = om.MFnDependencyNode(node_type, name or n)
