@@ -1,3 +1,4 @@
+from typing import Union
 from maya.api import OpenMaya as _om2
 
 
