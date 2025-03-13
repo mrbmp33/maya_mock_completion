@@ -148,6 +148,7 @@ def _add_node_to_pool(node: 'MObject') -> None:
     hierarchy.register(node)
 
 def _remove_node_from_pool(node: 'MObject') -> None:
+    node._alive = False
     hierarchy.deregister(node)
 
 _NODE_ADDED_SIGNAL = blinker.Signal()
@@ -12321,6 +12322,9 @@ class MObject(object):
     def _finalize_obj(self):
         if self.hasFn(MFn.kDependencyNode):
             _NODE_DESTROYED_SIGNAL.send(self)
+        elif self.hasFn(MFn.kDagNode) and len(self._children) > 0:
+            for child in self._children:
+                child._finalize_obj()
 
     @property
     def apiTypeStr(self):
@@ -21320,7 +21324,7 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
-    def findPlug(self, attr_name: str, want_network_plug):
+    def findPlug(self, attr_name: str, want_network_plug) -> 'MPlug':
         """
         Returns a plug for the given attribute.
         """

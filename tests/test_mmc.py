@@ -257,6 +257,22 @@ class TestMayaMockCompletion(unittest.TestCase):
             om.MFnDagNode(cam_fn.parent(0)).fullPathName(), transform_fn.fullPathName()
         )
 
+    def test_delete_node_hierarchy(self):
+        transform = self.dagmod.createNode("transform")
+        self.dagmod.doIt()
+        cam = self.dagmod.createNode("camera", parent=transform)
+        self.dagmod.doIt()
+
+        self.dagmod.deleteNode(transform)
+        self.dagmod.doIt()
+
+        self.assertTrue(transform.isNull() == False)
+        self.assertTrue(cam.isNull() == False)
+
+        if self.host == "python":
+            self.assertFalse(mc.objExists(transform))
+            self.assertFalse(mc.objExists(cam))
+
 
 class TestCmds(unittest.TestCase):
 
@@ -275,8 +291,13 @@ class TestCmds(unittest.TestCase):
 
         mc.file(new=True, force=True)
 
-        self.assertEqual(mc.ls(type="transform"), [])
-        self.assertEqual(mc.ls(type="mesh"), [])
+        if HOST() == "python":
+            from maya import mmc_hierarchy as hierarchy
+            self.assertEqual(mc.ls(type="transform"), [])
+            self.assertEqual(mc.ls(type="mesh"), [])
+        else:
+            self.assertEqual(set(mc.ls(type="transform")), set(['front', 'persp', 'side', 'top']))
+            self.assertEqual(mc.ls(type="mesh"), [])
 
     def test_create_node(self):
         transform = mc.createNode("transform")
@@ -351,28 +372,24 @@ class TestCallbacks(unittest.TestCase):
     def setUp(self):
         super().setUp()
         self.callback_ids = []
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger('test_callbacks')
 
     def tearDown(self):
-        
-        if len(self.callback_ids) == 0:
-            return
-        
+
         if HOST() == "python":
             self.assertEqual(
                 len(self.callback_ids),
                 len(list(om._CALLBACKS_REGISTRY.keys())),
             )
-            
-        print(self.callback_ids)
+
         for callback_id in self.callback_ids:
             om.MMessage.removeCallback(callback_id)
-        
-        if HOST():
+
+        if HOST() == "python":
             self.assertEqual(
                 len(list(om._CALLBACKS_REGISTRY.keys())),
                 0,
-                'Callbacks were not removed properly',
+                "Callbacks were not removed properly",
             )
 
     def test_node_deleted_cb(self):
@@ -387,21 +404,22 @@ class TestCallbacks(unittest.TestCase):
             self.logger.debug(f"Receiving args: {args}, kwargs: {kwargs}")
 
         self.callback_ids.append(
-            om.MNodeMessage.addNodeDestroyedCallback(
-                transform.object(),
+            om.MDGMessage.addNodeRemovedCallback(
                 partial(do_smth_noticeble, "arg1", "arg2", kwarg1="kwarg1"),
+                "dependNode",  # Filter for dependency nodes, which is to say all nodes
             )
         )
-        mc.delete(transform.name())
-        self.assertFalse(mc.objExists(transform))
 
-        self.assertNotIn(transform.object(), hierarchy.NodePool)
+        mc.delete(transform.name())
+
+        self.assertFalse(mc.objExists(transform))
+        self.assertTrue(mc.objExists("created_in_cb"))
 
     def test_node_created_cb(self):
         mc.file(new=True, force=True)
 
         # Create a node without any callback
-        pma = mc.createNode("plusMinusAverage", name="pma")
+        pma = mc.createNode("multDoubleLinear", name="mdl")
         self.assertTrue(mc.objExists(pma))
 
         if HOST() == "python":
@@ -409,24 +427,30 @@ class TestCallbacks(unittest.TestCase):
             self.assertTrue(hierarchy.NodePool.from_name(pma))
 
         def do_smth_noticeble(*args, **kwargs):
-            mc.createNode("transform", name="created_in_cb")
-            self.logger.debug(f"Node created. Receiving args: {args}, kwargs: {kwargs}")
+            sl = om.MSelectionList().add(args[0])
+            as_dep = om.MFnDependencyNode(sl.getDependNode(0))
+            tx = as_dep.findPlug('input1', False)
+            tx.setDouble(10.5)
+            print(f"Node created. Receiving args: {args}, kwargs: {kwargs}")
 
         self.callback_ids.append(
             om.MDGMessage.addNodeAddedCallback(
-                partial(do_smth_noticeble, "arg1", "arg2", kwarg1="kwarg1"),
+                partial(do_smth_noticeble, 'mdl', "arg2", kwarg1="kwarg1"),
                 "dependNode",  # Filter for dependency nodes, which is to say all nodes
             )
         )
 
         # Create a node with the callback
-        mc.createNode("transform", name="transform")
-        self.assertTrue(mc.objExists("transform"))
-        self.assertTrue(mc.objExists("created_in_cb"))
+        mc.createNode("transform", name="berni")
+        
+        sl = om.MSelectionList().add('mdl')
+        as_dep = om.MFnDependencyNode(sl.getDependNode(0))
+        tx = as_dep.findPlug('input1', False)
+        self.assertEqual(tx.asDouble(), 10.5)
 
 
 class TestScene(unittest.TestCase):
-    
+
     def setUp(self):
         mc.file(new=True, force=True)
 

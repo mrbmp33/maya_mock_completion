@@ -2329,7 +2329,7 @@ def delete(objects, all=bool(), attribute=str(), at=str(), channels=bool(), c=bo
         mobject = _hierarchy.NodePool.from_name(obj)
         if not mobject:
             raise ValueError(f'No object matches name: {obj}.')
-        om._NODE_DESTROYED_SIGNAL.send(mobject)
+        om._NODE_REMOVED_SIGNAL.send(mobject)
 
 
 
