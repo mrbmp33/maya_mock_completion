@@ -1,0 +1,16 @@
+NODE_TYPES_TO_SHAPES = {
+    "mesh": ('kMesh', 'polySurface1'),
+    "nurbsCurve": ('kNurbsCurve', 'curve1'),
+    "nurbsSurface": ('kNurbsSurface', 'surface1'),
+    "bezierCurve": ('kNurbsCurve', 'bezier1'),
+    "pointLight": ('kPointLight', 'pointLight1'),
+    "directionalLight": ('kDirectionalLight', 'directionalLight1'),
+    "spotLight": ('kSpotLight', 'spotLight1'),
+    "areaLight": ('kAreaLight', 'areaLight1'),
+    "volumeLight": ('kVolumeLight', 'volumeLight2'),
+    "ambientLight": ('kAmbientLight', 'ambientLight1'),
+    "camera": ('kCamera', 'camera1'),
+    "lattice": ('kLattice', 'lattice1'),
+    "imagePlane": ('kImagePlane', 'imagePlane1'),
+    "locator": ('kLocator', 'locator1'),
+}

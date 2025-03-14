@@ -1,6 +1,8 @@
 from time import sleep
 import re
+import platform
 from typing import Union
+from pathlib import Path
 
 import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
@@ -59,7 +61,38 @@ def about(apiVersion=bool(), api=bool(), application=bool(), a=bool(), batch=boo
           tm=bool(), uiLanguage=bool(), uil=bool(), uiLanguageForStartup=bool(), uis=bool(),
           uiLanguageIsLocalized=bool(), uii=bool(), uiLocaleLanguage=bool(), ull=bool(), version=bool(), v=bool(),
           win64=bool(), w64=bool(), windowManager=bool(), wm=bool(), windows=bool(), win=bool(), *args, **kwargs):
-    pass
+    if v or version:
+        _DEFAULT_MAYA_LOCATIONS = {
+            'Windows': r'C:/Program Files/Autodesk/Maya{}',
+            'Darwin': r'/Applications/Autodesk/maya{}/Maya.app/Contents',
+            'Linux': r'/usr/autodesk/maya{}',
+        }
+        p = Path(_DEFAULT_MAYA_LOCATIONS[str(platform.system())])
+        
+        def find_largest_versioned_folder(parent_directory):
+            largest_version = -1
+            largest_folder = None
+            
+            # Regular expression to match folder names ending with numbers (e.g., maya2022)
+            pattern = re.compile(r'^(.*?)(\d+)$')
+            
+            # Iterate through the child folders
+            for elem in Path(parent_directory).iterdir():
+                if not elem.is_dir():
+                    continue
+                match = pattern.match(elem.name)
+                if not match:
+                    continue
+                version_number = int(match.group(2))  # Extract the trailing number
+                if version_number > largest_version:
+                    largest_version = version_number
+                    largest_folder = elem.name
+            return largest_folder
+
+        maya_version = find_largest_versioned_folder(
+            next((str(x) for x in p.parents if str(x).lower().endswith("autodesk")))
+        )
+        return maya_version[4:] if maya_version else None
 
 
 def addAttr(attributeType=str(), at=str(), binaryTag=str(), bt=str(), cachedInternally=bool(), ci=bool(),
@@ -2069,6 +2102,9 @@ def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), share
     if not skipSelect and not ss:
         ACTIVE_SELECTION.replace_all([mobject, ])
 
+    if len(mobject._children) > 0:
+        return mobject._children[0]._name
+    
     return name or n
 
 
@@ -5528,9 +5564,18 @@ def objectCenter(gl=bool(), local=bool(), l=bool(), x=bool(), y=bool(), z=bool()
     pass
 
 
-def objectType(isAType=str(), isa=str(), isType=str(), i=str(), tagFromType=str(), tgt=str(), typeFromTag=int(),
-               tpt=int(), typeTag=bool(), tt=bool(), *args, **kwargs):
-    pass
+def objectType(*args, isAType: str = None, isa: str = None, isType: str = None, i: str = None, tagFromType: str = None,
+               tgt: str = None, typeFromTag: int = None, tpt: int = None, typeTag: bool = None, tt: bool = None,
+               **kwargs):
+    
+    if args:
+        object_name = args[0]
+        as_obj = _hierarchy.NodePool.from_name(object_name)
+        if not as_obj:
+            raise RuntimeError(f"No object matches name: {object_name}")
+        if isType or i:
+            compare = isType or i
+            return f"{as_obj.apiTypeStr[1].lower()}{as_obj.apiTypeStr[2:]}" == compare
 
 
 def objectTypeUI(isType=str(), i=str(), listAll=bool(), la=bool(), superClasses=bool(), sc=bool(), *args, **kwargs):

@@ -242,7 +242,7 @@ class TestMayaMockCompletion(unittest.TestCase):
         if self.host == "python":
             self.assertTrue(hierarchy.NodePool.object_exists(transform))
 
-    def test_create_node_with_shape(self):
+    def test_create_node_with_shape_manual(self):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
         cam = self.dagmod.createNode("camera", parent=transform)
@@ -256,6 +256,18 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertEqual(
             om.MFnDagNode(cam_fn.parent(0)).fullPathName(), transform_fn.fullPathName()
         )
+
+    def test_create_node_with_shape_auto(self):
+        trn_obj = om.MFnDagNode().create("mesh", name='some_mesh')
+        trn = om.MFnDagNode(trn_obj)
+
+        self.assertTrue(trn_obj.isNull() == False)
+        self.assertEqual(trn_obj.apiType(), om.MFn.kTransform)
+        self.assertEqual(trn.childCount(), 1)
+
+        shape = om.MFnDagNode(trn.child(0))
+        self.assertEqual(shape.object().apiType(), om.MFn.kMesh)
+        self.assertEqual(shape.name(), 'some_meshShape')
 
     def test_delete_node_hierarchy(self):
         transform = self.dagmod.createNode("transform")
@@ -283,11 +295,11 @@ class TestCmds(unittest.TestCase):
         mc.createNode("transform", name="transform")
         mc.createNode("transform", name="transform1")
         mc.createNode("transform", name="transform2")
-        mc.createNode("mesh", name="mesh")
+        mc.createNode("mesh", name="mesh")  # will create a transform node as well
 
         if HOST() == "python":
             from maya import mmc_hierarchy as hierarchy
-            self.assertEqual(len(hierarchy.NodePool._node_instances), 4)
+            self.assertEqual(len(hierarchy.NodePool._node_instances), 5)
 
         mc.file(new=True, force=True)
 
@@ -305,6 +317,8 @@ class TestCmds(unittest.TestCase):
 
         mesh = mc.createNode("mesh")
         self.assertTrue(mc.objExists(mesh))
+        mc.objectType(mesh, isType="mesh")
+        mc.objectType(transform, isType="transform")
 
     def test_create_node_with_name(self):
         transform = mc.createNode("transform", name="testTransform")
@@ -365,6 +379,10 @@ class TestCmds(unittest.TestCase):
 
         dep = om.MFnDependencyNode(sel.getDependNode(0))
         self.assertEqual(dep.name(), "mmc")
+
+    def test_about(self):
+        about = mc.about(version=True)
+        self.assertIsInstance(about, str)
 
 
 class TestCallbacks(unittest.TestCase):
