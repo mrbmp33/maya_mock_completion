@@ -93,7 +93,7 @@ def to_cache_file(data, out_file):
     
 
 if __name__ == '__main__':
-    route = r"E:/berni/Documents/01_personal_projects/maya_mock_completion/mmc_output/node_types_to_shapes.py"
+    route = r""
     out_file = Path(route)
     # out_file.parent.mkdir(parents=True, exist_ok=True)
     mc.file(new=True, f=True)

@@ -64,7 +64,7 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     if shape_type := node_types_to_shapes.NODE_TYPES_TO_SHAPES.get(type_str):
         parent_name = shape_type['parent_name']
         name = name or shape_type['child_name']
-        parent_mobject =_create_node_from_type(_TYPE_STR_TO_ID['transform'], name=parent_name)
+        parent_mobject = _create_node_from_type(_TYPE_STR_TO_ID['transform'], name=parent_name)
         
         mobject._parent = parent_mobject
         parent_mobject._children.insert(0, mobject)
@@ -72,7 +72,7 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     
     mobject._typeId = obj_id
     mobject._api_type = _calc_node_api_type(type_str)
-    mobject._name = hierarchy.find_first_available_name(name or f'{type_id}1', parent_name=parent_name)
+    mobject._name = hierarchy.find_first_available_name(name or f'{type_str}1', parent_name=parent_name)
 
     # Flag as alive
     mobject._is_null = False
