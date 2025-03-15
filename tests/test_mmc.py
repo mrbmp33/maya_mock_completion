@@ -258,6 +258,7 @@ class TestMayaMockCompletion(unittest.TestCase):
         )
 
     def test_create_node_with_shape_auto(self):
+        # returns the transform node bc no parent is provided
         trn_obj = om.MFnDagNode().create("mesh", name='some_mesh')
         trn = om.MFnDagNode(trn_obj)
 
@@ -267,7 +268,16 @@ class TestMayaMockCompletion(unittest.TestCase):
 
         shape = om.MFnDagNode(trn.child(0))
         self.assertEqual(shape.object().apiType(), om.MFn.kMesh)
-        self.assertEqual(shape.name(), 'some_meshShape')
+        self.assertEqual(shape.name(), 'some_mesh')
+
+        crv_trn_o = om.MFnDagNode().create("nurbsCurve")
+        crv_trn = om.MFnDagNode(crv_trn_o)
+        crv_shape = om.MFnDagNode(crv_trn.child(0))
+        self.assertEqual(crv_trn_o.apiType(), om.MFn.kTransform)
+        self.assertEqual(crv_trn.childCount(), 1)
+        self.assertEqual(crv_trn.name(), 'curve1')
+        self.assertEqual(crv_shape.name(), 'curveShape1')
+        self.assertEqual(crv_shape.object().apiType(), om.MFn.kNurbsCurve)
 
     def test_delete_node_hierarchy(self):
         transform = self.dagmod.createNode("transform")

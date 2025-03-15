@@ -55,9 +55,9 @@ node_types = [
 
 def yield_children():
     for ndt in node_types:
-        # print(ndt)
         try:
             mobject = om.MFnDagNode().create(ndt)
+            as_fn = om.MFnDagNode(mobject)
         except Exception:
             try:
                 mobject = om.MFnDependencyNode().create(ndt)
@@ -70,7 +70,7 @@ def yield_children():
                 if dag_path.numberOfShapesDirectlyBelow():
                     dag_path.extendToShape()
                     shape = dag_path.node()
-                    yield ndt, shape.apiTypeStr, om.MFnDependencyNode(mobject).name()
+                    yield ndt, shape.apiTypeStr, om.MFnDependencyNode(shape).name(), as_fn.name()
         except Exception as e:
             traceback.print_exc()
             continue
@@ -78,8 +78,8 @@ def yield_children():
 
 def to_data_struct():
     data = {}
-    for ndt, child_type, child_name in yield_children():
-        data[ndt] = (child_type, child_name)
+    for ndt, child_type, child_name, parent_name in yield_children():
+        data[ndt] = {'child_type': child_type, 'child_name': child_name, 'parent_name': parent_name}
     return data
 
 
@@ -93,9 +93,9 @@ def to_cache_file(data, out_file):
     
 
 if __name__ == '__main__':
-    route = r''
-    out_file = Path()
-    out_file.parent.mkdir(parents=True, exist_ok=True)
+    route = r"E:/berni/Documents/01_personal_projects/maya_mock_completion/mmc_output/node_types_to_shapes.py"
+    out_file = Path(route)
+    # out_file.parent.mkdir(parents=True, exist_ok=True)
     mc.file(new=True, f=True)
     # to_data_struct()
     to_cache_file(to_data_struct(), str(out_file))

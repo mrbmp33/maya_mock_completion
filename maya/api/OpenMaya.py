@@ -20,11 +20,9 @@ import blinker
 from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
-import maya.attribute_properties as attribute_properties
-from maya.node_types_literals import NODE_TYPES
+from mmc_output.node_types_literals import NODE_TYPES
 from maya import ACTIVE_SELECTION
-from maya import mmc_node_types_alias_map
-from output import node_types_to_shapes
+from mmc_output import mmc_node_types_alias_map, node_types_to_shapes, attribute_properties
 
 
 # ==== Utilities ====
@@ -56,16 +54,16 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     if isinstance(type_id, str):
         # noinspection PyProtectedMember
         obj_id = _TYPE_STR_TO_ID[type_id]
-        name = name if name else f'{type_id}1'
         type_str = type_id
     else:
         obj_id = type_id
         type_str = _TYPE_INT_TO_STR[type_id.id()]
-        name = name if name else f'{type_str}1'
 
     # If it's a node_type that has a shape, create an additional transform for it
+    parent_name = None
     if shape_type := node_types_to_shapes.NODE_TYPES_TO_SHAPES.get(type_str):
-        shape_type, parent_name = shape_type
+        parent_name = shape_type['parent_name']
+        name = name or shape_type['child_name']
         parent_mobject =_create_node_from_type(_TYPE_STR_TO_ID['transform'], name=parent_name)
         
         mobject._parent = parent_mobject
@@ -74,7 +72,7 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     
     mobject._typeId = obj_id
     mobject._api_type = _calc_node_api_type(type_str)
-    mobject._name = hierarchy.find_first_available_name(name if name else f'{type_str}Shape1')
+    mobject._name = hierarchy.find_first_available_name(name or f'{type_id}1', parent_name=parent_name)
 
     # Flag as alive
     mobject._is_null = False
@@ -21294,7 +21292,7 @@ class MFnDependencyNode(MFnBase):
         """
         Creates a new node of the given type.
         """
-        mobject = _create_node_from_type(type_id, name)
+        mobject = _create_node_from_type(type_id, name=name)
 
         # Set valid flag
         self._mobject = mobject
@@ -22650,16 +22648,42 @@ class MFnDagNode(MFnDependencyNode):
         """
 
         mobject = super().create(node_type, name)
-        mobject._api_type.insert(mobject._api_type.index(MFn.kDependencyNode) + 1, MFn.kDagNode)
-        if parent and mobject not in parent._children:
+
+        # Append DAG node type to the API type list
+        if MFn.kDagNode not in mobject._api_type:
+            mobject._api_type.insert(
+                mobject._api_type.index(MFn.kDependencyNode) + 1,
+                MFn.kDagNode
+            )
+
+        # Do the same for child (if applicable)
+        if len(mobject._children) > 0:
+            if MFn.kDagNode not in mobject._children[0]._api_type:
+                mobject._children[0]._api_type.insert(
+                    mobject._api_type.index(MFn.kDependencyNode) + 1,
+                    MFn.kDagNode
+                )
+        
+        # Setup hierarchy
+        if parent is not None and mobject not in parent._children:
             mobject._parent = parent
             mobject._parent._children.append(mobject)
         else:
             mobject._parent = WORLD
 
-        self._dag_path = _initialize_dag_path_from_mobject(mobject)
 
-        return mobject
+        if parent is None:
+            return_mobject = mobject  # Return transform        
+        else:
+            if len(mobject._children) > 0:
+                return_mobject = mobject._children[0]  # Return shape. Fix your program, Maya... :/
+            else:
+                return_mobject = mobject  # Return transform        
+
+        # Initialize DAG path. If it has a shape, initialize it to that.
+        self._dag_path = _initialize_dag_path_from_mobject(return_mobject)
+
+        return return_mobject
 
     def dagPath(self, *args, **kwargs) -> 'MDagPath':
         """
