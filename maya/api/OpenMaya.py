@@ -16617,6 +16617,7 @@ class MPlug(object):
         self._parent_name = None
 
         self._attribute = None
+        self._locked = False
 
     def __repr__(self):
         if not self._owner:
@@ -16909,7 +16910,11 @@ class MPlug(object):
         """
         Returns a value indicating if the plug's value can be changed, after taking into account the effects of locking and connections.
         """
-        return not self.isLocked and not self.isConnected
+        # return self.isLocked and not self.isConnected
+        if not self._locked and not self.isConnected:
+            return MPlug.kFreeToChange
+        else:
+            return MPlug.kNotFreeToChange
     
     def logicalIndex(self) -> int:
         """
@@ -17215,7 +17220,7 @@ class MPlug(object):
     @property
     def isLocked(self) -> bool:
         """Returns True if the plug is locked or the owning node is locked, False otherwise."""
-        return self._attribute._locked
+        return self._locked
 
     @isLocked.setter
     def isLocked(self, value: bool) -> None:
