@@ -2435,7 +2435,7 @@ class MDGModifier(object):
             elif action[0] == 'set_attr':
                 # Partial func undo
                 action[2]()
-                
+
         self._done = False
         self._undone = True
         return self
@@ -16696,6 +16696,8 @@ class MPlug(object):
 
         self._attribute = None
         self._locked = False
+        self._keyable = True
+        self._channel_box = False
 
     def __repr__(self):
         if not self._owner:
@@ -17250,7 +17252,13 @@ class MPlug(object):
 
     isCaching = None
 
-    isChannelBox = None
+    @property
+    def isChannelBox(self) -> bool:
+        return self._channel_box
+    
+    @isChannelBox.setter
+    def isChannelBox(self, value: bool):
+        self._channel_box = value
 
     @property
     def isChild(self) -> bool:
@@ -17293,7 +17301,12 @@ class MPlug(object):
     @property
     def isKeyable(self) -> bool:
         """Returns True if the plug is keyable, False otherwise."""    
-        return True
+        return self._keyable
+
+    @isKeyable.setter
+    def isKeyable(self, value: bool) -> None:
+        """Sets the keyable state of the plug."""
+        self._keyable = value
 
     @property
     def isLocked(self) -> bool:

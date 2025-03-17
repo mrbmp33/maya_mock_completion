@@ -8403,15 +8403,32 @@ def sequenceManager(addSequencerAudio=str(), asa=str(), attachSequencerAudio=str
     pass
 
 
-def setAttr(attribute_name, new_value, alteredValue=bool(), av=bool(), caching=bool(), ca=bool(), capacityHint=int(), ch=int(), channelBox=bool(),
-            cb=bool(), clamp=bool(), c=bool(), keyable=bool(), k=bool(), lock=bool(), l=bool(), size=int(), s=int(),
-            type=str(), typ=str(), *args, **kwargs):
+def setAttr(*args, alteredValue: bool = None, av: bool = None, caching: bool = None, ca: bool = None,
+            capacityHint: int = None, ch: int = None, channelBox: bool = None, cb: bool = None, clamp: bool = None,
+            c: bool = None, keyable: bool = None, k: bool = None, lock: bool = None, l: bool = None, size: int = None, 
+            s: int = None, type=str(), typ=str(), **kwargs):
 
-    full_name: str = attribute_name
-    new_value = new_value
-    node_name, attr_name = full_name.split('.')
-    node_mobject = _hierarchy.NodePool.from_name(node_name)
-    om.MFnDependencyNode(node_mobject).findPlug(attr_name, False).attribute()._value = new_value
+    if args:
+        full_name: str = args[0]
+        node_name, attr_name = full_name.split('.')
+        new_value = None
+        if len(args) == 2:
+            new_value = args[1]
+        node_mobject = _hierarchy.NodePool.from_name(node_name)
+        
+        plug = om.MFnDependencyNode(node_mobject).findPlug(attr_name, False)
+        if new_value is not None:
+            plug.attribute()._value = new_value
+            return
+
+        if keyable or k:
+            plug.isKeyable = keyable or k
+        
+        if lock or l:
+            plug.isLocked = lock or l
+
+        if channelBox or cb:
+            plug.isChannelBox = channelBox or cb
 
 
 def setAttrMapping(absolute=bool(), a=bool(), attribute=str(), at=str(), axis=str(), ax=str(), clutch=str(), c=str(),
