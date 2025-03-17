@@ -2047,6 +2047,10 @@ class MDGModifier(object):
                 # Add new key with new name
                 node._attributes[_get_attribute_id(attribute._name)] = attribute
 
+            elif action[0] == 'set_attr':
+                # Partial func do
+                action[1]()
+
         self._done = True
         self._executed = len(self._queue)
 
@@ -2078,89 +2082,159 @@ class MDGModifier(object):
         """
         pass
 
-    def newPlugValueBool(*args, **kwargs):
+    def newPlugValueBool(self, mplug: 'MPlug', new_value: bool) -> 'MDGModifier':
         """
         newPlugValueBool(MPlug plug, bool value) -> self
 
         Adds an operation to the modifier to set a value onto a bool plug.
         """
-        pass
+        old_value = mplug.asBool()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setBool, new_value),
+             partial(mplug.setBool, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueChar(*args, **kwargs):
+    def newPlugValueChar(self, mplug: 'MPlug', new_value: int) -> 'MDGModifier':
         """
         newPlugValueChar(MPlug plug, int value) -> self
 
         Adds an operation to the modifier to set a value onto a char (single
         byte signed integer) plug.
         """
-        pass
+        old_value = mplug.asChar()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setChar, new_value),
+             partial(mplug.setChar, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueDouble(*args, **kwargs):
+    def newPlugValueDouble(self, mplug: 'MPlug', new_value: float) -> 'MDGModifier':
         """
         newPlugValueDouble(MPlug plug, float value) -> self
 
         Adds an operation to the modifier to set a value onto a double-precision
         float plug.
         """
-        pass
+        old_value = mplug.asDouble()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setDouble, new_value),
+             partial(mplug.setDouble, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueFloat(*args, **kwargs):
+    def newPlugValueFloat(self, mplug: 'MPlug', new_value: float) -> 'MDGModifier':
         """
         newPlugValueFloat(MPlug plug, float value) -> self
 
         Adds an operation to the modifier to set a value onto a single-precision
         float plug.
         """
-        pass
+        old_value = mplug.asFloat()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setFloat, new_value),
+             partial(mplug.setFloat, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueInt(*args, **kwargs):
+    def newPlugValueInt(self, mplug: 'MPlug', new_value: int) -> 'MDGModifier':
         """
         newPlugValueInt(MPlug plug, int value) -> self
 
         Adds an operation to the modifier to set a value onto an int plug.
         """
-        pass
+        old_value = mplug.asInt()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setInt, new_value),
+             partial(mplug.setInt, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueMAngle(*args, **kwargs):
+    def newPlugValueMAngle(self, mplug: 'MPlug', new_value: 'MAngle') -> 'MDGModifier':
         """
         newPlugValueMAngle(MPlug plug, MAngle value) -> self
 
         Adds an operation to the modifier to set a value onto an angle plug.
         """
-        pass
+        old_value = mplug.asMAngle()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setMAngle, new_value),
+             partial(mplug.setMAngle, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueMDistance(*args, **kwargs):
+    def newPlugValueMDistance(self, mplug: 'MPlug', new_value: 'MDistance') -> 'MDGModifier':
         """
         newPlugValueMDistance(MPlug plug, MDistance value) -> self
 
         Adds an operation to the modifier to set a value onto a distance plug.
         """
-        pass
+        old_value = mplug.asMDistance()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setMDistance, new_value),
+             partial(mplug.setMDistance, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueMTime(*args, **kwargs):
+    def newPlugValueMTime(self, mplug: 'MPlug', new_value: 'MTime') -> 'MDGModifier':
         """
         newPlugValueMTime(MPlug plug, MTime value) -> self
 
         Adds an operation to the modifier to set a value onto a time plug.
         """
-        pass
+        old_value = mplug.asMTime()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setMTime, new_value),
+             partial(mplug.setMTime, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueShort(*args, **kwargs):
+    def newPlugValueShort(self, mplug: 'MPlug', new_value: int) -> 'MDGModifier':
         """
         newPlugValueShort(MPlug plug, int value) -> self
 
         Adds an operation to the modifier to set a value onto a short
         integer plug.
         """
-        pass
+        old_value = mplug.asShort()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.setShort, new_value),
+             partial(mplug.setShort, old_value),
+             )
+        )
+        return self
 
-    def newPlugValueString(*args, **kwargs):
+    def newPlugValueString(self, mplug: 'MPlug', new_value: str) -> 'MDGModifier':
         """
         newPlugValueString(MPlug plug, string value) -> self
 
         Adds an operation to the modifier to set a value onto a string plug.
         """
-        pass
+        old_value = mplug.asString()
+        self._queue.append(
+            ('set_attr',
+             partial(mplug.asString, new_value),
+             partial(mplug.asString, old_value),
+             )
+        )
+        return self
 
     def pythonCommandToExecute(*args, **kwargs):
         """
@@ -2357,6 +2431,10 @@ class MDGModifier(object):
                 attribute._name = node._name + '.' + action[6]
                 attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
                 node._attributes[attr_id] = attribute
+            
+            elif action[0] == 'set_attr':
+                # Partial func undo
+                action[2]()
                 
         self._done = False
         self._undone = True
