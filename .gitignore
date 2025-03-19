@@ -12,3 +12,4 @@ dist/maya_mock_completion-0.1.0-py3-none-any.whl
 dist/maya_mock_completion-0.1.0.tar.gz
 /maya/cmds/custom_cmds.py
 sandbox.py
+maya/cmds/custom_cmds.py
