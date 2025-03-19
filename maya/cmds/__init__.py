@@ -8,6 +8,7 @@ import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
 from maya.api import OpenMaya as om
 from maya import ACTIVE_SELECTION
+from mmc_output import node_types_to_shapes
 
 
 def _register_node_from_name(node_name:str) -> om.MObject:
@@ -2079,7 +2080,10 @@ def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), share
                skipSelect=bool(), ss=bool(),
                *args, **kwargs):
     if not any((name, n)):
-        name=f'{node_type}1'
+        if shape_type := node_types_to_shapes.NODE_TYPES_TO_SHAPES.get(node_type):
+            name = shape_type['child_name']
+        else:
+            name=f'{node_type}1'
     name = _hierarchy.find_first_available_name(name or n, parent_name=parent if parent != str() else None)
 
     # try to create as dag node, if it fails it defaults to dependency node
@@ -2099,13 +2103,13 @@ def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), share
     except RuntimeError:
         mobject = om.MFnDependencyNode(node_type, name or n)
 
+    if len(mobject._children) > 0:
+        mobject = mobject._children[0]
+
     if not skipSelect and not ss:
         ACTIVE_SELECTION.replace_all([mobject, ])
-
-    if len(mobject._children) > 0:
-        return mobject._children[0]._name
     
-    return name or n
+    return mobject._name
 
 
 def createRenderLayer(empty=bool(), e=bool(), g=bool(), makeCurrent=bool(), mc=bool(), name=str(), n=str(),
@@ -3348,8 +3352,9 @@ def fluidVoxelInfo(checkBounds=bool(), cb=bool(), inBounds=list, ib=list, object
     pass
 
 
-def flushUndo(*args, **kwargs):
-    pass
+def flushUndo():
+    for nd in (x for x in _hierarchy.NodePool.all_nodes() if not x._alive):
+        om._NODE_DESTROYED_SIGNAL(nd)
 
 
 def fontDialog(FontList=bool(), fl=bool(), scalable=bool(), sc=bool(), *args, **kwargs):
@@ -4763,7 +4768,7 @@ def lookThru(farClip=float(), fc=float(), nearClip=float(), nc=float(), *args, *
     pass
 
 
-def ls(absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bool(), cameras=bool(), ca=bool(),
+def ls(*args, absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bool(), cameras=bool(), ca=bool(),
        containerType=str(), ct=str(), containers=bool(), con=bool(), dagObjects=bool(), dag=bool(), defaultNodes=bool(),
        dn=bool(), dependencyNodes=bool(), dep=bool(), exactType=str(), et=str(), excludeType=str(), ext=str(),
        flatten=bool(), fl=bool(), geometry=bool(), g=bool(), ghost=bool(), gh=bool(), head=int(), hd=int(),
@@ -4778,8 +4783,10 @@ def ls(absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bo
        s=bool(), shortNames=bool(), sn=bool(), showNamespace=bool(), sns=bool(), showType=bool(), st=bool(), tail=int(),
        tl=int(), templated=bool(), tm=bool(), textures=bool(), tex=bool(), transforms=bool(), tr=bool(), type=str(),
        typ=str(), ufeObjects=bool(), ufe=bool(), undeletable=bool(), ud=bool(), untemplated=bool(), ut=bool(),
-       uuid=bool(), uid=bool(), visible=bool(), v=bool(), *args):
+       uuid=bool(), uid=bool(), visible=bool(), v=bool()):
     
+    from builtins import set as _set
+
     def match_pattern(pattern, string):
         # Convert the pattern to a regex pattern
         regex_pattern = pattern.replace('?', '.').replace('*', '.*')
@@ -4796,8 +4803,11 @@ def ls(absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemblies=bo
 
     if args:
         if isinstance(args[0], str):
-            filtered_patter = filter_nodes(args[0], _hierarchy.NodePool.all_nodes())
-            l = set(filtered_patter).intersection_update(set(l))
+            filtered_pattern = filter_nodes(args[0], _hierarchy.NodePool.all_nodes())
+            if selection or sl:
+                l = _set(filtered_pattern).intersection_update(_set(l))
+            else:
+                l = filtered_pattern
     else:
         l = l or _hierarchy.NodePool.all_nodes()
 
@@ -5583,7 +5593,10 @@ def objectTypeUI(isType=str(), i=str(), listAll=bool(), la=bool(), superClasses=
 
 
 def objExists(node_name: str) -> bool:
-    return True if _hierarchy.NodePool.from_name(node_name) else False
+    if node := _hierarchy.NodePool.from_name(node_name):
+        return node._alive
+    else:
+        return False
 
 
 def offsetCurve(caching=bool(), cch=bool(), connectBreaks=int(), cb=int(), constructionHistory=bool(), ch=bool(),
@@ -8415,6 +8428,8 @@ def setAttr(*args, alteredValue: bool = None, av: bool = None, caching: bool = N
         if len(args) == 2:
             new_value = args[1]
         node_mobject = _hierarchy.NodePool.from_name(node_name)
+        if not node_mobject:
+            raise RuntimeError(f"Node {node_name} not found")
         
         plug = om.MFnDependencyNode(node_mobject).findPlug(attr_name, False)
         if new_value is not None:

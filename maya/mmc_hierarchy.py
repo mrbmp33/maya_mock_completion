@@ -74,7 +74,14 @@ class NodePoolMeta(type):
 
     @classmethod
     def from_name(cls, name: str) -> 'om.MObject':
-        return cls._node_instances.get(hash(name))
+        for attempt in (name,
+                        f'|{name}' if not name.startswith('|') else name.strip('|'),
+                        name.rpartition('|')[-1]
+                        ):
+            hsh = hash(attempt)
+            if found := cls._node_instances.get(hsh):
+                return found
+        return False
 
     @classmethod
     def reset(cls):

@@ -292,8 +292,8 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertTrue(cam.isNull() == False)
 
         if self.host == "python":
-            self.assertFalse(mc.objExists(transform))
-            self.assertFalse(mc.objExists(cam))
+            self.assertFalse(mc.objExists(transform._name))
+            self.assertFalse(mc.objExists(cam._name))
 
 
 class TestCmds(unittest.TestCase):
@@ -326,7 +326,7 @@ class TestCmds(unittest.TestCase):
         self.assertTrue(mc.objExists(transform))
 
         mesh = mc.createNode("mesh")
-        self.assertTrue(mc.objExists(mesh))
+        self.assertTrue(mc.objExists('polySurfaceShape1'))
         mc.objectType(mesh, isType="mesh")
         mc.objectType(transform, isType="transform")
 
@@ -440,7 +440,7 @@ class TestCallbacks(unittest.TestCase):
 
         mc.delete(transform.name())
 
-        self.assertFalse(mc.objExists(transform))
+        self.assertFalse(mc.objExists(transform.name()))
         self.assertTrue(mc.objExists("created_in_cb"))
 
     def test_node_created_cb(self):

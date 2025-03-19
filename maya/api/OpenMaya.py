@@ -7,7 +7,7 @@
 # or hard copy form.
 """
 import copy
-from functools import partial
+from functools import partial, cached_property, wraps
 import re
 import random
 import string
@@ -158,6 +158,19 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
 
     return properties, long_name, short_name
 
+
+def _raise_if_invalid_mobject_decorator(func: Callable) -> Callable:
+    
+    @wraps(func)
+    def func_wrapper(*args, **kwargs):
+        function_set = args[0]
+        if not isinstance(function_set, MFnDependencyNode):
+            raise TypeError(f'Expected MFnDependencyNode instance, got {type(function_set)}')
+        
+        if function_set.object().isNull():
+            raise RuntimeError(f'{function_set.object()} does not exist.')
+        return func(*args, **kwargs)
+    return func_wrapper
 
 
 # ==== Signals ====
@@ -1888,13 +1901,12 @@ class MDGModifier(object):
         on the same node (e.g. a disconnect) then they should be committed by
         calling the modifier's doIt() before the deleteNode operation is added.
         """
-        self._queue.append(('delete', node, ))
+        if node.hasFn(MFn.kDagNode):
+            dag_path = _initialize_dag_path_from_mobject(node)
+            for child in reversed(list(dag_path._iter_descendants(node))):
+                self._queue.append(('delete', child, child._parent))
+        self._queue.append(('delete', node, node._parent))
         return self
-
-    def _iter_descendants(self, node: 'MObject'):
-        for nd in node._children:
-            yield from self._iter_descendants(nd)
-            yield nd
 
     def disconnect(self, *args) -> 'MDGModifier':
         """
@@ -1967,7 +1979,6 @@ class MDGModifier(object):
                 mobject._alive = False
                 if mobject._parent:
                     mobject._parent._children.remove(mobject)
-                # hierarchy.deregister(mobject)
                 _NODE_REMOVED_SIGNAL.send(mobject)
             
             elif action[0] == 'rename':
@@ -2367,7 +2378,13 @@ class MDGModifier(object):
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
                 mobject._alive = True
-                hierarchy.register(mobject)
+                
+                _NODE_ADDED_SIGNAL.send(mobject)
+
+                parent: Union['MObject', None] = action[2]
+                if parent is not None:
+                    mobject._parent = parent
+                    parent._children.append(mobject)
             
             elif action[0] == 'rename':
                 mobject: 'MObject' = action[1]
@@ -12256,6 +12273,15 @@ class MItMeshVertex(object):
         pass
 
 
+class _null_obj():
+    """mmc class for keeping syntax of MObject.kNullObj"""
+
+    def __get__(self, obj, owner):
+        mobj = MObject()
+        mobj._is_null = True
+        mobj._uuid = uuid.UUID(int=0)
+        return mobj
+
 # noinspection PyPep8Naming
 class MObject(object):
     """
@@ -12382,11 +12408,11 @@ class MObject(object):
         """
         pass
 
-    def __ne__(*args, **kwargs):
+    def __ne__(self, other: 'MObject') -> bool:
         """
         x.__ne__(y) <==> x!=y
         """
-        pass
+        return not self.__eq__(other)
 
     def __repr__(self):
         if hierarchy.NodePool.hash_exists(hash(self._path_str())):
@@ -12440,16 +12466,14 @@ class MObject(object):
         else:
             raise TypeError(f'Could not identify api type for: {self}')
 
-    @classmethod
-    def kNullObj(cls) -> 'MObject':
-        return MObject()
-
     def _path_str(self) -> str:
         dag_path = MDagPath.getAPathTo(self)
         ancestors = [x._name for x in dag_path._iter_ancestors() or ()]
         ancestors.reverse()
         ancestors.append(self._name)
         return "|" + "|".join(ancestors)
+
+    kNullObj = _null_obj()
 
 
 class MFloatPointArray(object):
@@ -14804,7 +14828,8 @@ class MDagPath(object):
             current = current._parent
             yield current
 
-    def _iter_descendants(self, node: 'MObject'):
+    def _iter_descendants(self, node: 'MObject') -> Generator['MObject', None, None]:
+        """NOT FROM API, UTILITY METHOD FROM MAYA MOCK COMPLETION"""
         for nd in node._children:
             yield nd
             yield from self._iter_descendants(nd)
@@ -21318,12 +21343,14 @@ class MFnDependencyNode(MFnBase):
         """
         super().__init__(*args, **kwargs)
 
+    @_raise_if_invalid_mobject_decorator
     def absoluteName(*args, **kwargs):
         """
         Returns the absolute name of this node.  The absolute name of a node is the full namespace path starting at (and including) the root namespace, down to (and including) the node itself.  Regardless of relative name mode, absoluteName() will always return a full namespace path prefixed with a leading colon (the root namespace).
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def addAttribute(self, attribute: 'MObject') -> 'MFnDependencyNode':
         """
         Adds a new dynamic attribute to the node.
@@ -21353,6 +21380,7 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def attribute(self, attr_name: str) -> 'MObject':
         """
         Returns an attribute of the node, given either its index or name.
@@ -21398,6 +21426,7 @@ class MFnDependencyNode(MFnBase):
 
         # Some nodes create shape nodes upon creation, thus signal them as well
         if len(mobject._children) > 0:
+            self._mobject._children[0]._alive = True
             _NODE_ADDED_SIGNAL.send(mobject._children[0])
 
         return self._mobject
@@ -21444,12 +21473,14 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def findAlias(*args, **kwargs):
         """
         Returns the attribute which has the given alias.
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def findPlug(self, attr_name: str, want_network_plug) -> 'MPlug':
         """
         Returns a plug for the given attribute.
@@ -21626,18 +21657,21 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def hasAttribute(self, attribute_name: str) -> bool:
         """
         Returns True if the node has an attribute with the given name.
         """
         return True if self.attribute(attribute_name) else False
 
+    @_raise_if_invalid_mobject_decorator
     def uniqueName(self):
         """For a DAG node, the unique name of a node is the full namespace path starting at (and including) the root
         namespace, down to (and including) the node itself. For a non-DAG node, the uniqueName is just its name.
         """
         return self._mobject._name
 
+    @_raise_if_invalid_mobject_decorator
     def hasUniqueName(*args, **kwargs):
         """
         Returns True if the node's name is unique.
@@ -21662,6 +21696,7 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def name(self) -> str:
         """
         Returns the node's name.
@@ -21722,12 +21757,14 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def setName(*args, **kwargs):
         """
         Sets the node's name.
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def setUuid(*args, **kwargs):
         """
         Sets the node's UUID.
@@ -21740,6 +21777,7 @@ class MFnDependencyNode(MFnBase):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def uuid(self) -> MUuid:
         """
         Returns the node's UUID.
@@ -21877,10 +21915,18 @@ class MDagModifier(MDGModifier):
         """
         mobject = super().createNode(type_id)
 
-        if not parent:
+        if not parent or parent == MObject.kNullObj:
             parent = WORLD
         mobject._parent = parent
         parent._children.append(mobject)
+
+        # Append DAG node type to the API type list
+        if MFn.kDagNode not in mobject._api_type:
+            mobject._api_type.insert(
+                mobject._api_type.index(MFn.kDependencyNode) + 1,
+                MFn.kDagNode
+            )
+        
 
         return mobject
 
@@ -22695,6 +22741,7 @@ class MFnDagNode(MFnDependencyNode):
         
         super().__init__(mobject)
 
+    @_raise_if_invalid_mobject_decorator
     def addChild(self, node: 'MObject', index: int = -1, keepExistingParents=False) -> 'MObject':
         """
         addChild(node, index=kNextPos, keepExistingParents=False) -> self
@@ -22703,6 +22750,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         self._mobject._children.insert(index, node)
 
+    @_raise_if_invalid_mobject_decorator
     def child(self, index: int) -> 'MObject':
         """
         child(index) -> MObject
@@ -22711,6 +22759,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         return self._mobject._children[index]
 
+    @_raise_if_invalid_mobject_decorator
     def childCount(self) -> int:
         """
         childCount() -> int
@@ -22761,7 +22810,7 @@ class MFnDagNode(MFnDependencyNode):
                 )
         
         # Setup hierarchy
-        if parent is not None and mobject not in parent._children:
+        if parent is not None and parent != MObject.kNullObj and mobject not in parent._children:
             mobject._parent = parent
             mobject._parent._children.append(mobject)
         else:
@@ -22781,6 +22830,7 @@ class MFnDagNode(MFnDependencyNode):
 
         return return_mobject
 
+    @_raise_if_invalid_mobject_decorator
     def dagPath(self, *args, **kwargs) -> 'MDagPath':
         """
         dagPath() -> MDagPath
@@ -22789,6 +22839,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         return self._dag_path
 
+    @_raise_if_invalid_mobject_decorator
     def dagRoot(self):
         """
         dagRoot() -> MObject
@@ -22805,6 +22856,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def fullPathName(self) -> str:
         """
         fullPathName() -> string
@@ -22813,6 +22865,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         return self._dag_path.fullPathName()
 
+    @_raise_if_invalid_mobject_decorator
     def getAllPaths(*args, **kwargs):
         """
         getAllPaths() -> MDagPathArray
@@ -22830,6 +22883,7 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
+    @_raise_if_invalid_mobject_decorator
     def getPath(self) -> 'MDagPath':
         """
         getPath() -> MDagPath
@@ -22946,8 +23000,10 @@ class MFnDagNode(MFnDependencyNode):
         """
         if isinstance(mobject, MDagPath):
             self._dag_path = mobject
+            self._mobject = mobject.node()
         else:
-            self._mobject = mobject
+            super().setObject(mobject)
+            self._dag_path = _initialize_dag_path_from_mobject(mobject)
         return self
 
     def transformationMatrix(*args, **kwargs):
