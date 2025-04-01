@@ -51,13 +51,16 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     mobject = MObject()
     
     # If given a string as input, get the matching MTypeId
-    if isinstance(type_id, str):
-        # noinspection PyProtectedMember
-        obj_id = _TYPE_STR_TO_ID[type_id]
-        type_str = type_id
-    else:
-        obj_id = type_id
-        type_str = _TYPE_INT_TO_STR[type_id.id()]
+    try:
+        if isinstance(type_id, str):
+            # noinspection PyProtectedMember
+            obj_id = _TYPE_STR_TO_ID[type_id]
+            type_str = type_id
+        else:
+            obj_id = type_id
+            type_str = _TYPE_INT_TO_STR[type_id.id()]
+    except KeyError:
+        raise RuntimeError(f'Invalid type id: {type_id}.')
 
     # If it's a node_type that has a shape, create an additional transform for it
     parent_name = None
@@ -381,11 +384,21 @@ class MNodeClass(object):
     A class for performing node class-level operations in the dependency graph.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, node_type: Union[str, 'MTypeId']):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._node_type_id: MTypeId = None
+        self._node_type_str: str = None
+        
+        if isinstance(node_type, str):
+            self._node_type_str = node_type
+            self._node_type_id = _TYPE_STR_TO_ID[node_type]
+        elif isinstance(node_type, MTypeId):
+            self._node_type_id = node_type
+            self._node_type_str = _TYPE_INT_TO_STR[node_type.id()]
+        else:
+            raise ValueError(f'Expected str or MTypeId, got {type(node_type)}')
 
     def __repr__(*args, **kwargs):
         """
@@ -441,9 +454,13 @@ class MNodeClass(object):
 
     pluginName = None
 
-    typeId = None
+    @property
+    def typeId(self):
+        return self._node_type_id
 
-    typeName = None
+    @property
+    def typeName(self):
+        return self._node_type_str
 
 
 class MItMeshFaceVertex(object):
