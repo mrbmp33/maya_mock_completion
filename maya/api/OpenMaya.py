@@ -41,7 +41,12 @@ def _calc_node_api_type(type_str: str) -> list[int]:
     ):
         nd_types.append(mfn_key)
     else:
-        nd_types.append(getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}'))
+        mfn_key = getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}')
+
+    # Some nodes are subtypes of more generic types, a good example would be transform nodes
+    # that are also kMesh, kCamera, kJoint, etc.
+    if mfn_key in MFn._transform_types:
+        nd_types.extend([MFn.kTransform, mfn_key])
     
     return nd_types
 
@@ -1275,6 +1280,7 @@ class MTypeId(object):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
+        super().__init__()
         self._value = value
 
     def __le__(*args, **kwargs):
@@ -1299,17 +1305,17 @@ class MTypeId(object):
         """
         x.__repr__() <==> repr(x)
         """
-        return str(self)
-
-    def __str__(self):
-        """
-        x.__str__() <==> str(x)
-        """
         return "{class_name}({value}) <{as_str}>".format(
             class_name=self.__class__.__name__,
             value=self._value,
             as_str=_TYPE_INT_TO_STR.get(self._value, 'kInvalid')
         )
+
+    def __str__(self):
+        """
+        x.__str__() <==> str(x)
+        """
+        return str(self._value)
 
     def id(self) -> int:
         """
@@ -5248,8 +5254,24 @@ class MSelectionList(object):
         The second version adds the specific item to the list, where the
         item can be a plug (MPlug), a node (MObject), a DAG path (MDagPath)
         or a component (tuple of (MDagPath, MObject) ).
-        """
 
+        Raises:
+            RuntimeError: If it could not add the item.
+        """
+        if isinstance(item, str):
+            node, *attr = item.split('.')
+            node = hierarchy.NodePool.from_name(node)
+            if not node:
+                raise RuntimeError(f"Node {node} not found in the pool.")
+            if len(attr) > 0:
+                # Attempt getting attribute from node. If not present, it will crash.
+                MFnDependencyNode(node).findPlug(attr[0])
+
+        elif isinstance(item, MObject):
+            exists = hierarchy.NodePool.object_exists(item)
+            if not exists:
+                raise RuntimeError(f"Object {item} not found in the pool.")
+        
         self._inner_ls.append(item)
         return self
 
@@ -10990,6 +11012,24 @@ class MFn(object):
     kXformManip = 931
     kXsectionSubdivEdit = 820
 
+    _transform_types = {
+        kAreaLight,
+        kAmbientLight,
+        kBezierCurve,
+        kCamera,
+        kDirectionalLight,
+        kJoint,
+        kLattice,
+        kLight,
+        kLocator,
+        kMesh,
+        kNurbsCurve,
+        kNurbsSurface,
+        kPointLight,
+        kSpotLight,
+        kTransform,
+        }
+
 
 class MDataHandle(object):
     """
@@ -16719,10 +16759,14 @@ class MPlug(object):
             value = value.attribute()
         return self.attribute() > value
 
-    def __init__(self):
+    def __init__(self, *args):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
+        if len(args) == 2:
+            self._owner = args[0]
+            self._attribute_name = args[1]
+
         self._owner: 'MObject' = None
         self._uuid: uuid.UUID = uuid.uuid4()
         self._network_plug = None
@@ -16733,10 +16777,10 @@ class MPlug(object):
             'INPUTS': {},
             'OUTPUTS': {},
         }
-        self._parent = None
+        self._parent: "MPlug" = None
         self._parent_name = None
 
-        self._attribute = None
+        self._attribute: MObject = None
         self._locked = False
         self._keyable = True
         self._channel_box = False
