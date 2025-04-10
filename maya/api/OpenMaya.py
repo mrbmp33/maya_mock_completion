@@ -17,7 +17,7 @@ import weakref
 import enum
 import math
 import blinker
-from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type
+from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, overload
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
@@ -34,19 +34,21 @@ def _calc_node_api_type(type_str: str) -> list[int]:
     nd_types = [MFn.kBase, MFn.kNamedObject, MFn.kDependencyNode]
     
     # Some type strings are aliases that need to be mapped to the actual type in MFn
-    if mfn_key := getattr(
-        MFn,
-        mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP.get(type_str, ''),
-        None
-    ):
-        nd_types.append(mfn_key)
-    else:
+    mfn_key = getattr(MFn, mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP.get(type_str, ''), None)
+    
+    if mfn_key is None:
         mfn_key = getattr(MFn, f'k{type_str[0].upper()}{type_str[1:]}')
+
+    # If node type is a shape add it to the list of types
+    if type_str in node_types_to_shapes.NODE_TYPES_TO_SHAPES:
+        nd_types.append(MFn.kShape)
 
     # Some nodes are subtypes of more generic types, a good example would be transform nodes
     # that are also kMesh, kCamera, kJoint, etc.
     if mfn_key in MFn._transform_types:
         nd_types.extend([MFn.kTransform, mfn_key])
+    else:
+        nd_types.append(mfn_key)
     
     return nd_types
 
@@ -2353,6 +2355,10 @@ class MDGModifier(object):
 
         Adds an operation to the modifer to rename a node.
         """
+        
+        if node._name.split('|')[-1] == newName:
+            return self
+
         parent_path = None
         if node._parent:
             parent_path = node._parent._path_str()
@@ -21819,11 +21825,16 @@ class MFnDependencyNode(MFnBase):
         pass
 
     @_raise_if_invalid_mobject_decorator
-    def setName(*args, **kwargs):
+    def setName(self, name: str) -> str:
         """
         Sets the node's name.
         """
-        pass
+        # Update the hash in the node pool
+        old_name = self._mobject._name
+        hierarchy.NodePool.remove_object(self._mobject)
+        self._mobject._name = name
+        hierarchy.NodePool.add_object(self._mobject)
+        return name
 
     @_raise_if_invalid_mobject_decorator
     def setUuid(*args, **kwargs):
@@ -21837,6 +21848,9 @@ class MFnDependencyNode(MFnBase):
         Returns the MPxNode object for a plugin node.
         """
         pass
+
+    @overload
+    def uuid(self) -> MUuid: ...
 
     @_raise_if_invalid_mobject_decorator
     def uuid(self) -> MUuid:
@@ -22811,7 +22825,6 @@ class MFnDagNode(MFnDependencyNode):
         """
         self._mobject._children.insert(index, node)
 
-    @_raise_if_invalid_mobject_decorator
     def child(self, index: int) -> 'MObject':
         """
         child(index) -> MObject
@@ -22877,14 +22890,13 @@ class MFnDagNode(MFnDependencyNode):
         else:
             mobject._parent = WORLD
 
-
-        if parent is None:
-            return_mobject = mobject  # Return transform        
-        else:
-            if len(mobject._children) > 0:
+        if parent is not None and parent != MObject.kNullObj:
+            if len(mobject._children):
                 return_mobject = mobject._children[0]  # Return shape. Fix your program, Maya... :/
             else:
-                return_mobject = mobject  # Return transform        
+                return_mobject = mobject  # Return actual node
+        else:  # No parent or null parent
+            return_mobject = mobject  # Return actual node
 
         # Initialize DAG path. If it has a shape, initialize it to that.
         self._dag_path = _initialize_dag_path_from_mobject(return_mobject)
