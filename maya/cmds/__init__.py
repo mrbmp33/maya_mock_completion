@@ -3353,8 +3353,8 @@ def fluidVoxelInfo(checkBounds=bool(), cb=bool(), inBounds=list, ib=list, object
 
 
 def flushUndo():
-    for nd in (x for x in _hierarchy.NodePool.all_nodes() if not x._alive):
-        om._NODE_DESTROYED_SIGNAL(nd)
+    for nd in [x for x in _hierarchy.NodePool.all_nodes() if not x._alive]:
+        om._NODE_DESTROYED_SIGNAL.send(nd)
 
 
 def fontDialog(FontList=bool(), fl=bool(), scalable=bool(), sc=bool(), *args, **kwargs):
