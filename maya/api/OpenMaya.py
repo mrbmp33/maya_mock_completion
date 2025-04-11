@@ -22889,6 +22889,7 @@ class MFnDagNode(MFnDependencyNode):
             mobject._parent._children.append(mobject)
         else:
             mobject._parent = WORLD
+            WORLD._children.append(mobject)
 
         if parent is not None and parent != MObject.kNullObj:
             if len(mobject._children):
