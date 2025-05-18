@@ -1,8 +1,4 @@
-
-
-
-if False:
-    from typing import Dict, List, Tuple, Union, Optional
+from qtpy import QtCore, QtWidgets, QtGui
 
 
 class MMaterial(object):
@@ -770,7 +766,10 @@ class MQtUtil(object):
     def getParent(*args, **kwargs): pass
 
     @staticmethod
-    def mainWindow(*args, **kwargs): pass
+    def mainWindow():
+        """Return the main window of Maya as a QWidget."""
+        
+        mw = QtWidgets.QMainWindow()
 
     @staticmethod
     def nativeWindow(*args, **kwargs): pass
