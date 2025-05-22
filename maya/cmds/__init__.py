@@ -4813,7 +4813,7 @@ def ls(*args, absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemb
 
     
     if transforms == True or tr == True:
-        l = [node for node in l if node.hasFn(om.MFn.kTransform)]
+        l = [node for node in l if node.hasFn(om.MFn.kTransform) and not node.hasFn(om.MFn.kShape)]
     if shapes == True or s == True:
         l = [node for node in l if node.hasFn(om.MFn.kShape)]
     if cameras == True or ca == True:
@@ -4841,6 +4841,8 @@ def ls(*args, absoluteName=bool(), an=bool(), allPaths=bool(), ap=bool(), assemb
         typ = type or typ
         as_constant = getattr(om.MFn, f'k{typ[0].upper()}{typ[1:]}')
         l = [node for node in l if node.hasFn(as_constant)]
+        if typ == 'transform':
+            l = [node for node in l if not node.hasFn(om.MFn.kShape)]
     if exactType:
         typ = type or typ
         as_constant = getattr(om.MFn, f'k{typ[0].upper()}{typ[1:]}')

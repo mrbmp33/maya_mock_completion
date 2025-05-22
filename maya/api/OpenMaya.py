@@ -16,6 +16,7 @@ import uuid
 import weakref
 import enum
 import math
+import numpy as np
 import blinker
 from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, overload
 from collections.abc import Sequence
@@ -8009,194 +8010,208 @@ class _MVectorMeta(type):
         cls.kZaxisVector = cls(0.0, 0.0, 1.0)
         cls.kZnegAxisVector = cls(0.0, 0.0, -1.0)
 
+
 class MVector(metaclass=_MVectorMeta):
     """
-    3D vector with double-precision coordinates.
+    N-dimensional vector with double-precision coordinates, backed by numpy.
     """
 
-    def __init__(self, x=0.0, y=0.0, z=0.0):
-        self.x = x
-        self.y = y
-        self.z = z
+    def __init__(self, *args):
+        if len(args) == 1 and isinstance(args[0], (list, tuple, np.ndarray)):
+            self._data = np.array(args[0], dtype=np.float64)
+        elif len(args) == 1 and isinstance(args[0], MVector):
+            self._data = np.array(args[0]._data, dtype=np.float64)
+        elif len(args) == 0:
+            self._data = np.zeros(3, dtype=np.float64)
+        else:
+            self._data = np.array(args, dtype=np.float64)
 
     def __add__(self, other):
-        return MVector(self.x + other.x, self.y + other.y, self.z + other.z)
-
-    def __iter__(self):
-        return iter([self.x, self.y, self.z])
-
-    def __delitem__(self, index):
-        if index == 0:
-            self.x = 0.0
-        elif index == 1:
-            self.y = 0.0
-        elif index == 2:
-            self.z = 0.0
-        else:
-            raise IndexError("Index out of range")
-
-    def __div__(self, scalar):
-        return MVector(self.x / scalar, self.y / scalar, self.z / scalar)
-
-    def __eq__(self, other):
-        return (abs(self.x - other.x) < MVector.kTolerance and
-                abs(self.y - other.y) < MVector.kTolerance and
-                abs(self.z - other.z) < MVector.kTolerance)
-
-    def __ge__(self, other):
-        return self.length() >= other.length()
-
-    def __getitem__(self, index):
-        if index == 0:
-            return self.x
-        elif index == 1:
-            return self.y
-        elif index == 2:
-            return self.z
-        else:
-            raise IndexError("Index out of range")
-
-    def __gt__(self, other):
-        return self.length() > other.length()
-
-    def __iadd__(self, other):
-        self.x += other.x
-        self.y += other.y
-        self.z += other.z
-        return self
-
-    def __idiv__(self, scalar):
-        self.x /= scalar
-        self.y /= scalar
-        self.z /= scalar
-        return self
-
-    def __imul__(self, scalar):
-        self.x *= scalar
-        self.y *= scalar
-        self.z *= scalar
-        return self
-
-    def __isub__(self, other):
-        self.x -= other.x
-        self.y -= other.y
-        self.z -= other.z
-        return self
-
-    def __le__(self, other):
-        return self.length() <= other.length()
-
-    def __len__(self):
-        return 3
-
-    def __lt__(self, other):
-        return self.length() < other.length()
-
-    def __mul__(self, other: Union[float, int, 'MVector']) -> 'MVector':
-        if isinstance(other, (int, float)):  # Scalar multiplication
-            return MVector(self.x * other, self.y * other, self.z * other)
-        elif isinstance(other, MVector):  # Dot product
-            return self.x * other.x + self.y * other.y + self.z * other.z
-        else:
-            raise TypeError(f"Unsupported operand type(s) for *: 'MVector' and '{type(other).__name__}'")
-
-    def __ne__(self, other):
-        return not self.__eq__(other)
-
-    def __neg__(self):
-        return MVector(-self.x, -self.y, -self.z)
+        return MVector(self._data + np.asarray(other))
 
     def __radd__(self, other):
         return self.__add__(other)
 
-    def __rdiv__(self, scalar):
-        return MVector(scalar / self.x, scalar / self.y, scalar / self.z)
+    def __sub__(self, other):
+        return MVector(self._data - np.asarray(other))
+
+    def __rsub__(self, other):
+        return MVector(np.asarray(other) - self._data)
+
+    def __mul__(self, other):
+        if isinstance(other, (int, float, np.floating)):
+            return MVector(self._data * other)
+        elif isinstance(other, MVector):
+            return float(np.dot(self._data, other._data))
+        elif isinstance(other, (list, tuple, np.ndarray)):
+            return float(np.dot(self._data, np.asarray(other)))
+        else:
+            raise TypeError(f"Unsupported operand type(s) for *: 'MVector' and '{type(other).__name__}'")
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
     def __truediv__(self, scalar):
-        if not isinstance(scalar, (int, float)):
+        if not isinstance(scalar, (int, float, np.floating)):
             raise TypeError(f"Division not supported between MVector and {type(scalar)}")
         if scalar == 0:
             raise ZeroDivisionError("Cannot divide by zero")
-        return MVector(self.x / scalar, self.y / scalar, self.z / scalar)
+        return MVector(self._data / scalar)
 
-    def __repr__(self):
-        return f'MVector({self.x}, {self.y}, {self.z})'
+    def __rdiv__(self, scalar):
+        return MVector(scalar / self._data)
 
-    def __rmul__(self, scalar):
-        return self.__mul__(scalar)
+    def __div__(self, scalar):
+        return self.__truediv__(scalar)
 
-    def __rsub__(self, other):
-        return MVector(other.x - self.x, other.y - self.y, other.z - self.z)
-
-    def __rxor__(self, other):
-        return self.__xor__(other)
-
-    def __setitem__(self, index, value):
-        if index == 0:
-            self.x = value
-        elif index == 1:
-            self.y = value
-        elif index == 2:
-            self.z = value
-        else:
-            raise IndexError("Index out of range")
-
-    def __str__(self):
-        return f'({self.x}, {self.y}, {self.z})'
-
-    def __sub__(self, other):
-        if not isinstance(other, MVector):
-            raise TypeError(f"Subtraction not supported between MVector and {type(other).__name__}")
-        return MVector(self.x - other.x, self.y - other.y, self.z - other.z)
-
-    def __xor__(self, other):
-        return MVector(self.y * other.z - self.z * other.y,
-                       self.z * other.x - self.x * other.z,
-                       self.x * other.y - self.y * other.x)
-
-    def angle(self, other):
-        dot_product = self.x * other.x + self.y * other.y + self.z * other.z
-        lengths_product = self.length() * other.length()
-        return math.acos(dot_product / lengths_product)
-
-    def isEquivalent(self, other, tolerance=1e-10):
-        return (abs(self.x - other.x) < tolerance and
-                abs(self.y - other.y) < tolerance and
-                abs(self.z - other.z) < tolerance)
-
-    def isParallel(self, other, tolerance=1e-10):
-        cross_product = self.__xor__(other)
-        return cross_product.length() < tolerance
-
-    def length(self):
-        return math.sqrt(self.x**2 + self.y**2 + self.z**2)
-
-    def normal(self):
-        length = self.length()
-        if length == 0:
-            return MVector()
-        return self / length
-
-    def normalize(self):
-        length = self.length()
-        if length == 0:
-            return self
-        self.x /= length
-        self.y /= length
-        self.z /= length
+    def __iadd__(self, other):
+        self._data += np.asarray(other)
         return self
 
+    def __isub__(self, other):
+        self._data -= np.asarray(other)
+        return self
+
+    def __imul__(self, scalar):
+        self._data *= scalar
+        return self
+
+    def __idiv__(self, scalar):
+        self._data /= scalar
+        return self
+
+    def __getitem__(self, index):
+        return self._data[index]
+
+    def __setitem__(self, index, value):
+        self._data[index] = value
+
+    def __delitem__(self, index):
+        self._data[index] = 0.0
+
+    def __eq__(self, other):
+        other_arr = np.asarray(other)
+        return np.all(np.abs(self._data - other_arr) < MVector.kTolerance)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __lt__(self, other):
+        return self.length() < MVector(other).length()
+
+    def __le__(self, other):
+        return self.length() <= MVector(other).length()
+
+    def __gt__(self, other):
+        return self.length() > MVector(other).length()
+
+    def __ge__(self, other):
+        return self.length() >= MVector(other).length()
+
+    def __neg__(self):
+        return MVector(-self._data)
+
+    def __len__(self):
+        return len(self._data)
+
+    def __iter__(self):
+        return iter(self._data)
+
+    def __repr__(self):
+        return f"MVector({', '.join(map(str, self._data))})"
+
+    def __str__(self):
+        return f"({', '.join(map(str, self._data))})"
+
+    def __xor__(self, other):
+        # Cross product only for 3D vectors
+        a = self._data
+        b = np.asarray(other)
+        if a.shape[0] != 3 or b.shape[0] != 3:
+            raise ValueError("Cross product is only defined for 3D vectors")
+        return MVector(np.cross(a, b))
+
+    def __rxor__(self, other):
+        return MVector(np.cross(np.asarray(other), self._data))
+
+    def length(self):
+        return float(np.linalg.norm(self._data))
+
+    def angle(self, other):
+        a = self._data
+        b = np.asarray(other)
+        dot = np.dot(a, b)
+        norm_prod = np.linalg.norm(a) * np.linalg.norm(b)
+        if norm_prod == 0:
+            return 0.0
+        return float(np.arccos(np.clip(dot / norm_prod, -1.0, 1.0)))
+
+    def isEquivalent(self, other, tolerance=1e-10):
+        return np.all(np.abs(self._data - np.asarray(other)) < tolerance)
+
+    def isParallel(self, other, tolerance=1e-10):
+        # For N-dim, check if cross product is (almost) zero for 3D, or if vectors are colinear for N-dim
+        a = self._data
+        b = np.asarray(other)
+        if a.shape[0] == 3 and b.shape[0] == 3:
+            return np.linalg.norm(np.cross(a, b)) < tolerance
+        # For N-dim, check if all elements are proportional
+        ratios = a / b
+        return np.all(np.abs(ratios - ratios[0]) < tolerance)
+
+    def normal(self):
+        norm = self.length()
+        if norm == 0:
+            return MVector(np.zeros_like(self._data))
+        return MVector(self._data / norm)
+
+    def normalize(self):
+        norm = self.length()
+        if norm == 0:
+            return self
+        self._data /= norm
+        return self
+
+    # The following methods are placeholders for compatibility
     def rotateBy(self, quaternion):
-        # Simplified rotation by quaternion
+        # Not implemented: would require quaternion logic
         return self
 
     def rotateTo(self, other):
-        # Simplified rotation to another vector
+        # Not implemented: would require quaternion logic
         return MQuaternion()
 
     def transformAsNormal(self, matrix):
-        # Simplified transformation as normal
+        # Not implemented: would require matrix logic
         return self
+
+    @property
+    def x(self):
+        return self._data[0] if len(self._data) > 0 else 0.0
+
+    @x.setter
+    def x(self, value):
+        self._data[0] = value
+
+    @property
+    def y(self):
+        return self._data[1] if len(self._data) > 1 else 0.0
+
+    @y.setter
+    def y(self, value):
+        self._data[1] = value
+
+    @property
+    def z(self):
+        return self._data[2] if len(self._data) > 2 else 0.0
+
+    @z.setter
+    def z(self, value):
+        self._data[2] = value
+
+    def __array__(self, dtype=None):
+        return np.array(self._data, dtype=dtype)
+
 
 class MBoundingBox(object):
     """
