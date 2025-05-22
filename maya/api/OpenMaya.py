@@ -6,6 +6,7 @@
 # or which otherwise accompanies this software in either electronic
 # or hard copy form.
 """
+from __future__ import annotations
 import copy
 from functools import partial, cached_property, wraps
 import re
@@ -182,6 +183,87 @@ def _raise_if_invalid_mobject_decorator(func: Callable) -> Callable:
             raise RuntimeError(f'{function_set.object()} does not exist.')
         return func(*args, **kwargs)
     return func_wrapper
+
+
+def _transform_plugs_to_matrix(mobject: MObject):
+    """Reads the current values of the translation, rotation and scale plugs and sets the matrix."""
+    attr_names = (
+        'translateX', 'translateY', 'translateZ',
+        'rotateX', 'rotateY', 'rotateZ',
+        'scaleX', 'scaleY', 'scaleZ'
+    )
+
+    values_map = {}
+    for attr_name in attr_names:
+        # Default value        
+        attribute_id = _get_attribute_id(f'{mobject._name}.{attr_name}')
+        attr = mobject._attributes.get(attribute_id)
+        
+        if attr is None:
+            attr = mobject._attributes.get(
+                attribute_properties.ATTRIBUTES_PROPERTIES[mobject.apiTypeStr][attr_name]['short_name']
+            )
+        value = getattr(attr, '_value', None)
+        if value is None:
+            value = 1.0 if 'scale' in attr_name else 0.0
+
+        values_map[attr_name] = value
+
+    # Step 2: Build individual transformation matrices
+    def deg_to_rad(degrees):
+        return degrees * math.pi / 180.0
+
+    tx, ty, tz = values_map['translateX'], values_map['translateY'], values_map['translateZ']
+    rx, ry, rz = map(deg_to_rad, (
+        values_map['rotateX'], values_map['rotateY'], values_map['rotateZ']
+    ))
+    sx, sy, sz = values_map['scaleX'], values_map['scaleY'], values_map['scaleZ']
+
+    # Translation matrix
+    T = np.array([
+        [1, 0, 0, tx],
+        [0, 1, 0, ty],
+        [0, 0, 1, tz],
+        [0, 0, 0, 1]
+    ])
+
+    # Scale matrix
+    S = np.array([
+        [sx, 0,  0,  0],
+        [0,  sy, 0,  0],
+        [0,  0,  sz, 0],
+        [0,  0,  0,  1]
+    ])
+
+    # Rotation matrices (XYZ order)
+    Rx = np.array([
+        [1, 0,          0,           0],
+        [0, math.cos(rx), -math.sin(rx), 0],
+        [0, math.sin(rx),  math.cos(rx), 0],
+        [0, 0,          0,           1]
+    ])
+
+    Ry = np.array([
+        [ math.cos(ry), 0, math.sin(ry), 0],
+        [ 0,           1, 0,           0],
+        [-math.sin(ry), 0, math.cos(ry), 0],
+        [ 0,           0, 0,           1]
+    ])
+
+    Rz = np.array([
+        [math.cos(rz), -math.sin(rz), 0, 0],
+        [math.sin(rz),  math.cos(rz), 0, 0],
+        [0,           0,            1, 0],
+        [0,           0,            0, 1]
+    ])
+
+    # Final rotation matrix: R = Rz * Ry * Rx (assuming Maya default XYZ rotation order)
+    R = Rz @ Ry @ Rx
+
+    # Final transformation matrix: M = T * R * S
+    M = T @ R @ S
+    mobject._matrix = MMatrix(*M)
+    return mobject._matrix
 
 
 # ==== Signals ====
@@ -1510,10 +1592,15 @@ class MEulerRotation(object):
     kZXY = 2
     kZYX = 5
 
-    def __init__(self, x=0.0, y=0.0, z=0.0, order=kXYZ):
+    def __init__(self, *rot, order=kXYZ):
         """
         Initializes the rotation with given x, y, z angles and rotation order.
         """
+        if len(rot) == 3:
+            x, y, z = rot
+        elif len(rot) == 1:
+            x, y, z = rot[0]
+            
         self.x = x
         self.y = y
         self.z = z
@@ -8021,6 +8108,8 @@ class MVector(metaclass=_MVectorMeta):
             self._data = np.array(args[0], dtype=np.float64)
         elif len(args) == 1 and isinstance(args[0], MVector):
             self._data = np.array(args[0]._data, dtype=np.float64)
+        elif len(args) == 1 and isinstance(args[0], MPoint):
+            self._data = np.array((args[0].x, args[0].y, args[0].z), dtype=np.float64)
         elif len(args) == 0:
             self._data = np.zeros(3, dtype=np.float64)
         else:
@@ -11769,195 +11858,217 @@ class MPoint(object):
     3D point with double-precision coordinates.
     """
 
-    def __add__(*args, **kwargs):
-        """
-        x.__add__(y) <==> x+y
-        """
-        pass
+    kTolerance = 1e-10
 
-    def __delitem__(*args, **kwargs):
-        """
-        x.__delitem__(y) <==> del x[y]
-        """
-        pass
-
-    def __div__(*args, **kwargs):
-        """
-        x.__div__(y) <==> x/y
-        """
-        pass
-
-    def __eq__(*args, **kwargs):
-        """
-        x.__eq__(y) <==> x==y
-        """
-        pass
-
-    def __ge__(*args, **kwargs):
-        """
-        x.__ge__(y) <==> x>=y
-        """
-        pass
-
-    def __getitem__(*args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
-
-    def __gt__(*args, **kwargs):
-        """
-        x.__gt__(y) <==> x>y
-        """
-        pass
-
-    def __iadd__(*args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
-
-    def __imul__(*args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
-
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        if not args:
+            self.x = 0.0
+            self.y = 0.0
+            self.z = 0.0
+            self.w = 1.0
+        elif len(args) == 1:
+            arg = args[0]
+            if isinstance(arg, (MPoint, MVector, MFloatPoint, MFloatVector)):
+                self.x, self.y, self.z = arg.x, arg.y, arg.z
+            elif isinstance(arg, (list, tuple, np.ndarray)):
+                vals = list(arg) + [1.0] * (4 - len(arg))
+                self.x, self.y, self.z, self.w = vals[:4]
+            else:
+                raise TypeError("Invalid argument type for MPoint")
+        elif 3 <= len(args) <= 4:
+            self.x = float(args[0])
+            self.y = float(args[1])
+            self.z = float(args[2])
+            self.w = float(args[3]) if len(args) == 4 else 1.0
+        else:
+            raise TypeError("Invalid arguments for MPoint")
 
-    def __isub__(*args, **kwargs):
-        """
-        x.__isub__(y) <==> x-=y
-        """
-        pass
+    def __add__(self, other):
+        if isinstance(other, MPoint):
+            return MPoint(self.x + other.x, self.y + other.y, self.z + other.z, self.w + other.w)
+        elif isinstance(other, (list, tuple, np.ndarray)):
+            vals = list(other) + [0.0] * (4 - len(other))
+            return MPoint(self.x + vals[0], self.y + vals[1], self.z + vals[2], self.w + vals[3])
+        else:
+            raise TypeError("Unsupported operand type(s) for +: 'MPoint' and '{}'".format(type(other).__name__))
+
+    def __sub__(self, other):
+        if isinstance(other, MPoint):
+            return MPoint(self.x - other.x, self.y - other.y, self.z - other.z, self.w - other.w)
+        elif isinstance(other, (list, tuple, np.ndarray)):
+            vals = list(other) + [0.0] * (4 - len(other))
+            return MPoint(self.x - vals[0], self.y - vals[1], self.z - vals[2], self.w - vals[3])
+        else:
+            raise TypeError("Unsupported operand type(s) for -: 'MPoint' and '{}'".format(type(other).__name__))
+
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return MPoint(self.x * other, self.y * other, self.z * other, self.w * other)
+        raise TypeError("Unsupported operand type(s) for *: 'MPoint' and '{}'".format(type(other).__name__))
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)):
+            if other == 0:
+                raise ZeroDivisionError("division by zero")
+            return MPoint(self.x / other, self.y / other, self.z / other, self.w / other)
+        raise TypeError("Unsupported operand type(s) for /: 'MPoint' and '{}'".format(type(other).__name__))
+
+    def __div__(self, other):
+        return self.__truediv__(other)
+
+    def __eq__(self, other):
+        if not isinstance(other, MPoint):
+            return False
+        return (math.isclose(self.x, other.x, abs_tol=self.kTolerance) and
+                math.isclose(self.y, other.y, abs_tol=self.kTolerance) and
+                math.isclose(self.z, other.z, abs_tol=self.kTolerance) and
+                math.isclose(self.w, other.w, abs_tol=self.kTolerance))
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __getitem__(self, index):
+        return (self.x, self.y, self.z, self.w)[index]
+
+    def __setitem__(self, index, value):
+        if index == 0:
+            self.x = value
+        elif index == 1:
+            self.y = value
+        elif index == 2:
+            self.z = value
+        elif index == 3:
+            self.w = value
+        else:
+            raise IndexError("MPoint index out of range")
+
+    def __delitem__(self, index):
+        self[index] = 0.0
+
+    def __len__(self):
+        return 4
 
     def __iter__(self):
-        for _ in range(3):
-            yield 0.0
+        yield self.x
+        yield self.y
+        yield self.z
+        yield self.w
 
-    def __le__(*args, **kwargs):
-        """
-        x.__le__(y) <==> x<=y
-        """
-        pass
+    def __repr__(self):
+        return f"MPoint({self.x}, {self.y}, {self.z}, {self.w})"
 
-    def __len__(*args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
+    def __str__(self):
+        return f"({self.x}, {self.y}, {self.z}, {self.w})"
 
-    def __lt__(*args, **kwargs):
-        """
-        x.__lt__(y) <==> x<y
-        """
-        pass
+    def __iadd__(self, other):
+        if isinstance(other, MPoint):
+            self.x += other.x
+            self.y += other.y
+            self.z += other.z
+            self.w += other.w
+        elif isinstance(other, (list, tuple, np.ndarray)):
+            vals = list(other) + [0.0] * (4 - len(other))
+            self.x += vals[0]
+            self.y += vals[1]
+            self.z += vals[2]
+            self.w += vals[3]
+        else:
+            raise TypeError("Unsupported operand type(s) for +=: 'MPoint' and '{}'".format(type(other).__name__))
+        return self
 
-    def __mul__(*args, **kwargs):
-        """
-        x.__mul__(y) <==> x*y
-        """
-        pass
+    def __isub__(self, other):
+        if isinstance(other, MPoint):
+            self.x -= other.x
+            self.y -= other.y
+            self.z -= other.z
+            self.w -= other.w
+        elif isinstance(other, (list, tuple, np.ndarray)):
+            vals = list(other) + [0.0] * (4 - len(other))
+            self.x -= vals[0]
+            self.y -= vals[1]
+            self.z -= vals[2]
+            self.w -= vals[3]
+        else:
+            raise TypeError("Unsupported operand type(s) for -=: 'MPoint' and '{}'".format(type(other).__name__))
+        return self
 
-    def __ne__(*args, **kwargs):
-        """
-        x.__ne__(y) <==> x!=y
-        """
-        pass
+    def __imul__(self, other):
+        if isinstance(other, (int, float)):
+            self.x *= other
+            self.y *= other
+            self.z *= other
+            self.w *= other
+        else:
+            raise TypeError("Unsupported operand type(s) for *=: 'MPoint' and '{}'".format(type(other).__name__))
+        return self
 
-    def __radd__(*args, **kwargs):
-        """
-        x.__radd__(y) <==> y+x
-        """
-        pass
+    def __radd__(self, other):
+        return self.__add__(other)
 
-    def __rdiv__(*args, **kwargs):
-        """
-        x.__rdiv__(y) <==> y/x
-        """
-        pass
+    def __rsub__(self, other):
+        if isinstance(other, MPoint):
+            return MPoint(other.x - self.x, other.y - self.y, other.z - self.z, other.w - self.w)
+        elif isinstance(other, (list, tuple, np.ndarray)):
+            vals = list(other) + [0.0] * (4 - len(other))
+            return MPoint(vals[0] - self.x, vals[1] - self.y, vals[2] - self.z, vals[3] - self.w)
+        else:
+            raise TypeError("Unsupported operand type(s) for -: '{}' and 'MPoint'".format(type(other).__name__))
 
-    def __repr__(*args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
+    def __ge__(self, other):
+        return self.length() >= MPoint(other).length()
 
-    def __rmul__(*args, **kwargs):
-        """
-        x.__rmul__(y) <==> y*x
-        """
-        pass
+    def __gt__(self, other):
+        return self.length() > MPoint(other).length()
 
-    def __rsub__(*args, **kwargs):
-        """
-        x.__rsub__(y) <==> y-x
-        """
-        pass
+    def __le__(self, other):
+        return self.length() <= MPoint(other).length()
 
-    def __setitem__(*args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
+    def __lt__(self, other):
+        return self.length() < MPoint(other).length()
 
-    def __str__(*args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
+    def cartesianize(self):
+        """Convert point to cartesian form (w=1)."""
+        if self.w == 0 or self.w == 1:
+            return MPoint(self.x, self.y, self.z, 1.0)
+        return MPoint(self.x / self.w, self.y / self.w, self.z / self.w, 1.0)
 
-    def __sub__(*args, **kwargs):
-        """
-        x.__sub__(y) <==> x-y
-        """
-        pass
+    def homogenize(self):
+        """Convert point to homogenous form (w=1 if not already)."""
+        return self.cartesianize()
 
-    def cartesianize(*args, **kwargs):
-        """
-        Convert point to cartesian form.
-        """
-        pass
+    def rationalize(self):
+        """Convert point to rational form (w preserved)."""
+        return MPoint(self.x, self.y, self.z, self.w)
 
-    def distanceTo(*args, **kwargs):
-        """
-        Return distance between this point and another.
-        """
-        pass
+    def distanceTo(self, other):
+        """Return distance between this point and another."""
+        if not isinstance(other, MPoint):
+            other = MPoint(other)
+        a = self.cartesianize()
+        b = other.cartesianize()
+        return math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2)
 
-    def homogenize(*args, **kwargs):
-        """
-        Convert point to homogenous form.
-        """
-        pass
+    def isEquivalent(self, other, tolerance=None):
+        """Test for equivalence of two points, within a tolerance."""
+        if not isinstance(other, MPoint):
+            other = MPoint(other)
+        tol = tolerance if tolerance is not None else self.kTolerance
+        return (math.isclose(self.x, other.x, abs_tol=tol) and
+                math.isclose(self.y, other.y, abs_tol=tol) and
+                math.isclose(self.z, other.z, abs_tol=tol) and
+                math.isclose(self.w, other.w, abs_tol=tol))
 
-    def isEquivalent(*args, **kwargs):
-        """
-        Test for equivalence of two points, within a tolerance.
-        """
-        pass
+    # Class attributes for origin and tolerance
+    kOrigin = None  # Will be set after class definition
 
-    def rationalize(*args, **kwargs):
-        """
-        Convert point to rational form.
-        """
-        pass
-
-    kOrigin = None
-
-    kTolerance = 1e-10
-
-    w = None
-
-    x = None
-
-    y = None
-
-    z = None
+# Set kOrigin after class definition
+MPoint.kOrigin = MPoint(0.0, 0.0, 0.0, 1.0)
 
 
 class MItMeshVertex(object):
@@ -12466,7 +12577,7 @@ class MObject(object):
 
     def _init_matrix_fields(self):
         self._matrix_type: int = MFnMatrixData.kMatrix
-        self._matrix: MMatrix | None = None
+        self._matrix: MMatrix = MMatrix()
 
     def _init_enum_fields(self):
         self._enum_items = {}
@@ -12700,269 +12811,576 @@ class MFloatPointArray(object):
     sizeIncrement = None
 
 
+class _trn_mx_identity():
+    """mmc class for keeping syntax of MObject.kNullObj"""
+
+    def __get__(self, obj, owner):
+        return MTransformationMatrix(np.identity(4))
+
 class MTransformationMatrix(object):
     """
     Manipulate the individual components of a transformation.
     """
 
-    def __eq__(self, *args, **kwargs):
-        """
-        x.__eq__(y) <==> x==y
-        """
-        pass
-
-    def __ge__(self, *args, **kwargs):
-        """
-        x.__ge__(y) <==> x>=y
-        """
-        pass
-
-    def __gt__(self, *args, **kwargs):
-        """
-        x.__gt__(y) <==> x>y
-        """
-        pass
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, matrix=None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        if matrix is None:
+            self._matrix = np.identity(4)
+        elif isinstance(matrix, MMatrix):
+            self._matrix = np.array(matrix._matrix)
+        elif isinstance(matrix, (list, tuple, np.ndarray)):
+            arr = np.array(matrix)
+            if arr.shape == (4, 4):
+                self._matrix = arr
+            else:
+                raise ValueError("Matrix must be 4x4")
+        else:
+            raise TypeError("Unsupported type for MTransformationMatrix initialization")
+        # Decompose matrix into components
+        self._decompose()
 
-    def __le__(self, *args, **kwargs):
-        """
-        x.__le__(y) <==> x<=y
-        """
-        pass
+    def _decompose(self):
+        """Decompose the matrix into translation, rotation, scale, shear."""
+        m = self._matrix
+        # Translation
+        self._translation = m[:3, 3].copy()
+        # Extract scale and shear from upper 3x3
+        M = m[:3, :3]
+        sx = np.linalg.norm(M[:, 0])
+        sy = np.linalg.norm(M[:, 1])
+        sz = np.linalg.norm(M[:, 2])
+        self._scale = [sx, sy, sz]
+        # Remove scale from rotation/shear
+        norm_matrix = np.zeros((3, 3))
+        norm_matrix[:, 0] = M[:, 0] / (sx if sx != 0 else 1)
+        norm_matrix[:, 1] = M[:, 1] / (sy if sy != 0 else 1)
+        norm_matrix[:, 2] = M[:, 2] / (sz if sz != 0 else 1)
+        # Shear
+        self._shear = [
+            np.dot(norm_matrix[:, 0], norm_matrix[:, 1]),
+            np.dot(norm_matrix[:, 0], norm_matrix[:, 2]),
+            np.dot(norm_matrix[:, 1], norm_matrix[:, 2])
+        ]
+        # Remove shear for pure rotation
+        R = norm_matrix.copy()
+        R[:, 1] -= self._shear[0] * R[:, 0]
+        R[:, 2] -= self._shear[1] * R[:, 0] + self._shear[2] * R[:, 1]
+        # Euler angles (XYZ order)
+        self._rotation = self._matrix_to_euler(R)
+        self._rotation_order = self.kXYZ
+        self._rotate_pivot = np.zeros(3)
+        self._rotate_pivot_translation = np.zeros(3)
+        self._scale_pivot = np.zeros(3)
+        self._scale_pivot_translation = np.zeros(3)
+        self._rotation_orientation = [0.0, 0.0, 0.0, 1.0]  # Quaternion (x, y, z, w)
 
-    def __lt__(self, *args, **kwargs):
-        """
-        x.__lt__(y) <==> x<y
-        """
-        pass
+    def _matrix_to_euler(self, R):
+        """Convert rotation matrix to Euler angles (XYZ order)."""
+        # Assumes R is a 3x3 rotation matrix
+        sy = math.sqrt(R[0, 0] ** 2 + R[1, 0] ** 2)
+        singular = sy < 1e-6
+        if not singular:
+            x = math.atan2(R[2, 1], R[2, 2])
+            y = math.atan2(-R[2, 0], sy)
+            z = math.atan2(R[1, 0], R[0, 0])
+        else:
+            x = math.atan2(-R[1, 2], R[1, 1])
+            y = math.atan2(-R[2, 0], sy)
+            z = 0
+        return [x, y, z]
 
-    def __ne__(self, *args, **kwargs):
-        """
-        x.__ne__(y) <==> x!=y
-        """
-        pass
+    def __eq__(self, other):
+        if not isinstance(other, MTransformationMatrix):
+            return False
+        return np.allclose(self._matrix, other._matrix, atol=self.kTolerance)
 
-    def asMatrix(self, *args, **kwargs):
-        """
-        Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix.
-        """
-        pass
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
-    def asMatrixInverse(self, *args, **kwargs):
-        """
-        Returns the inverse of the matrix representing the transformation.
-        """
-        pass
+    def asMatrix(self):
+        """Return the transformation as an MMatrix."""
+        return MMatrix(self._matrix)
 
-    def asRotateMatrix(self, *args, **kwargs):
-        """
-        Returns the matrix which takes points from object space to the space immediately following the scale/shear/rotation transformations.
-        """
-        pass
+    def asMatrixInverse(self):
+        """Return the inverse of the transformation as an MMatrix."""
+        return MMatrix(np.linalg.inv(self._matrix))
 
-    def asScaleMatrix(self, *args, **kwargs):
-        """
-        Returns the matrix which takes points from object space to the space immediately following scale and shear transformations.
-        """
-        pass
+    def asRotateMatrix(self):
+        """Return the rotation part as an MMatrix."""
+        R = np.identity(4)
+        # Remove scale and shear
+        M = self._matrix[:3, :3]
+        sx, sy, sz = self._scale
+        norm_matrix = np.zeros((3, 3))
+        norm_matrix[:, 0] = M[:, 0] / (sx if sx != 0 else 1)
+        norm_matrix[:, 1] = M[:, 1] / (sy if sy != 0 else 1)
+        norm_matrix[:, 2] = M[:, 2] / (sz if sz != 0 else 1)
+        R[:3, :3] = norm_matrix
+        return MMatrix(R)
 
-    def isEquivalent(self, *args, **kwargs):
-        """
-        Returns true if this transformation's matrix is within tolerance of another's matrix.
-        """
-        pass
+    def asScaleMatrix(self):
+        """Return the scale/shear part as an MMatrix."""
+        S = np.identity(4)
+        sx, sy, sz = self._scale
+        S[0, 0] = sx
+        S[1, 1] = sy
+        S[2, 2] = sz
+        # Shear not implemented in this simple version
+        return MMatrix(S)
 
-    def reorderRotation(self, *args, **kwargs):
-        """
-        Reorders the transformation's rotate component to give the same overall rotation but using a new order or rotations.
-        """
-        pass
+    def isEquivalent(self, other, tolerance: float=None) -> bool:
+        """Return True if matrices are equivalent within tolerance."""
+        tol = tolerance if tolerance is not None else self.kTolerance
+        return np.allclose(self._matrix, other._matrix, atol=tol)
 
-    def rotateBy(self, *args, **kwargs):
+    def reorderRotation(self, order: int):
+        """Change the rotation order (not implemented, placeholder).
+        
+        Parameters:
+            order (int): The new rotation order as a Rotation Order constant.
         """
-        Adds to the transformation's rotation component.
-        """
-        pass
+        self._rotation_order = order
 
-    def rotateByComponents(self, *args, **kwargs):
-        """
-        Adds to the transformation's rotation component.
-        """
-        pass
+    def rotateBy(self, rot, space: int = None) -> 'MTransformationMatrix':
+        """Add rotation (MQuaternion or MEulerRotation) to current rotation.
+        Signature: rotateBy(rot, space)
+        Parameters:
+            rot (MQuaternion | MEulerRotation): rotation to add
+            space (int): MSpace constant
 
-    def rotatePivot(self, *args, **kwargs):
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Returns the transformation's rotate pivot component.
-        """
-        pass
+        # Support both MEulerRotation and MQuaternion
+        if hasattr(rot, "asMatrix"):
+            # MEulerRotation or MQuaternion
+            rot_matrix = np.array(rot.asMatrix())
+        elif isinstance(rot, (tuple, list, np.ndarray)) and len(rot) == 3:
+            # Assume Euler angles in radians
+            rx, ry, rz = rot
+            Rx = np.array([
+                [1, 0, 0],
+                [0, math.cos(rx), -math.sin(rx)],
+                [0, math.sin(rx), math.cos(rx)]
+            ])
+            Ry = np.array([
+                [math.cos(ry), 0, math.sin(ry)],
+                [0, 1, 0],
+                [-math.sin(ry), 0, math.cos(ry)]
+            ])
+            Rz = np.array([
+                [math.cos(rz), -math.sin(rz), 0],
+                [math.sin(rz), math.cos(rz), 0],
+                [0, 0, 1]
+            ])
+            rot_matrix = Rz @ Ry @ Rx
+        else:
+            raise TypeError("rot must be MEulerRotation, MQuaternion, or a 3-tuple/list/ndarray of Euler angles")
 
-    def rotatePivotTranslation(self, *args, **kwargs):
-        """
-        Returns the transformation's rotate pivot translation component.
-        """
-        pass
+        # Compose new rotation with current
+        self._matrix[:3, :3] = rot_matrix @ self._matrix[:3, :3]
+        self._decompose()
+        return self
 
-    def rotation(self, *args, **kwargs):
+    def rotateByComponents(self, seq: list | tuple, space: int, asQuaternion: bool = False) -> 'MTransformationMatrix':
+        """Signature: rotateByComponents(seq, space, asQuaternion=False)
+        
+        Parameters:
+            seq - sequence of 4 floats or 3 floats and a Rotation Order constant
+            space - MSpace constant
+            asQuaternion - bool
+        Returns:
+            MTransformationMatrix: Reference to self.
+        
+        Description:
+            Adds the rotation represented by the four parameter values to the transformation's rotate
+            component.
+            
+            If asQuaternion is True then seq must contain four floats representing the x, y, z and w
+            components of a quaternion rotation.
+            
+            If asQuaternion is False then seq must contain three
+            floats representing the x, y and z angles, followed by a Rotation Order constant, which
+            together form an Euler rotation.
         """
-        Returns the transformation's rotation component as either an Euler rotation or a quaternion.
-        """
-        pass
+        if asQuaternion:
+            if len(seq) != 4:
+                raise ValueError("Quaternion rotation requires 4 values (x, y, z, w)")
+            x, y, z, w = seq
+            # Assume MQuaternion is available and has asMatrix()
+            quat = MQuaternion(x, y, z, w)
+            self.rotateBy(quat, space)
+        else:
+            if len(seq) != 4:
+                raise ValueError("Euler rotation requires 3 angles and a rotation order")
+            x, y, z, order = seq
+            # Assume MEulerRotation is available and has asMatrix()
+            euler = MEulerRotation(x, y, z, order)
+            self.rotateBy(euler, space)
+        return self
 
-    def rotationComponents(self, *args, **kwargs):
+    def rotatePivot(self, space: int = None) -> 'MPoint':
+        """Return the rotate pivot in the specified space.
+
+        Parameters:
+            space (int): The transformation space as a MSpace constant.
+
+        Returns:
+            MPoint: The rotate pivot in the requested space.
         """
+        # Only object and world space are relevant in Maya
+        if space == MSpace.kWorld:
+            # Transform the local pivot by the transformation matrix for world space
+            local_pivot = np.append(self._rotate_pivot, 1.0)
+            world_pivot = self._matrix @ local_pivot
+            return MPoint(world_pivot[:3])
+        # For object/pre-transform, just return local pivot
+        return MPoint(self._rotate_pivot.copy())
+
+    def rotatePivotTranslation(self, space: int = None) -> 'MVector':
+        """Returns the transformation's rotate pivot component.
+        Signature:
+            rotatePivot(space)
+        Parameters:
+            space (MSpace): constant
+        
+        Returns:
+            MVector: ...
+        """
+        return MVector(self._rotate_pivot_translation.copy())
+
+    @overload
+    def rotation(self, asQuaternion: bool = True) -> MQuaternion: ...
+
+    @overload
+    def rotation(self, asQuaternion: bool = False) -> MEulerRotation: ...
+    
+    def rotation(self, asQuaternion=False):
+        """Returns the transformation's rotation component as either an Euler rotation or a quaternion.
+        
+        Parameters:
+            asQuaternion (bool): If True, return as quaternion (x, y, z, w).
+        
+        Returns:
+            MEulerRotation | MQuaternion: The rotation in the requested format.
+        """
+        if asQuaternion:
+            # Placeholder: return as (x, y, z, w)
+            return self._rotation_orientation
+        return self._rotation.copy()
+
+    def rotationComponents(self, asQuaternion=False) -> list:
+        """Return the four rotation components (x, y, z, w).
+        
         Returns a list containing the four components of the transformation's rotate component.
-        """
-        pass
+        If asQuaternion is True then the first three elements are the quaternion's
+        unreal x, y, and z components, and the fourth is its real w component.
+        
+        If asQuaternion is False then the first three components are the x, y and z Euler
+        rotation angles and the fourth is a Rotation Order constant.
 
-    def rotationOrder(self, *args, **kwargs):
+        Parameters:
+            asQuaternion (bool): If True, return as quaternion (x, y, z, w).
+        
+        Returns:
+            list: The rotation components in the requested format. [x, y, z, order] or [x, y, z, w] 
         """
-        Returns the order of rotations when the transformation's rotate component is expressed as an euler rotation.
-        """
-        pass
+        # Return quaternion (x, y, z, w)
+        return self._rotation_orientation
 
-    def rotationOrientation(self, *args, **kwargs):
+    def rotationOrder(self) -> int:
+        """Returns the order of rotations when the transformation's rotate component is expressed as an euler rotation. .
+        
+        Returns:
+            int: The rotation order as a Rotation Order constant.
         """
-        Returns a quaternion which orients the local rotation space.
-        """
-        pass
+        return self._rotation_order
 
-    def scale(self, *args, **kwargs):
+    def rotationOrientation(self) -> MQuaternion:
+        """Return the rotation orientation quaternion.
+        
+        Returns:
+            MQuaternion: Returns the rotation which orients the local rotation space.
         """
-        Returns a list containing the transformation's scale components.
-        """
-        pass
+        return self._rotation_orientation
 
-    def scaleBy(self, *args, **kwargs):
-        """
-        Multiplies the transformation's scale components by the three floats in the provided sequence.
-        """
-        pass
+    def scale(self, space: int = None) -> list[float, float, float]:
+        """Return the scale components.
 
-    def scalePivot(self, *args, **kwargs):
+        Parameters:
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            list: Scale components [sx, sy, sz] in the requested space.
         """
-        Returns the transformation's scale pivot component.
-        """
-        pass
+        # Only object and world space are relevant in Maya
+        if space == MSpace.kWorld:
+            # For world space, you would need to accumulate scale up the DAG.
+            # Here, we just return the local scale as a mock.
+            return self._scale.copy()
+        # For object/pre-transform, just return local scale
+        return self._scale.copy()
 
-    def scalePivotTranslation(self, *args, **kwargs):
+    def scaleBy(self, scale:list | tuple, space=None) -> 'MTransformationMatrix':
+        """Multiply the scale by the given values.
+        
+        Parameters:
+            scale (list | tuple): Scale factors [sx, sy, sz].
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Returns the transformation's scale pivot translation component.
-        """
-        pass
+        self._scale = [a * b for a, b in zip(self._scale, scale)]
+        S = np.identity(4)
+        S[0, 0], S[1, 1], S[2, 2] = self._scale
+        self._matrix = S @ self._matrix
+        self._decompose()
 
-    def setRotatePivot(self, *args, **kwargs):
+    def scalePivot(self, space: int=None) -> 'MPoint':
+        """Return the scale pivot.
+        
+        Parameters:
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MPoint: The scale pivot in the requested space.
         """
-        Sets the transformation's rotate pivot component.
-        """
-        pass
+        return self._scale_pivot.copy()
 
-    def setRotatePivotTranslation(self, *args, **kwargs):
+    def scalePivotTranslation(self, space: int=None) -> MVector:
+        """Return the scale pivot translation.
+        
+        Parameters:
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MVector: The scale pivot translation in the requested space.
         """
-        Sets the transformation's rotate pivot translation component.
-        """
-        pass
+        return self._scale_pivot_translation.copy()
 
-    def setRotation(self, *args, **kwargs):
+    def setRotatePivot(self, pivot: MPoint, space: int, balance: bool) -> 'MTransformationMatrix':
+        """Set the rotate pivot.
+        
+        Parameters:
+            pivot (MPoint): The new rotate pivot.
+            space (int): The transformation space as a MSpace constant.
+            balance (bool): ...
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's rotation component.
-        """
-        pass
+        self._rotate_pivot = np.array(pivot)
+        return self
 
-    def setRotationComponents(self, *args, **kwargs):
+    def setRotatePivotTranslation(self, translation: MVector, space: int) -> 'MTransformationMatrix':
+        """Set the rotate pivot translation.
+        
+        Parameters:
+            translation (MVector): The new rotate pivot translation.
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's rotate component from the four values in the provided sequence.
-        """
-        pass
+        self._rotate_pivot_translation = np.array(translation)
+        return self
 
-    def setRotationOrientation(self, *args, **kwargs):
+    def setRotation(self, rot: MEulerRotation | MQuaternion) -> 'MTransformationMatrix':
+        """Sets the transformation's rotation component to rot.
+        (Euler angles in radians).
+        
+        Parameters:
+            rot (MEulerRotation | MQuaternion): The rotation to set.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets a quaternion which orients the local rotation space.
-        """
-        pass
+        if hasattr(rot, "asMatrix"):
+            rot_matrix = np.array(rot.asMatrix())
+        else:
+            raise TypeError("Expected MEulerRotation or MQuaternion with asMatrix()")
+        self._matrix[:3, :3] = rot_matrix
+        self._decompose()
+        return self
 
-    def setScale(self, *args, **kwargs):
+    def setRotationComponents(self, seq: list | tuple) -> 'MTransformationMatrix':
+        """Sets the transformation's rotate component.
+        If asQuaternion is True then seqmust contain four floats representing the
+        x, y, z and w components of a quaternion rotation.
+        
+        If asQuaternion is False then seq must contain three floats representing the
+        x, y and z angles, followed by a Rotation Order constant, which together form
+        an Euler rotation.
+        
+        Parameters:
+            seq (list | tuple): The rotation components.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's scale components to the three floats in the provided sequence.
-        """
-        pass
+        if len(seq) == 4:
+            # Assume quaternion
+            x, y, z, w = seq
+            quat = MQuaternion(x, y, z, w)
+            self.setRotation(quat)
+        elif len(seq) == 4:
+            # Assume Euler + order
+            x, y, z, order = seq
+            euler = MEulerRotation(x, y, z, order)
+            self.setRotation(euler)
+        else:
+            raise ValueError("Invalid rotation components: must be 4 floats (quaternion) or 3 + order (euler)")
+        return self
 
-    def setScalePivot(self, *args, **kwargs):
+    def setRotationOrientation(self, quat: MQuaternion) -> 'MTransformationMatrix':
+        """Set the rotation orientation quaternion.
+        
+        Parameters:
+            quat (MQuaternion): The new rotation orientation.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's scale pivot component.
-        """
-        pass
+        self._rotation_orientation = list(quat)
+        return self
 
-    def setScalePivotTranslation(self, *args, **kwargs):
-        """
-        Sets the transformation's scale pivot translation component.
-        """
-        pass
+    def setScale(self, seq: list | tuple, space: int) -> 'MTransformationMatrix':
+        """Sets the transformation's scale components to the three floats in seq.
 
-    def setShear(self, *args, **kwargs):
+        Parameters:
+            seq (list | tuple): The scale components [sx, sy, sz].
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's shear component.
-        """
-        pass
+        if len(seq) != 3:
+            raise ValueError("Scale must be a sequence of 3 floats")
+        self._scale = list(seq)
+        S = np.identity(4)
+        S[0, 0], S[1, 1], S[2, 2] = self._scale
+        self._matrix = S @ self._matrix
+        self._decompose()
+        return self
 
-    def setToRotationAxis(self, *args, **kwargs):
+    def setScalePivot(self, pivot: MPoint, space: int, balance: bool) -> 'MTransformationMatrix':
+        """Set the scale pivot.
+        
+        Parameters:
+            pivot (MPoint): The new scale pivot.
+            space (int): The transformation space as a MSpace constant.
+            balance (bool): If True, balance the scale pivot.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's rotate component to be a given axis vector and angle in radians.
-        """
-        pass
+        self._scale_pivot = np.array(pivot)
+        return self
 
-    def setTranslation(self, *args, **kwargs):
+    def setScalePivotTranslation(self, translation: MVector, space: int) -> 'MTransformationMatrix':
+        """Set the scale pivot translation.
+        
+        Parameters:
+            translation (MVector): The new scale pivot translation.
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Sets the transformation's translation component.
-        """
-        pass
+        self._scale_pivot_translation = np.array(translation)
+        return self
 
-    def shear(self, *args, **kwargs):
-        """
-        Returns a list containing the transformation's shear components.
-        """
-        pass
+    def setShear(self, shear, space: int) -> 'MTransformationMatrix':
+        """Set the shear components.
 
-    def shearBy(self, *args, **kwargs):
+        Parameters:
+            shear (list | tuple): The shear components [shx, shy, shz].
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Multiplies the transformation's shear components by the three floats in the provided sequence.
-        """
-        pass
+        if len(shear) != 3:
+            raise ValueError("Shear must be a list or tuple of 3 floats")
+        self._shear = list(shear)
+        # Note: Actual application of shear to matrix is not implemented
+        return self
 
-    def translateBy(self, *args, **kwargs):
+    def setToRotationAxis(self, axis: MVector, rot: float) -> 'MTransformationMatrix':
+        """Sets the transformation's rotate component to be rot radians around axis.
+        
+        Parameters:
+            axis (MVector): The axis of rotation.
+            rot (float): The angle of rotation in radians.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Adds a vector to the transformation's translation component.
-        """
-        pass
+        axis = np.array(axis)
+        axis = axis / np.linalg.norm(axis)
+        x, y, z = axis
+        c = math.cos(rot)
+        s = math.sin(rot)
+        t = 1 - c
+        R = np.array([
+            [t*x*x + c,   t*x*y - s*z, t*x*z + s*y],
+            [t*x*y + s*z, t*y*y + c,   t*y*z - s*x],
+            [t*x*z - s*y, t*y*z + s*x, t*z*z + c]
+        ])
+        self._matrix[:3, :3] = R
+        self._decompose()
+        return self
 
-    def translation(self, *args, **kwargs):
+    def setTranslation(self, translation: MVector, space: int) -> 'MTransformationMatrix':
+        """Set the translation component.
+        
+        Parameters:
+            translation (MVector): The new translation vector.
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        Returns the transformation's translation component as a vector.
+        self._translation = np.array(translation)
+        self._matrix[:3, 3] = self._translation
+        self._decompose()
+        return self
+
+    def shear(self, space: int = None) -> list[float, float, float]:
+        """Return the shear components."""
+        return self._shear.copy()
+
+    def shearBy(self, seq: list | tuple, space: int) -> 'MTransformationMatrix':
+        """Multiplies the transformation's shear components by the elements of seq. 
+
+        Parameters:
+            seq (list | tuple): The shear components [shx, shy, shz].
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
         """
-        pass
+        self._shear = [a + b for a, b in zip(self._shear, shear)]
+        # Not implemented: apply shear to matrix
 
-    kIdentity = None
+    def translateBy(self, vector: MVector, space: int) -> 'MTransformationMatrix':
+        """Adds vector to the transformation's translation component.
+        
+        Parameters:
+            vector (MVector): The translation vector to add.
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MTransformationMatrix: Reference to self.
+        """
+        self._translation += np.array(vector)
+        self._matrix[:3, 3] = self._translation
 
+    def translation(self, space:int = None) -> 'MVector':
+        """Return the translation component.
+        
+        Parameters:
+            space (int): The transformation space as a MSpace constant.
+        Returns:
+            MVector: The translation vector in the requested space.
+        """
+        return self._translation.copy()
+
+    kIdentity = _trn_mx_identity()
     kInvalid = 0
-
     kLast = 7
-
     kTolerance = 1e-10
-
     kXYZ = 1
-
     kXZY = 4
-
     kYXZ = 5
-
     kYZX = 2
-
     kZXY = 3
-
     kZYX = 6
 
 
@@ -21675,6 +22093,8 @@ class MFnDependencyNode(MFnBase):
         # For Typed Attribtues like Enum, String, Matrix...
         if properties.get('typed_type') is not None:
             attribute._typed_attr_type = properties['typed_type']
+            if properties['typed_type'] == MFnData.kMatrix:
+                attribute._init_matrix_fields()
 
         # Only for compound attributes
         if properties.get('children') is not None:
@@ -22527,6 +22947,10 @@ class MFnTypedAttribute(MFnAttribute):
         # Handle defaults based on specific data types
         if data_type == MFnData.kString:
             default_value = ''
+        elif data_type == MFnData.kMatrix:
+            self._mobject._init_matrix_fields()
+            default_value = MMatrix()
+            self._mobject._matrix = default_value
 
         self._mobject._value = default_value
         self._mobject._default = default_value
@@ -24574,6 +24998,11 @@ class MFnMatrixData(MFnData):
         """Initialize self.  See help(type(self)) for accurate signature."""
         super().__init__(*args, **kwargs)
 
+        # If the mobject is a matrix attribute
+        if MFn.kTypedAttribute in self._mobject._api_type:
+            if hasattr(self._mobject, '_matrix') and self._mobject._short_name == 'matrix':
+                _transform_plugs_to_matrix(self._mobject)
+
     def create(self, matrix: Union['MMatrix', 'MTransformationMatrix']) -> 'MObject':
         """
         Creates a new matrix data object.
@@ -24583,7 +25012,8 @@ class MFnMatrixData(MFnData):
         super()._create()
         self._mobject._init_matrix_fields()
         self._matrix = matrix
-        self._mobject._api_type.append(MFn.kMatrixData)
+        if MFn.kMatrixData not in self._mobject._api_type:
+            self._mobject._api_type.append(MFn.kMatrixData)
         return self._mobject
         
     def matrix(self) -> 'MMatrix':
