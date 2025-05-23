@@ -259,7 +259,7 @@ class TestMayaMockCompletion(unittest.TestCase):
 
     def test_create_node_with_shape_auto(self):
         # returns the transform node bc no parent is provided
-        trn_obj = om.MFnDagNode().create("mesh", name='some_mesh')
+        trn_obj = om.MFnDagNode().create("mesh", name="some_mesh")
         trn = om.MFnDagNode(trn_obj)
 
         self.assertTrue(trn_obj.isNull() == False)
@@ -268,15 +268,15 @@ class TestMayaMockCompletion(unittest.TestCase):
 
         shape = om.MFnDagNode(trn.child(0))
         self.assertEqual(shape.object().apiType(), om.MFn.kMesh)
-        self.assertEqual(shape.name(), 'some_mesh')
+        self.assertEqual(shape.name(), "some_mesh")
 
         crv_trn_o = om.MFnDagNode().create("nurbsCurve")
         crv_trn = om.MFnDagNode(crv_trn_o)
         crv_shape = om.MFnDagNode(crv_trn.child(0))
         self.assertEqual(crv_trn_o.apiType(), om.MFn.kTransform)
         self.assertEqual(crv_trn.childCount(), 1)
-        self.assertEqual(crv_trn.name(), 'curve1')
-        self.assertEqual(crv_shape.name(), 'curveShape1')
+        self.assertEqual(crv_trn.name(), "curve1")
+        self.assertEqual(crv_shape.name(), "curveShape1")
         self.assertEqual(crv_shape.object().apiType(), om.MFn.kNurbsCurve)
 
     def test_delete_node_hierarchy(self):
@@ -379,11 +379,15 @@ class TestMayaMockCompletion(unittest.TestCase):
         itertator = om.MItDag(om.MItDag.kDepthFirst)
         itertator.reset(gp_dup.object())
         predicted_names = {"grandparent1", "parent1", "child1"}
+        uuids = {
+            om.MFnDagNode(grandparent).uuid().asString(),
+            om.MFnDagNode(parent).uuid().asString(),
+            om.MFnDagNode(child).uuid().asString(),
+        }
         while not itertator.isDone():
-            self.assertIn(
-                om.MFnDagNode(itertator.currentItem()).name(),
-                predicted_names,
-                )
+            as_nd = om.MFnDagNode(itertator.currentItem())
+            self.assertIn(as_nd.name(), predicted_names)
+            self.assertNotIn(as_nd.uuid().asString(), uuids)
             itertator.next()
 
 
@@ -400,16 +404,20 @@ class TestCmds(unittest.TestCase):
 
         if HOST() == "python":
             from maya import mmc_hierarchy as hierarchy
+
             self.assertEqual(len(hierarchy.NodePool._node_instances), 5)
 
         mc.file(new=True, force=True)
 
         if HOST() == "python":
             from maya import mmc_hierarchy as hierarchy
+
             self.assertEqual(mc.ls(type="transform"), [])
             self.assertEqual(mc.ls(type="mesh"), [])
         else:
-            self.assertEqual(set(mc.ls(type="transform")), set(['front', 'persp', 'side', 'top']))
+            self.assertEqual(
+                set(mc.ls(type="transform")), set(["front", "persp", "side", "top"])
+            )
             self.assertEqual(mc.ls(type="mesh"), [])
 
     def test_create_node(self):
@@ -417,7 +425,7 @@ class TestCmds(unittest.TestCase):
         self.assertTrue(mc.objExists(transform))
 
         mesh = mc.createNode("mesh")
-        self.assertTrue(mc.objExists('polySurfaceShape1'))
+        self.assertTrue(mc.objExists("polySurfaceShape1"))
         mc.objectType(mesh, isType="mesh")
         mc.objectType(transform, isType="transform")
 
@@ -491,7 +499,7 @@ class TestCallbacks(unittest.TestCase):
     def setUp(self):
         super().setUp()
         self.callback_ids = []
-        self.logger = logging.getLogger('test_callbacks')
+        self.logger = logging.getLogger("test_callbacks")
 
     def tearDown(self):
 
@@ -543,28 +551,29 @@ class TestCallbacks(unittest.TestCase):
 
         if HOST() == "python":
             from maya import mmc_hierarchy as hierarchy
+
             self.assertTrue(hierarchy.NodePool.from_name(pma))
 
         def do_smth_noticeble(*args, **kwargs):
             sl = om.MSelectionList().add(args[0])
             as_dep = om.MFnDependencyNode(sl.getDependNode(0))
-            tx = as_dep.findPlug('input1', False)
+            tx = as_dep.findPlug("input1", False)
             tx.setDouble(10.5)
             print(f"Node created. Receiving args: {args}, kwargs: {kwargs}")
 
         self.callback_ids.append(
             om.MDGMessage.addNodeAddedCallback(
-                partial(do_smth_noticeble, 'mdl', "arg2", kwarg1="kwarg1"),
+                partial(do_smth_noticeble, "mdl", "arg2", kwarg1="kwarg1"),
                 "dependNode",  # Filter for dependency nodes, which is to say all nodes
             )
         )
 
         # Create a node with the callback
         mc.createNode("transform", name="berni")
-        
-        sl = om.MSelectionList().add('mdl')
+
+        sl = om.MSelectionList().add("mdl")
         as_dep = om.MFnDependencyNode(sl.getDependNode(0))
-        tx = as_dep.findPlug('input1', False)
+        tx = as_dep.findPlug("input1", False)
         self.assertEqual(tx.asDouble(), 10.5)
 
 

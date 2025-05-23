@@ -23552,6 +23552,7 @@ class MFnDagNode(MFnDependencyNode):
 
         # Ensure unique names
         for dup in flattened_hierarchy.values():
+            dup._uuid = uuid.uuid4()
             parent_name = dup._parent._name if dup._parent else None
             dup._name = hierarchy.find_first_available_name(
                 dup._name,
