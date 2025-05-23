@@ -4886,54 +4886,141 @@ class MItDag(object):
     of traversal, and to determine if the the traversal has been completed.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
 
-    def currentItem(*args, **kwargs):
+        Args:
+            0: om.MItDag.kDepthFirst: Specifies depth-first traversal.
+                Alternatively, use om.MItDag.kBreadthFirst for breadth-first traversal.
+            1: om.MItDag.kInvalidType: Specifies no filtering.
+                Alternatively, use a specific MFn.Type to filter the traversal.
+
+        """
+
+        self._traversalType: int = MItDag.kDepthFirst
+        self._filterType: int = MItDag.kInvalidType
+        self._root = None
+        self._done = False
+        self._prune_set = set()
+        self._current_depth = 0
+
+        # Set root node
+        if args and isinstance(args[0], MObject):
+            self._root = args[0]
+        else:
+            # Default to world node (first node with apiTypeStr == 'kWorld')
+            self._root = WORLD
+
+        # Traversal/filter type
+        if len(args) >= 2:
+            self._traversalType = args[0]
+            self._filterType = args[1]
+
+        # Build traversal order
+        self._build_traversal_list()
+
+    def _build_traversal_list(self):
+        # Build a list of nodes in traversal order, respecting filter and prune
+        def children(node):
+            return getattr(node, '_children', [])
+
+        def filter_fn(node):
+            if self._filterType == MItDag.kInvalidType:
+                return True
+            return node.hasFn(self._filterType)
+
+        self._traversal_list = []
+        self._depths = []
+        self._index = 0
+
+        def dfs(node, depth):
+            if node in self._prune_set:
+                return
+            if filter_fn(node):
+                self._traversal_list.append(node)
+                self._depths.append(depth)
+            for child in children(node):
+                dfs(child, depth + 1)
+
+        def bfs(node):
+            queue = [(node, 0)]
+            while queue:
+                n, d = queue.pop(0)
+                if n in self._prune_set:
+                    continue
+                if filter_fn(n):
+                    self._traversal_list.append(n)
+                    self._depths.append(d)
+                for c in children(n):
+                    queue.append((c, d + 1))
+
+        if self._root is None:
+            self._traversal_list = []
+            self._depths = []
+            self._done = True
+            return
+
+        if self._traversalType == MItDag.kDepthFirst:
+            dfs(self._root, 0)
+        else:
+            bfs(self._root)
+        self._done = not bool(self._traversal_list)
+
+    def currentItem(self) -> MObject:
         """
         currentItem() -> MObject
 
         Retrieves DAG node to which the iterator points.
         """
-        pass
+        if self.isDone():
+            return None
+        return self._traversal_list[self._index]
 
-    def depth(*args, **kwargs):
+    def depth(self) -> int:
         """
         depth() -> integer
 
         Returns the height or depth of the current node in the DAG relative to the
         root node.  The root node has a depth of zero.
         """
-        pass
+        if self.isDone():
+            return -1
+        return self._depths[self._index]
 
-    def fullPathName(*args, **kwargs):
+    def fullPathName(self) -> str:
         """
         fullPathName() -> MString
 
         Return a string representing the full path from the root of the dag to this object.
         """
-        pass
+        if self.isDone():
+            return ""
+        node = self.currentItem()
+        return getattr(node, '_name', "")
 
-    def getAllPaths(*args, **kwargs):
+    def getAllPaths(self) -> MDagPathArray:
         """
         getAllPaths() -> MDagPathArray
 
         Determines all DAG Paths to current item in the iteration.
         """
-        pass
+        if self.isDone():
+            return []
+        node = self.currentItem()
+        return [_initialize_dag_path_from_mobject(node)]
 
-    def getPath(*args, **kwargs):
+    def getPath(self) -> MDagPath:
         """
         getPath() -> MDagPath
 
         Determines a DAG Path to the current item in the iteration.
         """
-        pass
+        if self.isDone():
+            return None
+        node = self.currentItem()
+        return _initialize_dag_path_from_mobject(node)
 
-    def instanceCount(*args, **kwargs):
+    def instanceCount(self, total: bool) -> int:
         """
         instanceCount(total) -> Integer
 
@@ -4947,17 +5034,26 @@ class MItDag(object):
         indirect instances resulting from instancing higher up the DAG hierarchy
         (i.e. one or more of the node's ancestors also has multiple instances).
         """
-        pass
+        if self.isDone():
+            return 0
+        node = self.currentItem()
+        if not hasattr(node, '_parent'):
+            return 1
+        if not total:
+            return 1 if node._parent else 0
+        # For total, count all unique paths to this node from world
+        # (simplified: just return 1 unless node is instanced)
+        return getattr(node, '_instance_count', 1)
 
-    def isDone(*args, **kwargs):
+    def isDone(self) -> bool:
         """
         isDone() -> Bool
 
         Indicates end of iteration path.
         """
-        pass
+        return self._done or self._index >= len(self._traversal_list)
 
-    def isInstanced(*args, **kwargs):
+    def isInstanced(self, indirect: bool = True) -> bool:
         """
         isInstanced(indirect = True) -> Bool
 
@@ -4974,17 +5070,34 @@ class MItDag(object):
 
         * indirect (Bool) -Indirect instance flag, defaults to True.
         """
-        pass
+        if self.isDone():
+            return False
+        node = self.currentItem()
+        # Direct instance: more than one parent
+        if hasattr(node, '_parents') and len(node._parents) > 1:
+            return True
+        if indirect:
+            # Check ancestors for instancing
+            parent = getattr(node, '_parent', None)
+            while parent:
+                if hasattr(parent, '_parents') and len(parent._parents) > 1:
+                    return True
+                parent = getattr(parent, '_parent', None)
+        return False
 
-    def next(*args, **kwargs):
+    def next(self):
         """
         next() -> self
 
         Moves to the next node matching the filter in the graph.
         """
-        pass
+        if not self.isDone():
+            self._index += 1
+        if self._index >= len(self._traversal_list):
+            self._done = True
+        return self
 
-    def partialPathName(*args, **kwargs):
+    def partialPathName(self) -> str:
         """
         partialPathName() -> MString
 
@@ -4994,17 +5107,33 @@ class MItDag(object):
         The partial path is the minimum path that is still unique. This string
         may contain wildcards.
         """
-        pass
+        if self.isDone():
+            return ""
+        node = self.currentItem()
+        return getattr(node, '_name', "")
 
-    def prune(*args, **kwargs):
+    def prune(self) -> "MItDag":
         """
         prune() -> self
 
         Prunes iteration tree at current node.
         """
-        pass
+        if not self.isDone():
+            node = self.currentItem()
+            self._prune_set.add(node)
+            self._build_traversal_list()
+        return self
 
-    def reset(*args, **kwargs):
+    @overload
+    def reset(self, root: MObject, traversalType: int = 1, filterType: int = 0) -> "MItDag": ...
+    
+    @overload
+    def reset(self, root: MDagPath, traversalType: int = 1, filterType: int = 0) -> "MItDag": ...
+
+    @overload
+    def reset(self, dagInfoObject: MIteratorType, root: Union[MObject, MDagPath], traversalType: int = 1, filterType: int = 0) -> "MItDag": ...
+
+    def reset(self, *args, **kwargs):
         """
         reset() -> self
         reset(rootObject, traversalType = MItDag.kDepthFirst, filterType = MFn.kInvalid) -> self
@@ -5017,15 +5146,26 @@ class MItDag(object):
         If a dagInfoObject is used, then the type of the provided rootObject or rootPath must
         match dagInfoObject.objectType.
 
+        Parameters:
            rootObject (MObject) - Root node to begin the next traversal.
            rootPath (MDagPath) - Root path to to begin the next traversal. Useful with instances.
            dagInfoObject (MIteratorType) - Iterator object having info on filter or filterlist.
            traversalType (MItDag.TraversalType) - Enumerated type that determines the direction of the traversal, defaults to kDepthFirst.
            filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid
         """
-        pass
+        if args and isinstance(args[0], MObject):
+            self._root = args[0]
+        if 'traversalType' in kwargs:
+            self._traversalType = kwargs['traversalType']
+        if 'filterType' in kwargs:
+            self._filterType = kwargs['filterType']
+        self._index = 0
+        self._done = False
+        self._prune_set = set()
+        self._build_traversal_list()
+        return self
 
-    def root(*args, **kwargs):
+    def root(self) -> MObject:
         """
         root() -> MObject
 
@@ -5033,15 +5173,15 @@ class MItDag(object):
         The constructor sets the root of traversal to the world node.
         The root can be changed by the reset() method.
         """
-        pass
+        return self._root
 
-    def traversalType(*args, **kwargs):
+    def traversalType(self) -> int:
         """
         traversalType() -> MItDag.TraversalType
 
         Returns the direction of the traversal.
         """
-        pass
+        return self._traversalType
 
     kBreadthFirst = 2
 
@@ -22393,6 +22533,9 @@ class MFnDependencyNode(MFnBase):
                                    'first before adding it to the function set.')
             if not self._mobject._alive:
                 raise RuntimeError(f'MObject: {self._mobject._name} does not exist yet. Cannot return type.')
+        except KeyError:
+            if self._mobject._typeId.id() == WORLD._typeId.id():
+                return 'dagNode'
 
 
 class MDagModifier(MDGModifier):
@@ -29952,7 +30095,12 @@ class World(MObject):
         self._is_world = True
         self._alive = True
         self._name = 'world'
-        self._api_type.append(MFn.kWorld)
+        self._api_type.extend([MFn.kWorld, MFn.kDagNode])
+
+        self._typeId = MTypeId(0x4441474e)
+    
+    def isNull(self):
+        return False
 
 
 _TYPE_STR_TO_ID = {

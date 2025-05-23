@@ -327,6 +327,43 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertEqual(dag_path.fullPathName(), "|grandparent")
 
 
+    def test_MItDag(self):
+        mc.file(new=True, force=True)
+        dagmod = om.MDagModifier()
+        grandparent = dagmod.createNode("transform")
+        dagmod.renameNode(grandparent, "grandparent")
+        parent = dagmod.createNode("transform", parent=grandparent)
+        dagmod.renameNode(parent, "parent")
+        child = dagmod.createNode("transform", parent=parent)
+        dagmod.renameNode(child, "child")
+        dagmod.doIt()
+
+        ls = [grandparent, parent, child]
+        ls_copy = ls.copy()
+
+        it_dag = om.MItDag(om.MItDag.kDepthFirst)
+        while not it_dag.isDone():
+            if it_dag.currentItem() in ls_copy:
+                ls.pop()
+            it_dag.next()
+
+        self.assertEqual(len(ls), 0)
+
+        # Test MItDag with filter
+        great_grandchild = dagmod.createNode("joint", parent=child)
+        dagmod.renameNode(great_grandchild, "great_grandchild")
+        dagmod.doIt()
+        it_dag = om.MItDag(om.MItDag.kDepthFirst)
+        it_dag.reset(grandparent, filterType=om.MFn.kJoint)
+        ls = [grandparent, parent, child, great_grandchild]
+        while not it_dag.isDone():
+            mobj = it_dag.currentItem()
+            if mobj in ls:
+                ls.remove(mobj)
+            it_dag.next()
+        self.assertEqual(len(ls), 3)
+        self.assertEqual(mobj, great_grandchild)
+
 
 class TestCmds(unittest.TestCase):
 
