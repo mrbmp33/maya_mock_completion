@@ -19,7 +19,7 @@ import enum
 import math
 import numpy as np
 import blinker
-from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, overload
+from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, cast, overload
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
@@ -98,15 +98,15 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
 def _initialize_dag_path_from_mobject(mobject: 'MObject') -> 'MDagPath':
     dag_path = MDagPath()
     dag_path._node = mobject
-    ancestors = list(dag_path._iter_ancestors(mobject))
-    descendants = dag_path._iter_descendants(mobject)
-    dag_path._ancestors = ancestors
-    dag_path._descendants = descendants
+    ancestors = list(dag_path._iter_ancestors())
+    # descendants = list(dag_path._iter_descendants(mobject))
+    # dag_path._ancestors = ancestors
+    # dag_path._descendants = descendants
 
-    ls = copy.copy(ancestors)
-    ls.append(mobject)
+    # ls = copy.copy(ancestors)
+    ancestors.append(mobject)
 
-    dag_path._mobject_ls = ls
+    dag_path._mobject_ls = ancestors
     return dag_path
 
 
@@ -11123,21 +11123,21 @@ class MFn(object):
     kXsectionSubdivEdit = 820
 
     _transform_types = {
-        kAreaLight,
-        kAmbientLight,
-        kBezierCurve,
-        kCamera,
-        kDirectionalLight,
+        # kAreaLight,
+        # kAmbientLight,
+        # kBezierCurve,
+        # kCamera,
+        # kDirectionalLight,
         kJoint,
-        kLattice,
-        kLight,
-        kLocator,
-        kMesh,
-        kNurbsCurve,
-        kNurbsSurface,
-        kPointLight,
-        kSpotLight,
-        kTransform,
+        # kLattice,
+        # kLight,
+        # kLocator,
+        # kMesh,
+        # kNurbsCurve,
+        # kNurbsSurface,
+        # kPointLight,
+        # kSpotLight,
+        # kTransform,
         }
 
 
@@ -15214,10 +15214,11 @@ class MDagPath(object):
     
     def length(self) -> int:
         """Returns number of nodes on path, not including DAG root node."""
-        return len(list(self._iter_ancestors()))
+        return len(list(self._iter_ancestors()) + [self._node,])
 
     def node(self) -> 'MObject':
         """Returns the DAG node at the end of the path."""
+        self._node = self._mobject_ls[-1]
         return self._node
 
     def numberOfShapesDirectlyBelow(self) -> int:
@@ -15242,8 +15243,9 @@ class MDagPath(object):
             MDagPath: Self
         """
         for _ in range(levels):
-            if self._node._parent:
-                self._node = self._node._parent
+            if len(self._mobject_ls) > 1:
+                self._mobject_ls.pop()
+        self._node = self._mobject_ls[-1]
         return self
 
     def push(self, child: 'MObject') -> 'MDagPath': 
@@ -15313,14 +15315,13 @@ class MDagPath(object):
         Internal method to iterate through ancestors up to break_at node.
         """
         from maya.api.OpenMaya import WORLD  # Avoid circular import
-
         break_at = break_at or WORLD
         current = self._node
 
         if current._parent is break_at:
             return iter(())
 
-        while current._parent and current._parent is not break_at:
+        while current._parent and current._parent != break_at:
             current = current._parent
             yield current
 
@@ -23359,7 +23360,10 @@ class MFnDagNode(MFnDependencyNode):
 
         Returns the root node of the first path leading to this node.
         """
-        return next(self._dag_path._iter_ancestors())
+        ancestors = list(self._dag_path._iter_ancestors())
+        if not ancestors:
+            return self._mobject
+        return ancestors[-1]
 
     def duplicate(*args, **kwargs):
         """
@@ -23396,16 +23400,14 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    @_raise_if_invalid_mobject_decorator
-    def getPath(self) -> 'MDagPath':
+    def getPath(self) -> MDagPath:
         """
         getPath() -> MDagPath
 
         Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject.
         """
-        dag_path = MDagPath()
-        dag_path._node = self._mobject
-        return dag_path
+        self._dag_path = _initialize_dag_path_from_mobject(self._mobject)
+        return self._dag_path
 
     def hasChild(*args, **kwargs):
         """

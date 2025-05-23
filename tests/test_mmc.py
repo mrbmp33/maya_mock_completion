@@ -295,6 +295,38 @@ class TestMayaMockCompletion(unittest.TestCase):
             self.assertFalse(mc.objExists(transform._name))
             self.assertFalse(mc.objExists(cam._name))
 
+    def test_dap_path(self):
+        grandparent = self.dagmod.createNode("transform")
+        self.dagmod.renameNode(grandparent, "grandparent")
+        parent = self.dagmod.createNode("transform", parent=grandparent)
+        self.dagmod.renameNode(parent, "parent")
+        child = self.dagmod.createNode("transform", parent=parent)
+        self.dagmod.renameNode(child, "child")
+        self.dagmod.doIt()
+
+        dag_path = om.MDagPath.getAPathTo(parent)
+        self.assertEqual(dag_path.length(), 2)
+        self.assertEqual(dag_path.node().apiTypeStr, "kTransform")
+        self.assertEqual(dag_path.fullPathName(), "|grandparent|parent")
+        self.assertEqual(dag_path.partialPathName(), "parent")
+        self.assertEqual(dag_path.child(0), child)
+        self.assertEqual(dag_path.node(), parent)
+        dag_path.pop()
+        self.assertEqual(dag_path.node(), grandparent)
+        self.assertEqual(dag_path.fullPathName(), "|grandparent")
+
+        dag_path = om.MFnDagNode(parent).getPath()
+        self.assertEqual(dag_path.length(), 2)
+        self.assertEqual(dag_path.node().apiTypeStr, "kTransform")
+        self.assertEqual(dag_path.fullPathName(), "|grandparent|parent")
+        self.assertEqual(dag_path.partialPathName(), "parent")
+        self.assertEqual(dag_path.child(0), child)
+        self.assertEqual(dag_path.node(), parent)
+        dag_path.pop()
+        self.assertEqual(dag_path.node(), grandparent)
+        self.assertEqual(dag_path.fullPathName(), "|grandparent")
+
+
 
 class TestCmds(unittest.TestCase):
 
@@ -491,13 +523,8 @@ class TestScene(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    try:
-        from maya import cmds as mc
-        from maya import mel
 
-        reporter = mel.eval("string $tmp = $gCommandReporter;")
-        mc.cmdScrollFieldReporter(reporter, e=True, clear=True)
-
+    def old_test_runner():
         loader = unittest.TestLoader()
         suite = unittest.TestSuite()
 
@@ -506,6 +533,14 @@ if __name__ == "__main__":
 
         runner = unittest.TextTestRunner()
         runner.run(suite)
+
+    try:
+        from maya import cmds as mc
+        from maya import mel
+
+        reporter = mel.eval("string $tmp = $gCommandReporter;")
+        mc.cmdScrollFieldReporter(reporter, e=True, clear=True)
+        old_test_runner()
 
     except Exception as e:
         logging.critical(traceback.format_exc(), e)
