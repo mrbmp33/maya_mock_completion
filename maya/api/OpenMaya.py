@@ -23400,13 +23400,16 @@ class MFnDagNode(MFnDependencyNode):
         super().__init__(mobject)
 
     @_raise_if_invalid_mobject_decorator
-    def addChild(self, node: 'MObject', index: int = -1, keepExistingParents=False) -> 'MObject':
+    def addChild(self, node: 'MObject', index: int = 225, keepExistingParents=False) -> 'MObject':
         """
         addChild(node, index=kNextPos, keepExistingParents=False) -> self
 
         Makes a node a child of this one.
         """
+        if index == MFnDagNode.kNextPos:
+            index = len(self._mobject._children)
         self._mobject._children.insert(index, node)
+        node._parent = self._mobject
 
     def child(self, index: int) -> 'MObject':
         """
@@ -23678,13 +23681,16 @@ class MFnDagNode(MFnDependencyNode):
         """
         pass
 
-    def removeChild(*args, **kwargs):
+    def removeChild(self, node: 'MObject') -> 'MFnDagNode':
         """
         removeChild(node) -> self
 
         Removes the child, specified by MObject, reparenting it under the world.
         """
-        pass
+        self._mobject._children.remove(node)
+        node._parent = WORLD
+        WORLD._children.append(node)
+        return self
 
     def removeChildAt(*args, **kwargs):
         """
