@@ -159,7 +159,7 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
             ...
         elif as_node._parent.apiTypeStr == 'kWorld':
             ...
-        elif NodePool.from_name(name)._parent._name != parent_name:
+        elif as_node._parent._name != parent_name and parent_name:
             base_name = f'{parent_name or ""}|{base_name}'
             name = base_name
 
@@ -167,3 +167,11 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
         name = f'{base_name}{idx}'
         idx += 1
     return name
+
+
+def find_first_available_name_from_obj(obj: 'om.MObject', name: str) -> str:
+    """Finds the first available name for a given object."""
+    parent_name = None
+    if obj._parent:
+        parent_name = obj._parent._name
+    return find_first_available_name(name, parent_name)

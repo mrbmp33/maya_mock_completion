@@ -326,7 +326,6 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertEqual(dag_path.node(), grandparent)
         self.assertEqual(dag_path.fullPathName(), "|grandparent")
 
-
     def test_MItDag(self):
         mc.file(new=True, force=True)
         dagmod = om.MDagModifier()
@@ -363,6 +362,29 @@ class TestMayaMockCompletion(unittest.TestCase):
             it_dag.next()
         self.assertEqual(len(ls), 3)
         self.assertEqual(mobj, great_grandchild)
+
+    def test_duplicate_dag(self):
+        dagmod = om.MDagModifier()
+        grandparent = dagmod.createNode("transform")
+        dagmod.renameNode(grandparent, "grandparent")
+        parent = dagmod.createNode("transform", parent=grandparent)
+        dagmod.renameNode(parent, "parent")
+        child = dagmod.createNode("transform", parent=parent)
+        dagmod.renameNode(child, "child")
+        dagmod.doIt()
+
+        gp = om.MFnDagNode(grandparent)
+        gp_dup = om.MFnDagNode(gp.duplicate())
+        self.assertEqual(gp_dup.name(), "grandparent1")
+        itertator = om.MItDag(om.MItDag.kDepthFirst)
+        itertator.reset(gp_dup.object())
+        predicted_names = {"grandparent1", "parent1", "child1"}
+        while not itertator.isDone():
+            self.assertIn(
+                om.MFnDagNode(itertator.currentItem()).name(),
+                predicted_names,
+                )
+            itertator.next()
 
 
 class TestCmds(unittest.TestCase):

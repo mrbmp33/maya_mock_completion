@@ -23508,13 +23508,56 @@ class MFnDagNode(MFnDependencyNode):
             return self._mobject
         return ancestors[-1]
 
-    def duplicate(*args, **kwargs):
+    def duplicate(self, instance: bool = False, instanceLeaf: bool = False) -> 'MObject':
         """
         duplicate(instance=False, instanceLeaf=False) -> MObject
 
         Duplicates the DAG hierarchy rooted at the current node.
         """
-        pass
+        if instance:
+            raise NotImplementedError('Instance duplication not implemented yet.')
+
+        iterator = MItDag()
+        iterator.reset(self._dag_path)
+        flattened_hierarchy: dict[int, MObject] = {}
+
+        while not iterator.isDone():
+            # Duplicate the current item
+            current = iterator.currentItem()
+            
+            dup = copy.deepcopy(current)
+
+            # Reset the connections
+            for plug in dup._cached_plugs.values():
+                plug._connections = {'INPUTS': {}, 'OUTPUTS': {}}
+
+            # Store the duplicate in the flattened hierarchy
+            flattened_hierarchy[hash(dup._name)] = dup
+            iterator.next()
+
+        for node in flattened_hierarchy.values():
+            new_parent = None
+            new_children = []
+
+            if node._parent is not None:
+                new_parent = flattened_hierarchy.get(hash(node._parent._name))
+            if node._children:
+                new_children = [flattened_hierarchy.get(hash(child._name)) for child in node._children]
+
+            # Reparent the node to the updated references
+            node._parent = new_parent
+            node._children = new_children
+        
+        duplicated_nd = flattened_hierarchy.get(hash(self._mobject._name))
+
+        # Ensure unique names
+        for dup in flattened_hierarchy.values():
+            parent_name = dup._parent._name if dup._parent else None
+            dup._name = hierarchy.find_first_available_name(
+                dup._name,
+            )
+        
+        return duplicated_nd
 
     @_raise_if_invalid_mobject_decorator
     def fullPathName(self) -> str:
