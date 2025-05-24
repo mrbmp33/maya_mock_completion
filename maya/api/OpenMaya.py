@@ -171,7 +171,7 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
     return properties, long_name, short_name
 
 
-def _raise_if_invalid_mobject_decorator(func: Callable) -> Callable:
+def _raise_if_invalid_mobject_decorator(func):
     
     @wraps(func)
     def func_wrapper(*args, **kwargs):
