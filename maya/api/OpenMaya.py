@@ -8,7 +8,8 @@
 """
 from __future__ import annotations
 import copy
-from functools import partial, cached_property, wraps
+from functools import partial, wraps
+import functools
 import re
 import random
 import string
@@ -219,25 +220,31 @@ def _attr_from_name_and_node(attr_name: str, owner_node: "MObject") -> Tuple['MO
     attribute._is_element = properties['is_element']
 
     # Only for numeric attributes  ( and Enum )
-    if numeric_type := properties.get('numeric_type'):
+    numeric_type = properties.get('numeric_type')
+    if numeric_type is not None:
         attribute._numeric_type = numeric_type
     
-    if default_value := properties.get('default_value'):
+    default_value = properties.get('default_value')
+    if default_value is not None:
         attribute._default = default_value
         attribute._value = default_value
 
-    if min_value := properties.get('min_value'):
+    min_value = properties.get('min_value')
+    if min_value is not None:
         attribute._min = min_value
 
-    if max_value := properties.get('max_value'):
+    max_value = properties.get('max_value')
+    if max_value is not None:
         attribute._max = max_value
         
     # For Unit Attributes like distance, angle, time...
-    if unit_type := properties.get('unit_type'):
+    unit_type = properties.get('unit_type')
+    if unit_type is not None:
         attribute._unit_type = unit_type
 
     # For Typed Attribtues like Enum, String, Matrix...
-    if typed_type := properties.get('typed_type'):
+    typed_type = properties.get('typed_type')
+    if typed_type is not None:
         attribute._typed_attr_type = typed_type
         if typed_type == MFnData.kMatrix:
             attribute._init_matrix_fields()
@@ -280,10 +287,12 @@ def _mplug_from_attr_and_node(attr: "MObject", owner_node: "MObject", want_netwo
     
     # If the attribute has a parent, we need to create a plug for it
     if attr._parent:
-        mplug._parent = _mplug_from_attr_and_node(
-            attr._parent,
-            owner_node,
-            want_network_plug=False
+        mplug._parent = weakref.proxy(
+            _mplug_from_attr_and_node(
+                attr._parent,
+                owner_node,
+                want_network_plug=False
+            )
         )
 
     return mplug
@@ -339,45 +348,46 @@ def _raise_if_invalid_mobject_decorator(func):
     return func_wrapper
 
 
-def _transform_plugs_to_matrix(mobject: MObject) -> 'MMatrix':
+def _transform_plugs_to_matrix(mobject: MObject) -> np.array:
     """Reads the current values of the translation, rotation and scale plugs and sets the matrix."""
     
     # Extract attribute values from the MObject
+
+    fn = MFnDependencyNode(mobject)
+
     attr_names = (
         'translateX', 'translateY', 'translateZ',
         'rotateX', 'rotateY', 'rotateZ',
         'scaleX', 'scaleY', 'scaleZ'
     )
+    default_values = (
+        0.0 , 0.0, 0.0,  # translateX, translateY, translateZ
+        0.0, 0.0, 0.0,  # rotateX, rotateY, rotateZ
+        1.0, 1.0, 1.0   # scaleX, scaleY, scaleZ
+    )
+    
+    values_map: dict[str, MPlug] = {}
+    for attr_name, default_value in zip(attr_names, default_values):
+        plug = fn.findPlug(attr_name, False)
+        attribute = plug._attribute
+        attribute._value = attribute._value or default_value
+        values_map[attr_name] = attribute._value
 
-    values_map = {}
-    fn = MFnDependencyNode(mobject)
-
-    for attr_name in attr_names:
-        # Default value        
-        attribute_id = _get_attribute_id(f'{mobject._name}.{attr_name}')
-        attr = mobject._attributes.get(attribute_id)
-        
-        if attr is None:
-            # try to get the attribute by its short name
-            attr = mobject._attributes.get(
-                attribute_properties.ATTRIBUTES_PROPERTIES[_get_node_type(mobject)][attr_name]['short_name']
-            )
-
-        if attr is None:
-            # If still not found, create a new attribute with default value
-            attr = fn.findPlug(attr_name, want_network_plug=False)._attribute
-
-        values_map[attr_name] = attr._value
-
-    def deg_to_rad(d): return d * math.pi / 180.0
-
-    tx, ty, tz = values_map['translateX'], values_map['translateY'], values_map['translateZ']
-    rx, ry, rz = map(deg_to_rad, (values_map['rotateX'], values_map['rotateY'], values_map['rotateZ']))
-    sx, sy, sz = values_map['scaleX'], values_map['scaleY'], values_map['scaleZ']
+    tx = values_map['translateX']  # Stored in cm
+    ty = values_map['translateY']  # Stored in cm
+    tz = values_map['translateZ']  # Stored in cm
+    rx = values_map['rotateX']  # Rotation in radians
+    ry = values_map['rotateY']  # Rotation in radians
+    rz = values_map['rotateZ']  # Rotation in radians
+    sx = values_map['scaleX']
+    sy = values_map['scaleY']
+    sz = values_map['scaleZ']
 
     # Resolve rotation order
     rot_order_plug = fn.findPlug('rotateOrder', want_network_plug=False)
-    rotation_order = rot_order_plug._attribute._value or MEulerRotation.kXYZ
+    rotation_order = rot_order_plug._attribute._value
+    if rotation_order is None:
+        rotation_order = MEulerRotation.kXYZ
     rotation_order = MEulerRotation._orderToStr.get(rotation_order, 'xyz')
 
     # Translation
@@ -413,8 +423,8 @@ def _transform_plugs_to_matrix(mobject: MObject) -> 'MMatrix':
     R = Rmap[rotation_order[2]] @ Rmap[rotation_order[1]] @ Rmap[rotation_order[0]]
     M = T @ R @ S
 
-    mobject._local_matrix = MMatrix(M)
-    return MMatrix(M)
+    mobject._local_matrix = M
+    return M
 
 
 def _transform_matrix_to_plugs(mobject: "MObject", matrix: 'MMatrix'):
@@ -467,19 +477,30 @@ def _decompose_matrix(matrix: np.ndarray):
     return translation, rotation, scale
 
 
-def _calc_node_world_matrix(mobject: 'MObject') -> 'MMatrix':
-    start_object = mobject
-    world_martix = np.eye(4, dtype=np.float64)
-    while mobject._parent and mobject is not WORLD and mobject.hasFn(MFn.kTransform):
-        local_matrix = _transform_plugs_to_matrix(mobject)
-        world_martix = local_matrix._matrix @ world_martix
-        mobject = mobject._parent
-        world_mx_id = _get_attribute_id(f'{mobject._name}.worldMatrix[0]')
-        # if attr := mobject._attributes.get(world_mx_id):
-        #     attr._value = MMatrix(world_martix)
-        # else:
-        #     # attr = _initialize_attribute(MObject(), mobject)
-    return 
+def _calc_node_world_matrix(mobject: 'MObject') -> np.ndarray:
+    path = _initialize_dag_path_from_mobject(mobject)
+    ancestors = [mobject]
+    ancestors.extend([x for x in path._iter_ancestors() if x.hasFn(MFn.kTransform)])
+    ancestors.reverse()
+
+    local_matrices = []
+    
+    for nd in ancestors:
+        local_matrices.append(_transform_plugs_to_matrix(nd))
+
+    # Calculate world matrices incrementally
+    world_matrices = []
+    for i, local_mx in enumerate(local_matrices):
+        if i == 0:
+            world_matrices.append(local_mx)
+        else:
+            world_matrices.append(world_matrices[-1] @ local_mx)
+
+    # Assign _world_matrix to nodes
+    for nd, world_mx in zip(ancestors, world_matrices):
+        nd._world_matrix = world_mx
+
+    return mobject._world_matrix
 
 
 # ==== Signals ====
@@ -4045,8 +4066,12 @@ class MMatrix(object):
                 raise ValueError("MMatrix must be initialized with a 4x4 array-like object")
             self._matrix = arr
 
+    def _to_maya_order(self):
+        """Convert matrix to Maya's column-major order"""
+        return np.array(self._matrix, dtype=np.float64).T
+
     def __iter__(self):
-        return iter([item for sublist in self._matrix.tolist() for item in sublist])
+        return iter((float(x) for x in self._to_maya_order().flatten()))
 
     def __add__(self, other):
         """Matrix addition"""
@@ -4152,10 +4177,7 @@ class MMatrix(object):
 
     def __str__(self):
         """String representation"""
-        return "\n".join(
-            "[" + " ".join(f"{x:8.6f}" for x in row) + "]"
-            for row in self._matrix
-        )
+        return str(self._to_maya_order().tolist())
 
     def __repr__(self):
         return f"MMatrix({self.__str__()})"
@@ -9109,18 +9131,18 @@ class MDistance(object):
         pass
 
     @staticmethod
-    def internalUnit(*args, **kwargs):
+    def internalUnit():
         """
         Return the distance unit used internally by Maya.
         """
-        pass
+        return MDistance._internal_unit
 
     @staticmethod
-    def setUIUnit(*args, **kwargs):
+    def setUIUnit(unit: int):
         """
         Change the units used to display distances in Maya's UI.
         """
-        pass
+        MDistance._ui_unit = unit
 
     @staticmethod
     def uiToInternal(*args, **kwargs):
@@ -9130,11 +9152,12 @@ class MDistance(object):
         pass
 
     @staticmethod
-    def uiUnit(*args, **kwargs):
+    def uiUnit():
         """
         Return the units used to display distances in Maya's UI.
         """
-        pass
+        return MDistance._ui_unit
+
 
     kCentimeters = 6
 
@@ -9163,6 +9186,9 @@ class MDistance(object):
     @property
     def value(self):
         return self._value
+
+    _ui_unit = kCentimeters  # Default UI unit is centimeters
+    _internal_unit = kCentimeters  # Default internal unit is also centimeters
 
 
 class MFloatPoint(object):
@@ -12860,6 +12886,10 @@ class MObject(object):
         if MFn.kAttribute in self._api_type:
             self._init_attribute_fields()
 
+        # Transform-specific properties
+        self._local_matrix: MMatrix = MMatrix()
+        self._world_matrix: MMatrix = MMatrix()
+
     def _init_attribute_fields(self):
         self._owner: 'MObject' = None
 
@@ -12869,8 +12899,10 @@ class MObject(object):
         self._value = None
 
         self._is_array = False
+        self._array_owner: 'MObject' = None
         self._is_compound = False
         self._is_element = False
+        self._elements: list['MObject'] = []
 
         self._numeric_type: int = MFnNumericData.kInvalid
 
@@ -12917,7 +12949,7 @@ class MObject(object):
 
     def _init_matrix_fields(self):
         self._matrix_type: int = MFnMatrixData.kMatrix
-        self._matrix: MMatrix = MMatrix()
+        self._matrix: np.array = np.identity(4, dtype=np.float64)
 
     def _init_enum_fields(self):
         self._enum_items = {}
@@ -16239,7 +16271,7 @@ class MAngle(object):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         self._unit = unit or MAngle.kRadians
-        self._value = value or random.uniform(-2 * math.pi, 2 * math.pi)
+        self._value = value if value is not None else 0.0
 
     def __repr__(self):
         """
@@ -17650,12 +17682,12 @@ class MPlug(object):
             self._attribute._value = random.randint(-100, 100)
         return int(self._attribute._value)
 
-    def asMAngle(self, *args, **kwargs):
+    def asMAngle(self, context: Optional[MDGContext] = None) -> 'MAngle':
         """
         Retrieves the plug's value, as an MAngle.
         """
         if self._attribute._value is None:
-            self._attribute._value = random.uniform(-360, 360)
+            self._attribute._value = random.uniform(-2*math.pi, 2*math.pi)
         return MAngle(self._attribute._value)
 
     def asMDataHandle(self, *args, **kwargs):
@@ -17672,7 +17704,7 @@ class MPlug(object):
             self._attribute._value = random.uniform(-100, 100)
         return MDistance(self._attribute._value)
 
-    def asMObject(self, *args, **kwargs):
+    def asMObject(self):
         """
         Retrieves the plug's value, as as an MObject containing a direct reference to the plug's data.
         """
@@ -17797,24 +17829,43 @@ class MPlug(object):
         if not self.isArray:
             raise TypeError(f'Plug <{self.name()}> is not an array plug.')
 
-        if not index >= len(self._children_plugs):
-            return self._children_plugs[index]
-        else:
-            long_name = f'{self._attribute._long_name}[{index}]'
-            short_name = f'{self._attribute._short_name}[{index}]'
-            name = f'{self._attribute._name}[{index}]'
-            
-            # If not cached yet, create a new plug and attribute
-            if self._attribute.apiType() == MFn.kTypedAttribute:
-                array_type = MFnTypedAttribute(self._attribute).attrType()
-                mplug = MPlug()
-                attribute = MFnTypedAttribute().create(long_name, short_name, array_type)
-                mplug._attribute = attribute
-                mplug._owner = self._owner
-                mplug._parent = weakref.proxy(self)
-                mplug._parent_name = self._attribute._long_name
-                self._children_plugs.append(mplug)
+        # Check if the plug is already cached
+        if not index >= len(self._attribute._elements):
+            if mplug := self._owner._cached_plugs.get(
+                _get_attribute_id(f'{self._attribute._name}[{index}]')
+            ):
                 return mplug
+        
+        # If not cached yet, create a new plug and attribute
+        
+        # Get name
+        long_name = f'{self._attribute._long_name}[{index}]'
+        short_name = f'{self._attribute._short_name}[{index}]'
+        name = f'{self._attribute._name}[{index}]'
+
+        try:
+            attribute = _attr_from_name_and_node(
+                long_name, self._owner,
+            )
+        except RuntimeError:  # Not in cache // try to make it up
+            attribute = _initialize_attribute(
+                name,
+                long_name,
+                short_name,
+                _get_attribute_id(name),
+                self._owner,
+            )
+
+        # Set element properties
+        attribute._is_element = True
+        attribute._logical_index = index
+        self._attribute._elements.append(attribute)
+
+        mplug = _mplug_from_attr_and_node(
+            attribute, self._owner, want_network_plug=False,
+        )
+        self._children_plugs.append(mplug)
+        return mplug
 
     def elementByPhysicalIndex(self, index: int) -> 'MPlug':
         """
@@ -22325,9 +22376,6 @@ class MFnDependencyNode(MFnBase):
         """
         Returns a plug for the given attribute.
         """
-        if attr_name in ('worldMatrix[0]', 'worldInverseMatrix[0]', 'parentInverseMatrix[0]', 'parentMatrix[0]'):
-            _calc_node_world_matrix(self._mobject)
-
         # Get attribute and mplug from the cache, else create them
         attribute, properties = _attr_from_name_and_node(attr_name, self._mobject)
         
@@ -23187,7 +23235,7 @@ class MFnTypedAttribute(MFnAttribute):
             default_value = ''
         elif data_type == MFnData.kMatrix:
             self._mobject._init_matrix_fields()
-            default_value = MMatrix()
+            default_value = np.identity(4, dtype=np.float64)
             self._mobject._matrix = default_value
 
         self._mobject._value = default_value
@@ -24646,7 +24694,7 @@ class MFnMatrixAttribute(MFnAttribute):
 
         self._mobject._api_type.append(MFn.kMatrixAttribute)
         
-        self._mobject._matrix = MMatrix()
+        self._mobject._matrix = np.identity(4, dtype=np.float64)
         return self._mobject
 
     default = None
@@ -25287,22 +25335,49 @@ class MFnMatrixData(MFnData):
         """Initialize self.  See help(type(self)) for accurate signature."""
         super().__init__(*args, **kwargs)
 
-        # If the mobject is a matrix attribute
-        if MFn.kTypedAttribute in self._mobject._api_type:
-            if hasattr(self._mobject, '_matrix') and self._mobject._short_name == 'matrix':
-                _transform_plugs_to_matrix(self._mobject)
+        # If initialized using a matrix object, most likely depends on transform plug values
+        if MFn.kAttribute in self._mobject._api_type and hasattr(self._mobject, '_long_name') is True:
+            
+            match self._mobject._long_name:
+                case 'worldMatrix[0]':
+                    M = _calc_node_world_matrix(self._mobject._owner)
+                    self._mobject._matrix = M
+                case 'worldInverseMatrix[0]':
+                    M = _calc_node_world_matrix(self._mobject._owner)
+                    self._mobject._matrix = np.linalg.inv(M)
+                case 'parentInverseMatrix[0]':
+                    _calc_node_world_matrix(self._mobject._owner)
+                    self._mobject._matrix = np.linalg.inv(self._mobject._owner._parent._world_matrix)
+                case 'parentMatrix[0]':
+                    _calc_node_world_matrix(self._mobject._owner)
+                    self._mobject._matrix = self._mobject._owner._parent._world_matrix
+                case 'matrix':
+                    M = _transform_plugs_to_matrix(self._mobject._owner)
+                    self._mobject._matrix = M
+                case 'inverseMatrix':
+                    M = _transform_plugs_to_matrix(self._mobject._owner)
+                    self._mobject._matrix = np.linalg.inv(M)
+                case _:
+                    ...
 
-    def create(self, matrix: Union['MMatrix', 'MTransformationMatrix']) -> 'MObject':
+
+    def create(self, matrix: Union['MObject', 'MMatrix', 'MTransformationMatrix']) -> 'MObject':
         """
         Creates a new matrix data object.
         
         Returns: New matrix data MObject
         """
-        super()._create()
-        self._mobject._init_matrix_fields()
-        self._matrix = matrix
+        if isinstance(matrix, MObject):
+            self._mobject = matrix
+            self._mobject._init_attribute_fields()
+        else:
+            super()._create()
+            self._mobject._init_matrix_fields()
+            self._mobject._matrix = matrix
+
         if MFn.kMatrixData not in self._mobject._api_type:
             self._mobject._api_type.append(MFn.kMatrixData)
+
         return self._mobject
         
     def matrix(self) -> 'MMatrix':
@@ -25311,10 +25386,7 @@ class MFnMatrixData(MFnData):
         
         Returns: MMatrix object representing the data
         """
-        if isinstance(self._mobject._matrix, MTransformationMatrix):
-            # Cast to matrix
-            return self._mobject._matrix.asMatrix()
-        return self._mobject._matrix
+        return MMatrix(self._mobject._matrix)
         
     def set(self, matrix: 'MMatrix') -> 'MFnMatrixData':
         """
@@ -25323,12 +25395,7 @@ class MFnMatrixData(MFnData):
         Args:
             matrix (MMatrix): The new matrix value to set
         """
-        if isinstance(matrix, MTransformationMatrix):
-            self._mobject._matrix_type = matrix.asMatrix()
-            self._mobject._is_transformation = True
-        else:
-            self._mobject._matrix_type = matrix
-            self._mobject._is_transformation = False
+        self._mobject._matrix = matrix._matrix
         return self
 
     def transformation(self) -> 'MTransformationMatrix':
@@ -25338,10 +25405,7 @@ class MFnMatrixData(MFnData):
         
         Returns: Matrix data as an MTransformationMatrix
         """
-        if isinstance(self._matrix, MTransformationMatrix):
-            return self._matrix
-        else:
-            return MTransformationMatrix(self._matrix)
+        return MTransformationMatrix(self._mobject._matrix)
 
     def isTransformation(self) -> bool:
         """
@@ -25350,7 +25414,7 @@ class MFnMatrixData(MFnData):
 
         Returns: bool indicating whether object is an MTransformationMatrix
         """
-        return True if isinstance(self._matrix, MTransformationMatrix) else False
+        return hasattr(self._mobject, '_owner')
 
 
 class MFnTransform(MFnDagNode):
@@ -25582,7 +25646,9 @@ class MFnTransform(MFnDagNode):
         """
         Returns the transformation matrix represented by this transform.
         """
-        return _transform_plugs_to_matrix(self._mobject)
+        trn_mx = MTransformationMatrix()
+        trn_mx._matrix = _transform_plugs_to_matrix(self._mobject)
+        return trn_mx
 
     def translateBy(*args, **kwargs):
         """
