@@ -18,6 +18,7 @@ import weakref
 import enum
 import math
 import numpy as np
+from scipy.spatial.transform import Rotation as R
 import blinker
 from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, cast, overload
 from collections.abc import Sequence
@@ -115,24 +116,177 @@ def _get_attribute_id(attribute_full_name: str) -> uuid.UUID:
     return uuid.uuid5(uuid.NAMESPACE_DNS, attribute_full_name)
 
 
-def _initialize_mplug(owner: 'MObject',
-                     mplug: 'MPlug',
-                     attribute: 'MObject',
-                     mplug_id: uuid.UUID,
-                     want_network_plug=False) -> 'MPlug':
+def _initialize_mplug(
+        owner: 'MObject',
+        attribute: 'MObject',
+        want_network_plug=False
+    ) -> 'MPlug':
+    mplug = MPlug()
     mplug._owner = owner
-    mplug._uuid = mplug_id
+    mplug._uuid = attribute._uuid
     mplug._attribute = attribute
     mplug._network_plug = want_network_plug
-    owner._cached_plugs[mplug_id] = mplug
     return mplug
 
 
-def _initialize_attribute(attribute) -> 'MObject':
-    if not attribute._alive:
-        attribute._init_attribute_fields()
+def _initialize_attribute(
+        name: str,
+        long_name: str,
+        short_name: str,
+        uid: uuid.UUID,
+        owner_node: MObject
+    ) -> 'MObject':
+    """Initialize an MObject as an attribute and set values."""
+    attribute = MObject()
+    attribute._init_attribute_fields()
+    attribute._uuid = uid
+    attribute._name = name
+    attribute._long_name = long_name
+    attribute._short_name = short_name
+
     attribute._api_type = [MFn.kAttribute]
+    attribute._owner = owner_node
+
     return attribute
+
+
+def _attr_from_name_and_node(attr_name: str, owner_node: "MObject") -> Tuple['MObject', Optional[dict]]:
+
+    # FIRST OF ALL MAKE SURE THE ATTRIBUTE HAS NOT ALREADY BEEN CREATED
+
+    # the name could be the short name. We will check again using the long name upon
+    # getting the properties
+
+    attribute_name = f'{owner_node._name}.{attr_name}'
+    attribute_id = _get_attribute_id(attribute_name)
+    if attribute := owner_node._attributes.get(attribute_id):
+        return attribute, None
+
+    # Get the node type and attribute properties from the cache
+    node_type = _get_node_type(owner_node)
+    properties, long_name, short_name = _get_attribute_properties(node_type, attr_name)
+    attribute_name = f'{owner_node._name}.{long_name}'
+
+    # If the long name is different from the input name, update the attribute id
+    if attribute_name != f'{owner_node._name}.{attr_name}':
+        attribute_id = _get_attribute_id(attribute_name)
+
+    if attribute := owner_node._attributes.get(attribute_id):
+        # If the attribute already exists, return it
+        return attribute, properties
+        
+    # ==== IF THE ATTRIBUTE DOES NOT EXIST, CREATE A NEW ONE ====
+
+    attribute = _initialize_attribute(
+        attribute_name,
+        long_name,
+        short_name,
+        attribute_id,
+        owner_node,
+    )
+
+    # For custom attributes or attributes not defined in the properties, return the attribute
+    if not properties:
+        return attribute, None
+    
+    # ==== Initialize the attribute with its based on typeproperties ====
+
+    # Add type constant based on the type str
+    attr_type = getattr(MFn, properties['type_str'])
+    if attr_type not in attribute._api_type:
+        attribute._api_type.append(attr_type)
+
+    MAYA_ATTRIBUTE_TYPES_TO_FN_MAP: dict[int, Type["MFnAttribute"]] = {
+        MFn.kNumericAttribute: MObject._init_numeric_fields,
+        MFn.kUnitAttribute: MObject._init_unit_fields,
+        MFn.kDoubleLinearAttribute: MObject._init_unit_fields,
+        MFn.kFloatLinearAttribute: MObject._init_unit_fields,
+        MFn.kDoubleAngleAttribute: MObject._init_unit_fields,
+        MFn.kFloatAngleAttribute: MObject._init_unit_fields,
+        MFn.kTypedAttribute: MObject._init_typed_fields,
+        MFn.kMatrixAttribute: MObject._init_matrix_fields,
+        MFn.kFloatMatrixAttribute: MObject._init_matrix_fields,
+        MFn.kMessageAttribute: None,
+        MFn.kEnumAttribute: MObject._init_enum_fields,
+    }
+    intializer = MAYA_ATTRIBUTE_TYPES_TO_FN_MAP.get(attr_type)
+    if intializer:
+        intializer(attribute)
+
+    # Fill-in maya native attributes based on dict info
+    attribute._is_array = properties['is_array']
+    attribute._is_compound = properties['is_compound']
+    attribute._is_element = properties['is_element']
+
+    # Only for numeric attributes  ( and Enum )
+    if numeric_type := properties.get('numeric_type'):
+        attribute._numeric_type = numeric_type
+    
+    if default_value := properties.get('default_value'):
+        attribute._default = default_value
+        attribute._value = default_value
+
+    if min_value := properties.get('min_value'):
+        attribute._min = min_value
+
+    if max_value := properties.get('max_value'):
+        attribute._max = max_value
+        
+    # For Unit Attributes like distance, angle, time...
+    if unit_type := properties.get('unit_type'):
+        attribute._unit_type = unit_type
+
+    # For Typed Attribtues like Enum, String, Matrix...
+    if typed_type := properties.get('typed_type'):
+        attribute._typed_attr_type = typed_type
+        if typed_type == MFnData.kMatrix:
+            attribute._init_matrix_fields()
+
+    # FLAG IT AS VALID ATTRIBUTE
+    attribute._alive = True
+    attribute._is_null = False
+
+    # ADD THE ATTRIBUTE TO THE OWNER'S CACHED ATTRIBUTES
+    owner_node._attributes[attribute._uuid] = attribute
+
+    return attribute, properties
+
+
+def _mplug_from_attr_and_node(attr: "MObject", owner_node: "MObject", want_network_plug=False) -> 'MPlug':
+    """Initialize an MPlug from an attribute and owner node."""
+
+    # ==== SEE IF THE PLUG ALREADY EXISTS ====
+    if mplug := owner_node._cached_plugs.get(attr._uuid):
+        return mplug
+    
+    # ==== IF THE PLUG DOES NOT EXIST, CREATE A NEW ONE ====
+    mplug = _initialize_mplug(
+        owner_node,
+        attr,
+        want_network_plug=want_network_plug
+    )
+    owner_node._cached_plugs[mplug._uuid] = mplug
+
+    # If the child attribute is a compound, we need to create a plug for it
+    for child_attr in attr._children:
+        mplug._children_plugs.append(
+            _mplug_from_attr_and_node(
+                child_attr,
+                owner_node,
+                want_network_plug=False
+            )
+        )
+        
+    
+    # If the attribute has a parent, we need to create a plug for it
+    if attr._parent:
+        mplug._parent = _mplug_from_attr_and_node(
+            attr._parent,
+            owner_node,
+            want_network_plug=False
+        )
+
+    return mplug
 
 
 def _get_node_type(mobject: 'MObject') -> str:
@@ -185,8 +339,10 @@ def _raise_if_invalid_mobject_decorator(func):
     return func_wrapper
 
 
-def _transform_plugs_to_matrix(mobject: MObject):
+def _transform_plugs_to_matrix(mobject: MObject) -> 'MMatrix':
     """Reads the current values of the translation, rotation and scale plugs and sets the matrix."""
+    
+    # Extract attribute values from the MObject
     attr_names = (
         'translateX', 'translateY', 'translateZ',
         'rotateX', 'rotateY', 'rotateZ',
@@ -194,76 +350,136 @@ def _transform_plugs_to_matrix(mobject: MObject):
     )
 
     values_map = {}
+    fn = MFnDependencyNode(mobject)
+
     for attr_name in attr_names:
         # Default value        
         attribute_id = _get_attribute_id(f'{mobject._name}.{attr_name}')
         attr = mobject._attributes.get(attribute_id)
         
         if attr is None:
+            # try to get the attribute by its short name
             attr = mobject._attributes.get(
-                attribute_properties.ATTRIBUTES_PROPERTIES[mobject.apiTypeStr][attr_name]['short_name']
+                attribute_properties.ATTRIBUTES_PROPERTIES[_get_node_type(mobject)][attr_name]['short_name']
             )
-        value = getattr(attr, '_value', None)
-        if value is None:
-            value = 1.0 if 'scale' in attr_name else 0.0
 
-        values_map[attr_name] = value
+        if attr is None:
+            # If still not found, create a new attribute with default value
+            attr = fn.findPlug(attr_name, want_network_plug=False)._attribute
 
-    # Step 2: Build individual transformation matrices
-    def deg_to_rad(degrees):
-        return degrees * math.pi / 180.0
+        values_map[attr_name] = attr._value
+
+    def deg_to_rad(d): return d * math.pi / 180.0
 
     tx, ty, tz = values_map['translateX'], values_map['translateY'], values_map['translateZ']
-    rx, ry, rz = map(deg_to_rad, (
-        values_map['rotateX'], values_map['rotateY'], values_map['rotateZ']
-    ))
+    rx, ry, rz = map(deg_to_rad, (values_map['rotateX'], values_map['rotateY'], values_map['rotateZ']))
     sx, sy, sz = values_map['scaleX'], values_map['scaleY'], values_map['scaleZ']
 
-    # Translation matrix
+    # Resolve rotation order
+    rot_order_plug = fn.findPlug('rotateOrder', want_network_plug=False)
+    rotation_order = rot_order_plug._attribute._value or MEulerRotation.kXYZ
+    rotation_order = MEulerRotation._orderToStr.get(rotation_order, 'xyz')
+
+    # Translation
     T = np.array([
         [1, 0, 0, tx],
         [0, 1, 0, ty],
         [0, 0, 1, tz],
         [0, 0, 0, 1]
-    ])
+    ], dtype=np.float64)
 
-    # Scale matrix
-    S = np.array([
-        [sx, 0,  0,  0],
-        [0,  sy, 0,  0],
-        [0,  0,  sz, 0],
-        [0,  0,  0,  1]
-    ])
+    # Scale
+    S = np.diag([sx, sy, sz, 1])
 
-    # Rotation matrices (XYZ order)
-    Rx = np.array([
-        [1, 0,          0,           0],
-        [0, math.cos(rx), -math.sin(rx), 0],
-        [0, math.sin(rx),  math.cos(rx), 0],
-        [0, 0,          0,           1]
-    ])
+    # Rotation matrices
+    Rx = np.array([[1, 0, 0, 0],
+                   [0, math.cos(rx), -math.sin(rx), 0],
+                   [0, math.sin(rx),  math.cos(rx), 0],
+                   [0, 0, 0, 1]], dtype=np.float64)
 
-    Ry = np.array([
-        [ math.cos(ry), 0, math.sin(ry), 0],
-        [ 0,           1, 0,           0],
-        [-math.sin(ry), 0, math.cos(ry), 0],
-        [ 0,           0, 0,           1]
-    ])
+    Ry = np.array([[ math.cos(ry), 0, math.sin(ry), 0],
+                   [0, 1, 0, 0],
+                   [-math.sin(ry), 0, math.cos(ry), 0],
+                   [0, 0, 0, 1]], dtype=np.float64)
 
-    Rz = np.array([
-        [math.cos(rz), -math.sin(rz), 0, 0],
-        [math.sin(rz),  math.cos(rz), 0, 0],
-        [0,           0,            1, 0],
-        [0,           0,            0, 1]
-    ])
+    Rz = np.array([[math.cos(rz), -math.sin(rz), 0, 0],
+                   [math.sin(rz),  math.cos(rz), 0, 0],
+                   [0, 0, 1, 0],
+                   [0, 0, 0, 1]], dtype=np.float64)
 
-    # Final rotation matrix: R = Rz * Ry * Rx (assuming Maya default XYZ rotation order)
-    R = Rz @ Ry @ Rx
-
-    # Final transformation matrix: M = T * R * S
+    # Compose based on rotation order
+    rotation_order = rotation_order.lower()
+    Rmap = {'x': Rx, 'y': Ry, 'z': Rz}
+    R = Rmap[rotation_order[2]] @ Rmap[rotation_order[1]] @ Rmap[rotation_order[0]]
     M = T @ R @ S
-    mobject._matrix = MMatrix(*M)
-    return mobject._matrix
+
+    mobject._local_matrix = MMatrix(M)
+    return MMatrix(M)
+
+
+def _transform_matrix_to_plugs(mobject: "MObject", matrix: 'MMatrix'):
+    """Sets the translation, rotation and scale plugs based on the given matrix."""
+
+    as_depend_nd = MFnDependencyNode(mobject)
+    rot_order_plug = as_depend_nd.findPlug('rotateOrder', want_network_plug=False)
+    rot_order = rot_order_plug._attribute._value
+    if not rot_order:
+        # If rotateOrder is not set, default to XYZ
+        rot_order = MEulerRotation.kXYZ
+        rot_order_plug._attribute._value = rot_order
+    
+    rot_order_str = MEulerRotation._orderToStr[rot_order]
+
+    translation, rotation, scale = _decompose_matrix(matrix._matrix)
+    tx, ty, tz = translation
+    rx, ry, rz = rotation.as_euler(rot_order_str)
+    sx, sy, sz = scale
+    # Set the plugs with the decomposed values
+    attr_names = (
+        'translateX', 'translateY', 'translateZ',
+        'rotateX', 'rotateY', 'rotateZ',
+        'scaleX', 'scaleY', 'scaleZ'
+    )
+    for attr_name, value in zip(attr_names, (tx, ty, tz, rx, ry, rz, sx, sy, sz)):
+        # Get the attribute by its full name
+        plug = as_depend_nd.findPlug(attr_name, want_network_plug=False)
+        plug._attribute._value = value
+
+
+def _decompose_matrix(matrix: np.ndarray):
+    assert matrix.shape == (4, 4), "Input must be a 4x4 matrix"
+    
+    # Extract translation
+    translation = matrix[:3, 3]
+
+    # Extract 3x3 upper-left matrix
+    M = matrix[:3, :3]
+
+    # Extract scale (length of column vectors)
+    scale = np.linalg.norm(M, axis=0)
+
+    # Normalize the matrix to extract pure rotation
+    norm_matrix = M / scale
+
+    # Create a scipy Rotation object
+    rotation = R.from_matrix(norm_matrix)
+
+    return translation, rotation, scale
+
+
+def _calc_node_world_matrix(mobject: 'MObject') -> 'MMatrix':
+    start_object = mobject
+    world_martix = np.eye(4, dtype=np.float64)
+    while mobject._parent and mobject is not WORLD and mobject.hasFn(MFn.kTransform):
+        local_matrix = _transform_plugs_to_matrix(mobject)
+        world_martix = local_matrix._matrix @ world_martix
+        mobject = mobject._parent
+        world_mx_id = _get_attribute_id(f'{mobject._name}.worldMatrix[0]')
+        # if attr := mobject._attributes.get(world_mx_id):
+        #     attr._value = MMatrix(world_martix)
+        # else:
+        #     # attr = _initialize_attribute(MObject(), mobject)
+    return 
 
 
 # ==== Signals ====
@@ -1592,6 +1808,24 @@ class MEulerRotation(object):
     kZXY = 2
     kZYX = 5
 
+    _strToOrder = {
+        "xyz": kXYZ,
+        "xzy": kXZY,
+        "yxz": kYXZ,
+        "yzx": kYZX,
+        "zxy": kZXY,
+        "zyx": kZYX,
+    }
+
+    _orderToStr = {
+        kXYZ: "xyz",
+        kXZY: "xzy",
+        kYXZ: "yxz",
+        kYZX: "yzx",
+        kZXY: "zxy",
+        kZYX: "zyx",
+    }
+
     def __init__(self, *rot, order=kXYZ):
         """
         Initializes the rotation with given x, y, z angles and rotation order.
@@ -1650,7 +1884,7 @@ class MEulerRotation(object):
         """
         if not isinstance(scalar, (int, float)):
             return NotImplemented
-        return MEulerRotation(self.x * scalar, self.y * scalar, self.z * scalar, self.order)
+        return MEulerRotation(self.x * scalar, self.y * scalar, self.z * scalar, order=self.order)
 
     def __imul__(self, scalar):
         """
@@ -1768,6 +2002,9 @@ class MEulerRotation(object):
                 math.isclose(self.y, 0.0, abs_tol=self.kTolerance) and
                 math.isclose(self.z, 0.0, abs_tol=self.kTolerance))
 
+    def isEquivalent(self, other: 'MEulerRotation', tolerance: float = kTolerance) -> bool:
+        return self.__eq__(other)
+
     @staticmethod
     def computeBound(x, y, z):
         """
@@ -1781,7 +2018,6 @@ class MEulerRotation(object):
             return angle
 
         return (bound_angle(x), bound_angle(y), bound_angle(z))
-
 
     @staticmethod
     def computeBound(*args, **kwargs):
@@ -3787,25 +4023,34 @@ class MMatrix(object):
     4x4 matrix with double-precision elements.
     """
 
-    def __init__(self, matrix=None):
+
+    kTolerance = 1e-10  # Tolerance for floating point comparisons
+
+    def __init__(self, *args):
         """Initialize matrix with identity if no argument passed"""
-        if matrix is None:
-            # Initialize 4x4 identity matrix as nested list
-            self._matrix = [[1.0 if i == j else 0.0 for j in range(4)] for i in range(4)]
+        if not args:
+            self._matrix = np.identity(4, dtype=np.float64)
+        elif len(args) == 1:
+            array = args[0]
+            if isinstance(array, MMatrix):
+                array = np.array(args[0]._matrix, dtype=np.float64)
+            elif isinstance(array, (list, tuple)):
+                if len(array) != 4 or any(len(row) != 4 for row in array):
+                    raise ValueError("MMatrix must be initialized with a 4x4 array-like object")
+                array = np.array(array, dtype=np.float64)
+            self._matrix = array
         else:
-            # Copy input matrix
-            self._matrix = [[matrix[i][j] for j in range(4)] for i in range(4)]
+            arr = np.array(args, dtype=np.float64)
+            if arr.shape != (4, 4):
+                raise ValueError("MMatrix must be initialized with a 4x4 array-like object")
+            self._matrix = arr
 
     def __iter__(self):
-        return iter(self._matrix)
+        return iter([item for sublist in self._matrix.tolist() for item in sublist])
 
     def __add__(self, other):
         """Matrix addition"""
-        result = MMatrix()
-        for i in range(4):
-            for j in range(4):
-                result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j]
-        return result
+        return MMatrix(self._matrix + np.array(other._matrix))
 
     def __delitem__(self, index):
         """Delete row at index - not typically used for matrices"""
@@ -3815,11 +4060,7 @@ class MMatrix(object):
         """Compare matrices with tolerance"""
         if not isinstance(other, MMatrix):
             return False
-        for i in range(4):
-            for j in range(4):
-                if abs(self._matrix[i][j] - other._matrix[i][j]) > self.kTolerance:
-                    return False
-        return True
+        return np.allclose(self._matrix, other._matrix, atol=self.kTolerance)
 
     def __ge__(self, other):
         """Compare matrices by comparing elements"""
@@ -3831,7 +4072,7 @@ class MMatrix(object):
 
     def __getitem__(self, index):
         """Get matrix row"""
-        return self._matrix[index]
+        return self._matrix[index].tolist()
 
     def __gt__(self, other):
         """Greater than comparison"""
@@ -3843,22 +4084,22 @@ class MMatrix(object):
 
     def __iadd__(self, other):
         """In-place addition"""
-        for i in range(4):
-            for j in range(4):
-                self._matrix[i][j] += other._matrix[i][j]
+        self._matrix += np.array(other._matrix)
         return self
 
     def __imul__(self, other):
         """In-place multiplication"""
-        result = self * other
-        self._matrix = result._matrix
+        if isinstance(other, (int, float)):
+            self._matrix *= other
+        elif isinstance(other, MMatrix):
+            self._matrix = np.dot(self._matrix, other._matrix)
+        else:
+            raise TypeError("Unsupported operand type(s) for *=: 'MMatrix' and '{}'".format(type(other).__name__))
         return self
 
     def __isub__(self, other):
         """In-place subtraction"""
-        for i in range(4):
-            for j in range(4):
-                self._matrix[i][j] -= other._matrix[i][j]
+        self._matrix -= np.array(other._matrix)
         return self
 
     def __le__(self, other):
@@ -3870,8 +4111,7 @@ class MMatrix(object):
         return True
 
     def __len__(self):
-        """Return number of rows"""
-        return 4
+        return 16
 
     def __lt__(self, other):
         """Less than comparison"""
@@ -3883,19 +4123,12 @@ class MMatrix(object):
 
     def __mul__(self, other):
         """Matrix multiplication"""
-        result = MMatrix()
         if isinstance(other, (int, float)):
-            # Scalar multiplication
-            for i in range(4):
-                for j in range(4):
-                    result._matrix[i][j] = self._matrix[i][j] * other
-            return result
-            
-        # Matrix multiplication
-        for i in range(4):
-            for j in range(4):
-                result._matrix[i][j] = sum(self._matrix[i][k] * other._matrix[k][j] for k in range(4))
-        return result
+            return MMatrix(self._matrix * other)
+        elif isinstance(other, MMatrix):
+            return MMatrix(np.dot(self._matrix, other._matrix))
+        else:
+            raise TypeError("Unsupported operand type(s) for *: 'MMatrix' and '{}'".format(type(other).__name__))
 
     def __ne__(self, other):
         """Not equals"""
@@ -3907,125 +4140,92 @@ class MMatrix(object):
 
     def __rmul__(self, other):
         """Reverse multiplication"""
-        return self * other
+        return self.__mul__(other)
 
     def __rsub__(self, other):
         """Reverse subtraction"""
-        result = MMatrix()
-        for i in range(4):
-            for j in range(4):
-                result._matrix[i][j] = other._matrix[i][j] - self._matrix[i][j]
-        return result
+        return MMatrix(self._matrix - np.array(other._matrix))
 
     def __setitem__(self, index, value):
         """Set matrix row"""
-        self._matrix[index] = value
+        self.setElement(index // 4, index % 4, value)
 
     def __str__(self):
         """String representation"""
-        rows = []
-        for i in range(4):
-            row = ' '.join(f'{x:8.6f}' for x in self._matrix[i])
-            rows.append(f'[{row}]')
-        return '\n'.join(rows)
+        return "\n".join(
+            "[" + " ".join(f"{x:8.6f}" for x in row) + "]"
+            for row in self._matrix
+        )
+
+    def __repr__(self):
+        return f"MMatrix({self.__str__()})"
 
     def __sub__(self, other):
         """Matrix subtraction"""
-        result = MMatrix() 
-        for i in range(4):
-            for j in range(4):
-                result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j]
-        return result
+        return MMatrix(self._matrix - np.array(other._matrix))
 
     def adjoint(self):
         """Returns adjoint matrix"""
-        result = MMatrix()
-        # TODO: Implement proper adjoint calculation
-        return result
+        # Adjoint is the transpose of the cofactor matrix
+        cof = np.linalg.inv(self._matrix).T * np.linalg.det(self._matrix)
+        return MMatrix(cof)
 
     def det3x3(self):
         """3x3 determinant of upper left submatrix"""
-        m = self._matrix
-        return (m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
-                m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
-                m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]))
+        return float(np.linalg.det(self._matrix[:3, :3]))
 
     def det4x4(self):
         """4x4 determinant"""
-        m = self._matrix
-        return (m[0][0] * m[1][1] * m[2][2] * m[3][3] -
-                m[0][0] * m[1][1] * m[2][3] * m[3][2] -
-                m[0][0] * m[1][2] * m[2][1] * m[3][3] +
-                m[0][0] * m[1][2] * m[2][3] * m[3][1] +
-                m[0][0] * m[1][3] * m[2][1] * m[3][2] -
-                m[0][0] * m[1][3] * m[2][2] * m[3][1])
+        return float(np.linalg.det(self._matrix))
 
     def getElement(self, row, col):
         """Get element at row,col"""
-        return self._matrix[row][col]
+        return float(self._matrix[row, col])
 
     def homogenize(self):
         """Returns homogenized matrix"""
-        result = MMatrix(self)
-        w = self._matrix[3][3]
+        w = self._matrix[3, 3]
         if abs(w) > self.kTolerance:
-            for i in range(4):
-                for j in range(4):
-                    result._matrix[i][j] /= w
-        return result
+            return MMatrix(self._matrix / w)
+        return MMatrix(self._matrix)
 
     def inverse(self):
         """Returns inverse matrix"""
-        det = self.det4x4()
+        det = np.linalg.det(self._matrix)
         if abs(det) < self.kTolerance:
             raise ValueError("Matrix is singular")
-            
-        result = self.adjoint()
-        for i in range(4):
-            for j in range(4):
-                result._matrix[i][j] /= det
-                
-        return result
+        return MMatrix(np.linalg.inv(self._matrix))
 
     def isEquivalent(self, other, tolerance:float = 1e-10):
         """Test equivalence within tolerance"""
-        for i in range(4):
-            for j in range(4):
-                if abs(self._matrix[i][j] - other._matrix[i][j]) > tolerance:
-                    return False
-        return True
+        return np.allclose(self._matrix, other._matrix, atol=tolerance)
 
     def isSingular(self):
         """Test if matrix is singular"""
-        return abs(self.det4x4()) < self.kTolerance
+        return abs(np.linalg.det(self._matrix)) < self.kTolerance
 
     def setElement(self, row, col, value):
         """Set element at row,col"""
-        self._matrix[row][col] = value
+        self._matrix[row, col] = value
+        return self
 
     def setToIdentity(self):
         """Reset to identity matrix"""
-        for i in range(4):
-            for j in range(4):
-                self._matrix[i][j] = 1.0 if i == j else 0.0
+        self._matrix[:] = np.identity(4, dtype=np.float64)
+        return self
 
     def setToProduct(self, left, right):
         """Set this matrix to product of two others"""
-        self._matrix = (left * right)._matrix
+        self._matrix[:] = np.dot(left._matrix, right._matrix)
+        return self
 
     def transpose(self):
         """Returns transposed matrix"""
-        result = MMatrix()
-        for i in range(4):
-            for j in range(4):
-                result._matrix[i][j] = self._matrix[j][i]
-        return result
-
-    kTolerance = 1e-10
+        return MMatrix(self._matrix.T)
 
     @property
     def kIdentity(self):
-        return type(self)([[1.0 if i == j else 0.0 for j in range(4)] for i in range(4)])
+        return type(self)(np.identity(4, dtype=np.float64))
 
 
 class MUintArray(object):
@@ -12650,7 +12850,7 @@ class MObject(object):
         self._is_shape = False
         self._is_world = False
         self._cached_plugs: dict[str, MPlug] = {}
-        self._attributes = {}
+        self._attributes: dict[uuid.UUID, MObject] = {}
         self._callbacks: list[int] = []
 
         # Add finalizer object to trigger node deletion signal
@@ -12957,6 +13157,7 @@ class _trn_mx_identity():
     def __get__(self, obj, owner):
         return MTransformationMatrix(np.identity(4))
 
+
 class MTransformationMatrix(object):
     """
     Manipulate the individual components of a transformation.
@@ -12968,7 +13169,7 @@ class MTransformationMatrix(object):
         """
         if matrix is None:
             self._matrix = np.identity(4)
-        elif isinstance(matrix, MMatrix):
+        elif isinstance(matrix, (MMatrix, MTransformationMatrix)):
             self._matrix = np.array(matrix._matrix)
         elif isinstance(matrix, (list, tuple, np.ndarray)):
             arr = np.array(matrix)
@@ -15222,7 +15423,7 @@ class MDagPath(object):
             node (MObject, optional): Node to point to. Defaults to None.
         """
         super().__init__()
-        self._mobject_ls = []
+        self._mobject_ls: list[MObject] = []
 
         if dag_path is not None:
             self._mobject_ls = dag_path._mobject_ls
@@ -15275,11 +15476,11 @@ class MDagPath(object):
 
     def exclusiveMatrix(self) -> 'MMatrix':
         """Returns matrix for all transforms in path, excluding end object."""
-        return [MMatrix() for _ in range(len(self._mobject_ls) - 1)]
+        return _calc_node_world_matrix(self._node._parent)
 
     def exclusiveMatrixInverse(self) -> 'MMatrix':
         """Returns the inverse of exclusiveMatrix()."""
-        return [MMatrix().inverse for _ in range(len(self._mobject_ls) - 1)]
+        return self.exclusiveMatrix().inverse()
 
     def extendToShape(self, index: int = 0) -> 'MDagPath':
         """Extends path to specified shape node beneath the current transform.
@@ -15326,11 +15527,11 @@ class MDagPath(object):
 
     def inclusiveMatrix(self) -> 'MMatrix':
         """Returns matrix for all transforms in path, including end object."""
-        return MMatrix()
+        return _calc_node_world_matrix(self._node)
     
     def inclusiveMatrixInverse(self) -> 'MMatrix':
         """Returns inverse of inclusiveMatrix()."""
-        return MMatrix()
+        return self.inclusiveMatrix().inverse()
 
     def instanceNumber(self) -> int:
         """Returns instance number of path to end object."""
@@ -15454,7 +15655,6 @@ class MDagPath(object):
         
         Internal method to iterate through ancestors up to break_at node.
         """
-        from maya.api.OpenMaya import WORLD  # Avoid circular import
         break_at = break_at or WORLD
         current = self._node
 
@@ -15470,7 +15670,6 @@ class MDagPath(object):
         for nd in node._children:
             yield nd
             yield from self._iter_descendants(nd)
-
 
 class MFloatVector(object):
     """
@@ -22126,138 +22325,33 @@ class MFnDependencyNode(MFnBase):
         """
         Returns a plug for the given attribute.
         """
+        if attr_name in ('worldMatrix[0]', 'worldInverseMatrix[0]', 'parentInverseMatrix[0]', 'parentMatrix[0]'):
+            _calc_node_world_matrix(self._mobject)
 
-        # See if the attribute and/or the plug are already cached
-        attribute_id = _get_attribute_id(f'{self._mobject._name}.{attr_name}')
-        attribute = self._mobject._attributes.get(attribute_id)
-        mplug = self._mobject._cached_plugs.get(attribute_id)
-
-        # Fast return if both attr and mplug are cached
-        if attribute and mplug:
-            if mplug._attribute == attribute:
-                return mplug
-
-        # If only the plug is not cached, initialize a new one
-        elif attribute and not mplug:
-            return _initialize_mplug(self._mobject,
-                                     MPlug(),
-                                     attribute,
-                                     attribute_id,
-                                     want_network_plug=want_network_plug)
-
-        # Else, assume it's the first time the attribute is being accessed
-        mplug = MPlug()
-        mplug._owner = self._mobject
-        attribute = _initialize_attribute(attribute or MObject())
-
-        # Try to find attribute in list of known attributes based on the node type
-        node_type = _get_node_type(self._mobject)
-        properties, long_name, short_name = _get_attribute_properties(node_type, attr_name)
-
-        attribute_name = f'{self._mobject._name}.{long_name}'
-        attribute_id = _get_attribute_id(attribute_name)
-        mplug_id = attribute_id
-
-        # Try to find the mplug in the list of cached plugs. Just in case it was given the short name
-        cached_plug = self._mobject._cached_plugs.get(mplug_id)
-        if cached_plug:
-            return cached_plug
-
-        # Initialize the mplug and attribute
-        mplug._uuid = mplug_id
-        attribute._uuid = attribute_id
-        attribute._name = attribute_name
-        attribute._long_name = long_name
-        attribute._short_name = short_name
-        mplug._network_plug = want_network_plug
-
-        # Update the plugs & attrs cache
-        self._mobject._cached_plugs[mplug._uuid] = mplug
-        self._mobject._attributes[attribute._uuid] = attribute
-
-        # If no properties are found, return the mplug as is. Else, fill-in the mplug's attrs
-        if not properties:
-            return mplug
+        # Get attribute and mplug from the cache, else create them
+        attribute, properties = _attr_from_name_and_node(attr_name, self._mobject)
         
-        # Flag the attribute as a valid MObject and set it as the attribute of the mplug
-        attribute._alive = True
-        mplug._attribute = attribute
-        attribute._is_null = False
-        
-        # Fill-in maya native attributes based on dict info
-        attribute._is_array = properties['is_array']
-        attribute._is_compound = properties['is_compound']
-        attribute._is_element = properties['is_element']
+        # If found an attriute from the map of cached ones, initialize parent and children
+        if properties:
+            # For compound attributes, we need to initialize the children plugs
+            for child_attr_name in properties.get('children', ()):
+                # Might have to bite the bullet and initialize the children here
+                child_attr, _ = _attr_from_name_and_node(
+                    child_attr_name,
+                    self._mobject,
+                )
+                attribute._children.append(child_attr)
 
-        # Add type constant based on the type str
-        attr_type = getattr(MFn, properties['type_str'])
-        if attr_type not in attribute._api_type:
-            attribute._api_type.append(attr_type)
+            # And keep a reference to the parent attribute if it exists
+            if parent_attr_name := properties.get('parent_plug'):
+                parent_attr, _ = _attr_from_name_and_node(
+                    parent_attr_name,
+                    self._mobject,
+                )
+                attribute._parent = parent_attr
 
-        # Initialize the attribute based on its type
-        _MAYA_ATTRIBUTE_TYPES_TO_FN_MAP: dict[int, Type["MFnAttribute"]] = {
-            MFn.kNumericAttribute: MObject._init_numeric_fields,
-            MFn.kUnitAttribute: MObject._init_unit_fields,
-            MFn.kDoubleLinearAttribute: MObject._init_unit_fields,
-            MFn.kFloatLinearAttribute: MObject._init_unit_fields,
-            MFn.kDoubleAngleAttribute: MObject._init_unit_fields,
-            MFn.kFloatAngleAttribute: MObject._init_unit_fields,
-            MFn.kTypedAttribute: MObject._init_typed_fields,
-            MFn.kMatrixAttribute: MObject._init_matrix_fields,
-            MFn.kFloatMatrixAttribute: MObject._init_matrix_fields,
-            MFn.kMessageAttribute: None,
-            MFn.kEnumAttribute: MObject._init_enum_fields,
-        }
-        
-        intializer = _MAYA_ATTRIBUTE_TYPES_TO_FN_MAP.get(attr_type)
-        if intializer:
-            intializer(attribute)
-        
-        # Only for numeric attributes  ( and Enum )
-        if properties.get('numeric_type') is not None:
-            attribute._numeric_type = properties['numeric_type']
-        
-        if properties.get('default_value') is not None:
-            attribute._default = properties['default_value']
-            attribute._value = properties['default_value']
 
-        if properties.get('min_value') is not None:
-            attribute._min = properties['min_value']
-
-        if properties.get('max_value') is not None:
-            attribute._max = properties['max_value']
-            
-        # For Unit Attributes like distance, angle, time...
-        if properties.get('unit_type') is not None:
-            attribute._unit_type = properties['unit_type']
-
-        # For Typed Attribtues like Enum, String, Matrix...
-        if properties.get('typed_type') is not None:
-            attribute._typed_attr_type = properties['typed_type']
-            if properties['typed_type'] == MFnData.kMatrix:
-                attribute._init_matrix_fields()
-
-        # Only for compound attributes
-        if properties.get('children') is not None:
-
-            # Might have to bite the bullet and initialize the children here
-            for child in properties['children']:
-                child_plug = self.findPlug(child, want_network_plug)
-                
-                if child_plug not in attribute._children:
-                    attribute._children.append(child_plug._attribute)
-                if child_plug not in mplug._children_plugs:
-                    mplug._children_plugs.append(child_plug)
-        
-        # Add reference to parent name in case is needed later
-        if parent_name := properties.get('parent_plug'):
-            if not mplug._parent and not attribute._parent:
-                parent_plug = self.findPlug(parent_name, want_network_plug)
-                mplug._parent = parent_plug
-                mplug._parent_name = parent_name
-                attribute._parent = parent_plug._attribute
-                attribute._parent_name = parent_name
-
+        mplug = _mplug_from_attr_and_node(attribute, self._mobject)
         return mplug
 
     def getAffectedAttributes(*args, **kwargs):
@@ -25284,23 +25378,23 @@ class MFnTransform(MFnDagNode):
         """
         return super().create(MTypeId(0x5846524d), parent=parent)
 
-    def enableLimit(*args, **kwargs):
+    def enableLimit(self, limitType: int, enable: bool):
         """
         Enables or disables a specified limit type.
         """
-        pass
+        ...
 
-    def isLimited(*args, **kwargs):
+    def isLimited(self, limitType: int) -> bool:
         """
         Returns True if the specified limit type is enabled.
         """
-        pass
+        return False
 
-    def limitValue(*args, **kwargs):
+    def limitValue(self, limitType: int) -> float:
         """
         Returns the value of the specified limit.
         """
-        pass
+        return 0.0
 
     def resetFromRestPosition(*args, **kwargs):
         """
@@ -25386,7 +25480,7 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def setLimit(*args, **kwargs):
+    def setLimit(self, limitType: int, value: float):
         """
         Sets the value of the specified limit.
         """
@@ -25458,11 +25552,13 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def setTransformation(*args, **kwargs):
+    def setTransformation(self, transformation: 'MTransformationMatrix'):
         """
         Sets the transform's attribute values to represent the given transformation matrix.
         """
-        pass
+        if isinstance(transformation, MTransformationMatrix):
+            _transform_matrix_to_plugs(self._mobject, transformation)
+        return self
 
     def setTranslation(*args, **kwargs):
         """
@@ -25482,11 +25578,11 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def transformation(*args, **kwargs):
+    def transformation(self) -> 'MTransformationMatrix':
         """
         Returns the transformation matrix represented by this transform.
         """
-        pass
+        return _transform_plugs_to_matrix(self._mobject)
 
     def translateBy(*args, **kwargs):
         """
