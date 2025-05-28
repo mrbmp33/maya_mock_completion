@@ -22262,6 +22262,7 @@ class MFnDependencyNode(MFnBase):
 
         # For compound attrs, add the children in the map as well
         for child in attribute._children:
+            child._owner = self._mobject
             self._mobject._attributes[_get_attribute_id(f'{self._mobject._name}.{child._long_name}')] = child
 
         return self
