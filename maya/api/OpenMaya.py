@@ -13616,11 +13616,22 @@ class MTransformationMatrix(object):
         """
         if len(seq) != 3:
             raise ValueError("Scale must be a sequence of 3 floats")
-        self._scale = list(seq)
-        S = np.identity(4)
-        S[0, 0], S[1, 1], S[2, 2] = self._scale
-        self._matrix = S @ self._matrix
-        self._decompose()
+        
+        # Extract current axes (assumed to be the rotated & scaled basis vectors)
+        x_axis = self._matrix[:3, 0]
+        y_axis = self._matrix[:3, 1]
+        z_axis = self._matrix[:3, 2]
+
+        # Normalize to remove scale
+        x_axis = x_axis / np.linalg.norm(x_axis) if np.linalg.norm(x_axis) != 0 else x_axis
+        y_axis = y_axis / np.linalg.norm(y_axis) if np.linalg.norm(y_axis) != 0 else y_axis
+        z_axis = z_axis / np.linalg.norm(z_axis) if np.linalg.norm(z_axis) != 0 else z_axis
+
+        # Apply new scale
+        self._matrix[:3, 0] = x_axis * seq[0]
+        self._matrix[:3, 1] = y_axis * seq[1]
+        self._matrix[:3, 2] = z_axis * seq[2]
+
         return self
 
     def setScalePivot(self, pivot: MPoint, space: int, balance: bool) -> 'MTransformationMatrix':
