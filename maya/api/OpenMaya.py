@@ -2437,6 +2437,9 @@ class MDGModifier(object):
                 attribute: 'MObject' = action[2]
                 attr_id = _get_attribute_id(f'{node._name}.{attribute._long_name}')
                 node._attributes[attr_id] = attribute
+                attribute._owner = weakref.proxy(node)
+                for child in attribute._children:
+                    child._owner = weakref.proxy(node)
             
             elif action[0] == 'removeAttribute':
                 node: 'MObject' = action[1]
@@ -22256,13 +22259,13 @@ class MFnDependencyNode(MFnBase):
 
         assert attribute._alive is True, 'Attribute MObject must be valid to be added to a node.'
         attribute._dynamic = True
-        attribute._owner = self._mobject
+        attribute._owner = weakref.proxy(self._mobject)
         dict_key = _get_attribute_id(f'{self._mobject._name}.{attribute._long_name}')
         self._mobject._attributes[dict_key] = attribute
 
         # For compound attrs, add the children in the map as well
         for child in attribute._children:
-            child._owner = self._mobject
+            child._owner = weakref.proxy(self._mobject)
             self._mobject._attributes[_get_attribute_id(f'{self._mobject._name}.{child._long_name}')] = child
 
         return self
