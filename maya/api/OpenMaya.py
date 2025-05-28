@@ -348,7 +348,7 @@ def _raise_if_invalid_mobject_decorator(func):
     return func_wrapper
 
 
-def _transform_plugs_to_matrix(mobject: MObject) -> np.array:
+def _transform_plugs_to_matrix(mobject: MObject) -> np.ndarray:
     """Reads the current values of the translation, rotation and scale plugs and sets the matrix."""
     
     # Extract attribute values from the MObject
@@ -385,49 +385,13 @@ def _transform_plugs_to_matrix(mobject: MObject) -> np.array:
 
     # Resolve rotation order
     rot_order_plug = fn.findPlug('rotateOrder', want_network_plug=False)
-    rotation_order = rot_order_plug._attribute._value
-    if rotation_order is None:
-        rotation_order = MEulerRotation.kXYZ
+    rotation_order = rot_order_plug._attribute._value or MEulerRotation.kXYZ
     rotation_order = MEulerRotation._orderToStr.get(rotation_order, 'xyz')
 
-    # Translation
-    T = np.array([
-        [1, 0, 0, tx],
-        [0, 1, 0, ty],
-        [0, 0, 1, tz],
-        [0, 0, 0, 1]
-    ], dtype=np.float64)
-
-    # Scale
-    S = np.diag([sx, sy, sz, 1])
-
-    # Rotation matrices
-    Rx = np.array([[1, 0, 0, 0],
-                   [0, math.cos(rx), -math.sin(rx), 0],
-                   [0, math.sin(rx),  math.cos(rx), 0],
-                   [0, 0, 0, 1]], dtype=np.float64)
-
-    Ry = np.array([[ math.cos(ry), 0, math.sin(ry), 0],
-                   [0, 1, 0, 0],
-                   [-math.sin(ry), 0, math.cos(ry), 0],
-                   [0, 0, 0, 1]], dtype=np.float64)
-
-    Rz = np.array([[math.cos(rz), -math.sin(rz), 0, 0],
-                   [math.sin(rz),  math.cos(rz), 0, 0],
-                   [0, 0, 1, 0],
-                   [0, 0, 0, 1]], dtype=np.float64)
-
-    # Compose based on rotation order
-    rotation_order = rotation_order.lower()
-    Rmap = {'x': Rx, 'y': Ry, 'z': Rz}
-    R = Rmap[rotation_order[2]] @ Rmap[rotation_order[1]] @ Rmap[rotation_order[0]]
-    M = T @ R @ S
-
-    mobject._local_matrix = M
-    return M
+    return _compose_matrix((tx, ty, tz), (rx, ry, rz), (sx, sy, sz), rotation_order=rotation_order)
 
 
-def _transform_matrix_to_plugs(mobject: "MObject", matrix: 'MMatrix'):
+def _transform_matrix_to_plugs(mobject: "MObject", matrix: np.ndarray):
     """Sets the translation, rotation and scale plugs based on the given matrix."""
 
     as_depend_nd = MFnDependencyNode(mobject)
@@ -440,10 +404,11 @@ def _transform_matrix_to_plugs(mobject: "MObject", matrix: 'MMatrix'):
     
     rot_order_str = MEulerRotation._orderToStr[rot_order]
 
-    translation, rotation, scale = _decompose_matrix(matrix._matrix)
+    translation, rotation, scale = _decompose_matrix(matrix, rotation_order=rot_order_str)
     tx, ty, tz = translation
-    rx, ry, rz = rotation.as_euler(rot_order_str)
+    rx, ry, rz = rotation
     sx, sy, sz = scale
+
     # Set the plugs with the decomposed values
     attr_names = (
         'translateX', 'translateY', 'translateZ',
@@ -456,25 +421,51 @@ def _transform_matrix_to_plugs(mobject: "MObject", matrix: 'MMatrix'):
         plug._attribute._value = value
 
 
-def _decompose_matrix(matrix: np.ndarray):
-    assert matrix.shape == (4, 4), "Input must be a 4x4 matrix"
-    
+def _compose_matrix(translation: tuple, rotation_euler: tuple, scale: tuple, rotation_order:str = 'xyz'):
+    tx, ty, tz = translation
+    rx, ry, rz = rotation_euler
+    sx, sy, sz = scale
+
+    # Translation matrix
+    T = np.array([
+        [1, 0, 0, tx],
+        [0, 1, 0, ty],
+        [0, 0, 1, tz],
+        [0, 0, 0, 1]
+    ], dtype=np.float64)
+
+    # Scale matrix
+    S = np.diag([sx, sy, sz, 1])
+
+    # Rotation matrix using scipy, respecting order
+    rot3x3 = R.from_euler(rotation_order, [rx, ry, rz], degrees=False).as_matrix()
+    Rm = np.identity(4)
+    Rm[:3, :3] = rot3x3
+
+    # Maya-style: T @ R @ S
+    M = T @ Rm @ S
+    return M
+
+
+def _decompose_matrix(matrix: np.ndarray, rotation_order: str = 'xyz') -> Tuple[np.ndarray, R, np.ndarray]:    
+    """
+    Decompose a 4x4 transformation matrix into translation, rotation (Euler), and scale.
+    """
     # Extract translation
-    translation = matrix[:3, 3]
+    translation = matrix[:3, 3].copy()
 
-    # Extract 3x3 upper-left matrix
-    M = matrix[:3, :3]
+    # Extract scale by measuring lengths of the rotated/scaled axes
+    M3x3 = matrix[:3, :3]
+    scale = np.linalg.norm(M3x3, axis=0)
 
-    # Extract scale (length of column vectors)
-    scale = np.linalg.norm(M, axis=0)
+    # Normalize axes to isolate rotation
+    norm_matrix = M3x3 / scale
 
-    # Normalize the matrix to extract pure rotation
-    norm_matrix = M / scale
-
-    # Create a scipy Rotation object
+    # Use scipy to extract rotation in the same order
     rotation = R.from_matrix(norm_matrix)
+    euler_angles = rotation.as_euler(rotation_order, degrees=False)
 
-    return translation, rotation, scale
+    return translation, euler_angles, scale
 
 
 def _calc_node_world_matrix(mobject: 'MObject') -> np.ndarray:
@@ -501,6 +492,15 @@ def _calc_node_world_matrix(mobject: 'MObject') -> np.ndarray:
         nd._world_matrix = world_mx
 
     return mobject._world_matrix
+
+
+def _get_parent_world_matrix(mobject: 'MObject') -> np.ndarray:
+    """Returns the world matrix of the parent node, or the node itself if it has no parent."""
+    _calc_node_world_matrix(mobject)
+    if mobject._parent:
+        return mobject._parent._world_matrix
+    else:
+        return np.eye(4, dtype=np.float64)
 
 
 # ==== Signals ====
@@ -1855,6 +1855,10 @@ class MEulerRotation(object):
             x, y, z = rot
         elif len(rot) == 1:
             x, y, z = rot[0]
+        elif len(rot) == 2:
+            axis = rot[0]
+            order = rot[1]
+            x, y, z = axis[0], axis[1], axis[2]
             
         self.x = x
         self.y = y
@@ -1965,7 +1969,7 @@ class MEulerRotation(object):
         """
         Returns a string representation of the rotation.
         """
-        return f"MEulerRotation(x={self.x}, y={self.y}, z={self.z}, order={self.order})"
+        return f"MEulerRotation(x={self.x}, y={self.y}, z={self.z}, order={MEulerRotation._orderToStr[self.order]})"
 
     def asVector(self):
         """
@@ -1977,15 +1981,17 @@ class MEulerRotation(object):
         """
         Returns the rotation as an equivalent 3x3 matrix.
         """
-        # Placeholder: Actual matrix computation should depend on the rotation order.
-        return [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+        r = R.from_euler(self._orderToStr.get(self.order, 'xyz'), [self.x, self.y, self.z])
+        M = np.identity(4)
+        M[:3, :3] = r.as_matrix()
+        return MMatrix(M)
 
-    def asQuaternion(self):
+    def asQuaternion(self) -> MQuaternion:
         """
         Returns the rotation as an equivalent quaternion.
         """
         # Placeholder: Actual quaternion computation is needed here.
-        return (0, 0, 0, 1)
+        return MQuaternion(0, 0, 0, 1)
 
     def bound(self):
         """
@@ -2067,6 +2073,32 @@ class MEulerRotation(object):
         Extracts a rotation from a matrix.
         """
         pass
+
+    @staticmethod
+    def _from_matrix(mat: np.array, order: int = kXYZ) -> 'MEulerRotation':
+        assert len(mat.flatten()) == 9, "Expected 3x3 rotation matrix"
+        order = MEulerRotation._orderToStr.get(order, order)
+        order = order.lower()
+
+        def clamp(val, min_val, max_val):
+            return max(min(val, max_val), min_val)
+
+        if order == 'xyz':
+            sy = math.sqrt(mat[0, 0] ** 2 + mat[1, 0] ** 2)
+            singular = sy < 1e-6
+
+            if not singular:
+                x = math.atan2(mat[2, 1], mat[2, 2])
+                y = math.atan2(-mat[2, 0], sy)
+                z = math.atan2(mat[1, 0], mat[0, 0])
+            else:
+                x = math.atan2(-mat[1, 2], mat[1, 1])
+                y = math.atan2(-mat[2, 0], sy)
+                z = 0
+        else:
+            raise NotImplementedError(f"Rotation order '{order}' not implemented")
+
+        return MEulerRotation(x, y, z, order=order)
 
     x = None
 
@@ -4151,7 +4183,9 @@ class MMatrix(object):
         if isinstance(other, (int, float)):
             return MMatrix(self._matrix * other)
         elif isinstance(other, MMatrix):
-            return MMatrix(np.dot(self._matrix, other._matrix))
+            # print(self._matrix)
+            # print(other._matrix)
+            return MMatrix((self._matrix.T @ other._matrix.T).T)
         else:
             raise TypeError("Unsupported operand type(s) for *: 'MMatrix' and '{}'".format(type(other).__name__))
 
@@ -12887,8 +12921,8 @@ class MObject(object):
             self._init_attribute_fields()
 
         # Transform-specific properties
-        self._local_matrix: MMatrix = MMatrix()
-        self._world_matrix: MMatrix = MMatrix()
+        self._local_matrix: np.nd_array = np.identity(4, dtype=np.float64)
+        self._world_matrix: np.nd_array = np.identity(4, dtype=np.float64)
 
     def _init_attribute_fields(self):
         self._owner: 'MObject' = None
@@ -13211,58 +13245,8 @@ class MTransformationMatrix(object):
                 raise ValueError("Matrix must be 4x4")
         else:
             raise TypeError("Unsupported type for MTransformationMatrix initialization")
-        # Decompose matrix into components
-        self._decompose()
-
-    def _decompose(self):
-        """Decompose the matrix into translation, rotation, scale, shear."""
-        m = self._matrix
-        # Translation
-        self._translation = m[:3, 3].copy()
-        # Extract scale and shear from upper 3x3
-        M = m[:3, :3]
-        sx = np.linalg.norm(M[:, 0])
-        sy = np.linalg.norm(M[:, 1])
-        sz = np.linalg.norm(M[:, 2])
-        self._scale = [sx, sy, sz]
-        # Remove scale from rotation/shear
-        norm_matrix = np.zeros((3, 3))
-        norm_matrix[:, 0] = M[:, 0] / (sx if sx != 0 else 1)
-        norm_matrix[:, 1] = M[:, 1] / (sy if sy != 0 else 1)
-        norm_matrix[:, 2] = M[:, 2] / (sz if sz != 0 else 1)
-        # Shear
-        self._shear = [
-            np.dot(norm_matrix[:, 0], norm_matrix[:, 1]),
-            np.dot(norm_matrix[:, 0], norm_matrix[:, 2]),
-            np.dot(norm_matrix[:, 1], norm_matrix[:, 2])
-        ]
-        # Remove shear for pure rotation
-        R = norm_matrix.copy()
-        R[:, 1] -= self._shear[0] * R[:, 0]
-        R[:, 2] -= self._shear[1] * R[:, 0] + self._shear[2] * R[:, 1]
-        # Euler angles (XYZ order)
-        self._rotation = self._matrix_to_euler(R)
-        self._rotation_order = self.kXYZ
-        self._rotate_pivot = np.zeros(3)
-        self._rotate_pivot_translation = np.zeros(3)
-        self._scale_pivot = np.zeros(3)
-        self._scale_pivot_translation = np.zeros(3)
-        self._rotation_orientation = [0.0, 0.0, 0.0, 1.0]  # Quaternion (x, y, z, w)
-
-    def _matrix_to_euler(self, R):
-        """Convert rotation matrix to Euler angles (XYZ order)."""
-        # Assumes R is a 3x3 rotation matrix
-        sy = math.sqrt(R[0, 0] ** 2 + R[1, 0] ** 2)
-        singular = sy < 1e-6
-        if not singular:
-            x = math.atan2(R[2, 1], R[2, 2])
-            y = math.atan2(-R[2, 0], sy)
-            z = math.atan2(R[1, 0], R[0, 0])
-        else:
-            x = math.atan2(-R[1, 2], R[1, 1])
-            y = math.atan2(-R[2, 0], sy)
-            z = 0
-        return [x, y, z]
+        
+        self._rotation_order = MTransformationMatrix.kXYZ
 
     def __eq__(self, other):
         if not isinstance(other, MTransformationMatrix):
@@ -13282,25 +13266,21 @@ class MTransformationMatrix(object):
 
     def asRotateMatrix(self):
         """Return the rotation part as an MMatrix."""
-        R = np.identity(4)
-        # Remove scale and shear
-        M = self._matrix[:3, :3]
-        sx, sy, sz = self._scale
-        norm_matrix = np.zeros((3, 3))
-        norm_matrix[:, 0] = M[:, 0] / (sx if sx != 0 else 1)
-        norm_matrix[:, 1] = M[:, 1] / (sy if sy != 0 else 1)
-        norm_matrix[:, 2] = M[:, 2] / (sz if sz != 0 else 1)
-        R[:3, :3] = norm_matrix
-        return MMatrix(R)
+        RS = self._matrix[:3, :3]  # rotation + scale
+        scale = np.linalg.norm(RS, axis=0)
+        r = RS / scale  # normalize to get rotation matrix
+        
+        rot4 = np.identity(4)
+        rot4[:3, :3] = r
+        return MMatrix(rot4)
 
     def asScaleMatrix(self):
         """Return the scale/shear part as an MMatrix."""
+        RS = self._matrix[:3, :3]  # rotation + scale
+        scale = np.linalg.norm(RS, axis=0)
         S = np.identity(4)
-        sx, sy, sz = self._scale
-        S[0, 0] = sx
-        S[1, 1] = sy
-        S[2, 2] = sz
-        # Shear not implemented in this simple version
+        S[:3, :3] = np.diag(scale)  # scale matrix
+
         return MMatrix(S)
 
     def isEquivalent(self, other, tolerance: float=None) -> bool:
@@ -13430,7 +13410,7 @@ class MTransformationMatrix(object):
     @overload
     def rotation(self, asQuaternion: bool = False) -> MEulerRotation: ...
     
-    def rotation(self, asQuaternion=False):
+    def rotation(self, asQuaternion=False) -> MEulerRotation | MQuaternion:
         """Returns the transformation's rotation component as either an Euler rotation or a quaternion.
         
         Parameters:
@@ -13439,10 +13419,19 @@ class MTransformationMatrix(object):
         Returns:
             MEulerRotation | MQuaternion: The rotation in the requested format.
         """
+        # print("my matrix", self._matrix)
+        
+        RS = self._matrix[:3, :3]  # rotation + scale
+        scale = np.linalg.norm(RS, axis=0)
+        r = RS / scale  # normalize to get rotation matrix  # Convert to scipy Rotation object
+        RM = R.from_matrix(r)
+        
+        rotation_order = MTransformationMatrix._orderToStr[self._rotation_order]
+        angles = RM.as_euler(rotation_order, degrees=False)
+        ret = MEulerRotation(*angles, order=MEulerRotation._strToOrder[rotation_order])
         if asQuaternion:
-            # Placeholder: return as (x, y, z, w)
-            return self._rotation_orientation
-        return self._rotation.copy()
+            ret = ret.asQuaternion()
+        return ret
 
     def rotationComponents(self, asQuaternion=False) -> list:
         """Return the four rotation components (x, y, z, w).
@@ -13493,7 +13482,7 @@ class MTransformationMatrix(object):
             # Here, we just return the local scale as a mock.
             return self._scale.copy()
         # For object/pre-transform, just return local scale
-        return self._scale.copy()
+        return self._matrix[:3, :3].diagonal().tolist()
 
     def scaleBy(self, scale:list | tuple, space=None) -> 'MTransformationMatrix':
         """Multiply the scale by the given values.
@@ -13564,12 +13553,14 @@ class MTransformationMatrix(object):
         Returns:
             MTransformationMatrix: Reference to self.
         """
-        if hasattr(rot, "asMatrix"):
-            rot_matrix = np.array(rot.asMatrix())
-        else:
-            raise TypeError("Expected MEulerRotation or MQuaternion with asMatrix()")
-        self._matrix[:3, :3] = rot_matrix
-        self._decompose()
+        if not isinstance(rot, MEulerRotation):
+            raise NotImplementedError
+        RS = self._matrix[:3, :3]  # rotation + scale
+        scale = np.linalg.norm(RS, axis=0)
+        
+        RM = rot.asMatrix()._matrix  # Convert to rotation matrix
+        RSM = RM[:3, :3] @ np.diag(scale)  # Apply scale to rotation matrix
+        self._matrix[:3, :3] = RSM  # Set the rotation part of the matrix
         return self
 
     def setRotationComponents(self, seq: list | tuple) -> 'MTransformationMatrix':
@@ -13743,8 +13734,8 @@ class MTransformationMatrix(object):
         Returns:
             MVector: The translation vector in the requested space.
         """
-        return self._translation.copy()
-
+        return MVector(self._matrix[:3, 3])
+    
     kIdentity = _trn_mx_identity()
     kInvalid = 0
     kLast = 7
@@ -13755,6 +13746,22 @@ class MTransformationMatrix(object):
     kYZX = 2
     kZXY = 3
     kZYX = 6
+    _strToOrder = {
+        'xyz': kXYZ,
+        'xzy': kXZY,
+        'yxz': kYXZ,
+        'yzx': kYZX,
+        'zxy': kZXY,
+        'zyx': kZYX
+    }
+    _orderToStr = {
+        kXYZ: 'xyz',
+        kXZY: 'xzy',
+        kYXZ: 'yxz',
+        kYZX: 'yzx',
+        kZXY: 'zxy',
+        kZYX: 'zyx'
+    }
 
 
 class MPointArray(object):
@@ -15559,7 +15566,7 @@ class MDagPath(object):
 
     def inclusiveMatrix(self) -> 'MMatrix':
         """Returns matrix for all transforms in path, including end object."""
-        return _calc_node_world_matrix(self._node)
+        return MMatrix(_calc_node_world_matrix(self._node))
     
     def inclusiveMatrixInverse(self) -> 'MMatrix':
         """Returns inverse of inclusiveMatrix()."""
@@ -22380,24 +22387,38 @@ class MFnDependencyNode(MFnBase):
         attribute, properties = _attr_from_name_and_node(attr_name, self._mobject)
         
         # If found an attriute from the map of cached ones, initialize parent and children
-        if properties:
-            # For compound attributes, we need to initialize the children plugs
-            for child_attr_name in properties.get('children', ()):
-                # Might have to bite the bullet and initialize the children here
+        if properties is None:
+            properties = attribute_properties.ATTRIBUTES_PROPERTIES.get(
+                _get_node_type(attribute._owner), {}).get(
+                attribute._long_name, {}
+            )
+            
+        # For compound attributes, we need to initialize the children plugs
+        for child_attr_name in properties.get('children', ()):
+            attr_key = _get_attribute_id(f'{self._mobject._name}.{child_attr_name}')
+            child_attr = self._mobject._attributes.get(attr_key)
+            if child_attr is None:
+                # If the attribute is not in the cache, we need to create it
                 child_attr, _ = _attr_from_name_and_node(
                     child_attr_name,
                     self._mobject,
                 )
+            child_attr._parent = attribute
+            if child_attr not in attribute._children:
                 attribute._children.append(child_attr)
 
-            # And keep a reference to the parent attribute if it exists
-            if parent_attr_name := properties.get('parent_plug'):
+        # And keep a reference to the parent attribute if it exists
+        if parent_attr_name := properties.get('parent_plug'):
+            attr_key = _get_attribute_id(f'{self._mobject._name}.{parent_attr_name}')
+            parent_attr = self._mobject._attributes.get(attr_key)
+            if parent_attr is None:
                 parent_attr, _ = _attr_from_name_and_node(
                     parent_attr_name,
                     self._mobject,
                 )
                 attribute._parent = parent_attr
-
+                if attribute not in parent_attr._children:
+                    parent_attr._children.append(attribute)
 
         mplug = _mplug_from_attr_and_node(attribute, self._mobject)
         return mplug
@@ -23834,13 +23855,16 @@ class MFnDagNode(MFnDependencyNode):
         WORLD._children.append(node)
         return self
 
-    def removeChildAt(*args, **kwargs):
+    def removeChildAt(self, index: int) -> 'MFnDagNode':
         """
         removeChildAt(index) -> self
 
         Removes the child, specified by index, reparenting it under the world.
         """
-        pass
+        nd = self._mobject._children.pop(index)
+        nd._parent = WORLD
+        WORLD._children.append(nd)
+        return self
 
     def setObject(self, mobject: Union['MObject', 'MDagPath']):
         """
@@ -23856,13 +23880,13 @@ class MFnDagNode(MFnDependencyNode):
             self._dag_path = _initialize_dag_path_from_mobject(mobject)
         return self
 
-    def transformationMatrix(*args, **kwargs):
+    def transformationMatrix(self) -> 'MMatrix':
         """
         transformationMatrix() -> MMatrix
 
         Returns the object space transformation matrix for this DAG node.
         """
-        pass
+        return MMatrix(_transform_plugs_to_matrix(self._mobject))
 
     boundingBox = None
 
@@ -25335,8 +25359,12 @@ class MFnMatrixData(MFnData):
         """Initialize self.  See help(type(self)) for accurate signature."""
         super().__init__(*args, **kwargs)
 
+        self._dep_fn = None
+
         # If initialized using a matrix object, most likely depends on transform plug values
         if MFn.kAttribute in self._mobject._api_type and hasattr(self._mobject, '_long_name') is True:
+
+            self._dep_fn = MFnDependencyNode(self._mobject._owner)
             
             match self._mobject._long_name:
                 case 'worldMatrix[0]':
@@ -25359,7 +25387,6 @@ class MFnMatrixData(MFnData):
                     self._mobject._matrix = np.linalg.inv(M)
                 case _:
                     ...
-
 
     def create(self, matrix: Union['MObject', 'MMatrix', 'MTransformationMatrix']) -> 'MObject':
         """
@@ -25405,7 +25432,13 @@ class MFnMatrixData(MFnData):
         
         Returns: Matrix data as an MTransformationMatrix
         """
-        return MTransformationMatrix(self._mobject._matrix)
+        tmx = MTransformationMatrix(self._mobject._matrix)
+        if self._dep_fn:
+            euler_rot_order = self._dep_fn.findPlug('rotateOrder', False)._attribute._value or MEulerRotation.kXYZ
+            tmx._rotation_order = MTransformationMatrix._strToOrder(
+                MEulerRotation._orderToStr[euler_rot_order]
+            )
+        return tmx
 
     def isTransformation(self) -> bool:
         """
@@ -25502,11 +25535,29 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def rotation(*args, **kwargs):
+    def rotation(self, space: int = MSpace.kTransform, asQuaternion=False) -> Union['MEulerRotation', 'MQuaternion']:
         """
         Returns the transform's rotation as an MEulerRotation or MQuaternion.
         """
-        pass
+        order = self.findPlug('rotateOrder', False)._attribute._value or MEulerRotation.kXYZ
+
+        if space == MSpace.kWorld and asQuaternion:
+            M = _calc_node_world_matrix(self._mobject)
+            _, R, _ = _decompose_matrix(M)
+            rx, ry, rz = R.as_euler(MEulerRotation._orderToStr)
+        elif space == MSpace.kWorld and not asQuaternion:
+            raise NotImplementedError("World space rotation as MEulerRotation is not supported.")
+        else:
+            rx = self.findPlug('rotateX', False).asMAngle().asRadians()
+            ry = self.findPlug('rotateY', False).asMAngle().asRadians()
+            rz = self.findPlug('rotateZ', False).asMAngle().asRadians()
+        
+        eu = MEulerRotation(
+            rx, ry, rz,
+            order=order
+        )
+        return eu if not asQuaternion else eu.asQuaternion()
+
 
     def rotationComponents(*args, **kwargs):
         """
@@ -25574,11 +25625,44 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def setRotation(*args, **kwargs):
+    def setRotation(self, rotation: Union['MEulerRotation', 'MQuaternion'], space: int = MSpace.kTransform):
         """
         Sets the transform's rotation using an MEulerRotation or MQuaternion.
         """
-        pass
+        if isinstance(rotation, MQuaternion):
+            # Convert quaternion to Euler (assuming default Maya rotation order: xyz)
+            rotation = rotation.asEulerRotation()
+
+        if not isinstance(rotation, MEulerRotation):
+            raise TypeError("Rotation must be MEulerRotation or MQuaternion.")
+
+        # Optional: store the rotation order if you support it
+        self.findPlug('rotateOrder', False).setInt(rotation.order)
+
+        # If world space, convert the world-space rotation into local-space Euler angles
+        if space == MSpace.kWorld:
+            parent_world_matrix = _get_parent_world_matrix(self._mobject)
+            parent_rot_matrix = parent_world_matrix[:3, :3]
+
+            # Convert Euler to rotation matrix
+            world_rot_matrix = np.array(rotation.asMatrix())  # Get 3x3
+
+            # Compute local rotation matrix:
+            local_rot_matrix = np.linalg.inv(parent_rot_matrix) @ world_rot_matrix
+
+            # Convert matrix back to Euler angles (respecting rotation order)
+            local_rotation = MEulerRotation._from_matrix(local_rot_matrix, rotation.order)
+            self.findPlug('rotateX', False).setFloat(local_rotation.x)
+            self.findPlug('rotateY', False).setFloat(local_rotation.y)
+            self.findPlug('rotateZ', False).setFloat(local_rotation.z)
+        else:
+            # Set the rotation directly in local space
+            self.findPlug('rotateX', False).setFloat(rotation.x)
+            self.findPlug('rotateY', False).setFloat(rotation.y)
+            self.findPlug('rotateZ', False).setFloat(rotation.z)
+
+        _calc_node_world_matrix(self._mobject)  # Update world matrix after setting rotation
+        return self
 
     def setRotationComponents(*args, **kwargs):
         """
@@ -25592,11 +25676,23 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def setScale(*args, **kwargs):
+    def setScale(self, scale: Union[tuple, list, 'MVector']):
         """
         Sets the transform's scale components.
         """
-        pass
+        if isinstance(scale, (tuple, list)):
+            if len(scale) != 3:
+                raise ValueError("Scale must be a sequence of three floats (x, y, z).")
+            self.findPlug('scaleX', False).setFloat(scale[0])
+            self.findPlug('scaleY', False).setFloat(scale[1])
+            self.findPlug('scaleZ', False).setFloat(scale[2])
+        elif isinstance(scale, MVector):
+            self.findPlug('scaleX', False).setFloat(scale.x)
+            self.findPlug('scaleY', False).setFloat(scale.y)
+            self.findPlug('scaleZ', False).setFloat(scale.z)
+        else:
+            raise TypeError("Scale must be a sequence of three floats or an MVector.")
+        return self
 
     def setScalePivot(*args, **kwargs):
         """
@@ -25621,14 +25717,33 @@ class MFnTransform(MFnDagNode):
         Sets the transform's attribute values to represent the given transformation matrix.
         """
         if isinstance(transformation, MTransformationMatrix):
-            _transform_matrix_to_plugs(self._mobject, transformation)
+            _transform_matrix_to_plugs(self._mobject, transformation._matrix)
         return self
 
-    def setTranslation(*args, **kwargs):
+    def setTranslation(self, translation: 'MVector', space: int = MSpace.kTransform):
         """
         Sets the transform's translation.
         """
-        pass
+        if space in (MSpace.kTransform, MSpace.kObject):
+            self.findPlug('translateX', False).setFloat(translation.x)
+            self.findPlug('translateY', False).setFloat(translation.y)
+            self.findPlug('translateZ', False).setFloat(translation.z)
+        
+        elif space == MSpace.kWorld:
+            parent_world_matrix = _get_parent_world_matrix(self._mobject)
+
+            # Invert parent world matrix to convert world-space to local-space
+            parent_inv_world_matrix = np.linalg.inv(parent_world_matrix)
+
+            # Convert input translation (MVector) to homogeneous vec4
+            world_pos = np.array([translation.x, translation.y, translation.z, 1.0])
+            local_pos = parent_inv_world_matrix @ world_pos
+
+            # Update translation in local space
+            self.findPlug('translateX', False).setFloat(local_pos[0])
+            self.findPlug('translateY', False).setFloat(local_pos[1])
+            self.findPlug('translateZ', False).setFloat(local_pos[2])
+        return self
 
     def shear(*args, **kwargs):
         """
@@ -25646,9 +25761,12 @@ class MFnTransform(MFnDagNode):
         """
         Returns the transformation matrix represented by this transform.
         """
-        trn_mx = MTransformationMatrix()
-        trn_mx._matrix = _transform_plugs_to_matrix(self._mobject)
-        return trn_mx
+        M = MTransformationMatrix(_transform_plugs_to_matrix(self._mobject))
+        euler_rot_order = self.findPlug('rotateOrder', False)._attribute._value or MEulerRotation.kXYZ
+        M._rotation_order = MTransformationMatrix._strToOrder[
+            MEulerRotation._orderToStr[euler_rot_order]
+        ]
+        return M
 
     def translateBy(*args, **kwargs):
         """
@@ -25656,11 +25774,21 @@ class MFnTransform(MFnDagNode):
         """
         pass
 
-    def translation(*args, **kwargs):
+    def translation(self, space: int = MSpace.kTransform) -> 'MVector':
         """
         Returns the transform's translation as an MVector.
         """
-        pass
+        if space == MSpace.kWorld:
+            WM = _calc_node_world_matrix(self._mobject)
+            T, _, _ = _decompose_matrix(WM)
+            return MVector(T[0], T[1], T[2])
+        else:
+            return MVector(
+                self.findPlug('translateX', False).asFloat(),
+                self.findPlug('translateY', False).asFloat(),
+                self.findPlug('translateZ', False).asFloat()
+            )
+
 
     kRotateMaxX = 13
 

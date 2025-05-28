@@ -1,11 +1,14 @@
 from functools import partial
 import logging
+from pprint import pprint
 import traceback
 import unittest
 import sys
 import pathlib
 from maya.api import OpenMaya as om
 from maya import cmds as mc
+import numpy as np
+from scipy.spatial.transform import Rotation as R
 
 try:
     from maya import mmc_hierarchy as hierarchy
@@ -389,6 +392,110 @@ class TestMayaMockCompletion(unittest.TestCase):
             self.assertIn(as_nd.name(), predicted_names)
             self.assertNotIn(as_nd.uuid().asString(), uuids)
             itertator.next()
+
+    def test_local_and_world_matrices(self):
+        # Create a transform node and set translation, rotation, scale
+        transform = self.dagmod.createNode("transform")
+        self.dagmod.doIt()
+        fn_dep = om.MFnDependencyNode(transform)
+        fn_tr = om.MFnTransform(transform)
+
+        # Set translation, rotation, scale
+        fn_tr.setTranslation(om.MVector(1.0, 2.0, 3.0), om.MSpace.kTransform)
+        fn_tr.setRotation(om.MEulerRotation([0.1, 0.2, 0.3]), om.MTransformationMatrix.kXYZ)
+        fn_tr.setScale([2.0, 3.0, 4.0])
+
+        # Get local matrix
+        local_matrix = fn_tr.transformation().asMatrix()
+        # Get world matrix (should be same as local since no parent)
+        world_matrix = fn_tr.transformation().asMatrix()
+
+        # Check that local and world matrices are equal for root node
+        self.assertTrue(all(
+            abs(local_matrix[i][j] - world_matrix[i][j]) < 1e-6
+            for i in range(4) for j in range(4)
+        ))
+
+        # Create a parent node and parent the transform under it
+        parent = self.dagmod.createNode("transform")
+        self.dagmod.doIt()
+        parent_fn = om.MFnTransform(parent)
+        parent_fn.setTranslation(om.MVector(10.0, 0.0, 0.0), om.MSpace.kTransform)
+        # Parent the transform node
+        dag_mod = om.MDagModifier()
+        dag_mod.reparentNode(transform, parent)
+        dag_mod.doIt()
+
+        # Get updated world matrix for child
+        fn_tr = om.MFnTransform(transform)
+        dag_path = om.MDagPath.getAPathTo(transform)
+        world_matrix = dag_path.inclusiveMatrix()
+        local_matrix = fn_tr.transformation().asMatrix()
+
+    def test_rotations(self):
+        # Create a transform node and set rotation
+        transform = self.dagmod.createNode("transform")
+        self.dagmod.doIt()
+        fn_tr = om.MFnTransform(transform)
+
+        # Set rotation using Euler angles
+        euler_rotation = om.MEulerRotation(0.1, 0.2, 0.3)
+        fn_tr.setRotation(euler_rotation)
+
+        # Get the rotation as Euler angles
+        rotation = fn_tr.rotation(om.MSpace.kTransform)
+        self.assertAlmostEqual(rotation.x, euler_rotation.x)
+        self.assertAlmostEqual(rotation.y, euler_rotation.y)
+        self.assertAlmostEqual(rotation.z, euler_rotation.z)
+
+        # Get transformation matrix and check rotation
+        transformation_matrix = fn_tr.transformation()
+        self.assertAlmostEqual(transformation_matrix.rotation().x, euler_rotation.x)
+        self.assertAlmostEqual(transformation_matrix.rotation().y, euler_rotation.y)
+        self.assertAlmostEqual(transformation_matrix.rotation().z, euler_rotation.z)
+
+    def test_decompose_matrix(self):
+        def decompose_matrix(matrix: np.ndarray) -> tuple:
+            # Extract translation
+            translation = matrix[:3, 3]
+
+            # Extract 3x3 upper-left matrix
+            M = matrix[:3, :3]
+
+            # Extract scale (length of column vectors)
+            scale = np.linalg.norm(M, axis=0)
+
+            # Normalize the matrix to extract pure rotation
+            norm_matrix = M / scale
+
+            # Create a scipy Rotation object
+            rotation = R.from_matrix(norm_matrix)
+            rotation = rotation.as_euler('xyz', degrees=False)
+
+            return translation, rotation, scale
+        
+        # Create a transform node
+        dagmod = om.MDagModifier()
+        parent = dagmod.createNode("transform")
+        dagmod.renameNode(parent, "parent")
+        child = dagmod.createNode("transform")
+        dagmod.renameNode(child, "child")
+        dagmod.doIt()
+
+        ctrn = om.MFnTransform(child)
+        ptrn = om.MFnTransform(parent)
+
+        ptrn.setTranslation(om.MVector(1, 2, 3), om.MSpace.kTransform)
+        ptrn.setRotation(om.MEulerRotation(0.2, 0.3, 0.4), om.MSpace.kTransform)
+
+        # Set a rotation using Euler angles
+        euler_angles = om.MEulerRotation(1,2,3)  # in radians
+        ctrn.setRotation(euler_angles, om.MSpace.kTransform)
+
+        cmx = om.MMatrix(ctrn.transformationMatrix())
+        # print(f"Transformation Matrix:\n{np.array(cmx).reshape(4, 4)}")
+        t, r, s = decompose_matrix(np.array(cmx).reshape(4, 4))
+        print(ptrn.translation(om.MSpace.kTransform))
 
 
 class TestCmds(unittest.TestCase):
