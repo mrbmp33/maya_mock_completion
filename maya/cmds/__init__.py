@@ -8236,18 +8236,24 @@ def sculptTarget(after=bool(), af=bool(), afterReference=bool(), ar=bool(), befo
     pass
 
 
-def select(names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=None, allDagObjects=bool(), ado=bool(),
+def select(*args, names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=None, allDagObjects=bool(), ado=bool(),
            allDependencyNodes=bool(), adn=bool(), clear=bool(), cl=bool(), containerCentric=bool(), cc=bool(),
            deselect=bool(), d=bool(), hierarchy=bool(), hi=bool(), noExpand=bool(), ne=bool(), replace=True, r=True,
            symmetry=bool(), sym=bool(), symmetrySide=int(), sys=int(), toggle=bool(), tgl=bool(), visible=bool(),
-           vis=bool(), *args):
+           vis=bool()):
 
     from builtins import all as _all
 
     if clear == True or cl == True:
         ACTIVE_SELECTION.clear()
         return
-    
+
+    elif deselect == True or d == True:
+        for nd in args:
+            item = _hierarchy.NodePool.from_name(nd)
+            if item in ACTIVE_SELECTION:
+                ACTIVE_SELECTION.remove(item)
+                
     if all is True or names is None or names is None and all is None:
         items = list(_hierarchy.NodePool.all_nodes())
 

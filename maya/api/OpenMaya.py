@@ -249,6 +249,11 @@ def _attr_from_name_and_node(attr_name: str, owner_node: "MObject") -> Tuple['MO
         if typed_type == MFnData.kMatrix:
             attribute._init_matrix_fields()
 
+    enum_fields = properties.get('enum_fields')
+    if enum_fields is not None:
+        # If the attribute is an enum, set the fields
+        attribute._enum_items = enum_fields
+
     # FLAG IT AS VALID ATTRIBUTE
     attribute._alive = True
     attribute._is_null = False
@@ -5931,7 +5936,7 @@ class MSelectionList(object):
         """
         pass
 
-    def remove(*args, **kwargs):
+    def remove(self, index: int) -> "MSelectionList":
         """
         remove(index) -> self
 
@@ -7717,7 +7722,7 @@ class MGlobal(object):
         pass
 
     @staticmethod
-    def setActiveSelectionList(*args, **kwargs):
+    def setActiveSelectionList(selection_list: 'MSelectionList', listAdjustment=0):
         """
         setActiveSelectionList(MSelectionList, listAdjustment=kReplaceList) -> None
 
@@ -7732,7 +7737,8 @@ class MGlobal(object):
           kAddToList                    #Remove the items from the list.
           kAddToHeadOfList              #Add the items to the beginning of the list.
         """
-        pass
+        if listAdjustment == MGlobal.kReplaceList:
+            ACTIVE_SELECTION = selection_list
 
     @staticmethod
     def setAnimSelectionMask(*args, **kwargs):

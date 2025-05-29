@@ -632,7 +632,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -1628,7 +1636,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -1650,7 +1663,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -1845,7 +1862,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "xyz",
+                "1": "yzx",
+                "2": "zxy",
+                "3": "xzy",
+                "4": "yxz"
+            },
+            "default_value": 0
         },
         "rotatePivot": {
             "short_name": "rp",
@@ -2286,7 +2311,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Translate",
+                "2": "Rotate",
+                "3": "Scale",
+                "4": "Transform",
+                "5": "Global default",
+                "6": "Smart"
+            },
+            "default_value": 0
         },
         "specifiedManipLocation": {
             "short_name": "sml",
@@ -2437,7 +2472,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -2457,7 +2497,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -3212,7 +3257,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Bone",
+                "1": "Multi-child as Box",
+                "2": "None"
+            },
+            "default_value": 0
         },
         "dynamics": {
             "short_name": "dyn",
@@ -3521,7 +3572,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -4951,7 +5010,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -4973,7 +5037,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -5225,7 +5293,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "xyz",
+                "1": "yzx",
+                "2": "zxy",
+                "3": "xzy",
+                "4": "yxz"
+            },
+            "default_value": 0
         },
         "rotatePivot": {
             "short_name": "rp",
@@ -5678,7 +5754,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Translate",
+                "2": "Rotate",
+                "3": "Scale",
+                "4": "Transform",
+                "5": "Global default",
+                "6": "Smart"
+            },
+            "default_value": 0
         },
         "side": {
             "short_name": "sd",
@@ -5686,7 +5772,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Center",
+                "1": "Left",
+                "2": "Right"
+            },
+            "default_value": 0
         },
         "specifiedManipLocation": {
             "short_name": "sml",
@@ -5884,7 +5976,39 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Root",
+                "2": "Hip",
+                "3": "Knee",
+                "4": "Foot",
+                "5": "Toe",
+                "6": "Spine",
+                "7": "Neck",
+                "8": "Head",
+                "9": "Collar",
+                "10": "Shoulder",
+                "11": "Elbow",
+                "12": "Hand",
+                "13": "Finger",
+                "14": "Thumb",
+                "15": "PropA",
+                "16": "PropB",
+                "17": "PropC",
+                "18": "Other",
+                "19": "Index Finger",
+                "20": "Middle Finger",
+                "21": "Ring Finger",
+                "22": "Pinky Finger",
+                "23": "Extra Finger",
+                "24": "Big Toe",
+                "25": "Index Toe",
+                "26": "Middle Toe",
+                "27": "Ring Toe",
+                "28": "Pinky Toe"
+            },
+            "default_value": 0
         },
         "useObjectColor": {
             "short_name": "uoc",
@@ -5892,7 +6016,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -5912,7 +6041,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -6567,7 +6701,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Closest Visible Depth"
+            },
+            "default_value": 1
         },
         "displayCameraFarClip": {
             "short_name": "cfp",
@@ -6811,7 +6949,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Fill",
+                "1": "Horizontal",
+                "2": "Vertical"
+            },
+            "default_value": 1
         },
         "filmFitOffset": {
             "short_name": "ffo",
@@ -6858,7 +7002,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "filmRollControl"
+            "parent_plug": "filmRollControl",
+            "enum_fields": {
+                "0": "Rotate-Translate"
+            },
+            "default_value": 0
         },
         "filmRollPivot": {
             "short_name": "frp",
@@ -7194,7 +7342,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -7765,7 +7921,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -7787,7 +7948,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -8245,7 +8410,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -8334,7 +8504,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -8796,7 +8971,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "No Decay",
+                "1": "Linear",
+                "2": "Quadratic"
+            },
+            "default_value": 0
         },
         "dmapBias": {
             "short_name": "db",
@@ -9068,7 +9249,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Linear"
+            },
+            "default_value": 0
         },
         "frozen": {
             "short_name": "fzn",
@@ -9310,7 +9496,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -10006,7 +10200,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -10028,7 +10227,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -10521,7 +10724,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOnlySingleDmap": {
             "short_name": "us",
@@ -10696,7 +10904,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -11202,7 +11415,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "No Decay",
+                "1": "Linear",
+                "2": "Quadratic"
+            },
+            "default_value": 0
         },
         "dmapBias": {
             "short_name": "db",
@@ -11719,7 +11938,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -12425,7 +12652,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -12447,7 +12679,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -13039,7 +13275,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOnlySingleDmap": {
             "short_name": "us",
@@ -13214,7 +13455,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -13688,7 +13934,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "No Decay",
+                "1": "Linear",
+                "2": "Quadratic"
+            },
+            "default_value": 0
         },
         "dmapBias": {
             "short_name": "db",
@@ -14119,7 +14371,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -14886,7 +15146,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -14908,7 +15173,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -15401,7 +15670,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOnlySingleDmap": {
             "short_name": "us",
@@ -15576,7 +15850,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -16015,7 +16294,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Black Hole",
+                "1": "Solid Matte"
+            },
+            "default_value": 2
         },
         "mediumRefractiveIndex": {
             "short_name": "mrfi",
@@ -16635,7 +16919,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Outlines",
+                "2": "Entire Mesh"
+            },
+            "default_value": 0
         },
         "vrEdgeWeight": {
             "short_name": "vrew",
@@ -16653,7 +16943,18 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default Fill",
+                "1": "Single Color",
+                "2": "Two Color",
+                "3": "Four Color",
+                "4": "Full Color",
+                "5": "Average Color",
+                "6": "Area Gradient",
+                "7": "Mesh Gradient"
+            },
+            "default_value": 0
         },
         "vrHiddenEdges": {
             "short_name": "vrhe",
@@ -17197,7 +17498,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Off",
+                "1": "Mipmap",
+                "2": "Box",
+                "3": "Quadratic",
+                "4": "Quartic"
+            },
+            "default_value": 3
         },
         "filterWidth": {
             "short_name": "fw",
@@ -17273,7 +17582,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Clamp",
+                "1": "Linear"
+            },
+            "default_value": 0
         },
         "ignoreColorSpaceFileRules": {
             "short_name": "ifr",
@@ -17691,7 +18005,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Point",
+                "1": "Bilinear",
+                "2": "Box",
+                "3": "Gaussian",
+                "4": "Bicubic",
+                "5": "B-spline",
+                "6": "Catmull-Rom"
+            },
+            "default_value": 3
         },
         "ptexFilterWidth": {
             "short_name": "pfw",
@@ -17968,7 +18292,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Disable Preview",
+                "1": "Low Quality 1k",
+                "2": "Medium Quality 2k",
+                "3": "High Quality 4k",
+                "4": "Ultra High Quality 8k"
+            },
+            "default_value": 3
         },
         "uvTilingMode": {
             "short_name": "uvt",
@@ -17976,7 +18308,14 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Off",
+                "1": "0-based (ZBrush)",
+                "2": "1-based (Mudbox)",
+                "3": "UDIM (Mari)"
+            },
+            "default_value": 0
         },
         "vCoord": {
             "short_name": "v",
@@ -18454,7 +18793,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Equal",
+                "1": "Not Equal",
+                "2": "Greater Than",
+                "3": "Greater or Equal",
+                "4": "Less Than"
+            },
+            "default_value": 0
         },
         "outColor": {
             "short_name": "oc",
@@ -18762,7 +19109,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pass through",
+                "1": "Apply to Render Passes",
+                "2": "No Contribution"
+            },
+            "default_value": 1
         }
     },
     "remapValue": {
@@ -19166,7 +19519,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pass through",
+                "1": "Apply to Render Passes",
+                "2": "No Contribution"
+            },
+            "default_value": 1
         }
     },
     "uvPin": {
@@ -19255,7 +19614,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "X",
+                "1": "Y",
+                "2": "Z",
+                "3": "-X",
+                "4": "-Y"
+            },
+            "default_value": 0
         },
         "normalOverride": {
             "short_name": "novr",
@@ -19263,7 +19630,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Auto"
+            },
+            "default_value": 0
         },
         "normalizedIsoParms": {
             "short_name": "nrmip",
@@ -19327,7 +19698,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "World",
+                "1": "Local"
+            },
+            "default_value": 0
         },
         "tangentAxis": {
             "short_name": "tng",
@@ -19335,7 +19711,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "X",
+                "1": "Y",
+                "2": "Z",
+                "3": "-X",
+                "4": "-Y"
+            },
+            "default_value": 2
         },
         "uvSetName": {
             "short_name": "msn",
@@ -19436,7 +19820,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "No operation",
+                "1": "Sum",
+                "2": "Subtract"
+            },
+            "default_value": 1
         },
         "output1D": {
             "short_name": "o1",
@@ -19840,7 +20230,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pass through",
+                "1": "Apply to Render Passes",
+                "2": "No Contribution"
+            },
+            "default_value": 1
         }
     },
     "decomposeMatrix": {
@@ -19891,7 +20287,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "xyz",
+                "1": "yzx",
+                "2": "zxy",
+                "3": "xzy",
+                "4": "yxz"
+            },
+            "default_value": 0
         },
         "isHistoricallyInteresting": {
             "short_name": "ihi",
@@ -20990,7 +21394,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "default_value": 0
         },
         "frozen": {
             "short_name": "fzn",
@@ -21244,7 +21653,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -21776,7 +22193,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -21798,7 +22220,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -22123,7 +22549,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -22187,7 +22618,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -22395,7 +22831,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Object"
+            },
+            "default_value": 0
         },
         "binMembership": {
             "short_name": "bnm",
@@ -22879,7 +23319,14 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Highest Quality",
+                "1": "High Quality",
+                "2": "Medium Quality",
+                "3": "Low Quality"
+            },
+            "default_value": 2
         },
         "curvePrecision": {
             "short_name": "cpr",
@@ -23214,7 +23661,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "default_value": 0
         },
         "formV": {
             "short_name": "fv",
@@ -23222,7 +23674,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Open",
+                "1": "Closed"
+            },
+            "default_value": 0
         },
         "frozen": {
             "short_name": "fzn",
@@ -23476,7 +23933,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -24170,7 +24635,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -24192,7 +24662,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -24725,7 +25199,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOutlinerColor": {
             "short_name": "uocol",
@@ -24800,7 +25279,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",
@@ -25023,7 +25507,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "off",
+                "1": "wire",
+                "2": "hard"
+            },
+            "default_value": 0
         },
         "binMembership": {
             "short_name": "bnm",
@@ -25080,7 +25570,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Legacy",
+                "1": "Crease All"
+            },
+            "default_value": 1
         },
         "boundingBox": {
             "short_name": "bb",
@@ -25586,7 +26081,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "0 (Base)",
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4",
+                "5": "5"
+            },
+            "default_value": 0
         },
         "displacementType": {
             "short_name": "dist",
@@ -25594,7 +26098,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Scalar"
+            },
+            "default_value": 0
         },
         "displayAlphaAsGreyScale": {
             "short_name": "dags",
@@ -25683,7 +26191,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Standard",
+                "1": "Soft/Hard",
+                "2": "Hard (color)"
+            },
+            "default_value": 0
         },
         "displayFacesWithGroupId": {
             "short_name": "dfgi",
@@ -25807,7 +26321,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Base Mesh Only",
+                "1": "Base and Smooth Mesh"
+            },
+            "default_value": 0
         },
         "displaySubdComps": {
             "short_name": "dsc",
@@ -26255,7 +26774,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Pre And Post Frames",
+                "1": "Pre Frames",
+                "2": "Post Frames",
+                "3": "Custom Frames",
+                "4": "Pre And Post Keyframes"
+            },
+            "default_value": 0
         },
         "ghostsStep": {
             "short_name": "gstp",
@@ -26517,7 +27044,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Internal"
+            },
+            "default_value": 1
         },
         "layerOverrideColor": {
             "short_name": "lovc",
@@ -26575,7 +27107,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "overwrite",
+                "1": "add",
+                "2": "subtract",
+                "3": "multiply",
+                "4": "divide",
+                "5": "average"
+            },
+            "default_value": 0
         },
         "matrix": {
             "short_name": "m",
@@ -26854,7 +27395,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Normal"
+            },
+            "default_value": 0
         },
         "osdFvarBoundary": {
             "short_name": "ofb",
@@ -26862,7 +27407,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Preserve Edges and Corners",
+                "2": "Preserve Edges"
+            },
+            "default_value": 3
         },
         "osdFvarPropagateCorners": {
             "short_name": "ofc",
@@ -27076,7 +27627,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Normal",
+                "1": "Template"
+            },
+            "default_value": 0
         },
         "overrideEnabled": {
             "short_name": "ove",
@@ -27098,7 +27654,11 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "drawOverride"
+            "parent_plug": "drawOverride",
+            "enum_fields": {
+                "0": "Full"
+            },
+            "default_value": 0
         },
         "overridePlayback": {
             "short_name": "ovp",
@@ -27273,7 +27833,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Left",
+                "1": "Right"
+            },
+            "default_value": 2
         },
         "receiveShadows": {
             "short_name": "rcsh",
@@ -27451,7 +28016,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Base Cage",
+                "1": "Projected Cage"
+            },
+            "default_value": 0
         },
         "smoothOffset": {
             "short_name": "so",
@@ -27586,7 +28156,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "detectWindingRightHanded",
+                "1": "rightHanded",
+                "2": "detectWindingLeftHanded"
+            },
+            "default_value": 0
         },
         "template": {
             "short_name": "tmp",
@@ -27775,7 +28351,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Default",
+                "1": "Indexed"
+            },
+            "default_value": 0
         },
         "useOsdBoundaryMethods": {
             "short_name": "uob",
@@ -27922,7 +28503,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Current Color Set"
+            },
+            "default_value": 0
         },
         "vertexIdMap": {
             "short_name": "vmap",
@@ -27952,7 +28538,13 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Unweighted",
+                "1": "Angle Weighted",
+                "2": "Area Weighted"
+            },
+            "default_value": 3
         },
         "vertexSize": {
             "short_name": "vs",
@@ -27970,7 +28562,12 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kEnumAttribute"
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "Flat",
+                "1": "Use Template"
+            },
+            "default_value": 2
         },
         "viewName": {
             "short_name": "vwn",

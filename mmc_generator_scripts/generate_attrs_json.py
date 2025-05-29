@@ -1,6 +1,7 @@
 import ast
 import json
 import logging
+import os
 import pathlib
 import pprint
 import re
@@ -111,6 +112,8 @@ def get_attr_properties(nd):
                 fields = {}
                 for value in range(enum.getMax()):
                     fields[value] = enum.fieldName(value)
+                attr_properties["enum_fields"] = fields
+                attr_properties["default_value"] = enum.default
             
             elif attr.apiType() == om.MFn.kTypedAttribute:
                 typed = om.MFnTypedAttribute(attr)
@@ -193,5 +196,5 @@ def create_attrs_dict(output_properties_file, output_literals_file: str = None):
 
 
 if __name__ == "__main__":
-    out_file = ""
+    out_file = os.environ['GENERATE_ATTRIBUTES_OUTPUT']
     create_attrs_dict(out_file)
