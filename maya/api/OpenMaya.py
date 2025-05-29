@@ -25660,13 +25660,20 @@ class MFnTransform(MFnDagNode):
             parent_rot_matrix = parent_world_matrix[:3, :3]
 
             # Convert Euler to rotation matrix
-            world_rot_matrix = np.array(rotation.asMatrix())  # Get 3x3
+            world_rot_matrix = np.array(rotation.asMatrix()._matrix)
+            world_rot_matrix = world_rot_matrix[:3, :3]  # Ensure it's 3x3
 
             # Compute local rotation matrix:
             local_rot_matrix = np.linalg.inv(parent_rot_matrix) @ world_rot_matrix
 
+            # Normalize the local rotation matrix to ensure it's a valid rotation
+            local_rot_matrix /= np.linalg.norm(local_rot_matrix, axis=0)
+            if np.linalg.det(local_rot_matrix) < 0:
+                local_rot_matrix = -local_rot_matrix  # Ensure a right-handed system
+            rot = R.from_matrix(local_rot_matrix)
+            local_rotation = MEulerRotation(rot.as_euler(MEulerRotation._orderToStr[rotation.order], degrees=False))
+            
             # Convert matrix back to Euler angles (respecting rotation order)
-            local_rotation = MEulerRotation._from_matrix(local_rot_matrix, rotation.order)
             self.findPlug('rotateX', False).setFloat(local_rotation.x)
             self.findPlug('rotateY', False).setFloat(local_rotation.y)
             self.findPlug('rotateZ', False).setFloat(local_rotation.z)
