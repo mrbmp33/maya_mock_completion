@@ -3,7 +3,7 @@ import re
 import platform
 from typing import Union
 from pathlib import Path
-
+import weakref
 import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
 from maya.api import OpenMaya as om
@@ -5000,12 +5000,12 @@ def marker(attach=bool(), a=bool(), detach=bool(), d=bool(), frontTwist=float(),
     pass
 
 
-def matchTransform(pivots=bool(), piv=bool(), position=bool(), pos=bool(), positionX=bool(), px=bool(),
+def matchTransform(*args, pivots=bool(), piv=bool(), position=bool(), pos=bool(), positionX=bool(), px=bool(),
                    positionY=bool(), py=bool(), positionZ=bool(), pz=bool(), rotatePivot=bool(), rp=bool(),
                    rotation=bool(), rot=bool(), rotationX=bool(), rx=bool(), rotationY=bool(), ry=bool(),
                    rotationZ=bool(), rz=bool(), scale=bool(), scl=bool(), scaleBox=bool(), box=bool(),
                    scalePivot=bool(), sp=bool(), scaleX=bool(), sx=bool(), scaleY=bool(), sy=bool(), scaleZ=bool(),
-                   sz=bool(), *args, **kwargs):
+                   sz=bool()):
     pass
 
 
@@ -6408,13 +6408,20 @@ def polyCreateFacetCtx(append=bool(), ap=bool(), exists=bool(), ex=bool(), image
     pass
 
 
-def polyCube(axis=list, ax=list, caching=bool(), cch=bool(), constructionHistory=bool(), ch=bool(), createUVs=int(),
+def polyCube(*obj_name, axis=list, ax=list, caching=bool(), cch=bool(), constructionHistory=bool(), ch=bool(), createUVs=int(),
              cuv=int(), depth=float(), d=float(), height=float(), h=float(), name=str(), n=str(), nodeState=int(),
              nds=int(), object=bool(), o=bool(), subdivisionsDepth=int(), sd=int(), subdivisionsHeight=int(), sh=int(),
              subdivisionsWidth=int(), sw=int(), subdivisionsX=int(), sx=int(), subdivisionsY=int(), sy=int(),
-             subdivisionsZ=int(), sz=int(), texture=int(), tx=int(), width=float(), w=float(), *args, **kwargs):
-    pass
+             subdivisionsZ=int(), sz=int(), texture=int(), tx=int(), width=float(), w=float(), **kwargs):
 
+    trn = om.MFnDependencyNode().create('transform', name)
+    shape = om.MFnDependencyNode().create('mesh', name + 'Shape')
+    builder = om.MFnDependencyNode().create('polyCube', 'polyCube1')
+    
+    trn._children.append(shape)
+    shape._parent = weakref.proxy(trn)
+    shape._buider = builder
+    return trn._name, shape._name
 
 def polyCut(caching=bool(), cch=bool(), constructionHistory=bool(), ch=bool(), cutPlaneCenter=list, pc=list,
             cutPlaneCenterX=float(), pcx=float(), cutPlaneCenterY=float(), pcy=float(), cutPlaneCenterZ=float(),

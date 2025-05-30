@@ -1,4 +1,52 @@
 NODE_TYPES_TO_SHAPES = {
+    "polySphere": {
+        "child_type": "kMesh",
+        "child_name": "pSphereShape1",
+        "parent_name": "pSphere1",
+        "builder": {"name": "polySphere1", "type": "kPolySphere"},
+    },
+    "polyCube": {
+        "child_type": "kMesh",
+        "child_name": "pCubeShape1",
+        "parent_name": "pCube1",
+        "builder": {"name": "polyCube1", "type": "kPolyCube"},
+    },
+    "polyCylinder": {
+        "child_type": "kMesh",
+        "child_name": "pCylinderShape1",
+        "parent_name": "pCylinder1",
+        "builder": {"name": "polyCylinder1", "type": "kPolyCylinder"},
+    },
+    "polyCone": {
+        "child_type": "kMesh",
+        "child_name": "pConeShape1",
+        "parent_name": "pCone1",
+        "builder": {"name": "polyCone1", "type": "kPolyCone"},
+    },
+    "polyTorus": {
+        "child_type": "kMesh",
+        "child_name": "pTorusShape1",
+        "parent_name": "pTorus1",
+        "builder": {"name": "polyTorus1", "type": "kPolyTorus"},
+    },
+    "polyPlane": {
+        "child_type": "kMesh",
+        "child_name": "pPlaneShape1",
+        "parent_name": "pPlane1",
+        "builder": {"name": "polyPlane1", "type": "kPolyMesh"},
+    },
+    "polyPyramid": {
+        "child_type": "kMesh",
+        "child_name": "pPyramidShape1",
+        "parent_name": "pPyramid1",
+        "builder": {"name": "polyPyramid1", "type": "kPolyPyramid"},
+    },
+    "polyDisc": {
+        "child_type": "kMesh",
+        "child_name": "pDiscShape1",
+        "parent_name": "pDisc1",
+        "builder": {"name": "polyDisc1", "type": "kPluginDependNode"},
+    },
     "mesh": {
         "child_type": "kMesh",
         "child_name": "polySurfaceShape1",
@@ -18,6 +66,12 @@ NODE_TYPES_TO_SHAPES = {
         "child_type": "kNurbsCurve",
         "child_name": "bezierShape1",
         "parent_name": "bezier1",
+    },
+    "circle": {
+        "child_type": "kNurbsCurve",
+        "child_name": "nurbsCircleShape1",
+        "parent_name": "nurbsCircle1",
+        "builder": {"name": "makeNurbCircle1", "type": "kCircle"},
     },
     "pointLight": {
         "child_type": "kPointLight",

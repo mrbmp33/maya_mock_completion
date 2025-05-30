@@ -45,7 +45,7 @@ def _calc_node_api_type(type_str: str) -> list[int]:
 
     # If node type is a shape add it to the list of types
     if type_str in node_types_to_shapes.NODE_TYPES_TO_SHAPES:
-        nd_types.append(MFn.kShape)
+        nd_types.extend([MFn.kDagNode, MFn.kShape])
 
     # Some nodes are subtypes of more generic types, a good example would be transform nodes
     # that are also kMesh, kCamera, kJoint, etc.
