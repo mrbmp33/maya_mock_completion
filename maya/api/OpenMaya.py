@@ -25708,18 +25708,12 @@ class MFnTransform(MFnDagNode):
         """
         Sets the transform's scale components.
         """
-        if isinstance(scale, (tuple, list)):
-            if len(scale) != 3:
-                raise ValueError("Scale must be a sequence of three floats (x, y, z).")
-            self.findPlug('scaleX', False).setFloat(scale[0])
-            self.findPlug('scaleY', False).setFloat(scale[1])
-            self.findPlug('scaleZ', False).setFloat(scale[2])
-        elif isinstance(scale, MVector):
-            self.findPlug('scaleX', False).setFloat(scale.x)
-            self.findPlug('scaleY', False).setFloat(scale.y)
-            self.findPlug('scaleZ', False).setFloat(scale.z)
-        else:
-            raise TypeError("Scale must be a sequence of three floats or an MVector.")
+        scale = tuple(scale)
+        if len(scale) != 3:
+            raise ValueError("Scale must be a sequence of three floats (x, y, z).")
+        self.findPlug('scaleX', False).setFloat(scale[0])
+        self.findPlug('scaleY', False).setFloat(scale[1])
+        self.findPlug('scaleZ', False).setFloat(scale[2])
         return self
 
     def setScalePivot(*args, **kwargs):
