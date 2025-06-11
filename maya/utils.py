@@ -218,19 +218,53 @@ def _origShellLogHandler():
 def executeDeferred(*args, **kwargs):
     """
     Delays the execution of the given script or function until Maya is idle.
-    
+
     This function runs code using the idle event loop.  This means that the
     main thread must become idle before this python code will be executed.
-    
+
     There are two different ways to call this function.  The first is to
     supply a single string argument which contains the Python code to execute.
     In that case the code is interpreted.
-    
+
     The second way to call this routine is to pass it a "callable" object.
     When that is the case, then the remaining regular arguments and keyword
     arguments will be passed to the callable object
     """
-    pass
+    try:
+        import maya.utils as maya_utils
+    except ImportError:
+        # If maya.utils is not available, just execute immediately (mock behavior)
+        if not any(args) and not kwargs:
+            raise TypeError("executeDeferred() requires at least one argument")
+        if callable(args[0]):
+            func = args[0]
+            args = args[1:]
+            return func(*args, **kwargs)
+        elif isinstance(args[0], str):
+            code = args[0]
+            compiled_code = compile(code, '<string>', 'exec')
+            exec(compiled_code, globals(), locals())
+            return
+        else:
+            raise TypeError("First argument must be a callable or a string of code")
+    else:
+        # Use Maya's real executeDeferred if available
+        if hasattr(maya_utils, "executeDeferred") and maya_utils.executeDeferred is not executeDeferred:
+            return maya_utils.executeDeferred(*args, **kwargs)
+        # Fallback: execute immediately
+        if not any(args) and not kwargs:
+            raise TypeError("executeDeferred() requires at least one argument")
+        if callable(args[0]):
+            func = args[0]
+            args = args[1:]
+            return func(*args, **kwargs)
+        elif isinstance(args[0], str):
+            code = args[0]
+            compiled_code = compile(code, '<string>', 'exec')
+            exec(compiled_code, globals(), locals())
+            return
+        else:
+            raise TypeError("First argument must be a callable or a string of code")
 
 
 def processIdleEvents(*args, **kwargs):
@@ -324,8 +358,28 @@ def executeInMainThreadWithResult(*args, **kwargs):
     Note that if this routine is called from the main thread, then it will
     simply execute the given Python on the spot and return the result
     """
-    pass
+    if not any(args) and not kwargs:
+        raise TypeError("executeInMainThreadWithResult() requires at least one argument")
 
+    if callable(args[0]):
+        # If the first argument is callable, we assume it's a function to call
+        # with the remaining args and kwargs.
+        func = args[0]
+        args = args[1:]
+        return func(*args, **kwargs)
+    
+    elif isinstance(args[0], str):
+        # If the first argument is a string, we assume it's a Python code snippet
+        # to execute.
+        code = args[0]
+        try:
+            # Compile the code to ensure it's valid Python
+            compiled_code = compile(code, '<string>', 'exec')
+            # Execute the compiled code in the main thread
+            exec(compiled_code, globals(), locals())
+            return locals()  # Return the local variables after execution
+        except Exception as e:
+            raise RuntimeError(f"Error executing code: {e}")
 
 def runOverriddenModule(modName, callingFileFunc, globals):
     """

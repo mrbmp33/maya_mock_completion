@@ -17701,7 +17701,7 @@ class MPlug(object):
             self._attribute._value = random.uniform(-100, 100)
         return float(self._attribute._value)
 
-    def asInt(self, *args, **kwargs):
+    def asInt(self, *args, **kwargs) -> int:
         """
         Retrieves the plug's value, as a regular integer.
         """
@@ -29977,11 +29977,11 @@ class MFnNurbsCurve(MFnDagNode):
     External representation: {-1,0,1,2,...,N,N+1,N+2,N+3}
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super(MFnNurbsCurve, self).__init__(*args, **kwargs)
 
     def area(*args, **kwargs):
         """
@@ -30037,7 +30037,7 @@ class MFnNurbsCurve(MFnDagNode):
         """
         pass
 
-    def create(*args, **kwargs):
+    def create(self, *args, **kwargs):
         """
         create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
             -> self
@@ -30079,7 +30079,11 @@ class MFnNurbsCurve(MFnDagNode):
                        the previous curve in the array, and the curves must be
                        be at least C0 continuous (i.e. tangent breaks are okay).
         """
-        pass
+        mobject = super().create('nurbsCurve', parent=kwargs.get('parent'))
+        if mobject is kwargs.get('parent') and mobject.hasFn(MFn.kTransform):
+            # Return last child of the parent if it was a transform node
+            return mobject._children[-1]
+        return mobject
 
     def createWithEditPoints(*args, **kwargs):
         """

@@ -2868,9 +2868,22 @@ def eval(*args, **kwargs):
     pass
 
 
-def evalDeferred(evaluateNext=bool(), en=bool(), list=bool(), ls=bool(), lowPriority=bool(), low=bool(),
-                 lowestPriority=bool(), lp=bool(), *args, **kwargs):
-    pass
+def evalDeferred(*args, evaluateNext=bool(), en=bool(), list=bool(), ls=bool(), lowPriority=bool(), low=bool(),
+                 lowestPriority=bool(), lp=bool(), **kwargs):
+    if callable(args[0]):
+        # If the first argument is a callable, we assume it's a function to be evaluated
+        func = args[0]
+        args = args[1:]  # Remove the function from the args list
+        kwargs = kwargs or {}
+        if args:
+            # If there are additional arguments, we call the function with them
+            func(*args, **kwargs)
+        else:
+            func()
+    elif isinstance(args[0], str):
+        # If the first argument is a string, we assume it's a command to be evaluated
+        command = args[0]
+        # exec(command)
 
 
 def evaluationManager(cycleCluster=str(), ccl=str(), disableInfo=str(), di=str(), downstreamFrom=str(), dst=str(),
