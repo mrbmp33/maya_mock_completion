@@ -45,6 +45,10 @@ def aaf2fcp(deleteFile=bool(), df=bool(), dstPath=str(), dst=str(), getFileName=
     pass
 
 
+def AbcImport(*args, **kwargs):
+    ...
+
+
 def about(apiVersion=bool(), api=bool(), application=bool(), a=bool(), batch=bool(), b=bool(), buildDirectory=bool(),
           bd=bool(), buildVariant=bool(), bv=bool(), codeset=bool(), cs=bool(), compositingManager=bool(), cm=bool(),
           connected=bool(), cnt=bool(), ctime=bool(), cti=bool(), currentDate=bool(), cd=bool(), currentTime=bool(),

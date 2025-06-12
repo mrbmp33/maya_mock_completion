@@ -25,7 +25,7 @@ from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Genera
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
-from maya import ACTIVE_SELECTION
+from maya import ACTIVE_SELECTION, _ASSUME_NODES_EXIST
 from mmc_output import mmc_node_types_alias_map, node_types_to_shapes, attribute_properties
 
 
@@ -5757,10 +5757,13 @@ class MSelectionList(object):
             RuntimeError: If it could not add the item.
         """
         if isinstance(item, str):
-            node, *attr = item.split('.')
-            node = hierarchy.NodePool.from_name(node)
+            node_name, *attr = item.split('.')
+            node = hierarchy.NodePool.from_name(node_name)
             if not node:
-                raise RuntimeError(f"Node {node} not found in the pool.")
+                if not _ASSUME_NODES_EXIST:
+                    raise RuntimeError(f"Node {node} not found in the pool.")
+                else:
+                    node = MFnDependencyNode().create('transform', node_name)  # Create a new node if it doesn't exist
             if len(attr) > 0:
                 # Attempt getting attribute from node. If not present, it will crash.
                 MFnDependencyNode(node).findPlug(attr[0])
