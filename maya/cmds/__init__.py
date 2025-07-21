@@ -1,3 +1,5 @@
+import copy
+import math
 from time import sleep
 import re
 import platform
@@ -1417,14 +1419,68 @@ def choice(attribute=str(), at=str(), controlPoints=bool(), cp=bool(), index=int
     pass
 
 
-def circle(caching=bool(), cch=bool(), center=list, c=list, centerX=float(), cx=float(), centerY=float(), cy=float(),
-           centerZ=float(), cz=float(), constructionHistory=bool(), ch=bool(), degree=int(), d=int(), first=list,
-           fp=list, firstPointX=float(), fpx=float(), firstPointY=float(), fpy=float(), firstPointZ=float(),
-           fpz=float(), fixCenter=bool(), fc=bool(), name=str(), n=str(), nodeState=int(), nds=int(), normal=list,
-           nr=list, normalX=float(), nrx=float(), normalY=float(), nry=float(), normalZ=float(), nrz=float(),
+def circle(*args, caching=bool(), cch=bool(), center: list = None, c: list = None, centerX=float(), cx=float(), centerY=float(), cy=float(),
+           centerZ=float(), cz=float(), constructionHistory=bool(), ch=bool(), degree=int(), d=int(), first: list = None,
+           fp: list = None, firstPointX=float(), fpx=float(), firstPointY=float(), fpy=float(), firstPointZ=float(),
+           fpz=float(), fixCenter=bool(), fc=bool(), name=str(), n=str(), nodeState=int(), nds=int(), normal: list = None,
+           nr: list = None, normalX=float(), nrx=float(), normalY=float(), nry=float(), normalZ=float(), nrz=float(),
            object=bool(), o=bool(), radius=float(), r=float(), sections=int(), s=int(), sweep=float(), sw=float(),
-           tolerance=float(), tol=float(), useTolerance=bool(), ut=bool(), *args, **kwargs):
-    pass
+           tolerance=float(), tol=float(), useTolerance=bool(), ut=bool(), **kwargs):
+    
+        # Fallback to alternative argument names
+    center = center or c or [centerX or cx or 0.0, centerY or cy or 0.0, centerZ or cz or 0.0]
+    normal = normal or nr or [normalX or nrx or 0.0, normalY or nry or 1.0, normalZ or nrz or 0.0]
+    radius = radius or r or 1.0
+    sections = sections or s or 8
+    sweep = sweep or sw or 360.0
+
+    # Normalize the normal vector
+    normal_vec = om.MVector(*normal).normalize()
+
+    # Create orthogonal basis vectors
+    dot = normal_vec * om.MVector.kXaxis
+    if dot.length() < 0.99:
+        x_vec = normal_vec ^ om.MVector.kXaxisVector  # cross product
+    else:
+        x_vec = normal_vec ^ om.MVector.kYaxisVector
+    x_vec.normalize()
+    y_vec = normal_vec ^ x_vec
+    y_vec.normalize()
+
+    # Compute circle points
+    angle_step = math.radians(sweep / sections)
+    center_point = om.MPoint(center)
+    points = []
+    for i in range(sections + 1):
+        angle = i * angle_step
+        vec = (radius * math.cos(angle)) * x_vec + (radius * math.sin(angle)) * y_vec
+        pt = copy.copy(center_point)
+        pt.x += vec.x
+        pt.y += vec.y
+        pt.z += vec.z
+        points.append(pt)
+
+    # Create knot vector
+    degree = degree or d or 3
+    if sections < degree:
+        raise ValueError("Number of sections must be at least equal to the degree of the curve.")
+    num_spans = len(points) - degree
+    knots = [i for i in range(num_spans + degree + 1)]
+
+    # Create NURBS curve
+    curve_fn = om.MFnNurbsCurve()
+    trn = om.MFnDagNode().create('transform', name=name)
+    curve = curve_fn.create(
+        points,
+        knots,
+        degree,
+        om.MFnNurbsCurve.kOpen,
+        False,
+        False,
+        parent=trn
+    )
+
+    return [trn._name, curve._name]
 
 
 def circularFillet(caching=bool(), cch=bool(), constructionHistory=bool(), ch=bool(), curveOnSurface=bool(), cos=bool(),
@@ -8260,7 +8316,7 @@ def sculptTarget(after=bool(), af=bool(), afterReference=bool(), ar=bool(), befo
     pass
 
 
-def select(*args, names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=None, allDagObjects=bool(), ado=bool(),
+def select(*names, add=bool(), addFirst=bool(), af=bool(), all:bool=None, allDagObjects=bool(), ado=bool(),
            allDependencyNodes=bool(), adn=bool(), clear=bool(), cl=bool(), containerCentric=bool(), cc=bool(),
            deselect=bool(), d=bool(), hierarchy=bool(), hi=bool(), noExpand=bool(), ne=bool(), replace=True, r=True,
            symmetry=bool(), sym=bool(), symmetrySide=int(), sys=int(), toggle=bool(), tgl=bool(), visible=bool(),
@@ -8273,16 +8329,20 @@ def select(*args, names=None, add=bool(), addFirst=bool(), af=bool(), all:bool=N
         return
 
     elif deselect == True or d == True:
-        for nd in args:
+        for nd in names:
             item = _hierarchy.NodePool.from_name(nd)
             if item in ACTIVE_SELECTION:
                 ACTIVE_SELECTION.remove(item)
                 
+
     if all is True or names is None or names is None and all is None:
         items = list(_hierarchy.NodePool.all_nodes())
 
     if names and isinstance(names, str):
         names = [names]
+    
+    # Get items from names
+    if names:
         items = [_hierarchy.NodePool.from_name(i) for i in names]
     
     if toggle == True or tgl == True:

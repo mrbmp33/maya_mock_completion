@@ -50,14 +50,21 @@ def _calc_node_api_type(type_str: str) -> list[int]:
     # Some nodes are subtypes of more generic types, a good example would be transform nodes
     # that are also kMesh, kCamera, kJoint, etc.
     if mfn_key in MFn._transform_types:
-        nd_types.extend([MFn.kTransform, mfn_key])
+        if mfn_key != MFn.kTransform:
+            nd_types.extend([MFn.kDagNode, MFn.kTransform, mfn_key])
+        else:
+            nd_types.extend([MFn.kDagNode, mfn_key])
     else:
         nd_types.append(mfn_key)
     
     return nd_types
 
 
-def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 'MObject':
+def _create_node_from_type(
+        type_id: Union[str, 'MTypeId'],
+        name: str = None,
+        parent: Optional["MObject"] = None
+    ) -> 'MObject':
     
     mobject = MObject()
     
@@ -73,13 +80,18 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     except KeyError:
         raise RuntimeError(f'Invalid type id: {type_id}.')
 
-    # If it's a node_type that has a shape, create an additional transform for it
     parent_name = None
+    if parent is not None:
+        parent_name = parent._name
+
+    # If it's a node_type that has a shape, create an additional transform for it
     if shape_type := node_types_to_shapes.NODE_TYPES_TO_SHAPES.get(type_str):
         parent_name = shape_type['parent_name']
         name = name or shape_type['child_name']
-        parent_mobject = _create_node_from_type(_TYPE_STR_TO_ID['transform'], name=parent_name)
-        
+        if parent is None:
+            parent_mobject = _create_node_from_type(_TYPE_STR_TO_ID['transform'], name=parent_name)
+        else:
+            parent_mobject = parent
         mobject._parent = parent_mobject
         parent_mobject._children.insert(0, mobject)
         mobject._is_shape = True
@@ -91,9 +103,13 @@ def _create_node_from_type(type_id: Union[str, 'MTypeId'], name: str = None) -> 
     # Flag as alive
     mobject._is_null = False
 
+    # (If applicable) Initialize type-specific fields
+    if type_str == 'nurbsCurve':
+        mobject._init_nurbs_curve_fields()
+
     # If has a shape, parent mobject is returned
     if shape_type:
-        return parent_mobject
+        return parent_mobject or mobject
     return mobject
 
 
@@ -8496,14 +8512,14 @@ class _MVectorMeta(type):
         cls.kYaxis = 1
         cls.kZaxis = 2
         cls.kWaxis = 3
-        cls.kZeroVector = cls(0.0, 0.0, 0.0)
-        cls.kOneVector = cls(1.0, 1.0, 1.0)
-        cls.kXaxisVector = cls(1.0, 0.0, 0.0)
-        cls.kXnegAxisVector = cls(-1.0, 0.0, 0.0)
-        cls.kYaxisVector = cls(0.0, 1.0, 0.0)
-        cls.kYnegAxisVector = cls(0.0, -1.0, 0.0)
-        cls.kZaxisVector = cls(0.0, 0.0, 1.0)
-        cls.kZnegAxisVector = cls(0.0, 0.0, -1.0)
+        cls.kZeroVector: "MVector" = cls(0.0, 0.0, 0.0)
+        cls.kOneVector: "MVector" = cls(1.0, 1.0, 1.0)
+        cls.kXaxisVector: "MVector" = cls(1.0, 0.0, 0.0)
+        cls.kXnegAxisVector: "MVector" = cls(-1.0, 0.0, 0.0)
+        cls.kYaxisVector: "MVector" = cls(0.0, 1.0, 0.0)
+        cls.kYnegAxisVector: "MVector" = cls(0.0, -1.0, 0.0)
+        cls.kZaxisVector: "MVector" = cls(0.0, 0.0, 1.0)
+        cls.kZnegAxisVector: "MVector" = cls(0.0, 0.0, -1.0)
 
 
 class MVector(metaclass=_MVectorMeta):
@@ -11549,7 +11565,7 @@ class MFn(object):
         # kNurbsSurface,
         # kPointLight,
         # kSpotLight,
-        # kTransform,
+        kTransform,
         }
 
 
@@ -12289,7 +12305,7 @@ class MPoint(object):
                 vals = list(arg) + [1.0] * (4 - len(arg))
                 self.x, self.y, self.z, self.w = vals[:4]
             else:
-                raise TypeError("Invalid argument type for MPoint")
+                raise TypeError(f"Invalid argument type for MPoint: {arg}")
         elif 3 <= len(args) <= 4:
             self.x = float(args[0])
             self.y = float(args[1])
@@ -12893,6 +12909,8 @@ class MObject(object):
         """
         x.__eq__(y) <==> x==y
         """
+        if not isinstance(other, MObject):
+            return False
         return self._uuid == other._uuid
 
     def __ge__(*args, **kwargs):
@@ -12918,7 +12936,7 @@ class MObject(object):
         self._alive: bool = False
         self._typeId: "MTypeId" = None
         self._parent: Optional['MObject'] = None
-        self._children = []
+        self._children: list["MObject"] = []
         self._is_shape = False
         self._is_world = False
         self._cached_plugs: dict[str, MPlug] = {}
@@ -13002,6 +13020,14 @@ class MObject(object):
         self._default = 0
         self._min = 0
         self._max = 0
+
+    def _init_nurbs_curve_fields(self):
+        self._cvs: list[MPoint] = []
+        self._knots: list[float] = []
+        self._degree: int = 0
+        self._form: int = MFnNurbsCurve.kOpen
+        self._is2d: bool = False
+        self._rational: bool = False
 
     def __le__(*args, **kwargs):
         """
@@ -15988,6 +16014,8 @@ class MFnBase(object):
         if args:
             if isinstance(args[0], MObject):
                 self._mobject = args[0]
+            elif args[0] is None:
+                self._mobject = None
         else:
             self._mobject = None
 
@@ -23582,7 +23610,7 @@ class MFnDagNode(MFnDependencyNode):
             self._dag_path = _initialize_dag_path_from_mobject(mobject)
         else:
              self._dag_path: Optional['MDagPath'] = None
-             mobject = arg
+             mobject = None
         
         super().__init__(mobject)
 
@@ -23639,31 +23667,29 @@ class MFnDagNode(MFnDependencyNode):
         transform. The transform will be returned.
         """
 
-        mobject = super().create(node_type, name)
+        mobject = _create_node_from_type(node_type, name=name, parent=parent)
 
-        # Append DAG node type to the API type list
-        if MFn.kDagNode not in mobject._api_type:
-            mobject._api_type.insert(
-                mobject._api_type.index(MFn.kDependencyNode) + 1,
-                MFn.kDagNode
-            )
+        # Set valid flag
+        self._mobject = mobject
 
-        # Do the same for child (if applicable)
+        mobject._alive = True
+        _NODE_ADDED_SIGNAL.send(mobject)
+
+        # Some nodes create shape nodes upon creation, thus signal them as well
         if len(mobject._children) > 0:
-            if MFn.kDagNode not in mobject._children[0]._api_type:
-                mobject._children[0]._api_type.insert(
-                    mobject._api_type.index(MFn.kDependencyNode) + 1,
-                    MFn.kDagNode
-                )
-        
-        # Setup hierarchy
-        if parent is not None and parent != MObject.kNullObj and mobject not in parent._children:
-            mobject._parent = parent
-            mobject._parent._children.append(mobject)
-        else:
-            mobject._parent = WORLD
-            WORLD._children.append(mobject)
+            self._mobject._children[0]._alive = True
+            _NODE_ADDED_SIGNAL.send(mobject._children[0])
 
+        # Determine the parent of the object
+        if parent is None or parent == MObject.kNullObj:
+            mobject._parent = WORLD  # Default parent is the world
+            WORLD._children.append(mobject)  # Add to world children
+        elif mobject is parent:
+            ...
+        else:
+            mobject._parent = parent  # Set the specified parent
+
+        # Choose return node
         if parent is not None and parent != MObject.kNullObj:
             if len(mobject._children):
                 return_mobject = mobject._children[0]  # Return shape. Fix your program, Maya... :/
@@ -29985,8 +30011,13 @@ class MFnNurbsCurve(MFnDagNode):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super(MFnNurbsCurve, self).__init__(*args, **kwargs)
+        if self._mobject is not None:
+            if not all(
+                [hasattr(self, attr) for attr in ("_cvs", "_knots", "_degree", "_form", "_is2D", "_rational")]
+            ):
+                raise RuntimeError("MFnNurbsCurve must be initialized with a valid MObject")
 
-    def area(*args, **kwargs):
+    def area(self, tolerance=0.001) -> float:
         """
         area(tolerance=kPointTolerance) -> float
 
@@ -29995,9 +30026,25 @@ class MFnNurbsCurve(MFnDagNode):
 
         * tolerance (float) - Amount of error allowed in the calculation
         """
-        pass
+        if self._mobject._form != self.kClosed:
+            return 0.0
+        # Shoelace formula for planar closed curve
+        cvs = self._mobject._cvs
+        if len(cvs) < 3:
+            return 0.0
+        # Project to XY for simplicity
+        x = [cv.x for cv in cvs]
+        y = [cv.y for cv in cvs]
+        area = 0.5 * abs(sum(x[i] * y[(i+1)%len(cvs)] - x[(i+1)%len(cvs)] * y[i] for i in range(len(cvs))))
+        return area
 
-    def closestPoint(*args, **kwargs):
+    def closestPoint(
+            self,
+            testPoint: MPoint,
+            guess: float = None,
+            tolerance=0.001,
+            space=MSpace.kObject
+        ) -> MPoint | float:
         """
         closestPoint(testPoint, guess=None, tolerance=kPointTolerance,
             space=kObject) -> (MPoint, float)
@@ -30017,9 +30064,23 @@ class MFnNurbsCurve(MFnDagNode):
                                and the returned point.
         * space (MSpace constant) - coordinate space to use for the points
         """
-        pass
+        min_dist = float('inf')
+        closest_pt = None
+        closest_param = None
+        num_samples = 100
+        t0 = self._mobject._knots[self._mobject._degree]
+        t1 = self._mobject._knots[-self._mobject._degree-1]
+        for i in range(num_samples+1):
+            t = t0 + (t1-t0) * i / num_samples
+            pt = self.getPointAtParam(t, space)
+            dist = (pt - testPoint).length()
+            if dist < min_dist:
+                min_dist = dist
+                closest_pt = pt
+                closest_param = t
+        return closest_pt, closest_param
 
-    def copy(*args, **kwargs):
+    def copy(self, source: MObject, parent=MObject.kNullObj) -> MObject:
         """
         copy(source, parent=MObject.kNullObj) -> MObject
 
@@ -30038,9 +30099,28 @@ class MFnNurbsCurve(MFnDagNode):
                        beneath it as a nurbsCurve node. In this last case it
                        will be the transform node which is returned.
         """
-        pass
+        # Assume source is an MObject with curve data
+        new_curve = MFnDagNode().create('nurbsCurve', parent=parent)
+        new_curve._cvs = list(source._cvs)
+        new_curve._knots = list(source._knots)
+        new_curve._degree = source._degree
+        new_curve._form = source._form
+        new_curve._is2d = getattr(source, '_is2d', False)
+        new_curve._rational = getattr(source, '_rational', False)
+        self._mobject = new_curve
 
-    def create(self, *args, **kwargs):
+        return new_curve
+
+    def create(
+            self,
+            cvs: MPointArray | list[MPoint],
+            knots: MDoubleArray | list[float],
+            degree: int,
+            form: int,
+            is2D: bool,
+            rational: bool,
+            parent=MObject.kNullObj
+        ) -> MObject:
         """
         create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
             -> self
@@ -30082,13 +30162,29 @@ class MFnNurbsCurve(MFnDagNode):
                        the previous curve in the array, and the curves must be
                        be at least C0 continuous (i.e. tangent breaks are okay).
         """
-        mobject = super().create('nurbsCurve', parent=kwargs.get('parent'))
-        if mobject is kwargs.get('parent') and mobject.hasFn(MFn.kTransform):
+        mobject = super().create('nurbsCurve', parent=parent)
+        if mobject is parent and mobject.hasFn(MFn.kTransform):
             # Return last child of the parent if it was a transform node
-            return mobject._children[-1]
+            mobject = self._mobject._children[-1]
+        mobject._cvs = list(cvs)
+        mobject._knots = list(knots)
+        mobject._degree = degree
+        mobject._form = form
+        mobject._is2d = is2D
+        mobject._rational = rational
+        self._mobject = mobject
         return mobject
 
-    def createWithEditPoints(*args, **kwargs):
+    def createWithEditPoints(
+            self,
+            eps: list[MPoint] | MPointArray,
+            degree: int,
+            form: int,
+            is2D: bool,
+            rational: bool,
+            uniform: bool,
+            parent=MObject.kNullObj
+        ) -> MObject:
         """
         createWithEditPoints(eps, degree, form, is2D, rational, uniform,
             parent=kNullObj) -> MObject
@@ -30120,9 +30216,14 @@ class MFnNurbsCurve(MFnDagNode):
                        beneath it as a nurbsCurve node. In this last case it
                        will be the transform node which is returned.
         """
-        pass
+        spans = len(eps) - degree
+        knotcount = spans + 2 * degree - 1
 
-    def cvPosition(*args, **kwargs):
+        cvs = [p for p in eps]
+        knots = [i for i in range(knotcount)]
+        return self.create(eps, knots, degree, form, is2D, rational, parent)
+
+    def cvPosition(self, index: int , space=MSpace.kObject) -> MPoint:
         """
         cvPosition(index, space=kObject) -> MPoint
 
@@ -30132,9 +30233,9 @@ class MFnNurbsCurve(MFnDagNode):
         * space (int) - an MSpace constant giving the coordinate space in
                         which the point is given
         """
-        pass
+        return self._mobject._cvs[index]
 
-    def cvPositions(*args, **kwargs):
+    def cvPositions(self, space=MSpace.kObject) -> MPointArray:
         """
         cvPositions(space=kObject) -> MPointArray
 
@@ -30143,9 +30244,9 @@ class MFnNurbsCurve(MFnDagNode):
         * space (int) - an MSpace constant giving the coordinate space in
                         which the point is given
         """
-        pass
+        return MPointArray(self._mobject._cvs)
 
-    def cvs(*args, **kwargs):
+    def cvs(self, startIndex: int, endIndex: int = None) -> MObject:
         """
         cvs(startIndex[, endIndex]) -> MObject
 
@@ -30160,9 +30261,11 @@ class MFnNurbsCurve(MFnDagNode):
                              provided then only the CV specified by
                              startIndex will be returned.
         """
-        pass
+        if endIndex is None:
+            return self._mobject._cvs[startIndex]
+        return self._mobject._cvs[startIndex:endIndex+1]
 
-    def distanceToPoint(*args, **kwargs):
+    def distanceToPoint(self, point: MPoint, space=MSpace.kObject) -> float:
         """
         distanceToPoint(point, space=kObject) -> float
 
@@ -30173,9 +30276,10 @@ class MFnNurbsCurve(MFnDagNode):
         * space (int)    - an MSpace constant giving the coordinate space in
                            which the point is given
         """
-        pass
+        closest_pt, _ = self.closestPoint(point, space=space)
+        return (MVector(closest_pt) - MVector(point)).length()
 
-    def findLengthFromParam(*args, **kwargs):
+    def findLengthFromParam(self, param: float) -> float:
         """
         findLengthFromParam(param) -> float
 
@@ -30185,9 +30289,19 @@ class MFnNurbsCurve(MFnDagNode):
 
         * param (float) - parameter value on the curve
         """
-        pass
+        # Approximate by sampling
+        t0 = self._mobject._knots[self._mobject._degree]
+        length = 0.0
+        prev = self.getPointAtParam(t0)
+        num_samples = 50
+        for i in range(1, num_samples+1):
+            t = t0 + (param-t0) * i / num_samples
+            pt = self.getPointAtParam(t)
+            length += (pt - prev).length()
+            prev = pt
+        return length
 
-    def findParamFromLength(*args, **kwargs):
+    def findParamFromLength(self, length: float) -> float:
         """
         findParamFromLength(length) -> float
 
@@ -30197,9 +30311,28 @@ class MFnNurbsCurve(MFnDagNode):
 
         * length (float) - distance along the curve
         """
-        pass
+        # Approximate by sampling
+        t0 = self._mobject._knots[self._mobject._degree]
+        t1 = self._mobject._knots[-self._mobject._degree-1]
+        total_length = self.length()
+        if length <= 0:
+            return t0
+        if length >= total_length:
+            return t1
+        prev = self.getPointAtParam(t0)
+        accum = 0.0
+        num_samples = 100
+        for i in range(1, num_samples+1):
+            t = t0 + (t1-t0) * i / num_samples
+            pt = self.getPointAtParam(t)
+            seg = (pt - prev).length()
+            if accum + seg >= length:
+                return t
+            accum += seg
+            prev = pt
+        return t1
 
-    def getDerivativesAtParam(*args, **kwargs):
+    def getDerivativesAtParam(self, param: float, space=MSpace.kObject, dUU=False) -> tuple:
         """
         getDerivativesAtParam(param, space=kObject) -> (MPoint, MVector[, MVector])
 
@@ -30213,9 +30346,18 @@ class MFnNurbsCurve(MFnDagNode):
                           which the point is given
         * dUU    (bool) - if True include the second derivative in the result.
         """
-        pass
+        pt = self.getPointAtParam(param, space)
+        # Approximate derivative by finite difference
+        dt = 1e-4
+        pt1 = self.getPointAtParam(param + dt, space)
+        tangent = (pt1 - pt) * (1.0 / dt)
+        if dUU:
+            pt2 = self.getPointAtParam(param + 2*dt, space)
+            second = (pt2 - 2*pt1 + pt) * (1.0 / (dt*dt))
+            return pt, tangent, second
+        return pt, tangent
 
-    def getParamAtPoint(*args, **kwargs):
+    def getParamAtPoint(self, point: MPoint, tolerance=0.001, space=MSpace.kObject) -> float:
         """
         getParamAtPoint(point, tolerance=kPointTolerance, space=kObject) -> float
 
@@ -30228,9 +30370,10 @@ class MFnNurbsCurve(MFnDagNode):
         * space       (int) - an MSpace constant giving the coordinate space
                               in which the point is given
         """
-        pass
+        _, param = self.closestPoint(point, tolerance=tolerance, space=space)
+        return param
 
-    def getPointAtParam(*args, **kwargs):
+    def getPointAtParam(self, param: float, space=MSpace.kObject) -> MPoint:
         """
         getPointAtParam(param, space=kObject) -> MPoint
 
@@ -30240,9 +30383,26 @@ class MFnNurbsCurve(MFnDagNode):
         * space   (int) - an MSpace constant giving the coordinate space in
                           which the point should be returned
         """
-        pass
+        # De Boor's algorithm for B-spline evaluation
+        cvs = self._mobject._cvs
+        knots = self._mobject._knots
+        degree = self._mobject._degree
+        n = len(cvs) - 1
+        k = degree
+        # Find knot span
+        for i in range(k, len(knots)-k-1):
+            if knots[i] <= param < knots[i+1]:
+                break
+        else:
+            i = len(knots)-k-2
+        d = [cvs[j] for j in range(i-k, i+1)]
+        for r in range(1, k+1):
+            for j in range(k, r-1, -1):
+                alpha = (param - knots[i-k+j]) / (knots[j+1+i-r] - knots[i-k+j]) if knots[j+1+i-r] != knots[i-k+j] else 0
+                d[j] = d[j-1] * (1.0 - alpha) + d[j] * alpha
+        return d[k]
 
-    def isParamOnCurve(*args, **kwargs):
+    def isParamOnCurve(self, param: float) -> bool:
         """
         isParamOnCurve(param) -> bool
 
@@ -30251,9 +30411,10 @@ class MFnNurbsCurve(MFnDagNode):
 
         * param (float) - parameter value to test
         """
-        pass
+        knots = self._mobject._knots
+        return knots[self._mobject._degree] <= param <= knots[-self._mobject._degree-1]
 
-    def isPointOnCurve(*args, **kwargs):
+    def isPointOnCurve(self, point, tolerance=0.001, space=MSpace.kObject):
         """
         isPointOnCurve(point, tolerance=kPointTolerance, space=kObject) -> bool
 
@@ -30265,9 +30426,10 @@ class MFnNurbsCurve(MFnDagNode):
         * space       (int) - an MSpace constant giving the coordinate space
                               in which the point is given
         """
-        pass
+        pt, dist = self.closestPoint(point, tolerance=tolerance, space=space)
+        return (pt - point).length() <= tolerance
 
-    def knot(*args, **kwargs):
+    def knot(self, index: int) -> float:
         """
         knot(index) -> float
 
@@ -30276,17 +30438,17 @@ class MFnNurbsCurve(MFnDagNode):
         * index (int) - index of the knot to return. These range from 0 to
                         (numKnots - 1)
         """
-        pass
+        return self._mobject._knots[index]
 
-    def knots(*args, **kwargs):
+    def knots(self) -> MDoubleArray:
         """
         knots() -> MDoubleArray
 
         Returns the parameter values for all of the curve's knots.
         """
-        pass
+        return MDoubleArray(self._mobject._knots)
 
-    def length(*args, **kwargs):
+    def length(self, tolerance=0.001) -> float:
         """
         length(tolerance=kPointTolerance) -> float
 
@@ -30294,9 +30456,20 @@ class MFnNurbsCurve(MFnDagNode):
 
         * tolerance (float) - max error allowed in the calculation.
         """
-        pass
+        # Approximate by sampling
+        t0 = self._mobject._knots[self._mobject._degree]
+        t1 = self._mobject._knots[-self._mobject._degree-1]
+        num_samples = 100
+        length = 0.0
+        prev = self.getPointAtParam(t0)
+        for i in range(1, num_samples+1):
+            t = t0 + (t1-t0) * i / num_samples
+            pt = self.getPointAtParam(t)
+            length += (pt - prev).length()
+            prev = pt
+        return length
 
-    def makeMultipleEndKnots(*args, **kwargs):
+    def makeMultipleEndKnots(self) -> 'MFnNurbsCurve':
         """
         makeMultipleEndKnots() -> self
 
@@ -30305,9 +30478,15 @@ class MFnNurbsCurve(MFnDagNode):
         directly on them). It can also be used to convert a periodic curve
         to a closed curve.
         """
-        pass
+        k = self._mobject._degree
+        knots = self._mobject._knots
+        for i in range(k):
+            knots[i] = knots[k]
+            knots[-i-1] = knots[-k-1]
+        self._mobject._knots = knots
+        return self
 
-    def normal(*args, **kwargs):
+    def normal(self, param: float, space=MSpace.kObject) -> MVector:
         """
         normal(param, space=kObject) -> MVector
 
@@ -30320,9 +30499,14 @@ class MFnNurbsCurve(MFnDagNode):
         * space   (int) - an MSpace constant giving the coordinate space in
                           which the normal should be returned
         """
-        pass
+        # For 2D curve, normal is perpendicular to tangent
+        pt, tangent = self.getDerivativesAtParam(param, space)
+        tangent_vec = np.array([tangent.x, tangent.y])
+        normal_vec = np.array([-tangent_vec[1], tangent_vec[0]])
+        normal_vec = normal_vec / np.linalg.norm(normal_vec)
+        return MVector(normal_vec[0], normal_vec[1], 0.0)
 
-    def removeKnot(*args, **kwargs):
+    def removeKnot(self, param: float, removeAll=False) -> 'MFnNurbsCurve':
         """
         removeKnot(param, removeAll=False) -> self
 
@@ -30335,17 +30519,35 @@ class MFnNurbsCurve(MFnDagNode):
         * param     (float) - parameter of the knot
         * removeAll  (bool) - how to handle multiple knots at the same param
         """
-        pass
+        knots = self._mobject._knots
+        count = knots.count(param)
+        if count == 0:
+            return self
+        if removeAll:
+            self._mobject._knots = [k for k in knots if k != param]
+        else:
+            # Remove all but one
+            removed = 0
+            new_knots = []
+            for k in knots:
+                if k == param and removed < count-1:
+                    removed += 1
+                    continue
+                new_knots.append(k)
+            self._mobject._knots = new_knots
+        return self
 
-    def reverse(*args, **kwargs):
+    def reverse(self) -> 'MFnNurbsCurve':
         """
         reverse() -> self
 
         Reverses the direction of the curve.
         """
-        pass
+        self._mobject._cvs = list(reversed(self._mobject._cvs))
+        self._mobject._knots = list(reversed(self._mobject._knots))
+        return self
 
-    def setCVPosition(*args, **kwargs):
+    def setCVPosition(self, index: int, point: MPoint, space=MSpace.kObject) -> 'MFnNurbsCurve':
         """
         setCVPosition(index, point, space=kObject) -> self
 
@@ -30356,9 +30558,10 @@ class MFnNurbsCurve(MFnDagNode):
         * space    (int) - an MSpace constant giving the coordinate space
                            in which the point is given
         """
-        pass
+        self._mobject._cvs[index] = point
+        return self
 
-    def setCVPositions(*args, **kwargs):
+    def setCVPositions(self, points: MPointArray | list[MPoint], space=MSpace.kObject) -> 'MFnNurbsCurve':
         """
         setCVPositions(points, space=kObject) -> self
 
@@ -30371,9 +30574,12 @@ class MFnNurbsCurve(MFnDagNode):
         * space  (int) - an MSpace constant giving the coordinate space
                          in which the points are given
         """
-        pass
+        if len(points) != len(self._mobject._cvs):
+            raise ValueError("Incorrect number of CVs")
+        self._mobject._cvs = list(points)
+        return self
 
-    def setKnot(*args, **kwargs):
+    def setKnot(self, index: int, param: float) -> 'MFnNurbsCurve':
         """
         setKnot(index, param) -> self
 
@@ -30381,9 +30587,10 @@ class MFnNurbsCurve(MFnDagNode):
         * index   (int) - index of the knot
         * param (float) - new parameter value for the knot
         """
-        pass
+        self._mobject._knots[index] = param
+        return self
 
-    def setKnots(*args, **kwargs):
+    def setKnots(self, params: MDoubleArray | list[float], startIndex: int, endIndex: int) -> 'MFnNurbsCurve':
         """
         setKnots(params, startIndex, endIndex) -> self
 
@@ -30395,9 +30602,11 @@ class MFnNurbsCurve(MFnDagNode):
         * startIndex (int) - first knot in the range to be set
         * endIndex   (int) - last knot in the range to be set
         """
-        pass
+        for i, val in enumerate(params):
+            self._mobject._knots[startIndex + i] = val
+        return self
 
-    def tangent(*args, **kwargs):
+    def tangent(self, param: float, space=MSpace.kObject) -> MVector:
         """
         tangent(param, space=kObject) -> MVector
 
@@ -30408,46 +30617,61 @@ class MFnNurbsCurve(MFnDagNode):
         * space   (int) - an MSpace constant giving the coordinate space in
                           which the tangent should be returned
         """
-        pass
+        pt, tangent = self.getDerivativesAtParam(param, space)
+        t = np.array([tangent.x, tangent.y, tangent.z])
+        t = t / np.linalg.norm(t)
+        return MVector(*t)
 
-    def updateCurve(*args, **kwargs):
+    def updateCurve(self) -> 'MFnNurbsCurve':
         """
         updateCurve() -> self
 
         Tells the shape node which represents the curve in the scene, if
         any, that the curve has changed and needs to be redrawn.
         """
-        pass
+        return self
 
-    degree = None
+    @property
+    def degree(self):
+        return self._mobject._degree
 
-    form = None
+    @property
+    def form(self):
+        return self._mobject._form
 
     hasHistoryOnCreate = None
 
     isPlanar = None
 
-    kClosed = 2
-
     kInvalid = 0
-
-    kLast = 4
 
     kOpen = 1
 
+    kClosed = 2
+
     kPeriodic = 3
+
+    kLast = 4
 
     kPointTolerance = 0.001
 
     knotDomain = None
 
-    numCVs = None
+    @property
+    def numCVs(self) -> int:
+        return len(self._mobject._cvs)
 
-    numKnots = None
+    @property
+    def numKnots(self) -> int:
+        return len(self._mobject._knots)
+    
+    @property
+    def numSpans(self) -> int:
+        return len(self._mobject._knots) - 2 * self._mobject._degree - 1
 
-    numSpans = None
-
-    planeNormal = None
+    @property
+    def planeNormal(self) -> MVector:
+        return MVector(0, 0, 1)
 
 
 py2dict = {}
