@@ -5435,6 +5435,8 @@ class MItDag(object):
         """
         if args and isinstance(args[0], MObject):
             self._root = args[0]
+        elif args and isinstance(args[0], MDagPath):
+            self._root = args[0].node()
         if 'traversalType' in kwargs:
             self._traversalType = kwargs['traversalType']
         if 'filterType' in kwargs:
@@ -23734,46 +23736,39 @@ class MFnDagNode(MFnDependencyNode):
             raise NotImplementedError('Instance duplication not implemented yet.')
 
         iterator = MItDag()
-        iterator.reset(self._dag_path)
-        flattened_hierarchy: dict[int, MObject] = {}
+        iterator.reset(self._dag_path.node())
+        flattened_hierarchy: dict[str, MObject] = {}
 
+        # First pass: duplicate nodes and map by UUID
         while not iterator.isDone():
-            # Duplicate the current item
             current = iterator.currentItem()
-            
             dup = copy.deepcopy(current)
-
-            # Reset the connections
-            for plug in dup._cached_plugs.values():
-                plug._connections = {'INPUTS': {}, 'OUTPUTS': {}}
-
-            # Store the duplicate in the flattened hierarchy
-            flattened_hierarchy[hash(dup._name)] = dup
+            flattened_hierarchy[str(current._uuid)] = dup
             iterator.next()
 
+        # Second pass: reparent nodes using UUIDs
         for node in flattened_hierarchy.values():
-            new_parent = None
-            new_children = []
-
-            if node._parent is not None:
-                new_parent = flattened_hierarchy.get(hash(node._parent._name))
-            if node._children:
-                new_children = [flattened_hierarchy.get(hash(child._name)) for child in node._children]
-
-            # Reparent the node to the updated references
+            new_parent = flattened_hierarchy.get(str(node._parent._uuid)) if node._parent else None
+            new_children = [flattened_hierarchy.get(str(child._uuid)) for child in node._children] if node._children else []
             node._parent = new_parent
             node._children = new_children
-        
-        duplicated_nd = flattened_hierarchy.get(hash(self._mobject._name))
 
-        # Ensure unique names
+        duplicated_nd = flattened_hierarchy.get(str(self._mobject._uuid))
+
+        # Third pass: ensure unique names and attributes
         for dup in flattened_hierarchy.values():
             dup._uuid = uuid.uuid4()
-            parent_name = dup._parent._name if dup._parent else None
-            dup._name = hierarchy.find_first_available_name(
-                dup._name,
-            )
-        
+            dup._name = hierarchy.find_first_available_name(dup._name)
+            dup._cached_plugs = {}
+            attrs = dup._attributes.copy()
+            for key, attr in attrs.items():
+                attr._owner = dup
+                attr._uuid = _get_attribute_id(f"{dup._name}.{attr._name}")
+                del dup._attributes[key]
+                dup._attributes[attr._uuid] = attr
+                mplug = _mplug_from_attr_and_node(attr, dup)
+                dup._cached_plugs[mplug._uuid] = mplug
+
         return duplicated_nd
 
     @_raise_if_invalid_mobject_decorator

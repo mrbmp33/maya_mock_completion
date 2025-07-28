@@ -4954,8 +4954,8 @@ def makebot(checkdepends=bool(), c=bool(), checkres=int(), r=int(), input=str(),
     pass
 
 
-def makeIdentity(apply=bool(), a=bool(), jointOrient=bool(), jo=bool(), normal=int(), n=int(), preserveNormals=bool(),
-                 pn=bool(), rotate=bool(), r=bool(), scale=bool(), s=bool(), translate=bool(), t=bool(), *args,
+def makeIdentity(*objects, apply=bool(), a=bool(), jointOrient=bool(), jo=bool(), normal=int(), n=int(), preserveNormals=bool(),
+                 pn=bool(), rotate=bool(), r=bool(), scale=bool(), s=bool(), translate=bool(), t=bool(),
                  **kwargs):
     pass
 
