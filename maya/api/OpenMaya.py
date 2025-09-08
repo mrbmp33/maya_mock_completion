@@ -21,7 +21,7 @@ import math
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 import blinker
-from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, cast, overload
+from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, cast, overload, Iterator
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
@@ -2214,6 +2214,7 @@ class MDGModifier(object):
         self._queue = []
         self._done = False
         self._undone = False
+        # self._finializer = weakref.finalize(self, self._flag_destroyed)
 
     def addAttribute(self, node: 'MObject', attribute: 'MObject') -> 'MDGModifier':
         """
@@ -2315,11 +2316,11 @@ class MDGModifier(object):
         self._queue.append(('create', mobject))
         return mobject
 
-    def deleteNode(self, node: "MObject"):
+    def deleteNode(self, node: "MObject", *args) -> 'MDGModifier':
         """
-        deleteNode(MObject node) -> self
+        deleteNode(MObject node, bool deleteParents=False) -> self
 
-        Adds an operation to the modifer which deletes the specified node from
+        Adds an operation to the modifier which deletes the specified node from
         the Dependency Graph. If the modifier already contains other operations
         on the same node (e.g. a disconnect) then they should be committed by
         calling the modifier's doIt() before the deleteNode operation is added.
@@ -2903,6 +2904,16 @@ class MDGModifier(object):
         methods.
         """
         pass
+
+    def __del__(self):
+        """Not part of the public API. Marks removed mobjects as destroyed, invoking the callback."""
+        for action in self._queue:
+            if not (action[0] == 'create' or action[0] == 'delete'):
+                continue
+            mobject = action[1]
+            if mobject._alive is False:
+                mobject._destroyed = True
+                _NODE_DESTROYED_SIGNAL.send(mobject)
 
 
 class MUint64Array(object):
@@ -4654,7 +4665,7 @@ class MPlugArray(object):
             return MPlugArray(*(self._plugs + other._plugs))
         return NotImplemented
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator["MPlug"]:
         """
         x.__iter__() <==> iter(x)
         """
