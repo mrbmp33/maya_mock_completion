@@ -17621,6 +17621,8 @@ class MPlug(object):
         """
         x.__eq__(y) <==> x==y
         """
+        if self._owner != value._owner:
+            return False
         if isinstance(value, MPlug):
             value = value.attribute()
         return hash(self.attribute()._name) == hash(value._name)
@@ -25096,17 +25098,17 @@ class MFnMessageAttribute(MFnAttribute):
     Functionset for creating and working with message attributes.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def create(*args, **kwargs):
+    def create(self, *args, **kwargs):
         """
         Creates a new message attribute, attaches it to the function set and returns it as an MObject.
         """
-        pass
+        return super()._create(*args, **kwargs)
 
 
 class MFnPointArrayData(MFnData):
