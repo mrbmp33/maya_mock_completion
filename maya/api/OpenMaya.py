@@ -22643,11 +22643,11 @@ class MFnDependencyNode(MFnBase):
         return name
 
     @_raise_if_invalid_mobject_decorator
-    def setUuid(*args, **kwargs):
+    def setUuid(self, uuid: MUuid):
         """
         Sets the node's UUID.
         """
-        pass
+        self._mobject._uuid = uuid._uuid
 
     def userNode(*args, **kwargs):
         """
@@ -23320,7 +23320,7 @@ class MFnTypedAttribute(MFnAttribute):
 
         # Handle defaults based on specific data types
         if data_type == MFnData.kString:
-            default_value = ''
+            default_value = default_value._value
         elif data_type == MFnData.kMatrix:
             self._mobject._init_matrix_fields()
             default_value = np.identity(4, dtype=np.float64)
@@ -25318,29 +25318,36 @@ class MFnStringData(MFnData):
     Function set for string node data.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def create(*args, **kwargs):
+    def create(self, *args) -> 'MObject':
         """
         Creates a new string data object.
         """
-        pass
+        super()._create()
+        if args:
+            self._mobject._value = args[0]
+        else:
+            self._mobject._value = ''
+        self._mobject._api_type.append(MFn.kStringData)
+        return self._mobject
 
-    def set(*args, **kwargs):
+    def set(self, value: str) -> 'MFnStringData':
         """
         Sets the value of the encapsulated string.
         """
-        pass
+        self._mobject._value = value
+        return self
 
-    def string(*args, **kwargs):
+    def string(self) -> str:
         """
         Returns the encapsulated string as a unicode object.
         """
-        pass
+        return self._mobject._value
 
 
 class MFnCompoundAttribute(MFnAttribute):
