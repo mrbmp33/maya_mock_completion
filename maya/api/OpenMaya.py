@@ -21,7 +21,7 @@ import math
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 import blinker
-from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, cast, overload, Iterator
+from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Generator, Type, cast, overload, Iterator, Literal
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
@@ -2382,11 +2382,14 @@ class MDGModifier(object):
             previous_acitons = self._queue[:self._executed]
 
             # Since there is no going back, remove dead mobjects from hierarchy
-            dead_mobjects = [
-                action[1] for action in previous_acitons if action[0] == 'create' and not action[1]._alive
-                ]
+            dead_mobjects = []
+            for action in previous_acitons:
+                if action[0] == 'delete' and not action[1]._alive:
+                    dead_mobjects.append(action[1])
+                elif action[0] == 'create' and not action[1]._alive:
+                    dead_mobjects.append(action[1])
             for mobject in dead_mobjects:
-                hierarchy.deregister(mobject)
+                _NODE_DESTROYED_SIGNAL.send(mobject)
 
             self._queue = self._queue[self._executed:]
         
@@ -2401,7 +2404,7 @@ class MDGModifier(object):
             elif action[0] == 'delete':
                 mobject: 'MObject' = action[1]
                 mobject._alive = False
-                if mobject._parent:
+                if mobject._parent and mobject in mobject._parent._children:
                     mobject._parent._children.remove(mobject)
                 _NODE_REMOVED_SIGNAL.send(mobject)
             
@@ -2412,37 +2415,62 @@ class MDGModifier(object):
                 hierarchy.register(mobject)
             
             elif action[0] == 'reparent':
-                mobject: 'MObject' = action[1]
-                mobject._parent._children.remove(mobject)
-                mobject._parent = action[2]
-                mobject._parent._children.append(mobject)
+                mobject = cast(MObject, action[1])
+                old_parent = mobject._parent
+                new_parent = cast(MObject, action[2])
+                if new_parent and mobject not in new_parent._children:
+                    new_parent._children.append(mobject)
+                if old_parent and mobject in old_parent._children:
+                    old_parent._children.remove(mobject)
+                mobject._parent = new_parent
                 hierarchy.register(mobject)  # ensure path is updated
             
             elif action[0] == 'connect':
                 if len(action) == 3:
-                    source_plug: MPlug = action[1]
-                    dest_plug: MPlug = action[2]
+                    source_plug = cast(MPlug, action[1])
+                    dest_plug = cast(MPlug, action[2])
+                    
                     # Add connection to cached connections
                     dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
-                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
+
+                    # A source plug can have multiple destinations, they are a set
+                    destinations = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
+                    if dest_plug not in destinations:
+                        destinations.append(dest_plug)
+                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = destinations
+                
                 elif len(action) == 5:
-                    source_node: 'MObject' = action[1]
-                    source_attr: 'MObject' = action[2]
-                    dest_node: 'MObject' = action[3]
-                    dest_attr: 'MObject' = action[4]
+                    source_node = cast(MObject, action[1])
+                    source_attr = cast(MObject, action[2])
+                    dest_node = cast(MObject, action[3])
+                    dest_attr = cast(MObject, action[4])
                     source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
                     dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+                    
                     # Add connection to cached connections
                     dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
-                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
-            
+
+                    # A source plug can have multiple destinations, they are a list
+                    destinations = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
+                    if dest_plug not in destinations:
+                        destinations.append(dest_plug)
+                    source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = destinations
+
             elif action[0] == 'disconnect':
                 if len(action) == 3:
-                    source_plug: MPlug = action[1]
-                    dest_plug: MPlug = action[2]
+                    source_plug = cast(MPlug, action[1])
+                    dest_plug = cast(MPlug, action[2])
+
                     # Remove connection from cached connections
                     del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
-                    del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
+
+                    destination = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
+                    if dest_plug in destination:
+                        destination.remove(dest_plug)
+                    if len(destination) == 0:
+                        del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
+                    else:
+                        source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = destination
                 elif len(action) == 5:
                     source_node: 'MObject' = action[1]
                     source_attr: 'MObject' = action[2]
@@ -2450,10 +2478,18 @@ class MDGModifier(object):
                     dest_attr: 'MObject' = action[4]
                     source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
                     dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
+                    
                     # Remove connection from cached connections
                     del dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)]
-                    del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
-            
+
+                    destination = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
+                    if dest_plug in destination:
+                        destination.remove(dest_plug)
+                    if len(destination) == 0:
+                        del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
+                    else:
+                        source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = destination
+
             elif action[0] == 'addAttribute':
                 node: 'MObject' = action[1]
                 attribute: 'MObject' = action[2]
@@ -2910,10 +2946,12 @@ class MDGModifier(object):
         for action in self._queue:
             if not (action[0] == 'create' or action[0] == 'delete'):
                 continue
-            mobject = action[1]
-            if mobject._alive is False:
-                mobject._destroyed = True
-                _NODE_DESTROYED_SIGNAL.send(mobject)
+            mobject = cast(MObject, action[1])
+            if not mobject._alive:
+                try:
+                    _NODE_DESTROYED_SIGNAL.send(mobject)
+                except AttributeError:
+                    pass
 
 
 class MUint64Array(object):
@@ -17657,7 +17695,7 @@ class MPlug(object):
         self._value = None
         self._children_plugs = []
 
-        self._connections = {
+        self._connections: dict[Literal['INPUTS', 'OUTPUTS'], dict[uuid.UUID, list[MPlug]]] = {
             'INPUTS': {},
             'OUTPUTS': {},
         }
@@ -17838,13 +17876,13 @@ class MPlug(object):
         plug_array._plugs = []
         if asDest and asSrc:
             plug_array._plugs = list(self._connections['INPUTS'].values()) + list(self._connections['OUTPUTS'].values())
-            return plug_array
         elif asDest:
             plug_array._plugs = list(self._connections['INPUTS'].values())
-            return plug_array
         elif asSrc:
             plug_array._plugs = list(self._connections['OUTPUTS'].values())
-            return plug_array
+
+        # Flatten the list of lists
+        plug_array._plugs = [plug for sublist in plug_array._plugs for plug in (sublist if isinstance(sublist, list) else [sublist])]
         return plug_array
     
     def connectionByPhysicalIndex(self, index: int) -> 'MPlug':
@@ -20709,7 +20747,7 @@ class MNodeMessage(MMessage):
                 )
 
         # Setup event trigger
-        _NODE_DESTROYED_SIGNAL.connect(as_partial_fn)
+        _NODE_DESTROYED_SIGNAL.connect(as_partial_fn, sender=node)
 
         # Register the callback
         sys.modules[__name__]._CALLBACKS_REGISTRY[cb_id] = (as_partial_fn, _NODE_DESTROYED_SIGNAL)
