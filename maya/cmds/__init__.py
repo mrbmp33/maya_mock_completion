@@ -3,13 +3,13 @@ import math
 from time import sleep
 import re
 import platform
-from typing import Union
+from typing import Union, cast
 from pathlib import Path
 import weakref
 import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
 from maya.api import OpenMaya as om
-from maya import ACTIVE_SELECTION
+from maya import ACTIVE_SELECTION, IMPORT_MESH_DATA
 from mmc_output import node_types_to_shapes
 
 
@@ -3075,45 +3075,77 @@ def fcheck(*args, **kwargs):
     pass
 
 
-def file(absoluteName=bool(), an=bool(), activate=bool(), a=bool(), activeProxy=bool(), ap=bool(), add=bool(),
-         anyModified=bool(), amf=bool(), applyTo=str(), at=str(), buildLoadSettings=bool(), bls=bool(), channels=bool(),
-         chn=bool(), cleanReference=str(), cr=str(), command=list, c=list, compress=bool(), cmp=bool(),
-         constraints=bool(), con=bool(), constructionHistory=bool(), ch=bool(), copyNumberList=bool(), cnl=bool(),
-         defaultExtensions=bool(), de=bool(), defaultNamespace=bool(), dns=bool(), deferReference=bool(), dr=bool(),
-         editCommand=str(), ec=str(), errorStatus=bool(), err=bool(), executeScriptNodes=bool(), esn=bool(),
-         exists=bool(), ex=bool(), expandName=bool(), exn=bool(), exportAll=bool(), ea=bool(), exportAnim=bool(),
-         ean=bool(), exportAnimFromReference=bool(), ear=bool(), exportAsReference=bool(), er=bool(),
-         exportAsSegment=bool(), exs=bool(), exportSelected=bool(), es=bool(), exportSelectedAnim=bool(), eas=bool(),
-         exportSelectedAnimFromReference=bool(), esa=bool(), exportSelectedNoReference=bool(), esr=bool(),
-         exportSelectedStrict=bool(), ess=bool(), exportSnapshotCallback=list, esc=list,
-         exportUnloadedReferences=bool(), eur=bool(), expressions=bool(), exp=bool(), fileMetaData=bool(), fmd=bool(),
-         flushReference=str(), fr=str(), force=bool(), f=bool(), groupLocator=bool(), gl=bool(), groupName=str(),
-         gn=str(), groupReference=bool(), gr=bool(), i=bool(), ignoreVersion=bool(), iv=bool(), importFrameRate=bool(),
-         ifr=bool(), importReference=bool(), ir=bool(), importTimeRange=str(), itr=str(), lastFileOption=bool(),
-         lfo=bool(), lastTempFile=bool(), ltf=bool(), list=bool(), l=bool(), loadAllDeferred=bool(), lad=bool(),
-         loadAllReferences=bool(), lar=bool(), loadNoReferences=bool(), lnr=bool(), loadReference=str(), lr=str(),
-         loadReferenceDepth=str(), lrd=str(), loadReferencePreview=str(), lrp=str(), loadSettings=str(), ls=str(),
-         location=bool(), loc=bool(), lockContainerUnpublished=bool(), lcu=bool(), lockFile=bool(), lf=bool(),
-         lockReference=bool(), lck=bool(), mapPlaceHolderNamespace=list, mns=list, mergeBaseAnimLayer=bool(),
-         mbl=bool(), mergeNamespaceWithParent=bool(), mnp=bool(), mergeNamespaceWithRoot=bool(), mnr=bool(),
-         mergeNamespacesOnClash=bool(), mnc=bool(), modified=bool(), mf=bool(), moveSelected=bool(), ms=bool(),
-         namespace=str(), ns=str(), newFile=bool(), new=bool(), open=bool(), o=bool(), options=str(), op=str(),
-         parentNamespace=bool(), pns=bool(), postSaveScript=str(), pos=str(), preSaveScript=str(), prs=str(),
-         preserveName=bool(), pn=bool(), preserveReferences=bool(), pr=bool(), preview=bool(), pv=bool(), prompt=bool(),
-         pmt=bool(), proxyManager=str(), pm=str(), proxyTag=str(), pt=str(), reference=bool(), r=bool(),
-         referenceDepthInfo=int(), rdi=int(), referenceNode=str(), rfn=str(), relativeNamespace=str(), rns=str(),
-         removeDuplicateNetworks=bool(), rdn=bool(), removeReference=bool(), rr=bool(), rename=str(), rn=str(),
-         renameAll=bool(), ra=bool(), renameToSave=bool(), rts=bool(), renamingPrefix=str(), rpr=str(),
-         renamingPrefixList=bool(), rpl=bool(), replaceName=list, rep=list, reserveNamespaces=bool(), rvn=bool(),
-         resetError=bool(), rer=bool(), returnNewNodes=bool(), rnn=bool(), save=bool(), s=bool(), saveDiskCache=str(),
-         sdc=str(), saveReference=bool(), sr=bool(), saveReferencesUnloaded=bool(), sru=bool(), saveTextures=str(),
-         stx=str(), sceneName=bool(), sn=bool(), segment=str(), seg=str(), selectAll=bool(), sa=bool(), shader=bool(),
-         sh=bool(), sharedNodes=str(), shd=str(), sharedReferenceFile=bool(), srf=bool(), shortName=bool(), shn=bool(),
-         strict=bool(), str=bool(), swapNamespace=list, sns=list, type=str(), typ=str(), uiConfiguration=bool(),
-         uc=bool(), uiLoadConfiguration=bool(), ulc=bool(), unloadReference=str(), ur=str(), unresolvedName=bool(),
-         un=bool(), usingNamespaces=bool(), uns=bool(), withoutCopyNumber=bool(), wcn=bool(), writable=bool(), w=bool(),
-         *args, **kwargs):
-    
+def file(*args, absoluteName: bool = None, an: bool = None, activate: bool = None, a: bool = None, activeProxy: bool = None, ap: bool = None, add: bool = None,
+         anyModified: bool = None, amf: bool = None, applyTo: str = None, at: str = None, buildLoadSettings: bool = None, bls: bool = None, channels: bool = None,
+         chn: bool = None, cleanReference: str = None, cr: str = None, command=list, c=list, compress: bool = None, cmp: bool = None,
+         constraints: bool = None, con: bool = None, constructionHistory: bool = None, ch: bool = None, copyNumberList: bool = None, cnl: bool = None,
+         defaultExtensions=True, de=True, defaultNamespace: bool = None, dns: bool = None, deferReference=False, dr=False,
+         editCommand: str = None, ec: str = None, errorStatus: bool = None, err: bool = None, executeScriptNodes=True, esn=True,
+         exists: bool = None, ex: bool = None, expandName: bool = None, exn: bool = None, exportAll: bool = None, ea: bool = None, exportAnim: bool = None,
+         ean: bool = None, exportAnimFromReference: bool = None, ear: bool = None, exportAsReference: bool = None, er: bool = None,
+         exportAsSegment: bool = None, exs: bool = None, exportSelected: bool = None, es: bool = None, exportSelectedAnim: bool = None, eas: bool = None,
+         exportSelectedAnimFromReference: bool = None, esa: bool = None, exportSelectedNoReference: bool = None, esr: bool = None,
+         exportSelectedStrict: bool = None, ess: bool = None, exportSnapshotCallback=list, esc=list,
+         exportUnloadedReferences: bool = None, eur: bool = None, expressions: bool = None, exp: bool = None, fileMetaData: bool = None, fmd: bool = None,
+         flushReference: str = None, fr: str = None, force: bool = None, f: bool = None, groupLocator: bool = None, gl: bool = None, groupName: str = None,
+         gn: str = None, groupReference: bool = None, gr: bool = None, i: bool = None, ignoreVersion: bool = None, iv: bool = None, importFrameRate: bool = None,
+         ifr: bool = None, importReference: bool = None, ir: bool = None, importTimeRange: str = None, itr: str = None, lastFileOption: bool = None,
+         lfo: bool = None, lastTempFile: bool = None, ltf: bool = None, list: bool = None, l: bool = None, loadAllDeferred: bool = None, lad: bool = None,
+         loadAllReferences: bool = None, lar: bool = None, loadNoReferences: bool = None, lnr: bool = None, loadReference: str = None, lr: str = None,
+         loadReferenceDepth: str = None, lrd: str = None, loadReferencePreview: str = None, lrp: str = None, loadSettings: str = None, ls: str = None,
+         location: bool = None, loc: bool = None, lockContainerUnpublished: bool = None, lcu: bool = None, lockFile: bool = None, lf: bool = None,
+         lockReference: bool = None, lck: bool = None, mapPlaceHolderNamespace=list, mns=list, mergeBaseAnimLayer: bool = None,
+         mbl: bool = None, mergeNamespaceWithParent: bool = None, mnp: bool = None, mergeNamespaceWithRoot: bool = None, mnr: bool = None,
+         mergeNamespacesOnClash=False, mnc=False, modified: bool = None, mf: bool = None, moveSelected: bool = None, ms: bool = None,
+         namespace: str = None, ns: str = None, newFile: bool = None, new: bool = None, open: bool = None, o: bool = None, options: str = None, op: str = None,
+         parentNamespace: bool = None, pns: bool = None, postSaveScript: str = None, pos: str = None, preSaveScript: str = None, prs: str = None,
+         preserveName: bool = None, pn: bool = None, preserveReferences: bool = None, pr: bool = None, preview: bool = None, pv: bool = None, prompt: bool = None,
+         pmt: bool = None, proxyManager: str = None, pm: str = None, proxyTag: str = None, pt: str = None, reference: bool = None, r: bool = None,
+         referenceDepthInfo=int, rdi=int, referenceNode: str = None, rfn: str = None, relativeNamespace: str = None, rns: str = None,
+         removeDuplicateNetworks: bool = None, rdn: bool = None, removeReference: bool = None, rr: bool = None, rename: str = None, rn: str = None,
+         renameAll: bool = None, ra: bool = None, renameToSave: bool = None, rts: bool = None, renamingPrefix: str = None, rpr: str = None,
+         renamingPrefixList: bool = None, rpl: bool = None, replaceName=list, rep=list, reserveNamespaces: bool = None, rvn: bool = None,
+         resetError: bool = None, rer: bool = None, returnNewNodes: bool = None, rnn: bool = None, save: bool = None, s: bool = None, saveDiskCache: str = None,
+         sdc: str = None, saveReference: bool = None, sr: bool = None, saveReferencesUnloaded: bool = None, sru: bool = None, saveTextures: str = None,
+         stx: str = None, sceneName: bool = None, sn: bool = None, segment: str = None, seg: str = None, selectAll: bool = None, sa: bool = None, shader: bool = None,
+         sh: bool = None, sharedNodes: str = None, shd: str = None, sharedReferenceFile: bool = None, srf: bool = None, shortName: bool = None, shn: bool = None,
+         strict: bool = None, str: bool = None, swapNamespace=list, sns=list, type: str = None, typ: str = None, uiConfiguration: bool = None,
+         uc: bool = None, uiLoadConfiguration: bool = None, ulc: bool = None, unloadReference: str = None, ur: str = None, unresolvedName: bool = None,
+         un: bool = None, usingNamespaces: bool = None, uns: bool = None, withoutCopyNumber: bool = None, wcn: bool = None, writable: bool = None, w: bool = None,
+         **kwargs):
+    from builtins import str as _str, open as _open
+    default_extensions = all((de, defaultExtensions))
+    defer_reference = any((dr, deferReference))
+    execute_script_nodes = all((esn, executeScriptNodes))
+    merge_namespaces_on_clash = any((mnc, mergeNamespacesOnClash))
+    namespace = namespace or ns
+    if isinstance(namespace, _str):
+        if not namespace.endswith(':'):
+            namespace += ':'
+    _import = i
+    _type = type or typ
+    file_path: Path = None
+    if args:
+        file_path: Path = Path(args[0])
+
+    if _import is True:
+        match _type:
+            case "OBJ":
+                with _open(_str(file_path), 'r') as obj_file:
+                    next_line_geo = False
+                    for line in obj_file:
+                        if line.startswith('s'):
+                            next_line_geo = True
+                            continue
+                        if next_line_geo and line.startswith('g '):
+                            next_line_geo = False
+                            mesh_name = line[2:].strip()
+                            if merge_namespaces_on_clash and namespace:
+                                mesh_name = f"{namespace}{mesh_name}"
+                            parent_mobject = om.MFnDagNode().create('transform', mesh_name)
+                            mesh_mobject = om.MFnMesh().create([om.MPoint(), ], [1, ], [1, ], parent=parent_mobject)
+
+
     if new or newFile and force or f:
         om._NEW_SCENE_SIGNAL.send()
 

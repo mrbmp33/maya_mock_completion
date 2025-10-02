@@ -1,8 +1,9 @@
-from pkgutil import extend_path
 from . import mmc_selection
 import os
+import json
 
 ACTIVE_SELECTION = mmc_selection.ActiveSelection()
-_ASSUME_NODES_EXIST = os.getenv("ASSUME_NODES_EXIST", "1") == "1"
+ASSUME_NODES_EXIST = json.loads(os.getenv("ASSUME_NODES_EXIST", "true"))
+IMPORT_MESH_DATA = json.loads(os.getenv("IMPORT_MESH_DATA", "true"))
 
 stringTable = None

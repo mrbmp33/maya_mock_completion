@@ -25,7 +25,7 @@ from typing import Callable, Optional, Iterable, Union, Tuple, List, Any, Genera
 from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
-from maya import ACTIVE_SELECTION, _ASSUME_NODES_EXIST
+from maya import ACTIVE_SELECTION, ASSUME_NODES_EXIST
 from mmc_output import mmc_node_types_alias_map, node_types_to_shapes, attribute_properties
 
 
@@ -5827,7 +5827,7 @@ class MSelectionList(object):
             node_name, *attr = item.split('.')
             node = hierarchy.NodePool.from_name(node_name)
             if not node:
-                if not _ASSUME_NODES_EXIST:
+                if not ASSUME_NODES_EXIST:
                     raise RuntimeError(f"Node {node} not found in the pool.")
                 else:
                     node = MFnDependencyNode().create('transform', node_name)  # Create a new node if it doesn't exist
@@ -5908,7 +5908,7 @@ class MSelectionList(object):
         # If the item is not an MObject but a string, retrieve the mobject from the pool
         if isinstance(item, str):
             mobject = hierarchy.NodePool.from_name(item)
-            if not mobject:
+            if not mobject and ASSUME_NODES_EXIST:
                 # For nodes that already exist in the scene but are not inside the pool, initialize them as DependNodes
                 mobject = MFnDependencyNode().create('transform', item)  # this very rarely will be the case as it should already be created before adding it to the MSelectionList
             # Return converted str to mobject
@@ -26486,11 +26486,11 @@ class MFnMesh(MFnDagNode):
     node or mesh data object.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, node_or_path: MObject | MDagPath = None):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(node_or_path)
 
     def addHoles(*args, **kwargs):
         """
@@ -26910,7 +26910,27 @@ class MFnMesh(MFnDagNode):
         """
         pass
 
-    def create(*args, **kwargs):
+    @overload
+    def create(
+        vertices: Sequence[MPoint],
+        polygonCounts: Sequence[int],
+        polygonConnects: Sequence[int],
+        uValues: Sequence[float] = None,
+        vValues: Sequence[float] = None,
+        parent: MObject = None
+    ) -> MObject: ...
+
+    @overload
+    def create(
+        vertices: Sequence[MPoint],
+        edges: Sequence[int],
+        edgeConnectsCount: Sequence[int],
+        edgeFaceConnects: Sequence[int],
+        edgeFaceDesc: Sequence[int],
+        storeDoubles=False,
+        parent:MObject=None) -> MObject: ...
+
+    def create(self, *args, **kwargs):
         """
         create(vertices, polygonCounts, polygonConnects, uValues=None, vValues=None, parent=kNullObj) -> MObject
         create(vertices, edges, edgeConnectsCount, edgeFaceConnects, edgeFaceDesc, storeDoubles=False, parent=kNullObj) -> MObject
@@ -26934,8 +26954,26 @@ class MFnMesh(MFnDagNode):
         returned and a mesh node will be created and parented under the
         transform.
         """
-        pass
-
+        if any(map(lambda x: x in ['uValues', 'vValues'], kwargs.keys())):
+            # print('mode1')
+            ...
+        elif any(map(lambda x: x in ['edges', 'edgeConnectsCount', 'edgeFaceConnects', 'edgeFaceDesc', 'storeDoubles'], kwargs.keys())):
+            # print('mode2')
+            ...
+        elif len(args) == 5:
+            # print('mode2')
+            ...
+        elif len(args) == 3:
+            # print('mode1')
+            ...
+        else:
+            raise TypeError('Invalid arguments')
+        
+        mesh_name = 'polyMesh'
+        if parent := cast(MObject, kwargs.get('parent')):
+            mesh_name = parent._name + 'Shape'
+        return super().create(_TYPE_STR_TO_ID["mesh"], name=mesh_name, parent=kwargs.get('parent'))
+        
     def createBlindDataType(*args, **kwargs):
         """
         createBlindDataType(blindDataId, ((longName, shortName, typeName), ...)) -> self
