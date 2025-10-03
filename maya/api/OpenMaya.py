@@ -20719,7 +20719,7 @@ class MNodeMessage(MMessage):
         pass
 
     @staticmethod
-    def addNodeDestroyedCallback(node, function, clientData=None) -> int:
+    def addNodeDestroyedCallback(node: MObject, function: Callable, clientData=None) -> int:
         """
         addNodeDestroyedCallback(node, function, clientData=None) -> id
 
@@ -20789,7 +20789,7 @@ class MNodeMessage(MMessage):
         pass
 
     @staticmethod
-    def addNodePreRemovalCallback(*args, **kwargs):
+    def addNodePreRemovalCallback(node: MObject, func: Callable, clientData=None) -> int:
         """
         addNodePreRemovalCallback(node, function, clientData=None) -> id
 
@@ -20815,7 +20815,25 @@ class MNodeMessage(MMessage):
 
          * return: Identifier used for removing the callback.
         """
-        pass
+                # Convert into partial
+        if clientData is None:
+            clientData = ()
+        try:
+            as_partial_fn = partial(func, *clientData)
+            cb_id = id(as_partial_fn)
+        except Exception:
+            raise ValueError(
+                f"Invalid function signature. \
+                Getting node: {node}, function: {func}, clientData: {clientData}"
+                )
+
+        # Setup event trigger
+        _NODE_REMOVED_SIGNAL.connect(as_partial_fn, sender=node)
+
+        # Register the callback
+        sys.modules[__name__]._CALLBACKS_REGISTRY[cb_id] = (as_partial_fn, _NODE_REMOVED_SIGNAL)
+        
+        return cb_id
 
     @staticmethod
     def addUuidChangedCallback(*args, **kwargs):
