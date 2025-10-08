@@ -7020,20 +7020,20 @@ class MItDependencyGraph(object):
     (MFnAttribute) and its derivations.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        self._done = False
 
-    def currentNode(*args, **kwargs):
+    def currentNode(self, *args, **kwargs):
         """
         currentNode() -> MObject
 
         Retrieves the current node of the iteration.  Results in a null object on
         failure or if the node is of a unrecognized type.
         """
-        pass
+        return MObject()
 
     def currentNodeHasUnknownType(*args, **kwargs):
         """
@@ -7097,7 +7097,7 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def isDone(*args, **kwargs):
+    def isDone(self, *args, **kwargs):
         """
         isDone() -> Bool
 
@@ -7106,9 +7106,9 @@ class MItDependencyGraph(object):
         If a valid filter is set, the iterator only visits those nodes that match
         the filter.
         """
-        pass
+        return self._done
 
-    def next(*args, **kwargs):
+    def next(self, *args, **kwargs):
         """
         next() -> self
 
@@ -7121,7 +7121,8 @@ class MItDependencyGraph(object):
         failure.  An attempt to iterate when there is nothing left to
         iterate over has no effect.
         """
-        pass
+        self._done = True
+        return self
 
     def previousPlug(*args, **kwargs):
         """
@@ -16138,142 +16139,148 @@ class MUserData(object):
         pass
 
 
-class MDagPathArray(object):
+class MDagPathArray(list):
     """
     Array of MDagPath values.
     """
 
-    def __add__(*args, **kwargs):
-        """
-        x.__add__(y) <==> x+y
-        """
-        pass
+    @overload
+    def __iter__(self) -> Iterator[MDagPath]: ...
 
-    def __contains__(*args, **kwargs):
-        """
-        x.__contains__(y) <==> y in x
-        """
-        pass
+    def __iter__(self):
+        return super().__iter__()
 
-    def __delitem__(*args, **kwargs):
-        """
-        x.__delitem__(y) <==> del x[y]
-        """
-        pass
+    # def __add__(*args, **kwargs):
+    #     """
+    #     x.__add__(y) <==> x+y
+    #     """
+    #     pass
 
-    def __delslice__(*args, **kwargs):
-        """
-        x.__delslice__(i, j) <==> del x[i:j]
+    # def __contains__(*args, **kwargs):
+    #     """
+    #     x.__contains__(y) <==> y in x
+    #     """
+    #     pass
 
-        Use of negative indices is not supported.
-        """
-        pass
+    # def __delitem__(*args, **kwargs):
+    #     """
+    #     x.__delitem__(y) <==> del x[y]
+    #     """
+    #     pass
 
-    def __getitem__(*args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
+    # def __delslice__(*args, **kwargs):
+    #     """
+    #     x.__delslice__(i, j) <==> del x[i:j]
 
-    def __getslice__(*args, **kwargs):
-        """
-        x.__getslice__(i, j) <==> x[i:j]
+    #     Use of negative indices is not supported.
+    #     """
+    #     pass
 
-        Use of negative indices is not supported.
-        """
-        pass
+    # def __getitem__(*args, **kwargs):
+    #     """
+    #     x.__getitem__(y) <==> x[y]
+    #     """
+    #     pass
 
-    def __iadd__(*args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
+    # def __getslice__(*args, **kwargs):
+    #     """
+    #     x.__getslice__(i, j) <==> x[i:j]
 
-    def __imul__(*args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
+    #     Use of negative indices is not supported.
+    #     """
+    #     pass
 
-    def __init__(*args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
+    # def __iadd__(*args, **kwargs):
+    #     """
+    #     x.__iadd__(y) <==> x+=y
+    #     """
+    #     pass
 
-    def __len__(*args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
+    # def __imul__(*args, **kwargs):
+    #     """
+    #     x.__imul__(y) <==> x*=y
+    #     """
+    #     pass
 
-    def __mul__(*args, **kwargs):
-        """
-        x.__mul__(n) <==> x*n
-        """
-        pass
+    # def __init__(*args, **kwargs):
+    #     """
+    #     x.__init__(...) initializes x; see help(type(x)) for signature
+    #     """
+    #     pass
 
-    def __repr__(*args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
+    # def __len__(*args, **kwargs):
+    #     """
+    #     x.__len__() <==> len(x)
+    #     """
+    #     pass
 
-    def __rmul__(*args, **kwargs):
-        """
-        x.__rmul__(n) <==> n*x
-        """
-        pass
+    # def __mul__(*args, **kwargs):
+    #     """
+    #     x.__mul__(n) <==> x*n
+    #     """
+    #     pass
 
-    def __setitem__(*args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
+    # def __repr__(*args, **kwargs):
+    #     """
+    #     x.__repr__() <==> repr(x)
+    #     """
+    #     pass
 
-    def __setslice__(*args, **kwargs):
-        """
-        x.__setslice__(i, j, y) <==> x[i:j]=y
+    # def __rmul__(*args, **kwargs):
+    #     """
+    #     x.__rmul__(n) <==> n*x
+    #     """
+    #     pass
 
-        Use  of negative indices is not supported.
-        """
-        pass
+    # def __setitem__(*args, **kwargs):
+    #     """
+    #     x.__setitem__(i, y) <==> x[i]=y
+    #     """
+    #     pass
 
-    def __str__(*args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
+    # def __setslice__(*args, **kwargs):
+    #     """
+    #     x.__setslice__(i, j, y) <==> x[i:j]=y
 
-    def append(*args, **kwargs):
-        """
-        Add a value to the end of the array.
-        """
-        pass
+    #     Use  of negative indices is not supported.
+    #     """
+    #     pass
 
-    def clear(*args, **kwargs):
-        """
-        Remove all elements from the array.
-        """
-        pass
+    # def __str__(*args, **kwargs):
+    #     """
+    #     x.__str__() <==> str(x)
+    #     """
+    #     pass
 
-    def copy(*args, **kwargs):
-        """
-        Replace the array contents with that of another or of a compatible Python sequence.
-        """
-        pass
+    # def append(*args, **kwargs):
+    #     """
+    #     Add a value to the end of the array.
+    #     """
+    #     pass
 
-    def insert(*args, **kwargs):
-        """
-        Insert a new value into the array at the given index.
-        """
-        pass
+    # def clear(*args, **kwargs):
+    #     """
+    #     Remove all elements from the array.
+    #     """
+    #     pass
 
-    def remove(*args, **kwargs):
-        """
-        Remove an element from the array.
-        """
-        pass
+    # def copy(*args, **kwargs):
+    #     """
+    #     Replace the array contents with that of another or of a compatible Python sequence.
+    #     """
+    #     pass
+
+    # def insert(*args, **kwargs):
+    #     """
+    #     Insert a new value into the array at the given index.
+    #     """
+    #     pass
+
+    # def remove(*args, **kwargs):
+    #     """
+    #     Remove an element from the array.
+    #     """
+    #     pass
 
     def setLength(*args, **kwargs):
         """
@@ -17504,142 +17511,142 @@ class MURI(object):
         pass
 
 
-class MObjectArray(object):
+class MObjectArray(list):
     """
     Array of MObject values.
     """
 
-    def __add__(*args, **kwargs):
-        """
-        x.__add__(y) <==> x+y
-        """
-        pass
+    # def __add__(*args, **kwargs):
+    #     """
+    #     x.__add__(y) <==> x+y
+    #     """
+    #     pass
 
-    def __contains__(*args, **kwargs):
-        """
-        x.__contains__(y) <==> y in x
-        """
-        pass
+    # def __contains__(*args, **kwargs):
+    #     """
+    #     x.__contains__(y) <==> y in x
+    #     """
+    #     pass
 
-    def __delitem__(*args, **kwargs):
-        """
-        x.__delitem__(y) <==> del x[y]
-        """
-        pass
+    # def __delitem__(*args, **kwargs):
+    #     """
+    #     x.__delitem__(y) <==> del x[y]
+    #     """
+    #     pass
 
-    def __delslice__(*args, **kwargs):
-        """
-        x.__delslice__(i, j) <==> del x[i:j]
+    # def __delslice__(*args, **kwargs):
+    #     """
+    #     x.__delslice__(i, j) <==> del x[i:j]
 
-        Use of negative indices is not supported.
-        """
-        pass
+    #     Use of negative indices is not supported.
+    #     """
+    #     pass
 
-    def __getitem__(*args, **kwargs):
-        """
-        x.__getitem__(y) <==> x[y]
-        """
-        pass
+    # def __getitem__(*args, **kwargs):
+    #     """
+    #     x.__getitem__(y) <==> x[y]
+    #     """
+    #     pass
 
-    def __getslice__(*args, **kwargs):
-        """
-        x.__getslice__(i, j) <==> x[i:j]
+    # def __getslice__(*args, **kwargs):
+    #     """
+    #     x.__getslice__(i, j) <==> x[i:j]
 
-        Use of negative indices is not supported.
-        """
-        pass
+    #     Use of negative indices is not supported.
+    #     """
+    #     pass
 
-    def __iadd__(*args, **kwargs):
-        """
-        x.__iadd__(y) <==> x+=y
-        """
-        pass
+    # def __iadd__(*args, **kwargs):
+    #     """
+    #     x.__iadd__(y) <==> x+=y
+    #     """
+    #     pass
 
-    def __imul__(*args, **kwargs):
-        """
-        x.__imul__(y) <==> x*=y
-        """
-        pass
+    # def __imul__(*args, **kwargs):
+    #     """
+    #     x.__imul__(y) <==> x*=y
+    #     """
+    #     pass
 
-    def __init__(*args, **kwargs):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
-        """
-        pass
+    # def __init__(*args, **kwargs):
+    #     """
+    #     x.__init__(...) initializes x; see help(type(x)) for signature
+    #     """
+    #     pass
 
-    def __len__(*args, **kwargs):
-        """
-        x.__len__() <==> len(x)
-        """
-        pass
+    # def __len__(*args, **kwargs):
+    #     """
+    #     x.__len__() <==> len(x)
+    #     """
+    #     pass
 
-    def __mul__(*args, **kwargs):
-        """
-        x.__mul__(n) <==> x*n
-        """
-        pass
+    # def __mul__(*args, **kwargs):
+    #     """
+    #     x.__mul__(n) <==> x*n
+    #     """
+    #     pass
 
-    def __repr__(*args, **kwargs):
-        """
-        x.__repr__() <==> repr(x)
-        """
-        pass
+    # def __repr__(*args, **kwargs):
+    #     """
+    #     x.__repr__() <==> repr(x)
+    #     """
+    #     pass
 
-    def __rmul__(*args, **kwargs):
-        """
-        x.__rmul__(n) <==> n*x
-        """
-        pass
+    # def __rmul__(*args, **kwargs):
+    #     """
+    #     x.__rmul__(n) <==> n*x
+    #     """
+    #     pass
 
-    def __setitem__(*args, **kwargs):
-        """
-        x.__setitem__(i, y) <==> x[i]=y
-        """
-        pass
+    # def __setitem__(*args, **kwargs):
+    #     """
+    #     x.__setitem__(i, y) <==> x[i]=y
+    #     """
+    #     pass
 
-    def __setslice__(*args, **kwargs):
-        """
-        x.__setslice__(i, j, y) <==> x[i:j]=y
+    # def __setslice__(*args, **kwargs):
+    #     """
+    #     x.__setslice__(i, j, y) <==> x[i:j]=y
 
-        Use  of negative indices is not supported.
-        """
-        pass
+    #     Use  of negative indices is not supported.
+    #     """
+    #     pass
 
-    def __str__(*args, **kwargs):
-        """
-        x.__str__() <==> str(x)
-        """
-        pass
+    # def __str__(*args, **kwargs):
+    #     """
+    #     x.__str__() <==> str(x)
+    #     """
+    #     pass
 
-    def append(*args, **kwargs):
-        """
-        Add a value to the end of the array.
-        """
-        pass
+    # def append(*args, **kwargs):
+    #     """
+    #     Add a value to the end of the array.
+    #     """
+    #     pass
 
-    def clear(*args, **kwargs):
-        """
-        Remove all elements from the array.
-        """
-        pass
+    # def clear(*args, **kwargs):
+    #     """
+    #     Remove all elements from the array.
+    #     """
+    #     pass
 
-    def copy(*args, **kwargs):
-        """
-        Replace the array contents with that of another or of a compatible Python sequence.
-        """
-        pass
+    # def copy(*args, **kwargs):
+    #     """
+    #     Replace the array contents with that of another or of a compatible Python sequence.
+    #     """
+    #     pass
 
-    def insert(*args, **kwargs):
-        """
-        Insert a new value into the array at the given index.
-        """
-        pass
+    # def insert(*args, **kwargs):
+    #     """
+    #     Insert a new value into the array at the given index.
+    #     """
+    #     pass
 
-    def remove(*args, **kwargs):
-        """
-        Remove an element from the array.
-        """
-        pass
+    # def remove(*args, **kwargs):
+    #     """
+    #     Remove an element from the array.
+    #     """
+    #     pass
 
     def setLength(*args, **kwargs):
         """
@@ -20905,11 +20912,11 @@ class MFnComponent(MFnBase):
     Initializes a new MFnComponent function set, attached to the specified component.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
     def isEqual(*args, **kwargs):
         """
@@ -24748,7 +24755,7 @@ class MFnSingleIndexedComponent(MFnComponent):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
     def addElement(*args, **kwargs):
         """
@@ -24758,23 +24765,23 @@ class MFnSingleIndexedComponent(MFnComponent):
         """
         pass
 
-    def addElements(*args, **kwargs):
+    def addElements(self, *args, **kwargs):
         """
         addElements([int]) -> self
         addElements(MIntArray) -> self
 
         Adds the specified elements to the component.
         """
-        pass
+        return self
 
-    def create(*args, **kwargs):
+    def create(self, *args, **kwargs) -> MObject:
         """
         create(MFn Type constant) -> MObject
 
         Creates a new, empty component, attaches it to the function set and
         returns an MObject which references it.
         """
-        pass
+        return super()._create()
 
     def element(*args, **kwargs):
         """
@@ -28961,20 +28968,34 @@ class MFnMesh(MFnDagNode):
     kRGBA = 4
 
     kUnion = 1
+    
+    @property
+    def numColorSets(self):
+        return 0
 
-    numColorSets = None
+    @property
+    def numEdges(self):
+        return 0
 
-    numEdges = None
+    @property
+    def numFaceVertices(self):
+        return 0
 
-    numFaceVertices = None
+    @property
+    def numNormals(self):
+        return 0
 
-    numNormals = None
+    @property
+    def numPolygons(self):
+        return 0
 
-    numPolygons = None
+    @property
+    def numUVSets(self):
+        return 0
 
-    numUVSets = None
-
-    numVertices = None
+    @property
+    def numVertices(self) -> int:
+        return 0
 
 
 class MFnNurbsSurfaceData(MFnGeometryData):

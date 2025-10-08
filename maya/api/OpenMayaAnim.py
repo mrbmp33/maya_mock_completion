@@ -6,10 +6,8 @@
 # or which otherwise accompanies this software in either electronic
 # or hard copy form.
 """
-
-if False:
-    from typing import Dict, List, Tuple, Union, Optional
-
+from maya.api import OpenMaya as om
+from typing import overload
 
 class MAnimCurveClipboard(object):
     """
@@ -1345,7 +1343,7 @@ class MAnimMessage(_MMessage):
         pass
 
 
-class MFnGeometryFilter(_MFnDependencyNode):
+class MFnGeometryFilter(om.MFnDependencyNode):
     """
     Function set for operating on geometryFilter nodes.
     geometryFilter is the abstract node type from which all
@@ -1359,11 +1357,13 @@ class MFnGeometryFilter(_MFnDependencyNode):
     to a geometryFilter node.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
+
+        self._deformed_meshes = om.MObjectArray()
 
     def getInputGeometry(*args, **kwargs):
         """
@@ -1380,13 +1380,13 @@ class MFnGeometryFilter(_MFnDependencyNode):
         """
         pass
 
-    def getOutputGeometry(*args, **kwargs):
+    def getOutputGeometry(self, *args, **kwargs) -> om.MObjectArray:
         """
         getOutputGeometry() -> MObjectArray
         
         Returns the DAG nodes which receive output geometry from the deformer.
         """
-        pass
+        return self._deformed_meshes
 
     def getPathAtIndex(*args, **kwargs):
         """
@@ -1936,13 +1936,13 @@ class MFnSkinCluster(MFnGeometryFilter):
     a skinCluster node.
     """
 
-    def __init__(*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        pass
+        super().__init__(*args, **kwargs)
 
-    def getBlendWeights(*args, **kwargs):
+    def getBlendWeights(self, *args, **kwargs):
         """
         getBlendWeights(shape, components) -> MDoubleArray
         
@@ -1955,7 +1955,7 @@ class MFnSkinCluster(MFnGeometryFilter):
         * shape     (MDagPath) - the object being deformed by the skinCluster
         * components (MObject) - components for which weights should be returned
         """
-        pass
+        return om.MDoubleArray()
 
     def getPointsAffectedByInfluence(*args, **kwargs):
         """
@@ -1976,7 +1976,16 @@ class MFnSkinCluster(MFnGeometryFilter):
         """
         pass
 
-    def getWeights(*args, **kwargs):
+    @overload
+    def getWeights(self, shape, components) -> tuple[om.MDoubleArray, int]: ...
+
+    @overload
+    def getWeights(self, shape, components, influence: int) -> om.MDoubleArray: ...
+
+    @overload
+    def getWeights(self, shape, components, influences: om.MIntArray | list[int]) -> om.MDoubleArray: ...
+
+    def getWeights(self, shape, components, influences=None):
         """
         getWeights(shape, components) -> (MDoubleArray, int)
         getWeights(shape, components, influence) -> MDoubleArray
@@ -2004,7 +2013,12 @@ class MFnSkinCluster(MFnGeometryFilter):
         * influence        (int) - index of the single influence to return weights for
         * influences (MIntArray) - indices of multiple influences to return weights for
         """
-        pass
+        if influences is None:
+            return om.MDoubleArray(), 0
+        elif isinstance(influences, int):
+            return om.MDoubleArray()
+        else:
+            return om.MDoubleArray()
 
     def indexForInfluenceObject(*args, **kwargs):
         """
@@ -2017,13 +2031,13 @@ class MFnSkinCluster(MFnGeometryFilter):
         """
         pass
 
-    def influenceObjects(*args, **kwargs):
+    def influenceObjects(self, *args, **kwargs):
         """
         influenceObjects() -> MDagPathArray
         
         Returns an array of paths to the influence objects for the skinCluster.
         """
-        pass
+        return om.MDagPathArray()
 
     def setBlendWeights(*args, **kwargs):
         """

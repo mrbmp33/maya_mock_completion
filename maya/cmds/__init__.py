@@ -2303,10 +2303,14 @@ def dagObjectCompare(attribute=bool(), a=bool(), bail=str(), b=str(), connection
     pass
 
 
-def dagPose(addToPose=bool(), a=bool(), atPose=bool(), ap=bool(), bindPose=bool(), bp=bool(), g=bool(), members=bool(),
+def dagPose(*args, addToPose=bool(), a=bool(), atPose=bool(), ap=bool(), bindPose=bool(), bp=bool(), g=bool(), members=bool(),
             m=bool(), name=str(), n=str(), remove=bool(), rm=bool(), reset=bool(), rs=bool(), restore=bool(), r=bool(),
-            save=bool(), s=bool(), selection=bool(), sl=bool(), worldParent=bool(), wp=bool(), *args, **kwargs):
-    pass
+            save=bool(), s=bool(), selection=bool(), sl=bool(), worldParent=bool(), wp=bool(), **kwargs):
+    # name = args[0]
+    # mobject = _hierarchy.NodePool.from_name(name) if name else None
+    # om.MFnDependencyNode().create("dagPose")
+    if any((atPose, ap)):
+        return True
 
 
 def dataStructure(asFile=str(), af=str(), asString=str(), dataType=bool(), dt=bool(), format=str(), fmt=str(),
