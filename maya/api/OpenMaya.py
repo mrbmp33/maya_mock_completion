@@ -1109,7 +1109,7 @@ class MObjectHandle(object):
 
         Returns the live state of the associated MObject. An object can still be 'alive' but not 'valid' (eg. a deleted object that resides in the undo queue).
         """
-        return getattr(self._mobject, '_isAlive', True)
+        return getattr(self._mobject, '_alive', True)
 
     def isValid(self) -> bool:
         """
@@ -1117,7 +1117,7 @@ class MObjectHandle(object):
 
         Returns the validity of the associated MObject.
         """
-        return getattr(self._mobject, '_isValid', True)
+        return getattr(self._mobject, '_is_valid', True)
 
     def object(self):
         """
@@ -2431,7 +2431,7 @@ class MDGModifier(object):
                     dest_plug = cast(MPlug, action[2])
                     
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
 
                     # A source plug can have multiple destinations, they are a set
                     destinations = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
@@ -2448,7 +2448,7 @@ class MDGModifier(object):
                     dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
                     
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
 
                     # A source plug can have multiple destinations, they are a list
                     destinations = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
@@ -2470,7 +2470,7 @@ class MDGModifier(object):
                     if len(destination) == 0:
                         del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
                     else:
-                        source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = destination
+                        source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = [destination, ]
                 elif len(action) == 5:
                     source_node: 'MObject' = action[1]
                     source_attr: 'MObject' = action[2]
@@ -2488,7 +2488,7 @@ class MDGModifier(object):
                     if len(destination) == 0:
                         del source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)]
                     else:
-                        source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = destination
+                        source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = [destination, ]
 
             elif action[0] == 'addAttribute':
                 node: 'MObject' = action[1]
@@ -2879,7 +2879,7 @@ class MDGModifier(object):
                     source_plug: MPlug = action[1]
                     dest_plug: MPlug = action[2]
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
                     source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
                 elif len(action) == 5:
                     source_node: 'MObject' = action[1]
@@ -2889,7 +2889,7 @@ class MDGModifier(object):
                     source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
                     dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
                     source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
             
             elif action[0] == 'addAttribute':
@@ -2947,6 +2947,16 @@ class MDGModifier(object):
             if not (action[0] == 'create' or action[0] == 'delete'):
                 continue
             mobject = cast(MObject, action[1])
+            # Disconnect created mobjects
+            for mplug in mobject._cached_plugs.values():
+                for dest_plugs in list(mplug._connections['OUTPUTS'].values()):
+                    for dest_plug in dest_plugs:
+                        dest_plug._connections['INPUTS'].pop(_get_attribute_id(mplug._attribute._name), None)
+                for source_plugs in list(mplug._connections['INPUTS'].values()):
+                    for source_plug in source_plugs:
+                        source_plug._connections['OUTPUTS'].pop(_get_attribute_id(mplug._attribute._name), None)
+
+            # Flag signaled mobjects as destroyed
             if not mobject._alive:
                 try:
                     _NODE_DESTROYED_SIGNAL.send(mobject)

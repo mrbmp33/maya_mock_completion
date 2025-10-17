@@ -5,7 +5,7 @@ from typing import Optional, TypedDict, cast
 from qtpy.QtWidgets import QApplication, QMainWindow, QTreeView
 from qtpy.QtCore import QAbstractItemModel, Qt, QModelIndex, QObject
 
-from build.lib.maya.mmc_hierarchy import NodePool
+from maya.mmc_hierarchy import NodePool
 
 
 class TreeItemData(TypedDict):
@@ -216,7 +216,7 @@ class TreeModel(QAbstractItemModel):
 
     # === MODEL INTERFACE ==================================================================
 
-    def columnCount(self, parent: QModelIndex = None) -> int:
+    def columnCount(self, parent: Optional[QModelIndex] = None) -> int:
         return self.root_item.column_count()
 
     def rowCount(self, parent: QModelIndex = QModelIndex()) -> int:
