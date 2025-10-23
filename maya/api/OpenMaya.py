@@ -7045,7 +7045,7 @@ class MItDependencyGraph(object):
         direction: int = kDownstream,
         traversal: int = kDepthFirst,
         level: int = kNodeLevel,
-        filterType: int = -1,  # MFn.kInvalid
+        filter: int = -1,  # MFn.kInvalid
     ):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
@@ -7054,7 +7054,7 @@ class MItDependencyGraph(object):
         self._direction = direction
         self._traversal = traversal
         self._level = level
-        self._filterType = filterType
+        self._filterType = filter
 
         # Storage
         self._connections: dict[str, List[Union["MObject", "MPlug"]]] = {}
