@@ -11,6 +11,7 @@ import copy
 from functools import partial, wraps
 import functools
 import re
+from collections import deque
 import random
 import string
 import sys
@@ -26,7 +27,7 @@ from collections.abc import Sequence
 import maya.mmc_hierarchy as hierarchy
 from mmc_output.node_types_literals import NODE_TYPES
 from maya import ACTIVE_SELECTION, ASSUME_NODES_EXIST
-from mmc_output import mmc_node_types_alias_map, node_types_to_shapes, attribute_properties
+from mmc_output import mmc_node_types_alias_map, node_types_to_shapes, attribute_properties, attibutes_io_names
 
 
 # ==== Utilities ====
@@ -109,7 +110,9 @@ def _create_node_from_type(
 
     # If has a shape, parent mobject is returned
     if shape_type:
-        return parent_mobject or mobject
+        if parent_mobject and parent is None:
+            return parent_mobject
+        return mobject
     return mobject
 
 
@@ -2431,9 +2434,9 @@ class MDGModifier(object):
                     dest_plug = cast(MPlug, action[2])
                     
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
 
-                    # A source plug can have multiple destinations, they are a set
+                    # A source plug can have multiple destinations, they are a list
                     destinations = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
                     if dest_plug not in destinations:
                         destinations.append(dest_plug)
@@ -2448,7 +2451,7 @@ class MDGModifier(object):
                     dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
                     
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
 
                     # A source plug can have multiple destinations, they are a list
                     destinations = source_plug._connections['OUTPUTS'].get(_get_attribute_id(dest_plug._attribute._name), [])
@@ -2879,7 +2882,7 @@ class MDGModifier(object):
                     source_plug: MPlug = action[1]
                     dest_plug: MPlug = action[2]
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
                     source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
                 elif len(action) == 5:
                     source_node: 'MObject' = action[1]
@@ -2889,7 +2892,7 @@ class MDGModifier(object):
                     source_plug = MFnDependencyNode(source_node).findPlug(source_attr._long_name, False)
                     dest_plug = MFnDependencyNode(dest_node).findPlug(dest_attr._long_name, False)
                     # Add connection to cached connections
-                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = [source_plug,]
+                    dest_plug._connections['INPUTS'][_get_attribute_id(source_plug._attribute._name)] = source_plug
                     source_plug._connections['OUTPUTS'][_get_attribute_id(dest_plug._attribute._name)] = dest_plug
             
             elif action[0] == 'addAttribute':
@@ -2952,9 +2955,8 @@ class MDGModifier(object):
                 for dest_plugs in list(mplug._connections['OUTPUTS'].values()):
                     for dest_plug in dest_plugs:
                         dest_plug._connections['INPUTS'].pop(_get_attribute_id(mplug._attribute._name), None)
-                for source_plugs in list(mplug._connections['INPUTS'].values()):
-                    for source_plug in source_plugs:
-                        source_plug._connections['OUTPUTS'].pop(_get_attribute_id(mplug._attribute._name), None)
+                for source_plug in list(mplug._connections['INPUTS'].values()):
+                    source_plug._connections['OUTPUTS'].pop(_get_attribute_id(mplug._attribute._name), None)
 
             # Flag signaled mobjects as destroyed
             if not mobject._alive:
@@ -7029,21 +7031,140 @@ class MItDependencyGraph(object):
     Attributes on the nodes can be manipulated using the Attribute Function Set
     (MFnAttribute) and its derivations.
     """
+    # Enums (same values as real API)
+    kBreadthFirst = 1
+    kDepthFirst = 0
+    kDownstream = 0
+    kUpstream = 1
+    kNodeLevel = 0
+    kPlugLevel = 1
 
-    def __init__(self, *args, **kwargs):
+    def __init__(
+        self,
+        root: Union[MObject, MPlug, None] = None,
+        direction: int = kDownstream,
+        traversal: int = kDepthFirst,
+        level: int = kNodeLevel,
+        filterType: int = -1,  # MFn.kInvalid
+    ):
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self._done = False
+        self._root = root
+        self._direction = direction
+        self._traversal = traversal
+        self._level = level
+        self._filterType = filterType
 
-    def currentNode(self, *args, **kwargs):
+        # Storage
+        self._connections: dict[str, List[Union["MObject", "MPlug"]]] = {}
+        self._index: int = 0
+        self._done: bool = False
+        self._path: list[Union["MObject", "MPlug"]] = []
+        self._visited: set[str] = set()
+        self._pruned: set[str] = set()
+
+        # Auto-build path if root provided
+        if root is not None:
+            self._reset_iteration()
+
+    def _reset_iteration(self):
+        """Compute traversal path starting from root."""
+        self._index = 0
+        self._done = False
+        self._visited.clear()
+        self._path.clear()
+
+        if not self._root:
+            self._done = True
+            return
+
+        if self._level == self.kPlugLevel and isinstance(self._root, MPlug):
+            start = self._root
+        elif self._level == self.kNodeLevel and isinstance(self._root, MObject):
+            start = self._root
+        else:
+            self._done = True
+            return
+
+        if self._traversal == self.kDepthFirst:
+            self._path = self._depth_first(start)
+        else:
+            self._path = self._breadth_first(start)
+
+    def _depth_first(self, start: Union["MObject", "MPlug"]):
+        """Recursive DFS traversal."""
+        order = []
+        stack = [start]
+        while stack:
+            node = stack.pop()
+            if node._uuid in self._visited or node._uuid in self._pruned:
+                continue
+            self._visited.add(node._uuid)
+            order.append(node)
+            children = self._get_connected(node)
+            # downstream first if kDownstream
+            stack.extend(reversed(children))
+        return order
+
+    def _breadth_first(self, start: Union["MObject", "MPlug"]):
+        """Iterative BFS traversal."""
+        order = []
+        queue = deque([start])
+        while queue:
+            node = queue.popleft()
+            if node._uuid in self._visited or node._uuid in self._pruned:
+                continue
+            self._visited.add(node._uuid)
+            order.append(node)
+            queue.extend(self._get_connected(node))
+        return order
+
+    def _get_connected(self, node_or_plug: Union["MObject", "MPlug"]):
+        """Get connected items according to level + direction."""
+        if self._level == self.kPlugLevel and isinstance(node_or_plug, MPlug):
+            plugs = []
+            inputs_or_outputs: Literal["INPUTS", "OUTPUTS"] = None
+            next_plug_dict = {}
+            if self._direction == self.kUpstream:
+                next_plug_dict = attibutes_io_names.ATTRS_OUT_TO_IN_NAMES
+                inputs_or_outputs = 'INPUTS'
+            else:
+                next_plug_dict = attibutes_io_names.ATTRS_IN_TO_OUT_NAMES
+                inputs_or_outputs = 'OUTPUTS'
+
+            if in_plug := next_plug_dict.get(node_or_plug._attribute._long_name):
+                try:
+                    node_or_plug = MFnDependencyNode(node_or_plug.node()).findPlug(in_plug, False)
+                except RuntimeError:
+                    ...  # Plug not found
+            
+            connections = node_or_plug._connections[inputs_or_outputs].values()
+            for connection in connections:
+                if isinstance(connection, MPlug):
+                    plugs.append(connection)
+                elif isinstance(connection, list):
+                    plugs.extend(connection)
+            return plugs
+        
+        # elif self._level == self.kNodeLevel and isinstance(node_or_plug, MObject):
+        #     return self._connections.get(node_or_plug._uuid, [])
+        print("Node level traversal not implemented yet.")
+        return []
+    
+    def currentNode(self) -> MObject:
         """
         currentNode() -> MObject
 
         Retrieves the current node of the iteration.  Results in a null object on
         failure or if the node is of a unrecognized type.
         """
-        return MObject()
+        if self._done or not self._path:
+            return MObject.kNullObj
+        node = self._path[self._index]
+        if isinstance(node, MPlug):
+            node = node.node()
+        return node
 
     def currentNodeHasUnknownType(*args, **kwargs):
         """
@@ -7055,14 +7176,17 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def currentPlug(*args, **kwargs):
+    def currentPlug(self) -> MPlug:
         """
         currentPlug() -> MPlug
 
         Retrieves the current plug of the iteration.  Results in a null
         plug on failure.
         """
-        pass
+        if self._done or not self._path:
+            return None
+        current = self._path[self._index]
+        return current if isinstance(current, MPlug) else None
 
     def getNodePath(*args, **kwargs):
         """
@@ -7107,23 +7231,23 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def isDone(self, *args, **kwargs):
+    def isDone(self) -> bool:
         """
         isDone() -> Bool
 
         Indicates whether or not all nodes or plugs have been iterated over
-        in accordance with the direction, traversal, level and filter.
+        in accordance with the direction, _traversal, level and filter.
         If a valid filter is set, the iterator only visits those nodes that match
         the filter.
         """
         return self._done
 
-    def next(self, *args, **kwargs):
+    def next(self) -> "MItDependencyGraph":
         """
         next() -> self
 
         Iterates to the next node or plug in accordance with the
-        direction, traversal, level and filter.  If a valid filter is
+        direction, _traversal, level and filter.  If a valid filter is
         set, the iterator only visits those nodes that match the
         filter.  When filtering is enabled nodes that have unknown type
         are treated as non-matching nodes.  With filtering disabled,
@@ -7131,7 +7255,11 @@ class MItDependencyGraph(object):
         failure.  An attempt to iterate when there is nothing left to
         iterate over has no effect.
         """
-        self._done = True
+        if self._done:
+            return self
+        self._index += 1
+        if self._index >= len(self._path):
+            self._done = True
         return self
 
     def previousPlug(*args, **kwargs):
@@ -7144,16 +7272,19 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def prune(*args, **kwargs):
+    def prune(self) -> "MItDependencyGraph":
         """
         prune() -> self
 
         Prunes the search path at the current plug.  Iterator will not
         visit any of the plugs connected to the pruned plug.
         """
-        pass
+        current = self.currentNode()
+        if current:
+            self._pruned.add(current._uuid)
+        return self
 
-    def reset(*args, **kwargs):
+    def reset(self) -> "MItDependencyGraph":
         """
         reset() -> self
 
@@ -7163,9 +7294,10 @@ class MItDependencyGraph(object):
         that matches the filter.  If no matching node is found an
         exception is thrown.
         """
-        pass
+        self._reset_iteration()
+        return self
 
-    def resetFilter(*args, **kwargs):
+    def resetFilter(self):
         """
         resetFilter() -> self
 
@@ -7173,7 +7305,8 @@ class MItDependencyGraph(object):
         (filter disabled).  Disables pruning on the filter (default).
         Resets the iterator.
         """
-        pass
+        self._filterType = MFn.kInvalid
+        return self
 
     def resetTo(*args, **kwargs):
         """
@@ -7198,21 +7331,34 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def rootNode(*args, **kwargs):
+    def rootNode(self) -> MObject:
         """
         rootNode() -> MObject
 
         Retrieves the root node of the iteration.
         """
-        pass
+        return self._root if isinstance(self._root, MObject) else MObject.kNullObj
 
-    def rootPlug(*args, **kwargs):
+    def rootPlug(self) -> MPlug:
         """
         rootPlug() -> MPlug
 
         Retrieves the root plug of the iteration.
         """
-        pass
+        return self._root if isinstance(self._root, MPlug) else None
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.isDone():
+            raise StopIteration
+        node = self.currentNode()
+        self.next()
+        return node
+
+    def __repr__(self):
+        return f"<MItDependencyGraph index={self._index} done={self._done}>"
 
     currentDirection = None
 
@@ -7221,18 +7367,6 @@ class MItDependencyGraph(object):
     currentLevel = None
 
     currentTraversal = None
-
-    kBreadthFirst = 1
-
-    kDepthFirst = 0
-
-    kDownstream = 0
-
-    kNodeLevel = 0
-
-    kPlugLevel = 1
-
-    kUpstream = 1
 
     pruningOnFilter = None
 
@@ -18273,7 +18407,8 @@ class MPlug(object):
         This method will produce the networked version of the connected plug.
         """
         if self.isDestination:
-            return list(self._connections['INPUTS'].values())[0] if list(self._connections['INPUTS'].values()) else None
+            sources = list(self._connections['INPUTS'].values())
+            return sources[0]
         null_plug = MPlug()
         null_plug._owner = None
         null_plug._attribute = MObject()
@@ -23754,7 +23889,7 @@ class MFnDagNode(MFnDependencyNode):
         parented under it, and the functionset will be attached to the
         transform. The transform will be returned.
         """
-
+        parent = parent if parent is not None and not parent.isNull() else None
         mobject = _create_node_from_type(node_type, name=name, parent=parent)
 
         # Set valid flag
@@ -23769,7 +23904,7 @@ class MFnDagNode(MFnDependencyNode):
             _NODE_ADDED_SIGNAL.send(mobject._children[0])
 
         # Determine the parent of the object
-        if parent is None or parent == MObject.kNullObj:
+        if parent is None or parent.isNull():
             mobject._parent = WORLD  # Default parent is the world
             WORLD._children.append(mobject)  # Add to world children
         elif mobject is parent:
@@ -23778,7 +23913,7 @@ class MFnDagNode(MFnDependencyNode):
             mobject._parent = parent  # Set the specified parent
 
         # Choose return node
-        if parent is not None and parent != MObject.kNullObj:
+        if parent is not None and not parent.isNull():  # Has a valid parent
             if len(mobject._children):
                 return_mobject = mobject._children[0]  # Return shape. Fix your program, Maya... :/
             else:
@@ -27005,9 +27140,9 @@ class MFnMesh(MFnDagNode):
             raise TypeError('Invalid arguments')
         
         mesh_name = 'polyMesh'
-        if parent := cast(MObject, kwargs.get('parent')):
+        if (parent := cast(MObject, kwargs.get('parent'))) and not parent.isNull():
             mesh_name = parent._name + 'Shape'
-        return super().create(_TYPE_STR_TO_ID["mesh"], name=mesh_name, parent=kwargs.get('parent'))
+        return super().create(_TYPE_STR_TO_ID["mesh"], name=mesh_name, parent=parent)
         
     def createBlindDataType(*args, **kwargs):
         """

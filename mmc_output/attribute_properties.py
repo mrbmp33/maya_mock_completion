@@ -28743,6 +28743,269 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 14
         }
+    },
+    "polyCube": {
+        "axis": {
+            "short_name": "ax",
+            "long_name": "axis",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "num_children": 3,
+            "children": [
+                "axisX",
+                "axisY",
+                "axisZ"
+            ]
+        },
+        "axisX": {
+            "short_name": "axx",
+            "long_name": "axisX",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "axis",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "axisY": {
+            "short_name": "axy",
+            "long_name": "axisY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "axis",
+            "unit_type": 2,
+            "default_value": 1.0
+        },
+        "axisZ": {
+            "short_name": "axz",
+            "long_name": "axisZ",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "axis",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "binMembership": {
+            "short_name": "bnm",
+            "long_name": "binMembership",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "caching": {
+            "short_name": "cch",
+            "long_name": "caching",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "componentTagCreate": {
+            "short_name": "ctc",
+            "long_name": "componentTagCreate",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "componentTagPrefix": {
+            "short_name": "pfx",
+            "long_name": "componentTagPrefix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "componentTagSuffix": {
+            "short_name": "sfx",
+            "long_name": "componentTagSuffix",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "createUVs": {
+            "short_name": "cuv",
+            "long_name": "createUVs",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "None",
+                "1": "Normalization Off",
+                "2": "Normalize Each Face Separately",
+                "3": "Normalize Collectively"
+            },
+            "default_value": 3
+        },
+        "depth": {
+            "short_name": "d",
+            "long_name": "depth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 1.0
+        },
+        "frozen": {
+            "short_name": "fzn",
+            "long_name": "frozen",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "height": {
+            "short_name": "h",
+            "long_name": "height",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 1.0
+        },
+        "heightBaseline": {
+            "short_name": "hbl",
+            "long_name": "heightBaseline",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 0.0
+        },
+        "isHistoricallyInteresting": {
+            "short_name": "ihi",
+            "long_name": "isHistoricallyInteresting",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 2,
+            "default_value": 2,
+            "min_value": 0.0,
+            "max_value": 255.0
+        },
+        "message": {
+            "short_name": "msg",
+            "long_name": "message",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute"
+        },
+        "output": {
+            "short_name": "out",
+            "long_name": "output",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 14
+        },
+        "paramWarn": {
+            "short_name": "pw",
+            "long_name": "paramWarn",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 1,
+            "default_value": True,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "subdivisionsDepth": {
+            "short_name": "sd",
+            "long_name": "subdivisionsDepth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1,
+            "min_value": 1.0
+        },
+        "subdivisionsHeight": {
+            "short_name": "sh",
+            "long_name": "subdivisionsHeight",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1,
+            "min_value": 1.0
+        },
+        "subdivisionsWidth": {
+            "short_name": "sw",
+            "long_name": "subdivisionsWidth",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 7,
+            "default_value": 1,
+            "min_value": 1.0
+        },
+        "texture": {
+            "short_name": "tx",
+            "long_name": "texture",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kEnumAttribute",
+            "enum_fields": {
+                "0": "none",
+                "1": "object"
+            },
+            "default_value": 1
+        },
+        "uvSetName": {
+            "short_name": "uvs",
+            "long_name": "uvSetName",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "typed_type": 4
+        },
+        "width": {
+            "short_name": "w",
+            "long_name": "width",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
+            "default_value": 1.0
+        }
     }
 }
 
@@ -28771,7 +29034,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "binMembership",
         "nurbsCurve": "binMembership",
         "nurbsSurface": "binMembership",
-        "mesh": "binMembership"
+        "mesh": "binMembership",
+        "polyCube": "binMembership"
     },
     "bbx": {
         "transform": "blackBox",
@@ -28995,7 +29259,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "caching",
         "nurbsCurve": "caching",
         "nurbsSurface": "caching",
-        "mesh": "caching"
+        "mesh": "caching",
+        "polyCube": "caching"
     },
     "c": {
         "transform": "center",
@@ -29120,7 +29385,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "frozen",
         "nurbsCurve": "frozen",
         "nurbsSurface": "frozen",
-        "mesh": "frozen"
+        "mesh": "frozen",
+        "polyCube": "frozen"
     },
     "g": {
         "transform": "geometry",
@@ -29487,7 +29753,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "isHistoricallyInteresting",
         "nurbsCurve": "isHistoricallyInteresting",
         "nurbsSurface": "isHistoricallyInteresting",
-        "mesh": "isHistoricallyInteresting"
+        "mesh": "isHistoricallyInteresting",
+        "polyCube": "isHistoricallyInteresting"
     },
     "lovc": {
         "transform": "layerOverrideColor",
@@ -29653,7 +29920,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "message",
         "nurbsCurve": "message",
         "nurbsSurface": "message",
-        "mesh": "message"
+        "mesh": "message",
+        "polyCube": "message"
     },
     "mnrl": {
         "transform": "minRotLimit",
@@ -29775,7 +30043,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "blendMatrix": "nodeState",
         "nurbsCurve": "nodeState",
         "nurbsSurface": "nodeState",
-        "mesh": "nodeState"
+        "mesh": "nodeState",
+        "polyCube": "nodeState"
     },
     "oc": {
         "transform": "objectColor",
@@ -30284,7 +30553,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "sh": {
         "transform": "shear",
-        "joint": "shear"
+        "joint": "shear",
+        "polyCube": "subdivisionsHeight"
     },
     "shxy": {
         "transform": "shearXY",
@@ -30375,7 +30645,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "translateX",
         "pointLight": "pointWorldX",
         "spotLight": "pointWorldX",
-        "areaLight": "pointWorldX"
+        "areaLight": "pointWorldX",
+        "polyCube": "texture"
     },
     "ty": {
         "transform": "translateY",
@@ -30752,7 +31023,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "joint": "segmentScaleCompensate"
     },
     "sd": {
-        "joint": "side"
+        "joint": "side",
+        "polyCube": "subdivisionsDepth"
     },
     "st": {
         "joint": "stiffness",
@@ -31411,7 +31683,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "pw": {
         "pointLight": "pointWorld",
         "spotLight": "pointWorld",
-        "areaLight": "pointWorld"
+        "areaLight": "pointWorld",
+        "polyCube": "paramWarn"
     },
     "psi": {
         "pointLight": "preShadowIntensity",
@@ -32525,7 +32798,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "d": {
         "nurbsCurve": "degree",
-        "nurbsSurface": "degreeUV"
+        "nurbsSurface": "degreeUV",
+        "polyCube": "depth"
     },
     "dej": {
         "nurbsCurve": "depthJitter",
@@ -33151,7 +33425,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "mesh": "smoothUVs"
     },
     "sw": {
-        "mesh": "smoothWarn"
+        "mesh": "smoothWarn",
+        "polyCube": "subdivisionsWidth"
     },
     "tnt": {
         "mesh": "tangentNormalThreshold"
@@ -33223,7 +33498,44 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "mesh": "vrts"
     },
     "w": {
-        "mesh": "worldMesh"
+        "mesh": "worldMesh",
+        "polyCube": "width"
+    },
+    "ax": {
+        "polyCube": "axis"
+    },
+    "axx": {
+        "polyCube": "axisX"
+    },
+    "axy": {
+        "polyCube": "axisY"
+    },
+    "axz": {
+        "polyCube": "axisZ"
+    },
+    "ctc": {
+        "polyCube": "componentTagCreate"
+    },
+    "pfx": {
+        "polyCube": "componentTagPrefix"
+    },
+    "sfx": {
+        "polyCube": "componentTagSuffix"
+    },
+    "cuv": {
+        "polyCube": "createUVs"
+    },
+    "h": {
+        "polyCube": "height"
+    },
+    "hbl": {
+        "polyCube": "heightBaseline"
+    },
+    "out": {
+        "polyCube": "output"
+    },
+    "uvs": {
+        "polyCube": "uvSetName"
     }
 }
 

@@ -6523,14 +6523,20 @@ def polyCube(*obj_name, axis=list, ax=list, caching=bool(), cch=bool(), construc
              subdivisionsWidth=int(), sw=int(), subdivisionsX=int(), sx=int(), subdivisionsY=int(), sy=int(),
              subdivisionsZ=int(), sz=int(), texture=int(), tx=int(), width=float(), w=float(), **kwargs):
 
-    trn = om.MFnDependencyNode().create('transform', name)
-    shape = om.MFnDependencyNode().create('mesh', name + 'Shape')
-    builder = om.MFnDependencyNode().create('polyCube', 'polyCube1')
+    trn = om.MFnDependencyNode()
+    trn.create('transform', name)
+
+    shape = om.MFnDagNode()
+    shape.create('mesh', name + 'Shape', parent=trn.object())
+
+    builder = om.MFnDependencyNode()
+    builder.create('polyCube', name='polyCube1')
     
-    trn._children.append(shape)
-    shape._parent = weakref.proxy(trn)
-    shape._buider = builder
-    return trn._name, shape._name
+    shape._buider = builder.object()
+    om.MDGModifier().connect(builder.findPlug('output', False), shape.findPlug('inMesh', False)).doIt()
+
+
+    return [trn.object()._name, builder.object()._name]
 
 def polyCut(caching=bool(), cch=bool(), constructionHistory=bool(), ch=bool(), cutPlaneCenter=list, pc=list,
             cutPlaneCenterX=float(), pcx=float(), cutPlaneCenterY=float(), pcy=float(), cutPlaneCenterZ=float(),

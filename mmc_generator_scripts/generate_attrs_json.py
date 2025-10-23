@@ -5,6 +5,7 @@ import os
 import pathlib
 import pprint
 import re
+from typing import Optional
 
 from maya import cmds as mc
 from maya.api import OpenMaya as om
@@ -35,6 +36,7 @@ node_types = (
     "nurbsCurve",
     "nurbsSurface",
     "mesh",
+    "polyCube",
 )
 
 
@@ -135,7 +137,7 @@ def convert_booleans_to_python_style(json_str):
     return json_str
 
 
-def create_attrs_dict(output_properties_file, output_literals_file: str = None):
+def create_attrs_dict(output_properties_file, output_literals_file: Optional[str] = None):
     attributes_properties = {}
     attributes_short_names_map = {}
 
