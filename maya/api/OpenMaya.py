@@ -8,6 +8,7 @@
 """
 from __future__ import annotations
 import copy
+import abc
 from functools import partial, wraps
 import functools
 import re
@@ -532,6 +533,9 @@ def _get_parent_world_matrix(mobject: 'MObject') -> np.ndarray:
 def _new_scene(args):
     # print('New scene :)')
     hierarchy.NodePool.reset()
+    root_ns = _namespace(name=":")
+    MNamespace._FLAT_SCENE_NAMESPACES = {root_ns.name: root_ns}
+    MNamespace._current_namespace = root_ns
 
 def _add_node_to_pool(node: 'MObject') -> None:
     hierarchy.register(node)
@@ -5227,6 +5231,12 @@ class MItDag(object):
     of traversal, and to determine if the the traversal has been completed.
     """
 
+
+    kInvalidType = 0
+    kBreadthFirst = 2
+    kDepthFirst = 1
+    traverseUnderWorld = None
+
     def __init__(self, *args, **kwargs):
         """
 
@@ -5494,14 +5504,22 @@ class MItDag(object):
            traversalType (MItDag.TraversalType) - Enumerated type that determines the direction of the traversal, defaults to kDepthFirst.
            filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid
         """
-        if args and isinstance(args[0], MObject):
-            self._root = args[0]
-        elif args and isinstance(args[0], MDagPath):
-            self._root = args[0].node()
+        if isinstance(args[0], MIteratorType):
+            dagInfoObject = args[0]
+
+        elif args and isinstance(args[0], (MObject, MDagPath)):
+            self._root = args[0] if isinstance(args[0], MObject) else args[0].node()
+
+            if len(args) >= 2:
+                self._traversalType = args[1]
+            if len(args) == 3:
+                self._filterType = args[2]
+
         if 'traversalType' in kwargs:
             self._traversalType = kwargs['traversalType']
         if 'filterType' in kwargs:
             self._filterType = kwargs['filterType']
+        
         self._index = 0
         self._done = False
         self._prune_set = set()
@@ -5525,14 +5543,6 @@ class MItDag(object):
         Returns the direction of the traversal.
         """
         return self._traversalType
-
-    kBreadthFirst = 2
-
-    kDepthFirst = 1
-
-    kInvalidType = 0
-
-    traverseUnderWorld = None
 
 
 class MRampAttribute(object):
@@ -7047,8 +7057,14 @@ class MItDependencyGraph(object):
         level: int = kNodeLevel,
         filter: int = -1,  # MFn.kInvalid
     ):
-        """
-        x.__init__(...) initializes x; see help(type(x)) for signature
+        """Iterate over the dependency graph of a root.
+        
+        Parameters:
+            root (MObject | MPlug | None): The root node or plug to start traversal from.
+            direction (int): The direction of traversal (kDownstream or kUpstream).
+            traversal (int): The traversal method (kDepthFirst or kBreadthFirst).
+            level (int): The level of detail (kNodeLevel or kPlugLevel).
+            filter (int): The MFn.Type filter to apply during traversal.
         """
         self._root = root
         self._direction = direction
@@ -15407,15 +15423,60 @@ class MCallbackIdArray(list):
     sizeIncrement = None
 
 
-class MNamespace(object):
+class _namespace:
+    def __init__(self, name: str, parent: _namespace = None):
+        self.name: str = name
+        self.parent: _namespace = parent
+        if parent:
+            if name in parent.children:
+                raise RuntimeError(f"Namespace '{name}' already exists under parent namespace '{parent.name}'.")
+            parent.children[name] = self
+        self.children: dict[str, _namespace] = {}
+    
+    def iter_parents(self) -> Generator[ _namespace, None, None]:
+        current = self.parent
+        if not current:
+            return
+        while current:
+            yield current
+            current = current.parent
+
+    def absolute_name(self) -> str:
+        if self.parent and self.parent.name != ":":
+            return f":{':'.join(reversed([ns.name for ns in self.iter_parents()]))}:{self.name}"
+        return f":{self.name}"
+
+    def iter_members(self, recurse: bool = False) -> Generator[MObject, None, None]:
+        abs_name = self.absolute_name()[1:]  # remove leading ':'
+        if recurse:
+            for obj_name, obj in hierarchy.NodePool._node_instances.items():
+                if obj_name.startswith(f"{abs_name}:"):
+                    yield obj
+        else:
+            for obj_name, obj in hierarchy.NodePool._node_instances.items():
+                if obj_name.rpartition(":")[0] == abs_name:
+                    yield obj
+                    
+
+class MNamespace(abc.ABC):
     """
     Access Maya namespace functionality.
     """
+    _current_namespace = _namespace(name=":")
+    _FLAT_SCENE_NAMESPACES: dict[str, _namespace] = {":": _current_namespace}  # root namespace
 
-    @staticmethod
-    def addNamespace(*args, **kwargs):
+    @abc.abstractmethod
+    def __init__(*args, **kwargs):
+        """Cannot instantiate MNamespace directly."""
+        ...
+
+    @classmethod
+    def addNamespace(cls, name: str, parent: str = None):
         """
-        addNamespace(MString name, MString parent=None)
+        Parameters:
+            name (str): The new namespace to create.
+            parent (str, optional): The fully qualified name of the namespace under which
+                the new one is to be created. If not provided then the current namespace will be used.
 
         Create the namespace 'name'. If the `parent' namespace is given
         the new namespace will be a child of `parent', otherwise the new
@@ -15441,10 +15502,16 @@ class MNamespace(object):
                      then the 'parent' parameter will be ignored and the new namespace
                      will be created under the root namespace.
         """
-        pass
+        if parent is None:
+            parent_name_space: _namespace = cls._current_namespace
+        else:
+            parent_name_space: _namespace = cls._FLAT_SCENE_NAMESPACES.get(parent)
 
-    @staticmethod
-    def currentNamespace(*args, **kwargs):
+        child_ns = _namespace(name=name, parent=parent_name_space)
+        cls._FLAT_SCENE_NAMESPACES[child_ns.name] = child_ns
+
+    @classmethod
+    def currentNamespace(cls):
         """
         currentNamespace() -> MString
 
@@ -15452,32 +15519,42 @@ class MNamespace(object):
         as an absolute namepath (i.e. fully qualfied from the root
         namespace downwards, ':a:b:c').
         """
-        pass
+        return cls._current_namespace.absolute_name()
 
-    @staticmethod
-    def getNamespaceFromName(*args, **kwargs):
+    @classmethod
+    def getNamespaceFromName(cls, fullName: str) -> str:
         """
-        getNamespaceFromName(MString fullName) -> MString
-
         Get namespace from a full name.
         For example, given a full name: 'a:b:c:d:ball' this method
         would return: 'a:b:c:d'.
         """
-        pass
+        if ":" not in fullName:
+            return ""
+        return ":".join(fullName.split(":")[:-1])
 
-    @staticmethod
-    def getNamespaceObjects(*args, **kwargs):
+    @classmethod
+    def getNamespaceObjects(cls, parentNamespace: str, recurse: bool =False) -> MObjectArray:
         """
-        getNamespaceObjects(MString parentNamespace, bool recurse=False) -> MObjectArray
+        Parameters:
+            parentNamespace (str): The namespace to query.
+            recurse (bool, optional): Optional parameter to control whether to
+                retrieve objects only in the specified namespace (False) or
+                also in all child namespaces (True). Default is False.
 
         Return an array of MObjects representing the object contained within
         the specified namespace. To query the current namespace, call this
         method in this way:
-        """
-        pass
 
-    @staticmethod
-    def getNamespaces(*args, **kwargs):
+            MNamespace.getNamespaceObjects(MNamespace.currentNamespace())
+        """
+        ns = cls._FLAT_SCENE_NAMESPACES.get(parentNamespace.split(":")[-1])
+        if not ns:
+            raise RuntimeError(f"Namespace '{parentNamespace}' does not exist.")
+        else:
+            return MObjectArray(tuple(ns.iter_members(recurse=recurse)))
+
+    @classmethod
+    def getNamespaces(cls, parentNamespace: Optional[str], recurse: bool = False) -> list[str]:
         """
         getNamespaces(MString parentNamespace=None, bool recurse=False) -> [MString]
 
@@ -15496,10 +15573,23 @@ class MNamespace(object):
                                     top-level namespaces to be returned. If
                                     true, all namespaces will be listed.
         """
-        pass
+        if parentNamespace is None:
+            parent_ns = cls._current_namespace
+        else:
+            parent_ns = cls._FLAT_SCENE_NAMESPACES.get(parentNamespace)
+            if not parent_ns:
+                raise RuntimeError(f"Namespace '{parentNamespace}' does not exist.")
+        namespaces = []
+        def _collect_namespaces(ns: _namespace):
+            for child_ns in ns.children.values():
+                namespaces.append(child_ns.absolute_name())
+                if recurse:
+                    _collect_namespaces(child_ns)
+        _collect_namespaces(parent_ns)
+        return namespaces
 
-    @staticmethod
-    def makeNamepathAbsolute(*args, **kwargs):
+    @classmethod
+    def makeNamepathAbsolute(cls, *args, **kwargs):
         """
         makeNamepathAbsolute(MString fullName) -> MString
 
@@ -15510,8 +15600,8 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def moveNamespace(*args, **kwargs):
+    @classmethod
+    def moveNamespace(cls, *args, **kwargs):
         """
         moveNamespace(MString src, MString dst, bool force=False)
 
@@ -15529,8 +15619,8 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def namespaceExists(*args, **kwargs):
+    @classmethod
+    def namespaceExists(cls, *args, **kwargs):
         """
         namespaceExists(MString name) -> bool
 
@@ -15538,8 +15628,8 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def parentNamespace(*args, **kwargs):
+    @classmethod
+    def parentNamespace(cls, parentNamespace: str) -> str:
         """
         parentNamespace() -> MString
 
@@ -15548,10 +15638,14 @@ class MNamespace(object):
         downwards, ':a:b'). If the root namespace is
         current, this method returns an error.
         """
-        pass
+        ns = cls._FLAT_SCENE_NAMESPACES.get(parentNamespace, cls._current_namespace)
+        if not ns:
+            raise RuntimeError(f"Namespace '{parentNamespace}' does not exist.")
+        if not ns.parent:
+            raise RuntimeError(f"Namespace '{parentNamespace}' has no parent namespace.")
 
-    @staticmethod
-    def relativeNames(*args, **kwargs):
+    @classmethod
+    def relativeNames(cls, *args, **kwargs):
         """
         relativeNames() -> bool
 
@@ -15571,8 +15665,8 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def removeNamespace(*args, **kwargs):
+    @classmethod
+    def removeNamespace(cls, name: str, removeContents: bool =False):
         """
         removeNamespace(MString name, bool removeContents=False)
 
@@ -15580,10 +15674,27 @@ class MNamespace(object):
         Note that removing a namespace changes the scene, so any code
         that calls this method needs to handle undo.
         """
-        pass
+        ns_name = name.split(":")[-1]
+        ns = cls._FLAT_SCENE_NAMESPACES.get(ns_name)
+        if not ns:
+            raise RuntimeError(f"Namespace '{name}' does not exist.")
+        
+        if removeContents:
+            for obj in ns.iter_members(recurse=True):
+                hierarchy.NodePool.remove_node(obj)
 
-    @staticmethod
-    def renameNamespace(*args, **kwargs):
+        for child in ns.children:
+            cls._FLAT_SCENE_NAMESPACES.pop(child)
+        
+        if ns == cls._current_namespace:
+            cls._current_namespace = ns.parent if ns.parent else cls._FLAT_SCENE_NAMESPACES[":"]
+
+        if ns.parent:
+            ns.parent.children.pop(ns.name)
+        cls._FLAT_SCENE_NAMESPACES.pop(ns_name)
+
+    @classmethod
+    def renameNamespace(cls, *args, **kwargs):
         """
         renameNamespace(MString oldName, MString newName, MString parent=None)
 
@@ -15593,18 +15704,18 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def rootNamespace(*args, **kwargs):
+    @classmethod
+    def rootNamespace(cls) -> str:
         """
         rootNamespace() -> MString
 
         Get the name of the root namespace. This name is an absolute
         namepath (i.e. prefixed by a ':').
         """
-        pass
+        return ":"
 
-    @staticmethod
-    def setCurrentNamespace(*args, **kwargs):
+    @classmethod
+    def setCurrentNamespace(cls, name) -> str:
         """
         setCurrentNamespace(MString name) -> MString
 
@@ -15617,10 +15728,19 @@ class MNamespace(object):
         To make the root namespace become current, use:
             MNamespace.setCurrentNamespace(MNamespace.rootNamespace())
         """
-        pass
+        if name == ":":
+            cls._current_namespace = cls._FLAT_SCENE_NAMESPACES[":"]
+            return name
+        
+        ns_name = name.split(":")[-1]
+        ns = cls._FLAT_SCENE_NAMESPACES.get(ns_name)
+        if not ns:
+            raise RuntimeError(f"Namespace '{name}' does not exist.")
+        cls._current_namespace = ns
+        return cls._current_namespace.absolute_name()
 
-    @staticmethod
-    def setRelativeNames(*args, **kwargs):
+    @classmethod
+    def setRelativeNames(cls, *args, **kwargs):
         """
         setRelativeNames(bool newState)
 
@@ -15641,8 +15761,8 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def stripNamespaceFromName(*args, **kwargs):
+    @classmethod
+    def stripNamespaceFromName(cls, *args, **kwargs):
         """
         stripNamespaceFromName(MString fullName) -> MString
 
@@ -15652,8 +15772,8 @@ class MNamespace(object):
         """
         pass
 
-    @staticmethod
-    def validateName(*args, **kwargs):
+    @classmethod
+    def validateName(cls, *args, **kwargs):
         """
         validateName(MString name) -> MString
 

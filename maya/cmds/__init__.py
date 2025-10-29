@@ -5411,22 +5411,39 @@ def nameField(annotation=str(), ann=str(), backgroundColor=list, bgc=list, chang
     pass
 
 
-def namespace(absoluteName=bool(), an=bool(), addNamespace=str(), add=str(), collapseAncestors=str(), ch=str(),
-              deleteNamespaceContent=bool(), dnc=bool(), exists=str(), ex=str(), force=bool(), f=bool(),
-              isRootNamespace=str(), ir=str(), mergeNamespaceWithOther=str(), mno=str(),
-              mergeNamespaceWithParent=bool(), mnp=bool(), mergeNamespaceWithRoot=bool(), mnr=bool(),
-              moveNamespace=list, mv=list, parent=str(), p=str(), recurse=bool(), r=bool(), relativeNames=bool(),
-              rel=bool(), removeNamespace=str(), rm=str(), rename=list, ren=list, setNamespace=str(), set=str(),
-              validateName=str(), vn=str(), *args, **kwargs):
-    pass
+def namespace(*args, absoluteName: bool =None, an: bool =None, addNamespace: str = None, add: str = None, collapseAncestors: str = None, ch: str = None,
+              deleteNamespaceContent: bool =None, dnc: bool =None, exists: str = None, ex: str = None, force: bool =None, f: bool =None,
+              isRootNamespace: str = None, ir: str = None, mergeNamespaceWithOther: str = None, mno: str = None,
+              mergeNamespaceWithParent: bool =None, mnp: bool =None, mergeNamespaceWithRoot: bool =None, mnr: bool =None,
+              moveNamespace=list, mv=list, parent: str = None, p: str = None, recurse: bool =None, r: bool =None, relativeNames: bool =None,
+              rel: bool =None, removeNamespace: str = None, rm: str = None, rename=list, ren=list, setNamespace: str = None, set: str = None,
+              validateName: str = None, vn: str = None, **kwargs):
+
+    if add_ns := (addNamespace or add):
+        om.MNamespace.addNamespace(add_ns)
+    elif set_current := (setNamespace or set):
+        om.MNamespace.setCurrentNamespace(set_current)
+    elif remove_ns := (removeNamespace or rm):
+        om.MNamespace.removeNamespace(remove_ns)
 
 
-def namespaceInfo(absoluteName=bool(), an=bool(), baseName=bool(), bn=bool(), currentNamespace=bool(), cur=bool(),
-                  dagPath=bool(), dp=bool(), fullName=bool(), fn=bool(), internal=bool(), int=bool(),
-                  isRootNamespace=bool(), ir=bool(), listNamespace=bool(), ls=bool(), listOnlyDependencyNodes=bool(),
-                  lod=bool(), listOnlyNamespaces=bool(), lon=bool(), parent=bool(), p=bool(), recurse=bool(), r=bool(),
-                  shortName=bool(), sn=bool(), *args, **kwargs):
-    pass
+def namespaceInfo(absoluteName:bool=None, an:bool=None, baseName:bool=None, bn:bool=None, currentNamespace:bool=None, cur:bool=None,
+                  dagPath:bool=None, dp:bool=None, fullName:bool=None, fn:bool=None, internal:bool=None, int:bool=None,
+                  isRootNamespace:bool=None, ir:bool=None, listNamespace:bool=None, ls:bool=None, listOnlyDependencyNodes:bool=None,
+                  lod:bool=None, listOnlyNamespaces:bool=None, lon:bool=None, parent:bool=None, p:bool=None, recurse:bool=None, r:bool=None,
+                  shortName:bool=None, sn:bool=None, *args, **kwargs):
+    
+    if ls_only_ns := (listOnlyNamespaces or lon):
+        r = []
+        for x in (child.absolute_name() for child in om.MNamespace._current_namespace.children.values()):
+            r.append(x if not x.startswith(':') else x[1:])
+        return r
+    elif list_ns := (listNamespace or ls):
+        r = []
+        for x in om.MNamespace._current_namespace.children.values():
+            r.append(x.absolute_name() if not x.absolute_name().startswith(':') else x.absolute_name()[1:])
+        return r
+
 
 
 def nBase(clearCachedTextureMap=str(), cct=str(), clearStart=bool(), cs=bool(), stuffStart=bool(), ss=bool(),

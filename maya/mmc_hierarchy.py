@@ -140,6 +140,8 @@ def deregister(node: 'om.MObject'):
 
 
 def find_first_available_name(name: str, parent_name: str = None) -> str:
+    from maya.api import OpenMaya as om
+
     # Check if the name ends with a number
     match = re.match(r"^(.*?)(\d+)$", name)
     if match:
@@ -150,6 +152,14 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
         # No number at the end of the name
         base_name = name
         idx = 1
+
+    # If current namespace is not root, prefix the name with it
+    if len(base_name.split(":")) == 1:
+        current_ns = om.MNamespace.currentNamespace()
+        if current_ns != om.MNamespace.rootNamespace():
+            ns_prefix = current_ns.split(":")[1:][0]  # Remove leading ':'
+            base_name = f'{ns_prefix}:{base_name}'
+            name = base_name
 
     if NodePool.hash_exists(hash(name)):
 

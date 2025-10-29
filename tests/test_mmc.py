@@ -697,6 +697,24 @@ class TestScene(unittest.TestCase):
         mc.createNode("transform", name="transform")
 
 
+class TestNamespaces(unittest.TestCase):
+
+    def setUp(self):
+        mc.file(new=True, force=True)
+
+    def test_create_namespace(self):
+        mc.namespace(add="testNS")
+        namespaces = mc.namespaceInfo(listOnlyNamespaces=True)
+        self.assertIn("testNS", namespaces)
+
+    def test_create_node_in_namespace(self):
+        mc.namespace(add="testNS")
+        mc.namespace(set="testNS")
+        transform = mc.createNode("transform", name="nsTransform")
+        self.assertTrue(mc.objExists("testNS:nsTransform"))
+        mc.namespace(set=":")
+
+
 if __name__ == "__main__":
 
     def old_test_runner():
