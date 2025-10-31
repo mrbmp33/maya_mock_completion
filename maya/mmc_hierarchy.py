@@ -154,12 +154,14 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
         idx = 1
 
     # If current namespace is not root, prefix the name with it
-    if len(base_name.split(":")) == 1:
-        current_ns = om.MNamespace.currentNamespace()
-        if current_ns != om.MNamespace.rootNamespace():
+    current_ns = om.MNamespace.currentNamespace()
+    if current_ns != om.MNamespace.rootNamespace():
+        if current_ns.startswith(":"):
             ns_prefix = current_ns.split(":")[1:][0]  # Remove leading ':'
-            base_name = f'{ns_prefix}:{base_name}'
-            name = base_name
+        else:
+            ns_prefix = current_ns
+        base_name = f'{ns_prefix}:{base_name.rpartition(":")[-1]}'
+        name = base_name
 
     if NodePool.hash_exists(hash(name)):
 

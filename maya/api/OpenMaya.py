@@ -15444,7 +15444,7 @@ class _namespace:
     def absolute_name(self) -> str:
         if self.parent and self.parent.name != ":":
             return f":{':'.join(reversed([ns.name for ns in self.iter_parents()]))}:{self.name}"
-        return f":{self.name}"
+        return f":{self.name if self.name != ':' else ''}"
 
     def iter_members(self, recurse: bool = False) -> Generator[MObject, None, None]:
         abs_name = self.absolute_name()[1:]  # remove leading ':'
@@ -15681,7 +15681,7 @@ class MNamespace(abc.ABC):
         
         if removeContents:
             for obj in ns.iter_members(recurse=True):
-                hierarchy.NodePool.remove_node(obj)
+                hierarchy.NodePool.remove_object(obj)
 
         for child in ns.children:
             cls._FLAT_SCENE_NAMESPACES.pop(child)
