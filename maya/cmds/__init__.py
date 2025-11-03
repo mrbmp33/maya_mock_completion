@@ -47,7 +47,8 @@ def aaf2fcp(deleteFile=bool(), df=bool(), dstPath=str(), dst=str(), getFileName=
     pass
 
 
-def AbcImport(*args, **kwargs):
+def AbcImport(*args, ignoreVersion: bool = True, ra=True, mergeNamespacesOnClash=True, namespace:str = None,
+              **kwargs):
     ...
 
 

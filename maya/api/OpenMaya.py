@@ -17775,7 +17775,7 @@ class MURI(object):
         pass
 
 
-class MObjectArray(list):
+class MObjectArray(list[MObject]):
     """
     Array of MObject values.
     """
