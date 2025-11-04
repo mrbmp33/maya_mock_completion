@@ -151,22 +151,30 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
     else:
         # No number at the end of the name
         base_name = name
-        idx = 1
+        idx = ""
 
-    # If current namespace is not root, prefix the name with it
+    # Ensure we’re in a known namespace
     current_ns = om.MNamespace.currentNamespace()
-    if current_ns != om.MNamespace.rootNamespace():
+    root_ns = om.MNamespace.rootNamespace()
+
+    # If name contains a namespace, ensure it exists
+    if len(ns_parts := base_name.split(":")) > 1:
+        if ns_parts[0] == "":
+            ns_parts = ns_parts[1:]
+        ns = ":".join(ns_parts[:-1])
+        om.MNamespace.addNamespace(ns)
+        base_name = f'{ns}:{ns_parts[-1]}'
+    elif current_ns != root_ns:
         if current_ns.startswith(":"):
-            ns_prefix = current_ns.split(":")[1:][0]  # Remove leading ':'
+            ns_prefix = ":".join(current_ns.split(":")[1:])  # Remove leading ':'
         else:
             ns_prefix = current_ns
         base_name = f'{ns_prefix}:{base_name.rpartition(":")[-1]}'
         name = base_name
 
+    # If parent_name is provided, prefix it (like Maya's DAG paths)
     if NodePool.hash_exists(hash(name)):
-
         as_node = NodePool.from_name(name)
-
         if as_node._parent is None:
             ...
         elif as_node._parent.apiTypeStr == 'kWorld':
@@ -175,6 +183,8 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
             base_name = f'{parent_name or ""}|{base_name}'
             name = base_name
 
+    name = f'{base_name}{idx}'
+    idx = idx or 1
     while NodePool.hash_exists(hash(name)):
         name = f'{base_name}{idx}'
         idx += 1

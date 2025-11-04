@@ -5850,7 +5850,7 @@ class MSelectionList(object):
             node = hierarchy.NodePool.from_name(node_name)
             if not node:
                 if not ASSUME_NODES_EXIST:
-                    raise RuntimeError(f"Node {node} not found in the pool.")
+                    raise RuntimeError(f"Node {node} not found in the pool.")  #@IgnoreException
                 else:
                     node = MFnDependencyNode().create('transform', node_name)  # Create a new node if it doesn't exist
             if len(attr) > 0:
@@ -15433,6 +15433,9 @@ class _namespace:
             parent.children[name] = self
         self.children: dict[str, _namespace] = {}
     
+    def __repr__(self):
+        return f"<namespace: {self.absolute_name()}>"
+    
     def iter_parents(self) -> Generator[ _namespace, None, None]:
         current = self.parent
         if not current:
@@ -15443,18 +15446,18 @@ class _namespace:
 
     def absolute_name(self) -> str:
         if self.parent and self.parent.name != ":":
-            return f":{':'.join(reversed([ns.name for ns in self.iter_parents()]))}:{self.name}"
+            return f"{':'.join(reversed([ns.name for ns in self.iter_parents() if ns.name != ':']))}:{self.name}"
         return f":{self.name if self.name != ':' else ''}"
 
     def iter_members(self, recurse: bool = False) -> Generator[MObject, None, None]:
         abs_name = self.absolute_name()[1:]  # remove leading ':'
         if recurse:
-            for obj_name, obj in hierarchy.NodePool._node_instances.items():
-                if obj_name.startswith(f"{abs_name}:"):
+            for obj in hierarchy.NodePool._node_instances.values():
+                if obj._name.startswith(f"{abs_name}:"):
                     yield obj
         else:
-            for obj_name, obj in hierarchy.NodePool._node_instances.items():
-                if obj_name.rpartition(":")[0] == abs_name:
+            for obj in hierarchy.NodePool._node_instances.values():
+                if obj._name.rpartition(":")[0] == abs_name:
                     yield obj
                     
 
@@ -15506,9 +15509,16 @@ class MNamespace(abc.ABC):
             parent_name_space: _namespace = cls._current_namespace
         else:
             parent_name_space: _namespace = cls._FLAT_SCENE_NAMESPACES.get(parent)
-
-        child_ns = _namespace(name=name, parent=parent_name_space)
-        cls._FLAT_SCENE_NAMESPACES[child_ns.name] = child_ns
+        
+        if len(parts := name.split(":")) > 1:
+            for i, part in enumerate(parts, start=0):
+                parent = cls._FLAT_SCENE_NAMESPACES.get(parts[i-1], cls._current_namespace) if i > 0 else cls._current_namespace
+                if part not in cls._FLAT_SCENE_NAMESPACES:
+                    child_ns = _namespace(name=part, parent=parent)
+                    cls._FLAT_SCENE_NAMESPACES[child_ns.name] = child_ns
+        else:
+            child_ns = _namespace(name=name, parent=parent_name_space or cls._current_namespace)
+            cls._FLAT_SCENE_NAMESPACES[child_ns.name] = child_ns
 
     @classmethod
     def currentNamespace(cls):
@@ -15620,13 +15630,13 @@ class MNamespace(abc.ABC):
         pass
 
     @classmethod
-    def namespaceExists(cls, *args, **kwargs):
+    def namespaceExists(cls, name: str) -> bool:
         """
         namespaceExists(MString name) -> bool
 
-        Check if a given namespace exists.
+        Check if a given namespace exists. Absolute name is required
         """
-        pass
+        return name in {ns.absolute_name() for ns in cls._FLAT_SCENE_NAMESPACES.values()}
 
     @classmethod
     def parentNamespace(cls, parentNamespace: str) -> str:

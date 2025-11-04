@@ -3123,10 +3123,12 @@ def file(*args, absoluteName: bool = None, an: bool = None, activate: bool = Non
     defer_reference = any((dr, deferReference))
     execute_script_nodes = all((esn, executeScriptNodes))
     merge_namespaces_on_clash = any((mnc, mergeNamespacesOnClash))
-    namespace = namespace or ns
-    if isinstance(namespace, _str):
-        if not namespace.endswith(':'):
-            namespace += ':'
+    if namespace := (ns or namespace):
+        if parent_namespace := (pns or parentNamespace):
+            namespace = f"{om.MNamespace.currentNamespace()}:{parent_namespace}:{namespace}"
+        if relative_namespace := (rns or relativeNamespace):
+            rns = om.MNamespace._FLAT_SCENE_NAMESPACES.get(relative_namespace.split(":")[-1], relative_namespace)
+            namespace = f"{rns}:{namespace}"
     _import = i
     _type = type or typ
     file_path: Path = None
@@ -3145,8 +3147,10 @@ def file(*args, absoluteName: bool = None, an: bool = None, activate: bool = Non
                         if next_line_geo and line.startswith('g '):
                             next_line_geo = False
                             mesh_name = line[2:].strip()
-                            if merge_namespaces_on_clash and namespace:
-                                mesh_name = f"{namespace}{mesh_name}"
+                            if namespace:
+                                mesh_name = f"{namespace}:{mesh_name}"
+                            if mergeNamespacesOnClash:
+                                ...
                             parent_mobject = om.MFnDagNode().create('transform', mesh_name)
                             mesh_mobject = om.MFnMesh().create([om.MPoint(), ], [1, ], [1, ], parent=parent_mobject)
 
@@ -5425,7 +5429,15 @@ def namespace(*args, absoluteName: bool =None, an: bool =None, addNamespace: str
     elif set_current := (setNamespace or set):
         om.MNamespace.setCurrentNamespace(set_current)
     elif remove_ns := (removeNamespace or rm):
-        om.MNamespace.removeNamespace(remove_ns)
+        ns = om.MNamespace._FLAT_SCENE_NAMESPACES.get(remove_ns.split(":")[-1])
+        if ns is None:
+            raise RuntimeError(f"Namespace '{remove_ns}' does not exist.")
+        mod = om.MDGModifier()
+        for mobject in om.MNamespace.getNamespaceObjects(remove_ns, recurse=True):
+            mod.renameNode(mobject, mobject._name.split(":")[-1])
+        mod.doIt()
+    elif exists_ns := (exists or ex):
+        return om.MNamespace.namespaceExists(exists_ns)
 
 
 def namespaceInfo(absoluteName:bool=None, an:bool=None, baseName:bool=None, bn:bool=None, currentNamespace:bool=None, cur:bool=None,
@@ -5444,6 +5456,9 @@ def namespaceInfo(absoluteName:bool=None, an:bool=None, baseName:bool=None, bn:b
         for x in om.MNamespace._current_namespace.children.values():
             r.append(x.absolute_name() if not x.absolute_name().startswith(':') else x.absolute_name()[1:])
         return r
+    elif cur_ns := (currentNamespace or cur):
+        cn = om.MNamespace.currentNamespace()
+        return cn if not (cn.startswith(':') and cn != ':') else cn[1:]
 
 
 

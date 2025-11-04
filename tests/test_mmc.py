@@ -706,12 +706,24 @@ class TestNamespaces(unittest.TestCase):
         mc.namespace(add="testNS")
         namespaces = mc.namespaceInfo(listOnlyNamespaces=True)
         self.assertIn("testNS", namespaces)
+        om.MNamespace.namespaceExists(":testNS")
+
+        om.MNamespace.addNamespace("testNS2:bob")
+        namespaces = mc.namespaceInfo(listOnlyNamespaces=True)
+        self.assertIn("testNS2", namespaces)
 
     def test_create_node_in_namespace(self):
         mc.namespace(add="testNS")
+        om.MNamespace.namespaceExists(":testNS")
         mc.namespace(set="testNS")
         transform = mc.createNode("transform", name="nsTransform")
         self.assertTrue(mc.objExists("testNS:nsTransform"))
+
+        om.MNamespace.addNamespace("testNS2:bob")
+        om.MNamespace.namespaceExists(":testNS2:bob")
+        mc.namespace(set=":testNS:testNS2:bob")
+        transform2 = mc.createNode("transform", name="nsTransform2")
+        self.assertTrue(mc.objExists("testNS:testNS2:bob:nsTransform2"))
         mc.namespace(set=":")
 
 
