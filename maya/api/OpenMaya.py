@@ -7077,7 +7077,7 @@ class MItDependencyGraph(object):
         self._index: int = 0
         self._done: bool = False
         self._path: list[Union["MObject", "MPlug"]] = []
-        self._visited: set[str] = set()
+        self._visited: dict[UUID, MObject] = {}
         self._pruned: set[str] = set()
 
         # Auto-build path if root provided
@@ -7116,7 +7116,7 @@ class MItDependencyGraph(object):
             node = stack.pop()
             if node._uuid in self._visited or node._uuid in self._pruned:
                 continue
-            self._visited.add(node._uuid)
+            self._visited[node._uuid] = node
             order.append(node)
             children = self._get_connected(node)
             # downstream first if kDownstream
@@ -7131,7 +7131,7 @@ class MItDependencyGraph(object):
             node = queue.popleft()
             if node._uuid in self._visited or node._uuid in self._pruned:
                 continue
-            self._visited.add(node._uuid)
+            self._visited[node._uuid] = node
             order.append(node)
             queue.extend(self._get_connected(node))
         return order
@@ -7214,14 +7214,14 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def getNodesVisited(*args, **kwargs):
+    def getNodesVisited(self):
         """
         getNodesVisited() -> MObjectArray
 
         Retrieves all nodes visited during the iteration.
         State of the provided array is undefined if this method fails.
         """
-        pass
+        return MObjectArray(list(self._visited.values()))
 
     def getPlugPath(*args, **kwargs):
         """
@@ -7238,14 +7238,14 @@ class MItDependencyGraph(object):
         """
         pass
 
-    def getPlugsVisited(*args, **kwargs):
+    def getPlugsVisited(self) -> "MPlugArray":
         """
         getPlugsVisited() -> MPlugArray
 
         Retrieves all plugs visited during the iteration.
         State of the provided array is undefined if this method fails.
         """
-        pass
+        return MPlugArray([node for node in self._visited.values() if isinstance(node, MPlug)])
 
     def isDone(self) -> bool:
         """
@@ -7376,13 +7376,25 @@ class MItDependencyGraph(object):
     def __repr__(self):
         return f"<MItDependencyGraph index={self._index} done={self._done}>"
 
-    currentDirection = None
+    @property
+    def nodeDepth(self):
+        return self._index
+    
+    @property
+    def currentDirection(self):
+        return self._direction
 
-    currentFilter = None
+    @property
+    def currentFilter(self):
+        return self._filterType
 
-    currentLevel = None
+    @property
+    def currentTraversal(self):
+        return self._traversal
 
-    currentTraversal = None
+    @property
+    def currentLevel(self):
+        return self._level
 
     pruningOnFilter = None
 
