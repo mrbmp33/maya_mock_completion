@@ -5,7 +5,7 @@ with open("./README.md") as f:
     
 setup(
     name="maya_mock_completion",
-    version="0.1.0",
+    version="0.2.0",
     description="A mock version of the Autodesk maya libraries to run code intended for maya using a regular Python interpreter"
                 "from a virtual environment.",
     package_dir={

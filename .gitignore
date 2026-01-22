@@ -1,15 +1,10 @@
 /build/
 /.venv/
-/maya_mock_completion.egg-info/dependency_links.txt
-/maya_mock_completion.egg-info/PKG-INFO
-/maya_mock_completion.egg-info/requires.txt
-/maya_mock_completion.egg-info/SOURCES.txt
-/maya_mock_completion.egg-info/top_level.txt
+/maya_mock_completion.egg-info/*
 *.pyc
 .vscode/
 .env
-dist/maya_mock_completion-0.1.0-py3-none-any.whl
-dist/maya_mock_completion-0.1.0.tar.gz
+dist/*
 /maya/cmds/custom_cmds.py
 sandbox.py
 maya/cmds/custom_cmds.py
