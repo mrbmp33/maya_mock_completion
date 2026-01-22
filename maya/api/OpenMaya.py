@@ -7077,7 +7077,7 @@ class MItDependencyGraph(object):
         self._index: int = 0
         self._done: bool = False
         self._path: list[Union["MObject", "MPlug"]] = []
-        self._visited: dict[UUID, MObject] = {}
+        self._visited: dict[uuid.UUID, MObject] = {}
         self._pruned: set[str] = set()
 
         # Auto-build path if root provided
