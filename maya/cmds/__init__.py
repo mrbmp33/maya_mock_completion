@@ -220,8 +220,8 @@ def alignSurface(attach=bool(), at=bool(), caching=bool(), cch=bool(), construct
     pass
 
 
-def allNodeTypes(includeAbstract=bool(), ia=bool(), *args, **kwargs):
-    pass
+def allNodeTypes(includeAbstract=bool(), ia=bool(), *args, **kwargs) -> list[str]:
+    return ["transform", "mesh", "camera", "light", "joint"]
 
 
 def ambientLight(ambientShade=float(), discRadius=float(), drs=float(), exclusive=bool(), exc=bool(), intensity=float(),
@@ -2162,7 +2162,7 @@ def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), share
             mobject = om.MFnDagNode().create(node_type, name or n)
 
     except RuntimeError:
-        mobject = om.MFnDependencyNode(node_type, name or n)
+        mobject = om.MFnDependencyNode().create(node_type, name or n)
 
     if len(mobject._children) > 0:
         mobject = mobject._children[0]

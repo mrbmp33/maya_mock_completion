@@ -81,7 +81,7 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertTrue(mesh.isNull() == False)
 
     def test_create_node_by_typeid(self):
-        transform_id = om.MTypeId(0x5846524D)
+        transform_id = om._TYPE_STR_TO_ID["kTransform"]
         transform = self.dagmod.createNode(transform_id)
         self.dagmod.doIt()
         self.assertTrue(transform.isNull() == False)
@@ -653,7 +653,7 @@ class TestCallbacks(unittest.TestCase):
         mc.file(new=True, force=True)
 
         # Create a node without any callback
-        pma = mc.createNode("multDoubleLinear", name="mdl")
+        pma = mc.createNode("multDL", name="mdl")
         self.assertTrue(mc.objExists(pma))
 
         if HOST() == "python":

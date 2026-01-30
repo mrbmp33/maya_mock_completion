@@ -8,54 +8,58 @@ import re
 from typing import Optional
 
 from maya import cmds as mc
+import cmdx
 from maya.api import OpenMaya as om
 
 sel_ls = om.MSelectionList()
-node_types = (
-    "transform",
-    "joint",
-    "multDoubleLinear",
-    "camera",
-    "pointLight",
-    "spotLight",
+node_types = [
     "areaLight",
-    "lambert",
-    "file",
-    "condition",
-    "clamp",
-    "remapValue",
-    "remapColor",
-    "uvPin",
-    "plusMinusAverage",
-    "blendTwoAttr",
     "blendColors",
-    "decomposeMatrix",
-    "inverseMatrix",
-    "multMatrix",
     "blendMatrix",
+    "blendTwoAttr",
+    "camera",
+    "clamp",
+    "condition",
+    "decomposeMatrix",
+    "equal",
+    "file",
+    "inverseMatrix",
+    "joint",
+    "lambert",
+    "mesh",
+    "multDoubleLinear",
+    "multMatrix",
     "nurbsCurve",
     "nurbsSurface",
-    "mesh",
+    "parentMatrix",
+    "pickMatrix",
+    "plusMinusAverage",
+    "pointOnCurveInfo",
+    "pointOnSurfaceInfo",
+    "pointLight",
     "polyCube",
-)
+    "ramp",
+    "remapColor",
+    "remapValue",
+    "spotLight",
+    "transform",
+    "uvPin",
+]
 
 
 def get_attr_properties(nd):
-    sel_ls.add(nd)
-    mobject = sel_ls.getDependNode(0)
-    dg = om.MFnDependencyNode(mobject)
-    sel_ls.clear()
+    as_node = cmdx.encode(nd)
+    mobject = as_node.object()
 
     all_attr_properties = {}
     all_short_name_to_long_name = {}
 
     for attr_name in sorted(mc.listAttr(nd)):
         try:
-            plug = dg.findPlug(attr_name, 0)
-            attr = plug.attribute()
-            short_name = plug.partialName()
-            long_name = plug.partialName(useLongNames=1)
-
+            plug = as_node[attr_name]
+            attr: om.MObject = plug.attribute()
+            short_name = plug.name(long=False)
+            long_name = plug.name(long=True)
             attr_properties = {
                 "short_name": short_name,
                 "long_name": long_name,
@@ -66,29 +70,35 @@ def get_attr_properties(nd):
             }
 
             # Add the short name to long name mapping
-            name_key_d = all_short_name_to_long_name.get(short_name, {}).get(dg.typeName, {})
-            name_key_d[dg.typeName] = long_name
+            name_key_d = all_short_name_to_long_name.get(short_name, {}).get(
+                as_node.typeName, {}
+            )
+            name_key_d[as_node.object().apiTypeStr] = long_name
             all_short_name_to_long_name[short_name] = name_key_d
 
             # See if it has a parent plug. Better ask forgiveness than permission
             try:
-                parent_plug = plug.parent()
-                attr_properties["parent_plug"] = parent_plug.partialName(
-                    useLongNames=True
-                )
+                parent_plug: cmdx.Plug = plug.parent()
+                attr_properties["parent_plug"] = parent_plug.name(long=True)
             except TypeError:
                 ...
 
             if plug.isArray:
-                attr_properties["num_elements"] = plug.numElements()
+                try:
+                    attr_properties["num_elements"] = mc.getAttr(
+                        f"{plug.plug().partialName(includeNodeName=True, useLongNames=True)}".replace(
+                            "[-1]", "[0]"
+                        ),
+                        multiIndices=True,
+                    ) or 0
+                except ValueError:
+                    continue
 
             elif plug.isCompound:
-                attr_properties["num_children"] = plug.numChildren()
+                attr_properties["num_children"] = plug.plug().numChildren()
                 attr_properties["children"] = []
-                for index in range(plug.numChildren()):
-                    attr_properties["children"].append(
-                        plug.child(index).partialName(useLongNames=1)
-                    )
+                for child_plug in plug:
+                    attr_properties["children"].append(child_plug.name(long=True))
 
             if attr.apiType() in (
                 om.MFn.kDoubleLinearAttribute,
@@ -116,12 +126,13 @@ def get_attr_properties(nd):
                     fields[value] = enum.fieldName(value)
                 attr_properties["enum_fields"] = fields
                 attr_properties["default_value"] = enum.default
-            
+
             elif attr.apiType() == om.MFn.kTypedAttribute:
                 typed = om.MFnTypedAttribute(attr)
                 attr_properties["typed_type"] = typed.attrType()
 
             all_attr_properties[attr_properties["long_name"]] = attr_properties
+
         except RuntimeError as err:
             logging.debug(f"Could not complete attribute {attr_name}. {err}")
 
@@ -137,20 +148,25 @@ def convert_booleans_to_python_style(json_str):
     return json_str
 
 
-def create_attrs_dict(output_properties_file, output_literals_file: Optional[str] = None):
+def create_attrs_dict(
+    output_properties_file, output_literals_file: Optional[str] = None
+):
     attributes_properties = {}
     attributes_short_names_map = {}
 
     for node_type in node_types:
         mc.file(newFile=1, force=1)
         node_name = mc.createNode(node_type)
+        api_type = mc.nodeType(node_name, api=True)
+        print(f"Processing node type: {node_type}, node name: {node_name}")
 
         if isinstance(node_name, (tuple, list)):
             node_name, *_ = node_name
             mc.select(clear=True)
 
         attrs_dict, short_name_to_long_name = get_attr_properties(node_name)
-        attributes_properties[node_type] = attrs_dict
+
+        attributes_properties[api_type] = attrs_dict
         for key, nested_dict in short_name_to_long_name.items():
             short_name_dict = attributes_short_names_map.setdefault(key, nested_dict)
             short_name_dict.update(nested_dict)
@@ -198,5 +214,10 @@ def create_attrs_dict(output_properties_file, output_literals_file: Optional[str
 
 
 if __name__ == "__main__":
-    out_file = os.environ['GENERATE_ATTRIBUTES_OUTPUT']
-    create_attrs_dict(out_file)
+    properties_file = os.getenv("GENERATE_ATTRIBUTES_PROPERTIES_OUTPUT")
+    literals_file = os.getenv("GENERATE_ATTRIBUTES_LITERALS_OUTPUT")
+
+    create_attrs_dict(
+        properties_file,
+        literals_file
+    )
