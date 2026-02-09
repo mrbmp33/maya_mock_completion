@@ -10,7 +10,7 @@ import maya.mmc_hierarchy as _hierarchy
 from .custom_cmds import *
 from maya.api import OpenMaya as om
 from maya import ACTIVE_SELECTION, IMPORT_MESH_DATA
-from mmc_output import node_types_to_shapes
+from mmc_output import node_types_to_shapes, mmc_node_types_alias_map
 
 
 def _register_node_from_name(node_name:str) -> om.MObject:
@@ -2141,7 +2141,9 @@ def createNode(node_type: str, name=str(), n=str(), parent=str(), p=str(), share
                skipSelect=bool(), ss=bool(),
                *args, **kwargs):
     if not any((name, n)):
-        if shape_type := node_types_to_shapes.NODE_TYPES_TO_SHAPES.get(node_type):
+        if shape_type := node_types_to_shapes.NODE_TYPES_TO_SHAPES.get(
+            mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP.get(node_type, node_type)
+        ):
             name = shape_type['child_name']
         else:
             name=f'{node_type}1'

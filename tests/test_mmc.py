@@ -81,7 +81,7 @@ class TestMayaMockCompletion(unittest.TestCase):
         self.assertTrue(mesh.isNull() == False)
 
     def test_create_node_by_typeid(self):
-        transform_id = om._TYPE_STR_TO_ID["kTransform"]
+        transform_id = om.MTypeId(om._TYPE_STR_TO_ID["kTransform"])
         transform = self.dagmod.createNode(transform_id)
         self.dagmod.doIt()
         self.assertTrue(transform.isNull() == False)

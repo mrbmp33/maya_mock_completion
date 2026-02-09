@@ -47,78 +47,78 @@ NODE_TYPES_TO_SHAPES = {
     #     "parent_name": "pDisc1",
     #     "builder": {"name": "polyDisc1", "type": "kPluginDependNode"},
     # },
-    "mesh": {
+    "kMesh": {
         "child_type": "kMesh",
         "child_name": "polySurfaceShape1",
         "parent_name": "polySurface1",
     },
-    "nurbsCurve": {
+    "kNurbsCurve": {
         "child_type": "kNurbsCurve",
         "child_name": "curveShape1",
         "parent_name": "curve1",
     },
-    "nurbsSurface": {
+    "kNurbsSurface": {
         "child_type": "kNurbsSurface",
         "child_name": "surfaceShape1",
         "parent_name": "surface1",
     },
-    "bezierCurve": {
+    "kBezierCurve": {
         "child_type": "kNurbsCurve",
         "child_name": "bezierShape1",
         "parent_name": "bezier1",
     },
-    "circle": {
+    "kCircle": {
         "child_type": "kNurbsCurve",
         "child_name": "nurbsCircleShape1",
         "parent_name": "nurbsCircle1",
         "builder": {"name": "makeNurbCircle1", "type": "kCircle"},
     },
-    "pointLight": {
+    "kPointLight": {
         "child_type": "kPointLight",
         "child_name": "pointLightShape1",
         "parent_name": "pointLight1",
     },
-    "directionalLight": {
+    "kDirectionalLight": {
         "child_type": "kDirectionalLight",
         "child_name": "directionalLightShape1",
         "parent_name": "directionalLight1",
     },
-    "spotLight": {
+    "kSpotLight": {
         "child_type": "kSpotLight",
         "child_name": "spotLightShape1",
         "parent_name": "spotLight1",
     },
-    "areaLight": {
+    "kAreaLight": {
         "child_type": "kAreaLight",
         "child_name": "areaLightShape1",
         "parent_name": "areaLight1",
     },
-    "volumeLight": {
+    "kVolumeLight": {
         "child_type": "kVolumeLight",
         "child_name": "volumeLightShape2",
         "parent_name": "volumeLight2",
     },
-    "ambientLight": {
+    "kAmbientLight": {
         "child_type": "kAmbientLight",
         "child_name": "ambientLightShape1",
         "parent_name": "ambientLight1",
     },
-    "camera": {
+    "kCamera": {
         "child_type": "kCamera",
         "child_name": "cameraShape1",
         "parent_name": "camera1",
     },
-    "lattice": {
+    "kLattice": {
         "child_type": "kLattice",
         "child_name": "latticeShape1",
         "parent_name": "lattice1",
     },
-    "imagePlane": {
+    "kImagePlane": {
         "child_type": "kImagePlane",
         "child_name": "imagePlaneShape1",
         "parent_name": "imagePlane1",
     },
-    "locator": {
+    "kLocator": {
         "child_type": "kLocator",
         "child_name": "locatorShape1",
         "parent_name": "locator1",
