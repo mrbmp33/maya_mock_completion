@@ -9214,7 +9214,7 @@ class MPxCommand(object):
         """
         pass
 
-    def syntax(*args, **kwargs):
+    def syntax(self, *args, **kwargs):
         """
         Returns the command's MSyntax object, if it has one.
         """
@@ -14005,7 +14005,7 @@ class MTransformationMatrix(object):
         Returns:
             MTransformationMatrix: Reference to self.
         """
-        self._shear = [a + b for a, b in zip(self._shear, shear)]
+        self._shear = [a + b for a, b in zip(self._shear, seq)]
         # Not implemented: apply shear to matrix
 
     def translateBy(self, vector: MVector, space: int) -> 'MTransformationMatrix':
