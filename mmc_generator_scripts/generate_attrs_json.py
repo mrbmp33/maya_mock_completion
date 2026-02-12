@@ -78,7 +78,7 @@ def get_attr_properties(nd):
 
             # See if it has a parent plug. Better ask forgiveness than permission
             try:
-                parent_plug: cmdx.Plug = plug.parent()
+                parent_plug: cmdx.Plug = plug.parent
                 attr_properties["parent_plug"] = parent_plug.name(long=True)
             except TypeError:
                 ...

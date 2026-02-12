@@ -318,6 +318,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -328,6 +329,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -338,6 +340,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -348,6 +351,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -362,6 +366,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -372,6 +377,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -382,6 +388,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -392,6 +399,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -406,6 +414,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -416,6 +425,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -426,6 +436,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -436,6 +447,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -450,6 +462,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -460,6 +473,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -470,6 +484,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -543,6 +558,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -553,6 +569,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -563,6 +580,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -838,6 +856,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -850,6 +869,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -862,6 +882,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -888,6 +909,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -900,6 +922,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -912,6 +935,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -946,6 +970,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -967,6 +992,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -992,6 +1018,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -1002,6 +1029,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -1052,19 +1080,10 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
-        },
-        "height": {
-            "short_name": "ht",
-            "long_name": "height",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kNumericAttribute",
-            "numeric_type": 11,
-            "default_value": 0.0
         },
         "hiddenInOutliner": {
             "short_name": "hio",
@@ -1085,6 +1104,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1114,6 +1134,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -1143,6 +1164,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -1152,6 +1174,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -1162,6 +1185,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -1172,6 +1196,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intensity": {
@@ -1258,6 +1283,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -1270,6 +1296,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -1294,6 +1321,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1306,6 +1334,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 18,
             "default_value": 0
         },
@@ -1335,6 +1364,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1347,6 +1377,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
             "num_children": 3,
             "children": [
                 "lightDirectionX",
@@ -1361,6 +1392,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1371,6 +1403,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1381,6 +1414,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1399,6 +1433,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
             "num_children": 3,
             "children": [
                 "lightIntensityR",
@@ -1413,6 +1448,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1423,6 +1459,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1433,6 +1470,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1454,6 +1492,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1464,6 +1503,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1546,6 +1586,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1556,6 +1597,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1566,6 +1608,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1600,6 +1643,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1610,6 +1654,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1620,6 +1665,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1680,6 +1726,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1690,6 +1737,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1700,6 +1748,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1724,6 +1773,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1734,6 +1784,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1744,6 +1795,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1754,6 +1806,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -1766,6 +1819,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -1778,6 +1832,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1788,6 +1843,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1798,6 +1854,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -1808,6 +1865,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -1822,6 +1880,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -1835,6 +1894,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1847,6 +1907,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -1859,6 +1920,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -1871,6 +1933,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1883,6 +1946,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -1895,6 +1959,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -1907,6 +1972,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -1953,6 +2019,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1963,6 +2030,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1973,6 +2041,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -1997,6 +2066,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -2007,6 +2077,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -2017,6 +2088,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -2027,6 +2099,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2056,6 +2129,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -2067,7 +2141,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -2076,6 +2151,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "rayDepth": {
@@ -2161,6 +2237,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -2173,6 +2250,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -2183,6 +2261,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -2238,6 +2317,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2248,6 +2328,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2258,6 +2339,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2333,6 +2415,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2538,6 +2621,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2548,6 +2632,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2558,6 +2643,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2606,16 +2692,6 @@ ATTRIBUTES_PROPERTIES = {
             "default_value": 20,
             "min_value": 1.0
         },
-        "width": {
-            "short_name": "wd",
-            "long_name": "width",
-            "is_element": False,
-            "is_array": False,
-            "is_compound": False,
-            "type_str": "kNumericAttribute",
-            "numeric_type": 11,
-            "default_value": 0.0
-        },
         "wireColorB": {
             "short_name": "wfcb",
             "long_name": "wireColorB",
@@ -2623,6 +2699,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2633,6 +2710,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2643,6 +2721,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2748,6 +2827,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color1",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2758,6 +2838,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color1",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2768,6 +2849,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color1",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -2792,6 +2874,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color2",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -2802,6 +2885,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color2",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2812,6 +2896,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color2",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2868,6 +2953,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2878,6 +2964,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -2888,6 +2975,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3032,6 +3120,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -3042,6 +3131,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -3052,6 +3142,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -3061,7 +3152,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMatrixAttribute"
+            "type_str": "kMatrixAttribute",
+            "parent_plug": "target[-1]"
         },
         "target[-1].translateWeight": {
             "short_name": "tgt[-1].tra",
@@ -3070,6 +3162,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -3080,6 +3173,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -3092,6 +3186,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 14,
             "default_value": 1.0
         }
@@ -3391,7 +3486,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 0
+            "default_value": 16
         },
         "aiHandedness": {
             "short_name": "ai_handedness",
@@ -3435,6 +3530,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLensShift",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3445,6 +3541,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLensShift",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3468,6 +3565,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLensTiltAngle",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3478,6 +3576,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLensTiltAngle",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3497,6 +3596,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLookAt[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3507,6 +3607,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLookAt[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3517,6 +3618,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiLookAt[-1]",
             "numeric_type": 11,
             "default_value": -1.0
         },
@@ -3616,6 +3718,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiPosition[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3626,6 +3729,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiPosition[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3636,6 +3740,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiPosition[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3715,6 +3820,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiRayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3725,6 +3831,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiRayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3735,6 +3842,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiRayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3759,6 +3867,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiRayOrigin",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3769,6 +3878,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiRayOrigin",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3779,6 +3889,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiRayOrigin",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3823,6 +3934,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiScreenWindowMax[-1]",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -3833,6 +3945,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiScreenWindowMax[-1]",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -3852,6 +3965,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiScreenWindowMin[-1]",
             "numeric_type": 11,
             "default_value": -1.0
         },
@@ -3862,6 +3976,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiScreenWindowMin[-1]",
             "numeric_type": 11,
             "default_value": -1.0
         },
@@ -3881,8 +3996,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiShutterCurve[-1]",
             "numeric_type": 11,
-            "default_value": 3.917238811967777e+30
+            "default_value": -3.3010993914621206e-27
         },
         "aiShutterCurve[-1].aiShutterCurveY": {
             "short_name": "ai_shutter_curve[-1].ai_shutter_curvey",
@@ -3891,8 +4007,9 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiShutterCurve[-1]",
             "numeric_type": 11,
-            "default_value": 6.263804135531932e-43
+            "default_value": 6.151700258385947e-43
         },
         "aiShutterEnd": {
             "short_name": "ai_shutter_end",
@@ -3997,6 +4114,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiUp[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4007,6 +4125,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiUp[-1]",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -4017,6 +4136,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiUp[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4074,6 +4194,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiUvRemap",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4084,6 +4205,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiUvRemap",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4094,6 +4216,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiUvRemap",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4169,6 +4292,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "backgroundColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4179,6 +4303,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "backgroundColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4189,6 +4314,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "backgroundColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4276,6 +4402,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4286,6 +4413,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4296,6 +4424,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4306,6 +4435,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -4320,6 +4450,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4330,6 +4461,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4340,6 +4472,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4350,6 +4483,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -4364,6 +4498,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4374,6 +4509,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4384,6 +4520,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4394,6 +4531,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -4408,6 +4546,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4418,6 +4557,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4428,6 +4568,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -4710,6 +4851,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "displayGateMaskColor",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -4720,6 +4862,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "displayGateMaskColor",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -4730,6 +4873,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "displayGateMaskColor",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -4870,6 +5014,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "postProjection",
             "num_children": 3,
             "children": [
                 "filmRollPivot",
@@ -4884,6 +5029,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "filmRollControl",
             "enum_fields": {
                 "0": "Rotate-Translate"
             },
@@ -4896,6 +5042,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute2Double",
+            "parent_plug": "filmRollControl",
             "num_children": 2,
             "children": [
                 "horizontalRollPivot",
@@ -4909,6 +5056,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "filmRollControl",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -4919,6 +5067,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute2Double",
+            "parent_plug": "postProjection",
             "num_children": 2,
             "children": [
                 "filmTranslateH",
@@ -4932,6 +5081,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "filmTranslate",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -4942,6 +5092,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "filmTranslate",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -5011,6 +5162,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -5023,6 +5175,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -5035,6 +5188,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -5061,6 +5215,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -5073,6 +5228,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -5085,6 +5241,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -5119,6 +5276,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -5140,6 +5298,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -5165,6 +5324,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -5175,6 +5335,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -5225,6 +5386,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -5248,6 +5410,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -5269,6 +5432,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "cameraAperture",
             "numeric_type": 14,
             "default_value": 1.4173200000000001,
             "min_value": 3.9370000000000004e-05,
@@ -5281,6 +5445,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "filmOffset",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -5291,6 +5456,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pan",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -5301,6 +5467,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "filmRollPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -5311,6 +5478,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shake",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -5338,6 +5506,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -5387,6 +5556,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -5396,6 +5566,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -5406,6 +5577,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -5416,6 +5588,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -5495,6 +5668,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -5507,6 +5681,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -5638,6 +5813,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5648,6 +5824,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5658,6 +5835,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5718,6 +5896,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5728,6 +5907,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5738,6 +5918,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5748,6 +5929,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -5760,6 +5942,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -5772,6 +5955,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5782,6 +5966,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5792,6 +5977,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -5802,6 +5988,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -5816,6 +6003,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -5829,6 +6017,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -5841,6 +6030,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -5853,6 +6043,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -5865,6 +6056,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -5877,6 +6069,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -5889,6 +6082,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -5901,6 +6095,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -5984,6 +6179,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "postProjection",
             "numeric_type": 14,
             "default_value": 1.0,
             "min_value": 1e-10
@@ -5995,6 +6191,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "postProjection",
             "numeric_type": 14,
             "default_value": 1.0,
             "min_value": 1e-10
@@ -6015,6 +6212,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -6026,7 +6224,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -6035,6 +6234,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "renderInfo": {
@@ -6067,6 +6267,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -6079,6 +6280,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -6089,6 +6291,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -6314,6 +6517,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "tumblePivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6324,6 +6528,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "tumblePivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6334,6 +6539,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "tumblePivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6393,6 +6599,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "cameraAperture",
             "numeric_type": 14,
             "default_value": 0.94488,
             "min_value": 3.9370000000000004e-05,
@@ -6405,6 +6612,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "filmOffset",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6415,6 +6623,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pan",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6425,6 +6634,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "filmRollPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6435,6 +6645,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shake",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -6479,6 +6690,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6489,6 +6701,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6499,6 +6712,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6603,6 +6817,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6613,6 +6828,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6623,6 +6839,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6659,6 +6876,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "max",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6669,6 +6887,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "max",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6679,6 +6898,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "max",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6711,6 +6931,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "min",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6721,6 +6942,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "min",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6731,6 +6953,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "min",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6755,6 +6978,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6765,6 +6989,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6775,6 +7000,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6836,6 +7062,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorIfFalse",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -6846,6 +7073,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorIfFalse",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -6856,6 +7084,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorIfFalse",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -6880,6 +7109,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorIfTrue",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6890,6 +7120,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorIfTrue",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6900,6 +7131,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorIfTrue",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6982,6 +7214,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -6992,6 +7225,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -7002,6 +7236,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -7116,6 +7351,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputQuat",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7126,6 +7362,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputQuat",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7136,6 +7373,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputQuat",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7146,6 +7384,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputQuat",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7170,6 +7409,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "outputRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -7180,6 +7420,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "outputRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -7190,6 +7431,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "outputRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -7214,6 +7456,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputScale",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7224,6 +7467,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputScale",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7234,6 +7478,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputScale",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7258,6 +7503,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputShear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7268,6 +7514,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputShear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7278,6 +7525,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outputShear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -7302,6 +7550,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "outputTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -7312,6 +7561,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "outputTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -7322,6 +7572,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "outputTranslate",
             "unit_type": 2,
             "default_value": 0.0
         }
@@ -7354,8 +7605,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute",
-            "numeric_type": 14,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
             "default_value": 0.0
         },
         "frozen": {
@@ -7376,8 +7627,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute",
-            "numeric_type": 14,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
             "default_value": 0.0
         },
         "input2": {
@@ -7386,8 +7637,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kNumericAttribute",
-            "numeric_type": 14,
+            "type_str": "kDoubleLinearAttribute",
+            "unit_type": 2,
             "default_value": 0.0
         },
         "isHistoricallyInteresting": {
@@ -7533,6 +7784,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "baseExplicitUvTilePosition",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -7543,6 +7795,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "baseExplicitUvTilePosition",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -7611,6 +7864,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -7623,6 +7877,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -7635,6 +7890,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -7694,6 +7950,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -7706,6 +7963,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -7718,6 +7976,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -7771,6 +8030,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "coverage",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -7783,6 +8043,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "coverage",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -7809,6 +8070,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -7821,6 +8083,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -7833,6 +8096,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -7900,6 +8164,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "explicitUvTiles[-1]",
             "typed_type": 4
         },
         "explicitUvTiles[-1].explicitUvTilePosition": {
@@ -7909,6 +8174,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute2Float",
+            "parent_plug": "explicitUvTiles[-1]",
             "num_children": 2,
             "children": [
                 "explicitUvTiles[-1].explicitUvTilePositionU",
@@ -7922,6 +8188,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "explicitUvTiles[-1].explicitUvTilePosition",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -7932,6 +8199,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "explicitUvTiles[-1].explicitUvTilePosition",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8178,6 +8446,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "noiseUV",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0
@@ -8202,6 +8471,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "noiseUV",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0
@@ -8238,6 +8508,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "offset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -8250,6 +8521,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "offset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -8286,6 +8558,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8296,6 +8569,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8306,6 +8580,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8329,6 +8604,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8339,6 +8615,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8363,6 +8640,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8373,6 +8651,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8383,6 +8662,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8406,6 +8686,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pixelCenter",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8416,6 +8697,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pixelCenter",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8534,6 +8816,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "repeatUV",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0
@@ -8558,6 +8841,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "repeatUV",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0
@@ -8624,6 +8908,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "translateFrame",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -8636,6 +8921,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "translateFrame",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -8648,6 +8934,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8732,6 +9019,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8742,6 +9030,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8807,6 +9096,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8831,6 +9121,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraOne",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8841,6 +9132,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraOne",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8851,6 +9143,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraOne",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8875,6 +9168,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraThree",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8885,6 +9179,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraThree",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8895,6 +9190,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraThree",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8919,6 +9215,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraTwo",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8929,6 +9226,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraTwo",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8939,6 +9237,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexCameraTwo",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8962,6 +9261,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvOne",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8972,6 +9272,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvOne",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -8995,6 +9296,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvThree",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -9005,6 +9307,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvThree",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -9028,6 +9331,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvTwo",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -9038,6 +9342,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexUvTwo",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -9198,6 +9503,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "bindInverseScale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -9208,6 +9514,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "bindInverseScale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -9218,6 +9525,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "bindInverseScale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -9242,6 +9550,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindJointOrient",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9252,6 +9561,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindJointOrient",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9262,6 +9572,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindJointOrient",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9295,6 +9606,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindRotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9305,6 +9617,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindRotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9315,6 +9628,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindRotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9339,6 +9653,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindRotation",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9349,6 +9664,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindRotation",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9359,6 +9675,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindRotation",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9383,6 +9700,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindScale",
             "unit_type": 1,
             "default_value": 1.0
         },
@@ -9393,6 +9711,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindScale",
             "unit_type": 1,
             "default_value": 1.0
         },
@@ -9403,6 +9722,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "bindScale",
             "unit_type": 1,
             "default_value": 1.0
         },
@@ -9460,6 +9780,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9470,6 +9791,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9480,6 +9802,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9490,6 +9813,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -9504,6 +9828,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9514,6 +9839,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9524,6 +9850,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9534,6 +9861,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -9548,6 +9876,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9558,6 +9887,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9568,6 +9898,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9578,6 +9909,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -9592,6 +9924,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9602,6 +9935,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9612,6 +9946,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -9833,6 +10168,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "fkRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9843,6 +10179,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "fkRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9853,6 +10190,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "fkRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -9897,6 +10235,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -9909,6 +10248,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -9921,6 +10261,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -9947,6 +10288,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -9959,6 +10301,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -9971,6 +10314,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -10005,6 +10349,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -10026,6 +10371,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -10051,6 +10397,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -10061,6 +10408,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -10111,6 +10459,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -10134,6 +10483,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10181,6 +10531,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -10205,6 +10556,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "ikRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10215,6 +10567,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "ikRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10225,6 +10578,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "ikRotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10268,6 +10622,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -10277,6 +10632,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -10287,6 +10643,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -10297,6 +10654,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -10341,6 +10699,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "inverseScale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -10351,6 +10710,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "inverseScale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -10361,6 +10721,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "inverseScale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -10443,6 +10804,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "jointOrient",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10453,6 +10815,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "jointOrient",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10463,6 +10826,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "jointOrient",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10518,6 +10882,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -10530,6 +10895,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -10591,6 +10957,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotLimit",
             "unit_type": 1,
             "default_value": 0.7853981633974483
         },
@@ -10601,6 +10968,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10613,6 +10981,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotLimit",
             "unit_type": 1,
             "default_value": 0.7853981633974483
         },
@@ -10623,6 +10992,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10635,6 +11005,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotLimit",
             "unit_type": 1,
             "default_value": 0.7853981633974483
         },
@@ -10645,6 +11016,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10671,6 +11043,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotateDampRange",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10681,6 +11054,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotateDampRange",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10691,6 +11065,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotateDampRange",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -10715,6 +11090,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotateDampStrength",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -10725,6 +11101,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotateDampStrength",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -10735,6 +11112,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotateDampStrength",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -10773,6 +11151,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimit",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -10783,6 +11162,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10795,6 +11175,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimit",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -10805,6 +11186,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10817,6 +11199,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimit",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -10827,6 +11210,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10867,6 +11251,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "maxTransLimit",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -10877,6 +11262,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10889,6 +11275,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "maxTransLimit",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -10899,6 +11286,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10911,6 +11299,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "maxTransLimit",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -10921,6 +11310,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10969,6 +11359,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotLimit",
             "unit_type": 1,
             "default_value": -0.7853981633974483
         },
@@ -10979,6 +11370,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -10991,6 +11383,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotLimit",
             "unit_type": 1,
             "default_value": -0.7853981633974483
         },
@@ -11001,6 +11394,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11013,6 +11407,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotLimit",
             "unit_type": 1,
             "default_value": -0.7853981633974483
         },
@@ -11023,6 +11418,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11049,6 +11445,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotateDampRange",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11059,6 +11456,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotateDampRange",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11069,6 +11467,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotateDampRange",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11093,6 +11492,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotateDampStrength",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11103,6 +11503,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotateDampStrength",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11113,6 +11514,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotateDampStrength",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11151,6 +11553,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimit",
             "numeric_type": 14,
             "default_value": -1.0
         },
@@ -11161,6 +11564,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11173,6 +11577,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimit",
             "numeric_type": 14,
             "default_value": -1.0
         },
@@ -11183,6 +11588,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11195,6 +11601,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimit",
             "numeric_type": 14,
             "default_value": -1.0
         },
@@ -11205,6 +11612,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11245,6 +11653,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "minTransLimit",
             "unit_type": 2,
             "default_value": -1.0
         },
@@ -11255,6 +11664,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11267,6 +11677,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "minTransLimit",
             "unit_type": 2,
             "default_value": -1.0
         },
@@ -11277,6 +11688,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11289,6 +11701,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "minTransLimit",
             "unit_type": 2,
             "default_value": -1.0
         },
@@ -11299,6 +11712,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11323,6 +11737,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11333,6 +11748,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11343,6 +11759,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11398,6 +11815,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11408,6 +11826,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11418,6 +11837,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11428,6 +11848,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -11440,6 +11861,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -11452,6 +11874,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11462,6 +11885,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11472,6 +11896,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -11482,6 +11907,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -11496,6 +11922,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -11509,6 +11936,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11521,6 +11949,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -11533,6 +11962,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -11545,6 +11975,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11557,6 +11988,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -11569,6 +12001,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -11581,6 +12014,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -11627,6 +12061,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "preferredAngle",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11637,6 +12072,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "preferredAngle",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11647,6 +12083,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "preferredAngle",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11666,6 +12103,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -11677,7 +12115,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -11686,6 +12125,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "radius": {
@@ -11728,6 +12168,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -11740,6 +12181,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -11750,6 +12192,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -11799,6 +12242,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11809,6 +12253,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11819,6 +12264,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11873,6 +12319,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -11883,6 +12330,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -11893,6 +12341,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -11903,6 +12352,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -11913,6 +12363,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -11923,6 +12374,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -11948,6 +12400,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11958,6 +12411,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11968,6 +12422,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11978,6 +12433,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -11988,6 +12444,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -11998,6 +12455,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -12008,6 +12466,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -12060,6 +12519,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12070,6 +12530,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12080,6 +12541,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12090,6 +12552,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12100,6 +12563,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12110,6 +12574,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12120,6 +12585,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "scale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -12130,6 +12596,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "scale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -12140,6 +12607,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "scale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -12176,6 +12644,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "selectHandle",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12186,6 +12655,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "selectHandle",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12196,6 +12666,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "selectHandle",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12232,6 +12703,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -12242,6 +12714,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -12252,6 +12725,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -12317,6 +12791,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "stiffness",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -12327,6 +12802,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "stiffness",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -12337,6 +12813,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "stiffness",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -12401,6 +12878,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "transMinusRotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12411,6 +12889,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "transMinusRotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12421,6 +12900,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "transMinusRotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12445,6 +12925,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "translate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12455,6 +12936,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "translate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12465,6 +12947,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "translate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -12574,6 +13057,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12584,6 +13068,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12594,6 +13079,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12663,6 +13149,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ambientColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12673,6 +13160,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ambientColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12683,6 +13171,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ambientColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12740,6 +13229,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -12750,6 +13240,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -12760,6 +13251,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -12817,6 +13309,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "hardwareShader",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12827,6 +13320,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "hardwareShader",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12837,6 +13331,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "hardwareShader",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12873,6 +13368,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "incandescence",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12883,6 +13379,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "incandescence",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12893,6 +13390,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "incandescence",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -12935,6 +13433,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -12947,6 +13446,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1]",
             "numeric_type": 18,
             "default_value": 0
         },
@@ -12957,6 +13457,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -12969,6 +13470,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightDataArray[-1]",
             "num_children": 3,
             "children": [
                 "lightDataArray[-1].lightDirectionX",
@@ -12983,6 +13485,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1].lightDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -12993,6 +13496,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1].lightDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13003,6 +13507,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1].lightDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13013,6 +13518,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightDataArray[-1]",
             "num_children": 3,
             "children": [
                 "lightDataArray[-1].lightIntensityR",
@@ -13027,6 +13533,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1].lightIntensity",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13037,6 +13544,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1].lightIntensity",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13047,6 +13555,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1].lightIntensity",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13057,6 +13566,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13067,6 +13577,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -13079,6 +13590,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDataArray[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13154,6 +13666,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13164,6 +13677,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13174,6 +13688,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normalCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13218,6 +13733,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13228,6 +13744,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13238,6 +13755,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13262,6 +13780,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outGlowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13272,6 +13791,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outGlowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13282,6 +13802,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outGlowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13306,6 +13827,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outMatteOpacity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13316,6 +13838,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outMatteOpacity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13326,6 +13849,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outMatteOpacity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13350,6 +13874,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13360,6 +13885,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13370,6 +13896,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outTransparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13394,6 +13921,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13404,6 +13932,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13414,6 +13943,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13458,6 +13988,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13468,6 +13999,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13478,6 +14010,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -13611,6 +14144,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "transparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13632,6 +14166,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "transparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13642,6 +14177,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "transparency",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -13666,6 +14202,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vrEdgeColor",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -13676,6 +14213,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vrEdgeColor",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -13686,6 +14224,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vrEdgeColor",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -14239,6 +14778,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiShadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -14249,6 +14789,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiShadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -14259,6 +14800,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiShadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -14724,6 +15266,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14734,6 +15277,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14744,6 +15288,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14754,6 +15299,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -14768,6 +15314,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14778,6 +15325,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14788,6 +15336,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14798,6 +15347,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -14812,6 +15362,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14822,6 +15373,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14832,6 +15384,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14856,6 +15409,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
             "default_value": 1.5,
             "min_value": 1.0
@@ -14867,6 +15421,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
             "default_value": 1.5,
             "min_value": 1.0
@@ -14878,6 +15433,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
             "default_value": 1.5,
             "min_value": 1.0
@@ -14889,6 +15445,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -14903,6 +15460,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14913,6 +15471,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14923,6 +15482,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -14998,6 +15558,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15008,6 +15569,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15022,6 +15584,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15043,6 +15606,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15053,6 +15617,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15067,6 +15632,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15086,6 +15652,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15096,6 +15663,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15110,6 +15678,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15131,6 +15700,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15141,6 +15711,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15155,6 +15726,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15179,6 +15751,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -15189,6 +15762,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -15211,6 +15785,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -15230,6 +15805,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -15242,6 +15818,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "colorSet[-1]",
             "typed_type": 4
         },
         "colorSet[-1].colorSetPoints": {
@@ -15251,6 +15828,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet[-1]",
             "num_elements": 0
         },
         "colorSet[-1].colorSetPoints[-1].colorSetPointsA": {
@@ -15260,6 +15838,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15270,6 +15849,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15280,6 +15860,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15290,6 +15871,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15309,6 +15891,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colors[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15319,6 +15902,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colors[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15329,6 +15913,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colors[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15339,6 +15924,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colors[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15358,6 +15944,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups[-1]",
             "num_elements": 0
         },
         "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId": {
@@ -15367,6 +15954,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -15377,6 +15965,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
             "typed_type": 13
         },
         "componentTags": {
@@ -15395,6 +15984,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "componentTags[-1]",
             "typed_type": 13
         },
         "componentTags[-1].componentTagName": {
@@ -15404,6 +15994,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "componentTags[-1]",
             "typed_type": 4
         },
         "computeFromSculptCache": {
@@ -15455,6 +16046,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -15465,6 +16057,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -15475,6 +16068,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -15935,6 +16529,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "edge[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -15945,6 +16540,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "edge[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -15955,6 +16551,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "edge[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -16093,6 +16690,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -16105,6 +16703,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -16117,6 +16716,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -16143,6 +16743,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -16155,6 +16756,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -16167,6 +16769,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -16201,6 +16804,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -16222,6 +16826,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -16247,6 +16852,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -16257,6 +16863,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -16307,6 +16914,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -16342,6 +16950,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -16392,6 +17001,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -16476,6 +17086,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -16485,6 +17096,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -16495,6 +17107,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -16505,6 +17118,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intensity": {
@@ -16619,6 +17233,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -16631,6 +17246,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -16886,6 +17502,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normals[-1]",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -16896,6 +17513,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normals[-1]",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -16906,6 +17524,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "normals[-1]",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -16938,6 +17557,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -16948,6 +17568,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -16958,6 +17579,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17118,6 +17740,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17128,6 +17751,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17138,6 +17762,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17148,6 +17773,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -17160,6 +17786,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -17172,6 +17799,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17182,6 +17810,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17192,6 +17821,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17202,6 +17832,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -17216,6 +17847,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -17229,6 +17861,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -17241,6 +17874,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -17253,6 +17887,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -17265,6 +17900,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -17277,6 +17913,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -17289,6 +17926,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -17301,6 +17939,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -17415,6 +18054,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -17426,7 +18066,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -17435,6 +18076,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "quadSplit": {
@@ -17512,6 +18154,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -17524,6 +18167,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -17534,6 +18178,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -17748,6 +18393,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "smoothOffset",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17758,6 +18404,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "smoothOffset",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17768,6 +18415,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "smoothOffset",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18064,6 +18712,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -18074,6 +18723,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -18095,6 +18745,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "uvSet[-1]",
             "typed_type": 4
         },
         "uvSet[-1].uvSetPoints": {
@@ -18104,6 +18755,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kAttribute2Float",
+            "parent_plug": "uvSet[-1]",
             "num_elements": 0
         },
         "uvSet[-1].uvSetPoints[-1].uvSetPointsU": {
@@ -18113,6 +18765,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18123,6 +18776,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18133,6 +18787,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "uvSet[-1]",
             "typed_type": 24
         },
         "uvSize": {
@@ -18170,6 +18825,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvpt[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18180,6 +18836,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvpt[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18202,6 +18859,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "colorPerVertex",
             "num_elements": 0
         },
         "vertexColor[-1].vertexAlpha": {
@@ -18211,6 +18869,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1]",
             "numeric_type": 11,
             "default_value": 1.0,
             "max_value": 1.0
@@ -18222,6 +18881,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18232,6 +18892,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18242,6 +18903,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18252,6 +18914,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "vertexColor[-1]",
             "num_children": 3,
             "children": [
                 "vertexColor[-1].vertexColorR",
@@ -18266,6 +18929,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "vertexColor[-1]",
             "num_elements": 0
         },
         "vertexColor[-1].vertexFaceColor[-1].vertexFaceAlpha": {
@@ -18275,6 +18939,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexFaceColor[-1]",
             "numeric_type": 11,
             "default_value": 1.0,
             "max_value": 1.0
@@ -18286,6 +18951,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
             "numeric_type": 11,
             "default_value": 0.0,
             "max_value": 1.0
@@ -18297,6 +18963,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
             "numeric_type": 11,
             "default_value": 0.0,
             "max_value": 1.0
@@ -18308,6 +18975,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
             "numeric_type": 11,
             "default_value": 0.0,
             "max_value": 1.0
@@ -18319,6 +18987,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "vertexColor[-1].vertexFaceColor[-1]",
             "num_children": 3,
             "children": [
                 "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorR",
@@ -18358,6 +19027,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "normalPerVertex",
             "num_elements": 0
         },
         "vertexNormal[-1].vertexFaceNormal": {
@@ -18367,6 +19037,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "vertexNormal[-1]",
             "num_elements": 0
         },
         "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalX": {
@@ -18376,6 +19047,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -18386,6 +19058,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1]",
             "num_children": 3,
             "children": [
                 "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalX",
@@ -18400,6 +19073,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -18410,6 +19084,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -18420,6 +19095,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexNormal[-1].vertexNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -18430,6 +19106,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "vertexNormal[-1]",
             "num_children": 3,
             "children": [
                 "vertexNormal[-1].vertexNormalX",
@@ -18444,6 +19121,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexNormal[-1].vertexNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -18454,6 +19132,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vertexNormal[-1].vertexNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -18587,6 +19266,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vrts[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18597,6 +19277,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vrts[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18607,6 +19288,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "vrts[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18628,6 +19310,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18638,6 +19321,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18648,6 +19332,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18875,6 +19560,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiCurveShader",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18885,6 +19571,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiCurveShader",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18895,6 +19582,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "aiCurveShader",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -19195,6 +19883,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19205,6 +19894,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19215,6 +19905,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19225,6 +19916,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -19239,6 +19931,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19249,6 +19942,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19259,6 +19953,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19269,6 +19964,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -19283,6 +19979,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19293,6 +19990,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19303,6 +20001,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19313,6 +20012,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -19327,6 +20027,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19337,6 +20038,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19347,6 +20049,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19413,6 +20116,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -19425,6 +20129,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "colorSet[-1]",
             "typed_type": 4
         },
         "colorSet[-1].colorSetPoints": {
@@ -19434,6 +20139,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet[-1]",
             "num_elements": 0
         },
         "colorSet[-1].colorSetPoints[-1].colorSetPointsA": {
@@ -19443,6 +20149,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -19453,6 +20160,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -19463,6 +20171,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -19473,6 +20182,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -19492,6 +20202,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups[-1]",
             "num_elements": 0
         },
         "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId": {
@@ -19501,6 +20212,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -19511,6 +20223,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
             "typed_type": 13
         },
         "componentTags": {
@@ -19529,6 +20242,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "componentTags[-1]",
             "typed_type": 13
         },
         "componentTags[-1].componentTagName": {
@@ -19538,6 +20252,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "componentTags[-1]",
             "typed_type": 4
         },
         "containerType": {
@@ -19565,6 +20280,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19575,6 +20291,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19585,6 +20302,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19796,6 +20514,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "editPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19806,6 +20525,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "editPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19816,6 +20536,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "editPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -19877,6 +20598,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -19889,6 +20611,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -19901,6 +20624,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -19927,6 +20651,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -19939,6 +20664,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -19951,6 +20677,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -19985,6 +20712,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -20006,6 +20734,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -20031,6 +20760,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -20041,6 +20771,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -20091,6 +20822,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -20135,6 +20867,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -20164,6 +20897,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -20216,6 +20950,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -20225,6 +20960,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -20235,6 +20971,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -20245,6 +20982,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -20312,6 +21050,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -20324,6 +21063,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -20388,6 +21128,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minMaxValue",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -20443,6 +21184,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minMaxValue",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -20477,6 +21219,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20487,6 +21230,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20497,6 +21241,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20535,6 +21280,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20545,6 +21291,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20555,6 +21302,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20565,6 +21313,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -20577,6 +21326,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -20589,6 +21339,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20599,6 +21350,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20609,6 +21361,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20619,6 +21372,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -20633,6 +21387,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -20646,6 +21401,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -20658,6 +21414,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -20670,6 +21427,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -20682,6 +21440,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -20694,6 +21453,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -20706,6 +21466,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -20718,6 +21479,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -20779,6 +21541,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -20790,7 +21553,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -20799,6 +21563,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "receiveShadows": {
@@ -20863,6 +21628,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -20875,6 +21641,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -20885,6 +21652,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -21083,6 +21851,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -21093,6 +21862,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -21112,6 +21882,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "uvSet[-1]",
             "typed_type": 4
         },
         "uvSet[-1].uvSetPoints": {
@@ -21121,6 +21892,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kAttribute2Float",
+            "parent_plug": "uvSet[-1]",
             "num_elements": 0
         },
         "uvSet[-1].uvSetPoints[-1].uvSetPointsU": {
@@ -21130,6 +21902,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -21140,6 +21913,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -21150,6 +21924,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "uvSet[-1]",
             "typed_type": 24
         },
         "viewMode": {
@@ -21260,6 +22035,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -21270,6 +22046,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -21280,6 +22057,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -21333,6 +22111,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "worldNormal[-1]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -21343,6 +22122,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "worldNormal[-1]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -21353,6 +22133,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "worldNormal[-1]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -21862,6 +22643,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21872,6 +22654,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21882,6 +22665,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21892,6 +22676,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -21906,6 +22691,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21916,6 +22702,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21926,6 +22713,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21936,6 +22724,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -21950,6 +22739,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21960,6 +22750,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21970,6 +22761,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -21994,6 +22786,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
             "default_value": 1.5,
             "min_value": 1.0
@@ -22005,6 +22798,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
             "default_value": 1.5,
             "min_value": 1.0
@@ -22016,6 +22810,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "boundingBoxScale",
             "numeric_type": 11,
             "default_value": 1.5,
             "min_value": 1.0
@@ -22027,6 +22822,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -22041,6 +22837,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -22051,6 +22848,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -22061,6 +22859,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -22150,6 +22949,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22160,6 +22960,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -22174,6 +22975,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22195,6 +22997,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22205,6 +23008,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -22219,6 +23023,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22238,6 +23043,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22248,6 +23054,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -22262,6 +23069,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22283,6 +23091,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22293,6 +23102,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -22307,6 +23117,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22326,6 +23137,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -22338,6 +23150,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "colorSet[-1]",
             "typed_type": 4
         },
         "colorSet[-1].colorSetPoints": {
@@ -22347,6 +23160,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet[-1]",
             "num_elements": 0
         },
         "colorSet[-1].colorSetPoints[-1].colorSetPointsA": {
@@ -22356,6 +23170,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22366,6 +23181,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22376,6 +23192,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22386,6 +23203,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22405,6 +23223,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups[-1]",
             "num_elements": 0
         },
         "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId": {
@@ -22414,6 +23233,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -22424,6 +23244,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
             "typed_type": 13
         },
         "componentTags": {
@@ -22442,6 +23263,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "componentTags[-1]",
             "typed_type": 13
         },
         "componentTags[-1].componentTagName": {
@@ -22451,6 +23273,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "componentTags[-1]",
             "typed_type": 4
         },
         "containerType": {
@@ -22478,6 +23301,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -22488,6 +23312,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -22498,6 +23323,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "controlPoints[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -22601,6 +23427,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "degreeUV",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -22624,6 +23451,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "degreeUV",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -22957,6 +23785,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -22969,6 +23798,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -22981,6 +23811,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -23007,6 +23838,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -23019,6 +23851,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -23031,6 +23864,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -23065,6 +23899,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -23086,6 +23921,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -23111,6 +23947,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -23121,6 +23958,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -23171,6 +24009,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -23239,6 +24078,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -23280,6 +24120,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -23355,6 +24196,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -23364,6 +24206,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -23374,6 +24217,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -23384,6 +24228,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -23451,6 +24296,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -23463,6 +24309,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -23517,6 +24364,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minMaxRangeU",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -23527,6 +24375,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minMaxRangeV",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -23605,6 +24454,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minMaxRangeU",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -23615,6 +24465,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minMaxRangeV",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -23705,6 +24556,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23715,6 +24567,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23725,6 +24578,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23775,6 +24629,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23785,6 +24640,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23795,6 +24651,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23805,6 +24662,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -23817,6 +24675,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -23829,6 +24688,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23839,6 +24699,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23849,6 +24710,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23859,6 +24721,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -23873,6 +24736,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -23886,6 +24750,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -23898,6 +24763,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -23910,6 +24776,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -23922,6 +24789,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -23934,6 +24802,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -23946,6 +24815,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -23958,6 +24828,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -24029,6 +24900,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -24040,7 +24912,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -24049,6 +24922,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "receiveShadows": {
@@ -24113,6 +24987,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -24125,6 +25000,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -24135,6 +25011,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -24308,6 +25185,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "spansUV",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -24331,6 +25209,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "spansUV",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -24529,6 +25408,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -24539,6 +25419,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvPivot",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -24558,6 +25439,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "uvSet[-1]",
             "typed_type": 4
         },
         "uvSet[-1].uvSetPoints": {
@@ -24567,6 +25449,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kAttribute2Float",
+            "parent_plug": "uvSet[-1]",
             "num_elements": 0
         },
         "uvSet[-1].uvSetPoints[-1].uvSetPointsU": {
@@ -24576,6 +25459,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -24586,6 +25470,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -24596,6 +25481,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "uvSet[-1]",
             "typed_type": 24
         },
         "vDivisionsFactor": {
@@ -24717,6 +25603,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -24727,6 +25614,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -24737,6 +25625,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -24911,6 +25800,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -24922,7 +25812,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMatrixAttribute"
+            "type_str": "kMatrixAttribute",
+            "parent_plug": "target[-1]"
         },
         "target[-1].targetMatrix": {
             "short_name": "tgt[-1].tmat",
@@ -24930,7 +25821,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMatrixAttribute"
+            "type_str": "kMatrixAttribute",
+            "parent_plug": "target[-1]"
         },
         "target[-1].weight": {
             "short_name": "tgt[-1].wgt",
@@ -24939,6 +25831,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "target[-1]",
             "numeric_type": 14,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -25125,6 +26018,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input2D[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25135,6 +26029,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input2D[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25154,6 +26049,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input3D[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25164,6 +26060,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input3D[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25174,6 +26071,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "input3D[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25241,6 +26139,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output2D",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25251,6 +26150,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output2D",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25275,6 +26175,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output3D",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25285,6 +26186,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output3D",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -25295,6 +26197,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "output3D",
             "numeric_type": 11,
             "default_value": 0.0
         }
@@ -25328,6 +26231,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "curvatureCenterX",
@@ -25342,6 +26246,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "curvatureCenter",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25352,6 +26257,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "curvatureCenter",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25362,6 +26268,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "curvatureCenter",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25372,6 +26279,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "result",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25423,6 +26331,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalX",
@@ -25437,6 +26346,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25447,6 +26357,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25457,6 +26368,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normal",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25467,6 +26379,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalizedNormalX",
@@ -25481,6 +26394,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedNormal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25491,6 +26405,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedNormal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25501,6 +26416,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedNormal",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25511,6 +26427,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalizedTangentX",
@@ -25525,6 +26442,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangent",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25535,6 +26453,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangent",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25545,6 +26464,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangent",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25565,6 +26485,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "positionX",
@@ -25579,6 +26500,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "position",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25589,6 +26511,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "position",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25599,6 +26522,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "position",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25627,6 +26551,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "tangentX",
@@ -25641,6 +26566,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangent",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25651,6 +26577,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangent",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25661,6 +26588,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangent",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25747,6 +26675,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalX",
@@ -25761,6 +26690,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25771,6 +26701,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25781,6 +26712,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normal",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25791,6 +26723,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalizedNormalX",
@@ -25805,6 +26738,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedNormal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25815,6 +26749,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedNormal",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25825,6 +26760,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedNormal",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25835,6 +26771,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalizedTangentUX",
@@ -25849,6 +26786,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangentU",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25859,6 +26797,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangentU",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25869,6 +26808,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangentU",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25879,6 +26819,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "normalizedTangentVX",
@@ -25893,6 +26834,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangentV",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -25903,6 +26845,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangentV",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25913,6 +26856,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "normalizedTangentV",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25943,6 +26887,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "positionX",
@@ -25957,6 +26902,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "position",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25967,6 +26913,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "position",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -25977,6 +26924,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "position",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26005,6 +26953,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "tangentUx",
@@ -26019,6 +26968,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangentU",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -26029,6 +26979,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangentU",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26039,6 +26990,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangentU",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26049,6 +27001,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "result",
             "num_children": 3,
             "children": [
                 "tangentVx",
@@ -26063,6 +27016,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangentV",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -26073,6 +27027,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangentV",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26083,6 +27038,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "tangentV",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26381,6 +27337,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26391,6 +27348,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26401,6 +27359,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26411,6 +27370,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -26425,6 +27385,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26435,6 +27396,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26445,6 +27407,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26455,6 +27418,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -26469,6 +27433,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26479,6 +27444,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26489,6 +27455,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26499,6 +27466,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -26513,6 +27481,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26523,6 +27492,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26533,6 +27503,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -26606,6 +27577,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -26616,6 +27588,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -26626,6 +27599,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -26877,6 +27851,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -26887,6 +27862,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -26897,6 +27873,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -26986,6 +27963,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -26998,6 +27976,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -27010,6 +27989,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -27036,6 +28016,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -27048,6 +28029,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -27060,6 +28042,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -27094,6 +28077,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -27115,6 +28099,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -27140,6 +28125,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -27150,6 +28136,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -27200,6 +28187,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -27223,6 +28211,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -27252,6 +28241,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -27281,6 +28271,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -27290,6 +28281,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -27300,6 +28292,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -27310,6 +28303,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intensity": {
@@ -27396,6 +28390,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -27408,6 +28403,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -27420,6 +28416,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -27432,6 +28429,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 18,
             "default_value": 0
         },
@@ -27461,6 +28459,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -27473,6 +28472,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
             "num_children": 3,
             "children": [
                 "lightDirectionX",
@@ -27487,6 +28487,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27497,6 +28498,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27507,6 +28509,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27525,6 +28528,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
             "num_children": 3,
             "children": [
                 "lightIntensityR",
@@ -27539,6 +28543,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27549,6 +28554,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27559,6 +28565,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27580,6 +28587,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27590,6 +28598,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -27670,6 +28679,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27680,6 +28690,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27690,6 +28701,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27750,6 +28762,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -27760,6 +28773,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -27770,6 +28784,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -27794,6 +28809,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27804,6 +28820,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27814,6 +28831,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27824,6 +28842,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -27836,6 +28855,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -27848,6 +28868,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27858,6 +28879,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27868,6 +28890,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27878,6 +28901,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -27892,6 +28916,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -27905,6 +28930,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -27917,6 +28943,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -27929,6 +28956,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -27941,6 +28969,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -27953,6 +28982,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -27965,6 +28995,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -27977,6 +29008,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -28023,6 +29055,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -28033,6 +29066,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -28043,6 +29077,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -28067,6 +29102,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -28077,6 +29113,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -28087,6 +29124,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -28097,6 +29135,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28126,6 +29165,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -28137,7 +29177,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -28146,6 +29187,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "rayDepth": {
@@ -28231,6 +29273,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -28243,6 +29286,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -28253,6 +29297,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -28308,6 +29353,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28318,6 +29364,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28328,6 +29375,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28403,6 +29451,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28608,6 +29657,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28618,6 +29668,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28628,6 +29679,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28683,6 +29735,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28693,6 +29746,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28703,6 +29757,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -28775,6 +29830,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "axis",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -28785,6 +29841,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "axis",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -28795,6 +29852,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "axis",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -29104,6 +30162,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "colorEntryList[-1]",
             "num_children": 3,
             "children": [
                 "colorEntryList[-1].colorR",
@@ -29118,6 +30177,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorEntryList[-1].color",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -29130,6 +30190,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorEntryList[-1].color",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -29142,6 +30203,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorEntryList[-1].color",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -29154,6 +30216,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorEntryList[-1]",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -29180,6 +30243,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -29192,6 +30256,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -29204,6 +30269,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorGain",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -29230,6 +30296,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -29242,6 +30309,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -29254,6 +30322,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "colorOffset",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -29280,6 +30349,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -29292,6 +30362,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -29304,6 +30375,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "defaultColor",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -29466,6 +30538,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29476,6 +30549,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29486,6 +30560,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29537,6 +30612,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29584,6 +30660,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29594,6 +30671,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29604,6 +30682,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29670,6 +30749,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "blue[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29680,6 +30760,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "blue[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -29694,6 +30775,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "blue[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29730,6 +30812,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -29740,6 +30823,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -29750,6 +30834,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 0.5
         },
@@ -29784,6 +30869,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "green[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29794,6 +30880,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "green[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -29808,6 +30895,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "green[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29872,6 +30960,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29882,6 +30971,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29892,6 +30982,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29934,6 +31025,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "red[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -29944,6 +31036,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "red[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -29958,6 +31051,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "red[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30017,6 +31111,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "color[-1]",
             "num_children": 3,
             "children": [
                 "color[-1].color_ColorR",
@@ -30031,6 +31126,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color[-1].color_Color",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30041,6 +31137,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color[-1].color_Color",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30051,6 +31148,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color[-1].color_Color",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30061,6 +31159,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "color[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -30075,6 +31174,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30161,6 +31261,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30171,6 +31272,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30181,6 +31283,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30233,6 +31336,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "value[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30243,6 +31347,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "value[-1]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -30257,6 +31362,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "value[-1]",
             "numeric_type": 11,
             "default_value": 0.0
         }
@@ -30578,6 +31684,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30588,6 +31695,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30598,6 +31706,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30608,6 +31717,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -30622,6 +31732,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30632,6 +31743,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30642,6 +31754,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30652,6 +31765,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -30666,6 +31780,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30676,6 +31791,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30686,6 +31802,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30696,6 +31813,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -30710,6 +31828,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30720,6 +31839,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30730,6 +31850,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -30803,6 +31924,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -30813,6 +31935,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -30823,6 +31946,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "color",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -31095,6 +32219,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -31105,6 +32230,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -31115,6 +32241,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "farPointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -31191,6 +32318,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -31203,6 +32331,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -31215,6 +32344,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -31241,6 +32371,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -31253,6 +32384,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -31265,6 +32397,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -31299,6 +32432,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -31320,6 +32454,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -31345,6 +32480,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -31355,6 +32491,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -31405,6 +32542,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -31428,6 +32566,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -31457,6 +32596,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -31486,6 +32626,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -31495,6 +32636,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -31505,6 +32647,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -31515,6 +32658,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intensity": {
@@ -31601,6 +32745,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -31613,6 +32758,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -31635,6 +32781,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -31647,6 +32794,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 18,
             "default_value": 0
         },
@@ -31676,6 +32824,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -31688,6 +32837,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
             "num_children": 3,
             "children": [
                 "lightDirectionX",
@@ -31702,6 +32852,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31712,6 +32863,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31722,6 +32874,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31740,6 +32893,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "lightData",
             "num_children": 3,
             "children": [
                 "lightIntensityR",
@@ -31754,6 +32908,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31764,6 +32919,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31774,6 +32930,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightIntensity",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31795,6 +32952,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31805,6 +32963,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -31885,6 +33044,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31895,6 +33055,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31905,6 +33066,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31965,6 +33127,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -31975,6 +33138,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -31985,6 +33149,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "opticalFXvisibility",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32009,6 +33174,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32019,6 +33185,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32029,6 +33196,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32039,6 +33207,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -32051,6 +33220,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -32063,6 +33233,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32073,6 +33244,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32083,6 +33255,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32093,6 +33266,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -32107,6 +33281,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -32120,6 +33295,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -32132,6 +33308,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -32144,6 +33321,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -32156,6 +33334,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -32168,6 +33347,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -32180,6 +33360,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -32192,6 +33373,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -32248,6 +33430,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32258,6 +33441,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32268,6 +33452,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointCamera",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32292,6 +33477,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32302,6 +33488,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32312,6 +33499,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "pointWorld",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -32322,6 +33510,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "lightData",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32361,6 +33550,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -32372,7 +33562,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -32381,6 +33572,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "rayDepth": {
@@ -32425,6 +33617,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32435,6 +33628,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32445,6 +33639,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rayDirection",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32510,6 +33705,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -32522,6 +33718,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -32532,6 +33729,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -32597,6 +33795,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32607,6 +33806,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32617,6 +33817,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shadowColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32702,6 +33903,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32919,6 +34121,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32929,6 +34132,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvFilterSize",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32939,6 +34143,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "uvCoord",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -32994,6 +34199,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -33004,6 +34210,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -33014,6 +34221,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -33116,6 +34324,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33126,6 +34335,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33136,6 +34346,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "center",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33146,6 +34357,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMaxX",
@@ -33160,6 +34372,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33170,6 +34383,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33180,6 +34394,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMax",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33190,6 +34405,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxMinX",
@@ -33204,6 +34420,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33214,6 +34431,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33224,6 +34442,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxMin",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33234,6 +34453,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Double",
+            "parent_plug": "boundingBox",
             "num_children": 3,
             "children": [
                 "boundingBoxSizeX",
@@ -33248,6 +34468,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33258,6 +34479,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33268,6 +34490,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "boundingBoxSize",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -33473,6 +34696,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6629999876022339,
             "min_value": 0.0,
@@ -33485,6 +34709,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.6779999732971191,
             "min_value": 0.0,
@@ -33497,6 +34722,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPost",
             "numeric_type": 11,
             "default_value": 0.878000020980835,
             "min_value": 0.0,
@@ -33523,6 +34749,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -33535,6 +34762,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -33547,6 +34775,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostColorPre",
             "numeric_type": 11,
             "default_value": 0.44699999690055847,
             "min_value": 0.0,
@@ -33581,6 +34810,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.15000000596046448,
             "min_value": 0.0,
@@ -33602,6 +34832,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostOpacityRange",
             "numeric_type": 11,
             "default_value": 0.5,
             "min_value": 0.0,
@@ -33627,6 +34858,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -33637,6 +34869,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 3
         },
@@ -33687,6 +34920,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "ghostCustomSteps",
             "numeric_type": 7,
             "default_value": 1,
             "min_value": 1.0
@@ -33710,6 +34944,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -33739,6 +34974,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -33770,6 +35006,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[-1]",
             "num_elements": 0
         },
         "instObjGroups[-1].objectGroups[-1].objectGroupId": {
@@ -33779,6 +35016,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -33789,6 +35027,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "numeric_type": 4,
             "default_value": -1
         },
@@ -33799,6 +35038,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -33866,6 +35106,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -33878,6 +35119,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderInfo",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -33939,6 +35181,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotLimit",
             "unit_type": 1,
             "default_value": 0.7853981633974483
         },
@@ -33949,6 +35192,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -33961,6 +35205,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotLimit",
             "unit_type": 1,
             "default_value": 0.7853981633974483
         },
@@ -33971,6 +35216,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -33983,6 +35229,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "maxRotLimit",
             "unit_type": 1,
             "default_value": 0.7853981633974483
         },
@@ -33993,6 +35240,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34033,6 +35281,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimit",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -34043,6 +35292,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34055,6 +35305,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimit",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -34065,6 +35316,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34077,6 +35329,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimit",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -34087,6 +35340,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34127,6 +35381,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "maxTransLimit",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -34137,6 +35392,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34149,6 +35405,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "maxTransLimit",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -34159,6 +35416,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34171,6 +35429,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "maxTransLimit",
             "unit_type": 2,
             "default_value": 1.0
         },
@@ -34181,6 +35440,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "maxTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34229,6 +35489,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotLimit",
             "unit_type": 1,
             "default_value": -0.7853981633974483
         },
@@ -34239,6 +35500,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34251,6 +35513,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotLimit",
             "unit_type": 1,
             "default_value": -0.7853981633974483
         },
@@ -34261,6 +35524,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34273,6 +35537,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "minRotLimit",
             "unit_type": 1,
             "default_value": -0.7853981633974483
         },
@@ -34283,6 +35548,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minRotLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34323,6 +35589,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimit",
             "numeric_type": 14,
             "default_value": -1.0
         },
@@ -34333,6 +35600,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34345,6 +35613,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimit",
             "numeric_type": 14,
             "default_value": -1.0
         },
@@ -34355,6 +35624,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34367,6 +35637,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimit",
             "numeric_type": 14,
             "default_value": -1.0
         },
@@ -34377,6 +35648,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minScaleLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34417,6 +35689,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "minTransLimit",
             "unit_type": 2,
             "default_value": -1.0
         },
@@ -34427,6 +35700,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34439,6 +35713,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "minTransLimit",
             "unit_type": 2,
             "default_value": -1.0
         },
@@ -34449,6 +35724,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34461,6 +35737,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "minTransLimit",
             "unit_type": 2,
             "default_value": -1.0
         },
@@ -34471,6 +35748,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "minTransLimitEnable",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34495,6 +35773,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34505,6 +35784,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34515,6 +35795,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "objectColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34561,6 +35842,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34571,6 +35853,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34581,6 +35864,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "outlinerColor",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34591,6 +35875,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -34603,6 +35888,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -34615,6 +35901,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34625,6 +35912,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34635,6 +35923,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "overrideColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -34645,6 +35934,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
+            "parent_plug": "drawOverride",
             "num_children": 3,
             "children": [
                 "overrideColorR",
@@ -34659,6 +35949,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Normal",
                 "1": "Template"
@@ -34672,6 +35963,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34684,6 +35976,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
+            "parent_plug": "drawOverride",
             "enum_fields": {
                 "0": "Full"
             },
@@ -34696,6 +35989,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -34708,6 +36002,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34720,6 +36015,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -34732,6 +36028,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -34744,6 +36041,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "drawOverride",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -34785,6 +36083,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -34796,7 +36095,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kMessageAttribute"
+            "type_str": "kMessageAttribute",
+            "parent_plug": "publishedNodeInfo[-1]"
         },
         "publishedNodeInfo[-1].publishedNodeType": {
             "short_name": "pni[-1].pntp",
@@ -34805,6 +36105,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
+            "parent_plug": "publishedNodeInfo[-1]",
             "typed_type": 4
         },
         "renderInfo": {
@@ -34837,6 +36138,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
@@ -34849,6 +36151,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 4,
             "default_value": 0
         },
@@ -34859,6 +36162,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "renderLayerInfo[-1]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -34908,6 +36212,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -34918,6 +36223,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -34928,6 +36234,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotateAxis",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -34982,6 +36289,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -34992,6 +36300,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35002,6 +36311,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35012,6 +36322,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35022,6 +36333,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35032,6 +36344,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "rotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35057,6 +36370,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35067,6 +36381,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35077,6 +36392,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35087,6 +36403,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "rotateQuaternion",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35097,6 +36414,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -35107,6 +36425,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -35117,6 +36436,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleAngleAttribute",
+            "parent_plug": "rotate",
             "unit_type": 1,
             "default_value": 0.0
         },
@@ -35169,6 +36489,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35179,6 +36500,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35189,6 +36511,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivotTranslate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35199,6 +36522,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35209,6 +36533,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35219,6 +36544,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "scalePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35229,6 +36555,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "scale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -35239,6 +36566,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "scale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -35249,6 +36577,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "scale",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -35273,6 +36602,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "selectHandle",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35283,6 +36613,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "selectHandle",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35293,6 +36624,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "selectHandle",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35329,6 +36661,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35339,6 +36672,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35349,6 +36683,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "shear",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35440,6 +36775,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "transMinusRotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35450,6 +36786,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "transMinusRotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35460,6 +36797,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "transMinusRotatePivot",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35484,6 +36822,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "translate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35494,6 +36833,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "translate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35504,6 +36844,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "translate",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35573,6 +36914,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -35583,6 +36925,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -35593,6 +36936,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "wireColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -35686,6 +37030,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "coordinate[-1]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35696,6 +37041,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
+            "parent_plug": "coordinate[-1]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -35814,6 +37160,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "outputTranslate[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35824,6 +37171,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "outputTranslate[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -35834,6 +37182,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
+            "parent_plug": "outputTranslate[-1]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -36752,9 +38101,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kPointLight": "ghostsStep",
         "kSpotLight": "ghostsStep",
         "kTransform": "ghostsStep"
-    },
-    "ht": {
-        "kAreaLight": "height"
     },
     "hio": {
         "kAreaLight": "hiddenInOutliner",
@@ -38002,9 +39348,6 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kNurbsSurface": "numberV",
         "kPointLight": "volumeShadowSamples",
         "kSpotLight": "volumeShadowSamples"
-    },
-    "wd": {
-        "kAreaLight": "width"
     },
     "wfcb": {
         "kAreaLight": "wireColorB",

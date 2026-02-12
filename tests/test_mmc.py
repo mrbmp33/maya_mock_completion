@@ -530,6 +530,7 @@ class TestCmds(unittest.TestCase):
     def test_create_node(self):
         transform = mc.createNode("transform")
         self.assertTrue(mc.objExists(transform))
+        self.assertEqual(transform, "transform1")
 
         mesh = mc.createNode("mesh")
         self.assertTrue(mc.objExists("polySurfaceShape1"))
@@ -653,7 +654,7 @@ class TestCallbacks(unittest.TestCase):
         mc.file(new=True, force=True)
 
         # Create a node without any callback
-        pma = mc.createNode("multDL", name="mdl")
+        pma = mc.createNode("multDoubleLinear", name="mdl")
         self.assertTrue(mc.objExists(pma))
 
         if HOST() == "python":

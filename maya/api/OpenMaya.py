@@ -80,9 +80,15 @@ def _create_node_from_type(
         else:
             obj_id = type_id
             type_str = _TYPE_INT_TO_STR[type_id.id()]
-            type_alias = f"{type_str[1]}{type_str[2:]}"
+            type_alias = f"{type_str[1].lower()}{type_str[2:]}"
     except KeyError:
-        raise RuntimeError(f'Invalid type id: {type_id}.')
+        if isinstance(type_id, enum.Enum):
+            # Used cached MTypeIds including non-vanilla ones (Arnold for instance)
+            # Will attempt to resolve it by name.
+            type_alias = f"{type_id.name[0].lower()}{type_id.name[1:]}"
+            type_str = type_alias
+        else:
+            raise RuntimeError(f'Invalid type id: {type_id}. Maybe could not resolve the type if its from a plugin.')
 
     parent_name = None
     if parent is not None:
@@ -754,10 +760,14 @@ class MNodeClass(object):
         
         if isinstance(node_type, str):
             self._node_type_str = node_type
-            self._node_type_id = MTypeId(_TYPE_STR_TO_ID[node_type])
+            self._node_type_id = MTypeId(
+                _TYPE_STR_TO_ID[
+                    mmc_node_types_alias_map.NODE_TYPES_ALIAS_MAP[node_type]
+                ]
+            )
         elif isinstance(node_type, MTypeId):
             self._node_type_id = node_type
-            self._node_type_str = _TYPE_INT_TO_STR[node_type.id()]
+            self._node_type_str = mmc_node_types_alias_map.REVERSE_NODE_TYPES_ALIAS_MAP[_TYPE_INT_TO_STR[node_type.id()]]
         else:
             raise ValueError(f'Expected str or MTypeId, got {type(node_type)}')
 
@@ -23116,7 +23126,8 @@ class MFnDependencyNode(MFnBase):
     @property
     def typeName(self) -> str:
         try:
-            return _TYPE_INT_TO_STR[self._mobject._typeId.id()]
+            # return _TYPE_INT_TO_STR[self._mobject._typeId.id()]
+            return mmc_node_types_alias_map.REVERSE_NODE_TYPES_ALIAS_MAP[self._mobject.apiTypeStr]
         except AttributeError:
             if not self._mobject:
                 raise RuntimeError('No MObject associated with this function set. Enusure the MObject has been created'
