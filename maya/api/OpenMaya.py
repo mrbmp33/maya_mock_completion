@@ -33,6 +33,9 @@ from mmc_output.mmc_node_type_ids import _TYPE_STR_TO_ID, _TYPE_INT_TO_STR, _API
 
 # ==== Utilities ====
 
+_array_element_attr_regex_name_detect = re.compile(r"^([A-Za-z_]\w*)\[(\-?\d+)\](?:\.(.*))?$")
+
+
 def _calc_node_api_type(type_str: str) -> list[int]:
     """Returns a basic list of API types for the given node type."""
     
@@ -226,19 +229,6 @@ def _attr_from_name_and_node(attr_name: str, owner_node: "MObject") -> Tuple['MO
     if attr_type not in attribute._api_type:
         attribute._api_type.append(attr_type)
 
-    MAYA_ATTRIBUTE_TYPES_TO_FN_MAP: dict[int, Type["MFnAttribute"]] = {
-        MFn.kNumericAttribute: MObject._init_numeric_fields,
-        MFn.kUnitAttribute: MObject._init_unit_fields,
-        MFn.kDoubleLinearAttribute: MObject._init_unit_fields,
-        MFn.kFloatLinearAttribute: MObject._init_unit_fields,
-        MFn.kDoubleAngleAttribute: MObject._init_unit_fields,
-        MFn.kFloatAngleAttribute: MObject._init_unit_fields,
-        MFn.kTypedAttribute: MObject._init_typed_fields,
-        MFn.kMatrixAttribute: MObject._init_matrix_fields,
-        MFn.kFloatMatrixAttribute: MObject._init_matrix_fields,
-        MFn.kMessageAttribute: None,
-        MFn.kEnumAttribute: MObject._init_enum_fields,
-    }
     intializer = MAYA_ATTRIBUTE_TYPES_TO_FN_MAP.get(attr_type)
     if intializer:
         intializer(attribute)
@@ -360,6 +350,23 @@ def _get_attribute_properties(node_type, attr_name) -> Tuple[dict, str, str]:
             long_name = attribute_properties.ATTRIBUTES_SHORT_NAMES_MAP[short_name][node_type]
             properties = properties[long_name]
         
+        elif (m := re.match(_array_element_attr_regex_name_detect, attr_name)) is not None:
+            if m.group(2) == '0':
+                properties = properties[attr_name]
+                long_name = properties['long_name']
+                short_name = properties['short_name']
+            
+            # Must replace the index for the correct one
+            else:
+                as_key = f'{m.group(1)}[0]'
+                if m.group(3) is not None:
+                    as_key = f'{as_key}.{m.group(3)}'
+                properties = properties[as_key]
+                import json
+                as_str = json.dumps(properties).replace('[0]', f'[{m.group(2)}]')
+                properties = json.loads(as_str)
+                long_name = attr_name
+                short_name = properties['short_name']
         else:
             raise KeyError
 
@@ -13666,14 +13673,18 @@ class MTransformationMatrix(object):
         Returns:
             MPoint: The rotate pivot in the requested space.
         """
-        # Only object and world space are relevant in Maya
+        local_pivot = np.array(self._matrix[:3, 3], dtype=float)
+
         if space == MSpace.kWorld:
-            # Transform the local pivot by the transformation matrix for world space
-            local_pivot = np.append(self._rotate_pivot, 1.0)
-            world_pivot = self._matrix @ local_pivot
+            # Transform local pivot into world space
+            world_pivot = self._matrix @ np.array(
+                [local_pivot[0], local_pivot[1], local_pivot[2], 1.0],
+                dtype=float
+            )
             return MPoint(world_pivot[:3])
-        # For object/pre-transform, just return local pivot
-        return MPoint(self._rotate_pivot.copy())
+
+        # Object/pre-transform space
+        return MPoint(local_pivot)
 
     def rotatePivotTranslation(self, space: int = None) -> 'MVector':
         """Returns the transformation's rotate pivot component.
@@ -13685,7 +13696,22 @@ class MTransformationMatrix(object):
         Returns:
             MVector: ...
         """
-        return MVector(self._rotate_pivot_translation.copy())
+        pivot = np.array([*self.rotatePivot()], dtype=float)
+        M = self._matrix
+
+        # world-space pivot position
+        pivot_world = (M @ np.array([pivot[0], pivot[1], pivot[2], 1.0], dtype=float))[:3]
+
+        # object-space pivot position (just original)
+        pivot_local = pivot
+
+        if space == MSpace.kWorld:
+            # difference = how much the pivot moved due to transform
+            offset = pivot_world - (M @ np.array([0, 0, 0, 1], dtype=float))[:3]
+            return MVector(offset)
+
+        # in object space, there is no meaningful extra translation
+        return MVector(0.0, 0.0, 0.0)
 
     @overload
     def rotation(self, asQuaternion: bool = True) -> MQuaternion: ...
@@ -16374,9 +16400,9 @@ class MFnBase(object):
             if isinstance(args[0], MObject):
                 self._mobject = args[0]
             elif args[0] is None:
-                self._mobject = None
+                self._mobject = MObject()
         else:
-            self._mobject = None
+            self._mobject = MObject()
 
     def hasObj(self, mobject: 'MObject') -> bool:
         """
@@ -18268,27 +18294,20 @@ class MPlug(object):
         short_name = f'{self._attribute._short_name}[{index}]'
         name = f'{self._attribute._name}[{index}]'
 
-        try:
-            attribute = _attr_from_name_and_node(
-                long_name, self._owner,
-            )
-        except RuntimeError:  # Not in cache // try to make it up
-            attribute = _initialize_attribute(
-                name,
-                long_name,
-                short_name,
-                _get_attribute_id(name),
-                self._owner,
-            )
+        mplug = MFnDependencyNode(self._owner).findPlug(
+            long_name,
+            False
+        )
+        attribute = mplug._attribute
 
         # Set element properties
-        attribute._is_element = True
+        # attribute._is_element = True
         attribute._logical_index = index
         self._attribute._elements.append(attribute)
 
-        mplug = _mplug_from_attr_and_node(
-            attribute, self._owner, want_network_plug=False,
-        )
+        # mplug = _mplug_from_attr_and_node(
+        #     attribute, self._owner, want_network_plug=False,
+        # )
         self._children_plugs.append(mplug)
         return mplug
 
@@ -30449,7 +30468,7 @@ class MFnNurbsCurve(MFnDagNode):
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
         super(MFnNurbsCurve, self).__init__(*args, **kwargs)
-        if self._mobject is not None:
+        if not self._mobject.isNull():
             if not all(
                 [hasattr(self, attr) for attr in ("_cvs", "_knots", "_degree", "_form", "_is2D", "_rational")]
             ):
@@ -31136,3 +31155,17 @@ class World(MObject):
 
 # Reuse world
 WORLD = World()
+
+MAYA_ATTRIBUTE_TYPES_TO_FN_MAP: dict[int, Type["MFnAttribute"]] = {
+    MFn.kNumericAttribute: MObject._init_numeric_fields,
+    MFn.kUnitAttribute: MObject._init_unit_fields,
+    MFn.kDoubleLinearAttribute: MObject._init_unit_fields,
+    MFn.kFloatLinearAttribute: MObject._init_unit_fields,
+    MFn.kDoubleAngleAttribute: MObject._init_unit_fields,
+    MFn.kFloatAngleAttribute: MObject._init_unit_fields,
+    MFn.kTypedAttribute: MObject._init_typed_fields,
+    MFn.kMatrixAttribute: MObject._init_matrix_fields,
+    MFn.kFloatMatrixAttribute: MObject._init_matrix_fields,
+    MFn.kMessageAttribute: None,
+    MFn.kEnumAttribute: MObject._init_enum_fields,
+}

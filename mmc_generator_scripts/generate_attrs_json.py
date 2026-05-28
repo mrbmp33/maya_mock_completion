@@ -54,12 +54,12 @@ def get_attr_properties(nd):
     all_attr_properties = {}
     all_short_name_to_long_name = {}
 
-    for attr_name in sorted(mc.listAttr(nd)):
+    def fill_attr_entry(plug):
         try:
-            plug = as_node[attr_name]
             attr: om.MObject = plug.attribute()
-            short_name = plug.name(long=False)
-            long_name = plug.name(long=True)
+            short_name = plug.name(long=False).replace('[-1]', '[0]')
+            long_name = plug.name(long=True).replace('[-1]', '[0]')
+            print(f'Caching attribute data for attr: {as_node.name()} || {long_name}')
             attr_properties = {
                 "short_name": short_name,
                 "long_name": long_name,
@@ -79,7 +79,7 @@ def get_attr_properties(nd):
             # See if it has a parent plug. Better ask forgiveness than permission
             try:
                 parent_plug: cmdx.Plug = plug.parent
-                attr_properties["parent_plug"] = parent_plug.name(long=True)
+                attr_properties["parent_plug"] = parent_plug.name(long=True).replace('[-1]', '[0]')
             except TypeError:
                 ...
 
@@ -92,7 +92,7 @@ def get_attr_properties(nd):
                         multiIndices=True,
                     ) or 0
                 except ValueError:
-                    continue
+                    return
 
             elif plug.isCompound:
                 attr_properties["num_children"] = plug.plug().numChildren()
@@ -135,6 +135,12 @@ def get_attr_properties(nd):
 
         except RuntimeError as err:
             logging.debug(f"Could not complete attribute {attr_name}. {err}")
+
+    for attr_name in sorted(mc.listAttr(nd)):
+        as_plug = as_node[attr_name]
+        fill_attr_entry(as_plug)
+        if as_plug.is_array:
+            fill_attr_entry(as_plug[0])
 
     return all_attr_properties, all_short_name_to_long_name
 

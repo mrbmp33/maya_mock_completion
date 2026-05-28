@@ -87,6 +87,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "aiFilters[0]": {
+            "short_name": "ai_filters[0]",
+            "long_name": "aiFilters[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "aiFilters"
+        },
         "aiIndirect": {
             "short_name": "ai_indirect",
             "long_name": "aiIndirect",
@@ -296,6 +305,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "boundingBox": {
             "short_name": "bb",
@@ -1085,6 +1103,16 @@ ATTRIBUTES_PROPERTIES = {
             "default_value": 1,
             "min_value": 1.0
         },
+        "height": {
+            "short_name": "ht",
+            "long_name": "height",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
         "hiddenInOutliner": {
             "short_name": "hio",
             "long_name": "hiddenInOutliner",
@@ -1157,46 +1185,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intensity": {
@@ -1250,6 +1306,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -1988,6 +2057,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -1996,6 +2075,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "pointCamera": {
@@ -2122,36 +2211,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "rayDepth": {
@@ -2230,38 +2334,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -2692,6 +2811,16 @@ ATTRIBUTES_PROPERTIES = {
             "default_value": 20,
             "min_value": 1.0
         },
+        "width": {
+            "short_name": "wd",
+            "long_name": "width",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
         "wireColorB": {
             "short_name": "wfcb",
             "long_name": "wireColorB",
@@ -2749,6 +2878,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -2757,6 +2896,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "writeDmap": {
@@ -3113,80 +3262,99 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "target[-1].rotateWeight": {
-            "short_name": "tgt[-1].rot",
-            "long_name": "target[-1].rotateWeight",
+        "target[0]": {
+            "short_name": "tgt[0]",
+            "long_name": "target[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "target",
+            "num_children": 7,
+            "children": [
+                "target[0].targetMatrix",
+                "target[0].useMatrix",
+                "target[0].weight",
+                "target[0].scaleWeight",
+                "target[0].translateWeight",
+                "target[0].rotateWeight",
+                "target[0].shearWeight"
+            ]
+        },
+        "target[0].rotateWeight": {
+            "short_name": "tgt[0].rot",
+            "long_name": "target[0].rotateWeight",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 14,
             "default_value": 1.0
         },
-        "target[-1].scaleWeight": {
-            "short_name": "tgt[-1].sca",
-            "long_name": "target[-1].scaleWeight",
+        "target[0].scaleWeight": {
+            "short_name": "tgt[0].sca",
+            "long_name": "target[0].scaleWeight",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 14,
             "default_value": 1.0
         },
-        "target[-1].shearWeight": {
-            "short_name": "tgt[-1].she",
-            "long_name": "target[-1].shearWeight",
+        "target[0].shearWeight": {
+            "short_name": "tgt[0].she",
+            "long_name": "target[0].shearWeight",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 14,
             "default_value": 1.0
         },
-        "target[-1].targetMatrix": {
-            "short_name": "tgt[-1].tmat",
-            "long_name": "target[-1].targetMatrix",
+        "target[0].targetMatrix": {
+            "short_name": "tgt[0].tmat",
+            "long_name": "target[0].targetMatrix",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMatrixAttribute",
-            "parent_plug": "target[-1]"
+            "parent_plug": "target[0]"
         },
-        "target[-1].translateWeight": {
-            "short_name": "tgt[-1].tra",
-            "long_name": "target[-1].translateWeight",
+        "target[0].translateWeight": {
+            "short_name": "tgt[0].tra",
+            "long_name": "target[0].translateWeight",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 14,
             "default_value": 1.0
         },
-        "target[-1].useMatrix": {
-            "short_name": "tgt[-1].umt",
-            "long_name": "target[-1].useMatrix",
+        "target[0].useMatrix": {
+            "short_name": "tgt[0].umt",
+            "long_name": "target[0].useMatrix",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "target[-1].weight": {
-            "short_name": "tgt[-1].wgt",
-            "long_name": "target[-1].weight",
+        "target[0].weight": {
+            "short_name": "tgt[0].wgt",
+            "long_name": "target[0].weight",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 14,
             "default_value": 1.0
         }
@@ -3253,6 +3421,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 14,
+            "default_value": 0.0
+        },
+        "input[0]": {
+            "short_name": "i[0]",
+            "long_name": "input[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "input",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -3486,7 +3665,7 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "numeric_type": 7,
-            "default_value": 16
+            "default_value": 0
         },
         "aiHandedness": {
             "short_name": "ai_handedness",
@@ -3589,36 +3768,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Float",
             "num_elements": 0
         },
-        "aiLookAt[-1].aiLookAtX": {
-            "short_name": "ai_look_at[-1].ai_look_atx",
-            "long_name": "aiLookAt[-1].aiLookAtX",
+        "aiLookAt[0]": {
+            "short_name": "ai_look_at[0]",
+            "long_name": "aiLookAt[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "aiLookAt",
+            "num_children": 3,
+            "children": [
+                "aiLookAt[0].aiLookAtX",
+                "aiLookAt[0].aiLookAtY",
+                "aiLookAt[0].aiLookAtZ"
+            ]
+        },
+        "aiLookAt[0].aiLookAtX": {
+            "short_name": "ai_look_at[0].ai_look_atx",
+            "long_name": "aiLookAt[0].aiLookAtX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiLookAt[-1]",
+            "parent_plug": "aiLookAt[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "aiLookAt[-1].aiLookAtY": {
-            "short_name": "ai_look_at[-1].ai_look_aty",
-            "long_name": "aiLookAt[-1].aiLookAtY",
+        "aiLookAt[0].aiLookAtY": {
+            "short_name": "ai_look_at[0].ai_look_aty",
+            "long_name": "aiLookAt[0].aiLookAtY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiLookAt[-1]",
+            "parent_plug": "aiLookAt[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "aiLookAt[-1].aiLookAtZ": {
-            "short_name": "ai_look_at[-1].ai_look_atz",
-            "long_name": "aiLookAt[-1].aiLookAtZ",
+        "aiLookAt[0].aiLookAtZ": {
+            "short_name": "ai_look_at[0].ai_look_atz",
+            "long_name": "aiLookAt[0].aiLookAtZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiLookAt[-1]",
+            "parent_plug": "aiLookAt[0]",
             "numeric_type": 11,
             "default_value": -1.0
         },
@@ -3711,36 +3905,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Float",
             "num_elements": 0
         },
-        "aiPosition[-1].aiPositionX": {
-            "short_name": "ai_position[-1].ai_positionx",
-            "long_name": "aiPosition[-1].aiPositionX",
+        "aiPosition[0]": {
+            "short_name": "ai_position[0]",
+            "long_name": "aiPosition[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "aiPosition",
+            "num_children": 3,
+            "children": [
+                "aiPosition[0].aiPositionX",
+                "aiPosition[0].aiPositionY",
+                "aiPosition[0].aiPositionZ"
+            ]
+        },
+        "aiPosition[0].aiPositionX": {
+            "short_name": "ai_position[0].ai_positionx",
+            "long_name": "aiPosition[0].aiPositionX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiPosition[-1]",
+            "parent_plug": "aiPosition[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "aiPosition[-1].aiPositionY": {
-            "short_name": "ai_position[-1].ai_positiony",
-            "long_name": "aiPosition[-1].aiPositionY",
+        "aiPosition[0].aiPositionY": {
+            "short_name": "ai_position[0].ai_positiony",
+            "long_name": "aiPosition[0].aiPositionY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiPosition[-1]",
+            "parent_plug": "aiPosition[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "aiPosition[-1].aiPositionZ": {
-            "short_name": "ai_position[-1].ai_positionz",
-            "long_name": "aiPosition[-1].aiPositionZ",
+        "aiPosition[0].aiPositionZ": {
+            "short_name": "ai_position[0].ai_positionz",
+            "long_name": "aiPosition[0].aiPositionZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiPosition[-1]",
+            "parent_plug": "aiPosition[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -3927,25 +4136,39 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute2Float",
             "num_elements": 0
         },
-        "aiScreenWindowMax[-1].aiScreenWindowMaxX": {
-            "short_name": "ai_screen_window_max[-1].ai_screen_window_maxx",
-            "long_name": "aiScreenWindowMax[-1].aiScreenWindowMaxX",
+        "aiScreenWindowMax[0]": {
+            "short_name": "ai_screen_window_max[0]",
+            "long_name": "aiScreenWindowMax[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "aiScreenWindowMax",
+            "num_children": 2,
+            "children": [
+                "aiScreenWindowMax[0].aiScreenWindowMaxX",
+                "aiScreenWindowMax[0].aiScreenWindowMaxY"
+            ]
+        },
+        "aiScreenWindowMax[0].aiScreenWindowMaxX": {
+            "short_name": "ai_screen_window_max[0].ai_screen_window_maxx",
+            "long_name": "aiScreenWindowMax[0].aiScreenWindowMaxX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiScreenWindowMax[-1]",
+            "parent_plug": "aiScreenWindowMax[0]",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "aiScreenWindowMax[-1].aiScreenWindowMaxY": {
-            "short_name": "ai_screen_window_max[-1].ai_screen_window_maxy",
-            "long_name": "aiScreenWindowMax[-1].aiScreenWindowMaxY",
+        "aiScreenWindowMax[0].aiScreenWindowMaxY": {
+            "short_name": "ai_screen_window_max[0].ai_screen_window_maxy",
+            "long_name": "aiScreenWindowMax[0].aiScreenWindowMaxY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiScreenWindowMax[-1]",
+            "parent_plug": "aiScreenWindowMax[0]",
             "numeric_type": 11,
             "default_value": 1.0
         },
@@ -3958,25 +4181,39 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute2Float",
             "num_elements": 0
         },
-        "aiScreenWindowMin[-1].aiScreenWindowMinX": {
-            "short_name": "ai_screen_window_min[-1].ai_screen_window_minx",
-            "long_name": "aiScreenWindowMin[-1].aiScreenWindowMinX",
+        "aiScreenWindowMin[0]": {
+            "short_name": "ai_screen_window_min[0]",
+            "long_name": "aiScreenWindowMin[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "aiScreenWindowMin",
+            "num_children": 2,
+            "children": [
+                "aiScreenWindowMin[0].aiScreenWindowMinX",
+                "aiScreenWindowMin[0].aiScreenWindowMinY"
+            ]
+        },
+        "aiScreenWindowMin[0].aiScreenWindowMinX": {
+            "short_name": "ai_screen_window_min[0].ai_screen_window_minx",
+            "long_name": "aiScreenWindowMin[0].aiScreenWindowMinX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiScreenWindowMin[-1]",
+            "parent_plug": "aiScreenWindowMin[0]",
             "numeric_type": 11,
             "default_value": -1.0
         },
-        "aiScreenWindowMin[-1].aiScreenWindowMinY": {
-            "short_name": "ai_screen_window_min[-1].ai_screen_window_miny",
-            "long_name": "aiScreenWindowMin[-1].aiScreenWindowMinY",
+        "aiScreenWindowMin[0].aiScreenWindowMinY": {
+            "short_name": "ai_screen_window_min[0].ai_screen_window_miny",
+            "long_name": "aiScreenWindowMin[0].aiScreenWindowMinY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiScreenWindowMin[-1]",
+            "parent_plug": "aiScreenWindowMin[0]",
             "numeric_type": 11,
             "default_value": -1.0
         },
@@ -3989,27 +4226,41 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute2Float",
             "num_elements": 0
         },
-        "aiShutterCurve[-1].aiShutterCurveX": {
-            "short_name": "ai_shutter_curve[-1].ai_shutter_curvex",
-            "long_name": "aiShutterCurve[-1].aiShutterCurveX",
-            "is_element": False,
+        "aiShutterCurve[0]": {
+            "short_name": "ai_shutter_curve[0]",
+            "long_name": "aiShutterCurve[0]",
+            "is_element": True,
             "is_array": False,
-            "is_compound": False,
-            "type_str": "kNumericAttribute",
-            "parent_plug": "aiShutterCurve[-1]",
-            "numeric_type": 11,
-            "default_value": -3.3010993914621206e-27
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "aiShutterCurve",
+            "num_children": 2,
+            "children": [
+                "aiShutterCurve[0].aiShutterCurveX",
+                "aiShutterCurve[0].aiShutterCurveY"
+            ]
         },
-        "aiShutterCurve[-1].aiShutterCurveY": {
-            "short_name": "ai_shutter_curve[-1].ai_shutter_curvey",
-            "long_name": "aiShutterCurve[-1].aiShutterCurveY",
+        "aiShutterCurve[0].aiShutterCurveX": {
+            "short_name": "ai_shutter_curve[0].ai_shutter_curvex",
+            "long_name": "aiShutterCurve[0].aiShutterCurveX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiShutterCurve[-1]",
+            "parent_plug": "aiShutterCurve[0]",
             "numeric_type": 11,
-            "default_value": 6.151700258385947e-43
+            "default_value": 5.38579183843529e+33
+        },
+        "aiShutterCurve[0].aiShutterCurveY": {
+            "short_name": "ai_shutter_curve[0].ai_shutter_curvey",
+            "long_name": "aiShutterCurve[0].aiShutterCurveY",
+            "is_element": False,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "aiShutterCurve[0]",
+            "numeric_type": 11,
+            "default_value": 6.3618950280346695e-43
         },
         "aiShutterEnd": {
             "short_name": "ai_shutter_end",
@@ -4107,36 +4358,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Float",
             "num_elements": 0
         },
-        "aiUp[-1].aiUpX": {
-            "short_name": "ai_up[-1].ai_upx",
-            "long_name": "aiUp[-1].aiUpX",
+        "aiUp[0]": {
+            "short_name": "ai_up[0]",
+            "long_name": "aiUp[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "aiUp",
+            "num_children": 3,
+            "children": [
+                "aiUp[0].aiUpX",
+                "aiUp[0].aiUpY",
+                "aiUp[0].aiUpZ"
+            ]
+        },
+        "aiUp[0].aiUpX": {
+            "short_name": "ai_up[0].ai_upx",
+            "long_name": "aiUp[0].aiUpX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiUp[-1]",
+            "parent_plug": "aiUp[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "aiUp[-1].aiUpY": {
-            "short_name": "ai_up[-1].ai_upy",
-            "long_name": "aiUp[-1].aiUpY",
+        "aiUp[0].aiUpY": {
+            "short_name": "ai_up[0].ai_upy",
+            "long_name": "aiUp[0].aiUpY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiUp[-1]",
+            "parent_plug": "aiUp[0]",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "aiUp[-1].aiUpZ": {
-            "short_name": "ai_up[-1].ai_upz",
-            "long_name": "aiUp[-1].aiUpZ",
+        "aiUp[0].aiUpZ": {
+            "short_name": "ai_up[0].ai_upz",
+            "long_name": "aiUp[0].aiUpZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "aiUp[-1]",
+            "parent_plug": "aiUp[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -4354,11 +4620,11 @@ ATTRIBUTES_PROPERTIES = {
         "bookmarks": {
             "short_name": "b",
             "long_name": "bookmarks",
-            "is_element": False,
-            "is_array": True,
+            "is_element": True,
+            "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "num_elements": 0
+            "parent_plug": "bookmarks"
         },
         "bookmarksEnabled": {
             "short_name": "ben",
@@ -4380,6 +4646,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "boundingBox": {
             "short_name": "bb",
@@ -5534,11 +5809,11 @@ ATTRIBUTES_PROPERTIES = {
         "imagePlane": {
             "short_name": "ip",
             "long_name": "imagePlane",
-            "is_element": False,
-            "is_array": True,
+            "is_element": True,
+            "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "num_elements": 0
+            "parent_plug": "imagePlane"
         },
         "instObjGroups": {
             "short_name": "iog",
@@ -5549,46 +5824,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -5632,6 +5935,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -6147,6 +6463,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -6155,6 +6481,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "postProjection": {
@@ -6205,36 +6541,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "renderInfo": {
@@ -6260,38 +6611,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -6740,6 +7106,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -6748,6 +7124,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "zoom": {
@@ -7605,8 +7991,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleLinearAttribute",
-            "unit_type": 2,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
             "default_value": 0.0
         },
         "frozen": {
@@ -7627,8 +8013,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleLinearAttribute",
-            "unit_type": 2,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
             "default_value": 0.0
         },
         "input2": {
@@ -7637,8 +8023,8 @@ ATTRIBUTES_PROPERTIES = {
             "is_element": False,
             "is_array": False,
             "is_compound": False,
-            "type_str": "kDoubleLinearAttribute",
-            "unit_type": 2,
+            "type_str": "kNumericAttribute",
+            "numeric_type": 14,
             "default_value": 0.0
         },
         "isHistoricallyInteresting": {
@@ -8157,49 +8543,63 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "explicitUvTiles[-1].explicitUvTileName": {
-            "short_name": "euvt[-1].eutn",
-            "long_name": "explicitUvTiles[-1].explicitUvTileName",
+        "explicitUvTiles[0]": {
+            "short_name": "euvt[0]",
+            "long_name": "explicitUvTiles[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "explicitUvTiles",
+            "num_children": 2,
+            "children": [
+                "explicitUvTiles[0].explicitUvTileName",
+                "explicitUvTiles[0].explicitUvTilePosition"
+            ]
+        },
+        "explicitUvTiles[0].explicitUvTileName": {
+            "short_name": "euvt[0].eutn",
+            "long_name": "explicitUvTiles[0].explicitUvTileName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "explicitUvTiles[-1]",
+            "parent_plug": "explicitUvTiles[0]",
             "typed_type": 4
         },
-        "explicitUvTiles[-1].explicitUvTilePosition": {
-            "short_name": "euvt[-1].eutp",
-            "long_name": "explicitUvTiles[-1].explicitUvTilePosition",
+        "explicitUvTiles[0].explicitUvTilePosition": {
+            "short_name": "euvt[0].eutp",
+            "long_name": "explicitUvTiles[0].explicitUvTilePosition",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute2Float",
-            "parent_plug": "explicitUvTiles[-1]",
+            "parent_plug": "explicitUvTiles[0]",
             "num_children": 2,
             "children": [
                 "explicitUvTiles[-1].explicitUvTilePositionU",
                 "explicitUvTiles[-1].explicitUvTilePositionV"
             ]
         },
-        "explicitUvTiles[-1].explicitUvTilePositionU": {
-            "short_name": "euvt[-1].eupu",
-            "long_name": "explicitUvTiles[-1].explicitUvTilePositionU",
+        "explicitUvTiles[0].explicitUvTilePositionU": {
+            "short_name": "euvt[0].eupu",
+            "long_name": "explicitUvTiles[0].explicitUvTilePositionU",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "explicitUvTiles[-1].explicitUvTilePosition",
+            "parent_plug": "explicitUvTiles[0].explicitUvTilePosition",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "explicitUvTiles[-1].explicitUvTilePositionV": {
-            "short_name": "euvt[-1].eupv",
-            "long_name": "explicitUvTiles[-1].explicitUvTilePositionV",
+        "explicitUvTiles[0].explicitUvTilePositionV": {
+            "short_name": "euvt[0].eupv",
+            "long_name": "explicitUvTiles[0].explicitUvTilePositionV",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "explicitUvTiles[-1].explicitUvTilePosition",
+            "parent_plug": "explicitUvTiles[0].explicitUvTilePosition",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -9759,6 +10159,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
+        },
         "boundingBox": {
             "short_name": "bb",
             "long_name": "boundingBox",
@@ -10615,46 +11024,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -10745,6 +11182,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -12030,6 +12480,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -12038,6 +12498,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "preferredAngle": {
@@ -12096,36 +12566,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "radius": {
@@ -12161,38 +12646,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -13107,6 +13607,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -13115,6 +13625,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "xformMatrix": {
@@ -13426,51 +13946,71 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kLightDataAttribute",
             "num_elements": 0
         },
-        "lightDataArray[-1].lightAmbient": {
-            "short_name": "ltd[-1].la",
-            "long_name": "lightDataArray[-1].lightAmbient",
+        "lightDataArray[0]": {
+            "short_name": "ltd[0]",
+            "long_name": "lightDataArray[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kLightDataAttribute",
+            "parent_plug": "lightDataArray",
+            "num_children": 8,
+            "children": [
+                "lightDataArray[0].lightDirection",
+                "lightDataArray[0].lightIntensity",
+                "lightDataArray[0].lightAmbient",
+                "lightDataArray[0].lightDiffuse",
+                "lightDataArray[0].lightSpecular",
+                "lightDataArray[0].lightShadowFraction",
+                "lightDataArray[0].preShadowIntensity",
+                "lightDataArray[0].lightBlindData"
+            ]
+        },
+        "lightDataArray[0].lightAmbient": {
+            "short_name": "ltd[0].la",
+            "long_name": "lightDataArray[0].lightAmbient",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "lightDataArray[-1].lightBlindData": {
-            "short_name": "ltd[-1].lbd",
-            "long_name": "lightDataArray[-1].lightBlindData",
+        "lightDataArray[0].lightBlindData": {
+            "short_name": "ltd[0].lbd",
+            "long_name": "lightDataArray[0].lightBlindData",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "numeric_type": 18,
             "default_value": 0
         },
-        "lightDataArray[-1].lightDiffuse": {
-            "short_name": "ltd[-1].ldf",
-            "long_name": "lightDataArray[-1].lightDiffuse",
+        "lightDataArray[0].lightDiffuse": {
+            "short_name": "ltd[0].ldf",
+            "long_name": "lightDataArray[0].lightDiffuse",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "lightDataArray[-1].lightDirection": {
-            "short_name": "ltd[-1].ld",
-            "long_name": "lightDataArray[-1].lightDirection",
+        "lightDataArray[0].lightDirection": {
+            "short_name": "ltd[0].ld",
+            "long_name": "lightDataArray[0].lightDirection",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "num_children": 3,
             "children": [
                 "lightDataArray[-1].lightDirectionX",
@@ -13478,47 +14018,47 @@ ATTRIBUTES_PROPERTIES = {
                 "lightDataArray[-1].lightDirectionZ"
             ]
         },
-        "lightDataArray[-1].lightDirectionX": {
-            "short_name": "ltd[-1].ldx",
-            "long_name": "lightDataArray[-1].lightDirectionX",
+        "lightDataArray[0].lightDirectionX": {
+            "short_name": "ltd[0].ldx",
+            "long_name": "lightDataArray[0].lightDirectionX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1].lightDirection",
+            "parent_plug": "lightDataArray[0].lightDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "lightDataArray[-1].lightDirectionY": {
-            "short_name": "ltd[-1].ldy",
-            "long_name": "lightDataArray[-1].lightDirectionY",
+        "lightDataArray[0].lightDirectionY": {
+            "short_name": "ltd[0].ldy",
+            "long_name": "lightDataArray[0].lightDirectionY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1].lightDirection",
+            "parent_plug": "lightDataArray[0].lightDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "lightDataArray[-1].lightDirectionZ": {
-            "short_name": "ltd[-1].ldz",
-            "long_name": "lightDataArray[-1].lightDirectionZ",
+        "lightDataArray[0].lightDirectionZ": {
+            "short_name": "ltd[0].ldz",
+            "long_name": "lightDataArray[0].lightDirectionZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1].lightDirection",
+            "parent_plug": "lightDataArray[0].lightDirection",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "lightDataArray[-1].lightIntensity": {
-            "short_name": "ltd[-1].li",
-            "long_name": "lightDataArray[-1].lightIntensity",
+        "lightDataArray[0].lightIntensity": {
+            "short_name": "ltd[0].li",
+            "long_name": "lightDataArray[0].lightIntensity",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "num_children": 3,
             "children": [
                 "lightDataArray[-1].lightIntensityR",
@@ -13526,71 +14066,71 @@ ATTRIBUTES_PROPERTIES = {
                 "lightDataArray[-1].lightIntensityB"
             ]
         },
-        "lightDataArray[-1].lightIntensityB": {
-            "short_name": "ltd[-1].lib",
-            "long_name": "lightDataArray[-1].lightIntensityB",
+        "lightDataArray[0].lightIntensityB": {
+            "short_name": "ltd[0].lib",
+            "long_name": "lightDataArray[0].lightIntensityB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1].lightIntensity",
+            "parent_plug": "lightDataArray[0].lightIntensity",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "lightDataArray[-1].lightIntensityG": {
-            "short_name": "ltd[-1].lig",
-            "long_name": "lightDataArray[-1].lightIntensityG",
+        "lightDataArray[0].lightIntensityG": {
+            "short_name": "ltd[0].lig",
+            "long_name": "lightDataArray[0].lightIntensityG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1].lightIntensity",
+            "parent_plug": "lightDataArray[0].lightIntensity",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "lightDataArray[-1].lightIntensityR": {
-            "short_name": "ltd[-1].lir",
-            "long_name": "lightDataArray[-1].lightIntensityR",
+        "lightDataArray[0].lightIntensityR": {
+            "short_name": "ltd[0].lir",
+            "long_name": "lightDataArray[0].lightIntensityR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1].lightIntensity",
+            "parent_plug": "lightDataArray[0].lightIntensity",
             "numeric_type": 11,
             "default_value": 1.0
         },
-        "lightDataArray[-1].lightShadowFraction": {
-            "short_name": "ltd[-1].lsf",
-            "long_name": "lightDataArray[-1].lightShadowFraction",
+        "lightDataArray[0].lightShadowFraction": {
+            "short_name": "ltd[0].lsf",
+            "long_name": "lightDataArray[0].lightShadowFraction",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "lightDataArray[-1].lightSpecular": {
-            "short_name": "ltd[-1].ls",
-            "long_name": "lightDataArray[-1].lightSpecular",
+        "lightDataArray[0].lightSpecular": {
+            "short_name": "ltd[0].ls",
+            "long_name": "lightDataArray[0].lightSpecular",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "lightDataArray[-1].preShadowIntensity": {
-            "short_name": "ltd[-1].psi",
-            "long_name": "lightDataArray[-1].preShadowIntensity",
+        "lightDataArray[0].preShadowIntensity": {
+            "short_name": "ltd[0].psi",
+            "long_name": "lightDataArray[0].preShadowIntensity",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "lightDataArray[-1]",
+            "parent_plug": "lightDataArray[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -14520,6 +15060,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "aiFilters[0]": {
+            "short_name": "ai_filters[0]",
+            "long_name": "aiFilters[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "aiFilters"
+        },
         "aiFrameNumber": {
             "short_name": "ai_frame_number",
             "long_name": "aiFrameNumber",
@@ -15207,11 +15756,11 @@ ATTRIBUTES_PROPERTIES = {
         "blindDataNodes": {
             "short_name": "bn",
             "long_name": "blindDataNodes",
-            "is_element": False,
-            "is_array": True,
+            "is_element": True,
+            "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "num_elements": 0
+            "parent_plug": "blindDataNodes"
         },
         "borderConnections": {
             "short_name": "boc",
@@ -15221,6 +15770,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "borderWidth": {
             "short_name": "bw",
@@ -15551,25 +16109,40 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_FloatValue": {
-            "short_name": "cdvi[-1].cdvifv",
-            "long_name": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_FloatValue",
+        "collisionDepthVelocityIncrement[0]": {
+            "short_name": "cdvi[0]",
+            "long_name": "collisionDepthVelocityIncrement[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement",
+            "num_children": 3,
+            "children": [
+                "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position",
+                "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue",
+                "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp"
+            ]
+        },
+        "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue": {
+            "short_name": "cdvi[0].cdvifv",
+            "long_name": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityIncrement[-1]",
+            "parent_plug": "collisionDepthVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Interp": {
-            "short_name": "cdvi[-1].cdvii",
-            "long_name": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Interp",
+        "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp": {
+            "short_name": "cdvi[0].cdvii",
+            "long_name": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionDepthVelocityIncrement[-1]",
+            "parent_plug": "collisionDepthVelocityIncrement[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15577,14 +16150,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Position": {
-            "short_name": "cdvi[-1].cdvip",
-            "long_name": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Position",
+        "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position": {
+            "short_name": "cdvi[0].cdvip",
+            "long_name": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityIncrement[-1]",
+            "parent_plug": "collisionDepthVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15599,25 +16172,40 @@ ATTRIBUTES_PROPERTIES = {
                 0
             ]
         },
-        "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_FloatValue": {
-            "short_name": "cdvm[-1].cdvmfv",
-            "long_name": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_FloatValue",
+        "collisionDepthVelocityMultiplier[0]": {
+            "short_name": "cdvm[0]",
+            "long_name": "collisionDepthVelocityMultiplier[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier",
+            "num_children": 3,
+            "children": [
+                "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position",
+                "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue",
+                "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp"
+            ]
+        },
+        "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue": {
+            "short_name": "cdvm[0].cdvmfv",
+            "long_name": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
+            "parent_plug": "collisionDepthVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Interp": {
-            "short_name": "cdvm[-1].cdvmi",
-            "long_name": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Interp",
+        "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp": {
+            "short_name": "cdvm[0].cdvmi",
+            "long_name": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
+            "parent_plug": "collisionDepthVelocityMultiplier[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15625,14 +16213,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Position": {
-            "short_name": "cdvm[-1].cdvmp",
-            "long_name": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Position",
+        "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position": {
+            "short_name": "cdvm[0].cdvmp",
+            "long_name": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
+            "parent_plug": "collisionDepthVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15645,25 +16233,40 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_FloatValue": {
-            "short_name": "covi[-1].covifv",
-            "long_name": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_FloatValue",
+        "collisionOffsetVelocityIncrement[0]": {
+            "short_name": "covi[0]",
+            "long_name": "collisionOffsetVelocityIncrement[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement",
+            "num_children": 3,
+            "children": [
+                "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position",
+                "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue",
+                "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp"
+            ]
+        },
+        "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue": {
+            "short_name": "covi[0].covifv",
+            "long_name": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
+            "parent_plug": "collisionOffsetVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Interp": {
-            "short_name": "covi[-1].covii",
-            "long_name": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Interp",
+        "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp": {
+            "short_name": "covi[0].covii",
+            "long_name": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
+            "parent_plug": "collisionOffsetVelocityIncrement[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15671,14 +16274,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Position": {
-            "short_name": "covi[-1].covip",
-            "long_name": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Position",
+        "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position": {
+            "short_name": "covi[0].covip",
+            "long_name": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
+            "parent_plug": "collisionOffsetVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15693,25 +16296,40 @@ ATTRIBUTES_PROPERTIES = {
                 0
             ]
         },
-        "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_FloatValue": {
-            "short_name": "covm[-1].covmfv",
-            "long_name": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_FloatValue",
+        "collisionOffsetVelocityMultiplier[0]": {
+            "short_name": "covm[0]",
+            "long_name": "collisionOffsetVelocityMultiplier[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier",
+            "num_children": 3,
+            "children": [
+                "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position",
+                "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue",
+                "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp"
+            ]
+        },
+        "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue": {
+            "short_name": "covm[0].covmfv",
+            "long_name": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
+            "parent_plug": "collisionOffsetVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Interp": {
-            "short_name": "covm[-1].covmi",
-            "long_name": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Interp",
+        "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp": {
+            "short_name": "covm[0].covmi",
+            "long_name": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
+            "parent_plug": "collisionOffsetVelocityMultiplier[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -15719,14 +16337,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Position": {
-            "short_name": "covm[-1].covmp",
-            "long_name": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Position",
+        "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position": {
+            "short_name": "covm[0].covmp",
+            "long_name": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
+            "parent_plug": "collisionOffsetVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15798,80 +16416,112 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "colorSet[-1].clamped": {
-            "short_name": "clst[-1].clam",
-            "long_name": "colorSet[-1].clamped",
+        "colorSet[0]": {
+            "short_name": "clst[0]",
+            "long_name": "colorSet[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet",
+            "num_children": 4,
+            "children": [
+                "colorSet[0].colorName",
+                "colorSet[0].clamped",
+                "colorSet[0].representation",
+                "colorSet[0].colorSetPoints"
+            ]
+        },
+        "colorSet[0].clamped": {
+            "short_name": "clst[0].clam",
+            "long_name": "colorSet[0].clamped",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "colorSet[-1].colorName": {
-            "short_name": "clst[-1].clsn",
-            "long_name": "colorSet[-1].colorName",
+        "colorSet[0].colorName": {
+            "short_name": "clst[0].clsn",
+            "long_name": "colorSet[0].colorName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "typed_type": 4
         },
-        "colorSet[-1].colorSetPoints": {
-            "short_name": "clst[-1].clsp",
-            "long_name": "colorSet[-1].colorSetPoints",
+        "colorSet[0].colorSetPoints": {
+            "short_name": "clst[0].clsp",
+            "long_name": "colorSet[0].colorSetPoints",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "num_elements": 0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsA": {
-            "short_name": "clst[-1].clsp[-1].clpa",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsA",
+        "colorSet[0].colorSetPoints[0]": {
+            "short_name": "clst[0].clsp[0]",
+            "long_name": "colorSet[0].colorSetPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet[0].colorSetPoints",
+            "num_children": 4,
+            "children": [
+                "colorSet[-1].colorSetPoints[0].colorSetPointsR",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsG",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsB",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsA"
+            ]
+        },
+        "colorSet[0].colorSetPoints[0].colorSetPointsA": {
+            "short_name": "clst[0].clsp[0].clpa",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsA",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsB": {
-            "short_name": "clst[-1].clsp[-1].clpb",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsB",
+        "colorSet[0].colorSetPoints[0].colorSetPointsB": {
+            "short_name": "clst[0].clsp[0].clpb",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsG": {
-            "short_name": "clst[-1].clsp[-1].clpg",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsG",
+        "colorSet[0].colorSetPoints[0].colorSetPointsG": {
+            "short_name": "clst[0].clsp[0].clpg",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsR": {
-            "short_name": "clst[-1].clsp[-1].clpr",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsR",
+        "colorSet[0].colorSetPoints[0].colorSetPointsR": {
+            "short_name": "clst[0].clsp[0].clpr",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15884,47 +16534,63 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "colors[-1].colorA": {
-            "short_name": "clr[-1].clra",
-            "long_name": "colors[-1].colorA",
+        "colors[0]": {
+            "short_name": "clr[0]",
+            "long_name": "colors[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colors",
+            "num_children": 4,
+            "children": [
+                "colors[0].colorR",
+                "colors[0].colorG",
+                "colors[0].colorB",
+                "colors[0].colorA"
+            ]
+        },
+        "colors[0].colorA": {
+            "short_name": "clr[0].clra",
+            "long_name": "colors[0].colorA",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colors[-1]",
+            "parent_plug": "colors[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colors[-1].colorB": {
-            "short_name": "clr[-1].clrb",
-            "long_name": "colors[-1].colorB",
+        "colors[0].colorB": {
+            "short_name": "clr[0].clrb",
+            "long_name": "colors[0].colorB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colors[-1]",
+            "parent_plug": "colors[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colors[-1].colorG": {
-            "short_name": "clr[-1].clrg",
-            "long_name": "colors[-1].colorG",
+        "colors[0].colorG": {
+            "short_name": "clr[0].clrg",
+            "long_name": "colors[0].colorG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colors[-1]",
+            "parent_plug": "colors[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colors[-1].colorR": {
-            "short_name": "clr[-1].clrr",
-            "long_name": "colors[-1].colorR",
+        "colors[0].colorR": {
+            "short_name": "clr[0].clrr",
+            "long_name": "colors[0].colorR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colors[-1]",
+            "parent_plug": "colors[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -15937,35 +16603,62 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "compInstObjGroups[-1].compObjectGroups": {
-            "short_name": "ciog[-1].cog",
-            "long_name": "compInstObjGroups[-1].compObjectGroups",
+        "compInstObjGroups[0]": {
+            "short_name": "ciog[0]",
+            "long_name": "compInstObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups",
+            "num_children": 1,
+            "children": [
+                "compInstObjGroups[0].compObjectGroups"
+            ]
+        },
+        "compInstObjGroups[0].compObjectGroups": {
+            "short_name": "ciog[0].cog",
+            "long_name": "compInstObjGroups[0].compObjectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "compInstObjGroups[-1]",
+            "parent_plug": "compInstObjGroups[0]",
             "num_elements": 0
         },
-        "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId": {
-            "short_name": "ciog[-1].cog[-1].cgid",
-            "long_name": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId",
+        "compInstObjGroups[0].compObjectGroups[0]": {
+            "short_name": "ciog[0].cog[0]",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups",
+            "num_children": 2,
+            "children": [
+                "compInstObjGroups[-1].compObjectGroups[0].compObjectGrpCompList",
+                "compInstObjGroups[-1].compObjectGroups[0].compObjectGroupId"
+            ]
+        },
+        "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId": {
+            "short_name": "ciog[0].cog[0].cgid",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList": {
-            "short_name": "ciog[-1].cog[-1].cgcl",
-            "long_name": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList",
+        "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList": {
+            "short_name": "ciog[0].cog[0].cgcl",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups[0]",
             "typed_type": 13
         },
         "componentTags": {
@@ -15977,24 +16670,38 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "componentTags[-1].componentTagContents": {
-            "short_name": "gtag[-1].gtagcmp",
-            "long_name": "componentTags[-1].componentTagContents",
+        "componentTags[0]": {
+            "short_name": "gtag[0]",
+            "long_name": "componentTags[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "componentTags",
+            "num_children": 2,
+            "children": [
+                "componentTags[0].componentTagName",
+                "componentTags[0].componentTagContents"
+            ]
+        },
+        "componentTags[0].componentTagContents": {
+            "short_name": "gtag[0].gtagcmp",
+            "long_name": "componentTags[0].componentTagContents",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "componentTags[-1]",
+            "parent_plug": "componentTags[0]",
             "typed_type": 13
         },
-        "componentTags[-1].componentTagName": {
-            "short_name": "gtag[-1].gtagnm",
-            "long_name": "componentTags[-1].componentTagName",
+        "componentTags[0].componentTagName": {
+            "short_name": "gtag[0].gtagnm",
+            "long_name": "componentTags[0].componentTagName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "componentTags[-1]",
+            "parent_plug": "componentTags[0]",
             "typed_type": 4
         },
         "computeFromSculptCache": {
@@ -16039,36 +16746,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Double",
             "num_elements": 0
         },
-        "controlPoints[-1].xValue": {
-            "short_name": "cp[-1].xv",
-            "long_name": "controlPoints[-1].xValue",
+        "controlPoints[0]": {
+            "short_name": "cp[0]",
+            "long_name": "controlPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "controlPoints",
+            "num_children": 3,
+            "children": [
+                "controlPoints[0].xValue",
+                "controlPoints[0].yValue",
+                "controlPoints[0].zValue"
+            ]
+        },
+        "controlPoints[0].xValue": {
+            "short_name": "cp[0].xv",
+            "long_name": "controlPoints[0].xValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "controlPoints[-1].yValue": {
-            "short_name": "cp[-1].yv",
-            "long_name": "controlPoints[-1].yValue",
+        "controlPoints[0].yValue": {
+            "short_name": "cp[0].yv",
+            "long_name": "controlPoints[0].yValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "controlPoints[-1].zValue": {
-            "short_name": "cp[-1].zv",
-            "long_name": "controlPoints[-1].zValue",
+        "controlPoints[0].zValue": {
+            "short_name": "cp[0].zv",
+            "long_name": "controlPoints[0].zValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -16522,36 +17244,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Long",
             "num_elements": 0
         },
-        "edge[-1].edg1": {
-            "short_name": "ed[-1].e1",
-            "long_name": "edge[-1].edg1",
+        "edge[0]": {
+            "short_name": "ed[0]",
+            "long_name": "edge[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Long",
+            "parent_plug": "edge",
+            "num_children": 3,
+            "children": [
+                "edge[0].edg1",
+                "edge[0].edg2",
+                "edge[0].edgh"
+            ]
+        },
+        "edge[0].edg1": {
+            "short_name": "ed[0].e1",
+            "long_name": "edge[0].edg1",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "edge[-1]",
+            "parent_plug": "edge[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "edge[-1].edg2": {
-            "short_name": "ed[-1].e2",
-            "long_name": "edge[-1].edg2",
+        "edge[0].edg2": {
+            "short_name": "ed[0].e2",
+            "long_name": "edge[0].edg2",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "edge[-1]",
+            "parent_plug": "edge[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "edge[-1].edgh": {
-            "short_name": "ed[-1].eh",
-            "long_name": "edge[-1].edgh",
+        "edge[0].edgh": {
+            "short_name": "ed[0].eh",
+            "long_name": "edge[0].edgh",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "edge[-1]",
+            "parent_plug": "edge[0]",
             "numeric_type": 7,
             "default_value": 0
         },
@@ -16600,6 +17337,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 0
         },
+        "face[0]": {
+            "short_name": "fc[0]",
+            "long_name": "face[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "face",
+            "typed_type": 0
+        },
         "faceColorIndices": {
             "short_name": "fcid",
             "long_name": "faceColorIndices",
@@ -16608,6 +17355,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 9
+        },
+        "faceColorIndices[0]": {
+            "short_name": "fcid[0]",
+            "long_name": "faceColorIndices[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "faceColorIndices",
             "typed_type": 9
         },
         "faceIdMap": {
@@ -16642,6 +17399,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
+        "freeze[0]": {
+            "short_name": "frze[0]",
+            "long_name": "freeze[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "freeze",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -17070,6 +17838,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "instMaterialAssign[0]": {
+            "short_name": "imtla[0]",
+            "long_name": "instMaterialAssign[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "instMaterialAssign"
+        },
         "instObjGroups": {
             "short_name": "iog",
             "long_name": "instObjGroups",
@@ -17079,46 +17856,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intensity": {
@@ -17172,6 +17977,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -17495,36 +18313,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Float",
             "num_elements": 0
         },
-        "normals[-1].normalx": {
-            "short_name": "n[-1].nx",
-            "long_name": "normals[-1].normalx",
+        "normals[0]": {
+            "short_name": "n[0]",
+            "long_name": "normals[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "normals",
+            "num_children": 3,
+            "children": [
+                "normals[0].normalx",
+                "normals[0].normaly",
+                "normals[0].normalz"
+            ]
+        },
+        "normals[0].normalx": {
+            "short_name": "n[0].nx",
+            "long_name": "normals[0].normalx",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "normals[-1]",
+            "parent_plug": "normals[0]",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "normals[-1].normaly": {
-            "short_name": "n[-1].ny",
-            "long_name": "normals[-1].normaly",
+        "normals[0].normaly": {
+            "short_name": "n[0].ny",
+            "long_name": "normals[0].normaly",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "normals[-1]",
+            "parent_plug": "normals[0]",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "normals[-1].normalz": {
-            "short_name": "n[-1].nz",
-            "long_name": "normals[-1].normalz",
+        "normals[0].normalz": {
+            "short_name": "n[0].nz",
+            "long_name": "normals[0].normalz",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "normals[-1]",
+            "parent_plug": "normals[0]",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -17955,6 +18788,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -17963,6 +18806,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "perInstanceIndex": {
@@ -17976,6 +18829,17 @@ ATTRIBUTES_PROPERTIES = {
             "numeric_type": 7,
             "default_value": -1
         },
+        "perInstanceIndex[0]": {
+            "short_name": "pii[0]",
+            "long_name": "perInstanceIndex[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "perInstanceIndex",
+            "numeric_type": 7,
+            "default_value": -1
+        },
         "perInstanceTag": {
             "short_name": "pit",
             "long_name": "perInstanceTag",
@@ -17984,6 +18848,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 7,
+            "default_value": -1
+        },
+        "perInstanceTag[0]": {
+            "short_name": "pit[0]",
+            "long_name": "perInstanceTag[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "perInstanceTag",
             "numeric_type": 7,
             "default_value": -1
         },
@@ -18005,6 +18880,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 0
         },
+        "pinData[0]": {
+            "short_name": "pd[0]",
+            "long_name": "pinData[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "pinData",
+            "typed_type": 0
+        },
         "pnts": {
             "short_name": "pt",
             "long_name": "pnts",
@@ -18013,6 +18898,21 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": True,
             "type_str": "kAttribute3Float",
             "num_elements": 0
+        },
+        "pnts[0]": {
+            "short_name": "pt[0]",
+            "long_name": "pnts[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "pnts",
+            "num_children": 3,
+            "children": [
+                "pnts[0].pntx",
+                "pnts[0].pnty",
+                "pnts[0].pntz"
+            ]
         },
         "primaryVisibility": {
             "short_name": "vis",
@@ -18047,36 +18947,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "quadSplit": {
@@ -18147,38 +19062,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -18738,56 +19668,85 @@ ATTRIBUTES_PROPERTIES = {
                 0
             ]
         },
-        "uvSet[-1].uvSetName": {
-            "short_name": "uvst[-1].uvsn",
-            "long_name": "uvSet[-1].uvSetName",
+        "uvSet[0]": {
+            "short_name": "uvst[0]",
+            "long_name": "uvSet[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "uvSet",
+            "num_children": 3,
+            "children": [
+                "uvSet[0].uvSetName",
+                "uvSet[0].uvSetPoints",
+                "uvSet[0].uvSetTweakLocation"
+            ]
+        },
+        "uvSet[0].uvSetName": {
+            "short_name": "uvst[0].uvsn",
+            "long_name": "uvSet[0].uvSetName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "typed_type": 4
         },
-        "uvSet[-1].uvSetPoints": {
-            "short_name": "uvst[-1].uvsp",
-            "long_name": "uvSet[-1].uvSetPoints",
+        "uvSet[0].uvSetPoints": {
+            "short_name": "uvst[0].uvsp",
+            "long_name": "uvSet[0].uvSetPoints",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kAttribute2Float",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "num_elements": 0
         },
-        "uvSet[-1].uvSetPoints[-1].uvSetPointsU": {
-            "short_name": "uvst[-1].uvsp[-1].uvpu",
-            "long_name": "uvSet[-1].uvSetPoints[-1].uvSetPointsU",
+        "uvSet[0].uvSetPoints[0]": {
+            "short_name": "uvst[0].uvsp[0]",
+            "long_name": "uvSet[0].uvSetPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "uvSet[0].uvSetPoints",
+            "num_children": 2,
+            "children": [
+                "uvSet[-1].uvSetPoints[0].uvSetPointsU",
+                "uvSet[-1].uvSetPoints[0].uvSetPointsV"
+            ]
+        },
+        "uvSet[0].uvSetPoints[0].uvSetPointsU": {
+            "short_name": "uvst[0].uvsp[0].uvpu",
+            "long_name": "uvSet[0].uvSetPoints[0].uvSetPointsU",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
+            "parent_plug": "uvSet[0].uvSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvSet[-1].uvSetPoints[-1].uvSetPointsV": {
-            "short_name": "uvst[-1].uvsp[-1].uvpv",
-            "long_name": "uvSet[-1].uvSetPoints[-1].uvSetPointsV",
+        "uvSet[0].uvSetPoints[0].uvSetPointsV": {
+            "short_name": "uvst[0].uvsp[0].uvpv",
+            "long_name": "uvSet[0].uvSetPoints[0].uvSetPointsV",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
+            "parent_plug": "uvSet[0].uvSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvSet[-1].uvSetTweakLocation": {
-            "short_name": "uvst[-1].uvtw",
-            "long_name": "uvSet[-1].uvSetTweakLocation",
+        "uvSet[0].uvSetTweakLocation": {
+            "short_name": "uvst[0].uvtw",
+            "long_name": "uvSet[0].uvSetTweakLocation",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "typed_type": 24
         },
         "uvSize": {
@@ -18818,25 +19777,39 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute2Float",
             "num_elements": 0
         },
-        "uvpt[-1].uvpx": {
-            "short_name": "uv[-1].ux",
-            "long_name": "uvpt[-1].uvpx",
+        "uvpt[0]": {
+            "short_name": "uv[0]",
+            "long_name": "uvpt[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "uvpt",
+            "num_children": 2,
+            "children": [
+                "uvpt[0].uvpx",
+                "uvpt[0].uvpy"
+            ]
+        },
+        "uvpt[0].uvpx": {
+            "short_name": "uv[0].ux",
+            "long_name": "uvpt[0].uvpx",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvpt[-1]",
+            "parent_plug": "uvpt[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvpt[-1].uvpy": {
-            "short_name": "uv[-1].uy",
-            "long_name": "uvpt[-1].uvpy",
+        "uvpt[0].uvpy": {
+            "short_name": "uv[0].uy",
+            "long_name": "uvpt[0].uvpy",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvpt[-1]",
+            "parent_plug": "uvpt[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -18862,59 +19835,74 @@ ATTRIBUTES_PROPERTIES = {
             "parent_plug": "colorPerVertex",
             "num_elements": 0
         },
-        "vertexColor[-1].vertexAlpha": {
-            "short_name": "vclr[-1].vxal",
-            "long_name": "vertexColor[-1].vertexAlpha",
+        "vertexColor[0]": {
+            "short_name": "vclr[0]",
+            "long_name": "vertexColor[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "vertexColor",
+            "num_children": 3,
+            "children": [
+                "vertexColor[0].vertexColorRGB",
+                "vertexColor[0].vertexAlpha",
+                "vertexColor[0].vertexFaceColor"
+            ]
+        },
+        "vertexColor[0].vertexAlpha": {
+            "short_name": "vclr[0].vxal",
+            "long_name": "vertexColor[0].vertexAlpha",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1]",
+            "parent_plug": "vertexColor[0]",
             "numeric_type": 11,
             "default_value": 1.0,
             "max_value": 1.0
         },
-        "vertexColor[-1].vertexColorB": {
-            "short_name": "vclr[-1].vxcb",
-            "long_name": "vertexColor[-1].vertexColorB",
+        "vertexColor[0].vertexColorB": {
+            "short_name": "vclr[0].vxcb",
+            "long_name": "vertexColor[0].vertexColorB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexColorRGB",
+            "parent_plug": "vertexColor[0].vertexColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "vertexColor[-1].vertexColorG": {
-            "short_name": "vclr[-1].vxcg",
-            "long_name": "vertexColor[-1].vertexColorG",
+        "vertexColor[0].vertexColorG": {
+            "short_name": "vclr[0].vxcg",
+            "long_name": "vertexColor[0].vertexColorG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexColorRGB",
+            "parent_plug": "vertexColor[0].vertexColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "vertexColor[-1].vertexColorR": {
-            "short_name": "vclr[-1].vxcr",
-            "long_name": "vertexColor[-1].vertexColorR",
+        "vertexColor[0].vertexColorR": {
+            "short_name": "vclr[0].vxcr",
+            "long_name": "vertexColor[0].vertexColorR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexColorRGB",
+            "parent_plug": "vertexColor[0].vertexColorRGB",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "vertexColor[-1].vertexColorRGB": {
-            "short_name": "vclr[-1].vrgb",
-            "long_name": "vertexColor[-1].vertexColorRGB",
+        "vertexColor[0].vertexColorRGB": {
+            "short_name": "vclr[0].vrgb",
+            "long_name": "vertexColor[0].vertexColorRGB",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "vertexColor[-1]",
+            "parent_plug": "vertexColor[0]",
             "num_children": 3,
             "children": [
                 "vertexColor[-1].vertexColorR",
@@ -18922,72 +19910,86 @@ ATTRIBUTES_PROPERTIES = {
                 "vertexColor[-1].vertexColorB"
             ]
         },
-        "vertexColor[-1].vertexFaceColor": {
-            "short_name": "vclr[-1].vfcl",
-            "long_name": "vertexColor[-1].vertexFaceColor",
+        "vertexColor[0].vertexFaceColor": {
+            "short_name": "vclr[0].vfcl",
+            "long_name": "vertexColor[0].vertexFaceColor",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "vertexColor[-1]",
+            "parent_plug": "vertexColor[0]",
             "num_elements": 0
         },
-        "vertexColor[-1].vertexFaceColor[-1].vertexFaceAlpha": {
-            "short_name": "vclr[-1].vfcl[-1].vfal",
-            "long_name": "vertexColor[-1].vertexFaceColor[-1].vertexFaceAlpha",
+        "vertexColor[0].vertexFaceColor[0]": {
+            "short_name": "vclr[0].vfcl[0]",
+            "long_name": "vertexColor[0].vertexFaceColor[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "vertexColor[0].vertexFaceColor",
+            "num_children": 2,
+            "children": [
+                "vertexColor[-1].vertexFaceColor[0].vertexFaceColorRGB",
+                "vertexColor[-1].vertexFaceColor[0].vertexFaceAlpha"
+            ]
+        },
+        "vertexColor[0].vertexFaceColor[0].vertexFaceAlpha": {
+            "short_name": "vclr[0].vfcl[0].vfal",
+            "long_name": "vertexColor[0].vertexFaceColor[0].vertexFaceAlpha",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexFaceColor[-1]",
+            "parent_plug": "vertexColor[0].vertexFaceColor[0]",
             "numeric_type": 11,
             "default_value": 1.0,
             "max_value": 1.0
         },
-        "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorB": {
-            "short_name": "vclr[-1].vfcl[-1].vfcb",
-            "long_name": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorB",
+        "vertexColor[0].vertexFaceColor[0].vertexFaceColorB": {
+            "short_name": "vclr[0].vfcl[0].vfcb",
+            "long_name": "vertexColor[0].vertexFaceColor[0].vertexFaceColorB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
+            "parent_plug": "vertexColor[0].vertexFaceColor[0].vertexFaceColorRGB",
             "numeric_type": 11,
             "default_value": 0.0,
             "max_value": 1.0
         },
-        "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorG": {
-            "short_name": "vclr[-1].vfcl[-1].vfcg",
-            "long_name": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorG",
+        "vertexColor[0].vertexFaceColor[0].vertexFaceColorG": {
+            "short_name": "vclr[0].vfcl[0].vfcg",
+            "long_name": "vertexColor[0].vertexFaceColor[0].vertexFaceColorG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
+            "parent_plug": "vertexColor[0].vertexFaceColor[0].vertexFaceColorRGB",
             "numeric_type": 11,
             "default_value": 0.0,
             "max_value": 1.0
         },
-        "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorR": {
-            "short_name": "vclr[-1].vfcl[-1].vfcr",
-            "long_name": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorR",
+        "vertexColor[0].vertexFaceColor[0].vertexFaceColorR": {
+            "short_name": "vclr[0].vfcl[0].vfcr",
+            "long_name": "vertexColor[0].vertexFaceColor[0].vertexFaceColorR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
+            "parent_plug": "vertexColor[0].vertexFaceColor[0].vertexFaceColorRGB",
             "numeric_type": 11,
             "default_value": 0.0,
             "max_value": 1.0
         },
-        "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB": {
-            "short_name": "vclr[-1].vfcl[-1].frgb",
-            "long_name": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB",
+        "vertexColor[0].vertexFaceColor[0].vertexFaceColorRGB": {
+            "short_name": "vclr[0].vfcl[0].frgb",
+            "long_name": "vertexColor[0].vertexFaceColor[0].vertexFaceColorRGB",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "vertexColor[-1].vertexFaceColor[-1]",
+            "parent_plug": "vertexColor[0].vertexFaceColor[0]",
             "num_children": 3,
             "children": [
                 "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorR",
@@ -19030,35 +20032,62 @@ ATTRIBUTES_PROPERTIES = {
             "parent_plug": "normalPerVertex",
             "num_elements": 0
         },
-        "vertexNormal[-1].vertexFaceNormal": {
-            "short_name": "vn[-1].vfnl",
-            "long_name": "vertexNormal[-1].vertexFaceNormal",
+        "vertexNormal[0]": {
+            "short_name": "vn[0]",
+            "long_name": "vertexNormal[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "vertexNormal",
+            "num_children": 2,
+            "children": [
+                "vertexNormal[0].vertexNormalXYZ",
+                "vertexNormal[0].vertexFaceNormal"
+            ]
+        },
+        "vertexNormal[0].vertexFaceNormal": {
+            "short_name": "vn[0].vfnl",
+            "long_name": "vertexNormal[0].vertexFaceNormal",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "vertexNormal[-1]",
+            "parent_plug": "vertexNormal[0]",
             "num_elements": 0
         },
-        "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalX": {
-            "short_name": "vn[-1].vfnl[-1].vfnx",
-            "long_name": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalX",
+        "vertexNormal[0].vertexFaceNormal[0]": {
+            "short_name": "vn[0].vfnl[0]",
+            "long_name": "vertexNormal[0].vertexFaceNormal[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "vertexNormal[0].vertexFaceNormal",
+            "num_children": 1,
+            "children": [
+                "vertexNormal[-1].vertexFaceNormal[0].vertexFaceNormalXYZ"
+            ]
+        },
+        "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalX": {
+            "short_name": "vn[0].vfnl[0].vfnx",
+            "long_name": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
+            "parent_plug": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ": {
-            "short_name": "vn[-1].vfnl[-1].fnxy",
-            "long_name": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
+        "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalXYZ": {
+            "short_name": "vn[0].vfnl[0].fnxy",
+            "long_name": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalXYZ",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1]",
+            "parent_plug": "vertexNormal[0].vertexFaceNormal[0]",
             "num_children": 3,
             "children": [
                 "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalX",
@@ -19066,47 +20095,47 @@ ATTRIBUTES_PROPERTIES = {
                 "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalZ"
             ]
         },
-        "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalY": {
-            "short_name": "vn[-1].vfnl[-1].vfny",
-            "long_name": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalY",
+        "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalY": {
+            "short_name": "vn[0].vfnl[0].vfny",
+            "long_name": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
+            "parent_plug": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalZ": {
-            "short_name": "vn[-1].vfnl[-1].vfnz",
-            "long_name": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalZ",
+        "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalZ": {
+            "short_name": "vn[0].vfnl[0].vfnz",
+            "long_name": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ",
+            "parent_plug": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "vertexNormal[-1].vertexNormalX": {
-            "short_name": "vn[-1].vxnx",
-            "long_name": "vertexNormal[-1].vertexNormalX",
+        "vertexNormal[0].vertexNormalX": {
+            "short_name": "vn[0].vxnx",
+            "long_name": "vertexNormal[0].vertexNormalX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexNormal[-1].vertexNormalXYZ",
+            "parent_plug": "vertexNormal[0].vertexNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "vertexNormal[-1].vertexNormalXYZ": {
-            "short_name": "vn[-1].nxyz",
-            "long_name": "vertexNormal[-1].vertexNormalXYZ",
+        "vertexNormal[0].vertexNormalXYZ": {
+            "short_name": "vn[0].nxyz",
+            "long_name": "vertexNormal[0].vertexNormalXYZ",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "vertexNormal[-1]",
+            "parent_plug": "vertexNormal[0]",
             "num_children": 3,
             "children": [
                 "vertexNormal[-1].vertexNormalX",
@@ -19114,25 +20143,25 @@ ATTRIBUTES_PROPERTIES = {
                 "vertexNormal[-1].vertexNormalZ"
             ]
         },
-        "vertexNormal[-1].vertexNormalY": {
-            "short_name": "vn[-1].vxny",
-            "long_name": "vertexNormal[-1].vertexNormalY",
+        "vertexNormal[0].vertexNormalY": {
+            "short_name": "vn[0].vxny",
+            "long_name": "vertexNormal[0].vertexNormalY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexNormal[-1].vertexNormalXYZ",
+            "parent_plug": "vertexNormal[0].vertexNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
-        "vertexNormal[-1].vertexNormalZ": {
-            "short_name": "vn[-1].vxnz",
-            "long_name": "vertexNormal[-1].vertexNormalZ",
+        "vertexNormal[0].vertexNormalZ": {
+            "short_name": "vn[0].vxnz",
+            "long_name": "vertexNormal[0].vertexNormalZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vertexNormal[-1].vertexNormalXYZ",
+            "parent_plug": "vertexNormal[0].vertexNormalXYZ",
             "numeric_type": 11,
             "default_value": 1.0000000200408773e+20
         },
@@ -19259,36 +20288,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Float",
             "num_elements": 0
         },
-        "vrts[-1].vrtx": {
-            "short_name": "vt[-1].vx",
-            "long_name": "vrts[-1].vrtx",
+        "vrts[0]": {
+            "short_name": "vt[0]",
+            "long_name": "vrts[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "vrts",
+            "num_children": 3,
+            "children": [
+                "vrts[0].vrtx",
+                "vrts[0].vrty",
+                "vrts[0].vrtz"
+            ]
+        },
+        "vrts[0].vrtx": {
+            "short_name": "vt[0].vx",
+            "long_name": "vrts[0].vrtx",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vrts[-1]",
+            "parent_plug": "vrts[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "vrts[-1].vrty": {
-            "short_name": "vt[-1].vy",
-            "long_name": "vrts[-1].vrty",
+        "vrts[0].vrty": {
+            "short_name": "vt[0].vy",
+            "long_name": "vrts[0].vrty",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vrts[-1]",
+            "parent_plug": "vrts[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "vrts[-1].vrtz": {
-            "short_name": "vt[-1].vz",
-            "long_name": "vrts[-1].vrtz",
+        "vrts[0].vrtz": {
+            "short_name": "vt[0].vz",
+            "long_name": "vrts[0].vrtz",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "vrts[-1]",
+            "parent_plug": "vrts[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -19300,6 +20344,17 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
+        "weights[0]": {
+            "short_name": "wt[0]",
+            "long_name": "weights[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "weights",
             "numeric_type": 14,
             "default_value": 1.0
         },
@@ -19360,6 +20415,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -19370,6 +20435,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
+            "typed_type": 5
+        },
         "worldMesh": {
             "short_name": "w",
             "long_name": "worldMesh",
@@ -19378,6 +20453,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 14
+        },
+        "worldMesh[0]": {
+            "short_name": "w[0]",
+            "long_name": "worldMesh[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMesh",
             "typed_type": 14
         }
     },
@@ -19520,6 +20605,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMatrixAttribute",
             "num_elements": 0
+        },
+        "matrixIn[0]": {
+            "short_name": "i[0]",
+            "long_name": "matrixIn[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMatrixAttribute",
+            "parent_plug": "matrixIn"
         },
         "matrixSum": {
             "short_name": "o",
@@ -19847,11 +20941,11 @@ ATTRIBUTES_PROPERTIES = {
         "blindDataNodes": {
             "short_name": "bn",
             "long_name": "blindDataNodes",
-            "is_element": False,
-            "is_array": True,
+            "is_element": True,
+            "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "num_elements": 0
+            "parent_plug": "blindDataNodes"
         },
         "borderConnections": {
             "short_name": "boc",
@@ -19861,6 +20955,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "boundingBox": {
             "short_name": "bb",
@@ -20109,80 +21212,112 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "colorSet[-1].clamped": {
-            "short_name": "clst[-1].clam",
-            "long_name": "colorSet[-1].clamped",
+        "colorSet[0]": {
+            "short_name": "clst[0]",
+            "long_name": "colorSet[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet",
+            "num_children": 4,
+            "children": [
+                "colorSet[0].colorName",
+                "colorSet[0].clamped",
+                "colorSet[0].representation",
+                "colorSet[0].colorSetPoints"
+            ]
+        },
+        "colorSet[0].clamped": {
+            "short_name": "clst[0].clam",
+            "long_name": "colorSet[0].clamped",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "colorSet[-1].colorName": {
-            "short_name": "clst[-1].clsn",
-            "long_name": "colorSet[-1].colorName",
+        "colorSet[0].colorName": {
+            "short_name": "clst[0].clsn",
+            "long_name": "colorSet[0].colorName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "typed_type": 4
         },
-        "colorSet[-1].colorSetPoints": {
-            "short_name": "clst[-1].clsp",
-            "long_name": "colorSet[-1].colorSetPoints",
+        "colorSet[0].colorSetPoints": {
+            "short_name": "clst[0].clsp",
+            "long_name": "colorSet[0].colorSetPoints",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "num_elements": 0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsA": {
-            "short_name": "clst[-1].clsp[-1].clpa",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsA",
+        "colorSet[0].colorSetPoints[0]": {
+            "short_name": "clst[0].clsp[0]",
+            "long_name": "colorSet[0].colorSetPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet[0].colorSetPoints",
+            "num_children": 4,
+            "children": [
+                "colorSet[-1].colorSetPoints[0].colorSetPointsR",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsG",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsB",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsA"
+            ]
+        },
+        "colorSet[0].colorSetPoints[0].colorSetPointsA": {
+            "short_name": "clst[0].clsp[0].clpa",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsA",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsB": {
-            "short_name": "clst[-1].clsp[-1].clpb",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsB",
+        "colorSet[0].colorSetPoints[0].colorSetPointsB": {
+            "short_name": "clst[0].clsp[0].clpb",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsG": {
-            "short_name": "clst[-1].clsp[-1].clpg",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsG",
+        "colorSet[0].colorSetPoints[0].colorSetPointsG": {
+            "short_name": "clst[0].clsp[0].clpg",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsR": {
-            "short_name": "clst[-1].clsp[-1].clpr",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsR",
+        "colorSet[0].colorSetPoints[0].colorSetPointsR": {
+            "short_name": "clst[0].clsp[0].clpr",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -20195,35 +21330,62 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "compInstObjGroups[-1].compObjectGroups": {
-            "short_name": "ciog[-1].cog",
-            "long_name": "compInstObjGroups[-1].compObjectGroups",
+        "compInstObjGroups[0]": {
+            "short_name": "ciog[0]",
+            "long_name": "compInstObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups",
+            "num_children": 1,
+            "children": [
+                "compInstObjGroups[0].compObjectGroups"
+            ]
+        },
+        "compInstObjGroups[0].compObjectGroups": {
+            "short_name": "ciog[0].cog",
+            "long_name": "compInstObjGroups[0].compObjectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "compInstObjGroups[-1]",
+            "parent_plug": "compInstObjGroups[0]",
             "num_elements": 0
         },
-        "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId": {
-            "short_name": "ciog[-1].cog[-1].cgid",
-            "long_name": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId",
+        "compInstObjGroups[0].compObjectGroups[0]": {
+            "short_name": "ciog[0].cog[0]",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups",
+            "num_children": 2,
+            "children": [
+                "compInstObjGroups[-1].compObjectGroups[0].compObjectGrpCompList",
+                "compInstObjGroups[-1].compObjectGroups[0].compObjectGroupId"
+            ]
+        },
+        "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId": {
+            "short_name": "ciog[0].cog[0].cgid",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList": {
-            "short_name": "ciog[-1].cog[-1].cgcl",
-            "long_name": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList",
+        "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList": {
+            "short_name": "ciog[0].cog[0].cgcl",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups[0]",
             "typed_type": 13
         },
         "componentTags": {
@@ -20235,24 +21397,38 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "componentTags[-1].componentTagContents": {
-            "short_name": "gtag[-1].gtagcmp",
-            "long_name": "componentTags[-1].componentTagContents",
+        "componentTags[0]": {
+            "short_name": "gtag[0]",
+            "long_name": "componentTags[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "componentTags",
+            "num_children": 2,
+            "children": [
+                "componentTags[0].componentTagName",
+                "componentTags[0].componentTagContents"
+            ]
+        },
+        "componentTags[0].componentTagContents": {
+            "short_name": "gtag[0].gtagcmp",
+            "long_name": "componentTags[0].componentTagContents",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "componentTags[-1]",
+            "parent_plug": "componentTags[0]",
             "typed_type": 13
         },
-        "componentTags[-1].componentTagName": {
-            "short_name": "gtag[-1].gtagnm",
-            "long_name": "componentTags[-1].componentTagName",
+        "componentTags[0].componentTagName": {
+            "short_name": "gtag[0].gtagnm",
+            "long_name": "componentTags[0].componentTagName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "componentTags[-1]",
+            "parent_plug": "componentTags[0]",
             "typed_type": 4
         },
         "containerType": {
@@ -20273,36 +21449,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Double",
             "num_elements": 0
         },
-        "controlPoints[-1].xValue": {
-            "short_name": "cp[-1].xv",
-            "long_name": "controlPoints[-1].xValue",
+        "controlPoints[0]": {
+            "short_name": "cp[0]",
+            "long_name": "controlPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "controlPoints",
+            "num_children": 3,
+            "children": [
+                "controlPoints[0].xValue",
+                "controlPoints[0].yValue",
+                "controlPoints[0].zValue"
+            ]
+        },
+        "controlPoints[0].xValue": {
+            "short_name": "cp[0].xv",
+            "long_name": "controlPoints[0].xValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "controlPoints[-1].yValue": {
-            "short_name": "cp[-1].yv",
-            "long_name": "controlPoints[-1].yValue",
+        "controlPoints[0].yValue": {
+            "short_name": "cp[0].yv",
+            "long_name": "controlPoints[0].yValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "controlPoints[-1].zValue": {
-            "short_name": "cp[-1].zv",
-            "long_name": "controlPoints[-1].zValue",
+        "controlPoints[0].zValue": {
+            "short_name": "cp[0].zv",
+            "long_name": "controlPoints[0].zValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -20507,36 +21698,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Double",
             "num_elements": 0
         },
-        "editPoints[-1].xValueEp": {
-            "short_name": "eps[-1].xve",
-            "long_name": "editPoints[-1].xValueEp",
+        "editPoints[0]": {
+            "short_name": "eps[0]",
+            "long_name": "editPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "editPoints",
+            "num_children": 3,
+            "children": [
+                "editPoints[0].xValueEp",
+                "editPoints[0].yValueEp",
+                "editPoints[0].zValueEp"
+            ]
+        },
+        "editPoints[0].xValueEp": {
+            "short_name": "eps[0].xve",
+            "long_name": "editPoints[0].xValueEp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "editPoints[-1]",
+            "parent_plug": "editPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "editPoints[-1].yValueEp": {
-            "short_name": "eps[-1].yve",
-            "long_name": "editPoints[-1].yValueEp",
+        "editPoints[0].yValueEp": {
+            "short_name": "eps[0].yve",
+            "long_name": "editPoints[0].yValueEp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "editPoints[-1]",
+            "parent_plug": "editPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "editPoints[-1].zValueEp": {
-            "short_name": "eps[-1].zve",
-            "long_name": "editPoints[-1].zValueEp",
+        "editPoints[0].zValueEp": {
+            "short_name": "eps[0].zve",
+            "long_name": "editPoints[0].zValueEp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "editPoints[-1]",
+            "parent_plug": "editPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -20934,6 +22140,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "instMaterialAssign[0]": {
+            "short_name": "imtla[0]",
+            "long_name": "instMaterialAssign[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "instMaterialAssign"
+        },
         "instObjGroups": {
             "short_name": "iog",
             "long_name": "instObjGroups",
@@ -20943,46 +22158,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -21026,6 +22269,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -21495,6 +22751,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -21503,6 +22769,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "pickTexture": {
@@ -21534,36 +22810,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "receiveShadows": {
@@ -21621,38 +22912,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -21875,56 +23181,85 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "uvSet[-1].uvSetName": {
-            "short_name": "uvst[-1].uvsn",
-            "long_name": "uvSet[-1].uvSetName",
+        "uvSet[0]": {
+            "short_name": "uvst[0]",
+            "long_name": "uvSet[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "uvSet",
+            "num_children": 3,
+            "children": [
+                "uvSet[0].uvSetName",
+                "uvSet[0].uvSetPoints",
+                "uvSet[0].uvSetTweakLocation"
+            ]
+        },
+        "uvSet[0].uvSetName": {
+            "short_name": "uvst[0].uvsn",
+            "long_name": "uvSet[0].uvSetName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "typed_type": 4
         },
-        "uvSet[-1].uvSetPoints": {
-            "short_name": "uvst[-1].uvsp",
-            "long_name": "uvSet[-1].uvSetPoints",
+        "uvSet[0].uvSetPoints": {
+            "short_name": "uvst[0].uvsp",
+            "long_name": "uvSet[0].uvSetPoints",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kAttribute2Float",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "num_elements": 0
         },
-        "uvSet[-1].uvSetPoints[-1].uvSetPointsU": {
-            "short_name": "uvst[-1].uvsp[-1].uvpu",
-            "long_name": "uvSet[-1].uvSetPoints[-1].uvSetPointsU",
+        "uvSet[0].uvSetPoints[0]": {
+            "short_name": "uvst[0].uvsp[0]",
+            "long_name": "uvSet[0].uvSetPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "uvSet[0].uvSetPoints",
+            "num_children": 2,
+            "children": [
+                "uvSet[-1].uvSetPoints[0].uvSetPointsU",
+                "uvSet[-1].uvSetPoints[0].uvSetPointsV"
+            ]
+        },
+        "uvSet[0].uvSetPoints[0].uvSetPointsU": {
+            "short_name": "uvst[0].uvsp[0].uvpu",
+            "long_name": "uvSet[0].uvSetPoints[0].uvSetPointsU",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
+            "parent_plug": "uvSet[0].uvSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvSet[-1].uvSetPoints[-1].uvSetPointsV": {
-            "short_name": "uvst[-1].uvsp[-1].uvpv",
-            "long_name": "uvSet[-1].uvSetPoints[-1].uvSetPointsV",
+        "uvSet[0].uvSetPoints[0].uvSetPointsV": {
+            "short_name": "uvst[0].uvsp[0].uvpv",
+            "long_name": "uvSet[0].uvSetPoints[0].uvSetPointsV",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
+            "parent_plug": "uvSet[0].uvSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvSet[-1].uvSetTweakLocation": {
-            "short_name": "uvst[-1].uvtw",
-            "long_name": "uvSet[-1].uvSetTweakLocation",
+        "uvSet[0].uvSetTweakLocation": {
+            "short_name": "uvst[0].uvtw",
+            "long_name": "uvSet[0].uvSetTweakLocation",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "typed_type": 24
         },
         "viewMode": {
@@ -22028,6 +23363,17 @@ ATTRIBUTES_PROPERTIES = {
             "numeric_type": 14,
             "default_value": 1.0
         },
+        "weights[0]": {
+            "short_name": "wt[0]",
+            "long_name": "weights[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "weights",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
         "wireColorB": {
             "short_name": "wfcb",
             "long_name": "wireColorB",
@@ -22085,6 +23431,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -22093,6 +23449,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "worldNormal": {
@@ -22104,36 +23470,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Double",
             "num_elements": 0
         },
-        "worldNormal[-1].worldNormalX": {
-            "short_name": "wn[-1].wnx",
-            "long_name": "worldNormal[-1].worldNormalX",
+        "worldNormal[0]": {
+            "short_name": "wn[0]",
+            "long_name": "worldNormal[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "worldNormal",
+            "num_children": 3,
+            "children": [
+                "worldNormal[0].worldNormalX",
+                "worldNormal[0].worldNormalY",
+                "worldNormal[0].worldNormalZ"
+            ]
+        },
+        "worldNormal[0].worldNormalX": {
+            "short_name": "wn[0].wnx",
+            "long_name": "worldNormal[0].worldNormalX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "worldNormal[-1]",
+            "parent_plug": "worldNormal[0]",
             "numeric_type": 14,
             "default_value": 0.0
         },
-        "worldNormal[-1].worldNormalY": {
-            "short_name": "wn[-1].wny",
-            "long_name": "worldNormal[-1].worldNormalY",
+        "worldNormal[0].worldNormalY": {
+            "short_name": "wn[0].wny",
+            "long_name": "worldNormal[0].worldNormalY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "worldNormal[-1]",
+            "parent_plug": "worldNormal[0]",
             "numeric_type": 14,
             "default_value": 0.0
         },
-        "worldNormal[-1].worldNormalZ": {
-            "short_name": "wn[-1].wnz",
-            "long_name": "worldNormal[-1].worldNormalZ",
+        "worldNormal[0].worldNormalZ": {
+            "short_name": "wn[0].wnz",
+            "long_name": "worldNormal[0].worldNormalZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "worldNormal[-1]",
+            "parent_plug": "worldNormal[0]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -22145,6 +23526,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 16
+        },
+        "worldSpace[0]": {
+            "short_name": "ws[0]",
+            "long_name": "worldSpace[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldSpace",
             "typed_type": 16
         }
     },
@@ -22607,11 +23998,11 @@ ATTRIBUTES_PROPERTIES = {
         "blindDataNodes": {
             "short_name": "bn",
             "long_name": "blindDataNodes",
-            "is_element": False,
-            "is_array": True,
+            "is_element": True,
+            "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "num_elements": 0
+            "parent_plug": "blindDataNodes"
         },
         "borderConnections": {
             "short_name": "boc",
@@ -22621,6 +24012,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "boundingBox": {
             "short_name": "bb",
@@ -22942,25 +24342,40 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_FloatValue": {
-            "short_name": "cdvi[-1].cdvifv",
-            "long_name": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_FloatValue",
+        "collisionDepthVelocityIncrement[0]": {
+            "short_name": "cdvi[0]",
+            "long_name": "collisionDepthVelocityIncrement[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionDepthVelocityIncrement",
+            "num_children": 3,
+            "children": [
+                "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position",
+                "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue",
+                "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp"
+            ]
+        },
+        "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue": {
+            "short_name": "cdvi[0].cdvifv",
+            "long_name": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityIncrement[-1]",
+            "parent_plug": "collisionDepthVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Interp": {
-            "short_name": "cdvi[-1].cdvii",
-            "long_name": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Interp",
+        "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp": {
+            "short_name": "cdvi[0].cdvii",
+            "long_name": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionDepthVelocityIncrement[-1]",
+            "parent_plug": "collisionDepthVelocityIncrement[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -22968,14 +24383,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Position": {
-            "short_name": "cdvi[-1].cdvip",
-            "long_name": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Position",
+        "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position": {
+            "short_name": "cdvi[0].cdvip",
+            "long_name": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityIncrement[-1]",
+            "parent_plug": "collisionDepthVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -22990,25 +24405,40 @@ ATTRIBUTES_PROPERTIES = {
                 0
             ]
         },
-        "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_FloatValue": {
-            "short_name": "cdvm[-1].cdvmfv",
-            "long_name": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_FloatValue",
+        "collisionDepthVelocityMultiplier[0]": {
+            "short_name": "cdvm[0]",
+            "long_name": "collisionDepthVelocityMultiplier[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionDepthVelocityMultiplier",
+            "num_children": 3,
+            "children": [
+                "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position",
+                "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue",
+                "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp"
+            ]
+        },
+        "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue": {
+            "short_name": "cdvm[0].cdvmfv",
+            "long_name": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
+            "parent_plug": "collisionDepthVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Interp": {
-            "short_name": "cdvm[-1].cdvmi",
-            "long_name": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Interp",
+        "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp": {
+            "short_name": "cdvm[0].cdvmi",
+            "long_name": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
+            "parent_plug": "collisionDepthVelocityMultiplier[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -23016,14 +24446,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Position": {
-            "short_name": "cdvm[-1].cdvmp",
-            "long_name": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Position",
+        "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position": {
+            "short_name": "cdvm[0].cdvmp",
+            "long_name": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionDepthVelocityMultiplier[-1]",
+            "parent_plug": "collisionDepthVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23036,25 +24466,40 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_FloatValue": {
-            "short_name": "covi[-1].covifv",
-            "long_name": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_FloatValue",
+        "collisionOffsetVelocityIncrement[0]": {
+            "short_name": "covi[0]",
+            "long_name": "collisionOffsetVelocityIncrement[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionOffsetVelocityIncrement",
+            "num_children": 3,
+            "children": [
+                "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position",
+                "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue",
+                "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp"
+            ]
+        },
+        "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue": {
+            "short_name": "covi[0].covifv",
+            "long_name": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
+            "parent_plug": "collisionOffsetVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Interp": {
-            "short_name": "covi[-1].covii",
-            "long_name": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Interp",
+        "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp": {
+            "short_name": "covi[0].covii",
+            "long_name": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
+            "parent_plug": "collisionOffsetVelocityIncrement[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -23062,14 +24507,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Position": {
-            "short_name": "covi[-1].covip",
-            "long_name": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Position",
+        "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position": {
+            "short_name": "covi[0].covip",
+            "long_name": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityIncrement[-1]",
+            "parent_plug": "collisionOffsetVelocityIncrement[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23084,25 +24529,40 @@ ATTRIBUTES_PROPERTIES = {
                 0
             ]
         },
-        "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_FloatValue": {
-            "short_name": "covm[-1].covmfv",
-            "long_name": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_FloatValue",
+        "collisionOffsetVelocityMultiplier[0]": {
+            "short_name": "covm[0]",
+            "long_name": "collisionOffsetVelocityMultiplier[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "collisionOffsetVelocityMultiplier",
+            "num_children": 3,
+            "children": [
+                "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position",
+                "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue",
+                "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp"
+            ]
+        },
+        "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue": {
+            "short_name": "covm[0].covmfv",
+            "long_name": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
+            "parent_plug": "collisionOffsetVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Interp": {
-            "short_name": "covm[-1].covmi",
-            "long_name": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Interp",
+        "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp": {
+            "short_name": "covm[0].covmi",
+            "long_name": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
+            "parent_plug": "collisionOffsetVelocityMultiplier[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -23110,14 +24570,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Position": {
-            "short_name": "covm[-1].covmp",
-            "long_name": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Position",
+        "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position": {
+            "short_name": "covm[0].covmp",
+            "long_name": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "collisionOffsetVelocityMultiplier[-1]",
+            "parent_plug": "collisionOffsetVelocityMultiplier[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23130,80 +24590,112 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "colorSet[-1].clamped": {
-            "short_name": "clst[-1].clam",
-            "long_name": "colorSet[-1].clamped",
+        "colorSet[0]": {
+            "short_name": "clst[0]",
+            "long_name": "colorSet[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet",
+            "num_children": 4,
+            "children": [
+                "colorSet[0].colorName",
+                "colorSet[0].clamped",
+                "colorSet[0].representation",
+                "colorSet[0].colorSetPoints"
+            ]
+        },
+        "colorSet[0].clamped": {
+            "short_name": "clst[0].clam",
+            "long_name": "colorSet[0].clamped",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "colorSet[-1].colorName": {
-            "short_name": "clst[-1].clsn",
-            "long_name": "colorSet[-1].colorName",
+        "colorSet[0].colorName": {
+            "short_name": "clst[0].clsn",
+            "long_name": "colorSet[0].colorName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "typed_type": 4
         },
-        "colorSet[-1].colorSetPoints": {
-            "short_name": "clst[-1].clsp",
-            "long_name": "colorSet[-1].colorSetPoints",
+        "colorSet[0].colorSetPoints": {
+            "short_name": "clst[0].clsp",
+            "long_name": "colorSet[0].colorSetPoints",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "colorSet[-1]",
+            "parent_plug": "colorSet[0]",
             "num_elements": 0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsA": {
-            "short_name": "clst[-1].clsp[-1].clpa",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsA",
+        "colorSet[0].colorSetPoints[0]": {
+            "short_name": "clst[0].clsp[0]",
+            "long_name": "colorSet[0].colorSetPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorSet[0].colorSetPoints",
+            "num_children": 4,
+            "children": [
+                "colorSet[-1].colorSetPoints[0].colorSetPointsR",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsG",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsB",
+                "colorSet[-1].colorSetPoints[0].colorSetPointsA"
+            ]
+        },
+        "colorSet[0].colorSetPoints[0].colorSetPointsA": {
+            "short_name": "clst[0].clsp[0].clpa",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsA",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsB": {
-            "short_name": "clst[-1].clsp[-1].clpb",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsB",
+        "colorSet[0].colorSetPoints[0].colorSetPointsB": {
+            "short_name": "clst[0].clsp[0].clpb",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsG": {
-            "short_name": "clst[-1].clsp[-1].clpg",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsG",
+        "colorSet[0].colorSetPoints[0].colorSetPointsG": {
+            "short_name": "clst[0].clsp[0].clpg",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "colorSet[-1].colorSetPoints[-1].colorSetPointsR": {
-            "short_name": "clst[-1].clsp[-1].clpr",
-            "long_name": "colorSet[-1].colorSetPoints[-1].colorSetPointsR",
+        "colorSet[0].colorSetPoints[0].colorSetPointsR": {
+            "short_name": "clst[0].clsp[0].clpr",
+            "long_name": "colorSet[0].colorSetPoints[0].colorSetPointsR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorSet[-1].colorSetPoints[-1]",
+            "parent_plug": "colorSet[0].colorSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -23216,35 +24708,62 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "compInstObjGroups[-1].compObjectGroups": {
-            "short_name": "ciog[-1].cog",
-            "long_name": "compInstObjGroups[-1].compObjectGroups",
+        "compInstObjGroups[0]": {
+            "short_name": "ciog[0]",
+            "long_name": "compInstObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups",
+            "num_children": 1,
+            "children": [
+                "compInstObjGroups[0].compObjectGroups"
+            ]
+        },
+        "compInstObjGroups[0].compObjectGroups": {
+            "short_name": "ciog[0].cog",
+            "long_name": "compInstObjGroups[0].compObjectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "compInstObjGroups[-1]",
+            "parent_plug": "compInstObjGroups[0]",
             "num_elements": 0
         },
-        "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId": {
-            "short_name": "ciog[-1].cog[-1].cgid",
-            "long_name": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId",
+        "compInstObjGroups[0].compObjectGroups[0]": {
+            "short_name": "ciog[0].cog[0]",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups",
+            "num_children": 2,
+            "children": [
+                "compInstObjGroups[-1].compObjectGroups[0].compObjectGrpCompList",
+                "compInstObjGroups[-1].compObjectGroups[0].compObjectGroupId"
+            ]
+        },
+        "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId": {
+            "short_name": "ciog[0].cog[0].cgid",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList": {
-            "short_name": "ciog[-1].cog[-1].cgcl",
-            "long_name": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList",
+        "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList": {
+            "short_name": "ciog[0].cog[0].cgcl",
+            "long_name": "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "compInstObjGroups[-1].compObjectGroups[-1]",
+            "parent_plug": "compInstObjGroups[0].compObjectGroups[0]",
             "typed_type": 13
         },
         "componentTags": {
@@ -23256,24 +24775,38 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "componentTags[-1].componentTagContents": {
-            "short_name": "gtag[-1].gtagcmp",
-            "long_name": "componentTags[-1].componentTagContents",
+        "componentTags[0]": {
+            "short_name": "gtag[0]",
+            "long_name": "componentTags[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "componentTags",
+            "num_children": 2,
+            "children": [
+                "componentTags[0].componentTagName",
+                "componentTags[0].componentTagContents"
+            ]
+        },
+        "componentTags[0].componentTagContents": {
+            "short_name": "gtag[0].gtagcmp",
+            "long_name": "componentTags[0].componentTagContents",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "componentTags[-1]",
+            "parent_plug": "componentTags[0]",
             "typed_type": 13
         },
-        "componentTags[-1].componentTagName": {
-            "short_name": "gtag[-1].gtagnm",
-            "long_name": "componentTags[-1].componentTagName",
+        "componentTags[0].componentTagName": {
+            "short_name": "gtag[0].gtagnm",
+            "long_name": "componentTags[0].componentTagName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "componentTags[-1]",
+            "parent_plug": "componentTags[0]",
             "typed_type": 4
         },
         "containerType": {
@@ -23294,36 +24827,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Double",
             "num_elements": 0
         },
-        "controlPoints[-1].xValue": {
-            "short_name": "cp[-1].xv",
-            "long_name": "controlPoints[-1].xValue",
+        "controlPoints[0]": {
+            "short_name": "cp[0]",
+            "long_name": "controlPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "controlPoints",
+            "num_children": 3,
+            "children": [
+                "controlPoints[0].xValue",
+                "controlPoints[0].yValue",
+                "controlPoints[0].zValue"
+            ]
+        },
+        "controlPoints[0].xValue": {
+            "short_name": "cp[0].xv",
+            "long_name": "controlPoints[0].xValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "controlPoints[-1].yValue": {
-            "short_name": "cp[-1].yv",
-            "long_name": "controlPoints[-1].yValue",
+        "controlPoints[0].yValue": {
+            "short_name": "cp[0].yv",
+            "long_name": "controlPoints[0].yValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "controlPoints[-1].zValue": {
-            "short_name": "cp[-1].zv",
-            "long_name": "controlPoints[-1].zValue",
+        "controlPoints[0].zValue": {
+            "short_name": "cp[0].zv",
+            "long_name": "controlPoints[0].zValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "controlPoints[-1]",
+            "parent_plug": "controlPoints[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -24180,6 +25728,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "instMaterialAssign[0]": {
+            "short_name": "imtla[0]",
+            "long_name": "instMaterialAssign[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "instMaterialAssign"
+        },
         "instObjGroups": {
             "short_name": "iog",
             "long_name": "instObjGroups",
@@ -24189,46 +25746,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -24272,6 +25857,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -24844,6 +26442,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -24854,6 +26462,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
+            "typed_type": 5
+        },
         "patchUVIds": {
             "short_name": "pu",
             "long_name": "patchUVIds",
@@ -24862,6 +26480,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 0
+        },
+        "patchUVIds[0]": {
+            "short_name": "pu[0]",
+            "long_name": "patchUVIds[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "patchUVIds",
             "typed_type": 0
         },
         "pickTexture": {
@@ -24893,36 +26521,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "receiveShadows": {
@@ -24980,38 +26623,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -25275,6 +26933,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 0
         },
+        "trimFace[0]": {
+            "short_name": "tf[0]",
+            "long_name": "trimFace[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "trimFace",
+            "typed_type": 0
+        },
         "tweak": {
             "short_name": "tw",
             "long_name": "tweak",
@@ -25432,56 +27100,85 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "uvSet[-1].uvSetName": {
-            "short_name": "uvst[-1].uvsn",
-            "long_name": "uvSet[-1].uvSetName",
+        "uvSet[0]": {
+            "short_name": "uvst[0]",
+            "long_name": "uvSet[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "uvSet",
+            "num_children": 3,
+            "children": [
+                "uvSet[0].uvSetName",
+                "uvSet[0].uvSetPoints",
+                "uvSet[0].uvSetTweakLocation"
+            ]
+        },
+        "uvSet[0].uvSetName": {
+            "short_name": "uvst[0].uvsn",
+            "long_name": "uvSet[0].uvSetName",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "typed_type": 4
         },
-        "uvSet[-1].uvSetPoints": {
-            "short_name": "uvst[-1].uvsp",
-            "long_name": "uvSet[-1].uvSetPoints",
+        "uvSet[0].uvSetPoints": {
+            "short_name": "uvst[0].uvsp",
+            "long_name": "uvSet[0].uvSetPoints",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kAttribute2Float",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "num_elements": 0
         },
-        "uvSet[-1].uvSetPoints[-1].uvSetPointsU": {
-            "short_name": "uvst[-1].uvsp[-1].uvpu",
-            "long_name": "uvSet[-1].uvSetPoints[-1].uvSetPointsU",
+        "uvSet[0].uvSetPoints[0]": {
+            "short_name": "uvst[0].uvsp[0]",
+            "long_name": "uvSet[0].uvSetPoints[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "uvSet[0].uvSetPoints",
+            "num_children": 2,
+            "children": [
+                "uvSet[-1].uvSetPoints[0].uvSetPointsU",
+                "uvSet[-1].uvSetPoints[0].uvSetPointsV"
+            ]
+        },
+        "uvSet[0].uvSetPoints[0].uvSetPointsU": {
+            "short_name": "uvst[0].uvsp[0].uvpu",
+            "long_name": "uvSet[0].uvSetPoints[0].uvSetPointsU",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
+            "parent_plug": "uvSet[0].uvSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvSet[-1].uvSetPoints[-1].uvSetPointsV": {
-            "short_name": "uvst[-1].uvsp[-1].uvpv",
-            "long_name": "uvSet[-1].uvSetPoints[-1].uvSetPointsV",
+        "uvSet[0].uvSetPoints[0].uvSetPointsV": {
+            "short_name": "uvst[0].uvsp[0].uvpv",
+            "long_name": "uvSet[0].uvSetPoints[0].uvSetPointsV",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "uvSet[-1].uvSetPoints[-1]",
+            "parent_plug": "uvSet[0].uvSetPoints[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "uvSet[-1].uvSetTweakLocation": {
-            "short_name": "uvst[-1].uvtw",
-            "long_name": "uvSet[-1].uvSetTweakLocation",
+        "uvSet[0].uvSetTweakLocation": {
+            "short_name": "uvst[0].uvtw",
+            "long_name": "uvSet[0].uvSetTweakLocation",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "uvSet[-1]",
+            "parent_plug": "uvSet[0]",
             "typed_type": 24
         },
         "vDivisionsFactor": {
@@ -25596,6 +27293,17 @@ ATTRIBUTES_PROPERTIES = {
             "numeric_type": 14,
             "default_value": 1.0
         },
+        "weights[0]": {
+            "short_name": "wt[0]",
+            "long_name": "weights[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "weights",
+            "numeric_type": 14,
+            "default_value": 1.0
+        },
         "wireColorB": {
             "short_name": "wfcb",
             "long_name": "wireColorB",
@@ -25653,6 +27361,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -25663,6 +27381,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
+            "typed_type": 5
+        },
         "worldSpace": {
             "short_name": "ws",
             "long_name": "worldSpace",
@@ -25671,6 +27399,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 17
+        },
+        "worldSpace[0]": {
+            "short_name": "ws[0]",
+            "long_name": "worldSpace[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldSpace",
             "typed_type": 17
         }
     },
@@ -25793,45 +27531,61 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "target[-1].enableTarget": {
-            "short_name": "tgt[-1].umt",
-            "long_name": "target[-1].enableTarget",
+        "target[0]": {
+            "short_name": "tgt[0]",
+            "long_name": "target[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "target",
+            "num_children": 4,
+            "children": [
+                "target[0].enableTarget",
+                "target[0].weight",
+                "target[0].targetMatrix",
+                "target[0].offsetMatrix"
+            ]
+        },
+        "target[0].enableTarget": {
+            "short_name": "tgt[0].umt",
+            "long_name": "target[0].enableTarget",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "target[-1].offsetMatrix": {
-            "short_name": "tgt[-1].ofm",
-            "long_name": "target[-1].offsetMatrix",
+        "target[0].offsetMatrix": {
+            "short_name": "tgt[0].ofm",
+            "long_name": "target[0].offsetMatrix",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMatrixAttribute",
-            "parent_plug": "target[-1]"
+            "parent_plug": "target[0]"
         },
-        "target[-1].targetMatrix": {
-            "short_name": "tgt[-1].tmat",
-            "long_name": "target[-1].targetMatrix",
+        "target[0].targetMatrix": {
+            "short_name": "tgt[0].tmat",
+            "long_name": "target[0].targetMatrix",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMatrixAttribute",
-            "parent_plug": "target[-1]"
+            "parent_plug": "target[0]"
         },
-        "target[-1].weight": {
-            "short_name": "tgt[-1].wgt",
-            "long_name": "target[-1].weight",
+        "target[0].weight": {
+            "short_name": "tgt[0].wgt",
+            "long_name": "target[0].weight",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "target[-1]",
+            "parent_plug": "target[0]",
             "numeric_type": 14,
             "default_value": 1.0,
             "min_value": 0.0,
@@ -26002,6 +27756,17 @@ ATTRIBUTES_PROPERTIES = {
             "numeric_type": 11,
             "default_value": 0.0
         },
+        "input1D[0]": {
+            "short_name": "i1[0]",
+            "long_name": "input1D[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "input1D",
+            "numeric_type": 11,
+            "default_value": 0.0
+        },
         "input2D": {
             "short_name": "i2",
             "long_name": "input2D",
@@ -26011,25 +27776,39 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute2Float",
             "num_elements": 0
         },
-        "input2D[-1].input2Dx": {
-            "short_name": "i2[-1].i2x",
-            "long_name": "input2D[-1].input2Dx",
+        "input2D[0]": {
+            "short_name": "i2[0]",
+            "long_name": "input2D[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Float",
+            "parent_plug": "input2D",
+            "num_children": 2,
+            "children": [
+                "input2D[0].input2Dx",
+                "input2D[0].input2Dy"
+            ]
+        },
+        "input2D[0].input2Dx": {
+            "short_name": "i2[0].i2x",
+            "long_name": "input2D[0].input2Dx",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "input2D[-1]",
+            "parent_plug": "input2D[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "input2D[-1].input2Dy": {
-            "short_name": "i2[-1].i2y",
-            "long_name": "input2D[-1].input2Dy",
+        "input2D[0].input2Dy": {
+            "short_name": "i2[0].i2y",
+            "long_name": "input2D[0].input2Dy",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "input2D[-1]",
+            "parent_plug": "input2D[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -26042,36 +27821,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Float",
             "num_elements": 0
         },
-        "input3D[-1].input3Dx": {
-            "short_name": "i3[-1].i3x",
-            "long_name": "input3D[-1].input3Dx",
+        "input3D[0]": {
+            "short_name": "i3[0]",
+            "long_name": "input3D[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Float",
+            "parent_plug": "input3D",
+            "num_children": 3,
+            "children": [
+                "input3D[0].input3Dx",
+                "input3D[0].input3Dy",
+                "input3D[0].input3Dz"
+            ]
+        },
+        "input3D[0].input3Dx": {
+            "short_name": "i3[0].i3x",
+            "long_name": "input3D[0].input3Dx",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "input3D[-1]",
+            "parent_plug": "input3D[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "input3D[-1].input3Dy": {
-            "short_name": "i3[-1].i3y",
-            "long_name": "input3D[-1].input3Dy",
+        "input3D[0].input3Dy": {
+            "short_name": "i3[0].i3y",
+            "long_name": "input3D[0].input3Dy",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "input3D[-1]",
+            "parent_plug": "input3D[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "input3D[-1].input3Dz": {
-            "short_name": "i3[-1].i3z",
-            "long_name": "input3D[-1].input3Dz",
+        "input3D[0].input3Dz": {
+            "short_name": "i3[0].i3z",
+            "long_name": "input3D[0].input3Dz",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "input3D[-1]",
+            "parent_plug": "input3D[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -27141,6 +28935,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMessageAttribute",
             "num_elements": 0
         },
+        "aiFilters[0]": {
+            "short_name": "ai_filters[0]",
+            "long_name": "aiFilters[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "aiFilters"
+        },
         "aiIndirect": {
             "short_name": "ai_indirect",
             "long_name": "aiIndirect",
@@ -27315,6 +29118,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "boundingBox": {
             "short_name": "bb",
@@ -28264,46 +30076,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intensity": {
@@ -28357,6 +30197,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -29024,6 +30877,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -29032,6 +30895,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "pointCamera": {
@@ -29158,36 +31031,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "rayDepth": {
@@ -29266,38 +31154,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -29785,6 +31688,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -29793,6 +31706,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "writeDmap": {
@@ -30155,14 +32078,28 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "colorEntryList[-1].color": {
-            "short_name": "cel[-1].ec",
-            "long_name": "colorEntryList[-1].color",
+        "colorEntryList[0]": {
+            "short_name": "cel[0]",
+            "long_name": "colorEntryList[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "colorEntryList",
+            "num_children": 2,
+            "children": [
+                "colorEntryList[0].position",
+                "colorEntryList[0].color"
+            ]
+        },
+        "colorEntryList[0].color": {
+            "short_name": "cel[0].ec",
+            "long_name": "colorEntryList[0].color",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "colorEntryList[-1]",
+            "parent_plug": "colorEntryList[0]",
             "num_children": 3,
             "children": [
                 "colorEntryList[-1].colorR",
@@ -30170,53 +32107,53 @@ ATTRIBUTES_PROPERTIES = {
                 "colorEntryList[-1].colorB"
             ]
         },
-        "colorEntryList[-1].colorB": {
-            "short_name": "cel[-1].ecb",
-            "long_name": "colorEntryList[-1].colorB",
+        "colorEntryList[0].colorB": {
+            "short_name": "cel[0].ecb",
+            "long_name": "colorEntryList[0].colorB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorEntryList[-1].color",
+            "parent_plug": "colorEntryList[0].color",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "colorEntryList[-1].colorG": {
-            "short_name": "cel[-1].ecg",
-            "long_name": "colorEntryList[-1].colorG",
+        "colorEntryList[0].colorG": {
+            "short_name": "cel[0].ecg",
+            "long_name": "colorEntryList[0].colorG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorEntryList[-1].color",
+            "parent_plug": "colorEntryList[0].color",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "colorEntryList[-1].colorR": {
-            "short_name": "cel[-1].ecr",
-            "long_name": "colorEntryList[-1].colorR",
+        "colorEntryList[0].colorR": {
+            "short_name": "cel[0].ecr",
+            "long_name": "colorEntryList[0].colorR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorEntryList[-1].color",
+            "parent_plug": "colorEntryList[0].color",
             "numeric_type": 11,
             "default_value": 1.0,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "colorEntryList[-1].position": {
-            "short_name": "cel[-1].ep",
-            "long_name": "colorEntryList[-1].position",
+        "colorEntryList[0].position": {
+            "short_name": "cel[0].ep",
+            "long_name": "colorEntryList[0].position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "colorEntryList[-1]",
+            "parent_plug": "colorEntryList[0]",
             "numeric_type": 11,
             "default_value": 0.0,
             "min_value": 0.0,
@@ -30742,25 +32679,40 @@ ATTRIBUTES_PROPERTIES = {
                 1
             ]
         },
-        "blue[-1].blue_FloatValue": {
-            "short_name": "b[-1].bfv",
-            "long_name": "blue[-1].blue_FloatValue",
+        "blue[0]": {
+            "short_name": "b[0]",
+            "long_name": "blue[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "blue",
+            "num_children": 3,
+            "children": [
+                "blue[0].blue_Position",
+                "blue[0].blue_FloatValue",
+                "blue[0].blue_Interp"
+            ]
+        },
+        "blue[0].blue_FloatValue": {
+            "short_name": "b[0].bfv",
+            "long_name": "blue[0].blue_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "blue[-1]",
+            "parent_plug": "blue[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "blue[-1].blue_Interp": {
-            "short_name": "b[-1].bi",
-            "long_name": "blue[-1].blue_Interp",
+        "blue[0].blue_Interp": {
+            "short_name": "b[0].bi",
+            "long_name": "blue[0].blue_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "blue[-1]",
+            "parent_plug": "blue[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -30768,14 +32720,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "blue[-1].blue_Position": {
-            "short_name": "b[-1].bp",
-            "long_name": "blue[-1].blue_Position",
+        "blue[0].blue_Position": {
+            "short_name": "b[0].bp",
+            "long_name": "blue[0].blue_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "blue[-1]",
+            "parent_plug": "blue[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -30862,25 +32814,40 @@ ATTRIBUTES_PROPERTIES = {
                 1
             ]
         },
-        "green[-1].green_FloatValue": {
-            "short_name": "g[-1].gfv",
-            "long_name": "green[-1].green_FloatValue",
+        "green[0]": {
+            "short_name": "g[0]",
+            "long_name": "green[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "green",
+            "num_children": 3,
+            "children": [
+                "green[0].green_Position",
+                "green[0].green_FloatValue",
+                "green[0].green_Interp"
+            ]
+        },
+        "green[0].green_FloatValue": {
+            "short_name": "g[0].gfv",
+            "long_name": "green[0].green_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "green[-1]",
+            "parent_plug": "green[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "green[-1].green_Interp": {
-            "short_name": "g[-1].gi",
-            "long_name": "green[-1].green_Interp",
+        "green[0].green_Interp": {
+            "short_name": "g[0].gi",
+            "long_name": "green[0].green_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "green[-1]",
+            "parent_plug": "green[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -30888,14 +32855,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "green[-1].green_Position": {
-            "short_name": "g[-1].gp",
-            "long_name": "green[-1].green_Position",
+        "green[0].green_Position": {
+            "short_name": "g[0].gp",
+            "long_name": "green[0].green_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "green[-1]",
+            "parent_plug": "green[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31018,25 +32985,40 @@ ATTRIBUTES_PROPERTIES = {
                 1
             ]
         },
-        "red[-1].red_FloatValue": {
-            "short_name": "r[-1].rfv",
-            "long_name": "red[-1].red_FloatValue",
+        "red[0]": {
+            "short_name": "r[0]",
+            "long_name": "red[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "red",
+            "num_children": 3,
+            "children": [
+                "red[0].red_Position",
+                "red[0].red_FloatValue",
+                "red[0].red_Interp"
+            ]
+        },
+        "red[0].red_FloatValue": {
+            "short_name": "r[0].rfv",
+            "long_name": "red[0].red_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "red[-1]",
+            "parent_plug": "red[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "red[-1].red_Interp": {
-            "short_name": "r[-1].ri",
-            "long_name": "red[-1].red_Interp",
+        "red[0].red_Interp": {
+            "short_name": "r[0].ri",
+            "long_name": "red[0].red_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "red[-1]",
+            "parent_plug": "red[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -31044,14 +33026,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "red[-1].red_Position": {
-            "short_name": "r[-1].rp",
-            "long_name": "red[-1].red_Position",
+        "red[0].red_Position": {
+            "short_name": "r[0].rp",
+            "long_name": "red[0].red_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "red[-1]",
+            "parent_plug": "red[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31104,14 +33086,29 @@ ATTRIBUTES_PROPERTIES = {
                 1
             ]
         },
-        "color[-1].color_Color": {
-            "short_name": "cl[-1].clc",
-            "long_name": "color[-1].color_Color",
+        "color[0]": {
+            "short_name": "cl[0]",
+            "long_name": "color[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "color",
+            "num_children": 3,
+            "children": [
+                "color[0].color_Position",
+                "color[0].color_Color",
+                "color[0].color_Interp"
+            ]
+        },
+        "color[0].color_Color": {
+            "short_name": "cl[0].clc",
+            "long_name": "color[0].color_Color",
             "is_element": False,
             "is_array": False,
             "is_compound": True,
             "type_str": "kAttribute3Float",
-            "parent_plug": "color[-1]",
+            "parent_plug": "color[0]",
             "num_children": 3,
             "children": [
                 "color[-1].color_ColorR",
@@ -31119,47 +33116,47 @@ ATTRIBUTES_PROPERTIES = {
                 "color[-1].color_ColorB"
             ]
         },
-        "color[-1].color_ColorB": {
-            "short_name": "cl[-1].clcb",
-            "long_name": "color[-1].color_ColorB",
+        "color[0].color_ColorB": {
+            "short_name": "cl[0].clcb",
+            "long_name": "color[0].color_ColorB",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "color[-1].color_Color",
+            "parent_plug": "color[0].color_Color",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "color[-1].color_ColorG": {
-            "short_name": "cl[-1].clcg",
-            "long_name": "color[-1].color_ColorG",
+        "color[0].color_ColorG": {
+            "short_name": "cl[0].clcg",
+            "long_name": "color[0].color_ColorG",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "color[-1].color_Color",
+            "parent_plug": "color[0].color_Color",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "color[-1].color_ColorR": {
-            "short_name": "cl[-1].clcr",
-            "long_name": "color[-1].color_ColorR",
+        "color[0].color_ColorR": {
+            "short_name": "cl[0].clcr",
+            "long_name": "color[0].color_ColorR",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "color[-1].color_Color",
+            "parent_plug": "color[0].color_Color",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "color[-1].color_Interp": {
-            "short_name": "cl[-1].cli",
-            "long_name": "color[-1].color_Interp",
+        "color[0].color_Interp": {
+            "short_name": "cl[0].cli",
+            "long_name": "color[0].color_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "color[-1]",
+            "parent_plug": "color[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -31167,14 +33164,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "color[-1].color_Position": {
-            "short_name": "cl[-1].clp",
-            "long_name": "color[-1].color_Position",
+        "color[0].color_Position": {
+            "short_name": "cl[0].clp",
+            "long_name": "color[0].color_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "color[-1]",
+            "parent_plug": "color[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
@@ -31329,25 +33326,40 @@ ATTRIBUTES_PROPERTIES = {
                 1
             ]
         },
-        "value[-1].value_FloatValue": {
-            "short_name": "vl[-1].vlfv",
-            "long_name": "value[-1].value_FloatValue",
+        "value[0]": {
+            "short_name": "vl[0]",
+            "long_name": "value[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "value",
+            "num_children": 3,
+            "children": [
+                "value[0].value_Position",
+                "value[0].value_FloatValue",
+                "value[0].value_Interp"
+            ]
+        },
+        "value[0].value_FloatValue": {
+            "short_name": "vl[0].vlfv",
+            "long_name": "value[0].value_FloatValue",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "value[-1]",
+            "parent_plug": "value[0]",
             "numeric_type": 11,
             "default_value": 0.0
         },
-        "value[-1].value_Interp": {
-            "short_name": "vl[-1].vli",
-            "long_name": "value[-1].value_Interp",
+        "value[0].value_Interp": {
+            "short_name": "vl[0].vli",
+            "long_name": "value[0].value_Interp",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kEnumAttribute",
-            "parent_plug": "value[-1]",
+            "parent_plug": "value[0]",
             "enum_fields": {
                 "0": "None",
                 "1": "Linear",
@@ -31355,14 +33367,14 @@ ATTRIBUTES_PROPERTIES = {
             },
             "default_value": 0
         },
-        "value[-1].value_Position": {
-            "short_name": "vl[-1].vlp",
-            "long_name": "value[-1].value_Position",
+        "value[0].value_Position": {
+            "short_name": "vl[0].vlp",
+            "long_name": "value[0].value_Position",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "value[-1]",
+            "parent_plug": "value[0]",
             "numeric_type": 11,
             "default_value": 0.0
         }
@@ -31453,6 +33465,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "aiFilters[0]": {
+            "short_name": "ai_filters[0]",
+            "long_name": "aiFilters[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "aiFilters"
         },
         "aiIndirect": {
             "short_name": "ai_indirect",
@@ -31652,6 +33673,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "bottomBarnDoor": {
             "short_name": "bbd",
@@ -32619,46 +34649,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intensity": {
@@ -32712,6 +34770,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -33389,6 +35460,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -33397,6 +35478,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "penumbraAngle": {
@@ -33543,36 +35634,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "rayDepth": {
@@ -33698,38 +35804,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -34249,6 +36370,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -34257,6 +36388,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "writeDmap": {
@@ -34302,6 +36443,15 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kMessageAttribute",
             "num_elements": 0
+        },
+        "borderConnections[0]": {
+            "short_name": "boc[0]",
+            "long_name": "borderConnections[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMessageAttribute",
+            "parent_plug": "borderConnections"
         },
         "boundingBox": {
             "short_name": "bb",
@@ -34999,46 +37149,74 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups": {
-            "short_name": "iog[-1].og",
-            "long_name": "instObjGroups[-1].objectGroups",
+        "instObjGroups[0]": {
+            "short_name": "iog[0]",
+            "long_name": "instObjGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups",
+            "num_children": 1,
+            "children": [
+                "instObjGroups[0].objectGroups"
+            ]
+        },
+        "instObjGroups[0].objectGroups": {
+            "short_name": "iog[0].og",
+            "long_name": "instObjGroups[0].objectGroups",
             "is_element": False,
             "is_array": True,
             "is_compound": True,
             "type_str": "kCompoundAttribute",
-            "parent_plug": "instObjGroups[-1]",
+            "parent_plug": "instObjGroups[0]",
             "num_elements": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGroupId": {
-            "short_name": "iog[-1].og[-1].gid",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGroupId",
+        "instObjGroups[0].objectGroups[0]": {
+            "short_name": "iog[0].og[0]",
+            "long_name": "instObjGroups[0].objectGroups[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "instObjGroups[0].objectGroups",
+            "num_children": 3,
+            "children": [
+                "instObjGroups[-1].objectGroups[0].objectGrpCompList",
+                "instObjGroups[-1].objectGroups[0].objectGroupId",
+                "instObjGroups[-1].objectGroups[0].objectGrpColor"
+            ]
+        },
+        "instObjGroups[0].objectGroups[0].objectGroupId": {
+            "short_name": "iog[0].og[0].gid",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGroupId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 7,
             "default_value": 0
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpColor": {
-            "short_name": "iog[-1].og[-1].gco",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
+        "instObjGroups[0].objectGroups[0].objectGrpColor": {
+            "short_name": "iog[0].og[0].gco",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "numeric_type": 4,
             "default_value": -1
         },
-        "instObjGroups[-1].objectGroups[-1].objectGrpCompList": {
-            "short_name": "iog[-1].og[-1].gcl",
-            "long_name": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
+        "instObjGroups[0].objectGroups[0].objectGrpCompList": {
+            "short_name": "iog[0].og[0].gcl",
+            "long_name": "instObjGroups[0].objectGroups[0].objectGrpCompList",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "instObjGroups[-1].objectGroups[-1]",
+            "parent_plug": "instObjGroups[0].objectGroups[0]",
             "typed_type": 13
         },
         "intermediateObject": {
@@ -35082,6 +37260,19 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kNumericAttribute",
             "num_elements": 0,
+            "numeric_type": 1,
+            "default_value": False,
+            "min_value": 0.0,
+            "max_value": 1.0
+        },
+        "isHierarchicalConnection[0]": {
+            "short_name": "ish[0]",
+            "long_name": "isHierarchicalConnection[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kNumericAttribute",
+            "parent_plug": "isHierarchicalConnection",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
@@ -36057,6 +38248,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "parentInverseMatrix[0]": {
+            "short_name": "pim[0]",
+            "long_name": "parentInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentInverseMatrix",
+            "typed_type": 5
+        },
         "parentMatrix": {
             "short_name": "pm",
             "long_name": "parentMatrix",
@@ -36065,6 +38266,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "parentMatrix[0]": {
+            "short_name": "pm[0]",
+            "long_name": "parentMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "parentMatrix",
             "typed_type": 5
         },
         "publishedNodeInfo": {
@@ -36076,36 +38287,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "publishedNodeInfo[-1].isHierarchicalNode": {
-            "short_name": "pni[-1].ihn",
-            "long_name": "publishedNodeInfo[-1].isHierarchicalNode",
+        "publishedNodeInfo[0]": {
+            "short_name": "pni[0]",
+            "long_name": "publishedNodeInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "publishedNodeInfo",
+            "num_children": 3,
+            "children": [
+                "publishedNodeInfo[0].publishedNode",
+                "publishedNodeInfo[0].isHierarchicalNode",
+                "publishedNodeInfo[0].publishedNodeType"
+            ]
+        },
+        "publishedNodeInfo[0].isHierarchicalNode": {
+            "short_name": "pni[0].ihn",
+            "long_name": "publishedNodeInfo[0].isHierarchicalNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "numeric_type": 1,
             "default_value": False,
             "min_value": 0.0,
             "max_value": 1.0
         },
-        "publishedNodeInfo[-1].publishedNode": {
-            "short_name": "pni[-1].pnod",
-            "long_name": "publishedNodeInfo[-1].publishedNode",
+        "publishedNodeInfo[0].publishedNode": {
+            "short_name": "pni[0].pnod",
+            "long_name": "publishedNodeInfo[0].publishedNode",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kMessageAttribute",
-            "parent_plug": "publishedNodeInfo[-1]"
+            "parent_plug": "publishedNodeInfo[0]"
         },
-        "publishedNodeInfo[-1].publishedNodeType": {
-            "short_name": "pni[-1].pntp",
-            "long_name": "publishedNodeInfo[-1].publishedNodeType",
+        "publishedNodeInfo[0].publishedNodeType": {
+            "short_name": "pni[0].pntp",
+            "long_name": "publishedNodeInfo[0].publishedNodeType",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kTypedAttribute",
-            "parent_plug": "publishedNodeInfo[-1]",
+            "parent_plug": "publishedNodeInfo[0]",
             "typed_type": 4
         },
         "renderInfo": {
@@ -36131,38 +38357,53 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kCompoundAttribute",
             "num_elements": 0
         },
-        "renderLayerInfo[-1].renderLayerColor": {
-            "short_name": "rlio[-1].rlc",
-            "long_name": "renderLayerInfo[-1].renderLayerColor",
+        "renderLayerInfo[0]": {
+            "short_name": "rlio[0]",
+            "long_name": "renderLayerInfo[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kCompoundAttribute",
+            "parent_plug": "renderLayerInfo",
+            "num_children": 3,
+            "children": [
+                "renderLayerInfo[0].renderLayerId",
+                "renderLayerInfo[0].renderLayerRenderable",
+                "renderLayerInfo[0].renderLayerColor"
+            ]
+        },
+        "renderLayerInfo[0].renderLayerColor": {
+            "short_name": "rlio[0].rlc",
+            "long_name": "renderLayerInfo[0].renderLayerColor",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 2,
             "default_value": 0,
             "min_value": 0.0,
             "max_value": 31.0
         },
-        "renderLayerInfo[-1].renderLayerId": {
-            "short_name": "rlio[-1].rli",
-            "long_name": "renderLayerInfo[-1].renderLayerId",
+        "renderLayerInfo[0].renderLayerId": {
+            "short_name": "rlio[0].rli",
+            "long_name": "renderLayerInfo[0].renderLayerId",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 4,
             "default_value": 0
         },
-        "renderLayerInfo[-1].renderLayerRenderable": {
-            "short_name": "rlio[-1].rlr",
-            "long_name": "renderLayerInfo[-1].renderLayerRenderable",
+        "renderLayerInfo[0].renderLayerRenderable": {
+            "short_name": "rlio[0].rlr",
+            "long_name": "renderLayerInfo[0].renderLayerRenderable",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "renderLayerInfo[-1]",
+            "parent_plug": "renderLayerInfo[0]",
             "numeric_type": 1,
             "default_value": True,
             "min_value": 0.0,
@@ -36964,6 +39205,16 @@ ATTRIBUTES_PROPERTIES = {
             "num_elements": 0,
             "typed_type": 5
         },
+        "worldInverseMatrix[0]": {
+            "short_name": "wim[0]",
+            "long_name": "worldInverseMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldInverseMatrix",
+            "typed_type": 5
+        },
         "worldMatrix": {
             "short_name": "wm",
             "long_name": "worldMatrix",
@@ -36972,6 +39223,16 @@ ATTRIBUTES_PROPERTIES = {
             "is_compound": False,
             "type_str": "kTypedAttribute",
             "num_elements": 0,
+            "typed_type": 5
+        },
+        "worldMatrix[0]": {
+            "short_name": "wm[0]",
+            "long_name": "worldMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kTypedAttribute",
+            "parent_plug": "worldMatrix",
             "typed_type": 5
         },
         "xformMatrix": {
@@ -37023,25 +39284,39 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute2Double",
             "num_elements": 0
         },
-        "coordinate[-1].coordinateU": {
-            "short_name": "coord[-1].cu",
-            "long_name": "coordinate[-1].coordinateU",
+        "coordinate[0]": {
+            "short_name": "coord[0]",
+            "long_name": "coordinate[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute2Double",
+            "parent_plug": "coordinate",
+            "num_children": 2,
+            "children": [
+                "coordinate[0].coordinateU",
+                "coordinate[0].coordinateV"
+            ]
+        },
+        "coordinate[0].coordinateU": {
+            "short_name": "coord[0].cu",
+            "long_name": "coordinate[0].coordinateU",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "coordinate[-1]",
+            "parent_plug": "coordinate[0]",
             "numeric_type": 14,
             "default_value": 0.0
         },
-        "coordinate[-1].coordinateV": {
-            "short_name": "coord[-1].cv",
-            "long_name": "coordinate[-1].coordinateV",
+        "coordinate[0].coordinateV": {
+            "short_name": "coord[0].cv",
+            "long_name": "coordinate[0].coordinateV",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kNumericAttribute",
-            "parent_plug": "coordinate[-1]",
+            "parent_plug": "coordinate[0]",
             "numeric_type": 14,
             "default_value": 0.0
         },
@@ -37144,6 +39419,15 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kMatrixAttribute",
             "num_elements": 0
         },
+        "outputMatrix[0]": {
+            "short_name": "omat[0]",
+            "long_name": "outputMatrix[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": False,
+            "type_str": "kMatrixAttribute",
+            "parent_plug": "outputMatrix"
+        },
         "outputTranslate": {
             "short_name": "ot",
             "long_name": "outputTranslate",
@@ -37153,36 +39437,51 @@ ATTRIBUTES_PROPERTIES = {
             "type_str": "kAttribute3Double",
             "num_elements": 0
         },
-        "outputTranslate[-1].outputTranslateX": {
-            "short_name": "ot[-1].otx",
-            "long_name": "outputTranslate[-1].outputTranslateX",
+        "outputTranslate[0]": {
+            "short_name": "ot[0]",
+            "long_name": "outputTranslate[0]",
+            "is_element": True,
+            "is_array": False,
+            "is_compound": True,
+            "type_str": "kAttribute3Double",
+            "parent_plug": "outputTranslate",
+            "num_children": 3,
+            "children": [
+                "outputTranslate[0].outputTranslateX",
+                "outputTranslate[0].outputTranslateY",
+                "outputTranslate[0].outputTranslateZ"
+            ]
+        },
+        "outputTranslate[0].outputTranslateX": {
+            "short_name": "ot[0].otx",
+            "long_name": "outputTranslate[0].outputTranslateX",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "outputTranslate[-1]",
+            "parent_plug": "outputTranslate[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "outputTranslate[-1].outputTranslateY": {
-            "short_name": "ot[-1].oty",
-            "long_name": "outputTranslate[-1].outputTranslateY",
+        "outputTranslate[0].outputTranslateY": {
+            "short_name": "ot[0].oty",
+            "long_name": "outputTranslate[0].outputTranslateY",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "outputTranslate[-1]",
+            "parent_plug": "outputTranslate[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
-        "outputTranslate[-1].outputTranslateZ": {
-            "short_name": "ot[-1].otz",
-            "long_name": "outputTranslate[-1].outputTranslateZ",
+        "outputTranslate[0].outputTranslateZ": {
+            "short_name": "ot[0].otz",
+            "long_name": "outputTranslate[0].outputTranslateZ",
             "is_element": False,
             "is_array": False,
             "is_compound": False,
             "type_str": "kDoubleLinearAttribute",
-            "parent_plug": "outputTranslate[-1]",
+            "parent_plug": "outputTranslate[0]",
             "unit_type": 2,
             "default_value": 0.0
         },
@@ -37291,6 +39590,12 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kMesh": "aiFilters",
         "kPointLight": "aiFilters",
         "kSpotLight": "aiFilters"
+    },
+    "ai_filters[0]": {
+        "kAreaLight": "aiFilters[0]",
+        "kMesh": "aiFilters[0]",
+        "kPointLight": "aiFilters[0]",
+        "kSpotLight": "aiFilters[0]"
     },
     "ai_indirect": {
         "kAreaLight": "aiIndirect",
@@ -37434,6 +39739,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kPointLight": "borderConnections",
         "kSpotLight": "borderConnections",
         "kTransform": "borderConnections"
+    },
+    "boc[0]": {
+        "kAreaLight": "borderConnections[0]",
+        "kCamera": "borderConnections[0]",
+        "kJoint": "borderConnections[0]",
+        "kMesh": "borderConnections[0]",
+        "kNurbsCurve": "borderConnections[0]",
+        "kNurbsSurface": "borderConnections[0]",
+        "kPointLight": "borderConnections[0]",
+        "kSpotLight": "borderConnections[0]",
+        "kTransform": "borderConnections[0]"
     },
     "bb": {
         "kAreaLight": "boundingBox",
@@ -38102,6 +40418,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kSpotLight": "ghostsStep",
         "kTransform": "ghostsStep"
     },
+    "ht": {
+        "kAreaLight": "height"
+    },
     "hio": {
         "kAreaLight": "hiddenInOutliner",
         "kCamera": "hiddenInOutliner",
@@ -38175,49 +40494,71 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kSpotLight": "instObjGroups",
         "kTransform": "instObjGroups"
     },
-    "iog[-1].og": {
-        "kAreaLight": "instObjGroups[-1].objectGroups",
-        "kCamera": "instObjGroups[-1].objectGroups",
-        "kJoint": "instObjGroups[-1].objectGroups",
-        "kMesh": "instObjGroups[-1].objectGroups",
-        "kNurbsCurve": "instObjGroups[-1].objectGroups",
-        "kNurbsSurface": "instObjGroups[-1].objectGroups",
-        "kPointLight": "instObjGroups[-1].objectGroups",
-        "kSpotLight": "instObjGroups[-1].objectGroups",
-        "kTransform": "instObjGroups[-1].objectGroups"
+    "iog[0]": {
+        "kAreaLight": "instObjGroups[0]",
+        "kCamera": "instObjGroups[0]",
+        "kJoint": "instObjGroups[0]",
+        "kMesh": "instObjGroups[0]",
+        "kNurbsCurve": "instObjGroups[0]",
+        "kNurbsSurface": "instObjGroups[0]",
+        "kPointLight": "instObjGroups[0]",
+        "kSpotLight": "instObjGroups[0]",
+        "kTransform": "instObjGroups[0]"
     },
-    "iog[-1].og[-1].gid": {
-        "kAreaLight": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kCamera": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kJoint": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kMesh": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kNurbsCurve": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kNurbsSurface": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kPointLight": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kSpotLight": "instObjGroups[-1].objectGroups[-1].objectGroupId",
-        "kTransform": "instObjGroups[-1].objectGroups[-1].objectGroupId"
+    "iog[0].og": {
+        "kAreaLight": "instObjGroups[0].objectGroups",
+        "kCamera": "instObjGroups[0].objectGroups",
+        "kJoint": "instObjGroups[0].objectGroups",
+        "kMesh": "instObjGroups[0].objectGroups",
+        "kNurbsCurve": "instObjGroups[0].objectGroups",
+        "kNurbsSurface": "instObjGroups[0].objectGroups",
+        "kPointLight": "instObjGroups[0].objectGroups",
+        "kSpotLight": "instObjGroups[0].objectGroups",
+        "kTransform": "instObjGroups[0].objectGroups"
     },
-    "iog[-1].og[-1].gco": {
-        "kAreaLight": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kCamera": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kJoint": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kMesh": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kNurbsCurve": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kNurbsSurface": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kPointLight": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kSpotLight": "instObjGroups[-1].objectGroups[-1].objectGrpColor",
-        "kTransform": "instObjGroups[-1].objectGroups[-1].objectGrpColor"
+    "iog[0].og[0]": {
+        "kAreaLight": "instObjGroups[0].objectGroups[0]",
+        "kCamera": "instObjGroups[0].objectGroups[0]",
+        "kJoint": "instObjGroups[0].objectGroups[0]",
+        "kMesh": "instObjGroups[0].objectGroups[0]",
+        "kNurbsCurve": "instObjGroups[0].objectGroups[0]",
+        "kNurbsSurface": "instObjGroups[0].objectGroups[0]",
+        "kPointLight": "instObjGroups[0].objectGroups[0]",
+        "kSpotLight": "instObjGroups[0].objectGroups[0]",
+        "kTransform": "instObjGroups[0].objectGroups[0]"
     },
-    "iog[-1].og[-1].gcl": {
-        "kAreaLight": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kCamera": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kJoint": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kMesh": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kNurbsCurve": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kNurbsSurface": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kPointLight": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kSpotLight": "instObjGroups[-1].objectGroups[-1].objectGrpCompList",
-        "kTransform": "instObjGroups[-1].objectGroups[-1].objectGrpCompList"
+    "iog[0].og[0].gid": {
+        "kAreaLight": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kCamera": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kJoint": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kMesh": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kNurbsCurve": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kNurbsSurface": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kPointLight": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kSpotLight": "instObjGroups[0].objectGroups[0].objectGroupId",
+        "kTransform": "instObjGroups[0].objectGroups[0].objectGroupId"
+    },
+    "iog[0].og[0].gco": {
+        "kAreaLight": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kCamera": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kJoint": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kMesh": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kNurbsCurve": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kNurbsSurface": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kPointLight": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kSpotLight": "instObjGroups[0].objectGroups[0].objectGrpColor",
+        "kTransform": "instObjGroups[0].objectGroups[0].objectGrpColor"
+    },
+    "iog[0].og[0].gcl": {
+        "kAreaLight": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kCamera": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kJoint": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kMesh": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kNurbsCurve": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kNurbsSurface": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kPointLight": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kSpotLight": "instObjGroups[0].objectGroups[0].objectGrpCompList",
+        "kTransform": "instObjGroups[0].objectGroups[0].objectGrpCompList"
     },
     "in": {
         "kAreaLight": "intensity",
@@ -38269,6 +40610,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kPointLight": "isHierarchicalConnection",
         "kSpotLight": "isHierarchicalConnection",
         "kTransform": "isHierarchicalConnection"
+    },
+    "ish[0]": {
+        "kAreaLight": "isHierarchicalConnection[0]",
+        "kCamera": "isHierarchicalConnection[0]",
+        "kJoint": "isHierarchicalConnection[0]",
+        "kMesh": "isHierarchicalConnection[0]",
+        "kNurbsCurve": "isHierarchicalConnection[0]",
+        "kNurbsSurface": "isHierarchicalConnection[0]",
+        "kPointLight": "isHierarchicalConnection[0]",
+        "kSpotLight": "isHierarchicalConnection[0]",
+        "kTransform": "isHierarchicalConnection[0]"
     },
     "ihi": {
         "kAreaLight": "isHistoricallyInteresting",
@@ -38858,6 +41210,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kSpotLight": "parentInverseMatrix",
         "kTransform": "parentInverseMatrix"
     },
+    "pim[0]": {
+        "kAreaLight": "parentInverseMatrix[0]",
+        "kCamera": "parentInverseMatrix[0]",
+        "kJoint": "parentInverseMatrix[0]",
+        "kMesh": "parentInverseMatrix[0]",
+        "kNurbsCurve": "parentInverseMatrix[0]",
+        "kNurbsSurface": "parentInverseMatrix[0]",
+        "kPointLight": "parentInverseMatrix[0]",
+        "kSpotLight": "parentInverseMatrix[0]",
+        "kTransform": "parentInverseMatrix[0]"
+    },
     "pm": {
         "kAreaLight": "parentMatrix",
         "kCamera": "parentMatrix",
@@ -38868,6 +41231,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kPointLight": "parentMatrix",
         "kSpotLight": "parentMatrix",
         "kTransform": "parentMatrix"
+    },
+    "pm[0]": {
+        "kAreaLight": "parentMatrix[0]",
+        "kCamera": "parentMatrix[0]",
+        "kJoint": "parentMatrix[0]",
+        "kMesh": "parentMatrix[0]",
+        "kNurbsCurve": "parentMatrix[0]",
+        "kNurbsSurface": "parentMatrix[0]",
+        "kPointLight": "parentMatrix[0]",
+        "kSpotLight": "parentMatrix[0]",
+        "kTransform": "parentMatrix[0]"
     },
     "p": {
         "kAreaLight": "pointCamera",
@@ -38954,38 +41328,49 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kSpotLight": "publishedNodeInfo",
         "kTransform": "publishedNodeInfo"
     },
-    "pni[-1].ihn": {
-        "kAreaLight": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kCamera": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kJoint": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kMesh": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kNurbsCurve": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kNurbsSurface": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kPointLight": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kSpotLight": "publishedNodeInfo[-1].isHierarchicalNode",
-        "kTransform": "publishedNodeInfo[-1].isHierarchicalNode"
+    "pni[0]": {
+        "kAreaLight": "publishedNodeInfo[0]",
+        "kCamera": "publishedNodeInfo[0]",
+        "kJoint": "publishedNodeInfo[0]",
+        "kMesh": "publishedNodeInfo[0]",
+        "kNurbsCurve": "publishedNodeInfo[0]",
+        "kNurbsSurface": "publishedNodeInfo[0]",
+        "kPointLight": "publishedNodeInfo[0]",
+        "kSpotLight": "publishedNodeInfo[0]",
+        "kTransform": "publishedNodeInfo[0]"
     },
-    "pni[-1].pnod": {
-        "kAreaLight": "publishedNodeInfo[-1].publishedNode",
-        "kCamera": "publishedNodeInfo[-1].publishedNode",
-        "kJoint": "publishedNodeInfo[-1].publishedNode",
-        "kMesh": "publishedNodeInfo[-1].publishedNode",
-        "kNurbsCurve": "publishedNodeInfo[-1].publishedNode",
-        "kNurbsSurface": "publishedNodeInfo[-1].publishedNode",
-        "kPointLight": "publishedNodeInfo[-1].publishedNode",
-        "kSpotLight": "publishedNodeInfo[-1].publishedNode",
-        "kTransform": "publishedNodeInfo[-1].publishedNode"
+    "pni[0].ihn": {
+        "kAreaLight": "publishedNodeInfo[0].isHierarchicalNode",
+        "kCamera": "publishedNodeInfo[0].isHierarchicalNode",
+        "kJoint": "publishedNodeInfo[0].isHierarchicalNode",
+        "kMesh": "publishedNodeInfo[0].isHierarchicalNode",
+        "kNurbsCurve": "publishedNodeInfo[0].isHierarchicalNode",
+        "kNurbsSurface": "publishedNodeInfo[0].isHierarchicalNode",
+        "kPointLight": "publishedNodeInfo[0].isHierarchicalNode",
+        "kSpotLight": "publishedNodeInfo[0].isHierarchicalNode",
+        "kTransform": "publishedNodeInfo[0].isHierarchicalNode"
     },
-    "pni[-1].pntp": {
-        "kAreaLight": "publishedNodeInfo[-1].publishedNodeType",
-        "kCamera": "publishedNodeInfo[-1].publishedNodeType",
-        "kJoint": "publishedNodeInfo[-1].publishedNodeType",
-        "kMesh": "publishedNodeInfo[-1].publishedNodeType",
-        "kNurbsCurve": "publishedNodeInfo[-1].publishedNodeType",
-        "kNurbsSurface": "publishedNodeInfo[-1].publishedNodeType",
-        "kPointLight": "publishedNodeInfo[-1].publishedNodeType",
-        "kSpotLight": "publishedNodeInfo[-1].publishedNodeType",
-        "kTransform": "publishedNodeInfo[-1].publishedNodeType"
+    "pni[0].pnod": {
+        "kAreaLight": "publishedNodeInfo[0].publishedNode",
+        "kCamera": "publishedNodeInfo[0].publishedNode",
+        "kJoint": "publishedNodeInfo[0].publishedNode",
+        "kMesh": "publishedNodeInfo[0].publishedNode",
+        "kNurbsCurve": "publishedNodeInfo[0].publishedNode",
+        "kNurbsSurface": "publishedNodeInfo[0].publishedNode",
+        "kPointLight": "publishedNodeInfo[0].publishedNode",
+        "kSpotLight": "publishedNodeInfo[0].publishedNode",
+        "kTransform": "publishedNodeInfo[0].publishedNode"
+    },
+    "pni[0].pntp": {
+        "kAreaLight": "publishedNodeInfo[0].publishedNodeType",
+        "kCamera": "publishedNodeInfo[0].publishedNodeType",
+        "kJoint": "publishedNodeInfo[0].publishedNodeType",
+        "kMesh": "publishedNodeInfo[0].publishedNodeType",
+        "kNurbsCurve": "publishedNodeInfo[0].publishedNodeType",
+        "kNurbsSurface": "publishedNodeInfo[0].publishedNodeType",
+        "kPointLight": "publishedNodeInfo[0].publishedNodeType",
+        "kSpotLight": "publishedNodeInfo[0].publishedNodeType",
+        "kTransform": "publishedNodeInfo[0].publishedNodeType"
     },
     "rd": {
         "kAreaLight": "rayDepth",
@@ -39037,38 +41422,49 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kSpotLight": "renderLayerInfo",
         "kTransform": "renderLayerInfo"
     },
-    "rlio[-1].rlc": {
-        "kAreaLight": "renderLayerInfo[-1].renderLayerColor",
-        "kCamera": "renderLayerInfo[-1].renderLayerColor",
-        "kJoint": "renderLayerInfo[-1].renderLayerColor",
-        "kMesh": "renderLayerInfo[-1].renderLayerColor",
-        "kNurbsCurve": "renderLayerInfo[-1].renderLayerColor",
-        "kNurbsSurface": "renderLayerInfo[-1].renderLayerColor",
-        "kPointLight": "renderLayerInfo[-1].renderLayerColor",
-        "kSpotLight": "renderLayerInfo[-1].renderLayerColor",
-        "kTransform": "renderLayerInfo[-1].renderLayerColor"
+    "rlio[0]": {
+        "kAreaLight": "renderLayerInfo[0]",
+        "kCamera": "renderLayerInfo[0]",
+        "kJoint": "renderLayerInfo[0]",
+        "kMesh": "renderLayerInfo[0]",
+        "kNurbsCurve": "renderLayerInfo[0]",
+        "kNurbsSurface": "renderLayerInfo[0]",
+        "kPointLight": "renderLayerInfo[0]",
+        "kSpotLight": "renderLayerInfo[0]",
+        "kTransform": "renderLayerInfo[0]"
     },
-    "rlio[-1].rli": {
-        "kAreaLight": "renderLayerInfo[-1].renderLayerId",
-        "kCamera": "renderLayerInfo[-1].renderLayerId",
-        "kJoint": "renderLayerInfo[-1].renderLayerId",
-        "kMesh": "renderLayerInfo[-1].renderLayerId",
-        "kNurbsCurve": "renderLayerInfo[-1].renderLayerId",
-        "kNurbsSurface": "renderLayerInfo[-1].renderLayerId",
-        "kPointLight": "renderLayerInfo[-1].renderLayerId",
-        "kSpotLight": "renderLayerInfo[-1].renderLayerId",
-        "kTransform": "renderLayerInfo[-1].renderLayerId"
+    "rlio[0].rlc": {
+        "kAreaLight": "renderLayerInfo[0].renderLayerColor",
+        "kCamera": "renderLayerInfo[0].renderLayerColor",
+        "kJoint": "renderLayerInfo[0].renderLayerColor",
+        "kMesh": "renderLayerInfo[0].renderLayerColor",
+        "kNurbsCurve": "renderLayerInfo[0].renderLayerColor",
+        "kNurbsSurface": "renderLayerInfo[0].renderLayerColor",
+        "kPointLight": "renderLayerInfo[0].renderLayerColor",
+        "kSpotLight": "renderLayerInfo[0].renderLayerColor",
+        "kTransform": "renderLayerInfo[0].renderLayerColor"
     },
-    "rlio[-1].rlr": {
-        "kAreaLight": "renderLayerInfo[-1].renderLayerRenderable",
-        "kCamera": "renderLayerInfo[-1].renderLayerRenderable",
-        "kJoint": "renderLayerInfo[-1].renderLayerRenderable",
-        "kMesh": "renderLayerInfo[-1].renderLayerRenderable",
-        "kNurbsCurve": "renderLayerInfo[-1].renderLayerRenderable",
-        "kNurbsSurface": "renderLayerInfo[-1].renderLayerRenderable",
-        "kPointLight": "renderLayerInfo[-1].renderLayerRenderable",
-        "kSpotLight": "renderLayerInfo[-1].renderLayerRenderable",
-        "kTransform": "renderLayerInfo[-1].renderLayerRenderable"
+    "rlio[0].rli": {
+        "kAreaLight": "renderLayerInfo[0].renderLayerId",
+        "kCamera": "renderLayerInfo[0].renderLayerId",
+        "kJoint": "renderLayerInfo[0].renderLayerId",
+        "kMesh": "renderLayerInfo[0].renderLayerId",
+        "kNurbsCurve": "renderLayerInfo[0].renderLayerId",
+        "kNurbsSurface": "renderLayerInfo[0].renderLayerId",
+        "kPointLight": "renderLayerInfo[0].renderLayerId",
+        "kSpotLight": "renderLayerInfo[0].renderLayerId",
+        "kTransform": "renderLayerInfo[0].renderLayerId"
+    },
+    "rlio[0].rlr": {
+        "kAreaLight": "renderLayerInfo[0].renderLayerRenderable",
+        "kCamera": "renderLayerInfo[0].renderLayerRenderable",
+        "kJoint": "renderLayerInfo[0].renderLayerRenderable",
+        "kMesh": "renderLayerInfo[0].renderLayerRenderable",
+        "kNurbsCurve": "renderLayerInfo[0].renderLayerRenderable",
+        "kNurbsSurface": "renderLayerInfo[0].renderLayerRenderable",
+        "kPointLight": "renderLayerInfo[0].renderLayerRenderable",
+        "kSpotLight": "renderLayerInfo[0].renderLayerRenderable",
+        "kTransform": "renderLayerInfo[0].renderLayerRenderable"
     },
     "rdst": {
         "kAreaLight": "renderState",
@@ -39349,6 +41745,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kPointLight": "volumeShadowSamples",
         "kSpotLight": "volumeShadowSamples"
     },
+    "wd": {
+        "kAreaLight": "width"
+    },
     "wfcb": {
         "kAreaLight": "wireColorB",
         "kCamera": "wireColorB",
@@ -39404,6 +41803,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kSpotLight": "worldInverseMatrix",
         "kTransform": "worldInverseMatrix"
     },
+    "wim[0]": {
+        "kAreaLight": "worldInverseMatrix[0]",
+        "kCamera": "worldInverseMatrix[0]",
+        "kJoint": "worldInverseMatrix[0]",
+        "kMesh": "worldInverseMatrix[0]",
+        "kNurbsCurve": "worldInverseMatrix[0]",
+        "kNurbsSurface": "worldInverseMatrix[0]",
+        "kPointLight": "worldInverseMatrix[0]",
+        "kSpotLight": "worldInverseMatrix[0]",
+        "kTransform": "worldInverseMatrix[0]"
+    },
     "wm": {
         "kAreaLight": "worldMatrix",
         "kCamera": "worldMatrix",
@@ -39414,6 +41824,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kPointLight": "worldMatrix",
         "kSpotLight": "worldMatrix",
         "kTransform": "worldMatrix"
+    },
+    "wm[0]": {
+        "kAreaLight": "worldMatrix[0]",
+        "kCamera": "worldMatrix[0]",
+        "kJoint": "worldMatrix[0]",
+        "kMesh": "worldMatrix[0]",
+        "kNurbsCurve": "worldMatrix[0]",
+        "kNurbsSurface": "worldMatrix[0]",
+        "kPointLight": "worldMatrix[0]",
+        "kSpotLight": "worldMatrix[0]",
+        "kTransform": "worldMatrix[0]"
     },
     "ws": {
         "kAreaLight": "writeDmap",
@@ -39510,29 +41931,33 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kBlendMatrix": "target",
         "kParentMatrix": "target"
     },
-    "tgt[-1].rot": {
-        "kBlendMatrix": "target[-1].rotateWeight"
+    "tgt[0]": {
+        "kBlendMatrix": "target[0]",
+        "kParentMatrix": "target[0]"
     },
-    "tgt[-1].sca": {
-        "kBlendMatrix": "target[-1].scaleWeight"
+    "tgt[0].rot": {
+        "kBlendMatrix": "target[0].rotateWeight"
     },
-    "tgt[-1].she": {
-        "kBlendMatrix": "target[-1].shearWeight"
+    "tgt[0].sca": {
+        "kBlendMatrix": "target[0].scaleWeight"
     },
-    "tgt[-1].tmat": {
-        "kBlendMatrix": "target[-1].targetMatrix",
-        "kParentMatrix": "target[-1].targetMatrix"
+    "tgt[0].she": {
+        "kBlendMatrix": "target[0].shearWeight"
     },
-    "tgt[-1].tra": {
-        "kBlendMatrix": "target[-1].translateWeight"
+    "tgt[0].tmat": {
+        "kBlendMatrix": "target[0].targetMatrix",
+        "kParentMatrix": "target[0].targetMatrix"
     },
-    "tgt[-1].umt": {
-        "kBlendMatrix": "target[-1].useMatrix",
-        "kParentMatrix": "target[-1].enableTarget"
+    "tgt[0].tra": {
+        "kBlendMatrix": "target[0].translateWeight"
     },
-    "tgt[-1].wgt": {
-        "kBlendMatrix": "target[-1].weight",
-        "kParentMatrix": "target[-1].weight"
+    "tgt[0].umt": {
+        "kBlendMatrix": "target[0].useMatrix",
+        "kParentMatrix": "target[0].enableTarget"
+    },
+    "tgt[0].wgt": {
+        "kBlendMatrix": "target[0].weight",
+        "kParentMatrix": "target[0].weight"
     },
     "ab": {
         "kBlendTwoAttr": "attributesBlender"
@@ -39544,6 +41969,10 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kMatrixMult": "matrixIn",
         "kRamp": "invert",
         "kRemapValue": "inputValue"
+    },
+    "i[0]": {
+        "kBlendTwoAttr": "input[0]",
+        "kMatrixMult": "matrixIn[0]"
     },
     "o": {
         "kBlendTwoAttr": "output",
@@ -39631,14 +42060,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ai_look_at": {
         "kCamera": "aiLookAt"
     },
-    "ai_look_at[-1].ai_look_atx": {
-        "kCamera": "aiLookAt[-1].aiLookAtX"
+    "ai_look_at[0]": {
+        "kCamera": "aiLookAt[0]"
     },
-    "ai_look_at[-1].ai_look_aty": {
-        "kCamera": "aiLookAt[-1].aiLookAtY"
+    "ai_look_at[0].ai_look_atx": {
+        "kCamera": "aiLookAt[0].aiLookAtX"
     },
-    "ai_look_at[-1].ai_look_atz": {
-        "kCamera": "aiLookAt[-1].aiLookAtZ"
+    "ai_look_at[0].ai_look_aty": {
+        "kCamera": "aiLookAt[0].aiLookAtY"
+    },
+    "ai_look_at[0].ai_look_atz": {
+        "kCamera": "aiLookAt[0].aiLookAtZ"
     },
     "ai_matrix": {
         "kCamera": "aiMatrix"
@@ -39668,14 +42100,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ai_position": {
         "kCamera": "aiPosition"
     },
-    "ai_position[-1].ai_positionx": {
-        "kCamera": "aiPosition[-1].aiPositionX"
+    "ai_position[0]": {
+        "kCamera": "aiPosition[0]"
     },
-    "ai_position[-1].ai_positiony": {
-        "kCamera": "aiPosition[-1].aiPositionY"
+    "ai_position[0].ai_positionx": {
+        "kCamera": "aiPosition[0].aiPositionX"
     },
-    "ai_position[-1].ai_positionz": {
-        "kCamera": "aiPosition[-1].aiPositionZ"
+    "ai_position[0].ai_positiony": {
+        "kCamera": "aiPosition[0].aiPositionY"
+    },
+    "ai_position[0].ai_positionz": {
+        "kCamera": "aiPosition[0].aiPositionZ"
     },
     "ai_post_bake": {
         "kCamera": "aiPostBake"
@@ -39725,29 +42160,38 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ai_screen_window_max": {
         "kCamera": "aiScreenWindowMax"
     },
-    "ai_screen_window_max[-1].ai_screen_window_maxx": {
-        "kCamera": "aiScreenWindowMax[-1].aiScreenWindowMaxX"
+    "ai_screen_window_max[0]": {
+        "kCamera": "aiScreenWindowMax[0]"
     },
-    "ai_screen_window_max[-1].ai_screen_window_maxy": {
-        "kCamera": "aiScreenWindowMax[-1].aiScreenWindowMaxY"
+    "ai_screen_window_max[0].ai_screen_window_maxx": {
+        "kCamera": "aiScreenWindowMax[0].aiScreenWindowMaxX"
+    },
+    "ai_screen_window_max[0].ai_screen_window_maxy": {
+        "kCamera": "aiScreenWindowMax[0].aiScreenWindowMaxY"
     },
     "ai_screen_window_min": {
         "kCamera": "aiScreenWindowMin"
     },
-    "ai_screen_window_min[-1].ai_screen_window_minx": {
-        "kCamera": "aiScreenWindowMin[-1].aiScreenWindowMinX"
+    "ai_screen_window_min[0]": {
+        "kCamera": "aiScreenWindowMin[0]"
     },
-    "ai_screen_window_min[-1].ai_screen_window_miny": {
-        "kCamera": "aiScreenWindowMin[-1].aiScreenWindowMinY"
+    "ai_screen_window_min[0].ai_screen_window_minx": {
+        "kCamera": "aiScreenWindowMin[0].aiScreenWindowMinX"
+    },
+    "ai_screen_window_min[0].ai_screen_window_miny": {
+        "kCamera": "aiScreenWindowMin[0].aiScreenWindowMinY"
     },
     "ai_shutter_curve": {
         "kCamera": "aiShutterCurve"
     },
-    "ai_shutter_curve[-1].ai_shutter_curvex": {
-        "kCamera": "aiShutterCurve[-1].aiShutterCurveX"
+    "ai_shutter_curve[0]": {
+        "kCamera": "aiShutterCurve[0]"
     },
-    "ai_shutter_curve[-1].ai_shutter_curvey": {
-        "kCamera": "aiShutterCurve[-1].aiShutterCurveY"
+    "ai_shutter_curve[0].ai_shutter_curvex": {
+        "kCamera": "aiShutterCurve[0].aiShutterCurveX"
+    },
+    "ai_shutter_curve[0].ai_shutter_curvey": {
+        "kCamera": "aiShutterCurve[0].aiShutterCurveY"
     },
     "ai_shutter_end": {
         "kCamera": "aiShutterEnd"
@@ -39777,14 +42221,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ai_up": {
         "kCamera": "aiUp"
     },
-    "ai_up[-1].ai_upx": {
-        "kCamera": "aiUp[-1].aiUpX"
+    "ai_up[0]": {
+        "kCamera": "aiUp[0]"
     },
-    "ai_up[-1].ai_upy": {
-        "kCamera": "aiUp[-1].aiUpY"
+    "ai_up[0].ai_upx": {
+        "kCamera": "aiUp[0].aiUpX"
     },
-    "ai_up[-1].ai_upz": {
-        "kCamera": "aiUp[-1].aiUpZ"
+    "ai_up[0].ai_upy": {
+        "kCamera": "aiUp[0].aiUpY"
+    },
+    "ai_up[0].ai_upz": {
+        "kCamera": "aiUp[0].aiUpZ"
     },
     "ai_ugs": {
         "kCamera": "aiUseGlobalShutter"
@@ -40389,17 +42836,20 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "euvt": {
         "kFileTexture": "explicitUvTiles"
     },
-    "euvt[-1].eutn": {
-        "kFileTexture": "explicitUvTiles[-1].explicitUvTileName"
+    "euvt[0]": {
+        "kFileTexture": "explicitUvTiles[0]"
     },
-    "euvt[-1].eutp": {
-        "kFileTexture": "explicitUvTiles[-1].explicitUvTilePosition"
+    "euvt[0].eutn": {
+        "kFileTexture": "explicitUvTiles[0].explicitUvTileName"
     },
-    "euvt[-1].eupu": {
-        "kFileTexture": "explicitUvTiles[-1].explicitUvTilePositionU"
+    "euvt[0].eutp": {
+        "kFileTexture": "explicitUvTiles[0].explicitUvTilePosition"
     },
-    "euvt[-1].eupv": {
-        "kFileTexture": "explicitUvTiles[-1].explicitUvTilePositionV"
+    "euvt[0].eupu": {
+        "kFileTexture": "explicitUvTiles[0].explicitUvTilePositionU"
+    },
+    "euvt[0].eupv": {
+        "kFileTexture": "explicitUvTiles[0].explicitUvTilePositionV"
     },
     "exp": {
         "kFileTexture": "exposure"
@@ -41367,47 +43817,50 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "absb": {
         "kLambert": "lightAbsorbance"
     },
-    "ltd[-1].la": {
-        "kLambert": "lightDataArray[-1].lightAmbient"
+    "ltd[0]": {
+        "kLambert": "lightDataArray[0]"
     },
-    "ltd[-1].lbd": {
-        "kLambert": "lightDataArray[-1].lightBlindData"
+    "ltd[0].la": {
+        "kLambert": "lightDataArray[0].lightAmbient"
     },
-    "ltd[-1].ldf": {
-        "kLambert": "lightDataArray[-1].lightDiffuse"
+    "ltd[0].lbd": {
+        "kLambert": "lightDataArray[0].lightBlindData"
     },
-    "ltd[-1].ld": {
-        "kLambert": "lightDataArray[-1].lightDirection"
+    "ltd[0].ldf": {
+        "kLambert": "lightDataArray[0].lightDiffuse"
     },
-    "ltd[-1].ldx": {
-        "kLambert": "lightDataArray[-1].lightDirectionX"
+    "ltd[0].ld": {
+        "kLambert": "lightDataArray[0].lightDirection"
     },
-    "ltd[-1].ldy": {
-        "kLambert": "lightDataArray[-1].lightDirectionY"
+    "ltd[0].ldx": {
+        "kLambert": "lightDataArray[0].lightDirectionX"
     },
-    "ltd[-1].ldz": {
-        "kLambert": "lightDataArray[-1].lightDirectionZ"
+    "ltd[0].ldy": {
+        "kLambert": "lightDataArray[0].lightDirectionY"
     },
-    "ltd[-1].li": {
-        "kLambert": "lightDataArray[-1].lightIntensity"
+    "ltd[0].ldz": {
+        "kLambert": "lightDataArray[0].lightDirectionZ"
     },
-    "ltd[-1].lib": {
-        "kLambert": "lightDataArray[-1].lightIntensityB"
+    "ltd[0].li": {
+        "kLambert": "lightDataArray[0].lightIntensity"
     },
-    "ltd[-1].lig": {
-        "kLambert": "lightDataArray[-1].lightIntensityG"
+    "ltd[0].lib": {
+        "kLambert": "lightDataArray[0].lightIntensityB"
     },
-    "ltd[-1].lir": {
-        "kLambert": "lightDataArray[-1].lightIntensityR"
+    "ltd[0].lig": {
+        "kLambert": "lightDataArray[0].lightIntensityG"
     },
-    "ltd[-1].lsf": {
-        "kLambert": "lightDataArray[-1].lightShadowFraction"
+    "ltd[0].lir": {
+        "kLambert": "lightDataArray[0].lightIntensityR"
     },
-    "ltd[-1].ls": {
-        "kLambert": "lightDataArray[-1].lightSpecular"
+    "ltd[0].lsf": {
+        "kLambert": "lightDataArray[0].lightShadowFraction"
     },
-    "ltd[-1].psi": {
-        "kLambert": "lightDataArray[-1].preShadowIntensity"
+    "ltd[0].ls": {
+        "kLambert": "lightDataArray[0].lightSpecular"
+    },
+    "ltd[0].psi": {
+        "kLambert": "lightDataArray[0].preShadowIntensity"
     },
     "maga": {
         "kLambert": "materialAlphaGain"
@@ -41798,65 +44251,81 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kMesh": "collisionDepthVelocityIncrement",
         "kNurbsSurface": "collisionDepthVelocityIncrement"
     },
-    "cdvi[-1].cdvifv": {
-        "kMesh": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_FloatValue",
-        "kNurbsSurface": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_FloatValue"
+    "cdvi[0]": {
+        "kMesh": "collisionDepthVelocityIncrement[0]",
+        "kNurbsSurface": "collisionDepthVelocityIncrement[0]"
     },
-    "cdvi[-1].cdvii": {
-        "kMesh": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Interp",
-        "kNurbsSurface": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Interp"
+    "cdvi[0].cdvifv": {
+        "kMesh": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue",
+        "kNurbsSurface": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_FloatValue"
     },
-    "cdvi[-1].cdvip": {
-        "kMesh": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Position",
-        "kNurbsSurface": "collisionDepthVelocityIncrement[-1].collisionDepthVelocityIncrement_Position"
+    "cdvi[0].cdvii": {
+        "kMesh": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp",
+        "kNurbsSurface": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Interp"
+    },
+    "cdvi[0].cdvip": {
+        "kMesh": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position",
+        "kNurbsSurface": "collisionDepthVelocityIncrement[0].collisionDepthVelocityIncrement_Position"
     },
     "cdvm": {
         "kMesh": "collisionDepthVelocityMultiplier",
         "kNurbsSurface": "collisionDepthVelocityMultiplier"
     },
-    "cdvm[-1].cdvmfv": {
-        "kMesh": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_FloatValue",
-        "kNurbsSurface": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_FloatValue"
+    "cdvm[0]": {
+        "kMesh": "collisionDepthVelocityMultiplier[0]",
+        "kNurbsSurface": "collisionDepthVelocityMultiplier[0]"
     },
-    "cdvm[-1].cdvmi": {
-        "kMesh": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Interp",
-        "kNurbsSurface": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Interp"
+    "cdvm[0].cdvmfv": {
+        "kMesh": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue",
+        "kNurbsSurface": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_FloatValue"
     },
-    "cdvm[-1].cdvmp": {
-        "kMesh": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Position",
-        "kNurbsSurface": "collisionDepthVelocityMultiplier[-1].collisionDepthVelocityMultiplier_Position"
+    "cdvm[0].cdvmi": {
+        "kMesh": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp",
+        "kNurbsSurface": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Interp"
+    },
+    "cdvm[0].cdvmp": {
+        "kMesh": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position",
+        "kNurbsSurface": "collisionDepthVelocityMultiplier[0].collisionDepthVelocityMultiplier_Position"
     },
     "covi": {
         "kMesh": "collisionOffsetVelocityIncrement",
         "kNurbsSurface": "collisionOffsetVelocityIncrement"
     },
-    "covi[-1].covifv": {
-        "kMesh": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_FloatValue",
-        "kNurbsSurface": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_FloatValue"
+    "covi[0]": {
+        "kMesh": "collisionOffsetVelocityIncrement[0]",
+        "kNurbsSurface": "collisionOffsetVelocityIncrement[0]"
     },
-    "covi[-1].covii": {
-        "kMesh": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Interp",
-        "kNurbsSurface": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Interp"
+    "covi[0].covifv": {
+        "kMesh": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue",
+        "kNurbsSurface": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_FloatValue"
     },
-    "covi[-1].covip": {
-        "kMesh": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Position",
-        "kNurbsSurface": "collisionOffsetVelocityIncrement[-1].collisionOffsetVelocityIncrement_Position"
+    "covi[0].covii": {
+        "kMesh": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp",
+        "kNurbsSurface": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Interp"
+    },
+    "covi[0].covip": {
+        "kMesh": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position",
+        "kNurbsSurface": "collisionOffsetVelocityIncrement[0].collisionOffsetVelocityIncrement_Position"
     },
     "covm": {
         "kMesh": "collisionOffsetVelocityMultiplier",
         "kNurbsSurface": "collisionOffsetVelocityMultiplier"
     },
-    "covm[-1].covmfv": {
-        "kMesh": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_FloatValue",
-        "kNurbsSurface": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_FloatValue"
+    "covm[0]": {
+        "kMesh": "collisionOffsetVelocityMultiplier[0]",
+        "kNurbsSurface": "collisionOffsetVelocityMultiplier[0]"
     },
-    "covm[-1].covmi": {
-        "kMesh": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Interp",
-        "kNurbsSurface": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Interp"
+    "covm[0].covmfv": {
+        "kMesh": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue",
+        "kNurbsSurface": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_FloatValue"
     },
-    "covm[-1].covmp": {
-        "kMesh": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Position",
-        "kNurbsSurface": "collisionOffsetVelocityMultiplier[-1].collisionOffsetVelocityMultiplier_Position"
+    "covm[0].covmi": {
+        "kMesh": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp",
+        "kNurbsSurface": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Interp"
+    },
+    "covm[0].covmp": {
+        "kMesh": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position",
+        "kNurbsSurface": "collisionOffsetVelocityMultiplier[0].collisionOffsetVelocityMultiplier_Position"
     },
     "cpvx": {
         "kMesh": "colorPerVertex"
@@ -41866,113 +44335,146 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kNurbsCurve": "colorSet",
         "kNurbsSurface": "colorSet"
     },
-    "clst[-1].clam": {
-        "kMesh": "colorSet[-1].clamped",
-        "kNurbsCurve": "colorSet[-1].clamped",
-        "kNurbsSurface": "colorSet[-1].clamped"
+    "clst[0]": {
+        "kMesh": "colorSet[0]",
+        "kNurbsCurve": "colorSet[0]",
+        "kNurbsSurface": "colorSet[0]"
     },
-    "clst[-1].clsn": {
-        "kMesh": "colorSet[-1].colorName",
-        "kNurbsCurve": "colorSet[-1].colorName",
-        "kNurbsSurface": "colorSet[-1].colorName"
+    "clst[0].clam": {
+        "kMesh": "colorSet[0].clamped",
+        "kNurbsCurve": "colorSet[0].clamped",
+        "kNurbsSurface": "colorSet[0].clamped"
     },
-    "clst[-1].clsp": {
-        "kMesh": "colorSet[-1].colorSetPoints",
-        "kNurbsCurve": "colorSet[-1].colorSetPoints",
-        "kNurbsSurface": "colorSet[-1].colorSetPoints"
+    "clst[0].clsn": {
+        "kMesh": "colorSet[0].colorName",
+        "kNurbsCurve": "colorSet[0].colorName",
+        "kNurbsSurface": "colorSet[0].colorName"
     },
-    "clst[-1].clsp[-1].clpa": {
-        "kMesh": "colorSet[-1].colorSetPoints[-1].colorSetPointsA",
-        "kNurbsCurve": "colorSet[-1].colorSetPoints[-1].colorSetPointsA",
-        "kNurbsSurface": "colorSet[-1].colorSetPoints[-1].colorSetPointsA"
+    "clst[0].clsp": {
+        "kMesh": "colorSet[0].colorSetPoints",
+        "kNurbsCurve": "colorSet[0].colorSetPoints",
+        "kNurbsSurface": "colorSet[0].colorSetPoints"
     },
-    "clst[-1].clsp[-1].clpb": {
-        "kMesh": "colorSet[-1].colorSetPoints[-1].colorSetPointsB",
-        "kNurbsCurve": "colorSet[-1].colorSetPoints[-1].colorSetPointsB",
-        "kNurbsSurface": "colorSet[-1].colorSetPoints[-1].colorSetPointsB"
+    "clst[0].clsp[0]": {
+        "kMesh": "colorSet[0].colorSetPoints[0]",
+        "kNurbsCurve": "colorSet[0].colorSetPoints[0]",
+        "kNurbsSurface": "colorSet[0].colorSetPoints[0]"
     },
-    "clst[-1].clsp[-1].clpg": {
-        "kMesh": "colorSet[-1].colorSetPoints[-1].colorSetPointsG",
-        "kNurbsCurve": "colorSet[-1].colorSetPoints[-1].colorSetPointsG",
-        "kNurbsSurface": "colorSet[-1].colorSetPoints[-1].colorSetPointsG"
+    "clst[0].clsp[0].clpa": {
+        "kMesh": "colorSet[0].colorSetPoints[0].colorSetPointsA",
+        "kNurbsCurve": "colorSet[0].colorSetPoints[0].colorSetPointsA",
+        "kNurbsSurface": "colorSet[0].colorSetPoints[0].colorSetPointsA"
     },
-    "clst[-1].clsp[-1].clpr": {
-        "kMesh": "colorSet[-1].colorSetPoints[-1].colorSetPointsR",
-        "kNurbsCurve": "colorSet[-1].colorSetPoints[-1].colorSetPointsR",
-        "kNurbsSurface": "colorSet[-1].colorSetPoints[-1].colorSetPointsR"
+    "clst[0].clsp[0].clpb": {
+        "kMesh": "colorSet[0].colorSetPoints[0].colorSetPointsB",
+        "kNurbsCurve": "colorSet[0].colorSetPoints[0].colorSetPointsB",
+        "kNurbsSurface": "colorSet[0].colorSetPoints[0].colorSetPointsB"
     },
-    "clst[-1].rprt": {
-        "kMesh": "colorSet[-1].representation",
-        "kNurbsCurve": "colorSet[-1].representation",
-        "kNurbsSurface": "colorSet[-1].representation"
+    "clst[0].clsp[0].clpg": {
+        "kMesh": "colorSet[0].colorSetPoints[0].colorSetPointsG",
+        "kNurbsCurve": "colorSet[0].colorSetPoints[0].colorSetPointsG",
+        "kNurbsSurface": "colorSet[0].colorSetPoints[0].colorSetPointsG"
+    },
+    "clst[0].clsp[0].clpr": {
+        "kMesh": "colorSet[0].colorSetPoints[0].colorSetPointsR",
+        "kNurbsCurve": "colorSet[0].colorSetPoints[0].colorSetPointsR",
+        "kNurbsSurface": "colorSet[0].colorSetPoints[0].colorSetPointsR"
+    },
+    "clst[0].rprt": {
+        "kMesh": "colorSet[0].representation",
+        "kNurbsCurve": "colorSet[0].representation",
+        "kNurbsSurface": "colorSet[0].representation"
     },
     "clr": {
         "kMesh": "colors"
     },
-    "clr[-1].clra": {
-        "kMesh": "colors[-1].colorA"
+    "clr[0]": {
+        "kMesh": "colors[0]"
     },
-    "clr[-1].clrb": {
-        "kMesh": "colors[-1].colorB"
+    "clr[0].clra": {
+        "kMesh": "colors[0].colorA"
     },
-    "clr[-1].clrg": {
-        "kMesh": "colors[-1].colorG"
+    "clr[0].clrb": {
+        "kMesh": "colors[0].colorB"
     },
-    "clr[-1].clrr": {
-        "kMesh": "colors[-1].colorR"
+    "clr[0].clrg": {
+        "kMesh": "colors[0].colorG"
+    },
+    "clr[0].clrr": {
+        "kMesh": "colors[0].colorR"
     },
     "ciog": {
         "kMesh": "compInstObjGroups",
         "kNurbsCurve": "compInstObjGroups",
         "kNurbsSurface": "compInstObjGroups"
     },
-    "ciog[-1].cog": {
-        "kMesh": "compInstObjGroups[-1].compObjectGroups",
-        "kNurbsCurve": "compInstObjGroups[-1].compObjectGroups",
-        "kNurbsSurface": "compInstObjGroups[-1].compObjectGroups"
+    "ciog[0]": {
+        "kMesh": "compInstObjGroups[0]",
+        "kNurbsCurve": "compInstObjGroups[0]",
+        "kNurbsSurface": "compInstObjGroups[0]"
     },
-    "ciog[-1].cog[-1].cgid": {
-        "kMesh": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId",
-        "kNurbsCurve": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId",
-        "kNurbsSurface": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGroupId"
+    "ciog[0].cog": {
+        "kMesh": "compInstObjGroups[0].compObjectGroups",
+        "kNurbsCurve": "compInstObjGroups[0].compObjectGroups",
+        "kNurbsSurface": "compInstObjGroups[0].compObjectGroups"
     },
-    "ciog[-1].cog[-1].cgcl": {
-        "kMesh": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList",
-        "kNurbsCurve": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList",
-        "kNurbsSurface": "compInstObjGroups[-1].compObjectGroups[-1].compObjectGrpCompList"
+    "ciog[0].cog[0]": {
+        "kMesh": "compInstObjGroups[0].compObjectGroups[0]",
+        "kNurbsCurve": "compInstObjGroups[0].compObjectGroups[0]",
+        "kNurbsSurface": "compInstObjGroups[0].compObjectGroups[0]"
+    },
+    "ciog[0].cog[0].cgid": {
+        "kMesh": "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId",
+        "kNurbsCurve": "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId",
+        "kNurbsSurface": "compInstObjGroups[0].compObjectGroups[0].compObjectGroupId"
+    },
+    "ciog[0].cog[0].cgcl": {
+        "kMesh": "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList",
+        "kNurbsCurve": "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList",
+        "kNurbsSurface": "compInstObjGroups[0].compObjectGroups[0].compObjectGrpCompList"
     },
     "gtag": {
         "kMesh": "componentTags",
         "kNurbsCurve": "componentTags",
         "kNurbsSurface": "componentTags"
     },
-    "gtag[-1].gtagcmp": {
-        "kMesh": "componentTags[-1].componentTagContents",
-        "kNurbsCurve": "componentTags[-1].componentTagContents",
-        "kNurbsSurface": "componentTags[-1].componentTagContents"
+    "gtag[0]": {
+        "kMesh": "componentTags[0]",
+        "kNurbsCurve": "componentTags[0]",
+        "kNurbsSurface": "componentTags[0]"
     },
-    "gtag[-1].gtagnm": {
-        "kMesh": "componentTags[-1].componentTagName",
-        "kNurbsCurve": "componentTags[-1].componentTagName",
-        "kNurbsSurface": "componentTags[-1].componentTagName"
+    "gtag[0].gtagcmp": {
+        "kMesh": "componentTags[0].componentTagContents",
+        "kNurbsCurve": "componentTags[0].componentTagContents",
+        "kNurbsSurface": "componentTags[0].componentTagContents"
+    },
+    "gtag[0].gtagnm": {
+        "kMesh": "componentTags[0].componentTagName",
+        "kNurbsCurve": "componentTags[0].componentTagName",
+        "kNurbsSurface": "componentTags[0].componentTagName"
     },
     "cfsc": {
         "kMesh": "computeFromSculptCache"
     },
-    "cp[-1].xv": {
-        "kMesh": "controlPoints[-1].xValue",
-        "kNurbsCurve": "controlPoints[-1].xValue",
-        "kNurbsSurface": "controlPoints[-1].xValue"
+    "cp[0]": {
+        "kMesh": "controlPoints[0]",
+        "kNurbsCurve": "controlPoints[0]",
+        "kNurbsSurface": "controlPoints[0]"
     },
-    "cp[-1].yv": {
-        "kMesh": "controlPoints[-1].yValue",
-        "kNurbsCurve": "controlPoints[-1].yValue",
-        "kNurbsSurface": "controlPoints[-1].yValue"
+    "cp[0].xv": {
+        "kMesh": "controlPoints[0].xValue",
+        "kNurbsCurve": "controlPoints[0].xValue",
+        "kNurbsSurface": "controlPoints[0].xValue"
     },
-    "cp[-1].zv": {
-        "kMesh": "controlPoints[-1].zValue",
-        "kNurbsCurve": "controlPoints[-1].zValue",
-        "kNurbsSurface": "controlPoints[-1].zValue"
+    "cp[0].yv": {
+        "kMesh": "controlPoints[0].yValue",
+        "kNurbsCurve": "controlPoints[0].yValue",
+        "kNurbsSurface": "controlPoints[0].yValue"
+    },
+    "cp[0].zv": {
+        "kMesh": "controlPoints[0].zValue",
+        "kNurbsCurve": "controlPoints[0].zValue",
+        "kNurbsSurface": "controlPoints[0].zValue"
     },
     "cd": {
         "kMesh": "creaseData"
@@ -42078,14 +44580,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ed": {
         "kMesh": "edge"
     },
-    "ed[-1].e1": {
-        "kMesh": "edge[-1].edg1"
+    "ed[0]": {
+        "kMesh": "edge[0]"
     },
-    "ed[-1].e2": {
-        "kMesh": "edge[-1].edg2"
+    "ed[0].e1": {
+        "kMesh": "edge[0].edg1"
     },
-    "ed[-1].eh": {
-        "kMesh": "edge[-1].edgh"
+    "ed[0].e2": {
+        "kMesh": "edge[0].edg2"
+    },
+    "ed[0].eh": {
+        "kMesh": "edge[0].edgh"
     },
     "emap": {
         "kMesh": "edgeIdMap"
@@ -42100,8 +44605,14 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "fc": {
         "kMesh": "face"
     },
+    "fc[0]": {
+        "kMesh": "face[0]"
+    },
     "fcid": {
         "kMesh": "faceColorIndices"
+    },
+    "fcid[0]": {
+        "kMesh": "faceColorIndices[0]"
     },
     "fmap": {
         "kMesh": "faceIdMap"
@@ -42112,6 +44623,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     },
     "frze": {
         "kMesh": "freeze"
+    },
+    "frze[0]": {
+        "kMesh": "freeze[0]"
     },
     "gao": {
         "kMesh": "geometryAntialiasingOverride",
@@ -42150,6 +44664,11 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kMesh": "instMaterialAssign",
         "kNurbsCurve": "instMaterialAssign",
         "kNurbsSurface": "instMaterialAssign"
+    },
+    "imtla[0]": {
+        "kMesh": "instMaterialAssign[0]",
+        "kNurbsCurve": "instMaterialAssign[0]",
+        "kNurbsSurface": "instMaterialAssign[0]"
     },
     "intensity": {
         "kMesh": "intensity"
@@ -42225,14 +44744,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "ndt": {
         "kMesh": "normalType"
     },
-    "n[-1].nx": {
-        "kMesh": "normals[-1].normalx"
+    "n[0]": {
+        "kMesh": "normals[0]"
     },
-    "n[-1].ny": {
-        "kMesh": "normals[-1].normaly"
+    "n[0].nx": {
+        "kMesh": "normals[0].normalx"
     },
-    "n[-1].nz": {
-        "kMesh": "normals[-1].normalz"
+    "n[0].ny": {
+        "kMesh": "normals[0].normaly"
+    },
+    "n[0].nz": {
+        "kMesh": "normals[0].normalz"
     },
     "nt": {
         "kMesh": "numTriangles",
@@ -42259,8 +44781,14 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "pii": {
         "kMesh": "perInstanceIndex"
     },
+    "pii[0]": {
+        "kMesh": "perInstanceIndex[0]"
+    },
     "pit": {
         "kMesh": "perInstanceTag"
+    },
+    "pit[0]": {
+        "kMesh": "perInstanceTag[0]"
     },
     "pte": {
         "kMesh": "pickTexture",
@@ -42270,17 +44798,23 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "pd": {
         "kMesh": "pinData"
     },
+    "pd[0]": {
+        "kMesh": "pinData[0]"
+    },
     "pt": {
         "kMesh": "pnts"
     },
-    "pt[-1].px": {
-        "kMesh": "pnts[-1].pntx"
+    "pt[0]": {
+        "kMesh": "pnts[0]"
     },
-    "pt[-1].py": {
-        "kMesh": "pnts[-1].pnty"
+    "pt[0].px": {
+        "kMesh": "pnts[0].pntx"
     },
-    "pt[-1].pz": {
-        "kMesh": "pnts[-1].pntz"
+    "pt[0].py": {
+        "kMesh": "pnts[0].pnty"
+    },
+    "pt[0].pz": {
+        "kMesh": "pnts[0].pntz"
     },
     "vis": {
         "kMesh": "primaryVisibility",
@@ -42442,30 +44976,40 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kNurbsCurve": "uvSet",
         "kNurbsSurface": "uvSet"
     },
-    "uvst[-1].uvsn": {
-        "kMesh": "uvSet[-1].uvSetName",
-        "kNurbsCurve": "uvSet[-1].uvSetName",
-        "kNurbsSurface": "uvSet[-1].uvSetName"
+    "uvst[0]": {
+        "kMesh": "uvSet[0]",
+        "kNurbsCurve": "uvSet[0]",
+        "kNurbsSurface": "uvSet[0]"
     },
-    "uvst[-1].uvsp": {
-        "kMesh": "uvSet[-1].uvSetPoints",
-        "kNurbsCurve": "uvSet[-1].uvSetPoints",
-        "kNurbsSurface": "uvSet[-1].uvSetPoints"
+    "uvst[0].uvsn": {
+        "kMesh": "uvSet[0].uvSetName",
+        "kNurbsCurve": "uvSet[0].uvSetName",
+        "kNurbsSurface": "uvSet[0].uvSetName"
     },
-    "uvst[-1].uvsp[-1].uvpu": {
-        "kMesh": "uvSet[-1].uvSetPoints[-1].uvSetPointsU",
-        "kNurbsCurve": "uvSet[-1].uvSetPoints[-1].uvSetPointsU",
-        "kNurbsSurface": "uvSet[-1].uvSetPoints[-1].uvSetPointsU"
+    "uvst[0].uvsp": {
+        "kMesh": "uvSet[0].uvSetPoints",
+        "kNurbsCurve": "uvSet[0].uvSetPoints",
+        "kNurbsSurface": "uvSet[0].uvSetPoints"
     },
-    "uvst[-1].uvsp[-1].uvpv": {
-        "kMesh": "uvSet[-1].uvSetPoints[-1].uvSetPointsV",
-        "kNurbsCurve": "uvSet[-1].uvSetPoints[-1].uvSetPointsV",
-        "kNurbsSurface": "uvSet[-1].uvSetPoints[-1].uvSetPointsV"
+    "uvst[0].uvsp[0]": {
+        "kMesh": "uvSet[0].uvSetPoints[0]",
+        "kNurbsCurve": "uvSet[0].uvSetPoints[0]",
+        "kNurbsSurface": "uvSet[0].uvSetPoints[0]"
     },
-    "uvst[-1].uvtw": {
-        "kMesh": "uvSet[-1].uvSetTweakLocation",
-        "kNurbsCurve": "uvSet[-1].uvSetTweakLocation",
-        "kNurbsSurface": "uvSet[-1].uvSetTweakLocation"
+    "uvst[0].uvsp[0].uvpu": {
+        "kMesh": "uvSet[0].uvSetPoints[0].uvSetPointsU",
+        "kNurbsCurve": "uvSet[0].uvSetPoints[0].uvSetPointsU",
+        "kNurbsSurface": "uvSet[0].uvSetPoints[0].uvSetPointsU"
+    },
+    "uvst[0].uvsp[0].uvpv": {
+        "kMesh": "uvSet[0].uvSetPoints[0].uvSetPointsV",
+        "kNurbsCurve": "uvSet[0].uvSetPoints[0].uvSetPointsV",
+        "kNurbsSurface": "uvSet[0].uvSetPoints[0].uvSetPointsV"
+    },
+    "uvst[0].uvtw": {
+        "kMesh": "uvSet[0].uvSetTweakLocation",
+        "kNurbsCurve": "uvSet[0].uvSetTweakLocation",
+        "kNurbsSurface": "uvSet[0].uvSetTweakLocation"
     },
     "usz": {
         "kMesh": "uvSize"
@@ -42473,11 +45017,14 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "uvtl": {
         "kMesh": "uvTweakLocation"
     },
-    "uv[-1].ux": {
-        "kMesh": "uvpt[-1].uvpx"
+    "uv[0]": {
+        "kMesh": "uvpt[0]"
     },
-    "uv[-1].uy": {
-        "kMesh": "uvpt[-1].uvpy"
+    "uv[0].ux": {
+        "kMesh": "uvpt[0].uvpx"
+    },
+    "uv[0].uy": {
+        "kMesh": "uvpt[0].uvpy"
     },
     "vbc": {
         "kMesh": "vertexBackfaceCulling"
@@ -42485,38 +45032,44 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "vclr": {
         "kMesh": "vertexColor"
     },
-    "vclr[-1].vxal": {
-        "kMesh": "vertexColor[-1].vertexAlpha"
+    "vclr[0]": {
+        "kMesh": "vertexColor[0]"
     },
-    "vclr[-1].vxcb": {
-        "kMesh": "vertexColor[-1].vertexColorB"
+    "vclr[0].vxal": {
+        "kMesh": "vertexColor[0].vertexAlpha"
     },
-    "vclr[-1].vxcg": {
-        "kMesh": "vertexColor[-1].vertexColorG"
+    "vclr[0].vxcb": {
+        "kMesh": "vertexColor[0].vertexColorB"
     },
-    "vclr[-1].vxcr": {
-        "kMesh": "vertexColor[-1].vertexColorR"
+    "vclr[0].vxcg": {
+        "kMesh": "vertexColor[0].vertexColorG"
     },
-    "vclr[-1].vrgb": {
-        "kMesh": "vertexColor[-1].vertexColorRGB"
+    "vclr[0].vxcr": {
+        "kMesh": "vertexColor[0].vertexColorR"
     },
-    "vclr[-1].vfcl": {
-        "kMesh": "vertexColor[-1].vertexFaceColor"
+    "vclr[0].vrgb": {
+        "kMesh": "vertexColor[0].vertexColorRGB"
     },
-    "vclr[-1].vfcl[-1].vfal": {
-        "kMesh": "vertexColor[-1].vertexFaceColor[-1].vertexFaceAlpha"
+    "vclr[0].vfcl": {
+        "kMesh": "vertexColor[0].vertexFaceColor"
     },
-    "vclr[-1].vfcl[-1].vfcb": {
-        "kMesh": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorB"
+    "vclr[0].vfcl[0]": {
+        "kMesh": "vertexColor[0].vertexFaceColor[0]"
     },
-    "vclr[-1].vfcl[-1].vfcg": {
-        "kMesh": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorG"
+    "vclr[0].vfcl[0].vfal": {
+        "kMesh": "vertexColor[0].vertexFaceColor[0].vertexFaceAlpha"
     },
-    "vclr[-1].vfcl[-1].vfcr": {
-        "kMesh": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorR"
+    "vclr[0].vfcl[0].vfcb": {
+        "kMesh": "vertexColor[0].vertexFaceColor[0].vertexFaceColorB"
     },
-    "vclr[-1].vfcl[-1].frgb": {
-        "kMesh": "vertexColor[-1].vertexFaceColor[-1].vertexFaceColorRGB"
+    "vclr[0].vfcl[0].vfcg": {
+        "kMesh": "vertexColor[0].vertexFaceColor[0].vertexFaceColorG"
+    },
+    "vclr[0].vfcl[0].vfcr": {
+        "kMesh": "vertexColor[0].vertexFaceColor[0].vertexFaceColorR"
+    },
+    "vclr[0].vfcl[0].frgb": {
+        "kMesh": "vertexColor[0].vertexFaceColor[0].vertexFaceColorRGB"
     },
     "vcs": {
         "kMesh": "vertexColorSource"
@@ -42528,32 +45081,38 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kMesh": "vertexNormal",
         "kRamp": "valNoise"
     },
-    "vn[-1].vfnl": {
-        "kMesh": "vertexNormal[-1].vertexFaceNormal"
+    "vn[0]": {
+        "kMesh": "vertexNormal[0]"
     },
-    "vn[-1].vfnl[-1].vfnx": {
-        "kMesh": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalX"
+    "vn[0].vfnl": {
+        "kMesh": "vertexNormal[0].vertexFaceNormal"
     },
-    "vn[-1].vfnl[-1].fnxy": {
-        "kMesh": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalXYZ"
+    "vn[0].vfnl[0]": {
+        "kMesh": "vertexNormal[0].vertexFaceNormal[0]"
     },
-    "vn[-1].vfnl[-1].vfny": {
-        "kMesh": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalY"
+    "vn[0].vfnl[0].vfnx": {
+        "kMesh": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalX"
     },
-    "vn[-1].vfnl[-1].vfnz": {
-        "kMesh": "vertexNormal[-1].vertexFaceNormal[-1].vertexFaceNormalZ"
+    "vn[0].vfnl[0].fnxy": {
+        "kMesh": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalXYZ"
     },
-    "vn[-1].vxnx": {
-        "kMesh": "vertexNormal[-1].vertexNormalX"
+    "vn[0].vfnl[0].vfny": {
+        "kMesh": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalY"
     },
-    "vn[-1].nxyz": {
-        "kMesh": "vertexNormal[-1].vertexNormalXYZ"
+    "vn[0].vfnl[0].vfnz": {
+        "kMesh": "vertexNormal[0].vertexFaceNormal[0].vertexFaceNormalZ"
     },
-    "vn[-1].vxny": {
-        "kMesh": "vertexNormal[-1].vertexNormalY"
+    "vn[0].vxnx": {
+        "kMesh": "vertexNormal[0].vertexNormalX"
     },
-    "vn[-1].vxnz": {
-        "kMesh": "vertexNormal[-1].vertexNormalZ"
+    "vn[0].nxyz": {
+        "kMesh": "vertexNormal[0].vertexNormalXYZ"
+    },
+    "vn[0].vxny": {
+        "kMesh": "vertexNormal[0].vertexNormalY"
+    },
+    "vn[0].vxnz": {
+        "kMesh": "vertexNormal[0].vertexNormalZ"
     },
     "vnm": {
         "kMesh": "vertexNormalMethod"
@@ -42586,23 +45145,34 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "vt": {
         "kMesh": "vrts"
     },
-    "vt[-1].vx": {
-        "kMesh": "vrts[-1].vrtx"
+    "vt[0]": {
+        "kMesh": "vrts[0]"
     },
-    "vt[-1].vy": {
-        "kMesh": "vrts[-1].vrty"
+    "vt[0].vx": {
+        "kMesh": "vrts[0].vrtx"
     },
-    "vt[-1].vz": {
-        "kMesh": "vrts[-1].vrtz"
+    "vt[0].vy": {
+        "kMesh": "vrts[0].vrty"
+    },
+    "vt[0].vz": {
+        "kMesh": "vrts[0].vrtz"
     },
     "wt": {
         "kMesh": "weights",
         "kNurbsCurve": "weights",
         "kNurbsSurface": "weights"
     },
+    "wt[0]": {
+        "kMesh": "weights[0]",
+        "kNurbsCurve": "weights[0]",
+        "kNurbsSurface": "weights[0]"
+    },
     "w": {
         "kMesh": "worldMesh",
         "kPolyCube": "width"
+    },
+    "w[0]": {
+        "kMesh": "worldMesh[0]"
     },
     "ai_curve_shader": {
         "kNurbsCurve": "aiCurveShader"
@@ -42652,14 +45222,17 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "eps": {
         "kNurbsCurve": "editPoints"
     },
-    "eps[-1].xve": {
-        "kNurbsCurve": "editPoints[-1].xValueEp"
+    "eps[0]": {
+        "kNurbsCurve": "editPoints[0]"
     },
-    "eps[-1].yve": {
-        "kNurbsCurve": "editPoints[-1].yValueEp"
+    "eps[0].xve": {
+        "kNurbsCurve": "editPoints[0].xValueEp"
     },
-    "eps[-1].zve": {
-        "kNurbsCurve": "editPoints[-1].zValueEp"
+    "eps[0].yve": {
+        "kNurbsCurve": "editPoints[0].yValueEp"
+    },
+    "eps[0].zve": {
+        "kNurbsCurve": "editPoints[0].zValueEp"
     },
     "hd": {
         "kNurbsCurve": "header",
@@ -42689,14 +45262,21 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "wn": {
         "kNurbsCurve": "worldNormal"
     },
-    "wn[-1].wnx": {
-        "kNurbsCurve": "worldNormal[-1].worldNormalX"
+    "wn[0]": {
+        "kNurbsCurve": "worldNormal[0]"
     },
-    "wn[-1].wny": {
-        "kNurbsCurve": "worldNormal[-1].worldNormalY"
+    "wn[0].wnx": {
+        "kNurbsCurve": "worldNormal[0].worldNormalX"
     },
-    "wn[-1].wnz": {
-        "kNurbsCurve": "worldNormal[-1].worldNormalZ"
+    "wn[0].wny": {
+        "kNurbsCurve": "worldNormal[0].worldNormalY"
+    },
+    "wn[0].wnz": {
+        "kNurbsCurve": "worldNormal[0].worldNormalZ"
+    },
+    "ws[0]": {
+        "kNurbsCurve": "worldSpace[0]",
+        "kNurbsSurface": "worldSpace[0]"
     },
     "btt": {
         "kNurbsSurface": "basicTessellationType"
@@ -42776,6 +45356,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "pu": {
         "kNurbsSurface": "patchUVIds"
     },
+    "pu[0]": {
+        "kNurbsSurface": "patchUVIds[0]"
+    },
     "tcn": {
         "kNurbsSurface": "renderTriangleCount"
     },
@@ -42803,6 +45386,9 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "sv": {
         "kNurbsSurface": "spansV"
     },
+    "tf[0]": {
+        "kNurbsSurface": "trimFace[0]"
+    },
     "tsu": {
         "kNurbsSurface": "tweakSizeU"
     },
@@ -42821,8 +45407,8 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "nvfa": {
         "kNurbsSurface": "vDivisionsFactor"
     },
-    "tgt[-1].ofm": {
-        "kParentMatrix": "target[-1].offsetMatrix"
+    "tgt[0].ofm": {
+        "kParentMatrix": "target[0].offsetMatrix"
     },
     "tmat": {
         "kPickMatrix": "outputMatrix"
@@ -42839,23 +45425,32 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "tra": {
         "kPickMatrix": "useTranslate"
     },
-    "i2[-1].i2x": {
-        "kPlusMinusAverage": "input2D[-1].input2Dx"
+    "i1[0]": {
+        "kPlusMinusAverage": "input1D[0]"
     },
-    "i2[-1].i2y": {
-        "kPlusMinusAverage": "input2D[-1].input2Dy"
+    "i2[0]": {
+        "kPlusMinusAverage": "input2D[0]"
+    },
+    "i2[0].i2x": {
+        "kPlusMinusAverage": "input2D[0].input2Dx"
+    },
+    "i2[0].i2y": {
+        "kPlusMinusAverage": "input2D[0].input2Dy"
     },
     "i3": {
         "kPlusMinusAverage": "input3D"
     },
-    "i3[-1].i3x": {
-        "kPlusMinusAverage": "input3D[-1].input3Dx"
+    "i3[0]": {
+        "kPlusMinusAverage": "input3D[0]"
     },
-    "i3[-1].i3y": {
-        "kPlusMinusAverage": "input3D[-1].input3Dy"
+    "i3[0].i3x": {
+        "kPlusMinusAverage": "input3D[0].input3Dx"
     },
-    "i3[-1].i3z": {
-        "kPlusMinusAverage": "input3D[-1].input3Dz"
+    "i3[0].i3y": {
+        "kPlusMinusAverage": "input3D[0].input3Dy"
+    },
+    "i3[0].i3z": {
+        "kPlusMinusAverage": "input3D[0].input3Dz"
     },
     "o1": {
         "kPlusMinusAverage": "output1D"
@@ -43036,20 +45631,23 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "cel": {
         "kRamp": "colorEntryList"
     },
-    "cel[-1].ec": {
-        "kRamp": "colorEntryList[-1].color"
+    "cel[0]": {
+        "kRamp": "colorEntryList[0]"
     },
-    "cel[-1].ecb": {
-        "kRamp": "colorEntryList[-1].colorB"
+    "cel[0].ec": {
+        "kRamp": "colorEntryList[0].color"
     },
-    "cel[-1].ecg": {
-        "kRamp": "colorEntryList[-1].colorG"
+    "cel[0].ecb": {
+        "kRamp": "colorEntryList[0].colorB"
     },
-    "cel[-1].ecr": {
-        "kRamp": "colorEntryList[-1].colorR"
+    "cel[0].ecg": {
+        "kRamp": "colorEntryList[0].colorG"
     },
-    "cel[-1].ep": {
-        "kRamp": "colorEntryList[-1].position"
+    "cel[0].ecr": {
+        "kRamp": "colorEntryList[0].colorR"
+    },
+    "cel[0].ep": {
+        "kRamp": "colorEntryList[0].position"
     },
     "hn": {
         "kRamp": "hueNoise"
@@ -43075,23 +45673,29 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "vnf": {
         "kRamp": "valNoiseFreq"
     },
-    "b[-1].bfv": {
-        "kRemapColor": "blue[-1].blue_FloatValue"
+    "b[0]": {
+        "kRemapColor": "blue[0]"
     },
-    "b[-1].bi": {
-        "kRemapColor": "blue[-1].blue_Interp"
+    "b[0].bfv": {
+        "kRemapColor": "blue[0].blue_FloatValue"
     },
-    "b[-1].bp": {
-        "kRemapColor": "blue[-1].blue_Position"
+    "b[0].bi": {
+        "kRemapColor": "blue[0].blue_Interp"
     },
-    "g[-1].gfv": {
-        "kRemapColor": "green[-1].green_FloatValue"
+    "b[0].bp": {
+        "kRemapColor": "blue[0].blue_Position"
     },
-    "g[-1].gi": {
-        "kRemapColor": "green[-1].green_Interp"
+    "g[0]": {
+        "kRemapColor": "green[0]"
     },
-    "g[-1].gp": {
-        "kRemapColor": "green[-1].green_Position"
+    "g[0].gfv": {
+        "kRemapColor": "green[0].green_FloatValue"
+    },
+    "g[0].gi": {
+        "kRemapColor": "green[0].green_Interp"
+    },
+    "g[0].gp": {
+        "kRemapColor": "green[0].green_Position"
     },
     "imx": {
         "kRemapColor": "inputMax",
@@ -43105,44 +45709,53 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
         "kRemapColor": "outputMin",
         "kRemapValue": "outputMin"
     },
-    "r[-1].rfv": {
-        "kRemapColor": "red[-1].red_FloatValue"
+    "r[0]": {
+        "kRemapColor": "red[0]"
     },
-    "r[-1].ri": {
-        "kRemapColor": "red[-1].red_Interp"
+    "r[0].rfv": {
+        "kRemapColor": "red[0].red_FloatValue"
     },
-    "r[-1].rp": {
-        "kRemapColor": "red[-1].red_Position"
+    "r[0].ri": {
+        "kRemapColor": "red[0].red_Interp"
     },
-    "cl[-1].clc": {
-        "kRemapValue": "color[-1].color_Color"
+    "r[0].rp": {
+        "kRemapColor": "red[0].red_Position"
     },
-    "cl[-1].clcb": {
-        "kRemapValue": "color[-1].color_ColorB"
+    "cl[0]": {
+        "kRemapValue": "color[0]"
     },
-    "cl[-1].clcg": {
-        "kRemapValue": "color[-1].color_ColorG"
+    "cl[0].clc": {
+        "kRemapValue": "color[0].color_Color"
     },
-    "cl[-1].clcr": {
-        "kRemapValue": "color[-1].color_ColorR"
+    "cl[0].clcb": {
+        "kRemapValue": "color[0].color_ColorB"
     },
-    "cl[-1].cli": {
-        "kRemapValue": "color[-1].color_Interp"
+    "cl[0].clcg": {
+        "kRemapValue": "color[0].color_ColorG"
     },
-    "cl[-1].clp": {
-        "kRemapValue": "color[-1].color_Position"
+    "cl[0].clcr": {
+        "kRemapValue": "color[0].color_ColorR"
+    },
+    "cl[0].cli": {
+        "kRemapValue": "color[0].color_Interp"
+    },
+    "cl[0].clp": {
+        "kRemapValue": "color[0].color_Position"
     },
     "vl": {
         "kRemapValue": "value"
     },
-    "vl[-1].vlfv": {
-        "kRemapValue": "value[-1].value_FloatValue"
+    "vl[0]": {
+        "kRemapValue": "value[0]"
     },
-    "vl[-1].vli": {
-        "kRemapValue": "value[-1].value_Interp"
+    "vl[0].vlfv": {
+        "kRemapValue": "value[0].value_FloatValue"
     },
-    "vl[-1].vlp": {
-        "kRemapValue": "value[-1].value_Position"
+    "vl[0].vli": {
+        "kRemapValue": "value[0].value_Interp"
+    },
+    "vl[0].vlp": {
+        "kRemapValue": "value[0].value_Position"
     },
     "ai_aspect_ratio": {
         "kSpotLight": "aiAspectRatio"
@@ -43213,11 +45826,14 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "coord": {
         "kUVPin": "coordinate"
     },
-    "coord[-1].cu": {
-        "kUVPin": "coordinate[-1].coordinateU"
+    "coord[0]": {
+        "kUVPin": "coordinate[0]"
     },
-    "coord[-1].cv": {
-        "kUVPin": "coordinate[-1].coordinateV"
+    "coord[0].cu": {
+        "kUVPin": "coordinate[0].coordinateU"
+    },
+    "coord[0].cv": {
+        "kUVPin": "coordinate[0].coordinateV"
     },
     "curgeom": {
         "kUVPin": "deformedGeometry"
@@ -43231,14 +45847,20 @@ ATTRIBUTES_SHORT_NAMES_MAP = {
     "orggeom": {
         "kUVPin": "originalGeometry"
     },
-    "ot[-1].otx": {
-        "kUVPin": "outputTranslate[-1].outputTranslateX"
+    "omat[0]": {
+        "kUVPin": "outputMatrix[0]"
     },
-    "ot[-1].oty": {
-        "kUVPin": "outputTranslate[-1].outputTranslateY"
+    "ot[0]": {
+        "kUVPin": "outputTranslate[0]"
     },
-    "ot[-1].otz": {
-        "kUVPin": "outputTranslate[-1].outputTranslateZ"
+    "ot[0].otx": {
+        "kUVPin": "outputTranslate[0].outputTranslateX"
+    },
+    "ot[0].oty": {
+        "kUVPin": "outputTranslate[0].outputTranslateY"
+    },
+    "ot[0].otz": {
+        "kUVPin": "outputTranslate[0].outputTranslateZ"
     },
     "rlcrv": {
         "kUVPin": "railCurve"

@@ -188,6 +188,21 @@ class TestMayaMockCompletion(unittest.TestCase):
         vis_plug.setBool(False)
         self.assertEqual(vis_plug.asBool(), False)
 
+    def test_compound_plugs(self):
+        mobj = self.dagmod.createNode("parentMatrix")
+        self.dagmod.doIt()
+
+        nd = om.MFnDependencyNode(mobj)
+        target_plug = nd.findPlug("target", False)
+        target_1 = target_plug.elementByLogicalIndex(1)
+        self.assertEqual(target_1.name(), "parentMatrix1.target[1]")
+        target_0 = target_plug.elementByLogicalIndex(0)
+        self.assertEqual(target_0.name(), "parentMatrix1.target[0]")
+
+        target_0_offmx = target_0.child(3)
+        self.assertEqual(target_0_offmx.name(), "parentMatrix1.target[0].offsetMatrix")
+
+
     def test_create_attributes(self):
         transform = self.dagmod.createNode("transform")
         self.dagmod.doIt()
