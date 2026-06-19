@@ -5958,7 +5958,10 @@ class MSelectionList(object):
                 mobject = MFnDependencyNode().create('transform', item)  # this very rarely will be the case as it should already be created before adding it to the MSelectionList
             # Return converted str to mobject
             return mobject
-
+        elif isinstance(item, MUuid):
+            if (mobject := hierarchy.NodePool.from_uuid(item._uuid)):
+                return mobject
+            raise RuntimeError(f"No node with matching the given MUuid: <{item}>.")
         elif not isinstance(item, MObject):
             raise TypeError(f'Given index: {index} does not belong to a MPlug object. Current obj: {item}.')
         return item
@@ -7753,7 +7756,7 @@ class MGlobal(object):
         pass
 
     @staticmethod
-    def getSelectionListByName(*args, **kwargs):
+    def getSelectionListByName(name: str):
         """
         getSelectionListByName(name) -> MSelectionList
 
@@ -7762,7 +7765,7 @@ class MGlobal(object):
         as can be used in MEL commands. For example, the pattern 'pCube*' will
         match all occurrences of objects whose names begin with 'pCube'.
         """
-        pass
+        return MSelectionList()
 
     @staticmethod
     def isRedoing(*args, **kwargs):
@@ -18360,7 +18363,7 @@ class MPlug(object):
         """
         Returns this plug's logical index within its parent array.
         """
-        return self._attribute._logical_index
+        return self._attribute._parent._children.index(self._attribute)
 
     def name(self):
         """
@@ -23036,6 +23039,10 @@ class MFnDependencyNode(MFnBase):
         """
         Sets the node's UUID.
         """
+        # Update the uuid map in node pool
+        hierarchy.NodePool._uuids_to_hashes.pop(self._mobject._uuid, None)
+        hierarchy.NodePool._uuids_to_hashes[uuid._uuid] = self._mobject
+
         self._mobject._uuid = uuid._uuid
 
     def userNode(*args, **kwargs):

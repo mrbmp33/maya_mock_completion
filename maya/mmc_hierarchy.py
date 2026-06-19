@@ -1,6 +1,9 @@
 """Mapping of all nodes inside MMC."""
+
 import typing
 import re
+import uuid
+import weakref
 
 # FKS modules
 if typing.TYPE_CHECKING:
@@ -11,49 +14,50 @@ if typing.TYPE_CHECKING:
 class NodePoolMeta(type):
     """Store all instances of node mobjects in a dictionary UUID : MObject."""
 
-    _node_instances: typing.MutableMapping[int, 'om.MObject'] = {}
+    _node_instances: typing.MutableMapping[int, "om.MObject"] = {}
+    _uuids_to_hashes: weakref.WeakValueDictionary[uuid.UUID, "om.MObject"] = (
+        weakref.WeakValueDictionary()
+    )
 
     @classmethod
-    def __setitem__(cls, node: 'om.MObject', use_path: bool = False):
-        if use_path:
-            cls._node_instances[hash(node._path_str())] = node
-        cls._node_instances[hash(node._name)] = node
-
-    @classmethod
-    def __add__(cls, node: 'om.MObject', use_path: bool = False):
-        if use_path:
-            cls._node_instances[hash(node._path_str())] = node
-        cls._node_instances[hash(node._name)] = node
-
-    @classmethod
-    def add_object(cls, node: 'om.MObject', use_path: bool = False):
+    def __setitem__(cls, node: "om.MObject", use_path: bool = False):
         cls.__add__(node, use_path=use_path)
 
     @classmethod
-    def __getitem__(cls, node: 'om.MObject') -> 'om.MObject':
+    def __add__(cls, node: "om.MObject", use_path: bool = False):
+        if use_path:
+            cls._node_instances[hash(node._path_str())] = node
+        cls._node_instances[hash(node._name)] = node
+        cls._uuids_to_hashes[node._uuid] = node
+
+    @classmethod
+    def add_object(cls, node: "om.MObject", use_path: bool = False):
+        cls.__add__(node, use_path=use_path)
+
+    @classmethod
+    def __getitem__(cls, node: "om.MObject") -> "om.MObject":
         return cls._node_instances.get(
-            hash(node._name),
-            cls._node_instances.get(hash(node._path_str()))
+            hash(node._name), cls._node_instances.get(hash(node._path_str()))
         )
 
     @classmethod
-    def get_node(cls, node: 'om.MObject') -> 'om.MObject':
+    def get_node(cls, node: "om.MObject") -> "om.MObject":
         return cls.__getitem__(node)
 
     @classmethod
-    def __delitem__(cls, node: 'om.MObject'):
+    def __delitem__(cls, node: "om.MObject"):
         del cls._node_instances[hash(node._name)]
 
     @classmethod
-    def remove_object(cls, node: 'om.MObject'):
-        cls._node_instances.pop(hash(node._name), None)
+    def remove_object(cls, node: "om.MObject"):
+        cls.__delitem__(node)
 
     @classmethod
     def __contains__(cls, node):
         return hash(node._name) in cls._node_instances
 
     @classmethod
-    def object_exists(cls, node: 'om.MObject') -> bool:
+    def object_exists(cls, node: "om.MObject") -> bool:
         # if not hasattr(node, '_name'):
         #     print(f"Node {node} has no attribute '_name'")
         #     print(cls.all_nodes())
@@ -61,8 +65,7 @@ class NodePoolMeta(type):
         #     raise AttributeError
 
         nd = cls._node_instances.get(
-            hash(node._name),
-            cls._node_instances.get(hash(node._path_str()))
+            hash(node._name), cls._node_instances.get(hash(node._path_str()))
         )
         if nd is None:
             return False
@@ -73,15 +76,20 @@ class NodePoolMeta(type):
         return hash_num in cls._node_instances
 
     @classmethod
-    def from_name(cls, name: str) -> 'om.MObject':
-        for attempt in (name,
-                        f'|{name}' if not name.startswith('|') else name.strip('|'),
-                        name.rpartition('|')[-1]
-                        ):
+    def from_name(cls, name: str) -> "om.MObject":
+        for attempt in (
+            name,
+            f"|{name}" if not name.startswith("|") else name.strip("|"),
+            name.rpartition("|")[-1],
+        ):
             hsh = hash(attempt)
             if found := cls._node_instances.get(hsh):
                 return found
         return False
+
+    @classmethod
+    def from_uuid(cls, uid: uuid.UUID) -> typing.Union["om.MObject", None]:
+        return cls._uuids_to_hashes.get(uid)
 
     @classmethod
     def reset(cls):
@@ -93,14 +101,13 @@ class NodePoolMeta(type):
         return cls._node_instances.values()
 
 
-class NodePool(metaclass=NodePoolMeta):
-    ...
+class NodePool(metaclass=NodePoolMeta): ...
 
 
 # noinspection PyProtectedMember
-def register(node: 'om.MObject'):
+def register(node: "om.MObject"):
     """Registers a node from its MObject into the node pool and builds the hierarchy.
-    
+
     Looks first for possible matches in the pool. If a match is found, it will compare the paths
     of the nodes. If paths are different, it will use full path as key.
     """
@@ -119,7 +126,9 @@ def register(node: 'om.MObject'):
         if old_node._uuid == node._uuid:  # same node
             return
         else:  # same path, different node
-            raise ValueError(f"Node with same path already exists in the pool: {old_node._name}")
+            raise ValueError(
+                f"Node with same path already exists in the pool: {old_node._name}"
+            )
 
     # If the paths are different, use the full path as key
     else:
@@ -129,7 +138,7 @@ def register(node: 'om.MObject'):
         NodePool.add_object(old_node, use_path=True)
 
 
-def deregister(node: 'om.MObject'):
+def deregister(node: "om.MObject"):
     """Removes a node from the registry and hierarchy"""
     if NodePool.object_exists(node):
         NodePool.remove_object(node)
@@ -163,7 +172,7 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
             ns_parts = ns_parts[1:]
         ns = ":".join(ns_parts[:-1])
         om.MNamespace.addNamespace(ns)
-        base_name = f'{ns}:{ns_parts[-1]}'
+        base_name = f"{ns}:{ns_parts[-1]}"
     elif current_ns != root_ns:
         if current_ns.startswith(":"):
             ns_prefix = ":".join(current_ns.split(":")[1:])  # Remove leading ':'
@@ -177,21 +186,21 @@ def find_first_available_name(name: str, parent_name: str = None) -> str:
         as_node = NodePool.from_name(name)
         if as_node._parent is None:
             ...
-        elif as_node._parent.apiTypeStr == 'kWorld':
+        elif as_node._parent.apiTypeStr == "kWorld":
             ...
         elif as_node._parent._name != parent_name and parent_name:
             base_name = f'{parent_name or ""}|{base_name}'
             name = base_name
 
-    name = f'{base_name}{idx}'
+    name = f"{base_name}{idx}"
     idx = idx or 1
     while NodePool.hash_exists(hash(name)):
-        name = f'{base_name}{idx}'
+        name = f"{base_name}{idx}"
         idx += 1
     return name
 
 
-def find_first_available_name_from_obj(obj: 'om.MObject', name: str) -> str:
+def find_first_available_name_from_obj(obj: "om.MObject", name: str) -> str:
     """Finds the first available name for a given object."""
     parent_name = None
     if obj._parent:
